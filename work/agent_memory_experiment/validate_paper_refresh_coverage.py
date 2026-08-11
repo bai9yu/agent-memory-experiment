@@ -26,6 +26,7 @@ REQUIRED_STEPS = [
     ("submission_package_index", "paper package index"),
     ("paper_table_consistency", "paper table consistency audit"),
     ("untracked_artifact_audit", "untracked artifact hygiene audit"),
+    ("large_intermediate_provenance", "large local intermediate provenance audit"),
     ("public_release_readiness", "public release readiness gate"),
     ("reproducibility_checklist", "artifact and metric gates"),
     ("artifact_integrity_manifest", "artifact integrity manifest"),

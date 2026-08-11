@@ -24,6 +24,7 @@ def classify(path: str) -> tuple[str, str, str]:
         "work/agent_memory_experiment/validate_human_audit_blind_review.py",
         "work/agent_memory_experiment/validate_paper_table_consistency.py",
         "work/agent_memory_experiment/validate_submission_entrypoint_consistency.py",
+        "work/agent_memory_experiment/validate_large_intermediate_provenance.py",
         "outputs/agent_memory_untracked_artifact_audit.csv",
         "outputs/agent_memory_untracked_artifact_audit_zh.md",
         "outputs/agent_memory_api_embedding_postrun_gate.csv",
@@ -38,6 +39,8 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_paper_table_consistency_zh.md",
         "outputs/agent_memory_submission_entrypoint_consistency.csv",
         "outputs/agent_memory_submission_entrypoint_consistency_zh.md",
+        "outputs/agent_memory_large_intermediate_provenance.csv",
+        "outputs/agent_memory_large_intermediate_provenance_zh.md",
     }:
         return ("release_audit_artifact", "track_as_paper_artifact", "New public-release audit support file; track with the paper artifact package.")
     if path.startswith("work/agent_memory_experiment/data/deepseek_smoke_test/"):
@@ -46,6 +49,15 @@ def classify(path: str) -> tuple[str, str, str]:
         return ("intermediate_llm_extraction_slice", "keep_untracked", "Intermediate one-session extraction slice; not part of current LoCoMo10 paper package.")
     if path.startswith("work/agent_memory_experiment/data/locomo_observation"):
         return ("intermediate_observation_slice", "keep_untracked", "Intermediate observation conversion slice; not part of tracked paper artifact set.")
+    if path in {
+        "outputs/agent_memory_candidate_reranker_loco_ranked_top20.csv",
+        "outputs/agent_memory_candidate_reranker_locomo10_ranked_top20.csv",
+        "outputs/agent_memory_set_selection_ranked.csv",
+        "outputs/agent_memory_set_selection_top20_ranked.csv",
+    }:
+        return ("large_ranked_intermediate", "keep_untracked", "Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries.")
+    if path == "outputs/agent_memory_multi_evidence_coverage_top20_per_query.csv":
+        return ("large_per_query_intermediate", "keep_untracked", "Detailed per-query diagnostic audited by agent_memory_large_intermediate_provenance; tracked summary/delta/report carry paper-facing evidence.")
     if path.startswith("outputs/agent_memory_candidate_reranker_") or path.startswith("outputs/agent_memory_set_selection"):
         return ("exploratory_candidate_output", "review_before_tracking", "Exploratory ranking/selection output; add only if promoted to a named paper artifact and indexed.")
     if path.startswith("outputs/agent_memory_error_analysis_") or path.startswith("outputs/agent_memory_multi_evidence_"):

@@ -262,6 +262,8 @@ def main() -> None:
         ("Public release readiness gate CSV", outputs / "agent_memory_public_release_readiness.csv"),
         ("Untracked artifact audit", outputs / "agent_memory_untracked_artifact_audit_zh.md"),
         ("Untracked artifact audit CSV", outputs / "agent_memory_untracked_artifact_audit.csv"),
+        ("Large intermediate provenance audit", outputs / "agent_memory_large_intermediate_provenance_zh.md"),
+        ("Large intermediate provenance audit CSV", outputs / "agent_memory_large_intermediate_provenance.csv"),
         ("Artifact integrity manifest", outputs / "agent_memory_artifact_integrity_manifest_zh.md"),
         ("Artifact integrity manifest CSV", outputs / "agent_memory_artifact_integrity_manifest.csv"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
@@ -692,6 +694,11 @@ def main() -> None:
             "stage": "Untracked artifact audit",
             "command": "work/agent_memory_experiment/audit_untracked_artifacts.py",
             "notes": "Classifies untracked local outputs and temporary data before public artifact packaging.",
+        },
+        {
+            "stage": "Large intermediate provenance audit",
+            "command": "work/agent_memory_experiment/validate_large_intermediate_provenance.py",
+            "notes": "Explains large untracked ranked/per-query intermediates through README regeneration commands and tracked downstream summaries.",
         },
         {
             "stage": "Artifact integrity manifest",

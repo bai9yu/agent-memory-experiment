@@ -288,6 +288,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Classifies untracked local outputs before public artifact packaging.",
         ),
         Step(
+            "large_intermediate_provenance",
+            py(
+                "validate_large_intermediate_provenance.py",
+                "--project-root",
+                ".",
+                "--output-csv",
+                "outputs/agent_memory_large_intermediate_provenance.csv",
+                "--output-report",
+                "outputs/agent_memory_large_intermediate_provenance_zh.md",
+            ),
+            "Audits large local ranked/per-query intermediates against README commands and tracked downstream summaries.",
+        ),
+        Step(
             "public_release_readiness",
             py(
                 "validate_public_release_readiness.py",

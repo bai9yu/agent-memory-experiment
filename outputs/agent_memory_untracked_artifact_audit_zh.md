@@ -6,19 +6,14 @@
 
 - Untracked entries: 17
 - Track as paper artifact: 3
-- Review before tracking: 6
-- Keep untracked/local: 8
+- Review before tracking: 1
+- Keep untracked/local: 13
 
 ## 明细
 
 | Path | Category | Recommendation | Size Bytes | Reason |
 | --- | --- | --- | --- | --- |
-| outputs/agent_memory_candidate_reranker_loco_ranked_top20.csv | exploratory_candidate_output | review_before_tracking | 4670518 | Exploratory ranking/selection output; add only if promoted to a named paper artifact and indexed. |
-| outputs/agent_memory_candidate_reranker_locomo10_ranked_top20.csv | exploratory_candidate_output | review_before_tracking | 6737780 | Exploratory ranking/selection output; add only if promoted to a named paper artifact and indexed. |
-| outputs/agent_memory_set_selection_ranked.csv | exploratory_candidate_output | review_before_tracking | 6289166 | Exploratory ranking/selection output; add only if promoted to a named paper artifact and indexed. |
-| outputs/agent_memory_set_selection_top20_ranked.csv | exploratory_candidate_output | review_before_tracking | 12717839 | Exploratory ranking/selection output; add only if promoted to a named paper artifact and indexed. |
 | outputs/agent_memory_error_analysis_locomo10_time_aware_zh.md | exploratory_error_analysis_output | review_before_tracking | 2493 | Exploratory error/coverage output; add only with provenance, generator command, and claim boundary. |
-| outputs/agent_memory_multi_evidence_coverage_top20_per_query.csv | exploratory_error_analysis_output | review_before_tracking | 857416 | Exploratory error/coverage output; add only with provenance, generator command, and claim boundary. |
 | work/agent_memory_experiment/data/llm_extracted_locomo_1s_v2/ | intermediate_llm_extraction_slice | keep_untracked | 43701 | Intermediate one-session extraction slice; not part of current LoCoMo10 paper package. |
 | work/agent_memory_experiment/data/llm_extracted_locomo_1s_v2_d1_memories.jsonl | intermediate_llm_extraction_slice | keep_untracked | 4223 | Intermediate one-session extraction slice; not part of current LoCoMo10 paper package. |
 | work/agent_memory_experiment/data/llm_extracted_locomo_1s_v2_d1_queries.jsonl | intermediate_llm_extraction_slice | keep_untracked | 1442 | Intermediate one-session extraction slice; not part of current LoCoMo10 paper package. |
@@ -26,10 +21,15 @@
 | work/agent_memory_experiment/data/locomo_observation_d1_queries.jsonl | intermediate_observation_slice | keep_untracked | 18832 | Intermediate observation conversion slice; not part of tracked paper artifact set. |
 | work/agent_memory_experiment/data/locomo_observation_record1_d1_v2_scope_memories.jsonl | intermediate_observation_slice | keep_untracked | 2598 | Intermediate observation conversion slice; not part of tracked paper artifact set. |
 | work/agent_memory_experiment/data/locomo_observation_record1_d1_v2_scope_queries.jsonl | intermediate_observation_slice | keep_untracked | 1050 | Intermediate observation conversion slice; not part of tracked paper artifact set. |
+| outputs/agent_memory_multi_evidence_coverage_top20_per_query.csv | large_per_query_intermediate | keep_untracked | 857416 | Detailed per-query diagnostic audited by agent_memory_large_intermediate_provenance; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_candidate_reranker_loco_ranked_top20.csv | large_ranked_intermediate | keep_untracked | 4670518 | Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries. |
+| outputs/agent_memory_candidate_reranker_locomo10_ranked_top20.csv | large_ranked_intermediate | keep_untracked | 6737780 | Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries. |
+| outputs/agent_memory_set_selection_ranked.csv | large_ranked_intermediate | keep_untracked | 6289166 | Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries. |
+| outputs/agent_memory_set_selection_top20_ranked.csv | large_ranked_intermediate | keep_untracked | 12717839 | Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries. |
 | work/agent_memory_experiment/data/deepseek_smoke_test/ | local_smoke_test_data | keep_untracked | 45402 | DeepSeek smoke-test cache/output should stay local unless explicitly anonymized and documented. |
-| outputs/agent_memory_human_audit_blind_review_leakage.csv | release_audit_artifact | track_as_paper_artifact | 2567 | New public-release audit support file; track with the paper artifact package. |
-| outputs/agent_memory_human_audit_blind_review_leakage_zh.md | release_audit_artifact | track_as_paper_artifact | 3326 | New public-release audit support file; track with the paper artifact package. |
-| work/agent_memory_experiment/validate_human_audit_blind_review.py | release_audit_artifact | track_as_paper_artifact | 9163 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_large_intermediate_provenance.csv | release_audit_artifact | track_as_paper_artifact | 3178 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_large_intermediate_provenance_zh.md | release_audit_artifact | track_as_paper_artifact | 2262 | New public-release audit support file; track with the paper artifact package. |
+| work/agent_memory_experiment/validate_large_intermediate_provenance.py | release_audit_artifact | track_as_paper_artifact | 9560 | New public-release audit support file; track with the paper artifact package. |
 
 ## 使用边界
 
