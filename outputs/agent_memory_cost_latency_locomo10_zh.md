@@ -60,6 +60,26 @@ top-200 在当前离线实验中取得较好的效率-准确率折中：相比 f
 
 batched top-N 的候选召回阶段耗时为 0.2920 秒，约 0.16 ms/query。top-200 仍是当前最佳效率-准确率折中点。
 
+## Vector Index Baselines
+
+进一步加入两个索引基线：
+
+- `sklearn NearestNeighbors`：BGE-M3 dense embedding + exact NN index，作为可复现的标准向量索引对照。
+- `LSH`：hash embedding + random-hyperplane LSH，作为无需额外依赖的 ANN-style 弱基线。
+
+| Index | Candidate Limit | End-to-End Seconds | Speedup vs Full Ranking | Recall@1 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|---:|---:|
+| sklearn NN | 50 | 3.8927 | 9.26x | 0.482 | 0.695 | 0.579 |
+| sklearn NN | 100 | 5.9548 | 6.05x | 0.498 | 0.724 | 0.600 |
+| sklearn NN | 200 | 10.4359 | 3.45x | 0.509 | 0.734 | 0.613 |
+| sklearn NN | 500 | 23.6075 | 1.53x | 0.507 | 0.737 | 0.612 |
+| LSH | 50 | 8.1510 | 4.42x | 0.385 | 0.553 | 0.458 |
+| LSH | 100 | 11.0660 | 3.26x | 0.393 | 0.561 | 0.470 |
+| LSH | 200 | 16.7249 | 2.16x | 0.389 | 0.572 | 0.471 |
+| LSH | 500 | 33.4633 | 1.08x | 0.388 | 0.568 | 0.472 |
+
+sklearn NN top-200 是当前最合适的效率-准确率折中：MRR 0.613，Recall@5 0.734，端到端加速 3.45x。LSH 的召回质量明显较低，说明近似索引实验必须和强 embedding 结合，后续应加入 BGE-M3 + FAISS/HNSW。
+
 ## Accuracy-Cost Tradeoff
 
 | Variant | Method | Recall@1 | Recall@5 | MRR |

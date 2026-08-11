@@ -1,0 +1,2 @@
+semantic_backend,embedding_model,algorithm,metric,num_queries,num_memories,scorer_init_seconds,build_index_seconds,query_index_seconds
+sentence-transformer,BAAI/bge-m3,brute,euclidean,1838,2517,3.81806475,0.0011222500000003244,0.16021733299999985

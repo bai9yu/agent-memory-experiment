@@ -572,6 +572,54 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/index
   --output-report outputs/agent_memory_indexed_prefilter_locomo10_zh.md
 ```
 
+Run sklearn NearestNeighbors candidate prefiltering experiments:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/sklearn_nn_prefilter_experiment.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --candidate-limits 50,100,200,500 \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only \
+  --algorithm brute \
+  --metric euclidean \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3,4 \
+  --importance-weight 0.06 \
+  --type-awareness-weight 0.04 \
+  --full-baseline-seconds 36.049109834 \
+  --output-summary outputs/agent_memory_sklearn_nn_prefilter_locomo10_summary.csv \
+  --output-meta outputs/agent_memory_sklearn_nn_prefilter_locomo10_meta.csv \
+  --output-index-meta outputs/agent_memory_sklearn_nn_prefilter_locomo10_index_meta.csv \
+  --output-report outputs/agent_memory_sklearn_nn_prefilter_locomo10_zh.md
+```
+
+Run dependency-free LSH candidate prefiltering experiments:
+
+```bash
+python3 work/agent_memory_experiment/lsh_prefilter_experiment.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --candidate-limits 50,100,200,500 \
+  --num-tables 12 \
+  --num-bits 8 \
+  --probe-radius 1 \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3,4 \
+  --importance-weight 0.06 \
+  --type-awareness-weight 0.04 \
+  --full-baseline-seconds 36.049109834 \
+  --output-summary outputs/agent_memory_lsh_prefilter_locomo10_summary.csv \
+  --output-meta outputs/agent_memory_lsh_prefilter_locomo10_meta.csv \
+  --output-index-meta outputs/agent_memory_lsh_prefilter_locomo10_index_meta.csv \
+  --output-report outputs/agent_memory_lsh_prefilter_locomo10_zh.md
+```
+
 ## Cross-Agent Memory Reuse Experiments
 
 Run one cross-agent reuse experiment:

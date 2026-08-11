@@ -1,0 +1,2 @@
+num_queries,num_memories,num_tables,num_bits,probe_radius,vectorize_memories_seconds,build_index_seconds,query_index_seconds
+1838,2517,12,8,1,0.04052579099999999,1.267476792,5.343908542
