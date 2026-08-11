@@ -362,6 +362,25 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes the index of manuscript, tables, appendices, gates, and packaging actions.",
         ),
         Step(
+            "supplementary_package_manifest",
+            py(
+                "generate_supplementary_package_manifest.py",
+                "--project-root",
+                ".",
+                "--package-index-csv",
+                "outputs/agent_memory_submission_package_index.csv",
+                "--reproducibility-csv",
+                "outputs/agent_memory_reproducibility_artifacts.csv",
+                "--readiness-csv",
+                "outputs/agent_memory_submission_readiness.csv",
+                "--output-csv",
+                "outputs/agent_memory_supplementary_package_manifest.csv",
+                "--output-report",
+                "outputs/agent_memory_supplementary_package_manifest_zh.md",
+            ),
+            "Builds a supplement packaging manifest with blocker and anonymization checks.",
+        ),
+        Step(
             "paper_table_consistency",
             py(
                 "validate_paper_table_consistency.py",

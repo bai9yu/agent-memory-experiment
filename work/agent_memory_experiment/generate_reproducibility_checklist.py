@@ -264,6 +264,8 @@ def main() -> None:
         ("Reviewer response preparation matrix CSV", outputs / "agent_memory_reviewer_response_prep.csv"),
         ("Submission package index", outputs / "agent_memory_submission_package_index_zh.md"),
         ("Submission package index CSV", outputs / "agent_memory_submission_package_index.csv"),
+        ("Supplementary package manifest", outputs / "agent_memory_supplementary_package_manifest_zh.md"),
+        ("Supplementary package manifest CSV", outputs / "agent_memory_supplementary_package_manifest.csv"),
         ("Submission entrypoint consistency audit", outputs / "agent_memory_submission_entrypoint_consistency_zh.md"),
         ("Submission entrypoint consistency audit CSV", outputs / "agent_memory_submission_entrypoint_consistency.csv"),
         ("Submission readiness gate", outputs / "agent_memory_submission_readiness_zh.md"),
@@ -740,6 +742,11 @@ def main() -> None:
             "stage": "Submission package index",
             "command": "work/agent_memory_experiment/generate_submission_package_index.py",
             "notes": "Indexes manuscript, tables, appendices, reproducibility artifacts, blockers, and final packaging actions.",
+        },
+        {
+            "stage": "Supplementary package manifest",
+            "command": "work/agent_memory_experiment/generate_supplementary_package_manifest.py",
+            "notes": "Classifies package-index artifacts for supplement inclusion, internal review, blocker exclusion, and anonymization checks.",
         },
         {
             "stage": "Submission entrypoint consistency audit",

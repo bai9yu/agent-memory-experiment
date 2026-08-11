@@ -30,6 +30,7 @@ REQUIRED_STEPS = [
     ("embedding_paper_claim_upgrade", "embedding baseline paper-claim upgrade gate"),
     ("submission_blocker_closure_plan", "submission blocker closure path"),
     ("submission_package_index", "paper package index"),
+    ("supplementary_package_manifest", "supplementary package manifest and anonymization audit"),
     ("paper_table_consistency", "paper table consistency audit"),
     ("untracked_artifact_audit", "untracked artifact hygiene audit"),
     ("large_intermediate_provenance", "large local intermediate provenance audit"),
