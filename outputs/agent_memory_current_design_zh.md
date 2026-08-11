@@ -416,6 +416,39 @@ S_{\hat r(q)}(q,m_i)
 
 结论：浅层监督式文本分类器仍低于固定 `type_aware`，但 oracle best 显示 query-level 路由存在较高潜在收益。因此后续不应继续强化简单规则，而应把 intent 识别做成可验证模块，例如 LLM few-shot classifier、验证集调参的 hybrid router，或直接学习 candidate-level reranking。
 
+进一步加入 validation-tuned text-intent router。它不直接学习 query 到方法的分类，而是先用规则得到 predicted intent：
+
+\[
+z_q=g(\mathrm{text}(q))
+\]
+
+再在训练集上为每个 intent 选择平均指标最高的方法：
+
+\[
+r_z=\arg\max_{r\in\mathcal{R}}
+\frac{1}{|\mathcal{D}_{train,z}|}
+\sum_{q\in\mathcal{D}_{train,z}}
+\operatorname{MRR}(q,r)
+\]
+
+测试时：
+
+\[
+\operatorname{retrieve}(q)=
+\operatorname{TopK}_{m_i\in \mathcal{C}(q)}
+S_{r_{g(q)}}(q,m_i)
+\]
+
+5 个 held-out split 结果：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| fixed `type_aware` | 0.499 | 0.670 | 0.733 | 0.607 |
+| validation-tuned intent router | 0.497 | 0.669 | 0.733 | 0.606 |
+| oracle best method | 0.600 | 0.756 | 0.799 | 0.693 |
+
+该版本基本恢复到 fixed `type_aware` 水平，但仍没有超过它。当前判断是：手写 route 映射会带来明显退化，验证集调参可以避免大退化；但 intent 粒度仍然过粗，距离 oracle best 仍有明显空间。
+
 ## 8. 后续持续更新约定
 
 这个文档建议每次代码升级后同步更新四处：
