@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：111/111
+- Artifact 存在性：113/113
 - 关键指标阈值：9/9
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `1734660` |
+| git_commit | `163c118` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -86,7 +86,7 @@
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3826 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 19307 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 19658 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -102,6 +102,8 @@
 | API embedding run estimate CSV | True | 502 | `outputs/agent_memory_api_embedding_run_estimate.csv` |
 | Embedding baseline comparison | True | 998 | `outputs/agent_memory_embedding_baseline_comparison_zh.md` |
 | Embedding baseline comparison CSV | True | 381 | `outputs/agent_memory_embedding_baseline_comparison.csv` |
+| External embedding blocker audit | True | 2942 | `outputs/agent_memory_external_embedding_blocker_audit_zh.md` |
+| External embedding blocker audit CSV | True | 1140 | `outputs/agent_memory_external_embedding_blocker_audit.csv` |
 | Human audit protocol | True | 2479 | `outputs/agent_memory_human_audit_protocol_zh.md` |
 | Human audit sample | True | 28471 | `outputs/agent_memory_human_audit_sample_type_aware.csv` |
 | Human audit summary | True | 1394 | `outputs/agent_memory_human_audit_summary_zh.md` |
@@ -134,7 +136,7 @@
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
 | Human audit annotation codebook | True | 6136 | `outputs/agent_memory_human_audit_annotation_codebook_zh.md` |
 | Human audit annotation schema | True | 1883 | `outputs/agent_memory_human_audit_annotation_schema.csv` |
-| Paper experiment status | True | 29326 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 29799 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -173,6 +175,7 @@
 | Mock API embedding smoke test | `work/agent_memory_experiment/mock_api_embedding_smoke_test.py` | Runs the API embedding backend against a localhost OpenAI-compatible mock and verifies cache hits. |
 | API embedding run estimate | `work/agent_memory_experiment/estimate_api_embedding_run.py` | Estimates API embedding item count, approximate tokens, batches, and cache status without network. |
 | Embedding baseline comparison | `work/agent_memory_experiment/compare_embedding_baselines.py` | Compares API embedding summary against BGE-M3 when the API run exists. |
+| External embedding blocker audit | `work/agent_memory_experiment/generate_external_embedding_blocker_audit.py` | Aggregates key, preflight, summary, comparison, and readiness blockers into an actionable audit. |
 | Human audit sample | `work/agent_memory_experiment/generate_human_audit_sample.py` | Creates stratified manual-review sample for error-analysis reliability. |
 | Human audit summary | `work/agent_memory_experiment/summarize_human_audit.py` | Summarizes manual labels once the audit CSV is filled. |
 | LLM-assisted audit | `work/agent_memory_experiment/llm_audit_retrieval_errors.py` | Uses DeepSeek to draft audit labels for human review; does not replace human audit. |

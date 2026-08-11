@@ -248,6 +248,8 @@ def main() -> None:
         ("API embedding run estimate CSV", outputs / "agent_memory_api_embedding_run_estimate.csv"),
         ("Embedding baseline comparison", outputs / "agent_memory_embedding_baseline_comparison_zh.md"),
         ("Embedding baseline comparison CSV", outputs / "agent_memory_embedding_baseline_comparison.csv"),
+        ("External embedding blocker audit", outputs / "agent_memory_external_embedding_blocker_audit_zh.md"),
+        ("External embedding blocker audit CSV", outputs / "agent_memory_external_embedding_blocker_audit.csv"),
         ("Human audit protocol", outputs / "agent_memory_human_audit_protocol_zh.md"),
         ("Human audit sample", outputs / "agent_memory_human_audit_sample_type_aware.csv"),
         ("Human audit summary", outputs / "agent_memory_human_audit_summary_zh.md"),
@@ -409,6 +411,11 @@ def main() -> None:
             "stage": "Embedding baseline comparison",
             "command": "work/agent_memory_experiment/compare_embedding_baselines.py",
             "notes": "Compares API embedding summary against BGE-M3 when the API run exists.",
+        },
+        {
+            "stage": "External embedding blocker audit",
+            "command": "work/agent_memory_experiment/generate_external_embedding_blocker_audit.py",
+            "notes": "Aggregates key, preflight, summary, comparison, and readiness blockers into an actionable audit.",
         },
         {
             "stage": "Human audit sample",

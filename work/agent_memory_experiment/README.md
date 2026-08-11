@@ -1189,6 +1189,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/compa
   --output-report outputs/agent_memory_embedding_baseline_comparison_zh.md
 ```
 
+Generate an actionable blocker audit for the external embedding baseline:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_external_embedding_blocker_audit.py \
+  --outputs-dir outputs \
+  --output-report outputs/agent_memory_external_embedding_blocker_audit_zh.md \
+  --output-csv outputs/agent_memory_external_embedding_blocker_audit.csv
+```
+
 Prepare and summarize dual-human audit agreement sheets:
 
 ```bash

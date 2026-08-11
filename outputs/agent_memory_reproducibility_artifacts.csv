@@ -59,7 +59,7 @@ Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3826
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,19307
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,19658
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -75,6 +75,8 @@ API embedding run estimate,outputs/agent_memory_api_embedding_run_estimate_zh.md
 API embedding run estimate CSV,outputs/agent_memory_api_embedding_run_estimate.csv,True,502
 Embedding baseline comparison,outputs/agent_memory_embedding_baseline_comparison_zh.md,True,998
 Embedding baseline comparison CSV,outputs/agent_memory_embedding_baseline_comparison.csv,True,381
+External embedding blocker audit,outputs/agent_memory_external_embedding_blocker_audit_zh.md,True,2942
+External embedding blocker audit CSV,outputs/agent_memory_external_embedding_blocker_audit.csv,True,1140
 Human audit protocol,outputs/agent_memory_human_audit_protocol_zh.md,True,2479
 Human audit sample,outputs/agent_memory_human_audit_sample_type_aware.csv,True,28471
 Human audit summary,outputs/agent_memory_human_audit_summary_zh.md,True,1394
@@ -107,6 +109,6 @@ Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
 Human audit annotation codebook,outputs/agent_memory_human_audit_annotation_codebook_zh.md,True,6136
 Human audit annotation schema,outputs/agent_memory_human_audit_annotation_schema.csv,True,1883
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,29326
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,29799
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421
