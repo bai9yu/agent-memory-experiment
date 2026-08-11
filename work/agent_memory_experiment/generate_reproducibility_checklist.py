@@ -264,6 +264,8 @@ def main() -> None:
         ("Submission blocker closure plan CSV", outputs / "agent_memory_submission_blocker_closure_plan.csv"),
         ("Paper artifact refresh run", outputs / "agent_memory_paper_artifact_refresh_run_zh.md"),
         ("Paper artifact refresh run CSV", outputs / "agent_memory_paper_artifact_refresh_run.csv"),
+        ("Paper refresh coverage audit", outputs / "agent_memory_paper_refresh_coverage_audit_zh.md"),
+        ("Paper refresh coverage audit CSV", outputs / "agent_memory_paper_refresh_coverage_audit.csv"),
         ("Evidence freshness audit", outputs / "agent_memory_evidence_freshness_audit_zh.md"),
         ("Evidence freshness audit CSV", outputs / "agent_memory_evidence_freshness_audit.csv"),
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
@@ -666,6 +668,11 @@ def main() -> None:
             "stage": "Paper artifact refresh run",
             "command": "work/agent_memory_experiment/refresh_paper_artifacts.py",
             "notes": "Runs the offline cached paper-artifact refresh sequence and records step statuses.",
+        },
+        {
+            "stage": "Paper refresh coverage audit",
+            "command": "work/agent_memory_experiment/validate_paper_refresh_coverage.py",
+            "notes": "Checks that the offline paper refresh run contains all required report-refresh steps.",
         },
         {
             "stage": "Evidence freshness audit",

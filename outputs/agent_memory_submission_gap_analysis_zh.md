@@ -101,7 +101,7 @@
 ### P8 复现实验是否足够完整？
 
 - 风险等级：`moderate`
-- 当前证据：当前复现清单 artifact gate 152/152，metric gate 22/22。
+- 当前证据：当前复现清单 artifact gate 154/154，metric gate 22/22。
 - 重要性：复现清单完整能降低审稿人对工程实验的疑虑，但大模型输出和 embedding cache 不能全部进 Git。
 - 当前可写：可以写 artifact-checked reproducibility package。
 - 最小动作：在 appendix 写清楚数据准备、模型缓存、API key 不入库、重型结果由 CSV 缓存复现。

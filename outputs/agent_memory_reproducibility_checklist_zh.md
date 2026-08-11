@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：152/152
+- Artifact 存在性：154/154
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `72e9660` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `1d11222` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -104,20 +104,22 @@
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
 | Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
 | Reviewer response preparation matrix CSV | True | 4249 | `outputs/agent_memory_reviewer_response_prep.csv` |
-| Submission package index | True | 6583 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 7316 | `outputs/agent_memory_submission_package_index.csv` |
+| Submission package index | True | 6827 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 7578 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission readiness gate | True | 2326 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
 | Submission readiness gate CSV | True | 1884 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3843 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 26427 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 26763 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3584 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 2795 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Paper artifact refresh run | True | 2315 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 7445 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper artifact refresh run | True | 2441 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 8157 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper refresh coverage audit | True | 3637 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
+| Paper refresh coverage audit CSV | True | 2763 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -259,6 +261,7 @@
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |
 | Submission blocker closure plan | `work/agent_memory_experiment/generate_submission_blocker_closure_plan.py` | Orders remaining external embedding, human audit, reviewer-risk, and final-refresh gates into a concrete closure path. |
 | Paper artifact refresh run | `work/agent_memory_experiment/refresh_paper_artifacts.py` | Runs the offline cached paper-artifact refresh sequence and records step statuses. |
+| Paper refresh coverage audit | `work/agent_memory_experiment/validate_paper_refresh_coverage.py` | Checks that the offline paper refresh run contains all required report-refresh steps. |
 | Evidence freshness audit | `work/agent_memory_experiment/validate_evidence_freshness.py` | Checks paper-facing reports for stale reproducibility artifact/metric/integrity gate counts after regeneration. |
 | Experiment protocol | `work/agent_memory_experiment/generate_experiment_protocol.py` | Builds a paper appendix-style protocol from cached metrics and artifacts. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |

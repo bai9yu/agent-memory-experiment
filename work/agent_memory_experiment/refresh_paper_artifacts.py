@@ -224,6 +224,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Checks stale artifact/metric/integrity gate counts.",
         ),
         Step(
+            "paper_refresh_coverage",
+            py(
+                "validate_paper_refresh_coverage.py",
+                "--refresh-csv",
+                "outputs/agent_memory_paper_artifact_refresh_run.csv",
+                "--output-csv",
+                "outputs/agent_memory_paper_refresh_coverage_audit.csv",
+                "--output-report",
+                "outputs/agent_memory_paper_refresh_coverage_audit_zh.md",
+            ),
+            "Checks that the offline refresh run covers all required paper-facing reports.",
+        ),
+        Step(
             "artifact_integrity_manifest_final",
             py(
                 "generate_artifact_integrity_manifest.py",

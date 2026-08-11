@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Indexed artifacts: 23
+- Indexed artifacts: 24
 - Missing indexed artifacts: 0
 - Blocked/not-ready sections: 2
 
@@ -31,6 +31,7 @@
 | Reproducibility | outputs/agent_memory_artifact_integrity_manifest_zh.md | True | pass | 复现 artifact sha256、大小和行数 manifest。 | 每次结果更新后重新生成。 |
 | Reproducibility | outputs/agent_memory_environment_freshness_audit_zh.md | True | pass | 环境快照的 generation-time Git 状态和 system CSV 新鲜度审计。 | 提交前后若刷新环境快照，应重新运行 freshness audit。 |
 | Reproducibility | outputs/agent_memory_paper_artifact_refresh_run_zh.md | True | pass | 离线论文 artifact 刷新流水线的逐步执行日志。 | 补完 API baseline 或人工标签后运行该流水线收口所有报告。 |
+| Reproducibility | outputs/agent_memory_paper_refresh_coverage_audit_zh.md | True | pass | 检查离线刷新流水线是否覆盖关键论文报告步骤。 | 新增关键 paper artifact 后同步更新 coverage audit 的 required steps。 |
 | Submission Gate | outputs/agent_memory_submission_blocker_closure_plan_zh.md | True | ready_with_external_inputs | 外部 embedding、人审、reviewer risk 和最终一致性刷新的 blocker 关闭路线图。 | 按路线先解除 external embedding 和 human audit blockers。 |
 | Submission Gate | outputs/agent_memory_submission_readiness_gate_zh.md | True | not_ready | 最终投稿门禁，聚合复现、claim check、外部 baseline、人工复核和公开发布卫生。 | 解除 external_embedding_completed、priority20/full80_human_audit 和 reviewer_risk_blockers。 |
 

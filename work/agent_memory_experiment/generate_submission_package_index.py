@@ -232,6 +232,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "next_action": "补完 API baseline 或人工标签后运行该流水线收口所有报告。",
         },
         {
+            "section": "Reproducibility",
+            "artifact": "outputs/agent_memory_paper_refresh_coverage_audit_zh.md",
+            "role": "检查离线刷新流水线是否覆盖关键论文报告步骤。",
+            "status": "pass",
+            "evidence": "required offline steps covered",
+            "next_action": "新增关键 paper artifact 后同步更新 coverage audit 的 required steps。",
+        },
+        {
             "section": "Submission Gate",
             "artifact": "outputs/agent_memory_submission_blocker_closure_plan_zh.md",
             "role": "外部 embedding、人审、reviewer risk 和最终一致性刷新的 blocker 关闭路线图。",
