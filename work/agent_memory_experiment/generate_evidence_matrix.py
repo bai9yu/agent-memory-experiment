@@ -72,6 +72,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     audit_sample = read_csv(outputs / "agent_memory_human_audit_sample_type_aware.csv")
     audit_summary = read_csv(outputs / "agent_memory_human_audit_summary.csv")
     llm_audit_summary = read_csv(outputs / "agent_memory_llm_audit_summary.csv")
+    agreement_summary = read_csv(outputs / "agent_memory_human_llm_audit_agreement.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     embedding_estimate = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
     embedding_comparison = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
@@ -108,6 +109,8 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     llm_audit_correct = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="yes")
     llm_audit_partial = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="partial")
     llm_audit_no = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="no")
+    agreement_confirmed = lookup(agreement_summary, group="overview", label="confirmed_samples")
+    agreement_errors = lookup(agreement_summary, group="overview", label="validation_errors")
     embedding_completed = sum(1 for row in embedding_status if row["status"] == "completed")
     embedding_ready = sum(1 for row in embedding_status if row["status"] in {"completed", "ready_to_run"})
     embedding_items = sum(int(row["items"]) for row in embedding_estimate)
@@ -239,12 +242,13 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "evidence": (
                 f"已从 type-aware Top-1 错误中分层抽样 {len(audit_sample)} 条；当前已汇总人工标注 {audit_labeled} 条；"
                 f"LLM-assisted 预标注 {llm_audit_labeled} 条，auto_reason_correct yes/partial/no="
-                f"{llm_audit_correct['count']}/{llm_audit_partial['count']}/{llm_audit_no['count']}。"
+                f"{llm_audit_correct['count']}/{llm_audit_partial['count']}/{llm_audit_no['count']}；"
+                f"Human/LLM 确认表已生成，人工确认 {agreement_confirmed['count']} 条，非法标签 {agreement_errors['count']}。"
             ),
             "support_level": "llm_assisted_protocol_ready",
-            "primary_artifacts": "agent_memory_human_audit_sample_type_aware.csv; agent_memory_human_audit_protocol_zh.md; agent_memory_llm_audit_summary_zh.md; agent_memory_llm_audit_report_zh.md",
+            "primary_artifacts": "agent_memory_human_audit_sample_type_aware.csv; agent_memory_human_audit_protocol_zh.md; agent_memory_llm_audit_summary_zh.md; agent_memory_llm_audit_report_zh.md; agent_memory_human_llm_audit_confirmation.csv; agent_memory_human_llm_audit_agreement_zh.md",
             "paper_use": "可以说明已有 LLM-assisted 预复核流程；在人工确认前，不能把它写成人工验证结论。",
-            "remaining_gap": "需要人工确认或抽样复查 LLM-assisted labels，并统计一致性或准确率。",
+            "remaining_gap": "需要在 confirmation CSV 中填写 human_* 字段，并重新运行一致性脚本，得到 exact agreement 与 Cohen's kappa。",
         },
         {
             "claim": "DeepSeek memory writer 在 LoCoMo10 重复抽取中具有可报告的稳定性。",

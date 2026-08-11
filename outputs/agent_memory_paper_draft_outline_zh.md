@@ -10,7 +10,7 @@
 
 ## 摘要草稿
 
-长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002。在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 0.657，高于 type-aware 的 0.608，加权 MRR delta 为 +0.0504。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 28/29/23，可作为人工复核前的预标注材料。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
+长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002。在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 0.657，高于 type-aware 的 0.608，加权 MRR delta 为 +0.0504。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 28/29/23，并已生成 Human/LLM 确认表，可作为人工复核前的预标注材料。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
 
 ## 贡献点写法
 
@@ -87,18 +87,18 @@ time-aware / type-aware 重排：
 
 ## 当前不可写为主结果的内容
 
-- `reliability_protocol`：自动错误分析已经具备人工复核入口，并已有 LLM-assisted 预标注。；缺口：需要人工确认或抽样复查 LLM-assisted labels，并统计一致性或准确率。
+- `reliability_protocol`：自动错误分析已经具备人工复核入口，并已有 LLM-assisted 预标注。；缺口：需要在 confirmation CSV 中填写 human_* 字段，并重新运行一致性脚本，得到 exact agreement 与 Cohen's kappa。
 - `baseline_protocol`：外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。；缺口：需要提供 API key 并实际运行 text-embedding-3-small 等外部 embedding 对照。
 - `open_gap`：完整项目距离最终投稿仍需要额外验证。；缺口：投稿前至少补齐一个强 baseline 家族，以及一个稳定性/可靠性检查。
 
 ## 投稿前最小完成条件
 
 1. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。
-2. 人工确认或抽样复查 80 条 LLM-assisted 错误复核初稿，报告 human/LLM 一致性。
+2. 在 Human/LLM 确认表中填写人工字段，确认或抽样复查 80 条 LLM-assisted 错误复核初稿，并报告 exact agreement 与 Cohen's kappa。
 3. 若不补外部数据集，需要在论文中明确本工作是 LoCoMo10 slice 的系统性实验，而非广泛泛化结论。
 
 ## 复现状态
 
-- Artifact gate: 29/29
+- Artifact gate: 36/36
 - Metric gate: 5/5
 - 关键入口：`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_paper_evidence_matrix_zh.md`、`outputs/agent_memory_paper_tables_zh.md`。

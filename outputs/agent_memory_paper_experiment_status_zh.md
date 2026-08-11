@@ -260,17 +260,19 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_human_audit_summary_zh.md`：人工复核统计报告；当前为 `pending_labels`，用于标注完成后自动汇总可靠性。
 - `outputs/agent_memory_llm_audit_report_zh.md`：DeepSeek LLM-assisted 错误复核初稿；已为 80 条样本生成预标注，不替代人工复核。
 - `outputs/agent_memory_llm_audit_summary_zh.md`：LLM-assisted 预标注统计；auto_reason_correct yes/partial/no 为 `28/29/23`，可用于人工复核前的质量检查。
+- `outputs/agent_memory_human_llm_audit_confirmation.csv`：Human/LLM 复核确认表；保留 LLM 预标注，同时预留 `human_*` 字段供人工确认。
+- `outputs/agent_memory_human_llm_audit_agreement_zh.md`：Human/LLM 一致性报告；当前为 `pending_human_confirmation`，人工字段完成后会统计 exact agreement 和 Cohen's kappa。
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `29/29`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `36/36`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 2. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
 4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
-6. 错误复核：已生成 80 条分层抽样复核表，并完成 DeepSeek LLM-assisted 预标注；下一步需要人工确认或抽样复查，统计 human/LLM 一致性。
+6. 错误复核：已生成 80 条分层抽样复核表、DeepSeek LLM-assisted 预标注和 Human/LLM 确认表；下一步需要填写 `human_*` 字段并重新生成一致性统计。
 
 ## 错误分析
 

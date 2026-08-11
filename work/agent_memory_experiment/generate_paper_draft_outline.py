@@ -91,7 +91,7 @@ def write_report(path: Path, outputs: Path) -> None:
             f"DeepSeek memory writer 三次运行的 MRR 均值为 {f(writer_mrr['mean'])}，标准差为 {f(writer_mrr['stdev'])}，"
             f"Recall@5 均值为 {f(writer_r5['mean'])}，标准差为 {f(writer_r5['stdev'])}。"
             f"错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 "
-            f"{llm_audit_yes['count']}/{llm_audit_partial['count']}/{llm_audit_no['count']}，可作为人工复核前的预标注材料。"
+            f"{llm_audit_yes['count']}/{llm_audit_partial['count']}/{llm_audit_no['count']}，并已生成 Human/LLM 确认表，可作为人工复核前的预标注材料。"
             "同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。"
             "本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。"
         ),
@@ -183,7 +183,7 @@ def write_report(path: Path, outputs: Path) -> None:
         "## 投稿前最小完成条件",
         "",
         "1. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。",
-        "2. 人工确认或抽样复查 80 条 LLM-assisted 错误复核初稿，报告 human/LLM 一致性。",
+        "2. 在 Human/LLM 确认表中填写人工字段，确认或抽样复查 80 条 LLM-assisted 错误复核初稿，并报告 exact agreement 与 Cohen's kappa。",
         "3. 若不补外部数据集，需要在论文中明确本工作是 LoCoMo10 slice 的系统性实验，而非广泛泛化结论。",
         "",
         "## 复现状态",

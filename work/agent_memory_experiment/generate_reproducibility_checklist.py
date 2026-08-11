@@ -202,6 +202,9 @@ def main() -> None:
         ("LLM-assisted audit summary", outputs / "agent_memory_llm_audit_summary_zh.md"),
         ("LLM-assisted audit summary CSV", outputs / "agent_memory_llm_audit_summary.csv"),
         ("LLM-assisted audit usage", outputs / "agent_memory_llm_audit_usage.csv"),
+        ("Human/LLM audit confirmation", outputs / "agent_memory_human_llm_audit_confirmation.csv"),
+        ("Human/LLM audit agreement", outputs / "agent_memory_human_llm_audit_agreement_zh.md"),
+        ("Human/LLM audit agreement CSV", outputs / "agent_memory_human_llm_audit_agreement.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -289,6 +292,11 @@ def main() -> None:
             "stage": "LLM-assisted audit",
             "command": "work/agent_memory_experiment/llm_audit_retrieval_errors.py",
             "notes": "Uses DeepSeek to draft audit labels for human review; does not replace human audit.",
+        },
+        {
+            "stage": "Human/LLM audit confirmation",
+            "command": "work/agent_memory_experiment/confirm_llm_audit_labels.py",
+            "notes": "Creates a human-confirmation sheet and summarizes agreement after manual labels are filled.",
         },
         {
             "stage": "Evidence matrix",
