@@ -13,6 +13,8 @@ Intrinsic-only train-fraction minimum win rate,1.0,1.0,True
 Intrinsic-only train-fraction minimum MRR delta,0.041393908437331706,0.04,True
 Intrinsic-only paired effect-size MRR Cohen dz,0.22337708453512511,0.2,True
 Intrinsic-only paired effect-size positive net rate,0.06521739130434782,0.06,True
+Intrinsic-only MRR statistical-power CI precision,-0.010922841860657138,-0.012,True
+Intrinsic-only Recall@5 statistical-power CI precision,-0.013224637681159421,-0.014,True
 Intrinsic-only held-out MRR oracle-gap closure,0.21535541046296136,0.2,True
 Type3 Coverage@5 oracle-gap closure is negative,0.21495745633676655,0.1,True
 Type3 supervised selector Coverage@5 delta is negative,0.057205104263927796,0.05,True

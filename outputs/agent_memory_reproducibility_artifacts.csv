@@ -13,6 +13,8 @@ Candidate reranker feature ablation deltas,outputs/agent_memory_candidate_rerank
 Candidate reranker feature ablation comparison,outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv,True,1724236
 Candidate reranker paired effect-size report,outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md,True,1912
 Candidate reranker paired effect-size CSV,outputs/agent_memory_candidate_reranker_paired_effect_size.csv,True,6383
+Candidate reranker statistical power report,outputs/agent_memory_candidate_reranker_statistical_power_zh.md,True,3581
+Candidate reranker statistical power CSV,outputs/agent_memory_candidate_reranker_statistical_power.csv,True,4128
 Candidate reranker seed stability report,outputs/agent_memory_candidate_reranker_seed_stability_zh.md,True,2058
 Candidate reranker seed stability summary,outputs/agent_memory_candidate_reranker_seed_stability_summary.csv,True,682
 Candidate reranker seed stability deltas,outputs/agent_memory_candidate_reranker_seed_stability.csv,True,612
@@ -61,7 +63,7 @@ Type3 supervised selector rwn002 comparison,outputs/agent_memory_type3_supervise
 Type3 supervised selector rwn002 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv,True,725694
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,3724
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,5197
-Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7536
+Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7619
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,7485
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,12592
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
@@ -78,8 +80,8 @@ Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.m
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3975
 Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,22941
-Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9798
-Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5630
+Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9881
+Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5713
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
 Embedding baseline status,outputs/agent_memory_embedding_baseline_status_zh.md,True,3276
 Embedding baseline status CSV,outputs/agent_memory_embedding_baseline_status.csv,True,734

@@ -619,6 +619,18 @@ python3 work/agent_memory_experiment/generate_paired_effect_size_analysis.py \
   --output-report outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md
 ```
 
+Generate paired statistical-power and minimum-detectable-effect diagnostics:
+
+```bash
+python3 work/agent_memory_experiment/generate_statistical_power_analysis.py \
+  --comparison outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv \
+  --baseline type_aware \
+  --candidate ablation_intrinsic_only \
+  --comparison-name intrinsic_only_vs_type_aware \
+  --output-csv outputs/agent_memory_candidate_reranker_statistical_power.csv \
+  --output-report outputs/agent_memory_candidate_reranker_statistical_power_zh.md
+```
+
 Generate candidate-oracle gap and remaining-headroom diagnostics:
 
 ```bash

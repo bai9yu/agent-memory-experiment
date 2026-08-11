@@ -186,6 +186,8 @@ def main() -> None:
         ("Candidate reranker feature ablation comparison", outputs / "agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv"),
         ("Candidate reranker paired effect-size report", outputs / "agent_memory_candidate_reranker_paired_effect_size_zh.md"),
         ("Candidate reranker paired effect-size CSV", outputs / "agent_memory_candidate_reranker_paired_effect_size.csv"),
+        ("Candidate reranker statistical power report", outputs / "agent_memory_candidate_reranker_statistical_power_zh.md"),
+        ("Candidate reranker statistical power CSV", outputs / "agent_memory_candidate_reranker_statistical_power.csv"),
         ("Candidate reranker seed stability report", outputs / "agent_memory_candidate_reranker_seed_stability_zh.md"),
         ("Candidate reranker seed stability summary", outputs / "agent_memory_candidate_reranker_seed_stability_summary.csv"),
         ("Candidate reranker seed stability deltas", outputs / "agent_memory_candidate_reranker_seed_stability.csv"),
@@ -332,6 +334,19 @@ def main() -> None:
         group_value="all",
         metric="mrr",
     )
+    statistical_power_rows = read_csv(outputs / "agent_memory_candidate_reranker_statistical_power.csv")
+    statistical_power_mrr = metric_lookup(
+        statistical_power_rows,
+        comparison="intrinsic_only_vs_type_aware",
+        metric="mrr",
+        sample_size="2760",
+    )
+    statistical_power_r5 = metric_lookup(
+        statistical_power_rows,
+        comparison="intrinsic_only_vs_type_aware",
+        metric="recall@5",
+        sample_size="2760",
+    )
     oracle_gap_rows = read_csv(outputs / "agent_memory_candidate_oracle_gap_analysis.csv")
     heldout_oracle_gap = metric_lookup(oracle_gap_rows, scenario="heldout_intrinsic", metric="mrr")
     type3_oracle_gap = metric_lookup(oracle_gap_rows, scenario="type3_set_coverage", metric="coverage_ratio@5")
@@ -363,6 +378,8 @@ def main() -> None:
         ),
         metric_row("Intrinsic-only paired effect-size MRR Cohen dz", float(effect_size["cohen_dz"]), 0.20),
         metric_row("Intrinsic-only paired effect-size positive net rate", float(effect_size["net_positive_rate"]), 0.06),
+        metric_row("Intrinsic-only MRR statistical-power CI precision", -float(statistical_power_mrr["bootstrap_ci_half_width"]), -0.012),
+        metric_row("Intrinsic-only Recall@5 statistical-power CI precision", -float(statistical_power_r5["bootstrap_ci_half_width"]), -0.014),
         metric_row("Intrinsic-only held-out MRR oracle-gap closure", float(heldout_oracle_gap["closure_rate"]), 0.20),
         metric_row("Type3 Coverage@5 oracle-gap closure is negative", -float(type3_oracle_gap["closure_rate"]), 0.10),
         metric_row("Type3 supervised selector Coverage@5 delta is negative", -float(coverage["mean_delta"]), 0.05),
@@ -403,6 +420,11 @@ def main() -> None:
             "stage": "Candidate reranker paired effect size",
             "command": "work/agent_memory_experiment/generate_paired_effect_size_analysis.py",
             "notes": "Reports improved/worsened/tied paired outcomes, query-type breakdowns, and paired Cohen's dz.",
+        },
+        {
+            "stage": "Candidate reranker statistical power",
+            "command": "work/agent_memory_experiment/generate_statistical_power_analysis.py",
+            "notes": "Estimates paired bootstrap CI precision and sample-size sensitivity for main reranker metric deltas.",
         },
         {
             "stage": "Candidate reranker seed stability",

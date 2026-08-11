@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 131/131
+- Artifacts covered: 133/133
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 6190646
+- Total bytes: 6198604
 
 ## 前 20 个 Artifact
 
@@ -28,12 +28,12 @@
 | Candidate reranker feature ablation comparison | True | 1724236 | 24841 | de37c8ae840f | ok | outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv |
 | Candidate reranker paired effect-size report | True | 1912 | 35 | 8db941101e8a | ok | outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md |
 | Candidate reranker paired effect-size CSV | True | 6383 | 25 | 35a35c2968dc | ok | outputs/agent_memory_candidate_reranker_paired_effect_size.csv |
+| Candidate reranker statistical power report | True | 3581 | 75 | f5344c9ec805 | ok | outputs/agent_memory_candidate_reranker_statistical_power_zh.md |
+| Candidate reranker statistical power CSV | True | 4128 | 25 | 8d4738dae4df | ok | outputs/agent_memory_candidate_reranker_statistical_power.csv |
 | Candidate reranker seed stability report | True | 2058 | 38 | b8e8ecc22ba8 | ok | outputs/agent_memory_candidate_reranker_seed_stability_zh.md |
 | Candidate reranker seed stability summary | True | 682 | 4 | a5a2589cb075 | ok | outputs/agent_memory_candidate_reranker_seed_stability_summary.csv |
 | Candidate reranker seed stability deltas | True | 612 | 3 | db25ff72961b | ok | outputs/agent_memory_candidate_reranker_seed_stability.csv |
 | Candidate reranker seed stability split summary | True | 6086 | 61 | 66789519edd1 | ok | outputs/agent_memory_candidate_reranker_seed_stability_split_summary.csv |
-| Candidate reranker train-fraction sensitivity report | True | 2558 | 46 | 36acb7a58ab7 | ok | outputs/agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md |
-| Candidate reranker train-fraction sensitivity summary | True | 2399 | 13 | 1a3f77dc6eb7 | ok | outputs/agent_memory_candidate_reranker_train_fraction_summary.csv |
 
 ## 使用说明
 

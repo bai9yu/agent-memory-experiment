@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：131/131
-- 关键指标阈值：17/17
+- Artifact 存在性：133/133
+- 关键指标阈值：19/19
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `64d7a9c` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `ad0a56b` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -40,6 +40,8 @@
 | Candidate reranker feature ablation comparison | True | 1724236 | `outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv` |
 | Candidate reranker paired effect-size report | True | 1912 | `outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md` |
 | Candidate reranker paired effect-size CSV | True | 6383 | `outputs/agent_memory_candidate_reranker_paired_effect_size.csv` |
+| Candidate reranker statistical power report | True | 3581 | `outputs/agent_memory_candidate_reranker_statistical_power_zh.md` |
+| Candidate reranker statistical power CSV | True | 4128 | `outputs/agent_memory_candidate_reranker_statistical_power.csv` |
 | Candidate reranker seed stability report | True | 2058 | `outputs/agent_memory_candidate_reranker_seed_stability_zh.md` |
 | Candidate reranker seed stability summary | True | 682 | `outputs/agent_memory_candidate_reranker_seed_stability_summary.csv` |
 | Candidate reranker seed stability deltas | True | 612 | `outputs/agent_memory_candidate_reranker_seed_stability.csv` |
@@ -88,7 +90,7 @@
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
 | Paper tables Markdown | True | 3724 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 5197 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 7536 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper evidence matrix | True | 7619 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 7485 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Paper manuscript draft | True | 12592 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
@@ -105,8 +107,8 @@
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3975 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
 | Artifact integrity manifest CSV | True | 22941 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
-| Submission gap analysis | True | 9798 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
-| Submission gap analysis CSV | True | 5630 | `outputs/agent_memory_submission_gap_analysis.csv` |
+| Submission gap analysis | True | 9881 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
+| Submission gap analysis CSV | True | 5713 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
 | Embedding baseline status | True | 3276 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 734 | `outputs/agent_memory_embedding_baseline_status.csv` |
@@ -176,6 +178,8 @@
 | Intrinsic-only train-fraction minimum MRR delta | 0.0414 | 0.0400 | True |
 | Intrinsic-only paired effect-size MRR Cohen dz | 0.2234 | 0.2000 | True |
 | Intrinsic-only paired effect-size positive net rate | 0.0652 | 0.0600 | True |
+| Intrinsic-only MRR statistical-power CI precision | -0.0109 | -0.0120 | True |
+| Intrinsic-only Recall@5 statistical-power CI precision | -0.0132 | -0.0140 | True |
 | Intrinsic-only held-out MRR oracle-gap closure | 0.2154 | 0.2000 | True |
 | Type3 Coverage@5 oracle-gap closure is negative | 0.2150 | 0.1000 | True |
 | Type3 supervised selector Coverage@5 delta is negative | 0.0572 | 0.0500 | True |
@@ -189,6 +193,7 @@
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
 | Candidate reranker feature ablation | `work/agent_memory_experiment/candidate_reranker_feature_ablation.py` | Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware. |
 | Candidate reranker paired effect size | `work/agent_memory_experiment/generate_paired_effect_size_analysis.py` | Reports improved/worsened/tied paired outcomes, query-type breakdowns, and paired Cohen's dz. |
+| Candidate reranker statistical power | `work/agent_memory_experiment/generate_statistical_power_analysis.py` | Estimates paired bootstrap CI precision and sample-size sensitivity for main reranker metric deltas. |
 | Candidate reranker seed stability | `work/agent_memory_experiment/candidate_reranker_seed_stability.py` | Runs an extended 20-seed stability check for intrinsic-only and full candidate rerankers against type-aware. |
 | Candidate reranker train-fraction sensitivity | `work/agent_memory_experiment/candidate_reranker_train_fraction_sensitivity.py` | Checks whether intrinsic-only reranker gains hold across 0.5/0.6/0.7/0.8 train fractions. |
 | Candidate oracle gap analysis | `work/agent_memory_experiment/generate_oracle_gap_analysis.py` | Quantifies how much oracle headroom is closed by the main reranker and why Type3 remains unresolved. |
