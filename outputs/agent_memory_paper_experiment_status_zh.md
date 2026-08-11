@@ -250,6 +250,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_paper_tables_zh.md`：Markdown 主表、消融表、Type 3 失败分析表。
 - `outputs/agent_memory_paper_tables.tex`：可直接复制到论文的 LaTeX `booktabs` 表格。
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`：按“论文主张-证据-证据强度-剩余缺口”整理当前实验是否足以支撑投稿表述。
+- `outputs/agent_memory_paper_draft_outline_zh.md`：中文论文草稿骨架，汇总题目、摘要、贡献、公式、实验 RQ、边界和投稿前最小条件。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前 OpenAI-compatible `text-embedding-3-small` baseline 已有 API/cache 入口，但尚未实际运行出指标。
 - `outputs/agent_memory_api_embedding_run_estimate_zh.md`：外部 embedding baseline 跑前规模预估；当前 LoCoMo10 预计 4355 条文本、约 71882 个近似 token、未缓存约 35 个 API 批次。
 - `outputs/agent_memory_embedding_baseline_comparison_zh.md`：外部 embedding baseline 与 BGE-M3 主结果的对比表；当前为 pending，API summary 生成后会自动计算 delta。
@@ -258,7 +259,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `24/24`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `25/25`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。

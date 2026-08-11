@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：24/24
+- Artifact 存在性：25/25
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `77906b0` |
-| git_branch_status | `## main...origin/main [ahead 33]` |
+| git_commit | `8ac6f53` |
+| git_branch_status | `## main...origin/main [ahead 34]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -37,6 +37,7 @@
 | Paper tables Markdown | True | 2345 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 3190 | `outputs/agent_memory_paper_tables.tex` |
 | Paper evidence matrix | True | 6326 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper draft outline | True | 6223 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Embedding baseline status | True | 2017 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
@@ -47,7 +48,7 @@
 | Human audit sample | True | 28471 | `outputs/agent_memory_human_audit_sample_type_aware.csv` |
 | Human audit summary | True | 1394 | `outputs/agent_memory_human_audit_summary_zh.md` |
 | Human audit summary CSV | True | 777 | `outputs/agent_memory_human_audit_summary.csv` |
-| Paper experiment status | True | 20274 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 20442 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -75,6 +76,7 @@
 | Human audit sample | `work/agent_memory_experiment/generate_human_audit_sample.py` | Creates stratified manual-review sample for error-analysis reliability. |
 | Human audit summary | `work/agent_memory_experiment/summarize_human_audit.py` | Summarizes manual labels once the audit CSV is filled. |
 | Evidence matrix | `work/agent_memory_experiment/generate_evidence_matrix.py` | Summarizes paper claims, evidence strength, and remaining gaps. |
+| Paper draft outline | `work/agent_memory_experiment/generate_paper_draft_outline.py` | Builds a Chinese paper skeleton from current evidence, formulas, and result tables. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |
 | Paper tables | `work/agent_memory_experiment/generate_paper_tables.py` | Generates Markdown and LaTeX tables from cached CSVs. |
 

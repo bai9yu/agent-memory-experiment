@@ -776,6 +776,15 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-csv outputs/agent_memory_paper_evidence_matrix.csv
 ```
 
+Generate paper draft outline:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_paper_draft_outline.py \
+  --outputs-dir outputs \
+  --output-report outputs/agent_memory_paper_draft_outline_zh.md
+```
+
 Generate human audit sample for error-analysis reliability:
 
 ```bash
