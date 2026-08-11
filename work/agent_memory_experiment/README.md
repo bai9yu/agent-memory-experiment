@@ -346,7 +346,7 @@ Run a small DeepSeek extraction job:
 ```bash
 python3 work/agent_memory_experiment/llm_memory_extractor.py \
   --input work/agent_memory_experiment/data/locomo10.json \
-  --output-dir work/agent_memory_experiment/data/llm_extracted_locomo_1s \
+  --output-dir work/agent_memory_experiment/data/llm_extracted_locomo_1s_v3 \
   --max-records 1 \
   --max-sessions 1 \
   --temperature 0.1
@@ -356,9 +356,9 @@ Slice the result to the extracted LoCoMo session:
 
 ```bash
 python3 work/agent_memory_experiment/filter_memory_eval_slice.py \
-  --memories work/agent_memory_experiment/data/llm_extracted_locomo_1s/memories.jsonl \
-  --queries work/agent_memory_experiment/data/llm_extracted_locomo_1s/queries.jsonl \
-  --output-prefix work/agent_memory_experiment/data/llm_extracted_locomo_1s_d1 \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo_1s_v3/memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo_1s_v3/queries.jsonl \
+  --output-prefix work/agent_memory_experiment/data/llm_extracted_locomo_1s_v3_d1 \
   --sessions D1 \
   --require-answer
 ```
@@ -366,11 +366,20 @@ python3 work/agent_memory_experiment/filter_memory_eval_slice.py \
 Evaluate the extracted memory:
 
 ```bash
-python3 work/agent_memory_experiment/memory_eval.py \
-  --memories work/agent_memory_experiment/data/llm_extracted_locomo_1s_d1_memories.jsonl \
-  --queries work/agent_memory_experiment/data/llm_extracted_locomo_1s_d1_queries.jsonl \
-  --output-dir work/agent_memory_experiment/results/llm_extracted_locomo_1s_d1_hash \
-  --rank-output-k 7 \
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo_1s_v3_d1_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo_1s_v3_d1_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/llm_extracted_locomo_1s_v3_d1_bge_m3 \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only \
+  --rank-output-k 10 \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3,4 \
   --importance-weight 0.06
 ```
 

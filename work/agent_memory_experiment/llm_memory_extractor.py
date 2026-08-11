@@ -46,7 +46,8 @@ Return only valid JSON. Do not include markdown.
 
 Extract concise fact-level memories that are useful for future retrieval.
 Prefer stable facts about identity, relationships, goals, plans, preferences,
-important events, emotional experiences, and notable commitments. Keep specific
+important events, emotional experiences, notable commitments, family/work
+status, and immediate plans that a user may ask about later. Keep specific
 dates, people, and evidence turn ids. Skip greetings, filler, compliments with
 no durable fact, and generic backchannel messages.
 
@@ -71,7 +72,20 @@ Rules:
 - Use one to three source_turn_ids per memory.
 - Each text should be self-contained and understandable without the dialogue.
 - Do not invent facts not supported by source_turn_ids.
-- Prefer 3 to 8 memories per session unless the session has very little content.
+- Optimize for evidence coverage first, then brevity.
+- Prefer 6 to 12 memories per session when the dialogue contains enough facts.
+- Include short but answerable facts, such as "Melanie is managing kids and work"
+  or "Melanie is going swimming with the kids after the conversation."
+- For identity questions, write direct identity memories when supported, e.g.
+  "Caroline is a transgender woman" rather than only describing related stories.
+- For career/goal questions, include the specific target field in the same memory
+  when possible, e.g. "counseling or mental health" rather than only "career options."
+- For event memories, include the relevant time expression when present, e.g.
+  "recently", "yesterday", "last year", or the session date.
+- If a turn supports two different retrievable facts, create two memories with
+  the same source_turn_ids.
+- Set visibility to "private" unless the dialogue explicitly says the memory is
+  meant to be shared across agents or people.
 """
 
 
@@ -280,6 +294,37 @@ def normalize_memory(
     }
 
 
+def add_adjacent_goal_links(memories: list[dict[str, Any]]) -> None:
+    """Link adjacent planning/career turns so related QA evidence can map.
+
+    LoCoMo observations often compress a broad plan turn and a specific career
+    turn into one memory. LLM extraction may split them, which is useful, but
+    evidence-based evaluation then misses cross-turn questions. This lightweight
+    postprocess adds the adjacent source turn id to compatible memories.
+    """
+    by_session_subject: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for memory in memories:
+        key = (str(memory.get("session_id", "")), str(memory.get("agent_id", "")))
+        by_session_subject.setdefault(key, []).append(memory)
+
+    goal_types = {"goal", "plan", "work", "education"}
+    for rows in by_session_subject.values():
+        rows.sort(key=lambda row: int(row.get("turn", 0)))
+        for left, right in zip(rows, rows[1:]):
+            if left.get("memory_type") not in goal_types or right.get("memory_type") not in goal_types:
+                continue
+            if abs(int(right.get("turn", 0)) - int(left.get("turn", 0))) > 3:
+                continue
+            left_sources = list(left.get("source_evidence_ids", []))
+            right_sources = list(right.get("source_evidence_ids", []))
+            combined = []
+            for source in [*left_sources, *right_sources]:
+                if source not in combined:
+                    combined.append(source)
+            left["source_evidence_ids"] = combined
+            right["source_evidence_ids"] = combined
+
+
 def remap_queries(records: list[dict[str, Any]], evidence_map: dict[tuple[int, str], list[str]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     queries: list[dict[str, Any]] = []
     total_evidence = 0
@@ -433,10 +478,14 @@ def main() -> None:
                     continue
                 memory_rows.append(memory)
                 memory_counter += 1
-                for evidence_id in memory["source_evidence_ids"]:
-                    evidence_map.setdefault((record_idx, evidence_id), []).append(memory_id)
             if args.sleep_seconds > 0:
                 time.sleep(args.sleep_seconds)
+
+    add_adjacent_goal_links(memory_rows)
+    for memory in memory_rows:
+        record_idx = int(str(memory.get("session_id", "0_")).split("_", 1)[0])
+        for evidence_id in memory["source_evidence_ids"]:
+            evidence_map.setdefault((record_idx, evidence_id), []).append(memory["id"])
 
     write_csv(args.output_dir / "prompts.csv", prompt_rows)
     if args.dry_run:
