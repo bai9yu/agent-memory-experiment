@@ -35,6 +35,7 @@ DeepSeek API 用量：
 - Prompt tokens：361103
 - Completion tokens：198471
 - Total tokens：559574
+- 2026-08-11 已完成 `.env` 本地配置后的最小 smoke test：`deepseek-chat` 可正常返回结构化 memory，1 record / 1 session 生成 9 条 fact-level memory。该结果仅用于验证 API 连通性，不作为主实验指标。
 
 成本与延迟：
 
