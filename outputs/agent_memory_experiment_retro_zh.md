@@ -293,6 +293,28 @@
 
 收益：形成了更完整的负结果链条：oracle-light 有潜力，手写规则会退化，浅层监督分类也会退化，验证集调参可以回到固定方法水平但不产生显著收益。
 
+### 3.14 进展：candidate-level learned reranker 带来稳定提升
+
+现象：query-level router 的几种版本都没有稳定超过 fixed `type_aware` 后，改为 candidate-level reranking：先合并 `keyword/vector/hybrid/time_aware/type_aware` 的 Top-K 候选，再训练轻量随机森林分类器判断候选是否相关。
+
+结果：5 个 held-out query split 下，candidate reranker 的 MRR 为 `0.661`，高于 fixed `type_aware` 的 `0.607`；Recall@1 从 `0.499` 提升到 `0.556`，Recall@5 从 `0.733` 提升到 `0.796`。
+
+显著性：paired bootstrap/permutation test 显示 MRR delta 为 `+0.0539`，95% CI `[0.0462, 0.0619]`，p-value `0.0002`；Recall@5 delta 为 `+0.0623`，95% CI `[0.0500, 0.0746]`，p-value `0.0002`。
+
+原因判断：
+
+- query-level route 只能在几个完整检索器之间切换，粒度太粗。
+- candidate-level reranker 能同时使用 semantic、keyword、entity、time、persona、importance、memory type，以及不同检索器的候选排名特征。
+- candidate oracle MRR 达到 `0.909`，说明当前多检索器候选池里仍有大量可利用空间。
+
+解决：
+
+- 将 candidate reranker 作为当前最强的学习式排序 baseline。
+- 保留 fixed `type_aware` 作为可解释公式 baseline，candidate reranker 作为性能上界方向。
+- 后续补充 feature importance、按 query type 的收益分解和更强学习器消融。
+
+收益：项目从“手工公式 + 负结果 router”推进到“有显著提升的学习式重排模块”，更接近论文方法贡献。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -319,13 +341,13 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 4. 当前只评估检索，不评估最终回答生成质量。
 5. KV cache 复用还没有真实实现，只在方法文档中给出下一步公式。
 6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，100k synthetic distractor 实验也只能说明趋势，ANN 优势仍需要真实更大 memory bank 才能充分证明。
-7. 简单 text-intent router 和浅层监督式 query-text router 都弱于 fixed `type_aware`；validation-tuned router 可接近 fixed `type_aware`，但仍没有稳定超过，说明路由方法需要更细 intent schema 或学习式 reranker。
+7. 简单 text-intent router 和浅层监督式 query-text router 都弱于 fixed `type_aware`；validation-tuned router 可接近 fixed `type_aware`，但仍没有稳定超过。candidate-level reranker 已取得显著提升，但还需要 feature importance 和 query-type 分析支撑论文解释。
 
 ## 6. 下一步行动清单
 
 1. 固化当前推荐配置：BGE-M3 + adaptive time-aware + persona gate + importance proxy。
 2. 固化两层记忆结构：fact/observation 作为在线检索层，session_summary 作为归档回溯层。
-3. 增加强 router：在 validation-tuned router 基础上，尝试 LLM few-shot classifier 或 candidate-level reranking learner，并与 fixed `type_aware` 做 paired significance。
+3. 补充 candidate reranker 解释性：feature importance、按 query type 的收益分解、失败案例分析。
 4. 增加 LLM memory extraction 重复实验：从原始对话抽取事实、时间、实体、重要性、权限，并报告 seed/temperature 方差。
 5. 增加 conflict resolver：同一主体同一属性按时间和置信度更新。
 6. 增加真实多 Agent trace：把 Agent A 的工具经验、错误修复、代码片段作为共享记忆。

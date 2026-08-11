@@ -449,7 +449,85 @@ S_{r_{g(q)}}(q,m_i)
 
 该版本基本恢复到 fixed `type_aware` 水平，但仍没有超过它。当前判断是：手写 route 映射会带来明显退化，验证集调参可以避免大退化；但 intent 粒度仍然过粗，距离 oracle best 仍有明显空间。
 
-## 8. 后续持续更新约定
+## 8. Candidate-Level 学习重排
+
+在 query-level router 没有稳定超过 fixed `type_aware` 后，当前新增 candidate-level learned reranker。核心变化是不再先决定“这个 query 用哪个检索器”，而是把多个检索器召回的候选合并，再学习每个候选 memory 的相关性。
+
+候选池定义为：
+
+\[
+\mathcal{C}_{union}(q)=
+\bigcup_{r\in\mathcal{R}}
+\operatorname{TopK}_r(q)
+\]
+
+其中：
+
+\[
+\mathcal{R}=\{\mathrm{keyword},\mathrm{vector},\mathrm{hybrid},\mathrm{time\_aware},\mathrm{type\_aware}\}
+\]
+
+每个候选的特征包含：
+
+\[
+\phi(q,m_i)=[
+s_{\mathrm{semantic}},
+s_{\mathrm{keyword}},
+s_{\mathrm{entity}},
+d_{\mathrm{time}},
+g_{\mathrm{recency}},
+s_{\mathrm{persona}},
+s_{\mathrm{importance}},
+s_{\mathrm{memory\_type}},
+\{S_r(q,m_i), \operatorname{rr}_r(q,m_i)\}_{r\in\mathcal{R}}
+]
+\]
+
+训练目标是候选是否命中 evidence：
+
+\[
+y_{q,i}=\mathbb{I}[m_i\in E_q]
+\]
+
+当前实现使用轻量随机森林分类器：
+
+\[
+\hat p_{q,i}=f_\theta(\phi(q,m_i))
+\]
+
+最终排序：
+
+\[
+\operatorname{retrieve}(q)
+=
+\operatorname{TopK}_{m_i\in\mathcal{C}_{union}(q)}
+\hat p_{q,i}
+\]
+
+5 个 held-out query split 结果：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| fixed `type_aware` | 0.499 | 0.670 | 0.733 | 0.607 |
+| candidate reranker | 0.556 | 0.732 | 0.796 | 0.661 |
+| candidate oracle | 0.909 | 0.909 | 0.909 | 0.909 |
+
+paired significance test 显示 candidate reranker 相比 fixed `type_aware` 的 MRR delta 为 `+0.0539`，95% CI `[0.0462, 0.0619]`，p-value `0.0002`。这说明当前主要改进点应从 query-level route 转向 candidate-level reranking。
+
+当前 Top feature importance：
+
+| Feature | Importance |
+|---|---:|
+| `type_aware_score` | 0.0784 |
+| `time_aware_rr` | 0.0776 |
+| `semantic_score` | 0.0771 |
+| `time_aware_score` | 0.0762 |
+| `hybrid_score` | 0.0750 |
+| `type_aware_rr` | 0.0704 |
+
+解释：模型主要利用多个检索器的分数和排序位置，同时保留语义相似度本身。这支持“多候选融合 + 学习重排”作为比单一路由更合适的方向。
+
+## 9. 后续持续更新约定
 
 这个文档建议每次代码升级后同步更新四处：
 

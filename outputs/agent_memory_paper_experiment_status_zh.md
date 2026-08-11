@@ -132,12 +132,24 @@ paired significance test 显示 router 的 MRR delta 为 0.001994，但 95% CI �
 
 该调参版 router 基本接近 fixed `type_aware`，MRR delta 为 -0.0012，明显好于手写规则和监督式浅层分类器，但仍没有超过固定方法。结论：简单 intent 分组不足以支撑稳定方法选择；后续若要把 router 作为贡献点，需要更细粒度的 intent schema 或直接学习 candidate-level reranking。
 
+基于上述负结果，进一步测试 candidate-level learned reranker：使用 `keyword/vector/hybrid/time_aware/type_aware` 各自 Top-K 候选的并集作为候选池，在训练 query 上学习候选记忆是否相关，并在 held-out query 上重排。
+
+| Method | Splits | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|---:|
+| fixed type_aware | 5 | 0.499 | 0.670 | 0.733 | 0.607 |
+| candidate_reranker | 5 | 0.556 | 0.732 | 0.796 | 0.661 |
+| candidate_oracle | 5 | 0.909 | 0.909 | 0.909 | 0.909 |
+
+配对显著性检验显示 candidate reranker 相比 fixed `type_aware` 稳定提升：MRR delta `+0.0539`，95% CI `[0.0462, 0.0619]`，permutation p-value `0.0002`；Recall@5 delta `+0.0623`，95% CI `[0.0500, 0.0746]`，p-value `0.0002`。这是当前最适合作为论文方法增量的结果：固定公式和 query-level router 不够，而 candidate-level reranking 能从多检索器候选特征中学习更稳的排序。
+
+Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`、`semantic_score`、`time_aware_score`、`hybrid_score`、`type_aware_rr` 等特征，说明提升来自多检索器排序信号融合，而不是单一字段或 query type 记忆。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
-4. Query-intent 自适应路由：已有 query-type oracle-light、text-intent rules、held-out supervised classifier 和 validation-tuned router 四个基线；下一步需要更强 intent schema、LLM few-shot router 或 candidate-level learning，尤其针对 Type 3 和 Type 5。
+4. 学习式重排：candidate-level reranker 已有显著提升；下一步需要补特征重要性、按 query type 的收益分析、与更强 reranker 模型的消融。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 6. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 

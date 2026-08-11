@@ -10,6 +10,7 @@
 - adaptive time-aware reranking
 - persona gate，用于减少人物主体混淆
 - importance proxy，用于提升身份、关系、长期目标、偏好等高价值记忆
+- candidate-level learned reranking，用于从多检索器候选并集中学习排序
 - LoCoMo `observation` / `session_summary` 真实压缩对照
 - DeepSeek LLM fact-level memory extraction，并与 LoCoMo 官方 observation memory 对比
 - 跨智能体共享记忆的权限过滤与风险对照实验
@@ -65,6 +66,8 @@ Text-intent router 可部署规则基线见 `outputs/agent_memory_text_intent_ro
 
 验证集调参 text-intent router 实验见 `outputs/agent_memory_validation_tuned_router_locomo10_zh.md`。
 
+候选级学习重排实验见 `outputs/agent_memory_candidate_reranker_locomo10_zh.md`，显著性检验见 `outputs/agent_memory_candidate_reranker_significance_zh.md`。
+
 成本与延迟分析见 `outputs/agent_memory_cost_latency_locomo10_zh.md`。
 
 细粒度延迟分解见 `outputs/agent_memory_latency_breakdown_locomo10_zh.md`。
@@ -87,6 +90,16 @@ LoCoMo10 全量 DeepSeek 抽取结果：
 |---|---:|---:|---:|---:|---:|---:|
 | DeepSeek extracted fact + type-aware | 2517 | 31148 | 1838 | 0.503 | 0.733 | 0.609 |
 | LoCoMo observation | 2507 | 40241 | 1638 | 0.483 | 0.703 | 0.583 |
+
+候选级学习重排在 held-out query split 上进一步提升：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| fixed type-aware | 0.499 | 0.670 | 0.733 | 0.607 |
+| candidate reranker | 0.556 | 0.732 | 0.796 | 0.661 |
+| candidate oracle | 0.909 | 0.909 | 0.909 | 0.909 |
+
+配对检验显示 candidate reranker 相比 fixed type-aware 的 MRR 提升为 `+0.0539`，95% CI `[0.0462, 0.0619]`，permutation p-value `0.0002`。
 
 大文件没有纳入 Git：
 

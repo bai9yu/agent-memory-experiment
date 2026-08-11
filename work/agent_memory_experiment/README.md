@@ -537,6 +537,34 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
   --output-report outputs/agent_memory_validation_tuned_router_locomo10_zh.md
 ```
 
+Run held-out candidate-level reranker analysis:
+
+```bash
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candidate_reranker_experiment.py \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --seeds 13,17,23,29,31 \
+  --train-fraction 0.7 \
+  --output-split-summary outputs/agent_memory_candidate_reranker_locomo10_split_summary.csv \
+  --output-summary outputs/agent_memory_candidate_reranker_locomo10_summary.csv \
+  --output-selected outputs/agent_memory_candidate_reranker_locomo10_selected.csv \
+  --output-comparison outputs/agent_memory_candidate_reranker_locomo10_comparison_per_query.csv \
+  --output-feature-importance outputs/agent_memory_candidate_reranker_feature_importance.csv \
+  --output-report outputs/agent_memory_candidate_reranker_locomo10_zh.md
+```
+
+Run paired significance testing for the candidate reranker:
+
+```bash
+python3 work/agent_memory_experiment/paired_significance_test.py \
+  --per-query outputs/agent_memory_candidate_reranker_locomo10_comparison_per_query.csv \
+  --baseline type_aware \
+  --candidate candidate_reranker \
+  --iterations 5000 \
+  --output-csv outputs/agent_memory_candidate_reranker_significance_results.csv \
+  --output-report outputs/agent_memory_candidate_reranker_significance_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash

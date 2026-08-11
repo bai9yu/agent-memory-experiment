@@ -94,9 +94,9 @@ def write_csv(path: Path, rows: list[dict]) -> None:
 
 def write_report(path: Path, rows: list[dict]) -> None:
     lines = [
-        "# Paired Significance Test",
+        "# 配对显著性检验",
         "",
-        "| Metric | Baseline | Candidate | Delta | 95% Bootstrap CI | Permutation p-value | Improved | Worsened | Tied |",
+        "| 指标 | Baseline | Candidate | Delta | 95% Bootstrap CI | Permutation p-value | 改善 | 变差 | 持平 |",
         "|---|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for row in rows:
