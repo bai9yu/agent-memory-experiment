@@ -14,6 +14,7 @@ REQUIRED_STEPS = [
     ("human_audit_execution_plan", "human audit execution plan"),
     ("human_audit_sample_qc", "human audit sample coverage and progress QC"),
     ("human_audit_labeling_dashboard", "human audit per-row labeling progress dashboard"),
+    ("human_audit_blind_review_leakage", "human audit blind review schema and leakage audit"),
     ("embedding_baseline_status", "external embedding status without network calls"),
     ("embedding_provider_profiles", "provider-specific external embedding command profiles"),
     ("api_embedding_preflight", "paid/API embedding preflight"),

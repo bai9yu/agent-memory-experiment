@@ -86,6 +86,21 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes per-row human-audit labeling progress and next-item dashboard.",
         ),
         Step(
+            "human_audit_blind_review_leakage",
+            py(
+                "validate_human_audit_blind_review.py",
+                "--priority-csv",
+                "outputs/agent_memory_human_audit_priority20_blind_review.csv",
+                "--full-csv",
+                "outputs/agent_memory_human_audit_full80_blind_review.csv",
+                "--output-csv",
+                "outputs/agent_memory_human_audit_blind_review_leakage.csv",
+                "--output-report",
+                "outputs/agent_memory_human_audit_blind_review_leakage_zh.md",
+            ),
+            "Checks that blinded human-audit review sheets do not expose LLM-assisted labels and follow the expected schema.",
+        ),
+        Step(
             "embedding_baseline_status",
             py(
                 "generate_embedding_baseline_status.py",

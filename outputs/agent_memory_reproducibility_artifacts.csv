@@ -87,18 +87,18 @@ Submission readiness gate,outputs/agent_memory_submission_readiness_zh.md,True,2
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness.csv,True,2067
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1564
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1209
-Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4773
-Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3657
+Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4762
+Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3646
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3843
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,28754
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,29118
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3600
 Submission blocker closure plan CSV,outputs/agent_memory_submission_blocker_closure_plan.csv,True,2813
-Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,4140
-Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,16181
-Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,6121
-Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,5143
+Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,4310
+Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,16827
+Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,6328
+Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,5342
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
 Evidence freshness audit CSV,outputs/agent_memory_evidence_freshness_audit.csv,True,98
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -158,7 +158,9 @@ Human audit sample QC,outputs/agent_memory_human_audit_sample_qc_zh.md,True,6936
 Human audit sample QC CSV,outputs/agent_memory_human_audit_sample_qc.csv,True,7512
 Human audit labeling dashboard,outputs/agent_memory_human_audit_labeling_dashboard_zh.md,True,6904
 Human audit labeling dashboard CSV,outputs/agent_memory_human_audit_labeling_dashboard.csv,True,31843
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,33847
+Human audit blind review leakage audit,outputs/agent_memory_human_audit_blind_review_leakage_zh.md,True,3326
+Human audit blind review leakage audit CSV,outputs/agent_memory_human_audit_blind_review_leakage.csv,True,2567
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,33868
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1410
 Environment system snapshot,outputs/agent_memory_environment_system.csv,True,163

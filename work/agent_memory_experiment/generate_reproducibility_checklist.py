@@ -331,6 +331,8 @@ def main() -> None:
         ("Human audit sample QC CSV", outputs / "agent_memory_human_audit_sample_qc.csv"),
         ("Human audit labeling dashboard", outputs / "agent_memory_human_audit_labeling_dashboard_zh.md"),
         ("Human audit labeling dashboard CSV", outputs / "agent_memory_human_audit_labeling_dashboard.csv"),
+        ("Human audit blind review leakage audit", outputs / "agent_memory_human_audit_blind_review_leakage_zh.md"),
+        ("Human audit blind review leakage audit CSV", outputs / "agent_memory_human_audit_blind_review_leakage.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -620,6 +622,11 @@ def main() -> None:
             "stage": "Human audit labeling dashboard",
             "command": "work/agent_memory_experiment/generate_human_audit_labeling_dashboard.py",
             "notes": "Lists per-row missing human_* fields and the next priority/full80 items to label.",
+        },
+        {
+            "stage": "Human audit blind review leakage audit",
+            "command": "work/agent_memory_experiment/validate_human_audit_blind_review.py",
+            "notes": "Checks that blinded review sheets hide LLM-assisted labels and keep a stable labeling schema.",
         },
         {
             "stage": "Dual human audit agreement",
