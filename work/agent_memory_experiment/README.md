@@ -1435,6 +1435,16 @@ python3 work/agent_memory_experiment/error_analysis.py \
   --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
   --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004/rankings.csv \
   --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004/per_query_metrics.csv \
+  --method time_aware \
+  --output-csv outputs/agent_memory_error_analysis_locomo10_time_aware.csv \
+  --summary-csv outputs/agent_memory_error_analysis_locomo10_time_aware_summary.csv \
+  --output-report outputs/agent_memory_error_analysis_locomo10_time_aware_zh.md
+
+python3 work/agent_memory_experiment/error_analysis.py \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004/rankings.csv \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004/per_query_metrics.csv \
   --method type_aware \
   --output-csv outputs/agent_memory_error_analysis_locomo10_type_aware.csv \
   --summary-csv outputs/agent_memory_error_analysis_locomo10_type_aware_summary.csv \

@@ -4,9 +4,9 @@
 
 ## 总览
 
-- Audited intermediates: 6
+- Audited intermediates: 5
 - Major issues: 0
-- Review-only items: 1
+- Review-only items: 0
 - Provenance acceptable: True
 
 ## 明细
@@ -18,7 +18,6 @@
 | outputs/agent_memory_set_selection_ranked.csv | keep_untracked_regenerable | pass | False | 6289166 | work/agent_memory_experiment/set_level_selection_experiment.py | True | existing=3/3, tracked=3/3 |
 | outputs/agent_memory_set_selection_top20_ranked.csv | keep_untracked_regenerable | pass | False | 12717839 | work/agent_memory_experiment/set_level_selection_experiment.py | True | existing=3/3, tracked=3/3 |
 | outputs/agent_memory_multi_evidence_coverage_top20_per_query.csv | optional_track_or_keep_untracked | pass | False | 857416 | work/agent_memory_experiment/multi_evidence_coverage_analysis.py | True | existing=4/4, tracked=4/4 |
-| outputs/agent_memory_error_analysis_locomo10_time_aware_zh.md | review_before_tracking | review | False | 2493 | work/agent_memory_experiment/error_analysis.py | False | no tracked downstream artifact declared |
 
 ## 论文使用边界
 

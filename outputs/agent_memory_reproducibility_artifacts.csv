@@ -7,6 +7,12 @@ LLM extraction report,outputs/agent_memory_llm_extraction_locomo10_comparison_zh
 Writer stability report,outputs/agent_memory_writer_stability_zh.md,True,1780
 Writer stability aggregate,outputs/agent_memory_writer_stability_aggregate.csv,True,967
 Writer stability runs,outputs/agent_memory_writer_stability_runs.csv,True,924
+Time-aware error analysis report,outputs/agent_memory_error_analysis_locomo10_time_aware_zh.md,True,2493
+Time-aware error analysis CSV,outputs/agent_memory_error_analysis_locomo10_time_aware.csv,True,308368
+Time-aware error analysis summary,outputs/agent_memory_error_analysis_locomo10_time_aware_summary.csv,True,14604
+Type-aware error analysis report,outputs/agent_memory_error_analysis_locomo10_type_aware_zh.md,True,4359
+Type-aware error analysis CSV,outputs/agent_memory_error_analysis_locomo10_type_aware.csv,True,305669
+Type-aware error analysis summary,outputs/agent_memory_error_analysis_locomo10_type_aware_summary.csv,True,14594
 Candidate reranker report,outputs/agent_memory_candidate_reranker_locomo10_zh.md,True,2019
 Candidate reranker significance,outputs/agent_memory_candidate_reranker_significance_zh.md,True,607
 Candidate reranker feature ablation report,outputs/agent_memory_candidate_reranker_feature_ablation_zh.md,True,3225
@@ -87,12 +93,12 @@ Submission readiness gate,outputs/agent_memory_submission_readiness_zh.md,True,2
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness.csv,True,2067
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1564
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1209
-Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4976
-Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3857
-Large intermediate provenance audit,outputs/agent_memory_large_intermediate_provenance_zh.md,True,2262
-Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_provenance.csv,True,3178
-Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3843
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,29469
+Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4131
+Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3054
+Large intermediate provenance audit,outputs/agent_memory_large_intermediate_provenance_zh.md,True,2048
+Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_provenance.csv,True,2824
+Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3795
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,30546
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3600

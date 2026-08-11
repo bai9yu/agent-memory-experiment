@@ -18,7 +18,7 @@
 | gitignore_covers_env | security | major | True | pass | .gitignore contains `.env` |
 | env_example_uses_placeholders | reproducibility | major | True | pass | .env.example has provider placeholders |
 | readme_links_submission_gate | paper_artifact | major | True | pass | README links submission readiness gate |
-| untracked_artifact_audit_present | paper_artifact | major | True | pass | untracked audit rows=17, review_before_tracking=1 |
+| untracked_artifact_audit_present | paper_artifact | major | True | pass | untracked audit rows=14, review_before_tracking=1 |
 | license_file_present | open_source | minor | False | minor | license files=none |
 
 ## 当前动作

@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：170/170
+- Artifact 存在性：176/176
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `7354128` |
+| git_commit | `2d2a090` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -34,6 +34,12 @@
 | Writer stability report | True | 1780 | `outputs/agent_memory_writer_stability_zh.md` |
 | Writer stability aggregate | True | 967 | `outputs/agent_memory_writer_stability_aggregate.csv` |
 | Writer stability runs | True | 924 | `outputs/agent_memory_writer_stability_runs.csv` |
+| Time-aware error analysis report | True | 2493 | `outputs/agent_memory_error_analysis_locomo10_time_aware_zh.md` |
+| Time-aware error analysis CSV | True | 308368 | `outputs/agent_memory_error_analysis_locomo10_time_aware.csv` |
+| Time-aware error analysis summary | True | 14604 | `outputs/agent_memory_error_analysis_locomo10_time_aware_summary.csv` |
+| Type-aware error analysis report | True | 4359 | `outputs/agent_memory_error_analysis_locomo10_type_aware_zh.md` |
+| Type-aware error analysis CSV | True | 305669 | `outputs/agent_memory_error_analysis_locomo10_type_aware.csv` |
+| Type-aware error analysis summary | True | 14594 | `outputs/agent_memory_error_analysis_locomo10_type_aware_summary.csv` |
 | Candidate reranker report | True | 2019 | `outputs/agent_memory_candidate_reranker_locomo10_zh.md` |
 | Candidate reranker significance | True | 607 | `outputs/agent_memory_candidate_reranker_significance_zh.md` |
 | Candidate reranker feature ablation report | True | 3225 | `outputs/agent_memory_candidate_reranker_feature_ablation_zh.md` |
@@ -114,12 +120,12 @@
 | Submission readiness gate CSV | True | 2067 | `outputs/agent_memory_submission_readiness.csv` |
 | Public release readiness gate | True | 1564 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1209 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4976 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3857 | `outputs/agent_memory_untracked_artifact_audit.csv` |
-| Large intermediate provenance audit | True | 2262 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
-| Large intermediate provenance audit CSV | True | 3178 | `outputs/agent_memory_large_intermediate_provenance.csv` |
-| Artifact integrity manifest | True | 3843 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 29469 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Untracked artifact audit | True | 4131 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 3054 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
+| Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
+| Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
+| Artifact integrity manifest CSV | True | 30546 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3600 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |

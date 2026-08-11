@@ -47,13 +47,6 @@ INTERMEDIATES = [
         "downstream": "outputs/agent_memory_multi_evidence_coverage_top20_zh.md;outputs/agent_memory_multi_evidence_coverage_top20_summary.csv;outputs/agent_memory_multi_evidence_coverage_top20_delta_by_type.csv;outputs/agent_memory_candidate_depth_analysis_zh.md",
         "policy": "optional_track_or_keep_untracked",
     },
-    {
-        "path": "outputs/agent_memory_error_analysis_locomo10_time_aware_zh.md",
-        "role": "exploratory time-aware error-analysis report",
-        "generator": "work/agent_memory_experiment/error_analysis.py",
-        "downstream": "",
-        "policy": "review_before_tracking",
-    },
 ]
 
 

@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 170/170
+- Artifacts covered: 176/176
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 6384134
+- Total bytes: 7032005
 
 ## 前 20 个 Artifact
 
@@ -22,18 +22,18 @@
 | Writer stability report | True | 1780 | 36 | 9ab6d5462083 | ok | outputs/agent_memory_writer_stability_zh.md |
 | Writer stability aggregate | True | 967 | 11 | a00fb4e1379c | ok | outputs/agent_memory_writer_stability_aggregate.csv |
 | Writer stability runs | True | 924 | 4 | 13c91b80d653 | ok | outputs/agent_memory_writer_stability_runs.csv |
+| Time-aware error analysis report | True | 2493 | 51 | d582a9bfa7da | ok | outputs/agent_memory_error_analysis_locomo10_time_aware_zh.md |
+| Time-aware error analysis CSV | True | 308368 | 921 | 410ad453db48 | ok | outputs/agent_memory_error_analysis_locomo10_time_aware.csv |
+| Time-aware error analysis summary | True | 14604 | 184 | 9a92725ce374 | ok | outputs/agent_memory_error_analysis_locomo10_time_aware_summary.csv |
+| Type-aware error analysis report | True | 4359 | 107 | 4f2767ffde75 | ok | outputs/agent_memory_error_analysis_locomo10_type_aware_zh.md |
+| Type-aware error analysis CSV | True | 305669 | 914 | 22c2beda4da2 | ok | outputs/agent_memory_error_analysis_locomo10_type_aware.csv |
+| Type-aware error analysis summary | True | 14594 | 184 | 3ed423a7b62d | ok | outputs/agent_memory_error_analysis_locomo10_type_aware_summary.csv |
 | Candidate reranker report | True | 2019 | 53 | 47c06dda556d | ok | outputs/agent_memory_candidate_reranker_locomo10_zh.md |
 | Candidate reranker significance | True | 607 | 8 | 3d53a2fea54f | ok | outputs/agent_memory_candidate_reranker_significance_zh.md |
 | Candidate reranker feature ablation report | True | 3225 | 52 | 26995f86ad2b | ok | outputs/agent_memory_candidate_reranker_feature_ablation_zh.md |
 | Candidate reranker feature ablation summary | True | 2034 | 11 | b9331061399f | ok | outputs/agent_memory_candidate_reranker_feature_ablation_summary.csv |
 | Candidate reranker feature ablation split summary | True | 5458 | 51 | 36853fd8c0fa | ok | outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv |
 | Candidate reranker feature ablation deltas | True | 1407 | 10 | 51b2e15e43b6 | ok | outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv |
-| Candidate reranker feature ablation comparison | True | 1724236 | 24841 | de37c8ae840f | ok | outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv |
-| Candidate reranker paired effect-size report | True | 1912 | 35 | 8db941101e8a | ok | outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md |
-| Candidate reranker paired effect-size CSV | True | 6383 | 25 | 35a35c2968dc | ok | outputs/agent_memory_candidate_reranker_paired_effect_size.csv |
-| Candidate reranker statistical power report | True | 3581 | 75 | f5344c9ec805 | ok | outputs/agent_memory_candidate_reranker_statistical_power_zh.md |
-| Candidate reranker statistical power CSV | True | 4128 | 25 | 8d4738dae4df | ok | outputs/agent_memory_candidate_reranker_statistical_power.csv |
-| Paper case study pack | True | 8632 | 101 | f9c0247d28aa | ok | outputs/agent_memory_paper_case_study_pack_zh.md |
 
 ## 使用说明
 
