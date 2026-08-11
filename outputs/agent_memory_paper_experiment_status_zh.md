@@ -253,14 +253,14 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_writer_stability_zh.md`：DeepSeek memory writer 重复抽取稳定性汇总；当前 3 个 manifest run 已全部 completed，状态为 `ready_for_variance`，可报告 MRR / Recall@5 / memory_tokens / API tokens 的均值和标准差。
 - `outputs/agent_memory_paper_tables_zh.md`：Markdown 主表、消融表、candidate reranker LOCO 验证表、Type 3 失败分析表。
 - `outputs/agent_memory_paper_tables.tex`：可直接复制到论文的 LaTeX `booktabs` 表格。
-- `outputs/agent_memory_bootstrap_metric_ci_zh.md`：per-query bootstrap 置信区间报告；当前主方法 held-out MRR delta 为 `0.0539`，95% CI `[0.0459, 0.0622]`，LOCO MRR delta 为 `0.0504`，95% CI `[0.0407, 0.0601]`，均不跨 0；text-intent router 和 Type 3 decomposition fusion4 则作为稳定下降/负结果呈现。
+- `outputs/agent_memory_bootstrap_metric_ci_zh.md`：per-query bootstrap 置信区间报告；当前主方法 held-out MRR delta 为 `0.0539`，95% CI `[0.0459, 0.0622]`，LOCO MRR delta 为 `0.0504`，95% CI `[0.0407, 0.0601]`，均不跨 0；validation-tuned router、text-intent router 和 Type 3 decomposition fusion4 则作为弱/负结果呈现。
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`：按“论文主张-证据-证据强度-剩余缺口”整理当前实验是否足以支撑投稿表述。
 - `outputs/agent_memory_paper_draft_outline_zh.md`：中文论文草稿骨架，汇总题目、摘要、贡献、公式、实验 RQ、边界和投稿前最小条件。
 - `outputs/agent_memory_manuscript_draft_zh.md`：中文论文正文初稿；已包含摘要、引言、任务定义、方法、实验设置、结果、错误分析、限制和结论，但仍需补齐 embedding baseline 与人工一致性后才能作为最终投稿稿。
 - `outputs/agent_memory_manuscript_claim_check_zh.md`：论文声明一致性检查；当前 8 项检查全部通过，用于防止正文把 pending baseline 或人工复核写成已完成结论。
 - `outputs/agent_memory_submission_readiness_gate_zh.md`：最终投稿门禁汇总；当前 required gates 为 `5/10`，blockers 为 `5`，说明复现、声明检查、公开发布卫生和 artifact 完整性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
 - `outputs/agent_memory_public_release_readiness_zh.md`：公开发布卫生检查；当前 blocker 为 `0`，未发现 tracked secret 或 `.env` 入库，剩余 minor 是正式开源前可补 LICENSE。
-- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `86/86` 个复现 artifact，缺失 `0`；其中 `84` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
+- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `87/87` 个复现 artifact，缺失 `0`；其中 `85` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前 OpenAI-compatible `text-embedding-3-small` baseline 已有 API/cache 入口，但尚未实际运行出指标。
@@ -282,7 +282,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `86/86`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `87/87`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。

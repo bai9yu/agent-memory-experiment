@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：86/86
+- Artifact 存在性：87/87
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `5368b17` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `0e7bd32` |
+| git_branch_status | `## main...origin/main [ahead 2]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -33,8 +33,9 @@
 | Writer stability runs | True | 924 | `outputs/agent_memory_writer_stability_runs.csv` |
 | Candidate reranker report | True | 2019 | `outputs/agent_memory_candidate_reranker_locomo10_zh.md` |
 | Candidate reranker significance | True | 607 | `outputs/agent_memory_candidate_reranker_significance_zh.md` |
-| Bootstrap metric CI report | True | 3845 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
-| Bootstrap metric CI CSV | True | 6010 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
+| Bootstrap metric CI report | True | 4250 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
+| Bootstrap metric CI CSV | True | 7506 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
+| Validation-tuned router comparison | True | 850159 | `outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv` |
 | Candidate reranker LOCO report | True | 3506 | `outputs/agent_memory_candidate_reranker_loco_zh.md` |
 | Candidate reranker LOCO summary | True | 684 | `outputs/agent_memory_candidate_reranker_loco_summary.csv` |
 | Candidate reranker LOCO significance | True | 627 | `outputs/agent_memory_candidate_reranker_loco_significance_zh.md` |
@@ -109,7 +110,7 @@
 | Human audit full80 blind review CSV | True | 28745 | `outputs/agent_memory_human_audit_full80_blind_review.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 25850 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 25867 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 

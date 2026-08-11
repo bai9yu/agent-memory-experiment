@@ -29,6 +29,13 @@ DEFAULT_SCENARIOS = [
         "description": "Leave-one-conversation-out split：检验 candidate reranker 是否能跨 conversation 泛化。",
     },
     {
+        "scenario": "validation_tuned_router",
+        "path": "outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv",
+        "baseline": "type_aware",
+        "candidate": "validation_tuned_intent_router",
+        "description": "Validation-tuned intent router：可部署路由 baseline 相对固定 type-aware 的负/弱结果。",
+    },
+    {
         "scenario": "text_intent_router",
         "path": "outputs/agent_memory_text_intent_router_locomo10_comparison_per_query.csv",
         "baseline": "type_aware",
@@ -46,10 +53,6 @@ DEFAULT_SCENARIOS = [
 
 
 METRICS = ["mrr", "recall@1", "recall@3", "recall@5"]
-
-EXCLUDED_SCENARIOS = [
-    "`validation_tuned_router` 当前只有 selected/summary 产物，没有保存 baseline 与 candidate 的同一 split per-query 配对表；因此不纳入 bootstrap CI，避免把非配对结果误写成配对置信区间。",
-]
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -252,12 +255,6 @@ def write_report(path: Path, rows: list[dict[str, Any]], iterations: int, seed: 
             f"{row['improved_queries']}/{row['worsened_queries']}/{row['tied_queries']} |"
         )
 
-    lines.extend([
-        "",
-        "## 未纳入 CI 的结果",
-        "",
-    ])
-    lines.extend([f"- {item}" for item in EXCLUDED_SCENARIOS])
     lines.extend([
         "",
         "## 论文写法建议",

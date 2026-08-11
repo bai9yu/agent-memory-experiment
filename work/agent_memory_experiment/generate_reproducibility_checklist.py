@@ -181,6 +181,7 @@ def main() -> None:
         ("Candidate reranker significance", outputs / "agent_memory_candidate_reranker_significance_zh.md"),
         ("Bootstrap metric CI report", outputs / "agent_memory_bootstrap_metric_ci_zh.md"),
         ("Bootstrap metric CI CSV", outputs / "agent_memory_bootstrap_metric_ci.csv"),
+        ("Validation-tuned router comparison", outputs / "agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv"),
         ("Candidate reranker LOCO report", outputs / "agent_memory_candidate_reranker_loco_zh.md"),
         ("Candidate reranker LOCO summary", outputs / "agent_memory_candidate_reranker_loco_summary.csv"),
         ("Candidate reranker LOCO significance", outputs / "agent_memory_candidate_reranker_loco_significance_zh.md"),

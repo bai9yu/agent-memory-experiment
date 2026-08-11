@@ -230,6 +230,7 @@ def main() -> None:
     parser.add_argument("--output-split-summary", type=Path, required=True)
     parser.add_argument("--output-summary", type=Path, required=True)
     parser.add_argument("--output-selected", type=Path, required=True)
+    parser.add_argument("--output-comparison-per-query", type=Path)
     parser.add_argument("--output-routes", type=Path, required=True)
     parser.add_argument("--output-report", type=Path, required=True)
     args = parser.parse_args()
@@ -245,6 +246,7 @@ def main() -> None:
 
     split_rows = []
     selected_rows = []
+    comparison_rows = []
     route_rows = []
     route_counts: Counter[tuple[str, str]] = Counter()
     for seed in seeds:
@@ -271,6 +273,15 @@ def main() -> None:
             (oracle_rows, "oracle_best_method"),
         ):
             split_rows.append(aggregate_metric(rows, method, seed))
+        if args.output_comparison_per_query:
+            for rows in (baseline_rows, tuned_rows):
+                for row in rows:
+                    comparison_rows.append({
+                        **row,
+                        "query_id": f"{seed}:{row['query_id']}",
+                        "original_query_id": row["query_id"],
+                        "split_seed": seed,
+                    })
         for row in tuned_rows:
             selected_rows.append({"split_seed": seed, **row})
 
@@ -278,6 +289,8 @@ def main() -> None:
     write_csv(args.output_split_summary, split_rows)
     write_csv(args.output_summary, summary_rows)
     write_csv(args.output_selected, selected_rows)
+    if args.output_comparison_per_query:
+        write_csv(args.output_comparison_per_query, comparison_rows)
     write_csv(args.output_routes, route_rows)
     write_report(args.output_report, summary_rows, route_rows, dict(route_counts))
 

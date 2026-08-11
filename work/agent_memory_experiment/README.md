@@ -538,6 +538,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
   --output-split-summary outputs/agent_memory_validation_tuned_router_locomo10_split_summary.csv \
   --output-summary outputs/agent_memory_validation_tuned_router_locomo10_summary.csv \
   --output-selected outputs/agent_memory_validation_tuned_router_locomo10_selected.csv \
+  --output-comparison-per-query outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv \
   --output-routes outputs/agent_memory_validation_tuned_router_locomo10_routes.csv \
   --output-report outputs/agent_memory_validation_tuned_router_locomo10_zh.md
 ```
