@@ -1138,6 +1138,26 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/compa
   --output-report outputs/agent_memory_embedding_baseline_comparison_zh.md
 ```
 
+Prepare and summarize dual-human audit agreement sheets:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/dual_human_audit_agreement.py \
+  --scope priority20 \
+  --blind-csv outputs/agent_memory_human_audit_priority20_blind_review.csv \
+  --dual-csv outputs/agent_memory_human_audit_priority20_dual_review.csv \
+  --summary-csv outputs/agent_memory_human_audit_priority20_dual_agreement.csv \
+  --report outputs/agent_memory_human_audit_priority20_dual_agreement_zh.md
+
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/dual_human_audit_agreement.py \
+  --scope full80 \
+  --blind-csv outputs/agent_memory_human_audit_full80_blind_review.csv \
+  --dual-csv outputs/agent_memory_human_audit_full80_dual_review.csv \
+  --summary-csv outputs/agent_memory_human_audit_full80_dual_agreement.csv \
+  --report outputs/agent_memory_human_audit_full80_dual_agreement_zh.md
+```
+
 Generate reproducibility checklist:
 
 ```bash

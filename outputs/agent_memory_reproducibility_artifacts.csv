@@ -47,7 +47,7 @@ Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3770
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,15228
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,15559
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -82,11 +82,17 @@ Human/LLM priority20 audit agreement CSV,outputs/agent_memory_human_llm_audit_pr
 Human audit priority20 blind review,outputs/agent_memory_human_audit_priority20_blind_review_zh.md,True,1220
 Human audit priority20 blind review CSV,outputs/agent_memory_human_audit_priority20_blind_review.csv,True,6882
 Human audit priority20 review packet,outputs/agent_memory_human_audit_priority20_review_packet_zh.md,True,15963
+Human audit priority20 dual review CSV,outputs/agent_memory_human_audit_priority20_dual_review.csv,True,7390
+Human audit priority20 dual agreement,outputs/agent_memory_human_audit_priority20_dual_agreement_zh.md,True,6254
+Human audit priority20 dual agreement CSV,outputs/agent_memory_human_audit_priority20_dual_agreement.csv,True,750
 Human audit full80 blind review,outputs/agent_memory_human_audit_full80_blind_review_zh.md,True,1201
 Human audit full80 blind review CSV,outputs/agent_memory_human_audit_full80_blind_review.csv,True,28745
 Human audit full80 review packet,outputs/agent_memory_human_audit_full80_review_packet_zh.md,True,62903
+Human audit full80 dual review CSV,outputs/agent_memory_human_audit_full80_dual_review.csv,True,29853
+Human audit full80 dual agreement,outputs/agent_memory_human_audit_full80_dual_agreement_zh.md,True,6250
+Human audit full80 dual agreement CSV,outputs/agent_memory_human_audit_full80_dual_agreement.csv,True,750
 Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md,True,4943
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,26901
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,27339
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421
