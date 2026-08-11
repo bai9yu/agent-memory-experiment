@@ -263,8 +263,8 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `89/89` 个复现 artifact，缺失 `0`；其中 `87` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
-- `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前 OpenAI-compatible `text-embedding-3-small` baseline 已有 API/cache 入口，但尚未实际运行出指标。
-- `outputs/agent_memory_api_embedding_preflight_zh.md`：外部 embedding baseline 跑前门禁；当前 required checks 为 `4/5`，缺口是 `OPENAI_API_KEY` 未配置，因此不建议启动付费/API baseline。
+- `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前已登记默认 OpenAI `text-embedding-3-small` 和通用 OpenAI-compatible provider 两个入口，但尚未实际运行出指标。
+- `outputs/agent_memory_api_embedding_preflight_zh.md`：外部 embedding baseline 跑前门禁；当前 required checks 为 `4/5`，缺口是默认 `OPENAI_API_KEY` 未配置；若使用其他 provider，可配置 `EXTERNAL_EMBEDDING_API_KEY`、`EXTERNAL_EMBEDDING_MODEL`、`EXTERNAL_EMBEDDING_BASE_URL` 后按 README 替换 preflight 参数。
 - `outputs/agent_memory_mock_api_embedding_smoke_test_zh.md`：API embedding backend 离线 smoke test；使用 localhost mock server 验证 API 后端、summary 写入和 embedding cache，当前第一次 6 个请求、第二次 0 个请求，说明缓存命中。
 - `outputs/agent_memory_api_embedding_run_estimate_zh.md`：外部 embedding baseline 跑前规模预估；当前 LoCoMo10 预计 4355 条文本、约 71882 个近似 token、未缓存约 35 个 API 批次。
 - `outputs/agent_memory_embedding_baseline_comparison_zh.md`：外部 embedding baseline 与 BGE-M3 主结果的对比表；当前为 pending，API summary 生成后会自动计算 delta。
@@ -288,7 +288,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
-   - 当前投稿风险矩阵将该项列为 blocker；API embedding preflight required checks 为 `4/5`，需要补 `OPENAI_API_KEY` 并实际生成外部 embedding summary 后才能写入主结果。
+   - 当前投稿风险矩阵将该项列为 blocker；API embedding preflight required checks 为 `4/5`，需要补 `OPENAI_API_KEY` 或通用 OpenAI-compatible embedding provider key，并实际生成外部 embedding summary 后才能写入主结果。
 2. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
 4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。

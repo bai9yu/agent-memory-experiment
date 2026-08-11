@@ -17,10 +17,12 @@ SECRET_PATTERNS = (
     re.compile(r"Bearer [A-Za-z0-9_-]{20,}"),
     re.compile(r"OPENAI_API_KEY=[A-Za-z0-9]"),
     re.compile(r"DEEPSEEK_API_KEY=[A-Za-z0-9]"),
+    re.compile(r"EXTERNAL_EMBEDDING_API_KEY=[A-Za-z0-9]"),
 )
 ALLOWED_PLACEHOLDERS = {
     "your_deepseek_api_key_here",
     "your_openai_api_key_here",
+    "your_embedding_provider_key_here",
 }
 
 

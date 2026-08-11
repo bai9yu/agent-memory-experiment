@@ -340,8 +340,13 @@ DEEPSEEK_API_KEY=your_deepseek_api_key_here
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_MODEL=deepseek-chat
 
-# Optional: only needed for the OpenAI embedding baseline.
+# Optional: only needed for the default OpenAI embedding baseline.
 OPENAI_API_KEY=your_openai_api_key_here
+
+# Optional alternative: any OpenAI-compatible embedding provider.
+EXTERNAL_EMBEDDING_API_KEY=your_embedding_provider_key_here
+EXTERNAL_EMBEDDING_MODEL=your_embedding_model_name
+EXTERNAL_EMBEDDING_BASE_URL=https://your-provider.example/v1
 ```
 
 Run a small DeepSeek extraction job:
@@ -1074,6 +1079,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/prefl
   --env-file .env \
   --output-csv outputs/agent_memory_api_embedding_preflight.csv \
   --output-report outputs/agent_memory_api_embedding_preflight_zh.md
+```
+
+For a generic OpenAI-compatible embedding provider, replace provider-specific
+arguments with your `.env` values:
+
+```bash
+  --provider-label "Generic OpenAI-compatible embedding" \
+  --model "$EXTERNAL_EMBEDDING_MODEL" \
+  --base-url "$EXTERNAL_EMBEDDING_BASE_URL" \
+  --api-key-env EXTERNAL_EMBEDDING_API_KEY
 ```
 
 Run an offline smoke test for the API embedding backend and cache behavior:

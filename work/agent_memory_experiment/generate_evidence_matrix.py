@@ -280,7 +280,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "support_level": "protocol_ready_pending_run",
             "primary_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_api_embedding_preflight_zh.md; agent_memory_api_embedding_run_estimate_zh.md; agent_memory_embedding_baseline_comparison_zh.md; memory_eval.py",
             "paper_use": "可以作为复现实验入口；在 summary.csv 生成前，不能写入主结果表。",
-            "remaining_gap": "需要提供 API key 并实际运行 text-embedding-3-small 等外部 embedding 对照。",
+            "remaining_gap": "需要提供 OpenAI 或其他 OpenAI-compatible provider 的 embedding API key，并实际运行至少一个外部 embedding 对照。",
         },
         {
             "claim": "完整项目距离最终投稿仍需要额外验证。",

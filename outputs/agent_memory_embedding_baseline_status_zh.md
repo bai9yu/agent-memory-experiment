@@ -9,12 +9,14 @@
 - Loaded key names: DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
 - DeepSeek key available: True
 - OpenAI embedding key available: False
+- Generic external embedding key available: False
 
-说明：当前项目把 `DEEPSEEK_API_KEY` 用于 LLM memory writer / LLM-assisted audit；默认外部 embedding baseline 使用 `OPENAI_API_KEY` + `text-embedding-3-small`。如果只配置 DeepSeek key，DeepSeek 相关 LLM 实验可以跑，但 OpenAI embedding baseline 仍会保持 pending。
+说明：当前项目把 `DEEPSEEK_API_KEY` 用于 LLM memory writer / LLM-assisted audit；默认外部 embedding baseline 使用 `OPENAI_API_KEY` + `text-embedding-3-small`。如果没有 OpenAI key，也可以配置 `EXTERNAL_EMBEDDING_API_KEY`、`EXTERNAL_EMBEDDING_MODEL` 和 `EXTERNAL_EMBEDDING_BASE_URL`，接入任意 OpenAI-compatible embedding provider。
 
 | Label | Provider | Model | Key Env | Key Available | Status | Method | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | OpenAI text-embedding-3-small | OpenAI-compatible embeddings API | text-embedding-3-small | OPENAI_API_KEY | False | pending_api_key | type_aware | OPENAI_API_KEY is not set; summary.csv not found |
+| Generic OpenAI-compatible embedding | OpenAI-compatible embeddings API | provider_embedding_model | EXTERNAL_EMBEDDING_API_KEY | False | pending_api_key | type_aware | EXTERNAL_EMBEDDING_API_KEY is not set; summary.csv not found |
 
 ## 跑前规模预估
 
@@ -43,6 +45,14 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memor
   --importance-weight 0.06 \
   --type-awareness-weight 0.04 \
   --rank-output-k 20
+```
+
+通用 OpenAI-compatible provider 可把命令中的三项替换为：
+
+```bash
+  --api-embedding-model "$EXTERNAL_EMBEDDING_MODEL" \
+  --api-embedding-base-url "$EXTERNAL_EMBEDDING_BASE_URL" \
+  --api-key-env EXTERNAL_EMBEDDING_API_KEY \
 ```
 
 ## 论文使用判断

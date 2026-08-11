@@ -7,6 +7,7 @@ import argparse
 import csv
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -52,6 +53,10 @@ def summary_metric(summary_path: Path, method: str) -> dict[str, str] | None:
         if row.get("method") == method:
             return row
     return None
+
+
+def safe_name(value: str) -> str:
+    return re.sub(r"[^a-zA-Z0-9_.-]+", "_", value.strip()) or "custom"
 
 
 def status_row(
@@ -124,8 +129,9 @@ def write_report(path: Path, rows: list[dict[str, Any]], env_file: Path, loaded_
         f"- Loaded key names: {', '.join(loaded_env_keys) if loaded_env_keys else 'none'}",
         f"- DeepSeek key available: {bool(os.environ.get('DEEPSEEK_API_KEY', ''))}",
         f"- OpenAI embedding key available: {bool(os.environ.get('OPENAI_API_KEY', ''))}",
+        f"- Generic external embedding key available: {bool(os.environ.get('EXTERNAL_EMBEDDING_API_KEY', ''))}",
         "",
-        "说明：当前项目把 `DEEPSEEK_API_KEY` 用于 LLM memory writer / LLM-assisted audit；默认外部 embedding baseline 使用 `OPENAI_API_KEY` + `text-embedding-3-small`。如果只配置 DeepSeek key，DeepSeek 相关 LLM 实验可以跑，但 OpenAI embedding baseline 仍会保持 pending。",
+        "说明：当前项目把 `DEEPSEEK_API_KEY` 用于 LLM memory writer / LLM-assisted audit；默认外部 embedding baseline 使用 `OPENAI_API_KEY` + `text-embedding-3-small`。如果没有 OpenAI key，也可以配置 `EXTERNAL_EMBEDDING_API_KEY`、`EXTERNAL_EMBEDDING_MODEL` 和 `EXTERNAL_EMBEDDING_BASE_URL`，接入任意 OpenAI-compatible embedding provider。",
         "",
         markdown_table(["Label", "Provider", "Model", "Key Env", "Key Available", "Status", "Method", "Evidence"], table_rows),
         "",
@@ -158,6 +164,14 @@ def write_report(path: Path, rows: list[dict[str, Any]], env_file: Path, loaded_
         "  --rank-output-k 20",
         "```",
         "",
+        "通用 OpenAI-compatible provider 可把命令中的三项替换为：",
+        "",
+        "```bash",
+        "  --api-embedding-model \"$EXTERNAL_EMBEDDING_MODEL\" \\",
+        "  --api-embedding-base-url \"$EXTERNAL_EMBEDDING_BASE_URL\" \\",
+        "  --api-key-env EXTERNAL_EMBEDDING_API_KEY \\",
+        "```",
+        "",
         "## 论文使用判断",
         "",
     ]
@@ -179,8 +193,21 @@ def main() -> None:
         type=Path,
         default=Path("work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004"),
     )
+    parser.add_argument("--custom-label", default="Generic OpenAI-compatible embedding")
+    parser.add_argument("--custom-provider", default="OpenAI-compatible embeddings API")
+    parser.add_argument("--custom-model-env", default="EXTERNAL_EMBEDDING_MODEL")
+    parser.add_argument("--custom-base-url-env", default="EXTERNAL_EMBEDDING_BASE_URL")
+    parser.add_argument("--custom-key-env", default="EXTERNAL_EMBEDDING_API_KEY")
+    parser.add_argument("--custom-default-model", default="provider_embedding_model")
+    parser.add_argument("--custom-default-base-url", default="https://provider.example/v1")
+    parser.add_argument("--custom-result-dir", type=Path)
     args = parser.parse_args()
     loaded_env_keys = load_dotenv(args.env_file)
+    custom_model = os.environ.get(args.custom_model_env, args.custom_default_model)
+    custom_base_url = os.environ.get(args.custom_base_url_env, args.custom_default_base_url)
+    custom_result_dir = args.custom_result_dir or Path(
+        "work/agent_memory_experiment/results"
+    ) / f"llm_extracted_locomo10_all_v3_answerable_{safe_name(custom_model)}_type_004"
 
     rows = [
         status_row(
@@ -190,7 +217,15 @@ def main() -> None:
             key_env="OPENAI_API_KEY",
             result_dir=args.openai_result_dir,
             method="type_aware",
-        )
+        ),
+        status_row(
+            label=args.custom_label,
+            provider=args.custom_provider,
+            model=custom_model,
+            key_env=args.custom_key_env,
+            result_dir=custom_result_dir,
+            method="type_aware",
+        ),
     ]
     write_csv(args.output_csv, rows)
     write_report(args.output_report, rows, args.env_file, loaded_env_keys)

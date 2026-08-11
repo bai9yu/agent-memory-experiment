@@ -11,7 +11,7 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `c32cb9b` |
+| git_commit | `637b838` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -64,7 +64,7 @@
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
 | Paper tables Markdown | True | 2832 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 3994 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 6662 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper evidence matrix | True | 6707 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 6827 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Paper manuscript draft | True | 9893 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
@@ -78,8 +78,8 @@
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
-| Embedding baseline status | True | 2683 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
-| Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
+| Embedding baseline status | True | 3276 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
+| Embedding baseline status CSV | True | 734 | `outputs/agent_memory_embedding_baseline_status.csv` |
 | API embedding preflight | True | 2189 | `outputs/agent_memory_api_embedding_preflight_zh.md` |
 | API embedding preflight CSV | True | 1109 | `outputs/agent_memory_api_embedding_preflight.csv` |
 | Mock API embedding smoke test | True | 977 | `outputs/agent_memory_mock_api_embedding_smoke_test_zh.md` |
@@ -112,7 +112,7 @@
 | Human audit full80 review packet | True | 62903 | `outputs/agent_memory_human_audit_full80_review_packet_zh.md` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 26408 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 26612 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
