@@ -67,6 +67,7 @@ def write_report(path: Path, root: Path) -> None:
     writer = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
     agreement = read_csv(outputs / "agent_memory_human_llm_audit_priority20_agreement.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
+    threats = read_csv(outputs / "agent_memory_threats_to_validity.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
 
@@ -106,6 +107,8 @@ def write_report(path: Path, root: Path) -> None:
     priority_samples = lookup(agreement, group="overview", label="samples")["count"]
     priority_confirmed = lookup(agreement, group="overview", label="confirmed_samples")["count"]
     embedding_completed = sum(1 for row in embedding_status if row["status"] == "completed")
+    threat_blockers = [row for row in threats if row.get("status") == "blocker"]
+    threat_categories = sorted({row.get("category", "") for row in threats if row.get("category")})
     artifact_pass = sum(1 for row in repro_artifacts if row["exists"] == "True")
     metric_pass = sum(1 for row in repro_metrics if row["pass"] == "True")
 
@@ -233,9 +236,18 @@ def write_report(path: Path, root: Path) -> None:
         "",
         f"当前已有 80 条 LLM-assisted audit 初稿，并生成 priority20 快速人工确认包和盲审人工复核表。priority20 包包含 {priority_samples} 条样本，当前人工确认 {priority_confirmed} 条。该流程适合先在不暴露 LLM 预标注的条件下完成 quick-review，再回填 confirmation 表并报告 exact agreement 与 Cohen's kappa；完整投稿前仍应扩展到 80 条。",
         "",
-        "## 7 限制",
+        "## 7 Threats to Validity 与限制",
         "",
-        f"第一，外部 embedding baseline completed={embedding_completed}，因此目前不能把外部 API embedding 对照写入主结果。第二，Human/LLM 人工确认尚未完成，不能宣称 human-verified error analysis。第三，主结果仍限定在 LoCoMo10 answerable slice；LOCO split 支持跨 conversation 泛化，但不等同于跨数据集泛化。第四，100k 扩展性实验包含 synthetic distractor，只能作为效率诊断，不能直接代表真实生产规模。",
+        (
+            f"本文当前有效性威胁附录覆盖 {len(threats)} 项风险，类别包括 {', '.join(threat_categories)}；"
+            f"其中仍有 {len(threat_blockers)} 项会阻止最终投稿。"
+            f"第一，外部 embedding baseline completed={embedding_completed}，因此目前不能把外部 API embedding 对照写入主结果。"
+            "第二，Human/LLM 人工确认尚未完成，不能宣称 human-verified error analysis。"
+            "第三，主结果仍限定在 LoCoMo10 answerable slice；LOCO split 支持跨 conversation 泛化，但不等同于跨数据集泛化。"
+            "第四，MRR/Recall@K 只衡量 memory retrieval，不等价于端到端 agent task success。"
+            "第五，100k 扩展性实验包含 synthetic distractor，只能作为效率诊断，不能直接代表真实生产规模。"
+            "完整有效性威胁、缓解措施和论文声明边界见 `outputs/agent_memory_threats_to_validity_zh.md`。"
+        ),
         "",
         "## 8 结论",
         "",
@@ -245,7 +257,7 @@ def write_report(path: Path, root: Path) -> None:
         "",
         f"- Artifact gate：{artifact_pass}/{len(repro_artifacts)}",
         f"- Metric gate：{metric_pass}/{len(repro_metrics)}",
-        "- 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_manuscript_claim_check_zh.md`、`outputs/agent_memory_human_audit_readiness_gate_zh.md`。",
+        "- 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_manuscript_claim_check_zh.md`、`outputs/agent_memory_threats_to_validity_zh.md`、`outputs/agent_memory_human_audit_readiness_gate_zh.md`。",
         "",
         "## Appendix B 投稿前 TODO",
         "",

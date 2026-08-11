@@ -51,7 +51,7 @@ Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,3724
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,5197
 Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7048
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,7485
-Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,11027
+Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,11560
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
 Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True,5872
@@ -61,7 +61,7 @@ Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3826
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,19658
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,19966
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
