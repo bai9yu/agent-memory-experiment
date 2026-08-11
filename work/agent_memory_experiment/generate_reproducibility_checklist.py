@@ -198,6 +198,8 @@ def main() -> None:
         ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
         ("API embedding preflight", outputs / "agent_memory_api_embedding_preflight_zh.md"),
         ("API embedding preflight CSV", outputs / "agent_memory_api_embedding_preflight.csv"),
+        ("Mock API embedding smoke test", outputs / "agent_memory_mock_api_embedding_smoke_test_zh.md"),
+        ("Mock API embedding smoke test CSV", outputs / "agent_memory_mock_api_embedding_smoke_test.csv"),
         ("API embedding run estimate", outputs / "agent_memory_api_embedding_run_estimate_zh.md"),
         ("API embedding run estimate CSV", outputs / "agent_memory_api_embedding_run_estimate.csv"),
         ("Embedding baseline comparison", outputs / "agent_memory_embedding_baseline_comparison_zh.md"),
@@ -291,6 +293,11 @@ def main() -> None:
             "stage": "API embedding preflight",
             "command": "work/agent_memory_experiment/preflight_api_embedding_baseline.py",
             "notes": "Checks inputs, key availability, cache paths, and result summary before paid/API embedding runs.",
+        },
+        {
+            "stage": "Mock API embedding smoke test",
+            "command": "work/agent_memory_experiment/mock_api_embedding_smoke_test.py",
+            "notes": "Runs the API embedding backend against a localhost OpenAI-compatible mock and verifies cache hits.",
         },
         {
             "stage": "API embedding run estimate",

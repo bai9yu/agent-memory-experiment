@@ -13,7 +13,7 @@ Candidate reranker LOCO comparison,outputs/agent_memory_candidate_reranker_loco_
 Type3 coverage significance,outputs/agent_memory_type3_coverage_significance_zh.md,True,2545
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,2832
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,3994
-Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,6637
+Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,6662
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,6827
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,9893
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
@@ -25,6 +25,8 @@ Embedding baseline status,outputs/agent_memory_embedding_baseline_status_zh.md,T
 Embedding baseline status CSV,outputs/agent_memory_embedding_baseline_status.csv,True,400
 API embedding preflight,outputs/agent_memory_api_embedding_preflight_zh.md,True,2189
 API embedding preflight CSV,outputs/agent_memory_api_embedding_preflight.csv,True,1109
+Mock API embedding smoke test,outputs/agent_memory_mock_api_embedding_smoke_test_zh.md,True,977
+Mock API embedding smoke test CSV,outputs/agent_memory_mock_api_embedding_smoke_test.csv,True,102
 API embedding run estimate,outputs/agent_memory_api_embedding_run_estimate_zh.md,True,1048
 API embedding run estimate CSV,outputs/agent_memory_api_embedding_run_estimate.csv,True,502
 Embedding baseline comparison,outputs/agent_memory_embedding_baseline_comparison_zh.md,True,998
@@ -51,6 +53,6 @@ Human audit full80 blind review,outputs/agent_memory_human_audit_full80_blind_re
 Human audit full80 blind review CSV,outputs/agent_memory_human_audit_full80_blind_review.csv,True,28745
 Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md,True,4943
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,24096
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,24362
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

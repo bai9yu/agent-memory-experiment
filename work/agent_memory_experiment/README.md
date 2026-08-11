@@ -1028,6 +1028,15 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/prefl
   --output-report outputs/agent_memory_api_embedding_preflight_zh.md
 ```
 
+Run an offline smoke test for the API embedding backend and cache behavior:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/mock_api_embedding_smoke_test.py \
+  --output-csv outputs/agent_memory_mock_api_embedding_smoke_test.csv \
+  --output-report outputs/agent_memory_mock_api_embedding_smoke_test_zh.md
+```
+
 Estimate API embedding baseline run scale:
 
 ```bash
