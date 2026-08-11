@@ -287,9 +287,9 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_threats_to_validity.csv`：Threats to Validity 结构化表；用于审稿问答、限制小节和后续门禁更新。
 - `outputs/agent_memory_submission_package_index_zh.md`：论文提交包索引；按正文、主表、方法附录、实验协议、证据矩阵、有效性威胁、外部 embedding、人审、复现和最终门禁组织投稿 artifact 与下一步动作。
 - `outputs/agent_memory_submission_package_index.csv`：论文提交包结构化索引；记录每个 artifact 的 section、role、status、evidence、next_action 和存在性。
-- `outputs/agent_memory_submission_readiness_gate_zh.md`：最终投稿门禁汇总；当前 required gates 为 `5/10`，blockers 为 `5`，说明复现、声明检查、公开发布卫生和 artifact 完整性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
+- `outputs/agent_memory_submission_readiness_zh.md`：最终投稿门禁汇总；当前 required gates 为 `6/11`，blockers 为 `5`，说明复现 artifact、声明检查、公开发布卫生、artifact 完整性和入口一致性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
 - `outputs/agent_memory_public_release_readiness_zh.md`：公开发布卫生检查；当前 blocker 为 `0`，未发现 tracked secret 或 `.env` 入库，剩余 minor 是正式开源前可补 LICENSE。
-- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `117/117` 个复现 artifact，缺失 `0`；其中 `115` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
+- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `166/166` 个复现 artifact，缺失 `0`；其中 `164` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前已登记默认 OpenAI `text-embedding-3-small` 和通用 OpenAI-compatible provider 两个入口，但尚未实际运行出指标。

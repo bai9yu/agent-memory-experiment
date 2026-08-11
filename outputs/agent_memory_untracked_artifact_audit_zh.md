@@ -27,9 +27,9 @@
 | work/agent_memory_experiment/data/locomo_observation_record1_d1_v2_scope_memories.jsonl | intermediate_observation_slice | keep_untracked | 2598 | Intermediate observation conversion slice; not part of tracked paper artifact set. |
 | work/agent_memory_experiment/data/locomo_observation_record1_d1_v2_scope_queries.jsonl | intermediate_observation_slice | keep_untracked | 1050 | Intermediate observation conversion slice; not part of tracked paper artifact set. |
 | work/agent_memory_experiment/data/deepseek_smoke_test/ | local_smoke_test_data | keep_untracked | 45402 | DeepSeek smoke-test cache/output should stay local unless explicitly anonymized and documented. |
-| outputs/agent_memory_paper_table_consistency.csv | release_audit_artifact | track_as_paper_artifact | 3737 | New public-release audit support file; track with the paper artifact package. |
-| outputs/agent_memory_paper_table_consistency_zh.md | release_audit_artifact | track_as_paper_artifact | 3343 | New public-release audit support file; track with the paper artifact package. |
-| work/agent_memory_experiment/validate_paper_table_consistency.py | release_audit_artifact | track_as_paper_artifact | 9102 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_submission_entrypoint_consistency.csv | release_audit_artifact | track_as_paper_artifact | 2903 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_submission_entrypoint_consistency_zh.md | release_audit_artifact | track_as_paper_artifact | 3535 | New public-release audit support file; track with the paper artifact package. |
+| work/agent_memory_experiment/validate_submission_entrypoint_consistency.py | release_audit_artifact | track_as_paper_artifact | 8141 | New public-release audit support file; track with the paper artifact package. |
 
 ## 使用边界
 

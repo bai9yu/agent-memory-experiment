@@ -35,6 +35,7 @@ REQUIRED_STEPS = [
     ("paper_manuscript", "manuscript draft"),
     ("manuscript_claim_check", "manuscript claim check"),
     ("evidence_freshness", "stale evidence audit"),
+    ("submission_entrypoint_consistency", "submission readiness entrypoint consistency audit"),
 ]
 
 EXCLUDED_BY_DESIGN = [

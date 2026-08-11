@@ -52,7 +52,7 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
 def build_rows(root: Path) -> list[dict[str, Any]]:
     outputs = root / "outputs"
     data = root / "work" / "agent_memory_experiment" / "data"
-    submission = read_csv(outputs / "agent_memory_submission_readiness_gate.csv")
+    submission = read_csv(outputs / "agent_memory_submission_readiness.csv")
     embedding = read_csv(outputs / "agent_memory_external_embedding_blocker_audit.csv")
     human = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
     claims = read_csv(outputs / "agent_memory_manuscript_claim_check.csv")

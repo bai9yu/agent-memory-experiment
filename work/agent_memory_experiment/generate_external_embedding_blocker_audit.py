@@ -48,8 +48,6 @@ def build_action_rows(outputs: Path) -> list[dict[str, Any]]:
     estimate_rows = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
     comparison_rows = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
     readiness_rows = read_csv(outputs / "agent_memory_submission_readiness.csv")
-    if not readiness_rows:
-        readiness_rows = read_csv(outputs / "agent_memory_submission_readiness_gate.csv")
     postrun_rows = read_csv(outputs / "agent_memory_api_embedding_postrun_gate.csv")
 
     openai_status = find_row(status_rows, "label", "OpenAI text-embedding-3-small")

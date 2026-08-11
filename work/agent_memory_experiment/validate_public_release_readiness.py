@@ -51,7 +51,7 @@ def git_files(root: Path) -> list[str]:
 def file_text(path: Path) -> str | None:
     try:
         return path.read_text(encoding="utf-8")
-    except UnicodeDecodeError:
+    except (FileNotFoundError, UnicodeDecodeError):
         return None
 
 
@@ -140,7 +140,7 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
         check_row(
             "readme_links_submission_gate",
             "paper_artifact",
-            "agent_memory_submission_readiness_gate_zh.md" in readme,
+            "agent_memory_submission_readiness_zh.md" in readme,
             "major",
             "README links submission readiness gate",
             "在 README 的论文报告列表中加入最终投稿门禁。",

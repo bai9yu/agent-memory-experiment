@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 25
+- Required offline steps: 26
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -38,6 +38,7 @@
 | required_offline_step | paper_manuscript | True | manuscript draft | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | manuscript_claim_check | True | manuscript claim check | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | evidence_freshness | True | stale evidence audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | submission_entrypoint_consistency | True | submission readiness entrypoint consistency audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | excluded_by_design | external_api_embedding_run | True | requires paid/network API key | intentionally excluded from offline refresh pipeline | Run manually only after external input is available. |
 | excluded_by_design | human_label_filling | True | requires human judgment | intentionally excluded from offline refresh pipeline | Run manually only after external input is available. |
 | excluded_by_design | full80_adjudication | True | requires independent annotators/adjudication | intentionally excluded from offline refresh pipeline | Run manually only after external input is available. |

@@ -162,7 +162,7 @@ Paper submission support artifacts:
 - `outputs/agent_memory_threats_to_validity_zh.md`
 - `outputs/agent_memory_reviewer_response_prep_zh.md`
 - `outputs/agent_memory_submission_package_index_zh.md`
-- `outputs/agent_memory_submission_readiness_gate_zh.md`
+- `outputs/agent_memory_submission_readiness_zh.md`
 
 Generate the reviewer-question preparation matrix:
 
@@ -1223,8 +1223,8 @@ Validate final submission readiness gates:
 PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
 work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_submission_readiness.py \
   --outputs-dir outputs \
-  --output-csv outputs/agent_memory_submission_readiness_gate.csv \
-  --output-report outputs/agent_memory_submission_readiness_gate_zh.md
+  --output-csv outputs/agent_memory_submission_readiness.csv \
+  --output-report outputs/agent_memory_submission_readiness_zh.md
 ```
 
 Validate public-release hygiene before sharing the repository or paper artifacts:

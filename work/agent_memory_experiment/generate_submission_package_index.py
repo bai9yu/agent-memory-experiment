@@ -41,7 +41,7 @@ def exists(outputs: Path, path: str) -> str:
 
 def build_rows(root: Path) -> list[dict[str, Any]]:
     outputs = root / "outputs"
-    readiness = read_csv(outputs / "agent_memory_submission_readiness_gate.csv")
+    readiness = read_csv(outputs / "agent_memory_submission_readiness.csv")
     claim_check = read_csv(outputs / "agent_memory_manuscript_claim_check.csv")
     blocker_evidence = "; ".join(
         f"{row.get('gate')}={row.get('evidence')}"
@@ -289,7 +289,15 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
         },
         {
             "section": "Submission Gate",
-            "artifact": "outputs/agent_memory_submission_readiness_gate_zh.md",
+            "artifact": "outputs/agent_memory_submission_entrypoint_consistency_zh.md",
+            "role": "检查 README、package index 和 reproducibility checklist 是否统一指向当前投稿门禁 artifact。",
+            "status": "ready",
+            "evidence": "submission readiness entrypoints use the current artifact name",
+            "next_action": "每次重命名或替换投稿门禁 artifact 后重新运行。",
+        },
+        {
+            "section": "Submission Gate",
+            "artifact": "outputs/agent_memory_submission_readiness_zh.md",
             "role": "最终投稿门禁，聚合复现、claim check、外部 baseline、人工复核和公开发布卫生。",
             "status": "not_ready",
             "evidence": blocker_evidence,

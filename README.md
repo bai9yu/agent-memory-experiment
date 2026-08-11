@@ -35,7 +35,7 @@
 - `outputs/agent_memory_paper_draft_outline_zh.md`
 - `outputs/agent_memory_manuscript_draft_zh.md`
 - `outputs/agent_memory_manuscript_claim_check_zh.md`
-- `outputs/agent_memory_submission_readiness_gate_zh.md`
+- `outputs/agent_memory_submission_readiness_zh.md`
 - `outputs/agent_memory_public_release_readiness_zh.md`
 - `outputs/agent_memory_artifact_integrity_manifest_zh.md`
 - `outputs/agent_memory_submission_gap_analysis_zh.md`

@@ -428,6 +428,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Checks stale artifact/metric/integrity gate counts.",
         ),
         Step(
+            "submission_entrypoint_consistency",
+            py(
+                "validate_submission_entrypoint_consistency.py",
+                "--project-root",
+                ".",
+                "--output-csv",
+                "outputs/agent_memory_submission_entrypoint_consistency.csv",
+                "--output-report",
+                "outputs/agent_memory_submission_entrypoint_consistency_zh.md",
+            ),
+            "Checks that README/package/reproducibility entrypoints point to the current submission readiness artifact.",
+        ),
+        Step(
             "paper_refresh_coverage",
             py(
                 "validate_paper_refresh_coverage.py",

@@ -67,7 +67,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     intrinsic_loco = read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv")
     writer = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
     type3 = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
-    readiness = read_csv(outputs / "agent_memory_submission_readiness_gate.csv")
+    readiness = read_csv(outputs / "agent_memory_submission_readiness.csv")
     public_release = read_csv(outputs / "agent_memory_public_release_readiness.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
     embedding = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
@@ -255,7 +255,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "reviewer_question": "仓库公开发布是否会泄露 API key 或本地敏感文件？",
             "risk_level": "low" if public_blockers == 0 else "blocker",
             "current_answer": f"public release blockers={public_blockers}; readiness blockers={len(readiness_blockers)}。",
-            "evidence_artifacts": "agent_memory_public_release_readiness_zh.md; agent_memory_submission_readiness_gate_zh.md",
+            "evidence_artifacts": "agent_memory_public_release_readiness_zh.md; agent_memory_submission_readiness_zh.md",
             "remaining_gap": "推送前继续只提交明确 artifact，避免 `.env`、cache 和原始密钥进入版本库。",
             "planned_response": "公开仓库保留 `.env.example`，真实 key 只在本地 `.env`。",
         },
