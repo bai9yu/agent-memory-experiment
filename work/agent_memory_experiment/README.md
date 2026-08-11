@@ -765,6 +765,19 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-csv outputs/agent_memory_paper_evidence_matrix.csv
 ```
 
+Generate human audit sample for error-analysis reliability:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_human_audit_sample.py \
+  --errors outputs/agent_memory_error_analysis_locomo10_type_aware.csv \
+  --sample-size 80 \
+  --per-reason-min 4 \
+  --seed 20260811 \
+  --output-csv outputs/agent_memory_human_audit_sample_type_aware.csv \
+  --output-report outputs/agent_memory_human_audit_protocol_zh.md
+```
+
 Generate reproducibility checklist:
 
 ```bash

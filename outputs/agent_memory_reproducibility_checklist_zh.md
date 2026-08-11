@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：11/11
+- Artifact 存在性：13/13
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `75ac577` |
-| git_branch_status | `## main...origin/main [ahead 27]` |
+| git_commit | `24a02a2` |
+| git_branch_status | `## main...origin/main [ahead 28]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -33,8 +33,10 @@
 | Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
 | Paper tables Markdown | True | 2345 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 3190 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 4839 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
-| Paper experiment status | True | 19113 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper evidence matrix | True | 5316 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Human audit protocol | True | 2479 | `outputs/agent_memory_human_audit_protocol_zh.md` |
+| Human audit sample | True | 28471 | `outputs/agent_memory_human_audit_sample_type_aware.csv` |
+| Paper experiment status | True | 19326 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -55,6 +57,7 @@
 | Main LoCoMo retrieval | `work/agent_memory_experiment/README.md#recommended-locomo-run` | Requires local BGE-M3 cache; no online embedding API. |
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
+| Human audit sample | `work/agent_memory_experiment/generate_human_audit_sample.py` | Creates stratified manual-review sample for error-analysis reliability. |
 | Evidence matrix | `work/agent_memory_experiment/generate_evidence_matrix.py` | Summarizes paper claims, evidence strength, and remaining gaps. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |
 | Paper tables | `work/agent_memory_experiment/generate_paper_tables.py` | Generates Markdown and LaTeX tables from cached CSVs. |

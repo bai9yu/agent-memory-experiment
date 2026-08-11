@@ -179,6 +179,8 @@ def main() -> None:
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper evidence matrix", outputs / "agent_memory_paper_evidence_matrix_zh.md"),
+        ("Human audit protocol", outputs / "agent_memory_human_audit_protocol_zh.md"),
+        ("Human audit sample", outputs / "agent_memory_human_audit_sample_type_aware.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -216,6 +218,11 @@ def main() -> None:
             "stage": "Type3 diagnostics",
             "command": "work/agent_memory_experiment/type3_coverage_significance_analysis.py",
             "notes": "Aggregates Type3 coverage significance tests.",
+        },
+        {
+            "stage": "Human audit sample",
+            "command": "work/agent_memory_experiment/generate_human_audit_sample.py",
+            "notes": "Creates stratified manual-review sample for error-analysis reliability.",
         },
         {
             "stage": "Evidence matrix",

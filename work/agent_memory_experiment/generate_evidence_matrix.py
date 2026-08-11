@@ -67,6 +67,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     faiss_scale = read_csv(outputs / "agent_memory_faiss_scale_100k_locomo10.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
+    audit_sample = read_csv(outputs / "agent_memory_human_audit_sample_type_aware.csv")
 
     fact_type_aware = lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     observation_type_aware = lookup(baseline, variant="locomo_observation", method="type_aware")
@@ -205,9 +206,18 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "remaining_gap": "全新 clone 仍需要按文档准备模型/embedding cache，因为大缓存不进入 Git。",
         },
         {
+            "claim": "自动错误分析已经具备人工复核入口，但人工标注尚未完成。",
+            "status": "reliability_protocol",
+            "evidence": f"已从 type-aware Top-1 错误中分层抽样 {len(audit_sample)} 条，生成待标注 CSV 和中文标注协议。",
+            "support_level": "protocol_ready_unlabeled",
+            "primary_artifacts": "agent_memory_human_audit_sample_type_aware.csv; agent_memory_human_audit_protocol_zh.md",
+            "paper_use": "可以说明已有复核流程；在人工标注完成前，不能把自动错误分类当作已验证结论。",
+            "remaining_gap": "需要人工填写 manual_reason / auto_reason_correct，并统计一致性或准确率。",
+        },
+        {
             "claim": "完整项目距离最终投稿仍需要额外验证。",
             "status": "open_gap",
-            "evidence": "剩余缺口包括多 seed DeepSeek 抽取、更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核可靠性。",
+            "evidence": "剩余缺口包括多 seed DeepSeek 抽取、更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。",
             "support_level": "gap_analysis",
             "primary_artifacts": "agent_memory_paper_experiment_status_zh.md; agent_memory_reproducibility_checklist_zh.md",
             "paper_use": "作为下一步 checklist，而不是论文主张。",
