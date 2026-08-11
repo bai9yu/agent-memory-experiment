@@ -189,6 +189,8 @@ def main() -> None:
         ("Paper evidence matrix", outputs / "agent_memory_paper_evidence_matrix_zh.md"),
         ("Paper draft outline", outputs / "agent_memory_paper_draft_outline_zh.md"),
         ("Paper manuscript draft", outputs / "agent_memory_manuscript_draft_zh.md"),
+        ("Paper manuscript claim check", outputs / "agent_memory_manuscript_claim_check_zh.md"),
+        ("Paper manuscript claim check CSV", outputs / "agent_memory_manuscript_claim_check.csv"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
@@ -326,6 +328,11 @@ def main() -> None:
             "stage": "Paper manuscript draft",
             "command": "work/agent_memory_experiment/generate_paper_manuscript.py",
             "notes": "Generates an editable Chinese manuscript draft from cached experiment outputs.",
+        },
+        {
+            "stage": "Paper manuscript claim check",
+            "command": "work/agent_memory_experiment/validate_manuscript_claims.py",
+            "notes": "Checks that the draft does not overclaim pending embedding or human-audit results.",
         },
         {
             "stage": "Submission gap analysis",

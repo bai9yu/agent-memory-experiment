@@ -940,6 +940,17 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-report outputs/agent_memory_manuscript_draft_zh.md
 ```
 
+Validate manuscript claims against current experiment readiness:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_manuscript_claims.py \
+  --manuscript outputs/agent_memory_manuscript_draft_zh.md \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_manuscript_claim_check.csv \
+  --output-report outputs/agent_memory_manuscript_claim_check_zh.md
+```
+
 Generate external embedding baseline status:
 
 ```bash

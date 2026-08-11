@@ -34,6 +34,7 @@
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`
 - `outputs/agent_memory_paper_draft_outline_zh.md`
 - `outputs/agent_memory_manuscript_draft_zh.md`
+- `outputs/agent_memory_manuscript_claim_check_zh.md`
 - `outputs/agent_memory_submission_gap_analysis_zh.md`
 - `outputs/agent_memory_experiment_protocol_zh.md`
 - `outputs/agent_memory_embedding_baseline_status_zh.md`

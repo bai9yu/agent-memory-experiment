@@ -225,7 +225,7 @@ def write_report(path: Path, root: Path) -> None:
         "",
         f"- Artifact gate：{artifact_pass}/{len(repro_artifacts)}",
         f"- Metric gate：{metric_pass}/{len(repro_metrics)}",
-        "- 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`。",
+        "- 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_manuscript_claim_check_zh.md`。",
         "",
         "## Appendix B 投稿前 TODO",
         "",

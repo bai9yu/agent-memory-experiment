@@ -110,9 +110,9 @@ Type 3 supervised set selector 的 Coverage@5 delta 为 -0.0572，p=0.0286，说
 
 ## Appendix A 复现状态
 
-- Artifact gate：45/45
+- Artifact gate：47/47
 - Metric gate：5/5
-- 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`。
+- 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_manuscript_claim_check_zh.md`。
 
 ## Appendix B 投稿前 TODO
 
