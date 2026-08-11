@@ -16,6 +16,7 @@ REQUIRED_STEPS = [
     ("human_audit_labeling_dashboard", "human audit per-row labeling progress dashboard"),
     ("human_audit_annotation_interface", "offline human audit HTML annotation interface"),
     ("human_audit_annotation_interface_validation", "human audit annotation interface safety validation"),
+    ("human_audit_annotation_import_readiness", "human audit annotation export import readiness check"),
     ("human_audit_blind_review_leakage", "human audit blind review schema and leakage audit"),
     ("embedding_baseline_status", "external embedding status without network calls"),
     ("embedding_provider_profiles", "provider-specific external embedding command profiles"),

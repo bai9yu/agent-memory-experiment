@@ -1,0 +1,3 @@
+scope,source_csv,export_csv,confirmation_csv,export_exists,source_rows,export_rows,row_count_match,audit_id_order_match,missing_human_columns,missing_audit_ids,unexpected_audit_ids,duplicate_audit_ids,complete_labels,invalid_labels,invalid_examples,status
+priority20,outputs/agent_memory_human_audit_priority20_blind_review.csv,outputs/agent_memory_human_audit_priority20_blind_review.csv,outputs/agent_memory_human_llm_audit_priority20_confirmation.csv,True,20,20,True,True,,,,,0,0,,pending_human_labels
+full80,outputs/agent_memory_human_audit_full80_blind_review.csv,outputs/agent_memory_human_audit_full80_blind_review.csv,outputs/agent_memory_human_llm_audit_confirmation.csv,True,80,80,True,True,,,,,0,0,,pending_human_labels
