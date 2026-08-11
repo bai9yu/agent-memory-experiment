@@ -7,7 +7,7 @@
 - 本地 embedding：`BAAI/bge-m3`。
 - 主要对照：LoCoMo 官方 `observation` memory。
 - 检索方法：`vector`、`hybrid`、`time_aware`、`type_aware`。
-- 中文报告：抽取、压缩、跨智能体复用、type-aware 消融均已形成文档。
+- 中文报告：抽取、压缩、跨智能体复用、type-aware 消融、显著性检验和错误分析均已形成文档。
 
 ## LoCoMo10 全量主结果
 
@@ -54,10 +54,24 @@ Coverage：
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 baseline：加入纯 BM25、OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
-3. 错误分类：系统统计 identity、relationship、activity、temporal、multi-hop 等错误类型。
-4. 成本分析：报告 API 成本、memory token ratio、检索 latency、embedding cache 命中影响。
-5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
+3. 成本分析：报告 API 成本、memory token ratio、检索 latency、embedding cache 命中影响。
+4. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
+5. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
+
+## 错误分析
+
+LoCoMo10 `type_aware` Top-1 错误分析：
+
+| Error Reason | Count | Share of Errors |
+|---|---:|---:|
+| memory_type_mismatch | 365 | 0.400 |
+| gold_below_top20 | 236 | 0.258 |
+| semantic_neighbor | 63 | 0.069 |
+| temporal_neighbor | 57 | 0.062 |
+| persona_confusion | 35 | 0.038 |
+
+与 `time_aware` 相比，`type_aware` 将 Top-1 错误从 920 降到 913，主要减少 `gold_below_top20` 和 `memory_type_mismatch`。这说明 type signal 有效但较弱，后续应优先改进 query intent parser 和候选召回。
 
 ## 下一步建议
 
-优先做错误分类和更强 baseline。它们不需要继续花 DeepSeek 抽取费用，却能把当前结果从“工程实验”推进到“论文实验”。
+优先做更强 baseline 和成本/延迟分析。它们不需要继续花 DeepSeek 抽取费用，却能把当前结果从“工程实验”推进到“论文实验”。

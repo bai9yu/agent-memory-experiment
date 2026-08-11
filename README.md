@@ -21,6 +21,8 @@
 
 - `outputs/agent_memory_llm_extraction_deepseek_zh.md`
 - `outputs/agent_memory_llm_extraction_1conversation_comparison_zh.md`
+- `outputs/agent_memory_llm_extraction_locomo10_comparison_zh.md`
+- `outputs/agent_memory_error_analysis_locomo10_type_aware_zh.md`
 
 ## 当前推荐配置
 
