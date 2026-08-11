@@ -68,6 +68,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
     audit_sample = read_csv(outputs / "agent_memory_human_audit_sample_type_aware.csv")
+    audit_summary = read_csv(outputs / "agent_memory_human_audit_summary.csv")
 
     fact_type_aware = lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     observation_type_aware = lookup(baseline, variant="locomo_observation", method="type_aware")
@@ -91,6 +92,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
 
     artifact_pass = sum(1 for row in repro_artifacts if row["exists"] == "True")
     metric_pass = sum(1 for row in repro_metrics if row["pass"] == "True")
+    audit_labeled = sum(int(row["count"]) for row in audit_summary if row["group"] == "auto_reason")
 
     storage_ratio = float(fact_storage["memory_tokens"]) / float(observation_storage["memory_tokens"])
     sklearn_delta = float(sklearn_200["mrr"]) - float(fact_type_aware["mrr"])
@@ -208,9 +210,9 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
         {
             "claim": "自动错误分析已经具备人工复核入口，但人工标注尚未完成。",
             "status": "reliability_protocol",
-            "evidence": f"已从 type-aware Top-1 错误中分层抽样 {len(audit_sample)} 条，生成待标注 CSV 和中文标注协议。",
+            "evidence": f"已从 type-aware Top-1 错误中分层抽样 {len(audit_sample)} 条；当前已汇总人工标注 {audit_labeled} 条。",
             "support_level": "protocol_ready_unlabeled",
-            "primary_artifacts": "agent_memory_human_audit_sample_type_aware.csv; agent_memory_human_audit_protocol_zh.md",
+            "primary_artifacts": "agent_memory_human_audit_sample_type_aware.csv; agent_memory_human_audit_protocol_zh.md; agent_memory_human_audit_summary_zh.md",
             "paper_use": "可以说明已有复核流程；在人工标注完成前，不能把自动错误分类当作已验证结论。",
             "remaining_gap": "需要人工填写 manual_reason / auto_reason_correct，并统计一致性或准确率。",
         },

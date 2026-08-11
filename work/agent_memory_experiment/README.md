@@ -778,6 +778,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-report outputs/agent_memory_human_audit_protocol_zh.md
 ```
 
+Summarize completed human audit labels:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/summarize_human_audit.py \
+  --audit-csv outputs/agent_memory_human_audit_sample_type_aware.csv \
+  --output-csv outputs/agent_memory_human_audit_summary.csv \
+  --output-report outputs/agent_memory_human_audit_summary_zh.md
+```
+
 Generate reproducibility checklist:
 
 ```bash

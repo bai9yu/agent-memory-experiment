@@ -1,0 +1,12 @@
+group,label,value,count,share,yes,partial,no,unlabeled
+auto_reason,activity_neighbor,auto_reason_correct,0,0.0,0,0,0,5
+auto_reason,career_education_neighbor,auto_reason_correct,0,0.0,0,0,0,4
+auto_reason,gold_below_top20,auto_reason_correct,0,0.0,0,0,0,13
+auto_reason,identity_neighbor,auto_reason_correct,0,0.0,0,0,0,3
+auto_reason,memory_type_mismatch,auto_reason_correct,0,0.0,0,0,0,23
+auto_reason,other,auto_reason_correct,0,0.0,0,0,0,8
+auto_reason,persona_confusion,auto_reason_correct,0,0.0,0,0,0,5
+auto_reason,preference_neighbor,auto_reason_correct,0,0.0,0,0,0,4
+auto_reason,relationship_neighbor,auto_reason_correct,0,0.0,0,0,0,4
+auto_reason,semantic_neighbor,auto_reason_correct,0,0.0,0,0,0,5
+auto_reason,temporal_neighbor,auto_reason_correct,0,0.0,0,0,0,6

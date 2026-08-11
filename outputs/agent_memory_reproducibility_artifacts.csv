@@ -6,9 +6,11 @@ Candidate reranker significance,outputs/agent_memory_candidate_reranker_signific
 Type3 coverage significance,outputs/agent_memory_type3_coverage_significance_zh.md,True,2545
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,2345
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,3190
-Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,5316
+Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,5308
 Human audit protocol,outputs/agent_memory_human_audit_protocol_zh.md,True,2479
 Human audit sample,outputs/agent_memory_human_audit_sample_type_aware.csv,True,28471
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,19326
+Human audit summary,outputs/agent_memory_human_audit_summary_zh.md,True,1394
+Human audit summary CSV,outputs/agent_memory_human_audit_summary.csv,True,777
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,19481
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421
