@@ -1,0 +1,389 @@
+# Agent Memory Experiment
+
+This folder contains a first-stage, fully offline experiment for validating agent memory retrieval ideas.
+
+## What It Tests
+
+The first run compares three memory retrieval baselines:
+
+1. `vector`: deterministic hashed-vector similarity.
+2. `hybrid`: vector + BM25 keyword + entity overlap.
+3. `time_aware`: hybrid score with a recency-aware multiplier.
+
+This is a lightweight stand-in for later experiments with `mem0`, `MemoryOS`, LoCoMo, and LongMemEval.
+
+The project also includes a permissive long-conversation converter for LoCoMo-like JSON/JSONL files.
+
+## Run
+
+```bash
+python3 work/agent_memory_experiment/memory_eval.py
+```
+
+Outputs are written to:
+
+- `work/agent_memory_experiment/results/sample_10/summary.csv`
+- `work/agent_memory_experiment/results/sample_10/rankings.csv`
+- `work/agent_memory_experiment/results/sample_10/report.md`
+- `work/agent_memory_experiment/results/sample_10/summary_by_type.csv`
+- `work/agent_memory_experiment/results/sample_10/per_query_metrics.csv`
+
+## One-Command Pipeline
+
+Run the retrieval-only offline pipeline:
+
+```bash
+python3 work/agent_memory_experiment/run_experiments.py
+```
+
+Run the full first-stage pipeline, including retrieval, compression, cross-agent reuse, aggregation, and the consolidated final report:
+
+```bash
+python3 work/agent_memory_experiment/run_full_pipeline.py
+```
+
+The default semantic backend is dependency-free:
+
+```bash
+python3 work/agent_memory_experiment/run_experiments.py --semantic-backend hash
+```
+
+If `sentence-transformers` is installed, run the same pipeline with local BGE embeddings:
+
+```bash
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/run_experiments.py \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-small-en-v1.5 \
+  --embedding-batch-size 16 \
+  --local-files-only
+```
+
+The current project route does not use OpenAI embedding. Use BGE-small first for a fast local check, then switch to BGE-M3 after the pipeline is stable:
+
+```bash
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/locomo_real_1_memories.jsonl \
+  --queries work/agent_memory_experiment/data/locomo_real_1_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/locomo_real_1_bge_small \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-small-en-v1.5 \
+  --embedding-batch-size 16 \
+  --local-files-only
+
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/locomo_real_1_memories.jsonl \
+  --queries work/agent_memory_experiment/data/locomo_real_1_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/locomo_real_1_bge_m3 \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only
+```
+
+Recommended LoCoMo run with BGE-M3 cache, persona-gated time-aware scoring, and importance proxy:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/locomo_real_all_memories.jsonl \
+  --queries work/agent_memory_experiment/data/locomo_real_all_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/locomo_real_all_bge_m3_importance_006 \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only \
+  --rank-output-k 20 \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3,4 \
+  --importance-weight 0.06
+```
+
+Sentence-transformer embeddings are cached under `work/agent_memory_experiment/cache/embeddings/`, keyed by model name, ids, and text content.
+
+Feature weights can be tuned from a candidate-level `rankings.csv` without re-encoding BGE-M3:
+
+```bash
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/tune_memory_features_from_rankings.py \
+  --rankings work/agent_memory_experiment/results/locomo_real_all_bge_m3_importance_006/rankings.csv \
+  --output-csv outputs/agent_memory_feature_tuning_results.csv \
+  --output-report outputs/agent_memory_feature_tuning_zh.md
+```
+
+By default this evaluates:
+
+- `sample_10`
+- `synthetic_100`
+- `synthetic_300`
+- `synthetic_500`
+
+It also writes:
+
+- `outputs/agent_memory_experiment_analysis.md`
+- `outputs/agent_memory_experiment_trends.csv`
+- `outputs/agent_memory_experiment_visualization.html`
+
+The full pipeline additionally writes:
+
+- `outputs/agent_memory_compression_analysis.md`
+- `outputs/agent_memory_compression_results.csv`
+- `outputs/agent_memory_cross_agent_analysis.md`
+- `outputs/agent_memory_cross_agent_results.csv`
+- `outputs/agent_memory_full_pipeline_report.md`
+
+Chinese project notes:
+
+- `outputs/agent_memory_current_design_zh.md`
+- `outputs/agent_memory_open_source_research_zh.md`
+- `outputs/agent_memory_experiment_retro_zh.md`
+- `outputs/agent_memory_dataset_plan.md`
+
+To include a LoCoMo-like input file in the same pipeline:
+
+```bash
+python3 work/agent_memory_experiment/run_experiments.py \
+  --long-conversation-input path/to/locomo_or_long_conversation.json \
+  --long-conversation-name locomo_first_10 \
+  --max-long-records 10
+```
+
+## Generate Larger Synthetic Runs
+
+```bash
+python3 work/agent_memory_experiment/generate_synthetic_data.py --num-memories 100 --seed 7
+python3 work/agent_memory_experiment/generate_synthetic_data.py --num-memories 300 --seed 11
+```
+
+Run evaluation on generated data:
+
+```bash
+python3 work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/synthetic_100_memories.jsonl \
+  --queries work/agent_memory_experiment/data/synthetic_100_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/synthetic_100
+
+python3 work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/synthetic_300_memories.jsonl \
+  --queries work/agent_memory_experiment/data/synthetic_300_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/synthetic_300
+```
+
+Create a consolidated analysis report:
+
+```bash
+python3 work/agent_memory_experiment/compare_results.py \
+  work/agent_memory_experiment/results/sample_10 \
+  work/agent_memory_experiment/results/synthetic_100 \
+  work/agent_memory_experiment/results/synthetic_300 \
+  --output outputs/agent_memory_experiment_analysis.md
+```
+
+Create the offline visualization separately:
+
+```bash
+python3 work/agent_memory_experiment/visualize_results.py \
+  --trend-csv outputs/agent_memory_experiment_trends.csv \
+  --result-dirs \
+  work/agent_memory_experiment/results/sample_10 \
+  work/agent_memory_experiment/results/synthetic_100 \
+  work/agent_memory_experiment/results/synthetic_300 \
+  work/agent_memory_experiment/results/synthetic_500 \
+  --output outputs/agent_memory_experiment_visualization.html
+```
+
+## Convert LoCoMo-Like Long Conversation Data
+
+The converter accepts JSON or JSONL input and tries common field names such as:
+
+- conversation containers: `sessions`, `conversation`, `dialogue`, `messages`, `turns`
+- message text: `content`, `text`, `message`, `utterance`
+- speaker fields: `speaker`, `role`, `agent_id`, `name`
+- question containers: `qa`, `qas`, `questions`, `qa_pairs`
+- evidence fields: `evidence`, `evidence_turns`, `supporting_turns`, `answer_memory_ids`
+
+After downloading LoCoMo `data/locomo10.json` to `work/agent_memory_experiment/data/locomo10.json`, run the real-data pipeline:
+
+```bash
+python3 work/agent_memory_experiment/run_locomo_real.py
+```
+
+This writes:
+
+- `work/agent_memory_experiment/data/locomo_real_all_memories.jsonl`
+- `work/agent_memory_experiment/data/locomo_real_all_queries.jsonl`
+- `work/agent_memory_experiment/results/locomo_real_all/`
+- `outputs/agent_memory_locomo_real_report_zh.md`
+
+To start with a smaller subset:
+
+```bash
+python3 work/agent_memory_experiment/run_locomo_real.py \
+  --name locomo_real_1 \
+  --max-records 1
+```
+
+Run the included sample:
+
+```bash
+python3 work/agent_memory_experiment/convert_long_conversation.py \
+  --input work/agent_memory_experiment/data/locomo_like_sample.json \
+  --output-prefix work/agent_memory_experiment/data/locomo_like_converted
+
+python3 work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/locomo_like_converted_memories.jsonl \
+  --queries work/agent_memory_experiment/data/locomo_like_converted_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/locomo_like_sample
+```
+
+For a real dataset, start small:
+
+```bash
+python3 work/agent_memory_experiment/convert_long_conversation.py \
+  --input path/to/locomo.json \
+  --output-prefix work/agent_memory_experiment/data/locomo_first_10 \
+  --max-records 10
+```
+
+## Memory Compression Experiments
+
+Run raw/fact/summary compression experiments for one dataset:
+
+```bash
+python3 work/agent_memory_experiment/compression_experiment.py \
+  --memories work/agent_memory_experiment/data/synthetic_100_memories.jsonl \
+  --queries work/agent_memory_experiment/data/synthetic_100_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/compression_100
+```
+
+Aggregate multiple compression runs:
+
+```bash
+python3 work/agent_memory_experiment/compare_compression_results.py \
+  work/agent_memory_experiment/results/compression_100 \
+  work/agent_memory_experiment/results/compression_300 \
+  work/agent_memory_experiment/results/compression_500 \
+  --output outputs/agent_memory_compression_analysis.md \
+  --csv-output outputs/agent_memory_compression_results.csv
+```
+
+Compression variants:
+
+- `raw`: original memory records.
+- `fact`: shorter fact-style records, preserving one record per source memory.
+- `summary`: grouped records, five source memories per summary block by default.
+
+Build LoCoMo official compression variants from `observation` and `session_summary`:
+
+```bash
+python3 work/agent_memory_experiment/build_locomo_compression_variants.py \
+  --input work/agent_memory_experiment/data/locomo10.json \
+  --raw-memories work/agent_memory_experiment/data/locomo_real_all_memories.jsonl \
+  --output-dir work/agent_memory_experiment/data/locomo_compression_variants
+```
+
+Evaluate each LoCoMo compression variant with the recommended BGE-M3 configuration:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/locomo_compression_variants/observation/memories.jsonl \
+  --queries work/agent_memory_experiment/data/locomo_compression_variants/observation/queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/locomo_compression_observation_bge_m3_importance_006 \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only \
+  --rank-output-k 20 \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3,4 \
+  --importance-weight 0.06
+```
+
+Repeat the same command for `session_summary`, then aggregate:
+
+```bash
+python3 work/agent_memory_experiment/compare_locomo_compression_variants.py \
+  --build-dir work/agent_memory_experiment/data/locomo_compression_variants \
+  --raw-summary work/agent_memory_experiment/results/locomo_real_all_bge_m3_importance_006/summary.csv \
+  --observation-summary work/agent_memory_experiment/results/locomo_compression_observation_bge_m3_importance_006/summary.csv \
+  --session-summary work/agent_memory_experiment/results/locomo_compression_session_summary_bge_m3_importance_006/summary.csv \
+  --output outputs/agent_memory_locomo_compression_real_zh.md \
+  --csv-output outputs/agent_memory_locomo_compression_real_results.csv
+```
+
+## Cross-Agent Memory Reuse Experiments
+
+Run one cross-agent reuse experiment:
+
+```bash
+python3 work/agent_memory_experiment/cross_agent_experiment.py \
+  --memories work/agent_memory_experiment/data/synthetic_100_memories.jsonl \
+  --output-dir work/agent_memory_experiment/results/cross_agent_100
+```
+
+Aggregate multiple scale runs:
+
+```bash
+python3 work/agent_memory_experiment/compare_cross_agent_results.py \
+  work/agent_memory_experiment/results/cross_agent_100 \
+  work/agent_memory_experiment/results/cross_agent_300 \
+  work/agent_memory_experiment/results/cross_agent_500 \
+  --output outputs/agent_memory_cross_agent_analysis.md \
+  --csv-output outputs/agent_memory_cross_agent_results.csv
+```
+
+Cross-agent strategies:
+
+- `private_only`: agent B sees only its private pool, so answer memories from agent A are unavailable.
+- `shared_allowed`: agent B can retrieve authorized shared memories from agent A.
+- `shared_plus_private_noise`: shared memories remain visible while same-topic private distractors are also present.
+- `unfiltered_private_first`: a risk control where unauthorized private copies appear before shared copies, showing why permission filtering must happen before ranking or KV-cache reuse.
+
+## Data Format
+
+Memories are JSONL rows with fields:
+
+- `id`
+- `session_id`
+- `turn`
+- `date`
+- `agent_id`
+- `user_id`
+- `text`
+- `entities`
+
+Queries are JSONL rows with fields:
+
+- `id`
+- `query`
+- `answer_memory_ids`
+- `query_date`
+- `type`
+
+## Scale-Up Path
+
+Use the same script with larger files:
+
+```bash
+python3 work/agent_memory_experiment/memory_eval.py \
+  --memories path/to/memories.jsonl \
+  --queries path/to/queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/my_run
+```
+
+Recommended next steps:
+
+1. Convert a real LoCoMo subset into the same JSONL format.
+2. Run the converted subset with the default hash backend.
+3. Replace the offline hashed-vector scorer with `mem0` or sentence-transformer embeddings.
+4. Replace heuristic fact compression with LLM-based fact extraction.
+5. Replace synthetic cross-agent records with real multi-agent traces and add source-agent trust / KV-cache reuse cost as a reranking feature.

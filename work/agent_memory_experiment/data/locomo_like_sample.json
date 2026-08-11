@@ -1,0 +1,39 @@
+[
+  {
+    "conversation_id": "demo_1",
+    "user_id": "alice",
+    "sessions": [
+      {
+        "session_id": "day_1",
+        "date": "2026-01-10",
+        "messages": [
+          {"turn_id": "t1", "speaker": "user", "content": "Alice prefers Chroma for the first memory backend test."},
+          {"turn_id": "t2", "speaker": "assistant", "content": "I will remember that Chroma is the current backend preference."}
+        ]
+      },
+      {
+        "session_id": "day_2",
+        "date": "2026-03-15",
+        "messages": [
+          {"turn_id": "t3", "speaker": "user", "content": "Update the backend preference: Alice now wants Qdrant for the memory experiment."},
+          {"turn_id": "t4", "speaker": "assistant", "content": "The latest backend preference is Qdrant, replacing Chroma."}
+        ]
+      }
+    ],
+    "qa": [
+      {"question": "What is Alice's latest backend preference?", "evidence_turns": ["t3", "t4"], "type": "temporal-update"},
+      {"question": "Which backend did Alice prefer first?", "evidence_turns": ["t1"], "type": "temporal-update"}
+    ]
+  },
+  {
+    "conversation_id": "demo_2",
+    "user_id": "bo",
+    "conversation": [
+      {"id": "1", "role": "user", "content": "Bo wants evaluation to include Recall@1 and MRR.", "date": "2026-02-02"},
+      {"id": "2", "role": "assistant", "content": "The evaluation metrics are Recall@1 and MRR.", "date": "2026-02-02"}
+    ],
+    "questions": [
+      {"query": "Which metrics does Bo want?", "evidence": ["1", "2"], "question_type": "evaluation"}
+    ]
+  }
+]

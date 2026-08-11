@@ -1,0 +1,18 @@
+{
+  "name": "locomo10.json",
+  "path": "data/locomo10.json",
+  "sha": "d95b872480b413d935821fdc3c84f8a8f5f29e73",
+  "size": 2805274,
+  "url": "https://api.github.com/repos/snap-research/locomo/contents/data/locomo10.json?ref=main",
+  "html_url": "https://github.com/snap-research/locomo/blob/main/data/locomo10.json",
+  "git_url": "https://api.github.com/repos/snap-research/locomo/git/blobs/d95b872480b413d935821fdc3c84f8a8f5f29e73",
+  "download_url": "https://raw.githubusercontent.com/snap-research/locomo/main/data/locomo10.json",
+  "type": "file",
+  "content": "",
+  "encoding": "none",
+  "_links": {
+    "self": "https://api.github.com/repos/snap-research/locomo/contents/data/locomo10.json?ref=main",
+    "git": "https://api.github.com/repos/snap-research/locomo/git/blobs/d95b872480b413d935821fdc3c84f8a8f5f29e73",
+    "html": "https://github.com/snap-research/locomo/blob/main/data/locomo10.json"
+  }
+}

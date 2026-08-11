@@ -1,0 +1,3 @@
+{"id": "q00001", "query": "What is Alice's latest backend preference?", "answer_memory_ids": ["m00003", "m00004"], "query_date": "2026-03-16", "type": "temporal-update"}
+{"id": "q00002", "query": "Which backend did Alice prefer first?", "answer_memory_ids": ["m00001"], "query_date": "2026-03-16", "type": "temporal-update"}
+{"id": "q00003", "query": "Which metrics does Bo want?", "answer_memory_ids": ["m00005", "m00006"], "query_date": "2026-02-03", "type": "evaluation"}

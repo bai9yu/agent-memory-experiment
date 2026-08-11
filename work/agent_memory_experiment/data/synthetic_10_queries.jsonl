@@ -1,0 +1,8 @@
+{"id": "q00001", "query": "What is Eli's current memory backend preference for the LoCoMo experiment?", "answer_memory_ids": ["m00002"], "query_date": "2026-12-31", "type": "temporal-update"}
+{"id": "q00002", "query": "Which programming language does Faye prefer for MemoryOS memory experiments?", "answer_memory_ids": ["m00003"], "query_date": "2026-12-31", "type": "single-hop"}
+{"id": "q00003", "query": "Which metrics should be reported for the MemoryOS validation run?", "answer_memory_ids": ["m00004"], "query_date": "2026-12-31", "type": "evaluation"}
+{"id": "q00004", "query": "When should old conversation turns be compressed in LongMemEval?", "answer_memory_ids": ["m00005"], "query_date": "2026-12-31", "type": "compression"}
+{"id": "q00005", "query": "What is Alice's current memory backend preference for the AutoGen experiment?", "answer_memory_ids": ["m00007"], "query_date": "2026-12-31", "type": "temporal-update"}
+{"id": "q00006", "query": "Which programming language does Alice prefer for AutoGen memory experiments?", "answer_memory_ids": ["m00008"], "query_date": "2026-12-31", "type": "single-hop"}
+{"id": "q00007", "query": "Which metrics should be reported for the AutoGen validation run?", "answer_memory_ids": ["m00009"], "query_date": "2026-12-31", "type": "evaluation"}
+{"id": "q00008", "query": "When should old conversation turns be compressed in Graphiti?", "answer_memory_ids": ["m00010"], "query_date": "2026-12-31", "type": "compression"}

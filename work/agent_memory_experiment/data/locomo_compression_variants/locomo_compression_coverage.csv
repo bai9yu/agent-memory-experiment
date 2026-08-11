@@ -1,0 +1,3 @@
+variant,num_queries,fully_mapped_queries,partially_mapped_queries,unmapped_queries,query_coverage,strict_query_coverage,total_evidence_ids,mapped_evidence_ids,evidence_coverage
+observation,1986,1471,179,336,0.8308157099697885,0.7406847935548841,2815,2209,0.7847246891651865
+session_summary,1986,1973,4,9,0.9954682779456193,0.9934541792547835,2815,2806,0.9968028419182948

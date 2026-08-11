@@ -1,0 +1,6 @@
+{"id": "m00001", "session_id": "1_day_1", "turn": 1, "date": "2026-01-10", "agent_id": "user", "user_id": "alice", "text": "user: Alice prefers Chroma for the first memory backend test.", "entities": ["Alice", "Chroma"]}
+{"id": "m00002", "session_id": "1_day_1", "turn": 2, "date": "2026-01-10", "agent_id": "assistant", "user_id": "alice", "text": "assistant: I will remember that Chroma is the current backend preference.", "entities": ["Chroma"]}
+{"id": "m00003", "session_id": "1_day_2", "turn": 1, "date": "2026-03-15", "agent_id": "user", "user_id": "alice", "text": "user: Update the backend preference: Alice now wants Qdrant for the memory experiment.", "entities": ["Alice", "Qdrant"]}
+{"id": "m00004", "session_id": "1_day_2", "turn": 2, "date": "2026-03-15", "agent_id": "assistant", "user_id": "alice", "text": "assistant: The latest backend preference is Qdrant, replacing Chroma.", "entities": ["Qdrant", "Chroma"]}
+{"id": "m00005", "session_id": "2_demo_2", "turn": 1, "date": "2026-02-02", "agent_id": "user", "user_id": "bo", "text": "user: Bo wants evaluation to include Recall@1 and MRR.", "entities": ["Recall", "MRR"]}
+{"id": "m00006", "session_id": "2_demo_2", "turn": 2, "date": "2026-02-02", "agent_id": "assistant", "user_id": "bo", "text": "assistant: The evaluation metrics are Recall@1 and MRR.", "entities": ["Recall", "MRR"]}

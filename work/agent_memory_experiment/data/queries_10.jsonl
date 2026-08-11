@@ -1,0 +1,10 @@
+{"id":"q001","query":"What programming language does Alice prefer for memory examples?","answer_memory_ids":["m001"],"query_date":"2026-05-01","type":"single-hop"}
+{"id":"q002","query":"How many samples should the first experiment use?","answer_memory_ids":["m002"],"query_date":"2026-05-01","type":"single-hop"}
+{"id":"q003","query":"Which benchmark is easiest for the first long conversation memory pass?","answer_memory_ids":["m005","m003"],"query_date":"2026-05-01","type":"temporal-update"}
+{"id":"q004","query":"What retrieval baselines are planned?","answer_memory_ids":["m004"],"query_date":"2026-05-01","type":"single-hop"}
+{"id":"q005","query":"What metrics should be tracked for evaluation?","answer_memory_ids":["m006"],"query_date":"2026-05-01","type":"single-hop"}
+{"id":"q006","query":"When should old conversation memories be compressed?","answer_memory_ids":["m007"],"query_date":"2026-05-01","type":"single-hop"}
+{"id":"q007","query":"How will cross-agent reuse be verified?","answer_memory_ids":["m009"],"query_date":"2026-05-01","type":"multi-agent"}
+{"id":"q008","query":"Is KV cache the main semantic memory store?","answer_memory_ids":["m010"],"query_date":"2026-05-01","type":"system"}
+{"id":"q009","query":"Which dataset was not chosen first after the later decision?","answer_memory_ids":["m005"],"query_date":"2026-05-01","type":"temporal-update"}
+{"id":"q010","query":"How do we keep recent details while reducing old context tokens?","answer_memory_ids":["m008"],"query_date":"2026-05-01","type":"compression"}
