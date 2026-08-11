@@ -173,6 +173,9 @@ def main() -> None:
 
     artifact_specs = [
         ("Main baseline CSV", outputs / "agent_memory_baseline_comparison_locomo10.csv"),
+        ("Dataset slice profile report", outputs / "agent_memory_dataset_slice_profile_zh.md"),
+        ("Dataset slice profile summary", outputs / "agent_memory_dataset_slice_profile_summary.csv"),
+        ("Dataset slice profile distribution", outputs / "agent_memory_dataset_slice_profile_distribution.csv"),
         ("LLM extraction report", outputs / "agent_memory_llm_extraction_locomo10_comparison_zh.md"),
         ("Writer stability report", outputs / "agent_memory_writer_stability_zh.md"),
         ("Writer stability aggregate", outputs / "agent_memory_writer_stability_aggregate.csv"),
@@ -349,6 +352,10 @@ def main() -> None:
         metric="recall@5",
         sample_size="2760",
     )
+    dataset_profile = metric_lookup(
+        read_csv(outputs / "agent_memory_dataset_slice_profile_summary.csv"),
+        label="llm_extracted_fact_answerable",
+    )
     oracle_gap_rows = read_csv(outputs / "agent_memory_candidate_oracle_gap_analysis.csv")
     heldout_oracle_gap = metric_lookup(oracle_gap_rows, scenario="heldout_intrinsic", metric="mrr")
     type3_oracle_gap = metric_lookup(oracle_gap_rows, scenario="type3_set_coverage", metric="coverage_ratio@5")
@@ -360,6 +367,9 @@ def main() -> None:
     metric_rows = [
         metric_row("LoCoMo10 type_aware MRR", float(type_aware["mrr"]), 0.60),
         metric_row("LoCoMo10 type_aware Recall@5", float(type_aware["recall@5"]), 0.73),
+        metric_row("LoCoMo10 fact-slice raw query coverage", float(dataset_profile["answerable_share"]), 0.90),
+        metric_row("LoCoMo10 fact-slice group coverage", float(dataset_profile["groups"]), 10.00),
+        metric_row("LoCoMo10 fact-slice multi-gold query share", float(dataset_profile["multi_gold_query_share"]), 0.40),
         metric_row("Candidate reranker MRR", float(reranker["mrr_mean"]), 0.65),
         metric_row("Candidate reranker Recall@5", float(reranker["recall@5_mean"]), 0.79),
         metric_row("Intrinsic-only candidate reranker MRR", float(intrinsic_reranker["mrr_mean"]), 0.67),

@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：135/135
-- 关键指标阈值：19/19
+- Artifact 存在性：138/138
+- 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `6a73e8c` |
+| git_commit | `8b06b2b` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -27,6 +27,9 @@
 | Label | Exists | Size | Path |
 |---|---:|---:|---|
 | Main baseline CSV | True | 1146 | `outputs/agent_memory_baseline_comparison_locomo10.csv` |
+| Dataset slice profile report | True | 4014 | `outputs/agent_memory_dataset_slice_profile_zh.md` |
+| Dataset slice profile summary | True | 1545 | `outputs/agent_memory_dataset_slice_profile_summary.csv` |
+| Dataset slice profile distribution | True | 15966 | `outputs/agent_memory_dataset_slice_profile_distribution.csv` |
 | LLM extraction report | True | 3431 | `outputs/agent_memory_llm_extraction_locomo10_comparison_zh.md` |
 | Writer stability report | True | 1780 | `outputs/agent_memory_writer_stability_zh.md` |
 | Writer stability aggregate | True | 967 | `outputs/agent_memory_writer_stability_aggregate.csv` |
@@ -90,7 +93,7 @@
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
 | Paper tables Markdown | True | 3724 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 5197 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 7619 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper evidence matrix | True | 7731 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 7485 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Paper manuscript draft | True | 12592 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
@@ -168,6 +171,9 @@
 |---|---:|---:|---:|
 | LoCoMo10 type_aware MRR | 0.6094 | 0.6000 | True |
 | LoCoMo10 type_aware Recall@5 | 0.7334 | 0.7300 | True |
+| LoCoMo10 fact-slice raw query coverage | 0.9255 | 0.9000 | True |
+| LoCoMo10 fact-slice group coverage | 10.0000 | 10.0000 | True |
+| LoCoMo10 fact-slice multi-gold query share | 0.4608 | 0.4000 | True |
 | Candidate reranker MRR | 0.6606 | 0.6500 | True |
 | Candidate reranker Recall@5 | 0.7957 | 0.7900 | True |
 | Intrinsic-only candidate reranker MRR | 0.6719 | 0.6700 | True |

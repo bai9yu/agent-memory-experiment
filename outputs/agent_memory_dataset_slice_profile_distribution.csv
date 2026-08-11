@@ -1,0 +1,239 @@
+variant,kind,value,count,share
+raw_turn_full,query_type,4,841,0.42346424974823765
+raw_turn_full,query_type,5,446,0.22457200402819738
+raw_turn_full,query_type,2,321,0.16163141993957703
+raw_turn_full,query_type,1,282,0.1419939577039275
+raw_turn_full,query_type,3,96,0.04833836858006042
+raw_turn_full,memory_type,raw_turn,5882,1.0
+raw_turn_full,agent,John,1017,0.17290037402244135
+raw_turn_full,agent,Tim,344,0.058483509010540634
+raw_turn_full,agent,James,343,0.058313498809928595
+raw_turn_full,agent,Deborah,341,0.057973478408704524
+raw_turn_full,agent,Jolene,340,0.057803468208092484
+raw_turn_full,agent,Audrey,338,0.05746344780686841
+raw_turn_full,agent,Andrew,337,0.057293437606256374
+raw_turn_full,agent,Maria,328,0.05576334580074804
+raw_turn_full,agent,Nate,316,0.0537232233934036
+raw_turn_full,agent,Joanna,313,0.05321319279156749
+raw_turn_full,agent,Calvin,285,0.048452907174430467
+raw_turn_full,agent,Dave,283,0.048112886773206395
+raw_turn_full,agent,Evan,256,0.0435226113566814
+raw_turn_full,agent,Sam,253,0.04301258075484529
+raw_turn_full,agent,Caroline,211,0.03587215232913975
+raw_turn_full,agent,Melanie,208,0.03536212172730364
+raw_turn_full,agent,Jon,185,0.031451887113226794
+raw_turn_full,agent,Gina,184,0.031281876912614755
+raw_turn_full,group_memory,7,689,0.1171370282216933
+raw_turn_full,group_memory,8,681,0.11577694661679701
+raw_turn_full,group_memory,5,680,0.11560693641618497
+raw_turn_full,group_memory,6,675,0.11475688541312479
+raw_turn_full,group_memory,3,663,0.11271676300578035
+raw_turn_full,group_memory,4,629,0.1069364161849711
+raw_turn_full,group_memory,10,568,0.09656579394763685
+raw_turn_full,group_memory,9,509,0.08653519211152669
+raw_turn_full,group_memory,1,419,0.07123427405644339
+raw_turn_full,group_memory,2,369,0.06273376402584155
+raw_turn_full,group_query,4,260,0.1309164149043303
+raw_turn_full,group_query,5,242,0.12185297079556898
+raw_turn_full,group_query,8,239,0.1203423967774421
+raw_turn_full,group_query,10,204,0.1027190332326284
+raw_turn_full,group_query,1,199,0.10020140986908359
+raw_turn_full,group_query,9,196,0.0986908358509567
+raw_turn_full,group_query,3,193,0.09718026183282981
+raw_turn_full,group_query,7,190,0.09566968781470292
+raw_turn_full,group_query,6,158,0.07955689828801611
+raw_turn_full,group_query,2,105,0.052870090634441085
+raw_turn_full,gold_count,1,1563,0.7870090634441088
+raw_turn_full,gold_count,2,241,0.12134944612286001
+raw_turn_full,gold_count,3,81,0.04078549848942598
+raw_turn_full,gold_count,4,58,0.02920443101711984
+raw_turn_full,gold_count,5,20,0.010070493454179255
+raw_turn_full,gold_count,6,8,0.004028197381671702
+raw_turn_full,gold_count,7,5,0.0025176233635448137
+raw_turn_full,gold_count,9,2,0.0010070493454179255
+raw_turn_full,gold_count,8,2,0.0010070493454179255
+raw_turn_full,gold_count,10,2,0.0010070493454179255
+raw_turn_full,gold_count,11,2,0.0010070493454179255
+raw_turn_full,gold_count,19,1,0.0005035246727089627
+raw_turn_full,gold_count,17,1,0.0005035246727089627
+llm_extracted_fact_answerable,query_type,4,752,0.4091403699673558
+llm_extracted_fact_answerable,query_type,5,412,0.22415669205658323
+llm_extracted_fact_answerable,query_type,2,310,0.16866158868335146
+llm_extracted_fact_answerable,query_type,1,278,0.1512513601741023
+llm_extracted_fact_answerable,query_type,3,86,0.046789989118607184
+llm_extracted_fact_answerable,memory_type,event,589,0.23400874056416368
+llm_extracted_fact_answerable,memory_type,preference,361,0.14342471195868098
+llm_extracted_fact_answerable,memory_type,hobby,324,0.12872467222884387
+llm_extracted_fact_answerable,memory_type,plan,317,0.12594358363130712
+llm_extracted_fact_answerable,memory_type,goal,211,0.08382995629717918
+llm_extracted_fact_answerable,memory_type,emotion,151,0.059992054032578464
+llm_extracted_fact_answerable,memory_type,work,141,0.05601907032181168
+llm_extracted_fact_answerable,memory_type,relationship,133,0.052840683353198255
+llm_extracted_fact_answerable,memory_type,family,120,0.04767580452920143
+llm_extracted_fact_answerable,memory_type,health,53,0.021056813667063964
+llm_extracted_fact_answerable,memory_type,other,44,0.01748112832737386
+llm_extracted_fact_answerable,memory_type,identity,42,0.0166865315852205
+llm_extracted_fact_answerable,memory_type,education,22,0.00874056416368693
+llm_extracted_fact_answerable,memory_type,activity,3,0.0011918951132300357
+llm_extracted_fact_answerable,memory_type,project,2,0.0007945967421533572
+llm_extracted_fact_answerable,memory_type,belief,1,0.0003972983710766786
+llm_extracted_fact_answerable,memory_type,social,1,0.0003972983710766786
+llm_extracted_fact_answerable,memory_type,skill,1,0.0003972983710766786
+llm_extracted_fact_answerable,memory_type,habit,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,John,447,0.17759237187127533
+llm_extracted_fact_answerable,agent,Jolene,165,0.06555423122765197
+llm_extracted_fact_answerable,agent,Joanna,153,0.060786650774731825
+llm_extracted_fact_answerable,agent,Calvin,153,0.060786650774731825
+llm_extracted_fact_answerable,agent,James,134,0.05323798172427493
+llm_extracted_fact_answerable,agent,Audrey,132,0.052443384982121574
+llm_extracted_fact_answerable,agent,Evan,123,0.04886769964243146
+llm_extracted_fact_answerable,agent,Nate,115,0.04568931267381804
+llm_extracted_fact_answerable,agent,Andrew,113,0.04489471593166468
+llm_extracted_fact_answerable,agent,Deborah,113,0.04489471593166468
+llm_extracted_fact_answerable,agent,Caroline,108,0.04290822407628129
+llm_extracted_fact_answerable,agent,Dave,108,0.04290822407628129
+llm_extracted_fact_answerable,agent,Tim,105,0.041716328963051254
+llm_extracted_fact_answerable,agent,Jon,99,0.03933253873659118
+llm_extracted_fact_answerable,agent,Maria,92,0.03655145013905443
+llm_extracted_fact_answerable,agent,Sam,90,0.03575685339690107
+llm_extracted_fact_answerable,agent,Melanie,78,0.03098927294398093
+llm_extracted_fact_answerable,agent,Gina,68,0.027016289233214145
+llm_extracted_fact_answerable,agent,James and John,8,0.0031783869686134287
+llm_extracted_fact_answerable,agent,Calvin and Dave,8,0.0031783869686134287
+llm_extracted_fact_answerable,agent,Jon and Gina,7,0.0027810885975367503
+llm_extracted_fact_answerable,agent,John and Maria,7,0.0027810885975367503
+llm_extracted_fact_answerable,agent,Deborah's mother,6,0.0023837902264600714
+llm_extracted_fact_answerable,agent,Evan and Sam,6,0.0023837902264600714
+llm_extracted_fact_answerable,agent,Audrey's dogs,5,0.001986491855383393
+llm_extracted_fact_answerable,agent,Deborah and Jolene,5,0.001986491855383393
+llm_extracted_fact_answerable,agent,Caroline and Melanie,4,0.0015891934843067143
+llm_extracted_fact_answerable,agent,Tim and John,4,0.0015891934843067143
+llm_extracted_fact_answerable,agent,Maria and John,3,0.0011918951132300357
+llm_extracted_fact_answerable,agent,Joanna and Nate,3,0.0011918951132300357
+llm_extracted_fact_answerable,agent,John's team,3,0.0011918951132300357
+llm_extracted_fact_answerable,agent,Andrew and Audrey,3,0.0011918951132300357
+llm_extracted_fact_answerable,agent,Evan's son,3,0.0011918951132300357
+llm_extracted_fact_answerable,agent,Gina and Jon,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Maria's cousin,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Nate and Joanna,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Nate's turtles,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Pixie,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Pepper,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Buddy,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Audrey and Andrew,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Max,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,John and James,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,John's siblings,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Samantha,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Jolene and Deborah,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Dave and Calvin,2,0.0007945967421533572
+llm_extracted_fact_answerable,agent,Connected LGBTQ Activists,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Jean,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Laura,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Cindy,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,John's kids,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Precious,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Panda,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,James's dogs,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Daisy,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,John's parents,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,James's mother's friend,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Deborah's parents,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Anna,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Karlie,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Jolene's partner,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Deborah's mom,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,Sam and Evan,1,0.0003972983710766786
+llm_extracted_fact_answerable,agent,The Fireworks,1,0.0003972983710766786
+llm_extracted_fact_answerable,group_memory,conv-48,296,0.11760031783869686
+llm_extracted_fact_answerable,group_memory,conv-47,290,0.11521652761223679
+llm_extracted_fact_answerable,group_memory,conv-43,276,0.10965435041716329
+llm_extracted_fact_answerable,group_memory,conv-42,275,0.10925705204608661
+llm_extracted_fact_answerable,group_memory,conv-50,272,0.10806515693285658
+llm_extracted_fact_answerable,group_memory,conv-44,263,0.10448947159316647
+llm_extracted_fact_answerable,group_memory,conv-41,255,0.10131108462455304
+llm_extracted_fact_answerable,group_memory,conv-49,223,0.08859753675009932
+llm_extracted_fact_answerable,group_memory,conv-26,191,0.07588398887564561
+llm_extracted_fact_answerable,group_memory,conv-30,176,0.06992451330949544
+llm_extracted_fact_answerable,group_query,conv-42,239,0.13003264417845484
+llm_extracted_fact_answerable,group_query,conv-48,228,0.12404787812840043
+llm_extracted_fact_answerable,group_query,conv-43,227,0.1235038084874864
+llm_extracted_fact_answerable,group_query,conv-50,195,0.10609357997823722
+llm_extracted_fact_answerable,group_query,conv-49,183,0.09956474428726877
+llm_extracted_fact_answerable,group_query,conv-26,176,0.0957562568008705
+llm_extracted_fact_answerable,group_query,conv-47,175,0.09521218715995647
+llm_extracted_fact_answerable,group_query,conv-41,173,0.0941240478781284
+llm_extracted_fact_answerable,group_query,conv-44,148,0.08052230685527748
+llm_extracted_fact_answerable,group_query,conv-30,94,0.051142546245919476
+llm_extracted_fact_answerable,gold_count,1,991,0.5391730141458106
+llm_extracted_fact_answerable,gold_count,2,476,0.2589771490750816
+llm_extracted_fact_answerable,gold_count,3,183,0.09956474428726877
+llm_extracted_fact_answerable,gold_count,4,71,0.03862894450489663
+llm_extracted_fact_answerable,gold_count,5,50,0.02720348204570185
+llm_extracted_fact_answerable,gold_count,7,21,0.011425462459194777
+llm_extracted_fact_answerable,gold_count,6,19,0.010337323177366704
+llm_extracted_fact_answerable,gold_count,8,10,0.00544069640914037
+llm_extracted_fact_answerable,gold_count,9,5,0.002720348204570185
+llm_extracted_fact_answerable,gold_count,11,4,0.002176278563656148
+llm_extracted_fact_answerable,gold_count,12,3,0.001632208922742111
+llm_extracted_fact_answerable,gold_count,17,2,0.001088139281828074
+llm_extracted_fact_answerable,gold_count,14,1,0.000544069640914037
+llm_extracted_fact_answerable,gold_count,22,1,0.000544069640914037
+llm_extracted_fact_answerable,gold_count,10,1,0.000544069640914037
+locomo_observation_answerable,query_type,4,654,0.3992673992673993
+locomo_observation_answerable,query_type,5,356,0.21733821733821734
+locomo_observation_answerable,query_type,2,280,0.17094017094017094
+locomo_observation_answerable,query_type,1,272,0.16605616605616605
+locomo_observation_answerable,query_type,3,76,0.0463980463980464
+locomo_observation_answerable,memory_type,raw_turn,2507,1.0
+locomo_observation_answerable,agent,John,432,0.172317510969286
+locomo_observation_answerable,agent,Audrey,150,0.059832469086557635
+locomo_observation_answerable,agent,Jolene,148,0.059034702832070206
+locomo_observation_answerable,agent,Joanna,146,0.05823693657758277
+locomo_observation_answerable,agent,Maria,145,0.05783805345033905
+locomo_observation_answerable,agent,Deborah,141,0.05624252094136418
+locomo_observation_answerable,agent,Calvin,136,0.054248105305145594
+locomo_observation_answerable,agent,James,130,0.051854806541683285
+locomo_observation_answerable,agent,Tim,124,0.04946150777822098
+locomo_observation_answerable,agent,Andrew,124,0.04946150777822098
+locomo_observation_answerable,agent,Evan,124,0.04946150777822098
+locomo_observation_answerable,agent,Nate,120,0.04786597526924611
+locomo_observation_answerable,agent,Dave,119,0.04746709214200239
+locomo_observation_answerable,agent,Sam,116,0.046270442760271244
+locomo_observation_answerable,agent,Caroline,102,0.040686078978859196
+locomo_observation_answerable,agent,Jon,85,0.03390506581571599
+locomo_observation_answerable,agent,Gina,83,0.03310729956122856
+locomo_observation_answerable,agent,Melanie,82,0.032708416433984845
+locomo_observation_answerable,group_memory,conv-41,308,0.12285600319106502
+locomo_observation_answerable,group_memory,conv-48,289,0.11527722377343438
+locomo_observation_answerable,group_memory,conv-44,274,0.10929397686477862
+locomo_observation_answerable,group_memory,conv-42,266,0.10610291184682888
+locomo_observation_answerable,group_memory,conv-43,265,0.10570402871958516
+locomo_observation_answerable,group_memory,conv-47,258,0.10291184682887913
+locomo_observation_answerable,group_memory,conv-50,255,0.10171519744714799
+locomo_observation_answerable,group_memory,conv-49,240,0.09573195053849222
+locomo_observation_answerable,group_memory,conv-26,184,0.07339449541284404
+locomo_observation_answerable,group_memory,conv-30,168,0.06701236537694455
+locomo_observation_answerable,group_query,conv-42,211,0.1288156288156288
+locomo_observation_answerable,group_query,conv-48,200,0.1221001221001221
+locomo_observation_answerable,group_query,conv-43,196,0.11965811965811966
+locomo_observation_answerable,group_query,conv-50,176,0.10744810744810745
+locomo_observation_answerable,group_query,conv-49,173,0.10561660561660562
+locomo_observation_answerable,group_query,conv-41,160,0.09768009768009768
+locomo_observation_answerable,group_query,conv-26,155,0.09462759462759462
+locomo_observation_answerable,group_query,conv-47,147,0.08974358974358974
+locomo_observation_answerable,group_query,conv-44,138,0.08424908424908426
+locomo_observation_answerable,group_query,conv-30,82,0.050061050061050064
+locomo_observation_answerable,gold_count,1,1188,0.7252747252747253
+locomo_observation_answerable,gold_count,2,282,0.17216117216117216
+locomo_observation_answerable,gold_count,3,83,0.05067155067155067
+locomo_observation_answerable,gold_count,4,54,0.03296703296703297
+locomo_observation_answerable,gold_count,5,9,0.005494505494505495
+locomo_observation_answerable,gold_count,7,6,0.003663003663003663
+locomo_observation_answerable,gold_count,6,5,0.0030525030525030525
+locomo_observation_answerable,gold_count,9,3,0.0018315018315018315
+locomo_observation_answerable,gold_count,11,3,0.0018315018315018315
+locomo_observation_answerable,gold_count,8,2,0.001221001221001221
+locomo_observation_answerable,gold_count,12,1,0.0006105006105006105
+locomo_observation_answerable,gold_count,17,1,0.0006105006105006105
+locomo_observation_answerable,gold_count,15,1,0.0006105006105006105

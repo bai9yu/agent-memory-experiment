@@ -1195,6 +1195,22 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
   --output-report outputs/agent_memory_public_release_readiness_zh.md
 ```
 
+Generate LoCoMo dataset and answerable-slice profile:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_dataset_slice_profile.py \
+  --raw-memories work/agent_memory_experiment/data/locomo_real_all_memories.jsonl \
+  --raw-queries work/agent_memory_experiment/data/locomo_real_all_queries.jsonl \
+  --fact-memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --fact-queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --observation-memories work/agent_memory_experiment/data/locomo_observation_all_answerable_memories.jsonl \
+  --observation-queries work/agent_memory_experiment/data/locomo_observation_all_answerable_queries.jsonl \
+  --output-summary outputs/agent_memory_dataset_slice_profile_summary.csv \
+  --output-distribution outputs/agent_memory_dataset_slice_profile_distribution.csv \
+  --output-report outputs/agent_memory_dataset_slice_profile_zh.md
+```
+
 Generate artifact integrity manifest for paper reproducibility files:
 
 ```bash

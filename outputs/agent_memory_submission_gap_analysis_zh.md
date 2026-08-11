@@ -51,7 +51,7 @@
 ### P3 LoCoMo10 slice 是否足以支撑泛化结论？
 
 - 风险等级：`major`
-- 当前证据：DeepSeek fact + type-aware: MRR 0.609, R@5 0.733; LoCoMo observation + type-aware: MRR 0.583, R@5 0.703.
+- 当前证据：DeepSeek fact + type-aware: MRR 0.609, R@5 0.733; LoCoMo observation + type-aware: MRR 0.583, R@5 0.703. Dataset slice: 1838/1986 raw queries answerable (92.5%), 10 groups, 269 sessions, multi-gold query share 46.1%.
 - 重要性：当前主结果强，但数据范围仍是 LoCoMo10 answerable slice；过度宣称会被质疑外部有效性。
 - 当前可写：可以写 LoCoMo10 上有效，不能写一般智能体记忆场景均有效。
 - 最小动作：扩大 LoCoMo slice 或加入第二个长对话/agent memory 数据集；若时间有限，论文标题和结论限制在系统性实证研究。
@@ -101,7 +101,7 @@
 ### P8 复现实验是否足够完整？
 
 - 风险等级：`moderate`
-- 当前证据：当前复现清单 artifact gate 135/135，metric gate 19/19。
+- 当前证据：当前复现清单 artifact gate 138/138，metric gate 22/22。
 - 重要性：复现清单完整能降低审稿人对工程实验的疑虑，但大模型输出和 embedding cache 不能全部进 Git。
 - 当前可写：可以写 artifact-checked reproducibility package。
 - 最小动作：在 appendix 写清楚数据准备、模型缓存、API key 不入库、重型结果由 CSV 缓存复现。

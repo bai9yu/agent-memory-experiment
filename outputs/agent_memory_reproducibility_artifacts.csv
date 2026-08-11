@@ -1,5 +1,8 @@
 label,path,exists,size_bytes
 Main baseline CSV,outputs/agent_memory_baseline_comparison_locomo10.csv,True,1146
+Dataset slice profile report,outputs/agent_memory_dataset_slice_profile_zh.md,True,4014
+Dataset slice profile summary,outputs/agent_memory_dataset_slice_profile_summary.csv,True,1545
+Dataset slice profile distribution,outputs/agent_memory_dataset_slice_profile_distribution.csv,True,15966
 LLM extraction report,outputs/agent_memory_llm_extraction_locomo10_comparison_zh.md,True,3431
 Writer stability report,outputs/agent_memory_writer_stability_zh.md,True,1780
 Writer stability aggregate,outputs/agent_memory_writer_stability_aggregate.csv,True,967
@@ -63,7 +66,7 @@ Type3 supervised selector rwn002 comparison,outputs/agent_memory_type3_supervise
 Type3 supervised selector rwn002 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv,True,725694
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,3724
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,5197
-Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7619
+Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7731
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,7485
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,12592
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827

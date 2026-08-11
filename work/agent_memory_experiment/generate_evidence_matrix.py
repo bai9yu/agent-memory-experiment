@@ -88,9 +88,11 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     embedding_estimate = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
     embedding_comparison = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
     writer_stability = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
+    dataset_profile = read_csv(outputs / "agent_memory_dataset_slice_profile_summary.csv")
 
     fact_type_aware = lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     observation_type_aware = lookup(baseline, variant="locomo_observation", method="type_aware")
+    fact_slice = lookup(dataset_profile, label="llm_extracted_fact_answerable")
     fact_storage = lookup(storage, variant="llm_extracted_fact")
     observation_storage = lookup(storage, variant="locomo_observation")
     time_aware = lookup(baseline, variant="llm_extracted_fact", method="time_aware")
@@ -214,10 +216,12 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "status": "main_result",
             "evidence": (
                 f"DeepSeek fact + type-aware: MRR {f(fact_type_aware['mrr'])}, R@5 {f(fact_type_aware['recall@5'])}; "
-                f"LoCoMo observation + type-aware: MRR {f(observation_type_aware['mrr'])}, R@5 {f(observation_type_aware['recall@5'])}."
+                f"LoCoMo observation + type-aware: MRR {f(observation_type_aware['mrr'])}, R@5 {f(observation_type_aware['recall@5'])}. "
+                f"Dataset slice: {fact_slice['queries']}/{fact_slice['raw_query_count']} raw queries answerable ({pct(fact_slice['answerable_share'])}), "
+                f"{fact_slice['groups']} groups, {fact_slice['sessions']} sessions, multi-gold query share {pct(fact_slice['multi_gold_query_share'])}."
             ),
             "support_level": "strong_cached",
-            "primary_artifacts": "agent_memory_baseline_comparison_locomo10.csv; agent_memory_llm_extraction_locomo10_comparison_zh.md",
+            "primary_artifacts": "agent_memory_baseline_comparison_locomo10.csv; agent_memory_llm_extraction_locomo10_comparison_zh.md; agent_memory_dataset_slice_profile_zh.md",
             "paper_use": "可以作为记忆形态对比主结果，但需要说明当前仍是 LoCoMo10 切片。",
             "remaining_gap": "仍需在 LoCoMo10 之外补外部数据或更大真实 memory bank，才能宣称广泛泛化。",
         },
