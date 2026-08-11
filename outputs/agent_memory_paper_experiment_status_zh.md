@@ -112,12 +112,22 @@ paired significance test 显示 router 的 MRR delta 为 0.001994，但 95% CI �
 
 该规则 router 显著退化，MRR delta 为 -0.014602，95% CI 为 [-0.020611, -0.008713]，p=0.0002。结论：简单关键词规则不能替代 query type 标注，后续需要 validation-tuned intent classifier 或 LLM few-shot classifier。
 
+进一步测试 held-out 监督式 query-text router：用训练集 per-query 最优方法作为标签，测试集仅根据 query 文本预测 `keyword/vector/hybrid/time_aware/type_aware`。
+
+| Method | Splits | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|---:|
+| fixed type_aware | 5 | 0.499 | 0.670 | 0.733 | 0.607 |
+| supervised_text_router | 5 | 0.485 | 0.661 | 0.708 | 0.592 |
+| oracle_best_method | 5 | 0.600 | 0.756 | 0.799 | 0.693 |
+
+该监督式 router 仍低于 fixed `type_aware`，MRR delta 为 -0.0148，Recall@5 delta 为 -0.0250；同时与 oracle best 存在 0.1013 MRR 差距。结论：query-level 方法选择存在明显潜在上界，但不能直接用浅层 TF-IDF 分类器实现。后续应把 query intent 作为显式中间变量，用验证集调参、LLM few-shot classifier 或 pairwise reranking 学习替代简单分类。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
-4. Query-intent 自适应路由：按 query type 或 intent 在 vector/keyword/time-aware/type-aware 之间选择，尤其针对 Type 3 和 Type 5。
+4. Query-intent 自适应路由：已有 query-type oracle-light、text-intent rules 和 held-out supervised classifier 三个基线；下一步需要更强 intent classifier 或 LLM few-shot router，尤其针对 Type 3 和 Type 5。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 6. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 

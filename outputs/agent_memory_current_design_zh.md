@@ -385,6 +385,37 @@ r(q)=f_{\theta}(q)
 
 其中 \(f_{\theta}\) 可以是轻量文本分类器、LLM few-shot classifier，或人工规则 + validation search 的混合系统。
 
+当前已经加入 held-out 监督式 query-text router 基线。它将每个训练 query 在 `keyword/vector/hybrid/time_aware/type_aware` 中表现最好的方法作为伪标签：
+
+\[
+y_q=\arg\max_{r\in\mathcal{R}}\operatorname{MRR}(q,r)
+\]
+
+然后只用 query 文本训练分类器：
+
+\[
+\hat r(q)=f_\theta(\mathrm{text}(q))
+\]
+
+测试阶段使用预测出的检索方法：
+
+\[
+\operatorname{retrieve}(q)
+=
+\operatorname{TopK}_{m_i\in \mathcal{C}(q)}
+S_{\hat r(q)}(q,m_i)
+\]
+
+当前 5 个 held-out split 的结果：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| fixed `type_aware` | 0.499 | 0.670 | 0.733 | 0.607 |
+| supervised text router | 0.485 | 0.661 | 0.708 | 0.592 |
+| oracle best method | 0.600 | 0.756 | 0.799 | 0.693 |
+
+结论：浅层监督式文本分类器仍低于固定 `type_aware`，但 oracle best 显示 query-level 路由存在较高潜在收益。因此后续不应继续强化简单规则，而应把 intent 识别做成可验证模块，例如 LLM few-shot classifier、验证集调参的 hybrid router，或直接学习 candidate-level reranking。
+
 ## 8. 后续持续更新约定
 
 这个文档建议每次代码升级后同步更新四处：

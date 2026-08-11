@@ -508,6 +508,20 @@ python3 work/agent_memory_experiment/text_intent_router_experiment.py \
   --output-report outputs/agent_memory_text_intent_router_locomo10_zh.md
 ```
 
+Run held-out supervised query-text router analysis:
+
+```bash
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/supervised_intent_router_experiment.py \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --seeds 13,17,23,29,31 \
+  --train-fraction 0.7 \
+  --output-split-summary outputs/agent_memory_supervised_router_locomo10_split_summary.csv \
+  --output-summary outputs/agent_memory_supervised_router_locomo10_summary.csv \
+  --output-selected outputs/agent_memory_supervised_router_locomo10_selected.csv \
+  --output-report outputs/agent_memory_supervised_router_locomo10_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash

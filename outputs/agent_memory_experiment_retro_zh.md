@@ -257,6 +257,24 @@
 
 收益：避免把未验证的 router 写成贡献点，同时明确了后续方法改进方向。
 
+### 3.12 问题：监督式 query-text router 仍低于固定 type-aware
+
+现象：新增 held-out 监督式路由实验后，TF-IDF + LogisticRegression 根据 query 文本预测最佳检索方法，5 个划分下 MRR 为 `0.592`，低于 fixed `type_aware` 的 `0.607`；Recall@5 也从 `0.733` 降到 `0.708`。
+
+原因判断：
+
+- 训练标签来自 per-query oracle best method，本身噪声较大；很多 query 在多个检索器之间差距很小。
+- query 文本较短，仅靠 n-gram 特征难以区分“需要关键词精确匹配”还是“需要人物/时间/type-aware 约束”。
+- 类别分布不均衡，`type_aware` 是最大类，但仍有大量 query 被预测到 `keyword` 或 `vector`。
+
+解决：
+
+- 将监督式路由保留为可部署负结果 baseline，不作为当前主方法。
+- 报告 oracle best 上界：MRR `0.693`，说明 query-level route 仍有潜在空间。
+- 后续改为 validation-tuned router、LLM few-shot intent classifier，或 candidate-level reranking learner，而不是继续堆简单规则。
+
+收益：当前方法边界更清楚，论文中可以把 router 写成“分析驱动的后续方向”，避免夸大未稳定提升的模块。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -283,16 +301,17 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 4. 当前只评估检索，不评估最终回答生成质量。
 5. KV cache 复用还没有真实实现，只在方法文档中给出下一步公式。
 6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，100k synthetic distractor 实验也只能说明趋势，ANN 优势仍需要真实更大 memory bank 才能充分证明。
-7. 简单 text-intent router 显著弱于 fixed `type_aware`，说明路由方法需要验证集或模型化 intent classifier。
+7. 简单 text-intent router 和浅层监督式 query-text router 都弱于 fixed `type_aware`，说明路由方法需要更可靠的 intent classifier 或学习式 reranker。
 
 ## 6. 下一步行动清单
 
 1. 固化当前推荐配置：BGE-M3 + adaptive time-aware + persona gate + importance proxy。
 2. 固化两层记忆结构：fact/observation 作为在线检索层，session_summary 作为归档回溯层。
-3. 增加 LLM memory extraction：从原始对话抽取事实、时间、实体、重要性、权限。
-4. 增加 conflict resolver：同一主体同一属性按时间和置信度更新。
-5. 增加真实多 Agent trace：把 Agent A 的工具经验、错误修复、代码片段作为共享记忆。
-6. 增加 KV cache metadata：记录 cache key、来源 agent、scope、token cost、latency gain。
+3. 增加强 router：使用验证集调参或 LLM few-shot classifier 判断 query intent，并与 fixed `type_aware` 做 paired significance。
+4. 增加 LLM memory extraction 重复实验：从原始对话抽取事实、时间、实体、重要性、权限，并报告 seed/temperature 方差。
+5. 增加 conflict resolver：同一主体同一属性按时间和置信度更新。
+6. 增加真实多 Agent trace：把 Agent A 的工具经验、错误修复、代码片段作为共享记忆。
+7. 增加 KV cache metadata：记录 cache key、来源 agent、scope、token cost、latency gain。
 
 ## 7. 建议复盘口径
 
