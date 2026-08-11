@@ -179,6 +179,8 @@ def main() -> None:
         ("Writer stability runs", outputs / "agent_memory_writer_stability_runs.csv"),
         ("Candidate reranker report", outputs / "agent_memory_candidate_reranker_locomo10_zh.md"),
         ("Candidate reranker significance", outputs / "agent_memory_candidate_reranker_significance_zh.md"),
+        ("Bootstrap metric CI report", outputs / "agent_memory_bootstrap_metric_ci_zh.md"),
+        ("Bootstrap metric CI CSV", outputs / "agent_memory_bootstrap_metric_ci.csv"),
         ("Candidate reranker LOCO report", outputs / "agent_memory_candidate_reranker_loco_zh.md"),
         ("Candidate reranker LOCO summary", outputs / "agent_memory_candidate_reranker_loco_summary.csv"),
         ("Candidate reranker LOCO significance", outputs / "agent_memory_candidate_reranker_loco_significance_zh.md"),
@@ -305,6 +307,11 @@ def main() -> None:
             "stage": "Candidate reranker LOCO",
             "command": "work/agent_memory_experiment/candidate_reranker_loco_experiment.py",
             "notes": "Uses cached rankings.csv; leave-one-conversation-out split.",
+        },
+        {
+            "stage": "Bootstrap metric CI",
+            "command": "work/agent_memory_experiment/bootstrap_metric_ci.py",
+            "notes": "Computes query-level bootstrap confidence intervals for main, LOCO, router, and Type3 paired results.",
         },
         {
             "stage": "Type3 diagnostics",

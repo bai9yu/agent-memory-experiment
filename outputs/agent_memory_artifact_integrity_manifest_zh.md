@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 84/84
+- Artifacts covered: 86/86
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 3010703
+- Total bytes: 3020895
 
 ## 前 20 个 Artifact
 
@@ -21,6 +21,8 @@
 | Writer stability runs | True | 924 | 4 | 13c91b80d653 | ok | outputs/agent_memory_writer_stability_runs.csv |
 | Candidate reranker report | True | 2019 | 53 | 47c06dda556d | ok | outputs/agent_memory_candidate_reranker_locomo10_zh.md |
 | Candidate reranker significance | True | 607 | 8 | 3d53a2fea54f | ok | outputs/agent_memory_candidate_reranker_significance_zh.md |
+| Bootstrap metric CI report | True | 3845 | 48 | 07b806bff3db | ok | outputs/agent_memory_bootstrap_metric_ci_zh.md |
+| Bootstrap metric CI CSV | True | 6010 | 17 | 4cbd5c16c73a | ok | outputs/agent_memory_bootstrap_metric_ci.csv |
 | Candidate reranker LOCO report | True | 3506 | 68 | 79e3f0650f02 | ok | outputs/agent_memory_candidate_reranker_loco_zh.md |
 | Candidate reranker LOCO summary | True | 684 | 4 | 282d33bb4303 | ok | outputs/agent_memory_candidate_reranker_loco_summary.csv |
 | Candidate reranker LOCO significance | True | 627 | 8 | 2de97cf4cd43 | ok | outputs/agent_memory_candidate_reranker_loco_significance_zh.md |
@@ -32,8 +34,6 @@
 | Type3 query decomposition fusion4 facets | True | 43337 | 87 | 6db83e2028a8 | ok | outputs/agent_memory_type3_query_decomposition_fusion4_facets.csv |
 | Type3 query decomposition fusion4 ranked top20 | True | 529533 | 3441 | aa104641f5ce | ok | outputs/agent_memory_type3_query_decomposition_fusion4_ranked_top20.csv |
 | Type3 supervised selector rw0 report | True | 1936 | 38 | 968e6a1f0a13 | ok | outputs/agent_memory_type3_supervised_set_selector_rw0_zh.md |
-| Type3 supervised selector rw0 split summary | True | 2563 | 26 | dfcff8f9f42b | ok | outputs/agent_memory_type3_supervised_set_selector_rw0_split_summary.csv |
-| Type3 supervised selector rw0 summary | True | 1074 | 6 | f51e26c630e1 | ok | outputs/agent_memory_type3_supervised_set_selector_rw0_summary.csv |
 
 ## 使用说明
 

@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：84/84
+- Artifact 存在性：86/86
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `e39a918` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `5368b17` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -33,6 +33,8 @@
 | Writer stability runs | True | 924 | `outputs/agent_memory_writer_stability_runs.csv` |
 | Candidate reranker report | True | 2019 | `outputs/agent_memory_candidate_reranker_locomo10_zh.md` |
 | Candidate reranker significance | True | 607 | `outputs/agent_memory_candidate_reranker_significance_zh.md` |
+| Bootstrap metric CI report | True | 3845 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
+| Bootstrap metric CI CSV | True | 6010 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
 | Candidate reranker LOCO report | True | 3506 | `outputs/agent_memory_candidate_reranker_loco_zh.md` |
 | Candidate reranker LOCO summary | True | 684 | `outputs/agent_memory_candidate_reranker_loco_summary.csv` |
 | Candidate reranker LOCO significance | True | 627 | `outputs/agent_memory_candidate_reranker_loco_significance_zh.md` |
@@ -66,12 +68,12 @@
 | Paper manuscript draft | True | 9893 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
-| Submission readiness gate | True | 2291 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
-| Submission readiness gate CSV | True | 1847 | `outputs/agent_memory_submission_readiness_gate.csv` |
+| Submission readiness gate | True | 2319 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
+| Submission readiness gate CSV | True | 1877 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
-| Artifact integrity manifest | True | 3505 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 13759 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest | True | 3750 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
+| Artifact integrity manifest CSV | True | 14665 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -107,7 +109,7 @@
 | Human audit full80 blind review CSV | True | 28745 | `outputs/agent_memory_human_audit_full80_blind_review.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 25425 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 25850 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -129,6 +131,7 @@
 | Writer stability | `work/agent_memory_experiment/summarize_writer_stability.py` | Summarizes repeated DeepSeek memory-writer runs from a local manifest. |
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
 | Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
+| Bootstrap metric CI | `work/agent_memory_experiment/bootstrap_metric_ci.py` | Computes query-level bootstrap confidence intervals for main, LOCO, router, and Type3 paired results. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
 | Type3 query decomposition fusion4 | `work/agent_memory_experiment/type3_query_decomposition_experiment.py` | Records the stronger keyword-facet decomposition fusion variant and its negative result. |
 | Type3 supervised set selector variants | `work/agent_memory_experiment/type3_supervised_set_selector_experiment.py` | Records rw=0 and rw=-0.02 greedy set-selector variants for Type3 negative-result analysis. |

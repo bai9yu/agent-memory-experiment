@@ -6,6 +6,8 @@ Writer stability aggregate,outputs/agent_memory_writer_stability_aggregate.csv,T
 Writer stability runs,outputs/agent_memory_writer_stability_runs.csv,True,924
 Candidate reranker report,outputs/agent_memory_candidate_reranker_locomo10_zh.md,True,2019
 Candidate reranker significance,outputs/agent_memory_candidate_reranker_significance_zh.md,True,607
+Bootstrap metric CI report,outputs/agent_memory_bootstrap_metric_ci_zh.md,True,3845
+Bootstrap metric CI CSV,outputs/agent_memory_bootstrap_metric_ci.csv,True,6010
 Candidate reranker LOCO report,outputs/agent_memory_candidate_reranker_loco_zh.md,True,3506
 Candidate reranker LOCO summary,outputs/agent_memory_candidate_reranker_loco_summary.csv,True,684
 Candidate reranker LOCO significance,outputs/agent_memory_candidate_reranker_loco_significance_zh.md,True,627
@@ -39,12 +41,12 @@ Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,6827
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,9893
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
-Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2291
-Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1847
+Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2319
+Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1877
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
-Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3505
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,13759
+Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3750
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,14665
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -80,6 +82,6 @@ Human audit full80 blind review,outputs/agent_memory_human_audit_full80_blind_re
 Human audit full80 blind review CSV,outputs/agent_memory_human_audit_full80_blind_review.csv,True,28745
 Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md,True,4943
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,25425
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,25850
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421
