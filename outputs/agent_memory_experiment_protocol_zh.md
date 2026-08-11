@@ -55,7 +55,7 @@
 
 ## 7. 复现与审稿风险
 
-- 复现清单：artifact gate 53/53，metric gate 5/5。
+- 复现清单：artifact gate 55/55，metric gate 5/5。
 - 投稿风险矩阵：8 个风险，其中 blocker=2。
 - 两个 blocker：外部 embedding baseline 未实际完成；Human/LLM 人工确认未完成。
 

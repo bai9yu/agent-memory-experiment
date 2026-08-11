@@ -1008,6 +1008,26 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --env-file .env
 ```
 
+Preflight the API embedding baseline before starting any paid/networked run:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/preflight_api_embedding_baseline.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --result-dir work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004 \
+  --method type_aware \
+  --provider-label "OpenAI text-embedding-3-small" \
+  --model text-embedding-3-small \
+  --base-url https://api.openai.com/v1 \
+  --batch-size 128 \
+  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
+  --api-key-env OPENAI_API_KEY \
+  --env-file .env \
+  --output-csv outputs/agent_memory_api_embedding_preflight.csv \
+  --output-report outputs/agent_memory_api_embedding_preflight_zh.md
+```
+
 Estimate API embedding baseline run scale:
 
 ```bash

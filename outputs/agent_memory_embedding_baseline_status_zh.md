@@ -18,6 +18,7 @@
 
 ## 跑前规模预估
 
+- `outputs/agent_memory_api_embedding_preflight_zh.md` 记录输入文件、API key、缓存路径和目标 summary 的跑前门禁状态。
 - `outputs/agent_memory_api_embedding_run_estimate_zh.md` 记录当前 LoCoMo10 外部 embedding baseline 的文本数量、近似 token、批次数和缓存状态。
 - `outputs/agent_memory_embedding_baseline_comparison_zh.md` 在 API summary 尚未生成时显示 pending；跑完 baseline 后会自动给出相对 BGE-M3 的指标差值。
 

@@ -10,14 +10,14 @@
 
 ## 最小投稿前动作
 
-- P1 `blocker`：运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。
+- P1 `blocker`：先让 API embedding preflight 的 required checks 全部通过，再运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。
 - P2 `blocker`：优先填写 priority20 confirmation CSV 的 human_* 字段，先报告 quick-review exact agreement 与 Cohen's kappa；投稿前再扩展到 80 条。
 
 ## 风险矩阵
 
 | Priority | Risk | Reviewer Question | Minimum Action | Target Artifact |
 | --- | --- | --- | --- | --- |
-| 1 | blocker | 是否只在单一 embedding / 单一检索编码器上有效？ | 运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。 | agent_memory_embedding_baseline_comparison_zh.md |
+| 1 | blocker | 是否只在单一 embedding / 单一检索编码器上有效？ | 先让 API embedding preflight 的 required checks 全部通过，再运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。 | agent_memory_api_embedding_preflight_zh.md; agent_memory_embedding_baseline_comparison_zh.md |
 | 2 | blocker | 错误分析是否经过人工确认？ | 优先填写 priority20 confirmation CSV 的 human_* 字段，先报告 quick-review exact agreement 与 Cohen's kappa；投稿前再扩展到 80 条。 | agent_memory_human_audit_readiness_gate_zh.md; agent_memory_human_llm_audit_priority20_agreement_zh.md; agent_memory_human_llm_audit_agreement_zh.md |
 | 3 | major | LoCoMo10 slice 是否足以支撑泛化结论？ | 扩大 LoCoMo slice 或加入第二个长对话/agent memory 数据集；若时间有限，论文标题和结论限制在系统性实证研究。 | agent_memory_paper_draft_outline_zh.md |
 | 4 | major | 候选级重排是否真的跨 conversation 泛化？ | 在方法和实验设置中突出 leave-one-conversation-out split，并保留 paired permutation test。 | agent_memory_candidate_reranker_loco_zh.md |
@@ -31,11 +31,11 @@
 ### P1 是否只在单一 embedding / 单一检索编码器上有效？
 
 - 风险等级：`blocker`
-- 当前证据：外部 embedding baseline completed=0, ready_or_completed=0。
+- 当前证据：外部 embedding baseline completed=0, ready_or_completed=0；API embedding preflight required=4/5。
 - 重要性：没有强外部 embedding 对照时，审稿人可能认为提升来自 BGE-M3 或缓存设置，而不是记忆/重排方法本身。
 - 当前可写：只能说 API baseline 接口已经准备好，不能把它写入主结果。
-- 最小动作：运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。
-- 目标 artifact：`agent_memory_embedding_baseline_comparison_zh.md`
+- 最小动作：先让 API embedding preflight 的 required checks 全部通过，再运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。
+- 目标 artifact：`agent_memory_api_embedding_preflight_zh.md; agent_memory_embedding_baseline_comparison_zh.md`
 - 依赖：`needs_api_key`
 
 ### P2 错误分析是否经过人工确认？
@@ -101,7 +101,7 @@
 ### P8 复现实验是否足够完整？
 
 - 风险等级：`moderate`
-- 当前证据：Reproducibility artifact gate 53/53 and metric gate 5/5. Current checklist artifacts=53, metrics=5.
+- 当前证据：Reproducibility artifact gate 55/55 and metric gate 5/5. Current checklist artifacts=55, metrics=5.
 - 重要性：复现清单完整能降低审稿人对工程实验的疑虑，但大模型输出和 embedding cache 不能全部进 Git。
 - 当前可写：可以写 artifact-checked reproducibility package。
 - 最小动作：在 appendix 写清楚数据准备、模型缓存、API key 不入库、重型结果由 CSV 缓存复现。

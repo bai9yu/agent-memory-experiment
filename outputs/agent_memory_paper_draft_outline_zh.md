@@ -101,6 +101,6 @@ time-aware / type-aware 重排：
 
 ## 复现状态
 
-- Artifact gate: 53/53
+- Artifact gate: 55/55
 - Metric gate: 5/5
 - 关键入口：`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_paper_evidence_matrix_zh.md`、`outputs/agent_memory_paper_tables_zh.md`、`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_manuscript_draft_zh.md`。

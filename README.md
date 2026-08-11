@@ -38,6 +38,7 @@
 - `outputs/agent_memory_submission_gap_analysis_zh.md`
 - `outputs/agent_memory_experiment_protocol_zh.md`
 - `outputs/agent_memory_embedding_baseline_status_zh.md`
+- `outputs/agent_memory_api_embedding_preflight_zh.md`
 - `outputs/agent_memory_api_embedding_run_estimate_zh.md`
 - `outputs/agent_memory_embedding_baseline_comparison_zh.md`
 - `outputs/agent_memory_human_audit_protocol_zh.md`

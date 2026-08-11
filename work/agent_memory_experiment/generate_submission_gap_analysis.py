@@ -62,6 +62,7 @@ def markdown_table(headers: list[str], rows: list[list[str]]) -> str:
 def build_rows(outputs: Path) -> list[dict[str, Any]]:
     evidence = read_csv(outputs / "agent_memory_paper_evidence_matrix.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
+    embedding_preflight = read_csv(outputs / "agent_memory_api_embedding_preflight.csv")
     agreement = read_csv(outputs / "agent_memory_human_llm_audit_agreement.csv")
     priority_agreement = read_csv(outputs / "agent_memory_human_llm_audit_priority20_agreement.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
@@ -78,6 +79,11 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     human_gate_full = lookup(human_gate, label="full80")
     embedding_completed = count(embedding_status, "status", "completed")
     embedding_ready = sum(1 for row in embedding_status if row.get("status") in {"ready_to_run", "completed"})
+    preflight_required_pass = sum(
+        1 for row in embedding_preflight
+        if row.get("severity") == "required" and row.get("pass") == "True"
+    )
+    preflight_required_total = sum(1 for row in embedding_preflight if row.get("severity") == "required")
 
     main_retrieval = find_contains(evidence, "claim", "事实级记忆在 LoCoMo10")
     main_method = lookup(evidence, status="main_method")
@@ -91,11 +97,14 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "priority": 1,
             "risk_level": "blocker",
             "reviewer_question": "是否只在单一 embedding / 单一检索编码器上有效？",
-            "current_evidence": f"外部 embedding baseline completed={embedding_completed}, ready_or_completed={embedding_ready}。",
+            "current_evidence": (
+                f"外部 embedding baseline completed={embedding_completed}, ready_or_completed={embedding_ready}；"
+                f"API embedding preflight required={preflight_required_pass}/{preflight_required_total}。"
+            ),
             "why_it_matters": "没有强外部 embedding 对照时，审稿人可能认为提升来自 BGE-M3 或缓存设置，而不是记忆/重排方法本身。",
-            "minimum_action": "运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。",
+            "minimum_action": "先让 API embedding preflight 的 required checks 全部通过，再运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。",
             "paper_wording_now": "只能说 API baseline 接口已经准备好，不能把它写入主结果。",
-            "target_artifact": "agent_memory_embedding_baseline_comparison_zh.md",
+            "target_artifact": "agent_memory_api_embedding_preflight_zh.md; agent_memory_embedding_baseline_comparison_zh.md",
             "owner": "needs_api_key",
         },
         {

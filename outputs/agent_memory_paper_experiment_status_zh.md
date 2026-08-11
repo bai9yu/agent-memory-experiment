@@ -258,6 +258,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前 OpenAI-compatible `text-embedding-3-small` baseline 已有 API/cache 入口，但尚未实际运行出指标。
+- `outputs/agent_memory_api_embedding_preflight_zh.md`：外部 embedding baseline 跑前门禁；当前 required checks 为 `4/5`，缺口是 `OPENAI_API_KEY` 未配置，因此不建议启动付费/API baseline。
 - `outputs/agent_memory_api_embedding_run_estimate_zh.md`：外部 embedding baseline 跑前规模预估；当前 LoCoMo10 预计 4355 条文本、约 71882 个近似 token、未缓存约 35 个 API 批次。
 - `outputs/agent_memory_embedding_baseline_comparison_zh.md`：外部 embedding baseline 与 BGE-M3 主结果的对比表；当前为 pending，API summary 生成后会自动计算 delta。
 - `outputs/agent_memory_human_audit_protocol_zh.md`：自动错误分析的人工复核协议；已生成 80 条分层抽样待标注样本，但人工标注尚未完成。
@@ -274,11 +275,11 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `49/49`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `55/55`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
-   - 当前投稿风险矩阵将该项列为 blocker；需要实际生成外部 embedding summary 后才能写入主结果。
+   - 当前投稿风险矩阵将该项列为 blocker；API embedding preflight required checks 为 `4/5`，需要补 `OPENAI_API_KEY` 并实际生成外部 embedding summary 后才能写入主结果。
 2. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
 4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。

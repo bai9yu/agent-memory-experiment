@@ -196,6 +196,8 @@ def main() -> None:
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
         ("Embedding baseline status", outputs / "agent_memory_embedding_baseline_status_zh.md"),
         ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
+        ("API embedding preflight", outputs / "agent_memory_api_embedding_preflight_zh.md"),
+        ("API embedding preflight CSV", outputs / "agent_memory_api_embedding_preflight.csv"),
         ("API embedding run estimate", outputs / "agent_memory_api_embedding_run_estimate_zh.md"),
         ("API embedding run estimate CSV", outputs / "agent_memory_api_embedding_run_estimate.csv"),
         ("Embedding baseline comparison", outputs / "agent_memory_embedding_baseline_comparison_zh.md"),
@@ -284,6 +286,11 @@ def main() -> None:
             "stage": "Embedding baseline status",
             "command": "work/agent_memory_experiment/generate_embedding_baseline_status.py",
             "notes": "Tracks API embedding baseline readiness without reading or printing keys.",
+        },
+        {
+            "stage": "API embedding preflight",
+            "command": "work/agent_memory_experiment/preflight_api_embedding_baseline.py",
+            "notes": "Checks inputs, key availability, cache paths, and result summary before paid/API embedding runs.",
         },
         {
             "stage": "API embedding run estimate",

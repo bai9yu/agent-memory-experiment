@@ -75,6 +75,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     agreement_summary = read_csv(outputs / "agent_memory_human_llm_audit_agreement.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
+    embedding_preflight = read_csv(outputs / "agent_memory_api_embedding_preflight.csv")
     embedding_estimate = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
     embedding_comparison = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
     writer_stability = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
@@ -116,6 +117,11 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     human_gate_full = lookup(human_gate, label="full80")
     embedding_completed = sum(1 for row in embedding_status if row["status"] == "completed")
     embedding_ready = sum(1 for row in embedding_status if row["status"] in {"completed", "ready_to_run"})
+    preflight_required_pass = sum(
+        1 for row in embedding_preflight
+        if row["severity"] == "required" and row["pass"] == "True"
+    )
+    preflight_required_total = sum(1 for row in embedding_preflight if row["severity"] == "required")
     embedding_items = sum(int(row["items"]) for row in embedding_estimate)
     embedding_tokens = sum(int(row["approx_tokens"]) for row in embedding_estimate)
     embedding_batches = sum(0 if row["cache_exists"] == "True" else int(row["api_batches_if_uncached"]) for row in embedding_estimate)
@@ -270,9 +276,9 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
         {
             "claim": "外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。",
             "status": "baseline_protocol",
-            "evidence": f"已登记 {len(embedding_status)} 个外部 embedding baseline；completed={embedding_completed}, ready_or_completed={embedding_ready}；预计文本 {embedding_items} 条、约 {embedding_tokens} tokens、未缓存批次 {embedding_batches}；对比表完成={embedding_comparison_done}。",
+            "evidence": f"已登记 {len(embedding_status)} 个外部 embedding baseline；completed={embedding_completed}, ready_or_completed={embedding_ready}；preflight required={preflight_required_pass}/{preflight_required_total}；预计文本 {embedding_items} 条、约 {embedding_tokens} tokens、未缓存批次 {embedding_batches}；对比表完成={embedding_comparison_done}。",
             "support_level": "protocol_ready_pending_run",
-            "primary_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_api_embedding_run_estimate_zh.md; agent_memory_embedding_baseline_comparison_zh.md; memory_eval.py",
+            "primary_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_api_embedding_preflight_zh.md; agent_memory_api_embedding_run_estimate_zh.md; agent_memory_embedding_baseline_comparison_zh.md; memory_eval.py",
             "paper_use": "可以作为复现实验入口；在 summary.csv 生成前，不能写入主结果表。",
             "remaining_gap": "需要提供 API key 并实际运行 text-embedding-3-small 等外部 embedding 对照。",
         },

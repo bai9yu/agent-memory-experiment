@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：53/53
+- Artifact 存在性：55/55
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `6ec43bf` |
-| git_branch_status | `## main...origin/main [ahead 47]` |
+| git_commit | `8ce14ea` |
+| git_branch_status | `## main...origin/main [ahead 48]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -42,14 +42,16 @@
 | Paper tables LaTeX | True | 3994 | `outputs/agent_memory_paper_tables.tex` |
 | Paper evidence matrix | True | 6637 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 6827 | `outputs/agent_memory_paper_draft_outline_zh.md` |
-| Paper manuscript draft | True | 9773 | `outputs/agent_memory_manuscript_draft_zh.md` |
+| Paper manuscript draft | True | 9893 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
-| Submission gap analysis | True | 8736 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
-| Submission gap analysis CSV | True | 4752 | `outputs/agent_memory_submission_gap_analysis.csv` |
+| Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
+| Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
-| Embedding baseline status | True | 2542 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
+| Embedding baseline status | True | 2683 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
+| API embedding preflight | True | 2189 | `outputs/agent_memory_api_embedding_preflight_zh.md` |
+| API embedding preflight CSV | True | 1109 | `outputs/agent_memory_api_embedding_preflight.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
 | API embedding run estimate CSV | True | 502 | `outputs/agent_memory_api_embedding_run_estimate.csv` |
 | Embedding baseline comparison | True | 998 | `outputs/agent_memory_embedding_baseline_comparison_zh.md` |
@@ -76,7 +78,7 @@
 | Human audit full80 blind review CSV | True | 28745 | `outputs/agent_memory_human_audit_full80_blind_review.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 23804 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 24096 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -100,6 +102,7 @@
 | Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
 | Embedding baseline status | `work/agent_memory_experiment/generate_embedding_baseline_status.py` | Tracks API embedding baseline readiness without reading or printing keys. |
+| API embedding preflight | `work/agent_memory_experiment/preflight_api_embedding_baseline.py` | Checks inputs, key availability, cache paths, and result summary before paid/API embedding runs. |
 | API embedding run estimate | `work/agent_memory_experiment/estimate_api_embedding_run.py` | Estimates API embedding item count, approximate tokens, batches, and cache status without network. |
 | Embedding baseline comparison | `work/agent_memory_experiment/compare_embedding_baselines.py` | Compares API embedding summary against BGE-M3 when the API run exists. |
 | Human audit sample | `work/agent_memory_experiment/generate_human_audit_sample.py` | Creates stratified manual-review sample for error-analysis reliability. |
