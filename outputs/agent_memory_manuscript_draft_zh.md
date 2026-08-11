@@ -4,7 +4,7 @@
 
 ## 摘要
 
-长对话智能体需要在不断增长的交互历史中检索与当前任务相关的个体事实、事件、偏好和计划。本文围绕 agent memory 的写入、检索、压缩和重排过程构建一套可复现实验框架，并在 LoCoMo10 answerable slice 上比较 LLM-written fact memory、LoCoMo observation memory、BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排和候选级学习重排。实验显示，DeepSeek fact memory + type-aware reranking 达到 MRR 0.609、Recall@5 0.733，高于 LoCoMo observation memory + type-aware 的 MRR 0.583、Recall@5 0.703。候选级学习重排进一步将 held-out MRR 从 0.607 提升至 0.661，并在 leave-one-conversation-out split 中保持 +0.0504 的 MRR 提升。同时，事实级记忆将 memory token 降至 observation memory 的 77.4%，DeepSeek memory writer 三次运行的 MRR 标准差为 0.004。负结果表明，Type 3 多证据问题仍是主要边界，浅层单候选重排和简单 query decomposition 不能有效提高覆盖率。本文还给出复现清单、审稿风险矩阵和人工复核流程，用于后续补齐外部 embedding baseline 与人工一致性证据。
+长对话智能体需要在不断增长的交互历史中检索与当前任务相关的个体事实、事件、偏好和计划。本文围绕 agent memory 的写入、检索、压缩和重排过程构建一套可复现实验框架，并在 LoCoMo10 answerable slice 上比较 LLM-written fact memory、LoCoMo observation memory、BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排和候选级学习重排。实验显示，DeepSeek fact memory + type-aware reranking 达到 MRR 0.609、Recall@5 0.733，高于 LoCoMo observation memory + type-aware 的 MRR 0.583、Recall@5 0.703。候选级学习重排进一步将 held-out MRR 从 0.607 提升至 0.661，而 feature ablation 显示更简洁的 intrinsic feature reranker 可达到 MRR 0.672、Recall@5 0.801，并在 leave-one-conversation-out split 中保持 +0.0504 的 MRR 提升。同时，事实级记忆将 memory token 降至 observation memory 的 77.4%，DeepSeek memory writer 三次运行的 MRR 标准差为 0.004。负结果表明，Type 3 多证据问题仍是主要边界，浅层单候选重排和简单 query decomposition 不能有效提高覆盖率。本文还给出复现清单、审稿风险矩阵和人工复核流程，用于后续补齐外部 embedding baseline 与人工一致性证据。
 
 ## 1 引言
 
@@ -16,7 +16,7 @@
 
 1. 构建一套覆盖 memory writing、retrieval、reranking、compression、efficiency diagnostics 和 error audit 的 agent memory 实验框架。
 2. 在 LoCoMo10 answerable slice 上验证 DeepSeek fact-level memory 相比 observation memory 具有更好的检索表现和更低 token 存储成本。
-3. 提出并验证 candidate-level learned reranking，在 held-out 和 LOCO split 下均显著优于 type-aware reranking。
+3. 提出并验证 candidate-level learned reranking，并通过 feature-group ablation 发现更简洁的 intrinsic feature reranker；held-out、bootstrap CI 和 LOCO split 均支持该类方法优于 type-aware reranking。
 4. 系统报告 Type 3 multi-evidence retrieval 的负结果，明确当前方法边界。
 5. 提供论文级 artifact：复现清单、实验协议、审稿风险矩阵、LLM-assisted audit、盲审人工复核表和 priority20 人工确认包。
 
@@ -52,13 +52,13 @@ time-aware 与 type-aware reranking 在 hybrid 的基础上进一步加入时间
 
 其中 \(g(q)\) 是 recency gate，\(d(q,m_i)\) 是时间衰减，\(p(q,m_i)\) 是 persona match，\(I(m_i)\) 是重要性 proxy，\(T(q,m_i)\) 表示 query-intent 与 memory type 的匹配。
 
-### 3.3 Candidate-Level Learned Reranking
+### 3.3 Intrinsic Candidate-Level Learned Reranking
 
-候选级学习重排从 keyword、vector、hybrid、time-aware 和 type-aware 的 Top-K 并集中构造候选集，并为每个候选抽取多路分数、rank、type、importance 等特征。模型学习候选是否为 gold memory 的相关性分数：
+候选级学习重排从 keyword、vector、hybrid、time-aware 和 type-aware 的 Top-K 并集中构造候选集，并为每个候选抽取语义、关键词、时间、人物、memory type、importance 和交互特征。完整版本也可使用各检索器的 method-level score/rank，但 feature-group ablation 显示，只使用候选自身 intrinsic features 的变体更稳定。模型学习候选是否为 gold memory 的相关性分数：
 
-\[\hat{y}_{q,i}=f_{\theta}(s_{sem},s_{bm25},S_{hybrid},S_{time},S_{type},rank_*,type_i,I_i,\ldots)\]
+\[\hat{y}_{q,i}=f_{\theta}(s_{sem},s_{bm25},d(q,m_i),p(q,m_i),T(q,m_i),type_i,I_i,\phi(q,m_i))\]
 
-最终按照 \(\hat{y}_{q,i}\) 对候选重新排序。该方法不重新生成记忆，而是在已有检索结果上学习更稳健的排序函数。
+其中 \(\phi(q,m_i)\) 表示语义-关键词、persona-type、recency-decay 等交互项。最终按照 \(\hat{y}_{q,i}\) 对候选重新排序。该方法不重新生成记忆，而是在已有检索结果上学习更稳健的排序函数。
 
 ## 4 实验设置
 
@@ -76,6 +76,7 @@ time-aware 与 type-aware reranking 在 hybrid 的基础上进一步加入时间
 | time-aware | 0.605 | 0.727 |
 | type-aware | 0.609 | 0.733 |
 | candidate reranker | 0.661 | 0.796 |
+| intrinsic feature reranker | 0.672 | 0.801 |
 | candidate reranker LOCO | 0.657 | 0.782 |
 
 fact memory + type-aware 的 MRR 为 0.609，Recall@5 为 0.733，高于 observation memory + type-aware 的 MRR 0.583 和 Recall@5 0.703。这说明将长对话写成事实级记忆可以作为有效的 memory representation。
@@ -84,9 +85,9 @@ fact memory + type-aware 的 MRR 为 0.609，Recall@5 为 0.733，高于 observa
 
 type-aware 相比 time-aware 的 MRR delta 为 +0.0042，p=0.0072；Recall@5 delta 为 +0.0065，p=0.0028。该增益幅度不大，但在 MRR 和 Recall@5 上具有统计支持，因此适合写作一个有用的固定打分组件。
 
-### 5.3 Candidate-Level Reranking 是主要收益来源
+### 5.3 Intrinsic Candidate-Level Reranking 是主要收益来源
 
-在 held-out split 下，candidate reranker 将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，p=0.0002；Recall@5 delta 为 +0.0623。在 LOCO split 下，candidate reranker 的 MRR 为 0.657，高于 type-aware 的 0.608，MRR delta 为 +0.0504，p=0.0002。这支持将 candidate-level learned reranking 作为本文最主要的方法贡献。
+在 held-out split 下，full candidate reranker 将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，p=0.0002；Recall@5 delta 为 +0.0623。进一步的 feature-group ablation 显示，intrinsic feature reranker 达到 MRR 0.672、Recall@5 0.801，相对 type-aware 的 MRR delta 为 +0.0652，95% CI=[0.0543, 0.0759]；相对 full reranker 的 MRR delta 为 +0.0113，95% CI=[0.0032, 0.0199]。在 LOCO split 下，candidate reranker 的 MRR 为 0.657，高于 type-aware 的 0.608，MRR delta 为 +0.0504，p=0.0002。这支持将 intrinsic candidate-level learned reranking 作为本文最主要的方法贡献，同时把 method-level rank/score 特征视为可能带来噪声的消融发现。
 
 ### 5.4 存储效率与 Writer 稳定性
 
@@ -106,12 +107,12 @@ Type 3 supervised set selector 的 Coverage@5 delta 为 -0.0572，p=0.0286，说
 
 ## 8 结论
 
-本文给出一套面向长对话智能体记忆的可复现实验框架。结果显示，LLM-written fact memory 是紧凑且有效的记忆表示，candidate-level learned reranking 是当前最强的排序改进，而 Type 3 多证据检索仍是关键未解问题。后续最小补强是完成一个外部 embedding baseline，并通过盲审表填写 priority20/80 Human/LLM confirmation 以形成可靠性证据。
+本文给出一套面向长对话智能体记忆的可复现实验框架。结果显示，LLM-written fact memory 是紧凑且有效的记忆表示，intrinsic candidate-level learned reranking 是当前最强的排序改进，而 Type 3 多证据检索仍是关键未解问题。后续最小补强是完成一个外部 embedding baseline，并通过盲审表填写 priority20/80 Human/LLM confirmation 以形成可靠性证据。
 
 ## Appendix A 复现状态
 
-- Artifact gate：84/84
-- Metric gate：5/5
+- Artifact gate：102/102
+- Metric gate：7/7
 - 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_manuscript_claim_check_zh.md`、`outputs/agent_memory_human_audit_readiness_gate_zh.md`。
 
 ## Appendix B 投稿前 TODO

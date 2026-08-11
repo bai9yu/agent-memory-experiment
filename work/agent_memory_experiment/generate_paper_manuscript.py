@@ -58,6 +58,8 @@ def write_report(path: Path, root: Path) -> None:
     type_sig = read_csv(outputs / "agent_memory_type_aware_significance_results.csv")
     reranker = read_csv(outputs / "agent_memory_candidate_reranker_locomo10_summary.csv")
     reranker_sig = read_csv(outputs / "agent_memory_candidate_reranker_significance_results.csv")
+    feature_ablation = read_csv(outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv")
+    bootstrap_ci = read_csv(outputs / "agent_memory_bootstrap_metric_ci.csv")
     loco = read_csv(outputs / "agent_memory_candidate_reranker_loco_summary.csv")
     loco_sig = read_csv(outputs / "agent_memory_candidate_reranker_loco_significance_results.csv")
     type3 = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
@@ -79,6 +81,17 @@ def write_report(path: Path, root: Path) -> None:
     reranker_base = lookup(reranker, method="type_aware")
     reranker_mrr = lookup(reranker_sig, metric="mrr")
     reranker_r5 = lookup(reranker_sig, metric="recall@5")
+    intrinsic_row = lookup(feature_ablation, method="ablation_intrinsic_only")
+    intrinsic_vs_type_mrr = lookup(
+        bootstrap_ci,
+        scenario="candidate_reranker_intrinsic_ablation_vs_type_aware",
+        metric="mrr",
+    )
+    intrinsic_vs_full_mrr = lookup(
+        bootstrap_ci,
+        scenario="candidate_reranker_intrinsic_ablation_vs_full",
+        metric="mrr",
+    )
     loco_row = lookup(loco, method="candidate_reranker_loco")
     loco_base = lookup(loco, method="type_aware")
     loco_mrr = lookup(loco_sig, metric="mrr")
@@ -103,6 +116,7 @@ def write_report(path: Path, root: Path) -> None:
         ["time-aware", f(fact_time["mrr"]), f(fact_time["recall@5"])],
         ["type-aware", f(fact_type["mrr"]), f(fact_type["recall@5"])],
         ["candidate reranker", f(reranker_row["mrr_mean"]), f(reranker_row["recall@5_mean"])],
+        ["intrinsic feature reranker", f(intrinsic_row["mrr_mean"]), f(intrinsic_row["recall@5_mean"])],
         ["candidate reranker LOCO", f(loco_row["mrr_mean"]), f(loco_row["recall@5_mean"])],
     ]
     lines = [
@@ -119,6 +133,7 @@ def write_report(path: Path, root: Path) -> None:
             f"实验显示，DeepSeek fact memory + type-aware reranking 达到 MRR {f(fact_type['mrr'])}、Recall@5 {f(fact_type['recall@5'])}，"
             f"高于 LoCoMo observation memory + type-aware 的 MRR {f(obs_type['mrr'])}、Recall@5 {f(obs_type['recall@5'])}。"
             f"候选级学习重排进一步将 held-out MRR 从 {f(reranker_base['mrr_mean'])} 提升至 {f(reranker_row['mrr_mean'])}，"
+            f"而 feature ablation 显示更简洁的 intrinsic feature reranker 可达到 MRR {f(intrinsic_row['mrr_mean'])}、Recall@5 {f(intrinsic_row['recall@5_mean'])}，"
             f"并在 leave-one-conversation-out split 中保持 {signed(loco_mrr['mean_delta'])} 的 MRR 提升。"
             f"同时，事实级记忆将 memory token 降至 observation memory 的 {pct(storage_ratio)}，DeepSeek memory writer 三次运行的 MRR 标准差为 {f(writer_mrr['stdev'])}。"
             "负结果表明，Type 3 多证据问题仍是主要边界，浅层单候选重排和简单 query decomposition 不能有效提高覆盖率。"
@@ -135,7 +150,7 @@ def write_report(path: Path, root: Path) -> None:
         "",
         "1. 构建一套覆盖 memory writing、retrieval、reranking、compression、efficiency diagnostics 和 error audit 的 agent memory 实验框架。",
         "2. 在 LoCoMo10 answerable slice 上验证 DeepSeek fact-level memory 相比 observation memory 具有更好的检索表现和更低 token 存储成本。",
-        "3. 提出并验证 candidate-level learned reranking，在 held-out 和 LOCO split 下均显著优于 type-aware reranking。",
+        "3. 提出并验证 candidate-level learned reranking，并通过 feature-group ablation 发现更简洁的 intrinsic feature reranker；held-out、bootstrap CI 和 LOCO split 均支持该类方法优于 type-aware reranking。",
         "4. 系统报告 Type 3 multi-evidence retrieval 的负结果，明确当前方法边界。",
         "5. 提供论文级 artifact：复现清单、实验协议、审稿风险矩阵、LLM-assisted audit、盲审人工复核表和 priority20 人工确认包。",
         "",
@@ -171,13 +186,13 @@ def write_report(path: Path, root: Path) -> None:
         "",
         "其中 \(g(q)\) 是 recency gate，\(d(q,m_i)\) 是时间衰减，\(p(q,m_i)\) 是 persona match，\(I(m_i)\) 是重要性 proxy，\(T(q,m_i)\) 表示 query-intent 与 memory type 的匹配。",
         "",
-        "### 3.3 Candidate-Level Learned Reranking",
+        "### 3.3 Intrinsic Candidate-Level Learned Reranking",
         "",
-        "候选级学习重排从 keyword、vector、hybrid、time-aware 和 type-aware 的 Top-K 并集中构造候选集，并为每个候选抽取多路分数、rank、type、importance 等特征。模型学习候选是否为 gold memory 的相关性分数：",
+        "候选级学习重排从 keyword、vector、hybrid、time-aware 和 type-aware 的 Top-K 并集中构造候选集，并为每个候选抽取语义、关键词、时间、人物、memory type、importance 和交互特征。完整版本也可使用各检索器的 method-level score/rank，但 feature-group ablation 显示，只使用候选自身 intrinsic features 的变体更稳定。模型学习候选是否为 gold memory 的相关性分数：",
         "",
-        r"\[\hat{y}_{q,i}=f_{\theta}(s_{sem},s_{bm25},S_{hybrid},S_{time},S_{type},rank_*,type_i,I_i,\ldots)\]",
+        r"\[\hat{y}_{q,i}=f_{\theta}(s_{sem},s_{bm25},d(q,m_i),p(q,m_i),T(q,m_i),type_i,I_i,\phi(q,m_i))\]",
         "",
-        "最终按照 \(\hat{y}_{q,i}\) 对候选重新排序。该方法不重新生成记忆，而是在已有检索结果上学习更稳健的排序函数。",
+        "其中 \(\phi(q,m_i)\) 表示语义-关键词、persona-type、recency-decay 等交互项。最终按照 \(\hat{y}_{q,i}\) 对候选重新排序。该方法不重新生成记忆，而是在已有检索结果上学习更稳健的排序函数。",
         "",
         "## 4 实验设置",
         "",
@@ -197,9 +212,9 @@ def write_report(path: Path, root: Path) -> None:
         "",
         f"type-aware 相比 time-aware 的 MRR delta 为 {signed(type_mrr['mean_delta'])}，p={f(type_mrr['permutation_p_value'], 4)}；Recall@5 delta 为 {signed(type_r5['mean_delta'])}，p={f(type_r5['permutation_p_value'], 4)}。该增益幅度不大，但在 MRR 和 Recall@5 上具有统计支持，因此适合写作一个有用的固定打分组件。",
         "",
-        "### 5.3 Candidate-Level Reranking 是主要收益来源",
+        "### 5.3 Intrinsic Candidate-Level Reranking 是主要收益来源",
         "",
-        f"在 held-out split 下，candidate reranker 将 MRR 从 {f(reranker_base['mrr_mean'])} 提升到 {f(reranker_row['mrr_mean'])}，MRR delta 为 {signed(reranker_mrr['mean_delta'])}，p={f(reranker_mrr['permutation_p_value'], 4)}；Recall@5 delta 为 {signed(reranker_r5['mean_delta'])}。在 LOCO split 下，candidate reranker 的 MRR 为 {f(loco_row['mrr_mean'])}，高于 type-aware 的 {f(loco_base['mrr_mean'])}，MRR delta 为 {signed(loco_mrr['mean_delta'])}，p={f(loco_mrr['permutation_p_value'], 4)}。这支持将 candidate-level learned reranking 作为本文最主要的方法贡献。",
+        f"在 held-out split 下，full candidate reranker 将 MRR 从 {f(reranker_base['mrr_mean'])} 提升到 {f(reranker_row['mrr_mean'])}，MRR delta 为 {signed(reranker_mrr['mean_delta'])}，p={f(reranker_mrr['permutation_p_value'], 4)}；Recall@5 delta 为 {signed(reranker_r5['mean_delta'])}。进一步的 feature-group ablation 显示，intrinsic feature reranker 达到 MRR {f(intrinsic_row['mrr_mean'])}、Recall@5 {f(intrinsic_row['recall@5_mean'])}，相对 type-aware 的 MRR delta 为 {signed(intrinsic_vs_type_mrr['delta_mean'])}，95% CI=[{f(intrinsic_vs_type_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_type_mrr['delta_ci_high'], 4)}]；相对 full reranker 的 MRR delta 为 {signed(intrinsic_vs_full_mrr['delta_mean'])}，95% CI=[{f(intrinsic_vs_full_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_full_mrr['delta_ci_high'], 4)}]。在 LOCO split 下，candidate reranker 的 MRR 为 {f(loco_row['mrr_mean'])}，高于 type-aware 的 {f(loco_base['mrr_mean'])}，MRR delta 为 {signed(loco_mrr['mean_delta'])}，p={f(loco_mrr['permutation_p_value'], 4)}。这支持将 intrinsic candidate-level learned reranking 作为本文最主要的方法贡献，同时把 method-level rank/score 特征视为可能带来噪声的消融发现。",
         "",
         "### 5.4 存储效率与 Writer 稳定性",
         "",
@@ -219,7 +234,7 @@ def write_report(path: Path, root: Path) -> None:
         "",
         "## 8 结论",
         "",
-        "本文给出一套面向长对话智能体记忆的可复现实验框架。结果显示，LLM-written fact memory 是紧凑且有效的记忆表示，candidate-level learned reranking 是当前最强的排序改进，而 Type 3 多证据检索仍是关键未解问题。后续最小补强是完成一个外部 embedding baseline，并通过盲审表填写 priority20/80 Human/LLM confirmation 以形成可靠性证据。",
+        "本文给出一套面向长对话智能体记忆的可复现实验框架。结果显示，LLM-written fact memory 是紧凑且有效的记忆表示，intrinsic candidate-level learned reranking 是当前最强的排序改进，而 Type 3 多证据检索仍是关键未解问题。后续最小补强是完成一个外部 embedding baseline，并通过盲审表填写 priority20/80 Human/LLM confirmation 以形成可靠性证据。",
         "",
         "## Appendix A 复现状态",
         "",

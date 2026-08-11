@@ -34,6 +34,8 @@ def write_report(path: Path, outputs: Path) -> None:
     baseline = read_csv(outputs / "agent_memory_baseline_comparison_locomo10.csv")
     reranker = read_csv(outputs / "agent_memory_candidate_reranker_locomo10_summary.csv")
     reranker_sig = read_csv(outputs / "agent_memory_candidate_reranker_significance_results.csv")
+    feature_ablation = read_csv(outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv")
+    bootstrap_ci = read_csv(outputs / "agent_memory_bootstrap_metric_ci.csv")
     reranker_loco = read_csv(outputs / "agent_memory_candidate_reranker_loco_summary.csv")
     reranker_loco_sig = read_csv(outputs / "agent_memory_candidate_reranker_loco_significance_results.csv")
     type3_cov = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
@@ -49,6 +51,17 @@ def write_report(path: Path, outputs: Path) -> None:
     reranker_base = lookup(reranker, method="type_aware")
     reranker_mrr = lookup(reranker_sig, metric="mrr")
     reranker_r5 = lookup(reranker_sig, metric="recall@5")
+    intrinsic_row = lookup(feature_ablation, method="ablation_intrinsic_only")
+    intrinsic_vs_type_mrr = lookup(
+        bootstrap_ci,
+        scenario="candidate_reranker_intrinsic_ablation_vs_type_aware",
+        metric="mrr",
+    )
+    intrinsic_vs_full_mrr = lookup(
+        bootstrap_ci,
+        scenario="candidate_reranker_intrinsic_ablation_vs_full",
+        metric="mrr",
+    )
     reranker_loco_row = lookup(reranker_loco, method="candidate_reranker_loco")
     reranker_loco_base = lookup(reranker_loco, method="type_aware")
     reranker_loco_mrr = lookup(reranker_loco_sig, metric="mrr")
@@ -87,7 +100,8 @@ def write_report(path: Path, outputs: Path) -> None:
             f"在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR {f(type_aware['mrr'])} 和 Recall@5 {f(type_aware['recall@5'])}，"
             f"高于 LoCoMo observation memory 的 MRR {f(observation['mrr'])} 和 Recall@5 {f(observation['recall@5'])}。"
             f"进一步地，候选级学习重排在 held-out split 上将 MRR 从 {f(reranker_base['mrr_mean'])} 提升到 {f(reranker_row['mrr_mean'])}，"
-            f"MRR delta 为 {signed(reranker_mrr['mean_delta'])}，permutation p={f(reranker_mrr['permutation_p_value'], 4)}。"
+            f"MRR delta 为 {signed(reranker_mrr['mean_delta'])}，permutation p={f(reranker_mrr['permutation_p_value'], 4)}；"
+            f"feature ablation 中 intrinsic-only reranker 进一步达到 MRR {f(intrinsic_row['mrr_mean'])} 和 Recall@5 {f(intrinsic_row['recall@5_mean'])}。"
             f"在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 {f(reranker_loco_row['mrr_mean'])}，"
             f"高于 type-aware 的 {f(reranker_loco_base['mrr_mean'])}，加权 MRR delta 为 {signed(reranker_loco_mrr['mean_delta'])}。"
             f"DeepSeek memory writer 三次运行的 MRR 均值为 {f(writer_mrr['mean'])}，标准差为 {f(writer_mrr['stdev'])}，"
@@ -102,7 +116,7 @@ def write_report(path: Path, outputs: Path) -> None:
         "",
         "- 构建一套面向 agent memory 的可复现实验框架，覆盖 memory write、retrieval、reranking、compression、cross-agent reuse 和 error analysis。",
         "- 证明 fact-level LLM-written memory 在 LoCoMo10 上可以作为紧凑且有效的记忆形态，同时节省存储 token。",
-        "- 提出并验证 candidate-level learned reranking，比固定 type-aware scoring 有显著提升。",
+        "- 提出并验证 candidate-level learned reranking；feature-group ablation 发现 intrinsic-only reranker 高于 full reranker，说明 method-level rank/score 特征可能带来噪声。",
         "- 系统报告 Type 3 multi-evidence retrieval 的负结果，说明浅层单候选重排和简单 query decomposition 不足以解决多证据覆盖。",
         "- 提供复现实验包、环境快照、证据矩阵、人工复核协议、writer stability 框架和 API embedding baseline 框架。",
         "",
@@ -140,13 +154,13 @@ def write_report(path: Path, outputs: Path) -> None:
         "",
         "其中 \\(g(q)\\) 为 recency gate，\\(d\\) 为时间衰减，\\(p\\) 为 persona match，\\(I\\) 为 importance proxy，\\(T\\) 为 query-intent 与 memory type 的匹配分。",
         "",
-        "### Candidate-Level Learned Reranking",
+        "### Intrinsic Candidate-Level Learned Reranking",
         "",
         "从 keyword/vector/hybrid/time-aware/type-aware 的 Top-K 并集构造候选集合，用候选级特征学习相关性：",
         "",
-        "\\[\\hat{y}_{q,i}=f_{\\theta}(s_{sem},s_{bm25},S_{hybrid},S_{time},S_{type},rank_{*},type_i,I_i,...)\\]",
+        "\\[\\hat{y}_{q,i}=f_{\\theta}(s_{sem},s_{bm25},d(q,m_i),p(q,m_i),T(q,m_i),type_i,I_i,\\phi(q,m_i))\\]",
         "",
-        "最终按 \\(\\hat{y}_{q,i}\\) 重新排序候选。当前该方法是最强方法贡献。",
+        "最终按 \\(\\hat{y}_{q,i}\\) 重新排序候选。当前 intrinsic-only 变体是 held-out split 上最强方法贡献；full reranker 和 LOCO reranker 作为消融与跨 conversation 泛化证据。",
         "",
         "## 实验章节结构",
         "",
@@ -162,9 +176,10 @@ def write_report(path: Path, outputs: Path) -> None:
         "",
         "### RQ3: 学习式候选重排是否带来主要收益？",
         "",
-        f"- 结果：candidate reranker MRR {f(reranker_row['mrr_mean'])} vs type-aware {f(reranker_base['mrr_mean'])}；MRR delta {signed(reranker_mrr['mean_delta'])}，Recall@5 delta {signed(reranker_r5['mean_delta'])}。",
+        f"- 结果：full candidate reranker MRR {f(reranker_row['mrr_mean'])} vs type-aware {f(reranker_base['mrr_mean'])}；MRR delta {signed(reranker_mrr['mean_delta'])}，Recall@5 delta {signed(reranker_r5['mean_delta'])}。",
+        f"- 特征组消融：intrinsic-only reranker MRR {f(intrinsic_row['mrr_mean'])}，Recall@5 {f(intrinsic_row['recall@5_mean'])}；相对 type-aware MRR delta {signed(intrinsic_vs_type_mrr['delta_mean'])}，95% CI [{f(intrinsic_vs_type_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_type_mrr['delta_ci_high'], 4)}]；相对 full reranker MRR delta {signed(intrinsic_vs_full_mrr['delta_mean'])}，95% CI [{f(intrinsic_vs_full_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_full_mrr['delta_ci_high'], 4)}]。",
         f"- LOCO 验证：candidate reranker MRR {f(reranker_loco_row['mrr_mean'])} vs type-aware {f(reranker_loco_base['mrr_mean'])}；加权 MRR delta {signed(reranker_loco_mrr['mean_delta'])}，Recall@5 delta {signed(reranker_loco_r5['mean_delta'])}。",
-        "- 写法：这是当前论文最稳的算法贡献；随机 held-out 与 leave-one-conversation-out 均支持该结论。",
+        "- 写法：intrinsic-only 是 held-out 最强版本；LOCO 已支持 candidate-level reranking 方向跨 conversation 泛化，但 intrinsic-only 版本可作为后续补充 LOCO 复验。",
         "",
         "### RQ4: Type 3 多证据问题是否解决？",
         "",

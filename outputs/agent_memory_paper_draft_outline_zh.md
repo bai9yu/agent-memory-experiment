@@ -10,13 +10,13 @@
 
 ## 摘要草稿
 
-长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002。在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 0.657，高于 type-aware 的 0.608，加权 MRR delta 为 +0.0504。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 28/29/23，并已生成 Human/LLM 确认表，可作为人工复核前的预标注材料。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
+长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002；feature ablation 中 intrinsic-only reranker 进一步达到 MRR 0.672 和 Recall@5 0.801。在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 0.657，高于 type-aware 的 0.608，加权 MRR delta 为 +0.0504。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 28/29/23，并已生成 Human/LLM 确认表，可作为人工复核前的预标注材料。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
 
 ## 贡献点写法
 
 - 构建一套面向 agent memory 的可复现实验框架，覆盖 memory write、retrieval、reranking、compression、cross-agent reuse 和 error analysis。
 - 证明 fact-level LLM-written memory 在 LoCoMo10 上可以作为紧凑且有效的记忆形态，同时节省存储 token。
-- 提出并验证 candidate-level learned reranking，比固定 type-aware scoring 有显著提升。
+- 提出并验证 candidate-level learned reranking；feature-group ablation 发现 intrinsic-only reranker 高于 full reranker，说明 method-level rank/score 特征可能带来噪声。
 - 系统报告 Type 3 multi-evidence retrieval 的负结果，说明浅层单候选重排和简单 query decomposition 不足以解决多证据覆盖。
 - 提供复现实验包、环境快照、证据矩阵、人工复核协议、writer stability 框架和 API embedding baseline 框架。
 
@@ -50,13 +50,13 @@ time-aware / type-aware 重排：
 
 其中 \(g(q)\) 为 recency gate，\(d\) 为时间衰减，\(p\) 为 persona match，\(I\) 为 importance proxy，\(T\) 为 query-intent 与 memory type 的匹配分。
 
-### Candidate-Level Learned Reranking
+### Intrinsic Candidate-Level Learned Reranking
 
 从 keyword/vector/hybrid/time-aware/type-aware 的 Top-K 并集构造候选集合，用候选级特征学习相关性：
 
-\[\hat{y}_{q,i}=f_{\theta}(s_{sem},s_{bm25},S_{hybrid},S_{time},S_{type},rank_{*},type_i,I_i,...)\]
+\[\hat{y}_{q,i}=f_{\theta}(s_{sem},s_{bm25},d(q,m_i),p(q,m_i),T(q,m_i),type_i,I_i,\phi(q,m_i))\]
 
-最终按 \(\hat{y}_{q,i}\) 重新排序候选。当前该方法是最强方法贡献。
+最终按 \(\hat{y}_{q,i}\) 重新排序候选。当前 intrinsic-only 变体是 held-out split 上最强方法贡献；full reranker 和 LOCO reranker 作为消融与跨 conversation 泛化证据。
 
 ## 实验章节结构
 
@@ -72,9 +72,10 @@ time-aware / type-aware 重排：
 
 ### RQ3: 学习式候选重排是否带来主要收益？
 
-- 结果：candidate reranker MRR 0.661 vs type-aware 0.607；MRR delta +0.0539，Recall@5 delta +0.0623。
+- 结果：full candidate reranker MRR 0.661 vs type-aware 0.607；MRR delta +0.0539，Recall@5 delta +0.0623。
+- 特征组消融：intrinsic-only reranker MRR 0.672，Recall@5 0.801；相对 type-aware MRR delta +0.0652，95% CI [0.0543, 0.0759]；相对 full reranker MRR delta +0.0113，95% CI [0.0032, 0.0199]。
 - LOCO 验证：candidate reranker MRR 0.657 vs type-aware 0.608；加权 MRR delta +0.0504，Recall@5 delta +0.0522。
-- 写法：这是当前论文最稳的算法贡献；随机 held-out 与 leave-one-conversation-out 均支持该结论。
+- 写法：intrinsic-only 是 held-out 最强版本；LOCO 已支持 candidate-level reranking 方向跨 conversation 泛化，但 intrinsic-only 版本可作为后续补充 LOCO 复验。
 
 ### RQ4: Type 3 多证据问题是否解决？
 
@@ -88,7 +89,7 @@ time-aware / type-aware 重排：
 ## 当前不可写为主结果的内容
 
 - `reliability_protocol`：自动错误分析已经具备人工复核入口，并已有 LLM-assisted 预标注。；缺口：需要在 confirmation CSV 中填写 human_* 字段，并重新运行一致性脚本，得到 exact agreement 与 Cohen's kappa。
-- `baseline_protocol`：外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。；缺口：需要提供 API key 并实际运行 text-embedding-3-small 等外部 embedding 对照。
+- `baseline_protocol`：外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。；缺口：需要提供 OpenAI 或其他 OpenAI-compatible provider 的 embedding API key，并实际运行至少一个外部 embedding 对照。
 - `open_gap`：完整项目距离最终投稿仍需要额外验证。；缺口：投稿前至少补齐一个强 baseline 家族，以及一个稳定性/可靠性检查。
 
 ## 投稿前最小完成条件
@@ -101,6 +102,6 @@ time-aware / type-aware 重排：
 
 ## 复现状态
 
-- Artifact gate: 84/84
-- Metric gate: 5/5
+- Artifact gate: 102/102
+- Metric gate: 7/7
 - 关键入口：`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_paper_evidence_matrix_zh.md`、`outputs/agent_memory_paper_tables_zh.md`、`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_manuscript_draft_zh.md`。

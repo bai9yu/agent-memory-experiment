@@ -11,8 +11,8 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `6733731` |
-| git_branch_status | `## main...origin/main [ahead 2]` |
+| git_commit | `40fe30f` |
+| git_branch_status | `## main...origin/main [ahead 3]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -69,17 +69,17 @@
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
 | Paper tables Markdown | True | 3424 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 4741 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 6707 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
-| Paper draft outline | True | 6827 | `outputs/agent_memory_paper_draft_outline_zh.md` |
-| Paper manuscript draft | True | 9893 | `outputs/agent_memory_manuscript_draft_zh.md` |
+| Paper evidence matrix | True | 6959 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper draft outline | True | 7449 | `outputs/agent_memory_paper_draft_outline_zh.md` |
+| Paper manuscript draft | True | 10813 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
-| Submission readiness gate | True | 2319 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
-| Submission readiness gate CSV | True | 1877 | `outputs/agent_memory_submission_readiness_gate.csv` |
+| Submission readiness gate | True | 2324 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
+| Submission readiness gate CSV | True | 1882 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
-| Artifact integrity manifest | True | 3770 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 16640 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest | True | 3807 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
+| Artifact integrity manifest CSV | True | 17641 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -125,7 +125,7 @@
 | Human audit full80 dual agreement CSV | True | 750 | `outputs/agent_memory_human_audit_full80_dual_agreement.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 28206 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 28211 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
