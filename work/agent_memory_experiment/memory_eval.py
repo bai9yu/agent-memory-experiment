@@ -48,6 +48,44 @@ IMPORTANCE_LOW_RE = re.compile(
     r"good to see|how are you|what's up)\b",
     re.IGNORECASE,
 )
+QUERY_INTENT_TYPE_PATTERNS = (
+    (
+        re.compile(r"\b(identity|identify|transgender|who is|who was)\b", re.IGNORECASE),
+        {"identity": 1.0, "profile": 0.8, "emotion": 0.3},
+    ),
+    (
+        re.compile(r"\b(relationship|status|married|husband|wife|partner|single|dating)\b", re.IGNORECASE),
+        {"relationship": 1.0, "family": 0.7, "identity": 0.4},
+    ),
+    (
+        re.compile(r"\b(career|field|fields|pursue|education|educaton|study|school|class|job|work)\b", re.IGNORECASE),
+        {"goal": 1.0, "plan": 0.9, "education": 0.9, "work": 0.8, "event": 0.3},
+    ),
+    (
+        re.compile(r"\b(activity|activities|hobby|hobbies|instrument|play|playing|run|running|race|camp|camping|swim|swimming|music|paint|painting)\b", re.IGNORECASE),
+        {"hobby": 1.0, "event": 0.8, "plan": 0.7, "preference": 0.7, "emotion": 0.2},
+    ),
+    (
+        re.compile(r"\b(when|date|time|how long|last|yesterday|today|summer)\b", re.IGNORECASE),
+        {"event": 0.9, "plan": 0.9, "work": 0.3, "education": 0.3},
+    ),
+    (
+        re.compile(r"\b(where|move|moved|from|place|location)\b", re.IGNORECASE),
+        {"event": 0.8, "profile": 0.7, "plan": 0.3},
+    ),
+    (
+        re.compile(r"\b(like|likes|enjoy|favorite|prefer|love|value)\b", re.IGNORECASE),
+        {"preference": 1.0, "hobby": 0.8, "emotion": 0.5, "event": 0.2},
+    ),
+    (
+        re.compile(r"\b(kid|kids|child|children|family|parent|adoption|adopt)\b", re.IGNORECASE),
+        {"family": 1.0, "relationship": 0.8, "plan": 0.6, "goal": 0.4},
+    ),
+    (
+        re.compile(r"\b(feel|feels|realize|realized|learn|learned|support|supported|negative experience)\b", re.IGNORECASE),
+        {"emotion": 1.0, "event": 0.5, "relationship": 0.4},
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -60,6 +98,7 @@ class Memory:
     user_id: str
     text: str
     entities: tuple[str, ...]
+    memory_type: str = "unknown"
 
 
 @dataclass(frozen=True)
@@ -102,6 +141,7 @@ def load_memories(path: Path) -> list[Memory]:
                 user_id=row["user_id"],
                 text=row["text"],
                 entities=tuple(row.get("entities", [])),
+                memory_type=str(row.get("memory_type", "unknown")).lower(),
             )
         )
     return memories
@@ -410,6 +450,21 @@ def importance_score(memory: Memory) -> float:
     return max(0.0, min(score, 1.0))
 
 
+def query_intent_type_weights(query: Query) -> dict[str, float]:
+    weights: dict[str, float] = {}
+    for pattern, pattern_weights in QUERY_INTENT_TYPE_PATTERNS:
+        if pattern.search(query.query):
+            for memory_type, weight in pattern_weights.items():
+                weights[memory_type] = max(weights.get(memory_type, 0.0), weight)
+    return weights
+
+
+def memory_type_score(memory: Memory, query_type_weights: dict[str, float]) -> float:
+    if not query_type_weights:
+        return 0.0
+    return query_type_weights.get(memory.memory_type, 0.0)
+
+
 def entity_overlap(query_tokens: set[str], entities: tuple[str, ...]) -> float:
     entity_tokens = set()
     for entity in entities:
@@ -433,12 +488,14 @@ def rank_memories(
     persona_boost_query_types: set[str],
     importance_weight: float,
     memory_importance: dict[str, float],
+    type_awareness_weight: float,
 ) -> list[dict]:
     query_tokens = tokenize(query.query)
     query_token_set = set(query_tokens)
     query_recency_gate = recency_gate(query)
     query_persona_names = query_personas(query, personas)
     query_persona_weight = persona_weight_for_query(query, persona_boost_weight, persona_boost_query_types)
+    query_type_weights = query_intent_type_weights(query)
 
     semantic_scores = semantic_scorer.score(query, memories)
     bm25_scores = {
@@ -455,12 +512,13 @@ def rank_memories(
         decay = time_decay(memory.date, query.query_date, half_life_days)
         persona = persona_score(memory, query_persona_names)
         importance = memory_importance[memory.id]
+        type_match = memory_type_score(memory, query_type_weights)
 
         if method == "vector":
             final = semantic
         elif method == "hybrid":
             final = 0.65 * semantic + 0.30 * keyword + 0.05 * entity
-        elif method == "time_aware":
+        elif method in {"time_aware", "type_aware"}:
             final = (
                 0.70 * semantic
                 + 0.30 * keyword
@@ -468,6 +526,8 @@ def rank_memories(
                 + query_persona_weight * persona
                 + importance_weight * importance
             )
+            if method == "type_aware":
+                final += type_awareness_weight * type_match
         else:
             raise ValueError(f"Unknown method: {method}")
 
@@ -479,6 +539,7 @@ def rank_memories(
                 "method": method,
                 "memory_id": memory.id,
                 "memory_text": memory.text,
+                "memory_type": memory.memory_type,
                 "final_score": final,
                 "semantic_score": semantic,
                 "keyword_score": keyword,
@@ -487,6 +548,7 @@ def rank_memories(
                 "recency_gate": query_recency_gate,
                 "persona_score": persona,
                 "importance_score": importance,
+                "memory_type_score": type_match,
                 "semantic_backend": semantic_scorer.name,
                 "is_relevant": memory.id in query.answer_memory_ids,
             }
@@ -508,6 +570,7 @@ def rank_all_methods(
     persona_boost_query_types: set[str],
     importance_weight: float,
     memory_importance: dict[str, float],
+    type_awareness_weight: float,
 ) -> dict[str, list[dict]]:
     query_tokens = tokenize(query.query)
     query_token_set = set(query_tokens)
@@ -515,6 +578,7 @@ def rank_all_methods(
     query_recency_gate = recency_gate(query)
     query_persona_names = query_personas(query, personas)
     query_persona_weight = persona_weight_for_query(query, persona_boost_weight, persona_boost_query_types)
+    query_type_weights = query_intent_type_weights(query)
 
     semantic_scores = semantic_scorer.score(query, memories)
     bm25_scores = {
@@ -532,6 +596,7 @@ def rank_all_methods(
             "query_type": query.type,
             "memory_id": memory_id,
             "memory_text": memory.text,
+            "memory_type": memory.memory_type,
             "semantic_score": semantic_scores[memory_id],
             "keyword_score": bm25_norm[memory_id],
             "entity_score": entity_overlap(query_token_set, memory.entities),
@@ -540,6 +605,7 @@ def rank_all_methods(
             "persona_score": persona_score(memory, query_persona_names),
             "persona_weight": query_persona_weight,
             "importance_score": memory_importance[memory_id],
+            "memory_type_score": memory_type_score(memory, query_type_weights),
             "semantic_backend": semantic_scorer.name,
             "is_relevant": memory_id in relevant_ids,
         })
@@ -557,7 +623,7 @@ def rank_all_methods(
                 final = semantic
             elif method == "hybrid":
                 final = 0.65 * semantic + 0.30 * keyword + 0.05 * entity
-            elif method == "time_aware":
+            elif method in {"time_aware", "type_aware"}:
                 final = (
                     0.70 * semantic
                     + 0.30 * keyword
@@ -565,6 +631,8 @@ def rank_all_methods(
                     + base_row["persona_weight"] * base_row["persona_score"]
                     + importance_weight * base_row["importance_score"]
                 )
+                if method == "type_aware":
+                    final += type_awareness_weight * base_row["memory_type_score"]
             else:
                 raise ValueError(f"Unknown method: {method}")
 
@@ -730,6 +798,8 @@ def run(args: argparse.Namespace) -> None:
     if callable(prepare_queries):
         prepare_queries(queries)
     methods = ("vector", "hybrid", "time_aware")
+    if args.type_awareness_weight > 0:
+        methods = methods + ("type_aware",)
 
     ranked_output_rows = []
     top_rows = []
@@ -749,6 +819,7 @@ def run(args: argparse.Namespace) -> None:
             persona_boost_query_types,
             args.importance_weight,
             memory_importance,
+            args.type_awareness_weight,
         )
         for method, ranked in ranked_by_method.items():
             if args.rank_output_k > 0:
@@ -791,6 +862,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--persona-boost-weight", type=float, default=0.0)
     parser.add_argument("--persona-boost-query-types", default="", help="Comma-separated query types that may receive persona boost. Empty means all types.")
     parser.add_argument("--importance-weight", type=float, default=0.0)
+    parser.add_argument("--type-awareness-weight", type=float, default=0.0)
     parser.add_argument("--local-files-only", action="store_true", help="Load sentence-transformer models only from the local Hugging Face cache.")
     return parser
 

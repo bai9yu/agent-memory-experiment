@@ -416,6 +416,27 @@ Current first-conversation DeepSeek result with local BGE-M3:
 | DeepSeek extracted fact | 187 | 2443 | 175 | 0.474 | 0.726 | 0.590 |
 | LoCoMo observation | 184 | 3002 | 155 | 0.497 | 0.690 | 0.578 |
 
+Run type-aware reranking on the same slice:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo_1c_all_v3_d1_d30_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo_1c_all_v3_d1_d30_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/llm_extracted_locomo_1c_all_v3_d1_d30_bge_m3_type_008 \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only \
+  --rank-output-k 20 \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3,4 \
+  --importance-weight 0.06 \
+  --type-awareness-weight 0.08
+```
+
 ## Cross-Agent Memory Reuse Experiments
 
 Run one cross-agent reuse experiment:

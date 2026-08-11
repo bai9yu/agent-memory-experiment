@@ -49,6 +49,8 @@ DeepSeek 抽取的 fact-level memory 已完成第 1 个完整 conversation 的�
 
 结论：DeepSeek 可以作为 memory write 模块接入；当前候选召回有效，但 Top-1 排序还需要继续优化。
 
+当前已加入 `type_aware` 重排消融；在第 1 个完整 conversation 上，`w_type=0.08` 将 MRR 从 `0.620` 提升到 `0.626`，Recall@3 从 `0.680` 提升到 `0.691`。详细结果见 `outputs/agent_memory_type_aware_reranking_zh.md`。
+
 大文件没有纳入 Git：
 
 - `work/agent_memory_experiment/cache/`：本地 BGE-M3 模型和 embedding 缓存

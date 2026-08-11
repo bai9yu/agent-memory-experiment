@@ -106,6 +106,23 @@ LLM 抽取的 memory 格式如下：
 4. 加入消融实验：无 persona gate、无 importance、无 time-aware、仅 vector、仅 hybrid。
 5. 增加 API 成本统计：按 session、conversation、memory token ratio 汇总。
 
+## Type-Aware Reranking 初步消融
+
+在第 1 个完整 conversation 上，已加入 `type_aware` 方法：
+
+```text
+score_type = score_time + w_type * type_match(query, memory)
+```
+
+| Type Weight | Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---:|---|---:|---:|---:|---:|
+| 0.00 | time_aware | 0.509 | 0.680 | 0.743 | 0.620 |
+| 0.04 | type_aware | 0.514 | 0.680 | 0.737 | 0.624 |
+| 0.08 | type_aware | 0.514 | 0.691 | 0.737 | 0.626 |
+| 0.12 | type_aware | 0.509 | 0.697 | 0.749 | 0.625 |
+
+初步结论：`w_type=0.08` 的 MRR 最好，能修复部分身份、活动和计划类 Top-1 错误；但该信号仍需在 LoCoMo10 全量上验证稳定性。
+
 ## 复现命令
 
 三 session 抽取：
