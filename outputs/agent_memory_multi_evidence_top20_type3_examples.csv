@@ -1,0 +1,21 @@
+split_seed,query_id,query,num_gold,baseline_full@5,candidate_full@5,delta_full@5,baseline_ratio@5,candidate_ratio@5,delta_ratio@5
+13,q01191,Did John and James study together?,1,0.0,1.0,1.0,0.0,1.0,1.0
+17,q00065,"Would Melanie likely enjoy the song ""The Four Seasons"" by Vivaldi?",1,0.0,1.0,1.0,0.0,1.0,1.0
+17,q01658,Which major holiday season conincides with Evan's wedding?,1,0.0,1.0,1.0,0.0,1.0,1.0
+31,q00065,"Would Melanie likely enjoy the song ""The Four Seasons"" by Vivaldi?",1,0.0,1.0,1.0,0.0,1.0,1.0
+17,q00766,Which outdoor gear company likely signed up John for an endorsement deal?,2,0.0,1.0,1.0,0.5,1.0,0.5
+23,q00078,Would Melanie go on another roadtrip soon?,2,0.0,1.0,1.0,0.5,1.0,0.5
+17,q00510,What underlying condition might Joanna have based on her allergies?,3,0.0,1.0,1.0,0.6666666666666666,1.0,0.33333333333333337
+23,q00322,What might John's degree be in?,3,0.0,1.0,1.0,0.6666666666666666,1.0,0.33333333333333337
+23,q00510,What underlying condition might Joanna have based on her allergies?,3,0.0,1.0,1.0,0.6666666666666666,1.0,0.33333333333333337
+29,q00510,What underlying condition might Joanna have based on her allergies?,3,0.0,1.0,1.0,0.6666666666666666,1.0,0.33333333333333337
+31,q00566,How many hikes has Joanna been on?,3,0.0,0.0,0.0,0.0,0.6666666666666666,0.6666666666666666
+17,q01164,Does James live in Connecticut?,2,0.0,0.0,0.0,0.0,0.5,0.5
+13,q01183,Are John and James fans of the same football team?,3,0.0,0.0,0.0,0.3333333333333333,0.6666666666666666,0.3333333333333333
+17,q01183,Are John and James fans of the same football team?,3,0.0,0.0,0.0,0.3333333333333333,0.6666666666666666,0.3333333333333333
+13,q00060,Would Caroline be considered religious?,4,0.0,0.0,0.0,0.25,0.5,0.25
+23,q01820,Does Calvin love music tours?,8,0.0,0.0,0.0,0.0,0.125,0.125
+13,q01607,"In light of the health and dietary changes discussed, what would be an appropriate gift for both Evan and Sam to encourage their healthy lifestyles?",17,0.0,0.0,0.0,0.058823529411764705,0.0,-0.058823529411764705
+17,q01804,Does Calvin wish to become more popular?,5,0.0,0.0,0.0,0.6,0.4,-0.19999999999999996
+23,q01804,Does Calvin wish to become more popular?,5,0.0,0.0,0.0,0.6,0.4,-0.19999999999999996
+23,q01053,What is a career that Andrew could potentially pursue with his love for animals and nature?,5,0.0,0.0,0.0,0.2,0.0,-0.2

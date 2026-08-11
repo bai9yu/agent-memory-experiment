@@ -558,6 +558,16 @@ paired significance test 显示 candidate reranker 相比 fixed `type_aware` 的
 
 当前已测试一个无监督启发式 set selector：保留 candidate reranker 的 Top-1，再用文本 Jaccard 去重和 memory type 多样性选择后续候选。结果 Type 3 Coverage@5 从 `0.372` 降到 `0.351`，Coverage@10 保持 `0.462` 不变。说明只在当前 Top-10 里做多样性重排不够，下一版应扩大候选池或显式拆解 query：
 
+进一步的候选深度分析显示，Type 3 到 Top-20 时 coverage ratio 从 Top-10 的 `0.462` 提升到 `0.597`，Full@20 达到 `0.444`，说明相关证据常在更深候选中。因此推荐下一版候选池：
+
+\[
+\mathcal{C}_{deep}(q)=
+\bigcup_{r\in\mathcal{R}}
+\operatorname{TopK}_{r}(q),\quad K\in\{20,50\}
+\]
+
+然后在 \(\mathcal{C}_{deep}\) 上做集合级选择，而不是只重排 Top-10：
+
 \[
 q \rightarrow \{q_1,q_2,\ldots,q_n\}
 \]

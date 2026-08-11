@@ -368,6 +368,23 @@
 
 收益：排除了一个看似自然但无效的简单方案，让后续实验方向更聚焦。
 
+### 3.18 进展：Top-20 深度分析显示 Type 3 仍有候选空间
+
+现象：将 candidate reranker 的 ranked output 从 Top-10 扩展到 Top-20 后，Type 3 的 coverage ratio 从 `0.462` 提升到 `0.597`，Full coverage 从 `0.325` 提升到 `0.444`。相比 fixed `type_aware`，candidate reranker 在 Top-20 的 Type 3 coverage delta 为 `+0.0711`，Full coverage delta 为 `+0.0714`。
+
+原因判断：
+
+- Type 3 不是完全召回不到相关 evidence，而是相关 evidence 常落在更深候选位置。
+- Top-10 MMR 失败说明浅层候选里可重排空间不足；Top-20 改善说明扩大候选深度后仍有可利用信号。
+- 下一步应优先做“深候选池 + set-level learning”，而不是只继续调浅层 Top-10 重排。
+
+解决：
+
+- 新增 candidate depth analysis，记录不同 K 下 Type 3 coverage 曲线。
+- 将下一阶段候选池目标从 Top-10 扩展到 Top-20/Top-50。
+
+收益：Type 3 的后续路线从“尝试 query decomposition 或扩大召回”进一步收敛为“扩大候选深度后做集合级学习选择”。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性

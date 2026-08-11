@@ -607,6 +607,26 @@ python3 work/agent_memory_experiment/set_level_selection_experiment.py \
   --output-report outputs/agent_memory_set_selection_zh.md
 ```
 
+Run candidate depth analysis after saving candidate reranker Top-20 rows:
+
+```bash
+python3 work/agent_memory_experiment/multi_evidence_coverage_analysis.py \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --candidate-ranked outputs/agent_memory_candidate_reranker_locomo10_ranked_top20.csv \
+  --ks 1,3,5,10,20 \
+  --output-per-query outputs/agent_memory_multi_evidence_coverage_top20_per_query.csv \
+  --output-summary outputs/agent_memory_multi_evidence_coverage_top20_summary.csv \
+  --output-delta outputs/agent_memory_multi_evidence_coverage_top20_delta_by_type.csv \
+  --output-type3-examples outputs/agent_memory_multi_evidence_top20_type3_examples.csv \
+  --output-report outputs/agent_memory_multi_evidence_coverage_top20_zh.md
+
+python3 work/agent_memory_experiment/candidate_depth_analysis.py \
+  --delta-by-type outputs/agent_memory_multi_evidence_coverage_top20_delta_by_type.csv \
+  --output-csv outputs/agent_memory_candidate_depth_analysis.csv \
+  --output-report outputs/agent_memory_candidate_depth_analysis_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash
