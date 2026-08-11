@@ -177,6 +177,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
         },
         {
             "section": "Human Audit",
+            "artifact": "outputs/agent_memory_human_audit_execution_plan_zh.md",
+            "role": "把 priority20、full80、双人独立标注、仲裁和论文刷新步骤拆成可执行 checklist。",
+            "status": "ready_for_labeling",
+            "evidence": human_evidence,
+            "next_action": "按 execution plan 先完成 priority20 single blind labeling。",
+        },
+        {
+            "section": "Human Audit",
             "artifact": "outputs/agent_memory_human_audit_priority20_review_packet_zh.md",
             "role": "20 条优先人工复核阅读包。",
             "status": "ready_for_labeling",

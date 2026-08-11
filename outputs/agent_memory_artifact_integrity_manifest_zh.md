@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 140/140
+- Artifacts covered: 142/142
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 6235469
+- Total bytes: 6242068
 
 ## 前 20 个 Artifact
 

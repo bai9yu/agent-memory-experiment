@@ -1092,6 +1092,18 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-schema outputs/agent_memory_human_audit_annotation_schema.csv
 ```
 
+Generate the human-audit execution plan that turns the pending labeling blocker
+into ordered priority20/full80, dual-review, adjudication, and paper-refresh
+steps:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_human_audit_execution_plan.py \
+  --outputs-dir outputs \
+  --output-report outputs/agent_memory_human_audit_execution_plan_zh.md \
+  --output-csv outputs/agent_memory_human_audit_execution_plan.csv
+```
+
 Fill only the `human_*` columns in the blind CSV, then merge labels back into
 the Human/LLM confirmation sheet:
 

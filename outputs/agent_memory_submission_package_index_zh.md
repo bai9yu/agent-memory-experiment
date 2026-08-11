@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Indexed artifacts: 18
+- Indexed artifacts: 19
 - Missing indexed artifacts: 0
 - Blocked/not-ready sections: 2
 
@@ -24,6 +24,7 @@
 | Reviewer Prep | outputs/agent_memory_reviewer_response_prep_zh.md | True | ready_with_blockers_declared | 审稿人可能追问的问题、当前证据、剩余缺口和安全写作边界。 | 每次补完 blocker 或修改主张后重新生成。 |
 | External Embedding | outputs/agent_memory_external_embedding_blocker_audit_zh.md | True | blocked | 外部 embedding baseline 的 key、preflight、summary 和 comparison blocker 审计。 | 配置 OPENAI_API_KEY 或 OpenAI-compatible provider key 后运行 API baseline。 |
 | Human Audit | outputs/agent_memory_human_audit_annotation_codebook_zh.md | True | ready_for_labeling | 人工复核 yes/partial/no、gold sufficiency、manual reason 和双人标注规则。 | 先填写 priority20 盲审 CSV，再扩展 full80。 |
+| Human Audit | outputs/agent_memory_human_audit_execution_plan_zh.md | True | ready_for_labeling | 把 priority20、full80、双人独立标注、仲裁和论文刷新步骤拆成可执行 checklist。 | 按 execution plan 先完成 priority20 single blind labeling。 |
 | Human Audit | outputs/agent_memory_human_audit_priority20_review_packet_zh.md | True | ready_for_labeling | 20 条优先人工复核阅读包。 | 人工填写 blind review CSV 的 human_* 字段。 |
 | Reproducibility | outputs/agent_memory_reproducibility_checklist_zh.md | True | pass | artifact、指标阈值、数据规模、复现命令和环境入口清单。 | 新增任何 artifact 后重新生成。 |
 | Reproducibility | outputs/agent_memory_artifact_integrity_manifest_zh.md | True | pass | 复现 artifact sha256、大小和行数 manifest。 | 每次结果更新后重新生成。 |

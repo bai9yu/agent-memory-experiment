@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：140/140
+- Artifact 存在性：142/142
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `c7d2d1a` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `1df9a64` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -104,8 +104,8 @@
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
 | Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
 | Reviewer response preparation matrix CSV | True | 4249 | `outputs/agent_memory_reviewer_response_prep.csv` |
-| Submission package index | True | 5277 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 5575 | `outputs/agent_memory_submission_package_index.csv` |
+| Submission package index | True | 5549 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 5949 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission readiness gate | True | 2326 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
 | Submission readiness gate CSV | True | 1884 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
@@ -163,6 +163,8 @@
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
 | Human audit annotation codebook | True | 8167 | `outputs/agent_memory_human_audit_annotation_codebook_zh.md` |
 | Human audit annotation schema | True | 1883 | `outputs/agent_memory_human_audit_annotation_schema.csv` |
+| Human audit execution plan | True | 3788 | `outputs/agent_memory_human_audit_execution_plan_zh.md` |
+| Human audit execution plan CSV | True | 2165 | `outputs/agent_memory_human_audit_execution_plan.csv` |
 | Paper experiment status | True | 33847 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
@@ -230,6 +232,7 @@
 | Blinded human audit sheets | `work/agent_memory_experiment/blind_human_audit_labels.py` | Exports blind review sheets that hide LLM-assisted labels and can merge human labels back. |
 | Human audit review packet | `work/agent_memory_experiment/generate_human_audit_review_packet.py` | Renders a readable Markdown review packet from the blinded priority20 sheet without exposing LLM-assisted labels. |
 | Human audit annotation codebook | `work/agent_memory_experiment/generate_human_audit_annotation_codebook.py` | Defines yes/partial/no label rules, manual reason labels, dual-annotation flow, and paper-claim boundaries. |
+| Human audit execution plan | `work/agent_memory_experiment/generate_human_audit_execution_plan.py` | Turns the pending human-audit blocker into ordered labeling, dual-review, adjudication, and paper-refresh steps. |
 | Dual human audit agreement | `work/agent_memory_experiment/dual_human_audit_agreement.py` | Prepares two-annotator review sheets and reports exact agreement, partial-credit agreement, and Cohen's kappa. |
 | Human audit readiness gate | `work/agent_memory_experiment/validate_human_audit_readiness.py` | Checks whether priority20/full80 human confirmations can support paper claims. |
 | Evidence matrix | `work/agent_memory_experiment/generate_evidence_matrix.py` | Summarizes paper claims, evidence strength, and remaining gaps. |

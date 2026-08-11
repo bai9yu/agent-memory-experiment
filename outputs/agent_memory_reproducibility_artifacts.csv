@@ -77,8 +77,8 @@ Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True
 Threats to validity CSV,outputs/agent_memory_threats_to_validity.csv,True,3236
 Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,4396
 Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,4249
-Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,5277
-Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,5575
+Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,5549
+Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,5949
 Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2326
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1884
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
@@ -136,6 +136,8 @@ Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
 Human audit annotation codebook,outputs/agent_memory_human_audit_annotation_codebook_zh.md,True,8167
 Human audit annotation schema,outputs/agent_memory_human_audit_annotation_schema.csv,True,1883
+Human audit execution plan,outputs/agent_memory_human_audit_execution_plan_zh.md,True,3788
+Human audit execution plan CSV,outputs/agent_memory_human_audit_execution_plan.csv,True,2165
 Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,33847
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

@@ -309,6 +309,8 @@ def main() -> None:
         ("Human audit readiness gate CSV", outputs / "agent_memory_human_audit_readiness_gate.csv"),
         ("Human audit annotation codebook", outputs / "agent_memory_human_audit_annotation_codebook_zh.md"),
         ("Human audit annotation schema", outputs / "agent_memory_human_audit_annotation_schema.csv"),
+        ("Human audit execution plan", outputs / "agent_memory_human_audit_execution_plan_zh.md"),
+        ("Human audit execution plan CSV", outputs / "agent_memory_human_audit_execution_plan.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -569,6 +571,11 @@ def main() -> None:
             "stage": "Human audit annotation codebook",
             "command": "work/agent_memory_experiment/generate_human_audit_annotation_codebook.py",
             "notes": "Defines yes/partial/no label rules, manual reason labels, dual-annotation flow, and paper-claim boundaries.",
+        },
+        {
+            "stage": "Human audit execution plan",
+            "command": "work/agent_memory_experiment/generate_human_audit_execution_plan.py",
+            "notes": "Turns the pending human-audit blocker into ordered labeling, dual-review, adjudication, and paper-refresh steps.",
         },
         {
             "stage": "Dual human audit agreement",
