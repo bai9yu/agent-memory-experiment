@@ -232,6 +232,16 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 融合方法的 Coverage@20 与 `type_aware` 持平，但 MRR 和 Top5 指标下降；显著性检验显示 MRR delta 为 `-0.0867`，95% CI `[-0.1376, -0.0442]`，p-value `0.0002`。结论：简单关键词窗口拆解噪声过大，容易把人物身份/泛化事实推到前面；如果继续做 query decomposition，需要使用更准确的 LLM 子问题生成或任务专用规则，而不是弱关键词拆解。
 
+对 Type 3 三条改进尝试进一步做 evidence coverage 显著性汇总：
+
+| Experiment | Candidate | Coverage@5 Delta | Coverage@5 p-value | Coverage@20 Delta | Coverage@20 p-value |
+|---|---|---:|---:|---:|---:|
+| type3_specific_reranker | type3_specific_reranker | -0.0467 | 0.0474 | +0.0192 | 0.4653 |
+| supervised_set_selector | supervised_set_selector | -0.0572 | 0.0286 | +0.0101 | 0.6823 |
+| query_decomposition_fusion | type_aware_plus_decomposition | -0.0325 | 0.0198 | +0.0000 | 1.0000 |
+
+结论：三条 Type 3 尝试在 Coverage@5 上均下降，且均有统计证据；Coverage@20 没有可靠提升。因此当前 Type 3 失败并不是“多证据已经在深层候选中被方法稳定召回，只是没排到前面”，而是这些浅层方法没有形成有效的前排 evidence coverage 目标。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。

@@ -733,6 +733,18 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/paire
   --output-report outputs/agent_memory_type3_query_decomposition_significance_zh.md
 ```
 
+Run Type-3 evidence coverage significance summary:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/type3_coverage_significance_analysis.py \
+  --experiment type3_specific_reranker:outputs/agent_memory_type3_specific_reranker_coverage.csv:type_aware:type3_specific_reranker \
+  --experiment supervised_set_selector:outputs/agent_memory_type3_supervised_set_selector_coverage.csv:type_aware:supervised_set_selector \
+  --experiment query_decomposition_fusion:outputs/agent_memory_type3_query_decomposition_per_query.csv:type_aware:type_aware_plus_decomposition \
+  --output-csv outputs/agent_memory_type3_coverage_significance_summary.csv \
+  --output-report outputs/agent_memory_type3_coverage_significance_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash

@@ -456,6 +456,24 @@
 
 收益：排除了“简单关键词窗口拆解”这个低成本方案；如果后续继续做 decomposition，应转向 LLM 子问题生成、答案类型约束或更强语义解析。
 
+### 3.23 问题：Type 3 负结果需要 coverage 显著性支撑
+
+现象：前面多个 Type 3 实验都报告了 MRR、Recall 和 Coverage，但显著性检验主要集中在 MRR/Recall 上。论文写作时，如果要证明“多证据覆盖没有改善”，需要对 Coverage@5、Full@5、Coverage@20、Full@20 也做配对检验。
+
+解决：
+
+- 新增 `type3_coverage_significance_analysis.py`，统一读取 Type 3 专用重排、监督式 set selector、query decomposition fusion 的 per-query 覆盖结果。
+- 对 coverage 指标做 paired bootstrap CI 和 paired permutation test。
+
+结果：
+
+- Type 3 专用重排 Coverage@5 delta 为 `-0.0467`，p-value `0.0474`。
+- 监督式 set selector Coverage@5 delta 为 `-0.0572`，p-value `0.0286`。
+- 关键词式 decomposition fusion Coverage@5 delta 为 `-0.0325`，p-value `0.0198`。
+- 三者 Coverage@20 均没有可靠提升。
+
+收益：Type 3 的结论从“多个方法指标看起来没提升”升级为“前排 evidence coverage 也有统计证据支持没有改善”。这更适合作为论文 error analysis 和 future work 的论据。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -486,6 +504,7 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 8. Type 3 专用单候选重排已验证为负结果，说明 Type 3 需要 query decomposition 或 supervised set-level objective，而不是只换一个类型专用分类器。
 9. 监督式 greedy set selector 也没有改善 Type 3，说明下一步需要显式 query decomposition 或更强 listwise/setwise 学习目标。
 10. 关键词式 query decomposition 也没有改善 Type 3，说明 decomposition 方向若继续推进，需要更强的 LLM 子问题生成，而不是简单关键词窗口。
+11. Coverage 显著性检验显示三条 Type 3 尝试在 Coverage@5 上均显著下降或有统计证据支持下降，Coverage@20 没有可靠提升。
 
 ## 6. 下一步行动清单
 

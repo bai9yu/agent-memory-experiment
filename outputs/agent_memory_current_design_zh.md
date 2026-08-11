@@ -615,6 +615,8 @@ S_{fusion}(q,m_i)
 
 结果依然为负：纯 `query_decomposition` 的 Type 3 MRR 为 `0.214`，融合后为 `0.342`，仍低于 fixed `type_aware` 的 `0.429`；融合方法 Coverage@20 与 `type_aware` 持平，但 Coverage@5 和 MRR 下降。原因是弱关键词拆解会重复人物名并产生过泛 facet，导致 identity/profile 类泛化记忆抢占候选前排。因此下一步如果继续 decomposition，应使用 LLM 或更强规则生成语义子问题，而不是只做关键词窗口。
 
+Coverage 显著性汇总进一步确认：`type3_specific_reranker`、`supervised_set_selector`、`type_aware_plus_decomposition` 的 Coverage@5 delta 分别为 `-0.0467`、`-0.0572`、`-0.0325`，且 p-value 分别为 `0.0474`、`0.0286`、`0.0198`；Coverage@20 均没有可靠提升。因此 Type 3 后续贡献点应明确改成“学习或生成能覆盖多个 evidence 的前排集合”，而不是只扩大或重排浅层候选。
+
 \[
 \max_\theta
 \sum_q
