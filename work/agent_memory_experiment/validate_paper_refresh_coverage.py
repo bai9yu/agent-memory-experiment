@@ -23,6 +23,7 @@ REQUIRED_STEPS = [
     ("external_embedding_blocker_audit", "external embedding blocker audit"),
     ("submission_blocker_closure_plan", "submission blocker closure path"),
     ("submission_package_index", "paper package index"),
+    ("paper_table_consistency", "paper table consistency audit"),
     ("untracked_artifact_audit", "untracked artifact hygiene audit"),
     ("public_release_readiness", "public release readiness gate"),
     ("reproducibility_checklist", "artifact and metric gates"),

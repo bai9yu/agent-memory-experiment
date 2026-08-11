@@ -241,6 +241,8 @@ def main() -> None:
         ("Type3 supervised selector rwn002 ranked top20", outputs / "agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
+        ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
+        ("Paper table consistency audit CSV", outputs / "agent_memory_paper_table_consistency.csv"),
         ("Paper evidence matrix", outputs / "agent_memory_paper_evidence_matrix_zh.md"),
         ("Paper draft outline", outputs / "agent_memory_paper_draft_outline_zh.md"),
         ("Paper manuscript draft", outputs / "agent_memory_manuscript_draft_zh.md"),
@@ -726,6 +728,11 @@ def main() -> None:
             "stage": "Paper tables",
             "command": "work/agent_memory_experiment/generate_paper_tables.py",
             "notes": "Generates Markdown and LaTeX tables from cached CSVs.",
+        },
+        {
+            "stage": "Paper table consistency audit",
+            "command": "work/agent_memory_experiment/validate_paper_table_consistency.py",
+            "notes": "Regenerates paper tables in a temporary directory and compares current Markdown/LaTeX artifacts byte-for-byte.",
         },
     ]
 

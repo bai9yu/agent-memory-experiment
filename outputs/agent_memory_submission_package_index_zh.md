@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Indexed artifacts: 28
+- Indexed artifacts: 29
 - Missing indexed artifacts: 0
 - Blocked/not-ready sections: 2
 
@@ -20,6 +20,7 @@
 | Method Appendix | outputs/agent_memory_candidate_oracle_gap_analysis_zh.md | True | ready | candidate oracle 上界、主方法 gap closure 和 Type 3 剩余瓶颈分析。 | 投稿正文可用该结果解释方法上界和未来工作。 |
 | Experiment Protocol | outputs/agent_memory_experiment_protocol_zh.md | True | ready | 数据切片、指标公式、显著性检验、主结果、负结果和写法边界。 | 作为 supplementary material 或实验设置附录。 |
 | Evidence Matrix | outputs/agent_memory_paper_evidence_matrix_zh.md | True | ready | 论文主张、证据强度、剩余缺口和可写边界矩阵。 | 写作时逐条核对摘要/贡献是否过度宣称。 |
+| Paper Tables | outputs/agent_memory_paper_table_consistency_zh.md | True | ready | 重新生成 Markdown/LaTeX 表格并与当前表格 artifact 做字节级一致性审计。 | 任何实验 CSV 或表格生成器更新后重新运行该审计。 |
 | Threats to Validity | outputs/agent_memory_threats_to_validity_zh.md | True | ready_with_blockers_declared | 内部/外部/构念/统计/规模/复现有效性威胁与缓解措施。 | 外部 embedding 和人工复核完成后更新 blocker 行。 |
 | Reviewer Prep | outputs/agent_memory_reviewer_response_prep_zh.md | True | ready_with_blockers_declared | 审稿人可能追问的问题、当前证据、剩余缺口和安全写作边界。 | 每次补完 blocker 或修改主张后重新生成。 |
 | External Embedding | outputs/agent_memory_external_embedding_blocker_audit_zh.md | True | blocked | 外部 embedding baseline 的 key、preflight、summary 和 comparison blocker 审计。 | 配置 OPENAI_API_KEY 或 OpenAI-compatible provider key 后运行 API baseline。 |

@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 24
+- Required offline steps: 25
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -26,6 +26,7 @@
 | required_offline_step | external_embedding_blocker_audit | True | external embedding blocker audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | submission_blocker_closure_plan | True | submission blocker closure path | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | submission_package_index | True | paper package index | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | paper_table_consistency | True | paper table consistency audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | untracked_artifact_audit | True | untracked artifact hygiene audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | public_release_readiness | True | public release readiness gate | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | reproducibility_checklist | True | artifact and metric gates | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |

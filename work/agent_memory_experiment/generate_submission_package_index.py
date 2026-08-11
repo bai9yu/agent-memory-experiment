@@ -144,6 +144,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "next_action": "写作时逐条核对摘要/贡献是否过度宣称。",
         },
         {
+            "section": "Paper Tables",
+            "artifact": "outputs/agent_memory_paper_table_consistency_zh.md",
+            "role": "重新生成 Markdown/LaTeX 表格并与当前表格 artifact 做字节级一致性审计。",
+            "status": "ready",
+            "evidence": "paper tables are checked against cached CSV sources",
+            "next_action": "任何实验 CSV 或表格生成器更新后重新运行该审计。",
+        },
+        {
             "section": "Threats to Validity",
             "artifact": "outputs/agent_memory_threats_to_validity_zh.md",
             "role": "内部/外部/构念/统计/规模/复现有效性威胁与缓解措施。",

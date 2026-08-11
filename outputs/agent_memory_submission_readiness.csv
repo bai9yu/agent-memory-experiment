@@ -1,5 +1,5 @@
 gate,category,required_for_submission,pass,status,evidence,next_action
-reproducibility_artifacts,reproducibility,True,True,pass,162/162 artifacts exist,保持复现清单随新增 artifact 更新。
+reproducibility_artifacts,reproducibility,True,True,pass,164/164 artifacts exist,保持复现清单随新增 artifact 更新。
 reproducibility_metrics,reproducibility,True,True,pass,22/22 metric thresholds pass,修复任何低于阈值的核心指标或调整论文主张。
 manuscript_claim_check,paper_writing,True,True,pass,8/8 claim checks pass,继续防止正文把 pending 实验写成已完成结论。
 api_embedding_preflight,external_baseline,True,False,blocker,4/5 required checks pass,配置 OPENAI_API_KEY 或等价外部 embedding provider key 后重跑 preflight。
@@ -10,4 +10,4 @@ priority20_human_audit,reliability,True,False,blocker,"priority20 confirmed=0/20
 full80_human_audit,reliability,True,False,blocker,"full80 confirmed=0/80, invalid=0",投稿前完成 80 条人工确认并报告 exact agreement 与 Cohen's kappa。
 reviewer_risk_blockers,submission,True,False,blocker,blocker risks=2,优先补齐外部 embedding baseline 和人工复核标签。
 public_release_hygiene,submission,True,True,pass,public release blockers=0,修复公开发布检查中的 key、`.env` 或仓库卫生 blocker。
-artifact_integrity_manifest,reproducibility,True,True,pass,"integrity manifest covers=162/162, sha256_ok=160, self_skips=2",重新生成 artifact integrity manifest，确保所有复现 artifact 都有 sha256 记录。
+artifact_integrity_manifest,reproducibility,True,True,pass,"integrity manifest covers=164/164, sha256_ok=162, self_skips=2",重新生成 artifact integrity manifest，确保所有复现 artifact 都有 sha256 记录。

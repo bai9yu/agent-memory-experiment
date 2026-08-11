@@ -241,6 +241,25 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes the index of manuscript, tables, appendices, gates, and packaging actions.",
         ),
         Step(
+            "paper_table_consistency",
+            py(
+                "validate_paper_table_consistency.py",
+                "--project-root",
+                ".",
+                "--outputs-dir",
+                "outputs",
+                "--markdown",
+                "outputs/agent_memory_paper_tables_zh.md",
+                "--latex",
+                "outputs/agent_memory_paper_tables.tex",
+                "--output-csv",
+                "outputs/agent_memory_paper_table_consistency.csv",
+                "--output-report",
+                "outputs/agent_memory_paper_table_consistency_zh.md",
+            ),
+            "Checks that paper Markdown/LaTeX tables are byte-identical to regenerated CSV-derived outputs.",
+        ),
+        Step(
             "untracked_artifact_audit",
             py(
                 "audit_untracked_artifacts.py",
