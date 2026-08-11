@@ -173,6 +173,9 @@ def main() -> None:
     artifact_specs = [
         ("Main baseline CSV", outputs / "agent_memory_baseline_comparison_locomo10.csv"),
         ("LLM extraction report", outputs / "agent_memory_llm_extraction_locomo10_comparison_zh.md"),
+        ("Writer stability report", outputs / "agent_memory_writer_stability_zh.md"),
+        ("Writer stability aggregate", outputs / "agent_memory_writer_stability_aggregate.csv"),
+        ("Writer stability runs", outputs / "agent_memory_writer_stability_runs.csv"),
         ("Candidate reranker report", outputs / "agent_memory_candidate_reranker_locomo10_zh.md"),
         ("Candidate reranker significance", outputs / "agent_memory_candidate_reranker_significance_zh.md"),
         ("Type3 coverage significance", outputs / "agent_memory_type3_coverage_significance_zh.md"),
@@ -216,6 +219,11 @@ def main() -> None:
             "stage": "Main LoCoMo retrieval",
             "command": "work/agent_memory_experiment/README.md#recommended-locomo-run",
             "notes": "Requires local BGE-M3 cache; no online embedding API.",
+        },
+        {
+            "stage": "Writer stability",
+            "command": "work/agent_memory_experiment/summarize_writer_stability.py",
+            "notes": "Summarizes repeated DeepSeek memory-writer runs from a local manifest.",
         },
         {
             "stage": "Candidate reranker",

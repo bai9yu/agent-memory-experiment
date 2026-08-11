@@ -1,0 +1,4 @@
+run_id,temperature,seed,status,num_memories,memory_tokens,prompt_tokens,completion_tokens,total_tokens,num_queries,recall@1,recall@3,recall@5,mrr,method,evidence,notes
+run1_main,0.0,default,completed,2517,31148,361103,198471,559574,1838,0.5032644178454843,0.6702937976060935,0.7334058759521219,0.6093848002850233,type_aware,completed,Current main LoCoMo10 DeepSeek extraction.
+run2_repeat,0.2,repeat_1,pending,0,0,0,0,0,0,0.0,0.0,0.0,0.0,type_aware,pending_or_missing_files,Run another extraction with the same prompt and a nonzero temperature or seed-like setting.
+run3_repeat,0.2,repeat_2,pending,0,0,0,0,0,0,0.0,0.0,0.0,0.0,type_aware,pending_or_missing_files,Run another extraction with the same prompt and a second repeat setting.

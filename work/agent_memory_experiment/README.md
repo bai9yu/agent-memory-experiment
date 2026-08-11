@@ -755,6 +755,17 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-latex outputs/agent_memory_paper_tables.tex
 ```
 
+Summarize DeepSeek writer stability:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/summarize_writer_stability.py \
+  --manifest work/agent_memory_experiment/deepseek_writer_stability_manifest.csv \
+  --output-runs outputs/agent_memory_writer_stability_runs.csv \
+  --output-aggregate outputs/agent_memory_writer_stability_aggregate.csv \
+  --output-report outputs/agent_memory_writer_stability_zh.md
+```
+
 Generate paper evidence matrix:
 
 ```bash

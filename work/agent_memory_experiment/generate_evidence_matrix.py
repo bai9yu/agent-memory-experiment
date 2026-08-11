@@ -72,6 +72,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     embedding_estimate = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
     embedding_comparison = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
+    writer_stability = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
 
     fact_type_aware = lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     observation_type_aware = lookup(baseline, variant="locomo_observation", method="type_aware")
@@ -102,6 +103,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     embedding_tokens = sum(int(row["approx_tokens"]) for row in embedding_estimate)
     embedding_batches = sum(0 if row["cache_exists"] == "True" else int(row["api_batches_if_uncached"]) for row in embedding_estimate)
     embedding_comparison_done = all(row["status"] == "completed" for row in embedding_comparison)
+    writer_completed = max(int(row["completed_runs"]) for row in writer_stability)
 
     storage_ratio = float(fact_storage["memory_tokens"]) / float(observation_storage["memory_tokens"])
     sklearn_delta = float(sklearn_200["mrr"]) - float(fact_type_aware["mrr"])
@@ -226,6 +228,15 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "remaining_gap": "需要人工填写 manual_reason / auto_reason_correct，并统计一致性或准确率。",
         },
         {
+            "claim": "DeepSeek memory writer 稳定性分析框架已经准备好，但重复抽取尚未完成。",
+            "status": "stability_protocol",
+            "evidence": f"稳定性 manifest 登记 3 次抽取，目前 completed runs={writer_completed}；少于 3 次，不能报告方差。",
+            "support_level": "protocol_ready_pending_runs",
+            "primary_artifacts": "agent_memory_writer_stability_zh.md; deepseek_writer_stability_manifest.csv",
+            "paper_use": "可以作为重复抽取实验入口；在 run2/run3 完成前，不应宣称 memory writer 稳定。",
+            "remaining_gap": "需要补齐至少 2 次 DeepSeek 重复抽取，并重新生成均值/标准差。",
+        },
+        {
             "claim": "外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。",
             "status": "baseline_protocol",
             "evidence": f"已登记 {len(embedding_status)} 个外部 embedding baseline；completed={embedding_completed}, ready_or_completed={embedding_ready}；预计文本 {embedding_items} 条、约 {embedding_tokens} tokens、未缓存批次 {embedding_batches}；对比表完成={embedding_comparison_done}。",
@@ -237,7 +248,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
         {
             "claim": "完整项目距离最终投稿仍需要额外验证。",
             "status": "open_gap",
-            "evidence": "剩余缺口包括多 seed DeepSeek 抽取、实际完成更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。",
+            "evidence": "剩余缺口包括完成多 seed DeepSeek 抽取、实际完成更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。",
             "support_level": "gap_analysis",
             "primary_artifacts": "agent_memory_paper_experiment_status_zh.md; agent_memory_reproducibility_checklist_zh.md",
             "paper_use": "作为下一步 checklist，而不是论文主张。",

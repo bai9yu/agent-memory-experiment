@@ -16,6 +16,7 @@
 | open_gap | 1 |
 | reliability_protocol | 1 |
 | reproducibility | 1 |
+| stability_protocol | 1 |
 
 ## Evidence Matrix
 
@@ -29,10 +30,11 @@
 | negative_result | 浅层 Type 3 修复方法无法解决多证据检索。 | Supervised set selector Coverage@5 delta -0.0572, p=0.0286; Type3-specific reranker and keyword decomposition also reduce Coverage@5. | statistically_supported_negative | 适合作为边界/负结果消融，而不是作为改进方法。 | 下一步应尝试 LLM 子问题生成或真正的 setwise objective。 |
 | efficiency_result | 向量候选预筛选可以在不损害质量的情况下提升检索速度。 | Sklearn exact NN top-200 + type-aware MRR 0.613, R@5 0.734; delta vs full type-aware MRR +0.0032. | strong_cached_efficiency | 可以支撑论文效率实验章节。 | 需要统一报告 wall-clock 设置，并在更大的真实 memory bank 上验证。 |
 | efficiency_boundary | 100k 记忆规模下 ANN 的速度-质量权衡并非天然占优。 | 100k Flat candidate gold recall 0.952, query 0.360s; IVF nprobe=4 recall 0.737, query 0.199s. | synthetic_scale_diagnostic | 可以作为扩展性诊断，但必须标注为 synthetic distractor stress test。 | 需要真实的大规模 conversation memory bank 才能形成更强系统结论。 |
-| reproducibility | 当前仓库已经具备可复现的缓存实验包。 | Reproducibility artifact gate 21/21 and metric gate 5/5. | artifact_checked | 可以用于论文 appendix 和内部复现实验。 | 全新 clone 仍需要按文档准备模型/embedding cache，因为大缓存不进入 Git。 |
+| reproducibility | 当前仓库已经具备可复现的缓存实验包。 | Reproducibility artifact gate 24/24 and metric gate 5/5. | artifact_checked | 可以用于论文 appendix 和内部复现实验。 | 全新 clone 仍需要按文档准备模型/embedding cache，因为大缓存不进入 Git。 |
 | reliability_protocol | 自动错误分析已经具备人工复核入口，但人工标注尚未完成。 | 已从 type-aware Top-1 错误中分层抽样 80 条；当前已汇总人工标注 0 条。 | protocol_ready_unlabeled | 可以说明已有复核流程；在人工标注完成前，不能把自动错误分类当作已验证结论。 | 需要人工填写 manual_reason / auto_reason_correct，并统计一致性或准确率。 |
+| stability_protocol | DeepSeek memory writer 稳定性分析框架已经准备好，但重复抽取尚未完成。 | 稳定性 manifest 登记 3 次抽取，目前 completed runs=1；少于 3 次，不能报告方差。 | protocol_ready_pending_runs | 可以作为重复抽取实验入口；在 run2/run3 完成前，不应宣称 memory writer 稳定。 | 需要补齐至少 2 次 DeepSeek 重复抽取，并重新生成均值/标准差。 |
 | baseline_protocol | 外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。 | 已登记 1 个外部 embedding baseline；completed=0, ready_or_completed=0；预计文本 4355 条、约 71882 tokens、未缓存批次 35；对比表完成=False。 | protocol_ready_pending_run | 可以作为复现实验入口；在 summary.csv 生成前，不能写入主结果表。 | 需要提供 API key 并实际运行 text-embedding-3-small 等外部 embedding 对照。 |
-| open_gap | 完整项目距离最终投稿仍需要额外验证。 | 剩余缺口包括多 seed DeepSeek 抽取、实际完成更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。 | gap_analysis | 作为下一步 checklist，而不是论文主张。 | 投稿前至少补齐一个强 baseline 家族，以及一个稳定性/可靠性检查。 |
+| open_gap | 完整项目距离最终投稿仍需要额外验证。 | 剩余缺口包括完成多 seed DeepSeek 抽取、实际完成更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。 | gap_analysis | 作为下一步 checklist，而不是论文主张。 | 投稿前至少补齐一个强 baseline 家族，以及一个稳定性/可靠性检查。 |
 
 ## 投稿前最低补强建议
 

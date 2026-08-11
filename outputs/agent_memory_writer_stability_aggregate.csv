@@ -1,0 +1,11 @@
+metric,completed_runs,mean,stdev,min,max,status
+num_memories,1,2517.0,0.0,2517.0,2517.0,pending_more_runs
+memory_tokens,1,31148.0,0.0,31148.0,31148.0,pending_more_runs
+prompt_tokens,1,361103.0,0.0,361103.0,361103.0,pending_more_runs
+completion_tokens,1,198471.0,0.0,198471.0,198471.0,pending_more_runs
+total_tokens,1,559574.0,0.0,559574.0,559574.0,pending_more_runs
+num_queries,1,1838.0,0.0,1838.0,1838.0,pending_more_runs
+recall@1,1,0.5032644178454843,0.0,0.5032644178454843,0.5032644178454843,pending_more_runs
+recall@3,1,0.6702937976060935,0.0,0.6702937976060935,0.6702937976060935,pending_more_runs
+recall@5,1,0.7334058759521219,0.0,0.7334058759521219,0.7334058759521219,pending_more_runs
+mrr,1,0.6093848002850233,0.0,0.6093848002850233,0.6093848002850233,pending_more_runs
