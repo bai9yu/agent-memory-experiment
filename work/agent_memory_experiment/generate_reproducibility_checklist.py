@@ -178,6 +178,7 @@ def main() -> None:
         ("Type3 coverage significance", outputs / "agent_memory_type3_coverage_significance_zh.md"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
+        ("Paper evidence matrix", outputs / "agent_memory_paper_evidence_matrix_zh.md"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -215,6 +216,11 @@ def main() -> None:
             "stage": "Type3 diagnostics",
             "command": "work/agent_memory_experiment/type3_coverage_significance_analysis.py",
             "notes": "Aggregates Type3 coverage significance tests.",
+        },
+        {
+            "stage": "Evidence matrix",
+            "command": "work/agent_memory_experiment/generate_evidence_matrix.py",
+            "notes": "Summarizes paper claims, evidence strength, and remaining gaps.",
         },
         {
             "stage": "Environment snapshot",

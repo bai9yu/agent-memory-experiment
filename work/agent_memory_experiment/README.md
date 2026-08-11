@@ -755,6 +755,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-latex outputs/agent_memory_paper_tables.tex
 ```
 
+Generate paper evidence matrix:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_evidence_matrix.py \
+  --outputs-dir outputs \
+  --output-report outputs/agent_memory_paper_evidence_matrix_zh.md \
+  --output-csv outputs/agent_memory_paper_evidence_matrix.csv
+```
+
 Generate reproducibility checklist:
 
 ```bash
