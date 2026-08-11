@@ -546,6 +546,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes final-submission gates.",
         ),
         Step(
+            "final_submission_checklist",
+            py(
+                "generate_final_submission_checklist.py",
+                "--outputs-dir",
+                "outputs",
+                "--output-csv",
+                "outputs/agent_memory_final_submission_checklist.csv",
+                "--output-report",
+                "outputs/agent_memory_final_submission_checklist_zh.md",
+            ),
+            "Refreshes the action-oriented final-submission checklist.",
+        ),
+        Step(
             "reviewer_response_prep",
             py(
                 "generate_reviewer_response_prep.py",

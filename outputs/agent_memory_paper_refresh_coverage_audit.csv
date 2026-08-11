@@ -30,6 +30,7 @@ required_offline_step,artifact_integrity_manifest,artifact integrity manifest,Tr
 required_offline_step,evidence_matrix,claim/evidence/gap matrix,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,submission_gap_analysis,reviewer risk matrix,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,submission_readiness,final submission gates,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
+required_offline_step,final_submission_checklist,action-oriented final submission checklist,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,reviewer_response_prep,reviewer response prep,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,paper_manuscript,manuscript draft,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,manuscript_claim_check,manuscript claim check,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.

@@ -41,6 +41,7 @@ REQUIRED_STEPS = [
     ("evidence_matrix", "claim/evidence/gap matrix"),
     ("submission_gap_analysis", "reviewer risk matrix"),
     ("submission_readiness", "final submission gates"),
+    ("final_submission_checklist", "action-oriented final submission checklist"),
     ("reviewer_response_prep", "reviewer response prep"),
     ("paper_manuscript", "manuscript draft"),
     ("manuscript_claim_check", "manuscript claim check"),

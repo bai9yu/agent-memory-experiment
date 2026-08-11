@@ -270,6 +270,8 @@ def main() -> None:
         ("Submission entrypoint consistency audit CSV", outputs / "agent_memory_submission_entrypoint_consistency.csv"),
         ("Submission readiness gate", outputs / "agent_memory_submission_readiness_zh.md"),
         ("Submission readiness gate CSV", outputs / "agent_memory_submission_readiness.csv"),
+        ("Final submission checklist", outputs / "agent_memory_final_submission_checklist_zh.md"),
+        ("Final submission checklist CSV", outputs / "agent_memory_final_submission_checklist.csv"),
         ("Public release readiness gate", outputs / "agent_memory_public_release_readiness_zh.md"),
         ("Public release readiness gate CSV", outputs / "agent_memory_public_release_readiness.csv"),
         ("Untracked artifact audit", outputs / "agent_memory_untracked_artifact_audit_zh.md"),
@@ -757,6 +759,11 @@ def main() -> None:
             "stage": "Submission readiness gate",
             "command": "work/agent_memory_experiment/validate_submission_readiness.py",
             "notes": "Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission.",
+        },
+        {
+            "stage": "Final submission checklist",
+            "command": "work/agent_memory_experiment/generate_final_submission_checklist.py",
+            "notes": "Turns submission gates and claim-upgrade reports into an action-oriented final-submission checklist.",
         },
         {
             "stage": "Public release readiness gate",

@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 38
+- Required offline steps: 39
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -44,6 +44,7 @@
 | required_offline_step | evidence_matrix | True | claim/evidence/gap matrix | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | submission_gap_analysis | True | reviewer risk matrix | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | submission_readiness | True | final submission gates | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | final_submission_checklist | True | action-oriented final submission checklist | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | reviewer_response_prep | True | reviewer response prep | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | paper_manuscript | True | manuscript draft | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | manuscript_claim_check | True | manuscript claim check | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
