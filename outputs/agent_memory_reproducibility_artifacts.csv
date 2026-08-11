@@ -84,11 +84,13 @@ Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3843
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,25752
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,26427
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3584
 Submission blocker closure plan CSV,outputs/agent_memory_submission_blocker_closure_plan.csv,True,2795
+Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,2180
+Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,6975
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
 Evidence freshness audit CSV,outputs/agent_memory_evidence_freshness_audit.csv,True,98
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247

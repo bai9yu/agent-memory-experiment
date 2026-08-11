@@ -1137,6 +1137,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-report outputs/agent_memory_submission_blocker_closure_plan_zh.md
 ```
 
+Refresh all offline paper-facing artifacts from cached results:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py \
+  --project-root . \
+  --output-csv outputs/agent_memory_paper_artifact_refresh_run.csv \
+  --output-report outputs/agent_memory_paper_artifact_refresh_run_zh.md
+```
+
 Validate evidence freshness across paper-facing reports:
 
 ```bash
