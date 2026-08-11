@@ -889,6 +889,29 @@ Fill `human_manual_reason`, `human_auto_reason_correct`, `human_top_memory_relev
 The agreement report will compute exact agreement and Cohen's kappa once the human
 fields are complete.
 
+Generate a 20-sample priority Human/LLM quick-review pack:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_priority_audit_subset.py \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --sample-size 20 \
+  --output-id-csv outputs/agent_memory_human_llm_audit_priority20_ids.csv \
+  --output-report outputs/agent_memory_human_llm_audit_priority20_guide_zh.md
+```
+
+Prepare and summarize the priority20 confirmation sheet:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/confirm_llm_audit_labels.py \
+  --llm-audit-csv outputs/agent_memory_llm_audit_sample_type_aware.csv \
+  --audit-id-csv outputs/agent_memory_human_llm_audit_priority20_ids.csv \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-summary-csv outputs/agent_memory_human_llm_audit_priority20_agreement.csv \
+  --output-report outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md
+```
+
 Generate submission gap and reviewer-risk analysis:
 
 ```bash

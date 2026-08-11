@@ -1,0 +1,21 @@
+audit_id,query_id,query_type,auto_reason,first_rank,llm_auto_reason_correct,llm_top_memory_relevant,llm_gold_memory_sufficient,priority_score,selection_reason
+audit_002,q01430,1,activity_neighbor,12,partial,partial,unclear,9,LLM 认为自动错误类型只有部分正确; Top memory 只有部分相关; gold evidence 充分性存疑; gold evidence 未进入 Top-5
+audit_006,q00028,3,career_education_neighbor,5,partial,partial,no,10,LLM 认为自动错误类型只有部分正确; Top memory 只有部分相关; gold evidence 充分性存疑; 覆盖 Type 3 多证据问题
+audit_007,q00442,4,career_education_neighbor,4,no,no,yes,8,LLM 认为自动错误类型不正确; Top memory 被判为不相关
+audit_009,q00889,4,career_education_neighbor,13,no,no,yes,9,LLM 认为自动错误类型不正确; Top memory 被判为不相关; gold evidence 未进入 Top-5
+audit_010,q00183,5,gold_below_top20,24,no,no,yes,10,LLM 认为自动错误类型不正确; Top memory 被判为不相关; gold evidence 排名较低
+audit_019,q01169,2,gold_below_top20,377,yes,no,unclear,9,Top memory 被判为不相关; gold evidence 充分性存疑; gold evidence 排名较低
+audit_020,q01345,5,gold_below_top20,23,yes,no,no,9,Top memory 被判为不相关; gold evidence 充分性存疑; gold evidence 排名较低
+audit_025,q00970,5,identity_neighbor,18,yes,no,no,8,Top memory 被判为不相关; gold evidence 充分性存疑; gold evidence 未进入 Top-5
+audit_031,q00459,5,memory_type_mismatch,4,no,partial,no,10,LLM 认为自动错误类型不正确; Top memory 只有部分相关; gold evidence 充分性存疑
+audit_034,q00645,4,memory_type_mismatch,12,no,partial,unclear,11,LLM 认为自动错误类型不正确; Top memory 只有部分相关; gold evidence 充分性存疑; gold evidence 未进入 Top-5
+audit_040,q01164,3,memory_type_mismatch,10,partial,partial,unclear,11,LLM 认为自动错误类型只有部分正确; Top memory 只有部分相关; gold evidence 充分性存疑; 覆盖 Type 3 多证据问题; gold evidence 未进入 Top-5
+audit_045,q01756,5,memory_type_mismatch,3,no,no,no,12,LLM 认为自动错误类型不正确; Top memory 被判为不相关; gold evidence 充分性存疑
+audit_050,q00715,5,other,8,no,partial,yes,9,LLM 认为自动错误类型不正确; Top memory 只有部分相关; 覆盖高歧义错误类型 other; gold evidence 未进入 Top-5
+audit_051,q01147,5,other,2,no,no,no,14,LLM 认为自动错误类型不正确; Top memory 被判为不相关; gold evidence 充分性存疑; 覆盖高歧义错误类型 other
+audit_055,q01576,5,other,8,no,no,no,15,LLM 认为自动错误类型不正确; Top memory 被判为不相关; gold evidence 充分性存疑; 覆盖高歧义错误类型 other; gold evidence 未进入 Top-5
+audit_056,q01803,1,other,19,no,partial,yes,9,LLM 认为自动错误类型不正确; Top memory 只有部分相关; 覆盖高歧义错误类型 other; gold evidence 未进入 Top-5
+audit_069,q01772,5,relationship_neighbor,2,no,no,yes,10,LLM 认为自动错误类型不正确; Top memory 被判为不相关; 覆盖高歧义错误类型 relationship_neighbor
+audit_075,q00133,4,temporal_neighbor,11,no,no,unclear,15,LLM 认为自动错误类型不正确; Top memory 被判为不相关; gold evidence 充分性存疑; 覆盖高歧义错误类型 temporal_neighbor; gold evidence 未进入 Top-5
+audit_076,q00520,2,temporal_neighbor,5,partial,partial,no,10,LLM 认为自动错误类型只有部分正确; Top memory 只有部分相关; gold evidence 充分性存疑; 覆盖高歧义错误类型 temporal_neighbor
+audit_077,q00555,2,temporal_neighbor,6,no,no,yes,11,LLM 认为自动错误类型不正确; Top memory 被判为不相关; 覆盖高歧义错误类型 temporal_neighbor; gold evidence 未进入 Top-5

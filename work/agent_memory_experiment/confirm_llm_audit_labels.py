@@ -58,6 +58,18 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def filter_by_audit_ids(rows: list[dict[str, str]], id_csv: Path | None) -> list[dict[str, str]]:
+    if id_csv is None:
+        return rows
+    id_rows = read_csv(id_csv)
+    ordered_ids = [row["audit_id"] for row in id_rows if row.get("audit_id")]
+    row_by_id = {row["audit_id"]: row for row in rows if row.get("audit_id")}
+    missing = [audit_id for audit_id in ordered_ids if audit_id not in row_by_id]
+    if missing:
+        raise RuntimeError(f"Missing audit ids in LLM audit CSV: {missing[:5]}")
+    return [row_by_id[audit_id] for audit_id in ordered_ids]
+
+
 def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str] | tuple[str, ...] | None = None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if fieldnames is None:
@@ -270,12 +282,13 @@ def write_report(path: Path, rows: list[dict[str, str]], summary: list[dict[str,
 def main() -> None:
     parser = argparse.ArgumentParser(description="Prepare and summarize human confirmation for LLM-assisted audit labels.")
     parser.add_argument("--llm-audit-csv", type=Path, required=True)
+    parser.add_argument("--audit-id-csv", type=Path)
     parser.add_argument("--confirmation-csv", type=Path, required=True)
     parser.add_argument("--output-summary-csv", type=Path, required=True)
     parser.add_argument("--output-report", type=Path, required=True)
     args = parser.parse_args()
 
-    llm_rows = read_csv(args.llm_audit_csv)
+    llm_rows = filter_by_audit_ids(read_csv(args.llm_audit_csv), args.audit_id_csv)
     existing_rows = read_csv(args.confirmation_csv) if args.confirmation_csv.exists() else None
     confirmation_rows = prepare_rows(llm_rows, existing_rows)
     validation_errors = validate_rows(confirmation_rows)

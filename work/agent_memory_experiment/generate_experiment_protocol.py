@@ -60,6 +60,7 @@ def write_report(path: Path, root: Path) -> None:
     type3 = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
     writer = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
     gap = read_csv(outputs / "agent_memory_submission_gap_analysis.csv")
+    priority_agreement = read_csv(outputs / "agent_memory_human_llm_audit_priority20_agreement.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
 
@@ -82,6 +83,8 @@ def write_report(path: Path, root: Path) -> None:
     artifact_pass = sum(1 for row in repro_artifacts if row["exists"] == "True")
     metric_pass = sum(1 for row in repro_metrics if row["pass"] == "True")
     blocker_count = sum(1 for row in gap if row["risk_level"] == "blocker")
+    priority_samples = lookup(priority_agreement, group="overview", label="samples")["count"]
+    priority_confirmed = lookup(priority_agreement, group="overview", label="confirmed_samples")["count"]
 
     main_table = [
         ["Fact memory + time-aware", f(time_aware["mrr"]), f(time_aware["recall@5"]), "fixed reranking baseline"],
@@ -139,7 +142,7 @@ def write_report(path: Path, root: Path) -> None:
         "",
         f"- DeepSeek memory writer 三次运行：MRR mean={f(writer_mrr['mean'])}, stdev={f(writer_mrr['stdev'])}; Recall@5 mean={f(writer_r5['mean'])}, stdev={f(writer_r5['stdev'])}。",
         f"- Type 3 supervised set selector Coverage@5 delta={signed(type3_cov['mean_delta'])}, p={f(type3_cov['permutation_p_value'], 4)}；该结果应写为负结果和边界分析。",
-        "- Human/LLM 错误复核：已有 80 条确认表，但人工字段尚未填写；不能写作 human-verified error analysis。",
+        f"- Human/LLM 错误复核：已有 80 条确认表；另有 priority20 快速抽查包 {priority_samples} 条，当前人工确认 {priority_confirmed} 条；不能写作 human-verified error analysis。",
         "",
         "## 7. 复现与审稿风险",
         "",
@@ -156,7 +159,7 @@ def write_report(path: Path, root: Path) -> None:
         "## 9. 最小投稿前检查",
         "",
         "- 完成至少一个外部 embedding baseline 并生成 delta。",
-        "- 填写 Human/LLM confirmation CSV，报告 exact agreement 和 Cohen's kappa。",
+        "- 优先填写 Human/LLM priority20 confirmation CSV，先报告 quick-review exact agreement 和 Cohen's kappa；投稿前再扩展到完整 80 条。",
         "- 在论文实验设置中显式写出 LoCoMo10 slice、BGE-M3 cache、DeepSeek writer、LOCO split、paired significance test。",
     ]
     path.parent.mkdir(parents=True, exist_ok=True)

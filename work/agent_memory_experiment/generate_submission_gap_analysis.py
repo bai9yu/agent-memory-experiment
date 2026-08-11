@@ -63,6 +63,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     evidence = read_csv(outputs / "agent_memory_paper_evidence_matrix.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     agreement = read_csv(outputs / "agent_memory_human_llm_audit_agreement.csv")
+    priority_agreement = read_csv(outputs / "agent_memory_human_llm_audit_priority20_agreement.csv")
     checklist_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     checklist_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
 
@@ -70,6 +71,8 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     metric_pass = count(checklist_metrics, "pass", "True")
     confirmed = int(lookup(agreement, group="overview", label="confirmed_samples")["count"])
     invalid_labels = int(lookup(agreement, group="overview", label="validation_errors")["count"])
+    priority_samples = int(lookup(priority_agreement, group="overview", label="samples")["count"])
+    priority_confirmed = int(lookup(priority_agreement, group="overview", label="confirmed_samples")["count"])
     embedding_completed = count(embedding_status, "status", "completed")
     embedding_ready = sum(1 for row in embedding_status if row.get("status") in {"ready_to_run", "completed"})
 
@@ -96,11 +99,11 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "priority": 2,
             "risk_level": "blocker",
             "reviewer_question": "错误分析是否经过人工确认？",
-            "current_evidence": f"Human/LLM 确认表 80 条，人工确认 {confirmed} 条，非法标签 {invalid_labels}。",
+            "current_evidence": f"Human/LLM 确认表 80 条，人工确认 {confirmed} 条，非法标签 {invalid_labels}；priority20 快速抽查包 {priority_samples} 条，已确认 {priority_confirmed} 条。",
             "why_it_matters": "自动错误类型如果没有人工或一致性证据，只能作为诊断脚本输出，难以支撑论文中的错误分析结论。",
-            "minimum_action": "填写 confirmation CSV 的 human_* 字段，并报告 exact agreement 与 Cohen's kappa。",
+            "minimum_action": "优先填写 priority20 confirmation CSV 的 human_* 字段，先报告 quick-review exact agreement 与 Cohen's kappa；投稿前再扩展到 80 条。",
             "paper_wording_now": "可以写 LLM-assisted audit draft 和人工确认流程，不能写 human-verified error analysis。",
-            "target_artifact": "agent_memory_human_llm_audit_agreement_zh.md",
+            "target_artifact": "agent_memory_human_llm_audit_priority20_agreement_zh.md; agent_memory_human_llm_audit_agreement_zh.md",
             "owner": "needs_human_labels",
         },
         {

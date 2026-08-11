@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：39/39
+- Artifact 存在性：44/44
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `6558b4b` |
-| git_branch_status | `## main...origin/main [ahead 40]` |
+| git_commit | `d88bd69` |
+| git_branch_status | `## main...origin/main [ahead 41]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -41,7 +41,7 @@
 | Paper tables Markdown | True | 2832 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 3994 | `outputs/agent_memory_paper_tables.tex` |
 | Paper evidence matrix | True | 6590 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
-| Paper draft outline | True | 6755 | `outputs/agent_memory_paper_draft_outline_zh.md` |
+| Paper draft outline | True | 6806 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Submission gap analysis | True | 8239 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4479 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4091 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -62,7 +62,12 @@
 | Human/LLM audit confirmation | True | 44890 | `outputs/agent_memory_human_llm_audit_confirmation.csv` |
 | Human/LLM audit agreement | True | 1804 | `outputs/agent_memory_human_llm_audit_agreement_zh.md` |
 | Human/LLM audit agreement CSV | True | 980 | `outputs/agent_memory_human_llm_audit_agreement.csv` |
-| Paper experiment status | True | 22271 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Human/LLM priority20 audit ids | True | 3777 | `outputs/agent_memory_human_llm_audit_priority20_ids.csv` |
+| Human/LLM priority20 audit guide | True | 5330 | `outputs/agent_memory_human_llm_audit_priority20_guide_zh.md` |
+| Human/LLM priority20 audit confirmation | True | 11290 | `outputs/agent_memory_human_llm_audit_priority20_confirmation.csv` |
+| Human/LLM priority20 audit agreement | True | 1804 | `outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md` |
+| Human/LLM priority20 audit agreement CSV | True | 980 | `outputs/agent_memory_human_llm_audit_priority20_agreement.csv` |
+| Paper experiment status | True | 22700 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -92,6 +97,7 @@
 | Human audit summary | `work/agent_memory_experiment/summarize_human_audit.py` | Summarizes manual labels once the audit CSV is filled. |
 | LLM-assisted audit | `work/agent_memory_experiment/llm_audit_retrieval_errors.py` | Uses DeepSeek to draft audit labels for human review; does not replace human audit. |
 | Human/LLM audit confirmation | `work/agent_memory_experiment/confirm_llm_audit_labels.py` | Creates a human-confirmation sheet and summarizes agreement after manual labels are filled. |
+| Human/LLM priority20 audit | `work/agent_memory_experiment/generate_priority_audit_subset.py` | Selects a 20-sample quick-review subset and reuses the agreement workflow. |
 | Evidence matrix | `work/agent_memory_experiment/generate_evidence_matrix.py` | Summarizes paper claims, evidence strength, and remaining gaps. |
 | Paper draft outline | `work/agent_memory_experiment/generate_paper_draft_outline.py` | Builds a Chinese paper skeleton from current evidence, formulas, and result tables. |
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |

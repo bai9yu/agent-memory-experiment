@@ -208,6 +208,11 @@ def main() -> None:
         ("Human/LLM audit confirmation", outputs / "agent_memory_human_llm_audit_confirmation.csv"),
         ("Human/LLM audit agreement", outputs / "agent_memory_human_llm_audit_agreement_zh.md"),
         ("Human/LLM audit agreement CSV", outputs / "agent_memory_human_llm_audit_agreement.csv"),
+        ("Human/LLM priority20 audit ids", outputs / "agent_memory_human_llm_audit_priority20_ids.csv"),
+        ("Human/LLM priority20 audit guide", outputs / "agent_memory_human_llm_audit_priority20_guide_zh.md"),
+        ("Human/LLM priority20 audit confirmation", outputs / "agent_memory_human_llm_audit_priority20_confirmation.csv"),
+        ("Human/LLM priority20 audit agreement", outputs / "agent_memory_human_llm_audit_priority20_agreement_zh.md"),
+        ("Human/LLM priority20 audit agreement CSV", outputs / "agent_memory_human_llm_audit_priority20_agreement.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -300,6 +305,11 @@ def main() -> None:
             "stage": "Human/LLM audit confirmation",
             "command": "work/agent_memory_experiment/confirm_llm_audit_labels.py",
             "notes": "Creates a human-confirmation sheet and summarizes agreement after manual labels are filled.",
+        },
+        {
+            "stage": "Human/LLM priority20 audit",
+            "command": "work/agent_memory_experiment/generate_priority_audit_subset.py",
+            "notes": "Selects a 20-sample quick-review subset and reuses the agreement workflow.",
         },
         {
             "stage": "Evidence matrix",
