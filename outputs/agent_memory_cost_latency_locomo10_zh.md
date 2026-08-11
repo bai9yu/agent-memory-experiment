@@ -87,6 +87,22 @@ batched top-N 的候选召回阶段耗时为 0.2920 秒，约 0.16 ms/query。to
 
 sklearn NN / FAISS Flat top-200 是当前最合适的效率-准确率折中：MRR 约 0.612-0.613，Recall@5 0.734，端到端加速约 3.4x。FAISS IVF nprobe=32 接近 exact index，但在 LoCoMo10 当前规模下还没有明显速度优势；IVF nprobe=8 更近似但召回损失明显。LSH 的召回质量较低，说明近似索引实验必须和强 embedding 结合。
 
+## FAISS Scale Stress Test
+
+为分析更大 memory bank 下的索引扩展性，额外构造了 synthetic distractor vectors，将 LoCoMo10 的 BGE-M3 memory bank 扩展到 10k、25k、50k 和 100k。该实验只测候选召回层，不重新执行 type-aware reranking。
+
+| Memory Bank | Index | nlist | nprobe | Query Seconds | Candidate Gold Recall |
+|---:|---|---:|---:|---:|---:|
+| 50000 | Flat | 0 | 0 | 0.1993 | 0.958 |
+| 50000 | IVF | 128 | 8 | 0.4901 | 0.862 |
+| 50000 | IVF | 128 | 32 | 1.9144 | 0.941 |
+| 100000 | Flat | 0 | 0 | 0.3602 | 0.952 |
+| 100000 | IVF | 512 | 4 | 0.1990 | 0.737 |
+| 100000 | IVF | 512 | 16 | 0.5551 | 0.845 |
+| 100000 | IVF | 512 | 64 | 2.0774 | 0.941 |
+
+100k 规模下，IVF nprobe=4 比 Flat 查询更快，但召回损失较大；提高 nprobe 可提升召回，但速度会慢于 Flat。当前结论是：ANN 折中曲线已经建立，但要展示高召回且明显快于 Flat，还需要更大 memory bank 或 HNSW/IVF-PQ 等索引。
+
 ## Accuracy-Cost Tradeoff
 
 | Variant | Method | Recall@1 | Recall@5 | MRR |

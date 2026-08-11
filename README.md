@@ -67,6 +67,8 @@ sklearn NearestNeighbors 向量索引候选预筛选实验见 `outputs/agent_mem
 
 FAISS 向量索引对比实验见 `outputs/agent_memory_faiss_index_comparison_locomo10_zh.md`。
 
+FAISS 扩展规模压力测试见 `outputs/agent_memory_faiss_scale_locomo10_zh.md`。
+
 零依赖 LSH 近似索引补充基线见 `outputs/agent_memory_lsh_prefilter_locomo10_zh.md`。
 
 LoCoMo10 全量 DeepSeek 抽取结果：

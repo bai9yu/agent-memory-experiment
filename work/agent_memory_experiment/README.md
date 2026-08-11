@@ -649,6 +649,29 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/faiss
   --output-report outputs/agent_memory_faiss_ivf32_prefilter_locomo10_zh.md
 ```
 
+Run FAISS index-only scale stress tests:
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/faiss_scale_experiment.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --target-sizes 2517,10000,25000,50000 \
+  --top-k 200 \
+  --nlist 128 \
+  --nprobes 8,32 \
+  --noise 0.03 \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only \
+  --output-csv outputs/agent_memory_faiss_scale_locomo10.csv \
+  --output-report outputs/agent_memory_faiss_scale_locomo10_zh.md
+```
+
 ## Cross-Agent Memory Reuse Experiments
 
 Run one cross-agent reuse experiment:

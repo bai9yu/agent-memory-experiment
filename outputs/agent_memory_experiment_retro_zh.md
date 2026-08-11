@@ -231,6 +231,18 @@
 
 收益：FAISS Flat、IVF nprobe=8、IVF nprobe=32 均可稳定完成 LoCoMo10 实验，并形成向量索引效率对照表。
 
+### 3.10 问题：LoCoMo10 memory bank 太小，不足以体现 ANN 优势
+
+现象：LoCoMo10 answerable slice 只有 2517 条 memory，FAISS Flat 已经非常快；IVF 虽然是 ANN，但在该规模下没有稳定快过 Flat。
+
+解决：
+
+- 新增 `faiss_scale_experiment.py`，在真实 BGE-M3 memory/query embedding 基础上加入轻微扰动的 synthetic distractor vectors，扩展到 10k、25k、50k、100k。
+- 该实验只评估候选召回层，不执行完整 type-aware reranking，因此在报告中明确标注为 index-only stress test。
+- 100k 结果显示 IVF nprobe=4 可以比 Flat 快，但 candidate gold recall 明显下降；nprobe=64 召回接近 Flat，但查询时间慢于 Flat。
+
+收益：形成了 ANN 速度-召回折中曲线，也明确了下一步应在真实更大 memory bank 或 HNSW/IVF-PQ 上继续验证。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -256,7 +268,7 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 3. 当前没有 LLM-based memory write/update，无法处理复杂冲突。
 4. 当前只评估检索，不评估最终回答生成质量。
 5. KV cache 复用还没有真实实现，只在方法文档中给出下一步公式。
-6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，ANN 优势需要更大 memory bank 才能充分体现。
+6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，100k synthetic distractor 实验也只能说明趋势，ANN 优势仍需要真实更大 memory bank 才能充分证明。
 
 ## 6. 下一步行动清单
 
