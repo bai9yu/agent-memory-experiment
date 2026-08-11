@@ -38,6 +38,7 @@ def write_report(path: Path, outputs: Path) -> None:
     evidence = read_csv(outputs / "agent_memory_paper_evidence_matrix.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
+    writer_aggregate = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
 
     type_aware = lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     observation = lookup(baseline, variant="locomo_observation", method="type_aware")
@@ -46,8 +47,12 @@ def write_report(path: Path, outputs: Path) -> None:
     reranker_mrr = lookup(reranker_sig, metric="mrr")
     reranker_r5 = lookup(reranker_sig, metric="recall@5")
     type3_selector = lookup(type3_cov, experiment="supervised_set_selector", metric="coverage_ratio@5")
+    writer_mrr = lookup(writer_aggregate, metric="mrr")
+    writer_r5 = lookup(writer_aggregate, metric="recall@5")
     artifact_pass = sum(1 for row in repro_artifacts if row["exists"] == "True")
     metric_pass = sum(1 for row in repro_metrics if row["pass"] == "True")
+    writer_completed = int(writer_mrr["completed_runs"])
+    writer_ready = writer_completed >= 3
     open_gaps = [row for row in evidence if row["status"] in {"open_gap", "baseline_protocol", "stability_protocol", "reliability_protocol"}]
 
     lines = [
@@ -71,8 +76,10 @@ def write_report(path: Path, outputs: Path) -> None:
             f"高于 LoCoMo observation memory 的 MRR {f(observation['mrr'])} 和 Recall@5 {f(observation['recall@5'])}。"
             f"进一步地，候选级学习重排在 held-out split 上将 MRR 从 {f(reranker_base['mrr_mean'])} 提升到 {f(reranker_row['mrr_mean'])}，"
             f"MRR delta 为 {signed(reranker_mrr['mean_delta'])}，permutation p={f(reranker_mrr['permutation_p_value'], 4)}。"
+            f"DeepSeek memory writer 三次运行的 MRR 均值为 {f(writer_mrr['mean'])}，标准差为 {f(writer_mrr['stdev'])}，"
+            f"Recall@5 均值为 {f(writer_r5['mean'])}，标准差为 {f(writer_r5['stdev'])}。"
             "同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。"
-            "本文给出主结果、负结果、效率诊断和复现清单，并指出 memory writer 稳定性、外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。"
+            "本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。"
         ),
         "",
         "## 贡献点写法",
@@ -95,7 +102,11 @@ def write_report(path: Path, outputs: Path) -> None:
         "",
         "\\[m_i=(text_i, type_i, date_i, entities_i, importance_i, source_i)\\]",
         "",
-        "当前主实验完成一次 LoCoMo10 抽取；稳定性框架已登记 3 次 run，但只有 1 次 completed，不能报告方差。",
+        (
+            f"当前稳定性框架已登记 3 次 LoCoMo10 抽取，completed runs={writer_completed}。"
+            if writer_ready
+            else f"当前稳定性框架已登记 3 次 LoCoMo10 抽取，completed runs={writer_completed}，暂不能报告方差。"
+        ),
         "",
         "### Retrieval Scoring",
         "",
@@ -126,7 +137,7 @@ def write_report(path: Path, outputs: Path) -> None:
         "### RQ1: LLM-written fact memory 是否有效？",
         "",
         f"- 主表：fact memory type-aware MRR {f(type_aware['mrr'])}, Recall@5 {f(type_aware['recall@5'])}；observation MRR {f(observation['mrr'])}, Recall@5 {f(observation['recall@5'])}。",
-        "- 写法：可以作为 memory-form comparison，但必须说明 LoCoMo10 slice 限制和 writer stability 尚未完成。",
+        "- 写法：可以作为 memory-form comparison；必须说明 LoCoMo10 slice 限制，并把 writer stability 作为 LoCoMo10 范围内证据。",
         "",
         "### RQ2: 固定重排组件是否有用？",
         "",
@@ -156,10 +167,9 @@ def write_report(path: Path, outputs: Path) -> None:
         "",
         "## 投稿前最小完成条件",
         "",
-        "1. 完成至少 3 次 DeepSeek writer run，并报告 MRR / Recall@5 / memory_tokens / API tokens 的均值和标准差。",
-        "2. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。",
-        "3. 完成 80 条人工错误复核，报告 auto_reason_correct 的 yes / partial / no 比例。",
-        "4. 若不补外部数据集，需要在论文中明确本工作是 LoCoMo10 slice 的系统性实验，而非广泛泛化结论。",
+        "1. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。",
+        "2. 完成 80 条人工错误复核，报告 auto_reason_correct 的 yes / partial / no 比例。",
+        "3. 若不补外部数据集，需要在论文中明确本工作是 LoCoMo10 slice 的系统性实验，而非广泛泛化结论。",
         "",
         "## 复现状态",
         "",

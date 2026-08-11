@@ -68,6 +68,7 @@ def write_report(
     command_rows: list[dict[str, str]],
     data_rows: list[dict[str, Any]],
     env_rows: list[dict[str, str]],
+    writer_ready: bool,
 ) -> None:
     artifact_pass = sum(1 for row in artifact_rows if row["exists"])
     metric_pass = sum(1 for row in metric_rows if row["pass"])
@@ -128,7 +129,7 @@ def write_report(
         "",
         "## 仍需补强",
         "",
-        "- DeepSeek 抽取重复实验仍需多 seed/temperature 版本，以报告 memory writer 方差。",
+        "- DeepSeek 抽取重复实验已具备 3 个 completed run；后续可在额外数据集或更大 slice 上复验稳定性。" if writer_ready else "- DeepSeek 抽取重复实验仍需多 seed/temperature 版本，以报告 memory writer 方差。",
         "- 跨智能体/KV cache 仍需要真实或半真实 multi-agent trace。",
         "- Type 3 需要更强 LLM 子问题生成或 listwise/setwise objective；当前浅层方法均为负结果。",
         "- 如果投稿，需要把实验环境写成固定版本，包括 Python、sentence-transformers、FAISS/sklearn 版本和 BGE-M3 缓存来源。",
@@ -214,6 +215,16 @@ def main() -> None:
         metric_row("Candidate reranker Recall@5", float(reranker["recall@5_mean"]), 0.79),
         metric_row("Type3 supervised selector Coverage@5 delta is negative", -float(coverage["mean_delta"]), 0.05),
     ]
+    writer_ready = False
+    writer_aggregate_path = outputs / "agent_memory_writer_stability_aggregate.csv"
+    if writer_aggregate_path.exists():
+        writer_rows = read_csv(writer_aggregate_path)
+        writer_ready = any(
+            row.get("metric") == "mrr"
+            and int(row.get("completed_runs", "0") or 0) >= 3
+            and row.get("status") == "ready_for_variance"
+            for row in writer_rows
+        )
 
     command_rows = [
         {
@@ -285,7 +296,7 @@ def main() -> None:
 
     write_csv(args.output_artifacts, artifact_rows)
     write_csv(args.output_metrics, metric_rows)
-    write_report(args.output_report, artifact_rows, metric_rows, command_rows, data_rows, env_rows)
+    write_report(args.output_report, artifact_rows, metric_rows, command_rows, data_rows, env_rows, writer_ready)
     print(json.dumps({
         "output_report": str(args.output_report),
         "artifacts": f"{sum(1 for row in artifact_rows if row['exists'])}/{len(artifact_rows)}",

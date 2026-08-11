@@ -372,6 +372,8 @@ python3 work/agent_memory_experiment/llm_memory_extractor.py \
   --max-records 10 \
   --max-sessions 30 \
   --temperature 0.1 \
+  --retries 5 \
+  --retry-sleep 3 \
   --sleep-seconds 0.2 \
   --resume
 ```

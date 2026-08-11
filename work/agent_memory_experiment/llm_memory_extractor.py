@@ -268,7 +268,16 @@ def parse_json_response(content: str) -> dict[str, Any]:
     return data
 
 
-def call_deepseek(prompt: str, model: str, base_url: str, api_key: str, temperature: float, timeout: int) -> tuple[dict[str, Any], dict[str, Any]]:
+def call_deepseek(
+    prompt: str,
+    model: str,
+    base_url: str,
+    api_key: str,
+    temperature: float,
+    timeout: int,
+    retries: int,
+    retry_sleep: float,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     url = base_url.rstrip("/") + "/chat/completions"
     body = {
         "model": model,
@@ -279,21 +288,33 @@ def call_deepseek(prompt: str, model: str, base_url: str, api_key: str, temperat
         "temperature": temperature,
         "response_format": {"type": "json_object"},
     }
-    request = urllib.request.Request(
-        url,
-        data=json.dumps(body).encode("utf-8"),
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        message = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"DeepSeek API error {exc.code}: {message}") from exc
+    payload = None
+    for attempt in range(retries + 1):
+        request = urllib.request.Request(
+            url,
+            data=json.dumps(body).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as exc:
+            message = exc.read().decode("utf-8", errors="replace")
+            if exc.code != 429 and exc.code < 500:
+                raise RuntimeError(f"DeepSeek API error {exc.code}: {message}") from exc
+            if attempt >= retries:
+                raise RuntimeError(f"DeepSeek API error {exc.code}: {message}") from exc
+        except urllib.error.URLError as exc:
+            if attempt >= retries:
+                raise RuntimeError(f"DeepSeek API network error after {retries + 1} attempts: {exc}") from exc
+        time.sleep(retry_sleep * (attempt + 1))
+    if payload is None:
+        raise RuntimeError("DeepSeek API returned no payload.")
     content = payload["choices"][0]["message"]["content"]
     return parse_json_response(content), payload.get("usage", {})
 
@@ -497,6 +518,8 @@ def main() -> None:
     parser.add_argument("--session-start", type=int, default=1)
     parser.add_argument("--temperature", type=float, default=0.1)
     parser.add_argument("--timeout", type=int, default=90)
+    parser.add_argument("--retries", type=int, default=3)
+    parser.add_argument("--retry-sleep", type=float, default=2.0)
     parser.add_argument("--sleep-seconds", type=float, default=0.0)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--resume", action="store_true", help="Skip sessions already present in usage.csv and refresh outputs after each new session.")
@@ -536,7 +559,16 @@ def main() -> None:
                 append_csv(args.output_dir / "prompts.csv", prompt_row)
             if args.dry_run:
                 continue
-            data, usage = call_deepseek(prompt, model, base_url, api_key, args.temperature, args.timeout)
+            data, usage = call_deepseek(
+                prompt,
+                model,
+                base_url,
+                api_key,
+                args.temperature,
+                args.timeout,
+                args.retries,
+                args.retry_sleep,
+            )
             usage_row = {
                 "record_idx": record_idx,
                 "sample_id": sample_id,

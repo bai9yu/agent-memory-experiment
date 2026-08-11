@@ -10,7 +10,7 @@
 
 ## 摘要草稿
 
-长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、效率诊断和复现清单，并指出 memory writer 稳定性、外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
+长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
 
 ## 贡献点写法
 
@@ -32,7 +32,7 @@
 
 \[m_i=(text_i, type_i, date_i, entities_i, importance_i, source_i)\]
 
-当前主实验完成一次 LoCoMo10 抽取；稳定性框架已登记 3 次 run，但只有 1 次 completed，不能报告方差。
+当前稳定性框架已登记 3 次 LoCoMo10 抽取，completed runs=3。
 
 ### Retrieval Scoring
 
@@ -63,7 +63,7 @@ time-aware / type-aware 重排：
 ### RQ1: LLM-written fact memory 是否有效？
 
 - 主表：fact memory type-aware MRR 0.609, Recall@5 0.733；observation MRR 0.583, Recall@5 0.703。
-- 写法：可以作为 memory-form comparison，但必须说明 LoCoMo10 slice 限制和 writer stability 尚未完成。
+- 写法：可以作为 memory-form comparison；必须说明 LoCoMo10 slice 限制，并把 writer stability 作为 LoCoMo10 范围内证据。
 
 ### RQ2: 固定重排组件是否有用？
 
@@ -87,16 +87,14 @@ time-aware / type-aware 重排：
 ## 当前不可写为主结果的内容
 
 - `reliability_protocol`：自动错误分析已经具备人工复核入口，但人工标注尚未完成。；缺口：需要人工填写 manual_reason / auto_reason_correct，并统计一致性或准确率。
-- `stability_protocol`：DeepSeek memory writer 稳定性分析框架已经准备好，但重复抽取尚未完成。；缺口：需要补齐至少 2 次 DeepSeek 重复抽取，并重新生成均值/标准差。
 - `baseline_protocol`：外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。；缺口：需要提供 API key 并实际运行 text-embedding-3-small 等外部 embedding 对照。
 - `open_gap`：完整项目距离最终投稿仍需要额外验证。；缺口：投稿前至少补齐一个强 baseline 家族，以及一个稳定性/可靠性检查。
 
 ## 投稿前最小完成条件
 
-1. 完成至少 3 次 DeepSeek writer run，并报告 MRR / Recall@5 / memory_tokens / API tokens 的均值和标准差。
-2. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。
-3. 完成 80 条人工错误复核，报告 auto_reason_correct 的 yes / partial / no 比例。
-4. 若不补外部数据集，需要在论文中明确本工作是 LoCoMo10 slice 的系统性实验，而非广泛泛化结论。
+1. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。
+2. 完成 80 条人工错误复核，报告 auto_reason_correct 的 yes / partial / no 比例。
+3. 若不补外部数据集，需要在论文中明确本工作是 LoCoMo10 slice 的系统性实验，而非广泛泛化结论。
 
 ## 复现状态
 

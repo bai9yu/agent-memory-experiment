@@ -11,8 +11,8 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `8ac6f53` |
-| git_branch_status | `## main...origin/main [ahead 34]` |
+| git_commit | `f655294` |
+| git_branch_status | `## main...origin/main [ahead 35]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -29,15 +29,15 @@
 | Main baseline CSV | True | 1146 | `outputs/agent_memory_baseline_comparison_locomo10.csv` |
 | LLM extraction report | True | 3431 | `outputs/agent_memory_llm_extraction_locomo10_comparison_zh.md` |
 | Writer stability report | True | 1780 | `outputs/agent_memory_writer_stability_zh.md` |
-| Writer stability aggregate | True | 789 | `outputs/agent_memory_writer_stability_aggregate.csv` |
-| Writer stability runs | True | 740 | `outputs/agent_memory_writer_stability_runs.csv` |
+| Writer stability aggregate | True | 967 | `outputs/agent_memory_writer_stability_aggregate.csv` |
+| Writer stability runs | True | 924 | `outputs/agent_memory_writer_stability_runs.csv` |
 | Candidate reranker report | True | 2019 | `outputs/agent_memory_candidate_reranker_locomo10_zh.md` |
 | Candidate reranker significance | True | 607 | `outputs/agent_memory_candidate_reranker_significance_zh.md` |
 | Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
 | Paper tables Markdown | True | 2345 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 3190 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 6326 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
-| Paper draft outline | True | 6223 | `outputs/agent_memory_paper_draft_outline_zh.md` |
+| Paper evidence matrix | True | 6276 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper draft outline | True | 5966 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Embedding baseline status | True | 2017 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
@@ -48,7 +48,7 @@
 | Human audit sample | True | 28471 | `outputs/agent_memory_human_audit_sample_type_aware.csv` |
 | Human audit summary | True | 1394 | `outputs/agent_memory_human_audit_summary_zh.md` |
 | Human audit summary CSV | True | 777 | `outputs/agent_memory_human_audit_summary.csv` |
-| Paper experiment status | True | 20442 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 20405 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -82,7 +82,7 @@
 
 ## 仍需补强
 
-- DeepSeek 抽取重复实验仍需多 seed/temperature 版本，以报告 memory writer 方差。
+- DeepSeek 抽取重复实验已具备 3 个 completed run；后续可在额外数据集或更大 slice 上复验稳定性。
 - 跨智能体/KV cache 仍需要真实或半真实 multi-agent trace。
 - Type 3 需要更强 LLM 子问题生成或 listwise/setwise objective；当前浅层方法均为负结果。
 - 如果投稿，需要把实验环境写成固定版本，包括 Python、sentence-transformers、FAISS/sklearn 版本和 BGE-M3 缓存来源。

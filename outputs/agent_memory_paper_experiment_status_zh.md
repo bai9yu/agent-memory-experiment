@@ -246,7 +246,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文表格包：
 
-- `outputs/agent_memory_writer_stability_zh.md`：DeepSeek memory writer 重复抽取稳定性汇总；当前 3 个 manifest run 中只有 1 个 completed，仍为 pending。
+- `outputs/agent_memory_writer_stability_zh.md`：DeepSeek memory writer 重复抽取稳定性汇总；当前 3 个 manifest run 已全部 completed，状态为 `ready_for_variance`，可报告 MRR / Recall@5 / memory_tokens / API tokens 的均值和标准差。
 - `outputs/agent_memory_paper_tables_zh.md`：Markdown 主表、消融表、Type 3 失败分析表。
 - `outputs/agent_memory_paper_tables.tex`：可直接复制到论文的 LaTeX `booktabs` 表格。
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`：按“论文主张-证据-证据强度-剩余缺口”整理当前实验是否足以支撑投稿表述。
@@ -262,9 +262,8 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `25/25`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
-1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
-2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
-3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
+1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
+2. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
 4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 6. 人工复核：已生成 80 条分层抽样复核表，下一步需要人工填写并统计自动错误分类可靠性。

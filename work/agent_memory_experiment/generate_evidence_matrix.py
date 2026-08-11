@@ -104,6 +104,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     embedding_batches = sum(0 if row["cache_exists"] == "True" else int(row["api_batches_if_uncached"]) for row in embedding_estimate)
     embedding_comparison_done = all(row["status"] == "completed" for row in embedding_comparison)
     writer_completed = max(int(row["completed_runs"]) for row in writer_stability)
+    writer_ready = writer_completed >= 3
 
     storage_ratio = float(fact_storage["memory_tokens"]) / float(observation_storage["memory_tokens"])
     sklearn_delta = float(sklearn_200["mrr"]) - float(fact_type_aware["mrr"])
@@ -119,7 +120,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "support_level": "strong_cached",
             "primary_artifacts": "agent_memory_baseline_comparison_locomo10.csv; agent_memory_llm_extraction_locomo10_comparison_zh.md",
             "paper_use": "可以作为记忆形态对比主结果，但需要说明当前仍是 LoCoMo10 切片。",
-            "remaining_gap": "需要做多 seed / temperature 的 DeepSeek 重复抽取，才能宣称 memory writer 稳定性。",
+            "remaining_gap": "仍需在 LoCoMo10 之外补外部数据或更大真实 memory bank，才能宣称广泛泛化。",
         },
         {
             "claim": "事实级记忆相比 LoCoMo observation memory 能减少存储 token。",
@@ -131,7 +132,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "support_level": "strong_cached",
             "primary_artifacts": "agent_memory_baseline_comparison_locomo10.csv; agent_memory_cost_latency_locomo10_zh.md",
             "paper_use": "可以支撑 memory compression / storage efficiency 动机。",
-            "remaining_gap": "需要把抽取 API 成本和检索阶段存储成本分开报告，并补充重复抽取方差。",
+            "remaining_gap": "需要把抽取 API 成本和检索阶段存储成本分开报告；方差可引用 writer stability report。",
         },
         {
             "claim": "type-aware 重排相比 time-aware 重排有小幅但统计可靠的提升。",
@@ -228,13 +229,16 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "remaining_gap": "需要人工填写 manual_reason / auto_reason_correct，并统计一致性或准确率。",
         },
         {
-            "claim": "DeepSeek memory writer 稳定性分析框架已经准备好，但重复抽取尚未完成。",
-            "status": "stability_protocol",
-            "evidence": f"稳定性 manifest 登记 3 次抽取，目前 completed runs={writer_completed}；少于 3 次，不能报告方差。",
-            "support_level": "protocol_ready_pending_runs",
+            "claim": "DeepSeek memory writer 在 LoCoMo10 重复抽取中具有可报告的稳定性。",
+            "status": "stability_result" if writer_ready else "stability_protocol",
+            "evidence": (
+                f"稳定性 manifest 登记 3 次抽取，目前 completed runs={writer_completed}；"
+                f"{'已可报告均值和标准差。' if writer_ready else '少于 3 次，不能报告方差。'}"
+            ),
+            "support_level": "variance_ready" if writer_ready else "protocol_ready_pending_runs",
             "primary_artifacts": "agent_memory_writer_stability_zh.md; deepseek_writer_stability_manifest.csv",
-            "paper_use": "可以作为重复抽取实验入口；在 run2/run3 完成前，不应宣称 memory writer 稳定。",
-            "remaining_gap": "需要补齐至少 2 次 DeepSeek 重复抽取，并重新生成均值/标准差。",
+            "paper_use": "可以作为 memory writer stability 小节；需要说明 temperature 设置和 LoCoMo10 slice 范围。",
+            "remaining_gap": "若投稿目标更高，需要在额外数据集或更大 LoCoMo slice 上复验。",
         },
         {
             "claim": "外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。",
@@ -248,7 +252,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
         {
             "claim": "完整项目距离最终投稿仍需要额外验证。",
             "status": "open_gap",
-            "evidence": "剩余缺口包括完成多 seed DeepSeek 抽取、实际完成更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。",
+            "evidence": "剩余缺口包括实际完成更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。",
             "support_level": "gap_analysis",
             "primary_artifacts": "agent_memory_paper_experiment_status_zh.md; agent_memory_reproducibility_checklist_zh.md",
             "paper_use": "作为下一步 checklist，而不是论文主张。",
@@ -295,11 +299,11 @@ def write_report(path: Path, rows: list[dict[str, str]]) -> None:
         "",
         "## 投稿前最低补强建议",
         "",
-        "1. 对 DeepSeek memory writer 做至少 3 个 seed / temperature 的重复抽取，报告 retrieval 指标均值和方差。",
-        "2. 加入至少一个强 embedding/API baseline，避免结果只依赖 BGE-M3。",
-        "3. 对 candidate reranker 增加外部数据或更大 LoCoMo split 的验证。",
-        "4. 对错误分析做人工抽样复核，报告自动错误分类的可信度。",
-        "5. Type 3 暂按负结果和边界分析书写，不应宣称已经解决多证据检索。",
+        "1. 加入至少一个强 embedding/API baseline，避免结果只依赖 BGE-M3。",
+        "2. 对 candidate reranker 增加外部数据或更大 LoCoMo split 的验证。",
+        "3. 对错误分析做人工抽样复核，报告自动错误分类的可信度。",
+        "4. Type 3 暂按负结果和边界分析书写，不应宣称已经解决多证据检索。",
+        "5. 若目标期刊/会议要求更强泛化，应在额外数据集或更大真实 memory bank 上复验 writer stability。",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
