@@ -315,6 +315,24 @@
 
 收益：项目从“手工公式 + 负结果 router”推进到“有显著提升的学习式重排模块”，更接近论文方法贡献。
 
+### 3.15 问题：candidate reranker 的收益集中在部分 query type，Type 3 下降
+
+现象：按 query type 分析后，candidate reranker 在 Type 5 上 MRR delta 为 `+0.0887`，Type 2 为 `+0.0522`，Type 4 为 `+0.0515`；但 Type 3 为 `-0.0194`，Recall@5 也下降 `-0.0556`。
+
+原因判断：
+
+- Type 5 多为关键词/属性/具体事实问题，多检索器融合能修正固定公式的语义漂移。
+- Type 2/4 多为事件或事实定位，candidate reranker 能利用 time-aware、type-aware 和 semantic 排名特征。
+- Type 3 更像多跳、推理、判断或跨事实聚合问题，只优化单条候选 memory 的 Top-1 排序可能不够。
+
+解决：
+
+- 保留 candidate reranker 作为总体最强方法。
+- 将 Type 3 单独列为下一步短板，不把总体提升解释为所有 query type 都提升。
+- 后续尝试多证据聚合、query decomposition 或 answer-aware reranking。
+
+收益：论文分析更诚实，也更像正式实验：既报告总体显著提升，也指出方法边界和下一步改进方向。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -341,13 +359,13 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 4. 当前只评估检索，不评估最终回答生成质量。
 5. KV cache 复用还没有真实实现，只在方法文档中给出下一步公式。
 6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，100k synthetic distractor 实验也只能说明趋势，ANN 优势仍需要真实更大 memory bank 才能充分证明。
-7. 简单 text-intent router 和浅层监督式 query-text router 都弱于 fixed `type_aware`；validation-tuned router 可接近 fixed `type_aware`，但仍没有稳定超过。candidate-level reranker 已取得显著提升，但还需要 feature importance 和 query-type 分析支撑论文解释。
+7. 简单 text-intent router 和浅层监督式 query-text router 都弱于 fixed `type_aware`；validation-tuned router 可接近 fixed `type_aware`，但仍没有稳定超过。candidate-level reranker 已取得显著提升，且 feature importance 与 query-type 分析显示它主要改善 Type 2/4/5，但 Type 3 仍是短板。
 
 ## 6. 下一步行动清单
 
 1. 固化当前推荐配置：BGE-M3 + adaptive time-aware + persona gate + importance proxy。
 2. 固化两层记忆结构：fact/observation 作为在线检索层，session_summary 作为归档回溯层。
-3. 补充 candidate reranker 解释性：feature importance、按 query type 的收益分解、失败案例分析。
+3. 针对 Type 3 增加多证据聚合或 query decomposition，验证是否能修复当前下降。
 4. 增加 LLM memory extraction 重复实验：从原始对话抽取事实、时间、实体、重要性、权限，并报告 seed/temperature 方差。
 5. 增加 conflict resolver：同一主体同一属性按时间和置信度更新。
 6. 增加真实多 Agent trace：把 Agent A 的工具经验、错误修复、代码片段作为共享记忆。

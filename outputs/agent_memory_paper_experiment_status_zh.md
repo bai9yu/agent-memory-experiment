@@ -144,12 +144,24 @@ paired significance test 显示 router 的 MRR delta 为 0.001994，但 95% CI �
 
 Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`、`semantic_score`、`time_aware_score`、`hybrid_score`、`type_aware_rr` 等特征，说明提升来自多检索器排序信号融合，而不是单一字段或 query type 记忆。
 
+按 query type 分析显示，candidate reranker 的收益并不均匀：
+
+| Query Type | Base MRR | Reranker MRR | Delta MRR | Base R@5 | Reranker R@5 |
+|---|---:|---:|---:|---:|---:|
+| Type 1 | 0.508 | 0.537 | +0.0288 | 0.661 | 0.707 |
+| Type 2 | 0.714 | 0.766 | +0.0522 | 0.833 | 0.895 |
+| Type 3 | 0.439 | 0.419 | -0.0194 | 0.548 | 0.492 |
+| Type 4 | 0.667 | 0.718 | +0.0515 | 0.793 | 0.846 |
+| Type 5 | 0.524 | 0.613 | +0.0887 | 0.645 | 0.756 |
+
+结论：candidate reranker 对 Type 5、Type 2、Type 4 收益最明显，说明它能纠正固定公式在关键词/事件/偏好类问题上的排序错误；但 Type 3 下降，说明推理型或跨事实问题仍需要单独处理，可能需要多证据聚合或 answer-aware reranking。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
-4. 学习式重排：candidate-level reranker 已有显著提升；下一步需要补特征重要性、按 query type 的收益分析、与更强 reranker 模型的消融。
+4. 学习式重排：candidate-level reranker 已有显著提升；下一步需要针对 Type 3 下降做多证据聚合、错误案例复核和更强 reranker 模型消融。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 6. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 

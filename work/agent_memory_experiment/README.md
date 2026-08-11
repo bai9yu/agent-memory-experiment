@@ -565,6 +565,20 @@ python3 work/agent_memory_experiment/paired_significance_test.py \
   --output-report outputs/agent_memory_candidate_reranker_significance_zh.md
 ```
 
+Run candidate reranker by-type and case analysis:
+
+```bash
+python3 work/agent_memory_experiment/candidate_reranker_analysis.py \
+  --comparison outputs/agent_memory_candidate_reranker_locomo10_comparison_per_query.csv \
+  --selected outputs/agent_memory_candidate_reranker_locomo10_selected.csv \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --output-by-type outputs/agent_memory_candidate_reranker_by_type.csv \
+  --output-examples outputs/agent_memory_candidate_reranker_examples.csv \
+  --output-report outputs/agent_memory_candidate_reranker_by_type_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash

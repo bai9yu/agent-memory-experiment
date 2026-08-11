@@ -49,5 +49,6 @@
 ## 解释
 
 - 该实验检验的是：给定多个检索器已经召回的候选并集，轻量学习器能否学到比固定公式更好的排序。
-- 如果低于 fixed `type_aware`，说明当前特征或训练标签不足以支撑学习式重排，固定加权公式仍更稳。
-- 如果接近 candidate oracle 但不超过 full baseline，则主要瓶颈在候选召回；如果远低于 candidate oracle，则主要瓶颈在重排学习。
+- candidate reranker 明显高于 fixed `type_aware`，说明固定加权公式不足以利用多检索器候选中的互补排序信号。
+- candidate oracle 仍明显更高，说明候选池里还有大量未被重排器充分利用的空间。
+- 按 query type 的细粒度结果见 `outputs/agent_memory_candidate_reranker_by_type_zh.md`；当前 Type 5 收益最大，Type 3 反而下降，是下一步重点优化对象。

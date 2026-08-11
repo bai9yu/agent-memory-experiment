@@ -527,6 +527,33 @@ paired significance test 显示 candidate reranker 相比 fixed `type_aware` 的
 
 解释：模型主要利用多个检索器的分数和排序位置，同时保留语义相似度本身。这支持“多候选融合 + 学习重排”作为比单一路由更合适的方向。
 
+按 query type 的结果显示：
+
+| Query Type | Delta MRR | Delta Recall@5 | 判断 |
+|---|---:|---:|---|
+| Type 1 | +0.0288 | +0.0460 | 小幅提升 |
+| Type 2 | +0.0522 | +0.0622 | 明显提升 |
+| Type 3 | -0.0194 | -0.0556 | 当前短板 |
+| Type 4 | +0.0515 | +0.0529 | 明显提升 |
+| Type 5 | +0.0887 | +0.1108 | 收益最大 |
+
+因此下一版方法不应只继续调随机森林参数，而应专门为 Type 3 增加多证据聚合：
+
+\[
+\operatorname{retrieve}_{multi}(q)
+=
+\operatorname{SelectSet}_{K}
+\{m_i\in\mathcal{C}_{union}(q)\}
+\]
+
+其中目标不是只让第一个 evidence 排到最前，而是最大化前 K 个候选对答案所需事实集合的覆盖：
+
+\[
+\max_{S, |S|\le K}
+\sum_{e\in E_q}
+\mathbb{I}[\exists m_i\in S: m_i \sim e]
+\]
+
 ## 9. 后续持续更新约定
 
 这个文档建议每次代码升级后同步更新四处：
