@@ -93,22 +93,22 @@ Submission readiness gate,outputs/agent_memory_submission_readiness_zh.md,True,2
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness.csv,True,2067
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1688
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1424
-Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4726
-Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3616
+Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4131
+Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3054
 Large intermediate provenance audit,outputs/agent_memory_large_intermediate_provenance_zh.md,True,2048
 Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_provenance.csv,True,2824
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734
 Artifact path portability audit CSV,outputs/agent_memory_artifact_path_portability.csv,True,214
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3795
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,30879
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,31982
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3600
 Submission blocker closure plan CSV,outputs/agent_memory_submission_blocker_closure_plan.csv,True,2813
-Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,4618
-Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,15228
-Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,6719
-Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,5717
+Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,4924
+Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,16650
+Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,7141
+Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,6123
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
 Evidence freshness audit CSV,outputs/agent_memory_evidence_freshness_audit.csv,True,98
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -155,6 +155,12 @@ Human audit priority20 dual agreement CSV,outputs/agent_memory_human_audit_prior
 Human audit full80 blind review,outputs/agent_memory_human_audit_full80_blind_review_zh.md,True,1201
 Human audit full80 blind review CSV,outputs/agent_memory_human_audit_full80_blind_review.csv,True,28745
 Human audit full80 review packet,outputs/agent_memory_human_audit_full80_review_packet_zh.md,True,62903
+Human audit priority20 annotation HTML,outputs/agent_memory_human_audit_priority20_annotation.html,True,26223
+Human audit full80 annotation HTML,outputs/agent_memory_human_audit_full80_annotation.html,True,71948
+Human audit annotation interface,outputs/agent_memory_human_audit_annotation_interface_zh.md,True,907
+Human audit annotation interface CSV,outputs/agent_memory_human_audit_annotation_interface.csv,True,319
+Human audit annotation interface validation,outputs/agent_memory_human_audit_annotation_interface_validation_zh.md,True,2856
+Human audit annotation interface validation CSV,outputs/agent_memory_human_audit_annotation_interface_validation.csv,True,2178
 Human audit full80 dual review CSV,outputs/agent_memory_human_audit_full80_dual_review.csv,True,29853
 Human audit full80 dual agreement,outputs/agent_memory_human_audit_full80_dual_agreement_zh.md,True,6250
 Human audit full80 dual agreement CSV,outputs/agent_memory_human_audit_full80_dual_agreement.csv,True,750

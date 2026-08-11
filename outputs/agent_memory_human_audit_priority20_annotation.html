@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Human Audit Annotation · priority20</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #5f6b7a;
+      --line: #d8dee8;
+      --panel: #f7f8fb;
+      --accent: #1f6feb;
+      --ok: #0a7f45;
+      --warn: #a15c00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.96);
+    }
+    h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .item {
+      border-top: 1px solid var(--line);
+      padding: 18px 0;
+    }
+    .item:first-of-type {
+      border-top: 0;
+    }
+    .item-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 8px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      min-height: 118px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .text {
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+    .form {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+      align-items: end;
+    }
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    select, input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      min-height: 34px;
+      padding: 7px 8px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+    textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+    .wide {
+      grid-column: span 2;
+    }
+    .complete .item-title h2::after {
+      content: "已填";
+      margin-left: 8px;
+      color: var(--ok);
+      font-size: 12px;
+    }
+    .incomplete .item-title h2::after {
+      content: "待填";
+      margin-left: 8px;
+      color: var(--warn);
+      font-size: 12px;
+    }
+    h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+    @media (max-width: 860px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .controls { justify-content: flex-start; }
+      .progress { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .grid, .form { grid-template-columns: 1fr; }
+      .wide { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Human Audit Annotation · priority20</h1>
+      <div class="meta">源文件：outputs/agent_memory_human_audit_priority20_blind_review.csv · 样本数：20</div>
+    </div>
+    <div class="controls">
+      <button type="button" onclick="showIncomplete()">跳到下一条待填</button>
+      <button type="button" class="primary" onclick="downloadCsv()">导出 CSV</button>
+    </div>
+  </header>
+  <main>
+    <section class="progress">
+      <div class="metric"><strong id="doneCount">0</strong><span>已完成</span></div>
+      <div class="metric"><strong id="totalCount">20</strong><span>总样本</span></div>
+      <div class="metric"><strong id="missingCount">20</strong><span>待填写</span></div>
+      <div class="metric"><strong id="percentDone">0%</strong><span>完成度</span></div>
+    </section>
+    <section id="items"></section>
+  </main>
+  <script>
+    const rows = [{"review_order": "1", "audit_id": "audit_050", "query_id": "q00715", "query": "Who did Joanna plan to invite to her gaming party in June 2022?", "query_type": "5", "auto_reason": "other", "first_rank": "8", "top_memory_id": "llm_00801", "top_memory_type": "plan", "top_memory_text": "Joanna and Nate plan to see each other soon.", "gold_memory_ids": "llm_00744", "gold_memory_types": "plan", "gold_memory_texts": "Nate is organizing a gaming party two weekends later, inviting tournament friends and old teammates.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "2", "audit_id": "audit_076", "query_id": "q00520", "query": "When did Joanna start writing her third screenplay?", "query_type": "2", "auto_reason": "temporal_neighbor", "first_rank": "5", "top_memory_id": "llm_00734", "top_memory_type": "work", "top_memory_text": "Joanna recently finished writing a screenplay.", "gold_memory_ids": "llm_00723|llm_00724", "gold_memory_types": "work", "gold_memory_texts": "Joanna has written her third book, which is about loss, identity, and connection. || Joanna's third book is personal and based on a story she had for ages but just got the courage to write.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "3", "audit_id": "audit_020", "query_id": "q01345", "query": "What game is James hooked on playing on 5 November, 2022?", "query_type": "5", "auto_reason": "gold_below_top20", "first_rank": "23", "top_memory_id": "llm_01618", "top_memory_type": "hobby", "top_memory_text": "John is currently playing 'The Witcher 3' and is hooked on its storytelling and characters.", "gold_memory_ids": "llm_01724", "gold_memory_types": "hobby", "gold_memory_texts": "John is currently playing FIFA 23, a football game with online multiplayer.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "4", "audit_id": "audit_031", "query_id": "q00459", "query": "Who inspired John to start volunteering?", "query_type": "5", "auto_reason": "memory_type_mismatch", "first_rank": "4", "top_memory_id": "llm_00455", "top_memory_type": "emotion", "top_memory_text": "John found volunteering at the career fair rewarding and was inspired to help kids with lack of resources.", "gold_memory_ids": "llm_00410", "gold_memory_types": "relationship", "gold_memory_texts": "Maria started volunteering to make a difference, inspired by her aunt who believed in volunteering and helped her family when struggling.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "5", "audit_id": "audit_002", "query_id": "q01430", "query": "Which locations does Deborah practice her yoga at?", "query_type": "1", "auto_reason": "activity_neighbor", "first_rank": "12", "top_memory_id": "llm_01830", "top_memory_type": "preference", "top_memory_text": "Deborah likes candles and essential oils for her yoga practice.", "gold_memory_ids": "llm_01745|llm_01755|llm_01761|llm_01762|llm_01782|llm_01783", "gold_memory_types": "event|preference|relationship|work", "gold_memory_texts": "Deborah's mother passed away. || Deborah met her new neighbor Anna yesterday at yoga in the park. || Deborah teaches yoga and spends a lot of time doing so.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "6", "audit_id": "audit_007", "query_id": "q00442", "query": "What happened to John's job in August 2023?", "query_type": "4", "auto_reason": "career_education_neighbor", "first_rank": "4", "top_memory_id": "llm_01643", "top_memory_type": "plan", "top_memory_text": "John has a day off tomorrow (27 August 2022).", "gold_memory_ids": "llm_00602|llm_00603|llm_00604", "gold_memory_types": "goal|plan|work", "gold_memory_texts": "John lost his job at a mechanical engineering company. || John is looking for opportunities in the tech industry. || John found a potential job at a tech company that needs his mechanical skills for their hardware team.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "7", "audit_id": "audit_051", "query_id": "q01147", "query": "What type of jewelry does Andrew make?", "query_type": "5", "auto_reason": "other", "first_rank": "2", "top_memory_id": "llm_01177", "top_memory_type": "preference", "top_memory_text": "Andrew does not have any pets currently, but he loves animals.", "gold_memory_ids": "llm_01367|llm_01371", "gold_memory_types": "hobby|preference", "gold_memory_texts": "Audrey makes jewelry from recycled objects like bottle caps, buttons, and broken jewelry. || Audrey values combining creativity and sustainability in her jewelry making.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "8", "audit_id": "audit_056", "query_id": "q01803", "query": "Who inspired Dave's passion for car engineering?", "query_type": "1", "auto_reason": "other", "first_rank": "19", "top_memory_id": "llm_02365", "top_memory_type": "event", "top_memory_text": "Dave attended a car workshop in San Francisco and was inspired by the passion and dedication of people in car restoration.", "gold_memory_ids": "llm_02348|llm_02349|llm_02472|llm_02473", "gold_memory_types": "event|hobby|work", "gold_memory_texts": "Dave grew up working on cars with his dad, and refurbishing cars is like therapy for him. || Dave has fond memories of working on cars with his dad as a kid, including one summer spent restoring an old car together. || Dave is an automotive engineer.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "9", "audit_id": "audit_055", "query_id": "q01576", "query": "Why did Deborah get the new plant on 30 August, 2023?", "query_type": "5", "auto_reason": "other", "first_rank": "8", "top_memory_id": "llm_01958", "top_memory_type": "event", "top_memory_text": "Deborah attended a community meetup last Friday (August 25, 2023) where they shared stories.", "gold_memory_ids": "llm_01949", "gold_memory_types": "event", "gold_memory_texts": "Jolene recently got a new plant as a reminder to nurture herself and embrace fresh starts.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "10", "audit_id": "audit_069", "query_id": "q01772", "query": "What is the motto of Sam's family?", "query_type": "5", "auto_reason": "relationship_neighbor", "first_rank": "2", "top_memory_id": "llm_02219", "top_memory_type": "family", "top_memory_text": "Sam's family has been a rock for him through everything.", "gold_memory_ids": "llm_02181", "gold_memory_types": "family", "gold_memory_texts": "Evan's family motto is 'Bring it on Home', from a trip to Banff.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "11", "audit_id": "audit_025", "query_id": "q00970", "query": "Who is one of Tim's sources of inspiration for painting?", "query_type": "5", "auto_reason": "identity_neighbor", "first_rank": "18", "top_memory_id": "llm_01034", "top_memory_type": "preference", "top_memory_text": "Tim draws inspiration for his writing from books, movies, real-life experiences, and certain authors.", "gold_memory_ids": "llm_01035", "gold_memory_types": "preference", "gold_memory_texts": "Tim is inspired by J.K. Rowling and takes notes on her style for his own writing.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "12", "audit_id": "audit_077", "query_id": "q00555", "query": "When did Joanna plan to go over to Nate's and share recipes?", "query_type": "2", "auto_reason": "temporal_neighbor", "first_rank": "6", "top_memory_id": "llm_00718", "top_memory_type": "plan", "top_memory_text": "Joanna and Nate plan to go hiking together sometime.", "gold_memory_ids": "llm_00863", "gold_memory_types": "plan", "gold_memory_texts": "Joanna plans to visit Nate tomorrow to share desserts and try his lactose-free dessert.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "13", "audit_id": "audit_075", "query_id": "q00133", "query": "How long has Melanie been creating art?", "query_type": "4", "auto_reason": "temporal_neighbor", "first_rank": "11", "top_memory_id": "llm_00154", "top_memory_type": "hobby", "top_memory_text": "Melanie has been into art for seven years, focusing on painting and pottery.", "gold_memory_ids": "llm_00153", "gold_memory_types": "hobby", "gold_memory_texts": "Caroline has been creating art since she was 17.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "14", "audit_id": "audit_010", "query_id": "q00183", "query": "What did Melanie find in her neighborhood during her walk?", "query_type": "5", "auto_reason": "gold_below_top20", "first_rank": "24", "top_memory_id": "llm_00077", "top_memory_type": "family", "top_memory_text": "Melanie's family supported her during her move.", "gold_memory_ids": "llm_00134", "gold_memory_types": "event", "gold_memory_texts": "Caroline saw a rainbow sidewalk for Pride Month in her neighborhood.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "15", "audit_id": "audit_045", "query_id": "q01756", "query": "What food did Evan share a photo of on 19 August, 2023?", "query_type": "5", "auto_reason": "memory_type_mismatch", "first_rank": "3", "top_memory_id": "llm_02082", "top_memory_type": "hobby", "top_memory_text": "Evan started taking painting classes a few days before August 19, 2023.", "gold_memory_ids": "llm_02079", "gold_memory_types": "health", "gold_memory_texts": "Sam is on a diet and living healthier as of August 2023.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "16", "audit_id": "audit_034", "query_id": "q00645", "query": "What type of ice cream does Joanna mention that Nate makes and is delicious?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "12", "top_memory_id": "llm_00897", "top_memory_type": "event", "top_memory_text": "Nate offered Joanna some of his coconut milk ice cream.", "gold_memory_ids": "llm_00778", "gold_memory_types": "hobby", "gold_memory_texts": "Nate loves making dairy-free desserts, especially coconut milk ice cream.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "17", "audit_id": "audit_019", "query_id": "q01169", "query": "How was John feeling on April 10, 2022?", "query_type": "2", "auto_reason": "gold_below_top20", "first_rank": "377", "top_memory_id": "llm_01116", "top_memory_type": "event", "top_memory_text": "John's favorite basketball game was when his team was down 10 in the 4th and he hit a buzzer-beater shot to win.", "gold_memory_ids": "llm_01494", "gold_memory_types": "event", "gold_memory_texts": "John visited a canyon two days ago to be alone with nature.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "18", "audit_id": "audit_040", "query_id": "q01164", "query": "Does James live in Connecticut?", "query_type": "3", "auto_reason": "memory_type_mismatch", "first_rank": "10", "top_memory_id": "llm_01716", "top_memory_type": "relationship", "top_memory_text": "James and Samantha have decided to move in together.", "gold_memory_ids": "llm_01482|llm_01483", "gold_memory_types": "event|family", "gold_memory_texts": "James adopted a puppy from a shelter in Stamford last week and named it Ned. || James has a dog named Ned.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "19", "audit_id": "audit_009", "query_id": "q00889", "query": "What does Tim have that serves as a reminder of hard work and is his prized possession?", "query_type": "4", "auto_reason": "career_education_neighbor", "first_rank": "13", "top_memory_id": "llm_01062", "top_memory_type": "hobby", "top_memory_text": "Tim enjoys reading and does it as usual.", "gold_memory_ids": "llm_01050", "gold_memory_types": "hobby", "gold_memory_texts": "Tim owns a basketball signed by his favorite player, LeBron James.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "20", "audit_id": "audit_006", "query_id": "q00028", "query": "Would Caroline pursue writing as a career option?", "query_type": "3", "auto_reason": "career_education_neighbor", "first_rank": "5", "top_memory_id": "llm_00045", "top_memory_type": "goal", "top_memory_text": "Caroline is exploring counseling or mental health work as a career.", "gold_memory_ids": "llm_00058|llm_00060", "gold_memory_types": "goal|hobby", "gold_memory_texts": "Caroline is exploring counseling and mental health career options. || Caroline loves reading and considers books a huge part of her journey.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}];
+    const outputFilename = "agent_memory_human_audit_priority20_completed.csv";
+    const humanFields = ["human_manual_reason", "human_auto_reason_correct", "human_top_memory_relevant", "human_gold_memory_sufficient", "human_auditor_notes"];
+
+    function cell(value) {
+      return String(value ?? "");
+    }
+
+    function isComplete(row) {
+      return humanFields.every((field) => cell(row[field]).trim().length > 0);
+    }
+
+    function escapeHtml(value) {
+      return cell(value).replace(/[&<>"']/g, (ch) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[ch]));
+    }
+
+    function fieldId(rowIndex, field) {
+      return `row_${rowIndex}_${field}`;
+    }
+
+    function renderItems() {
+      const items = document.getElementById("items");
+      items.innerHTML = rows.map((row, idx) => `
+        <article class="item ${isComplete(row) ? "complete" : "incomplete"}" id="item_${idx}">
+          <div class="item-title">
+            <h2>#${escapeHtml(row.review_order)} · ${escapeHtml(row.audit_id)} · ${escapeHtml(row.query_id)}</h2>
+            <div>
+              <span class="badge">query type ${escapeHtml(row.query_type)}</span>
+              <span class="badge">first rank ${escapeHtml(row.first_rank)}</span>
+              <span class="badge">auto ${escapeHtml(row.auto_reason)}</span>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="box">
+              <div class="label">Query</div>
+              <div class="text">${escapeHtml(row.query)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Top Memory · ${escapeHtml(row.top_memory_id)} · ${escapeHtml(row.top_memory_type)}</div>
+              <div class="text">${escapeHtml(row.top_memory_text)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Gold Memory · ${escapeHtml(row.gold_memory_ids)} · ${escapeHtml(row.gold_memory_types)}</div>
+              <div class="text">${escapeHtml(row.gold_memory_texts)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Human Labels</div>
+              <div class="form">
+                <label>Manual reason
+                  <select id="${fieldId(idx, "human_manual_reason")}" onchange="updateField(${idx}, 'human_manual_reason', this.value)">
+                    <option value=""></option>
+<option value="memory_type_mismatch">memory_type_mismatch</option>
+<option value="time_mismatch">time_mismatch</option>
+<option value="entity_mismatch">entity_mismatch</option>
+<option value="under_specific">under_specific</option>
+<option value="multi_evidence_missing">multi_evidence_missing</option>
+<option value="retrieval_noise">retrieval_noise</option>
+<option value="query_ambiguous">query_ambiguous</option>
+<option value="other">other</option>
+                  </select>
+                </label>
+                <label>Auto reason correct
+                  <select id="${fieldId(idx, "human_auto_reason_correct")}" onchange="updateField(${idx}, 'human_auto_reason_correct', this.value)">
+                    <option value=""></option>
+<option value="yes">yes</option>
+<option value="partial">partial</option>
+<option value="no">no</option>
+                  </select>
+                </label>
+                <label>Top memory relevant
+                  <select id="${fieldId(idx, "human_top_memory_relevant")}" onchange="updateField(${idx}, 'human_top_memory_relevant', this.value)">
+                    <option value=""></option>
+<option value="yes">yes</option>
+<option value="partial">partial</option>
+<option value="no">no</option>
+                  </select>
+                </label>
+                <label>Gold memory sufficient
+                  <select id="${fieldId(idx, "human_gold_memory_sufficient")}" onchange="updateField(${idx}, 'human_gold_memory_sufficient', this.value)">
+                    <option value=""></option>
+<option value="yes">yes</option>
+<option value="no">no</option>
+<option value="unclear">unclear</option>
+                  </select>
+                </label>
+                <label class="wide">Auditor notes
+                  <textarea id="${fieldId(idx, "human_auditor_notes")}" oninput="updateField(${idx}, 'human_auditor_notes', this.value)"></textarea>
+                </label>
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join("");
+      rows.forEach((row, idx) => {
+        humanFields.forEach((field) => {
+          const element = document.getElementById(fieldId(idx, field));
+          if (element) element.value = cell(row[field]);
+        });
+      });
+      updateProgress();
+    }
+
+    function updateField(index, field, value) {
+      rows[index][field] = value;
+      const item = document.getElementById(`item_${index}`);
+      item.classList.toggle("complete", isComplete(rows[index]));
+      item.classList.toggle("incomplete", !isComplete(rows[index]));
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const done = rows.filter(isComplete).length;
+      const total = rows.length;
+      document.getElementById("doneCount").textContent = done;
+      document.getElementById("missingCount").textContent = total - done;
+      document.getElementById("percentDone").textContent = total ? `${Math.round(done / total * 100)}%` : "0%";
+    }
+
+    function showIncomplete() {
+      const index = rows.findIndex((row) => !isComplete(row));
+      const target = document.getElementById(`item_${index < 0 ? 0 : index}`);
+      if (target) target.scrollIntoView({behavior: "smooth", block: "start"});
+    }
+
+    function csvEscape(value) {
+      const text = cell(value);
+      return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+    }
+
+    function downloadCsv() {
+      const headers = Object.keys(rows[0] || {});
+      const csv = [headers.join(","), ...rows.map((row) => headers.map((h) => csvEscape(row[h])).join(","))].join("\n");
+      const blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = outputFilename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    renderItems();
+  </script>
+</body>
+</html>

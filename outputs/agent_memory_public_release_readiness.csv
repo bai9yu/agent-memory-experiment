@@ -4,6 +4,6 @@ env_file_not_tracked,security,True,blocker,pass,.env tracked=False,确保 `.env`
 gitignore_covers_env,security,True,major,pass,.gitignore contains `.env`,在 `.gitignore` 中加入 `.env`，避免后续误提交 key。
 env_example_uses_placeholders,reproducibility,True,major,pass,.env.example has provider placeholders,保留 DeepSeek/OpenAI key 的占位说明，不能写真实 key。
 readme_links_submission_gate,paper_artifact,True,major,pass,README links submission readiness gate,在 README 的论文报告列表中加入最终投稿门禁。
-untracked_artifact_audit_present,paper_artifact,True,major,pass,"untracked audit rows=16, review_before_tracking=0, keep_untracked=13",运行 audit_untracked_artifacts.py，并确认 keep_untracked/local 项仍不属于论文正式 artifact。
+untracked_artifact_audit_present,paper_artifact,True,major,pass,"untracked audit rows=13, review_before_tracking=0, keep_untracked=13",运行 audit_untracked_artifacts.py，并确认 keep_untracked/local 项仍不属于论文正式 artifact。
 artifact_paths_portable,paper_artifact,True,major,pass,"path portability rows=1, findings=0",运行 validate_artifact_path_portability.py，并把公开报告中的本机绝对路径改为仓库相对路径。
 license_file_present,open_source,False,minor,minor,license files=none,正式开源前补充 LICENSE；内部实验仓库可暂缓。

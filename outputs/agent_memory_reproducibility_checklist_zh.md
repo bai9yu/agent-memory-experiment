@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：178/178
+- Artifact 存在性：184/184
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `b222737` |
+| git_commit | `43f40d5` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -120,22 +120,22 @@
 | Submission readiness gate CSV | True | 2067 | `outputs/agent_memory_submission_readiness.csv` |
 | Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4726 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3616 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Untracked artifact audit | True | 4131 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 3054 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 30879 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 31982 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3600 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 2813 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Paper artifact refresh run | True | 4618 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 15228 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
-| Paper refresh coverage audit | True | 6719 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
-| Paper refresh coverage audit CSV | True | 5717 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
+| Paper artifact refresh run | True | 4924 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 16650 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper refresh coverage audit | True | 7141 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
+| Paper refresh coverage audit CSV | True | 6123 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -182,6 +182,12 @@
 | Human audit full80 blind review | True | 1201 | `outputs/agent_memory_human_audit_full80_blind_review_zh.md` |
 | Human audit full80 blind review CSV | True | 28745 | `outputs/agent_memory_human_audit_full80_blind_review.csv` |
 | Human audit full80 review packet | True | 62903 | `outputs/agent_memory_human_audit_full80_review_packet_zh.md` |
+| Human audit priority20 annotation HTML | True | 26223 | `outputs/agent_memory_human_audit_priority20_annotation.html` |
+| Human audit full80 annotation HTML | True | 71948 | `outputs/agent_memory_human_audit_full80_annotation.html` |
+| Human audit annotation interface | True | 907 | `outputs/agent_memory_human_audit_annotation_interface_zh.md` |
+| Human audit annotation interface CSV | True | 319 | `outputs/agent_memory_human_audit_annotation_interface.csv` |
+| Human audit annotation interface validation | True | 2856 | `outputs/agent_memory_human_audit_annotation_interface_validation_zh.md` |
+| Human audit annotation interface validation CSV | True | 2178 | `outputs/agent_memory_human_audit_annotation_interface_validation.csv` |
 | Human audit full80 dual review CSV | True | 29853 | `outputs/agent_memory_human_audit_full80_dual_review.csv` |
 | Human audit full80 dual agreement | True | 6250 | `outputs/agent_memory_human_audit_full80_dual_agreement_zh.md` |
 | Human audit full80 dual agreement CSV | True | 750 | `outputs/agent_memory_human_audit_full80_dual_agreement.csv` |
@@ -273,6 +279,8 @@
 | Human audit execution plan | `work/agent_memory_experiment/generate_human_audit_execution_plan.py` | Turns the pending human-audit blocker into ordered labeling, dual-review, adjudication, and paper-refresh steps. |
 | Human audit sample QC | `work/agent_memory_experiment/validate_human_audit_sample_qc.py` | Checks sample count, duplicate audit IDs, query/error/rank coverage, and pending human-label progress. |
 | Human audit labeling dashboard | `work/agent_memory_experiment/generate_human_audit_labeling_dashboard.py` | Lists per-row missing human_* fields and the next priority/full80 items to label. |
+| Human audit annotation interface | `work/agent_memory_experiment/generate_human_audit_annotation_interface.py` | Generates offline HTML annotation forms for priority20/full80 blind-review sheets with CSV export. |
+| Human audit annotation interface validation | `work/agent_memory_experiment/validate_human_audit_annotation_interface.py` | Checks that annotation HTML matches blind CSV rows and hides LLM-assisted label fields. |
 | Human audit blind review leakage audit | `work/agent_memory_experiment/validate_human_audit_blind_review.py` | Checks that blinded review sheets hide LLM-assisted labels and keep a stable labeling schema. |
 | Dual human audit agreement | `work/agent_memory_experiment/dual_human_audit_agreement.py` | Prepares two-annotator review sheets and reports exact agreement, partial-credit agreement, and Cohen's kappa. |
 | Human audit readiness gate | `work/agent_memory_experiment/validate_human_audit_readiness.py` | Checks whether priority20/full80 human confirmations can support paper claims. |

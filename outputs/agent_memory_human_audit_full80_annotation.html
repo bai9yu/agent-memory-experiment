@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Human Audit Annotation · full80</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #5f6b7a;
+      --line: #d8dee8;
+      --panel: #f7f8fb;
+      --accent: #1f6feb;
+      --ok: #0a7f45;
+      --warn: #a15c00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.96);
+    }
+    h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .item {
+      border-top: 1px solid var(--line);
+      padding: 18px 0;
+    }
+    .item:first-of-type {
+      border-top: 0;
+    }
+    .item-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 8px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      min-height: 118px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .text {
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+    .form {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+      align-items: end;
+    }
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    select, input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      min-height: 34px;
+      padding: 7px 8px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+    textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+    .wide {
+      grid-column: span 2;
+    }
+    .complete .item-title h2::after {
+      content: "已填";
+      margin-left: 8px;
+      color: var(--ok);
+      font-size: 12px;
+    }
+    .incomplete .item-title h2::after {
+      content: "待填";
+      margin-left: 8px;
+      color: var(--warn);
+      font-size: 12px;
+    }
+    h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+    @media (max-width: 860px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .controls { justify-content: flex-start; }
+      .progress { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .grid, .form { grid-template-columns: 1fr; }
+      .wide { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Human Audit Annotation · full80</h1>
+      <div class="meta">源文件：outputs/agent_memory_human_audit_full80_blind_review.csv · 样本数：80</div>
+    </div>
+    <div class="controls">
+      <button type="button" onclick="showIncomplete()">跳到下一条待填</button>
+      <button type="button" class="primary" onclick="downloadCsv()">导出 CSV</button>
+    </div>
+  </header>
+  <main>
+    <section class="progress">
+      <div class="metric"><strong id="doneCount">0</strong><span>已完成</span></div>
+      <div class="metric"><strong id="totalCount">80</strong><span>总样本</span></div>
+      <div class="metric"><strong id="missingCount">80</strong><span>待填写</span></div>
+      <div class="metric"><strong id="percentDone">0%</strong><span>完成度</span></div>
+    </section>
+    <section id="items"></section>
+  </main>
+  <script>
+    const rows = [{"review_order": "1", "audit_id": "audit_039", "query_id": "q00962", "query": "What does Tim want to do after his basketball career?", "query_type": "5", "auto_reason": "memory_type_mismatch", "first_rank": "3", "top_memory_id": "llm_01051", "top_memory_type": "preference", "top_memory_text": "Tim's favorite basketball player is LeBron James.", "gold_memory_ids": "llm_00997|llm_00998|llm_00999|llm_01000", "gold_memory_types": "goal", "gold_memory_texts": "John is working on better shooting and making more impact on the court. || John is looking into endorsements and building his brand for life after basketball. || John wants to start a foundation and do charity work to make a positive difference.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "2", "audit_id": "audit_009", "query_id": "q00889", "query": "What does Tim have that serves as a reminder of hard work and is his prized possession?", "query_type": "4", "auto_reason": "career_education_neighbor", "first_rank": "13", "top_memory_id": "llm_01062", "top_memory_type": "hobby", "top_memory_text": "Tim enjoys reading and does it as usual.", "gold_memory_ids": "llm_01050", "gold_memory_types": "hobby", "gold_memory_texts": "Tim owns a basketball signed by his favorite player, LeBron James.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "3", "audit_id": "audit_069", "query_id": "q01772", "query": "What is the motto of Sam's family?", "query_type": "5", "auto_reason": "relationship_neighbor", "first_rank": "2", "top_memory_id": "llm_02219", "top_memory_type": "family", "top_memory_text": "Sam's family has been a rock for him through everything.", "gold_memory_ids": "llm_02181", "gold_memory_types": "family", "gold_memory_texts": "Evan's family motto is 'Bring it on Home', from a trip to Banff.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "4", "audit_id": "audit_010", "query_id": "q00183", "query": "What did Melanie find in her neighborhood during her walk?", "query_type": "5", "auto_reason": "gold_below_top20", "first_rank": "24", "top_memory_id": "llm_00077", "top_memory_type": "family", "top_memory_text": "Melanie's family supported her during her move.", "gold_memory_ids": "llm_00134", "gold_memory_types": "event", "gold_memory_texts": "Caroline saw a rainbow sidewalk for Pride Month in her neighborhood.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "5", "audit_id": "audit_052", "query_id": "q01246", "query": "What did John organize with his friends on May 8, 2022?", "query_type": "4", "auto_reason": "other", "first_rank": "2", "top_memory_id": "llm_01701", "top_memory_type": "event", "top_memory_text": "John organized an online comp with his programmer friends last week.", "gold_memory_ids": "llm_01530|llm_01535", "gold_memory_types": "event|hobby", "gold_memory_texts": "John organized a CS:GO charity tournament with friends yesterday. || John plays CS:GO and considers it his favorite game.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "6", "audit_id": "audit_047", "query_id": "q01865", "query": "What did Dave open in May 2023?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "6", "top_memory_id": "llm_02272", "top_memory_type": "goal", "top_memory_text": "Dave's dream was to open a car maintenance shop, and he achieved it.", "gold_memory_ids": "llm_02294|llm_02295", "gold_memory_types": "event|work", "gold_memory_texts": "Dave opened his car shop last week and celebrated with friends. || Dave owns a car shop and is passionate about helping with people's rides.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "7", "audit_id": "audit_014", "query_id": "q00633", "query": "What did Joanna plan to do with the recipe Nate promised to share?", "query_type": "4", "auto_reason": "gold_below_top20", "first_rank": "31", "top_memory_id": "llm_00759", "top_memory_type": "plan", "top_memory_text": "Nate promised to give Joanna the vegan ice cream recipe tomorrow.", "gold_memory_ids": "llm_00760", "gold_memory_types": "plan", "gold_memory_texts": "Joanna plans to make the vegan ice cream for her family this weekend.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "8", "audit_id": "audit_064", "query_id": "q00695", "query": "What does Nate love most about having turtles?", "query_type": "4", "auto_reason": "preference_neighbor", "first_rank": "6", "top_memory_id": "llm_00637", "top_memory_type": "preference", "top_memory_text": "Nate recommends having pets like turtles for times of stress.", "gold_memory_ids": "llm_00894|llm_00895", "gold_memory_types": "hobby|preference", "gold_memory_texts": "Nate has pet turtles that bring him peace and calm. || Nate loves that his turtles don't require much looking after.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "9", "audit_id": "audit_080", "query_id": "q01819", "query": "When was Calvin's album released?", "query_type": "2", "auto_reason": "temporal_neighbor", "first_rank": "2", "top_memory_id": "llm_02489", "top_memory_type": "event", "top_memory_text": "Calvin released a new album.", "gold_memory_ids": "llm_02397|llm_02398|llm_02406", "gold_memory_types": "emotion|event|relationship", "gold_memory_texts": "Calvin released his album on September 11, 2023. || Calvin is motivated by the positive reception of his album to continue making music. || Calvin and Dave have a friendly relationship and enjoy chatting about music and hobbies.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "10", "audit_id": "audit_076", "query_id": "q00520", "query": "When did Joanna start writing her third screenplay?", "query_type": "2", "auto_reason": "temporal_neighbor", "first_rank": "5", "top_memory_id": "llm_00734", "top_memory_type": "work", "top_memory_text": "Joanna recently finished writing a screenplay.", "gold_memory_ids": "llm_00723|llm_00724", "gold_memory_types": "work", "gold_memory_texts": "Joanna has written her third book, which is about loss, identity, and connection. || Joanna's third book is personal and based on a story she had for ages but just got the courage to write.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "11", "audit_id": "audit_031", "query_id": "q00459", "query": "Who inspired John to start volunteering?", "query_type": "5", "auto_reason": "memory_type_mismatch", "first_rank": "4", "top_memory_id": "llm_00455", "top_memory_type": "emotion", "top_memory_text": "John found volunteering at the career fair rewarding and was inspired to help kids with lack of resources.", "gold_memory_ids": "llm_00410", "gold_memory_types": "relationship", "gold_memory_texts": "Maria started volunteering to make a difference, inspired by her aunt who believed in volunteering and helped her family when struggling.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "12", "audit_id": "audit_071", "query_id": "q01605", "query": "What kind of healthy food suggestions has Evan given to Sam?", "query_type": "1", "auto_reason": "semantic_neighbor", "first_rank": "20", "top_memory_id": "llm_02208", "top_memory_type": "plan", "top_memory_text": "Evan plans to send Sam recipes for healthy snacks and cookies.", "gold_memory_ids": "llm_02041|llm_02050|llm_02052|llm_02205|llm_02206", "gold_memory_types": "health|hobby|plan|preference", "gold_memory_texts": "Sam agreed to try swapping soda for flavored seltzer water and candy for dark chocolate with high cocoa content. || Evan is reading 'The Great Gatsby' and finds it gripping. || Evan suggested flavored seltzer water as an alternative to soda and recommended air-popped popcorn or fruit as low-calorie snacks.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "13", "audit_id": "audit_066", "query_id": "q00176", "query": "What did Caroline and her family see during their camping trip last year?", "query_type": "5", "auto_reason": "relationship_neighbor", "first_rank": "3", "top_memory_id": "llm_00053", "top_memory_type": "event", "top_memory_text": "Caroline had a picnic with friends and family last week.", "gold_memory_ids": "llm_00095", "gold_memory_types": "event", "gold_memory_texts": "Melanie's best camping memory is seeing the Perseid meteor shower during a camping trip last year.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "14", "audit_id": "audit_051", "query_id": "q01147", "query": "What type of jewelry does Andrew make?", "query_type": "5", "auto_reason": "other", "first_rank": "2", "top_memory_id": "llm_01177", "top_memory_type": "preference", "top_memory_text": "Andrew does not have any pets currently, but he loves animals.", "gold_memory_ids": "llm_01367|llm_01371", "gold_memory_types": "hobby|preference", "gold_memory_texts": "Audrey makes jewelry from recycled objects like bottle caps, buttons, and broken jewelry. || Audrey values combining creativity and sustainability in her jewelry making.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "15", "audit_id": "audit_034", "query_id": "q00645", "query": "What type of ice cream does Joanna mention that Nate makes and is delicious?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "12", "top_memory_id": "llm_00897", "top_memory_type": "event", "top_memory_text": "Nate offered Joanna some of his coconut milk ice cream.", "gold_memory_ids": "llm_00778", "gold_memory_types": "hobby", "gold_memory_texts": "Nate loves making dairy-free desserts, especially coconut milk ice cream.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "16", "audit_id": "audit_016", "query_id": "q01031", "query": "What has Andrew done with his dogs?", "query_type": "1", "auto_reason": "gold_below_top20", "first_rank": "29", "top_memory_id": "llm_01420", "top_memory_type": "identity", "top_memory_text": "Andrew has two dogs named Toby and Buddy.", "gold_memory_ids": "llm_01298|llm_01392", "gold_memory_types": "hobby|plan", "gold_memory_texts": "Andrew plans to take Toby hiking on a local trail. || Andrew enjoys taking walks with Buddy.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "17", "audit_id": "audit_022", "query_id": "q01655", "query": "What was Sam doing on December 4, 2023?", "query_type": "2", "auto_reason": "gold_below_top20", "first_rank": "24", "top_memory_id": "llm_02079", "top_memory_type": "health", "top_memory_text": "Sam is on a diet and living healthier as of August 2023.", "gold_memory_ids": "llm_02175", "gold_memory_types": "event", "gold_memory_texts": "Sam attended a Weight Watchers meeting yesterday.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "18", "audit_id": "audit_046", "query_id": "q01783", "query": "When did Calvin first travel to Tokyo?", "query_type": "2", "auto_reason": "memory_type_mismatch", "first_rank": "8", "top_memory_id": "llm_02451", "top_memory_type": "plan", "top_memory_text": "Calvin is going to Tokyo next month after the tour ends.", "gold_memory_ids": "llm_02261", "gold_memory_types": "event", "gold_memory_texts": "Calvin attended a music festival in Tokyo recently and found it enriching.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "19", "audit_id": "audit_054", "query_id": "q01340", "query": "What games were played at the gaming tournament organized by James on 31 October, 2022?", "query_type": "5", "auto_reason": "other", "first_rank": "8", "top_memory_id": "llm_01477", "top_memory_type": "event", "top_memory_text": "James received gaming tips from a team member at the tournament.", "gold_memory_ids": "llm_01713|llm_01714", "gold_memory_types": "event", "gold_memory_texts": "John organized a gaming tournament with his buddies last night, playing Fortnite, Overwatch, and Apex Legends, to raise money for a children's hospital. || John and his gaming pals raised a decent amount of money for a children's hospital during the gaming tournament.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "20", "audit_id": "audit_001", "query_id": "q00349", "query": "What activities has Maria done with her church friends?", "query_type": "1", "auto_reason": "activity_neighbor", "first_rank": "3", "top_memory_id": "llm_00605", "top_memory_type": "event", "top_memory_text": "Maria did community work with friends from church yesterday.", "gold_memory_ids": "llm_00576|llm_00568|llm_00602|llm_00603|llm_00604", "gold_memory_types": "event|goal|plan|work", "gold_memory_texts": "Maria went hiking with church friends last weekend and found it refreshing. || Maria had a picnic with friends from church last weekend. || John lost his job at a mechanical engineering company.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "21", "audit_id": "audit_073", "query_id": "q01811", "query": "What does Calvin do to relax?", "query_type": "1", "auto_reason": "semantic_neighbor", "first_rank": "3", "top_memory_id": "llm_02423", "top_memory_type": "hobby", "top_memory_text": "Calvin has a project he works on to chill out.", "gold_memory_ids": "llm_02286|llm_02287|llm_02288|llm_02303", "gold_memory_types": "emotion|hobby", "gold_memory_texts": "Calvin relaxes by taking long drives in his car. || Calvin has been enjoying learning about Japanese culture. || Calvin is experiencing creative block with his music.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "22", "audit_id": "audit_049", "query_id": "q00547", "query": "How many times has Joanna's scripts been rejected?", "query_type": "1", "auto_reason": "other", "first_rank": "3", "top_memory_id": "llm_00869", "top_memory_type": "event", "top_memory_text": "Joanna submitted a few more scripts last week.", "gold_memory_ids": "llm_00737|llm_00738|llm_00842", "gold_memory_types": "event|work", "gold_memory_texts": "Joanna received a rejection letter from a major company for her screenplay, which made her feel disheartened. || Joanna has written a screenplay. || Joanna recently received another rejection from a production company.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "23", "audit_id": "audit_063", "query_id": "q00589", "query": "What is Nate's favorite book series about?", "query_type": "4", "auto_reason": "preference_neighbor", "first_rank": "3", "top_memory_id": "llm_00699", "top_memory_type": "preference", "top_memory_text": "Nate's favorite movie trilogy is a fantasy/sci-fi series with great world building and battles.", "gold_memory_ids": "llm_00700", "gold_memory_types": "preference", "gold_memory_texts": "Nate recommends a book series with adventures, magic, and great characters.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "24", "audit_id": "audit_012", "query_id": "q00367", "query": "How many dogs has Maria adopted from the dog shelter she volunteers at?", "query_type": "1", "auto_reason": "gold_below_top20", "first_rank": "32", "top_memory_id": "llm_00459", "top_memory_type": "event", "top_memory_text": "Maria recently gave talks at the homeless shelter where she volunteers.", "gold_memory_ids": "llm_00615", "gold_memory_types": "event", "gold_memory_texts": "Maria got a puppy named Coco two weeks ago.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "25", "audit_id": "audit_038", "query_id": "q00957", "query": "How long did Tim and his high school basketball teammates play together?", "query_type": "5", "auto_reason": "memory_type_mismatch", "first_rank": "6", "top_memory_id": "llm_00965", "top_memory_type": "education", "top_memory_text": "Tim is focusing on school and reading fantasy books.", "gold_memory_ids": "llm_00975", "gold_memory_types": "event", "gold_memory_texts": "John played on a high school sports team with friends for four years.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "26", "audit_id": "audit_060", "query_id": "q01337", "query": "What kind of gig was James offered at the game dev non-profit organization?", "query_type": "5", "auto_reason": "persona_confusion", "first_rank": "2", "top_memory_id": "llm_01687", "top_memory_type": "event", "top_memory_text": "John got an email about a volunteer gig at a game dev non-profit.", "gold_memory_ids": "llm_01689|llm_01690", "gold_memory_types": "work", "gold_memory_texts": "John was offered a programming mentor role for game developers at a non-profit. || John will be teaching coding and assisting with projects as a programming mentor.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "27", "audit_id": "audit_007", "query_id": "q00442", "query": "What happened to John's job in August 2023?", "query_type": "4", "auto_reason": "career_education_neighbor", "first_rank": "4", "top_memory_id": "llm_01643", "top_memory_type": "plan", "top_memory_text": "John has a day off tomorrow (27 August 2022).", "gold_memory_ids": "llm_00602|llm_00603|llm_00604", "gold_memory_types": "goal|plan|work", "gold_memory_texts": "John lost his job at a mechanical engineering company. || John is looking for opportunities in the tech industry. || John found a potential job at a tech company that needs his mechanical skills for their hardware team.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "28", "audit_id": "audit_025", "query_id": "q00970", "query": "Who is one of Tim's sources of inspiration for painting?", "query_type": "5", "auto_reason": "identity_neighbor", "first_rank": "18", "top_memory_id": "llm_01034", "top_memory_type": "preference", "top_memory_text": "Tim draws inspiration for his writing from books, movies, real-life experiences, and certain authors.", "gold_memory_ids": "llm_01035", "gold_memory_types": "preference", "gold_memory_texts": "Tim is inspired by J.K. Rowling and takes notes on her style for his own writing.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "29", "audit_id": "audit_062", "query_id": "q00573", "query": "What are Nate's favorite desserts?", "query_type": "1", "auto_reason": "preference_neighbor", "first_rank": "5", "top_memory_id": "llm_00807", "top_memory_type": "preference", "top_memory_text": "Nate's favorite dish from his cooking show is coconut milk ice cream.", "gold_memory_ids": "llm_00646|llm_00649|llm_00650", "gold_memory_types": "event|hobby|preference", "gold_memory_texts": "Nate discovered he can make coconut milk ice cream and tried it. || Nate likes coconut milk, chocolate, and mixed berry flavors for dairy-free desserts. || Nate made a dairy-free chocolate cake with berries recently.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "30", "audit_id": "audit_053", "query_id": "q01314", "query": "What was the main goal of the money raised from the political campaign organized by John and his friends in May 2022?", "query_type": "5", "auto_reason": "other", "first_rank": "6", "top_memory_id": "llm_01714", "top_memory_type": "event", "top_memory_text": "John and his gaming pals raised a decent amount of money for a children's hospital during the gaming tournament.", "gold_memory_ids": "llm_01531", "gold_memory_types": "event", "gold_memory_texts": "John's CS:GO tournament raised money for a dog shelter near his street.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "31", "audit_id": "audit_024", "query_id": "q00882", "query": "Who is one of Tim's sources of inspiration for writing?", "query_type": "4", "auto_reason": "identity_neighbor", "first_rank": "2", "top_memory_id": "llm_01034", "top_memory_type": "preference", "top_memory_text": "Tim draws inspiration for his writing from books, movies, real-life experiences, and certain authors.", "gold_memory_ids": "llm_01035", "gold_memory_types": "preference", "gold_memory_texts": "Tim is inspired by J.K. Rowling and takes notes on her style for his own writing.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "32", "audit_id": "audit_042", "query_id": "q01294", "query": "What does John feel about starting the journey as a programming mentor for game developers?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "2", "top_memory_id": "llm_01689", "top_memory_type": "work", "top_memory_text": "John was offered a programming mentor role for game developers at a non-profit.", "gold_memory_ids": "llm_01691|llm_01692", "gold_memory_types": "emotion|preference", "gold_memory_texts": "John feels excited and inspired about starting the mentoring journey. || John finds sharing knowledge and seeing others reach their potential rewarding.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "33", "audit_id": "audit_020", "query_id": "q01345", "query": "What game is James hooked on playing on 5 November, 2022?", "query_type": "5", "auto_reason": "gold_below_top20", "first_rank": "23", "top_memory_id": "llm_01618", "top_memory_type": "hobby", "top_memory_text": "John is currently playing 'The Witcher 3' and is hooked on its storytelling and characters.", "gold_memory_ids": "llm_01724", "gold_memory_types": "hobby", "gold_memory_texts": "John is currently playing FIFA 23, a football game with online multiplayer.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "34", "audit_id": "audit_048", "query_id": "q01924", "query": "Which city is featured in the photograph Dave showed Calvin?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "2", "top_memory_id": "llm_02380", "top_memory_type": "plan", "top_memory_text": "Calvin and Dave plan to meet up when Calvin is in Boston.", "gold_memory_ids": "llm_02481", "gold_memory_types": "event", "gold_memory_texts": "Dave took a photograph of a sunset in Boston.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "35", "audit_id": "audit_035", "query_id": "q00667", "query": "What does Joanna do while she writes?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "2", "top_memory_id": "llm_00726", "top_memory_type": "preference", "top_memory_text": "Joanna writes best when being true to herself, even if it's hard.", "gold_memory_ids": "llm_00838", "gold_memory_types": "relationship", "gold_memory_texts": "Joanna has a stuffed animal dog named Tilly that Nate gave her, and she keeps it with her while writing.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "36", "audit_id": "audit_037", "query_id": "q00900", "query": "How did \"The Alchemist\" impact John's perspective on following dreams?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "2", "top_memory_id": "llm_01002", "top_memory_type": "preference", "top_memory_text": "John read and loved 'The Alchemist'.", "gold_memory_ids": "llm_01076", "gold_memory_types": "event", "gold_memory_texts": "John recently finished rereading 'The Alchemist' and found it inspiring.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "37", "audit_id": "audit_030", "query_id": "q00410", "query": "How does John plan to honor the memories of his beloved pet?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "13", "top_memory_id": "llm_00508", "top_memory_type": "emotion", "top_memory_text": "John is grieving the loss of his dog Max but finds comfort in memories.", "gold_memory_ids": "llm_00509|llm_00510", "gold_memory_types": "goal|plan", "gold_memory_texts": "John wants his kids to learn unconditional love and loyalty from the bond with Max. || John is considering adopting a rescue dog to teach his kids responsibility and compassion.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "38", "audit_id": "audit_058", "query_id": "q01136", "query": "What are some of the personalities of Andrew's four fur babies?", "query_type": "5", "auto_reason": "persona_confusion", "first_rank": "3", "top_memory_id": "llm_01289", "top_memory_type": "family", "top_memory_text": "Audrey has four dogs, which she considers her 'fur babies' and says they are more important to her than anything.", "gold_memory_ids": "llm_01290", "gold_memory_types": "family", "gold_memory_texts": "Audrey's four dogs have distinct personalities: the oldest is relaxed, the second is playful, the third is naughty but cuddly, and the youngest is adventurous.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "39", "audit_id": "audit_032", "query_id": "q00568", "query": "What activities does Nate do with his turtles?", "query_type": "1", "auto_reason": "memory_type_mismatch", "first_rank": "4", "top_memory_id": "llm_00663", "top_memory_type": "family", "top_memory_text": "Nate has pet turtles.", "gold_memory_ids": "llm_00850", "gold_memory_types": "preference", "gold_memory_texts": "Nate enjoys watching his turtles eat fruit because they get excited.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "40", "audit_id": "audit_074", "query_id": "q01884", "query": "What did Calvin and his friends record in August 2023?", "query_type": "4", "auto_reason": "semantic_neighbor", "first_rank": "5", "top_memory_id": "llm_02397", "top_memory_type": "event", "top_memory_text": "Calvin released his album on September 11, 2023.", "gold_memory_ids": "llm_02381", "gold_memory_types": "event", "gold_memory_texts": "Calvin and his friends recorded a podcast yesterday discussing the rap industry.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "41", "audit_id": "audit_026", "query_id": "q00016", "query": "What activities does Melanie partake in?", "query_type": "1", "auto_reason": "memory_type_mismatch", "first_rank": "8", "top_memory_id": "llm_00079", "top_memory_type": "hobby", "top_memory_text": "Melanie and her family enjoy hiking in the mountains and exploring forests.", "gold_memory_ids": "llm_00042|llm_00080|llm_00010", "gold_memory_types": "event|plan", "gold_memory_texts": "Melanie signed up for a pottery class yesterday. || Melanie went camping with her family two weekends ago. || Melanie is going swimming with the kids after the conversation.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "42", "audit_id": "audit_006", "query_id": "q00028", "query": "Would Caroline pursue writing as a career option?", "query_type": "3", "auto_reason": "career_education_neighbor", "first_rank": "5", "top_memory_id": "llm_00045", "top_memory_type": "goal", "top_memory_text": "Caroline is exploring counseling or mental health work as a career.", "gold_memory_ids": "llm_00058|llm_00060", "gold_memory_types": "goal|hobby", "gold_memory_texts": "Caroline is exploring counseling and mental health career options. || Caroline loves reading and considers books a huge part of her journey.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "43", "audit_id": "audit_077", "query_id": "q00555", "query": "When did Joanna plan to go over to Nate's and share recipes?", "query_type": "2", "auto_reason": "temporal_neighbor", "first_rank": "6", "top_memory_id": "llm_00718", "top_memory_type": "plan", "top_memory_text": "Joanna and Nate plan to go hiking together sometime.", "gold_memory_ids": "llm_00863", "gold_memory_types": "plan", "gold_memory_texts": "Joanna plans to visit Nate tomorrow to share desserts and try his lactose-free dessert.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "44", "audit_id": "audit_019", "query_id": "q01169", "query": "How was John feeling on April 10, 2022?", "query_type": "2", "auto_reason": "gold_below_top20", "first_rank": "377", "top_memory_id": "llm_01116", "top_memory_type": "event", "top_memory_text": "John's favorite basketball game was when his team was down 10 in the 4th and he hit a buzzer-beater shot to win.", "gold_memory_ids": "llm_01494", "gold_memory_types": "event", "gold_memory_texts": "John visited a canyon two days ago to be alone with nature.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "45", "audit_id": "audit_023", "query_id": "q00071", "query": "What transgender-specific events has Caroline attended?", "query_type": "1", "auto_reason": "identity_neighbor", "first_rank": "7", "top_memory_id": "llm_00002", "top_memory_type": "identity", "top_memory_text": "Caroline is transgender.", "gold_memory_ids": "llm_00170|llm_00171", "gold_memory_types": "event|identity", "gold_memory_texts": "Caroline attended a transgender poetry reading last Friday where transgender people shared their stories through poetry. || Caroline is a transgender woman.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "46", "audit_id": "audit_061", "query_id": "q01814", "query": "Where was Dave in the last two weeks of August 2023?", "query_type": "2", "auto_reason": "persona_confusion", "first_rank": "8", "top_memory_id": "llm_01958", "top_memory_type": "event", "top_memory_text": "Deborah attended a community meetup last Friday (August 25, 2023) where they shared stories.", "gold_memory_ids": "llm_02365|llm_02391|llm_02392|llm_02396", "gold_memory_types": "event|hobby|relationship", "gold_memory_texts": "Dave attended a car workshop in San Francisco and was inspired by the passion and dedication of people in car restoration. || Dave recently returned from San Francisco with insights on car modification. || Dave is interested in car modification and finds it satisfying to give old cars new life.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "47", "audit_id": "audit_072", "query_id": "q01670", "query": "What type of car did Evan get after his old Prius broke down?", "query_type": "4", "auto_reason": "semantic_neighbor", "first_rank": "2", "top_memory_id": "llm_02172", "top_memory_type": "event", "top_memory_text": "Evan recently bought a new Prius that broke down.", "gold_memory_ids": "llm_02023|llm_02024", "gold_memory_types": "event", "gold_memory_texts": "Evan recently bought a new Prius after his old one broke down and he repaired and sold it. || Evan went on a family trip to the Rockies last week and hiked the trails.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "48", "audit_id": "audit_017", "query_id": "q01052", "query": "What is something that Andrew could do to make birdwatching hobby to fit in his city schedule?", "query_type": "3", "auto_reason": "gold_below_top20", "first_rank": "54", "top_memory_id": "llm_01356", "top_memory_type": "hobby", "top_memory_text": "Andrew is experienced in birdwatching and offered to give Audrey advice and plan a birdwatching trip together.", "gold_memory_ids": "llm_01374|llm_01375|llm_01178", "gold_memory_types": "event|preference|relationship", "gold_memory_texts": "Andrew had a busy week and played board games with his girlfriend Toby last Tuesday. || Andrew's girlfriend is named Toby. || Andrew's favorite animal is birds, specifically eagles, which he finds strong and graceful.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "49", "audit_id": "audit_003", "query_id": "q01639", "query": "Which activity do Evan and Sam plan on doing together during September 2023?", "query_type": "2", "auto_reason": "activity_neighbor", "first_rank": "6", "top_memory_id": "llm_02142", "top_memory_type": "plan", "top_memory_text": "Evan and Sam plan to go on a hike together soon.", "gold_memory_ids": "llm_02110", "gold_memory_types": "plan", "gold_memory_texts": "Sam and Evan plan to have a painting session next Saturday.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "50", "audit_id": "audit_059", "query_id": "q01316", "query": "What did James create for the charitable foundation that helped generate reports for analysis?", "query_type": "5", "auto_reason": "persona_confusion", "first_rank": "2", "top_memory_id": "llm_01537", "top_memory_type": "event", "top_memory_text": "John volunteered his programming skills for a social cause by creating a software tool for a charitable foundation.", "gold_memory_ids": "llm_01538", "gold_memory_types": "event", "gold_memory_texts": "John built an application for a charitable foundation to replace paper records and manual inventory tracking, now used on smartphones.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "51", "audit_id": "audit_027", "query_id": "q00056", "query": "What subject have Caroline and Melanie both painted?", "query_type": "1", "auto_reason": "memory_type_mismatch", "first_rank": "3", "top_memory_id": "llm_00191", "top_memory_type": "relationship", "top_memory_text": "Caroline and Melanie have a supportive friendship and are there for each other.", "gold_memory_ids": "llm_00128|llm_00068|llm_00069", "gold_memory_types": "event|hobby", "gold_memory_texts": "Caroline has not tried pottery yet. || Melanie and her kids enjoy painting together, especially nature-inspired paintings. || Melanie and her kids painted a nature-inspired painting together last weekend.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "52", "audit_id": "audit_078", "query_id": "q01242", "query": "What kind of assignment was giving John a hard time at work?", "query_type": "4", "auto_reason": "temporal_neighbor", "first_rank": "6", "top_memory_id": "llm_00529", "top_memory_type": "work", "top_memory_text": "John tries to organize his time to balance work and family.", "gold_memory_ids": "llm_01502|llm_01503|llm_01504", "gold_memory_types": "emotion|work", "gold_memory_texts": "John is currently very busy with work and has many deadlines. || John is working on a difficult coding project involving an algorithm and is stuck. || John hates being stuck and not making progress on his work.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "53", "audit_id": "audit_044", "query_id": "q01741", "query": "Why did Evan apologize to his partner?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "3", "top_memory_id": "llm_02211", "top_memory_type": "identity", "top_memory_text": "Evan is married to his partner.", "gold_memory_ids": "llm_02236", "gold_memory_types": "event", "gold_memory_texts": "Evan apologized to his partner for a drunken night involving damage to rose bushes.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "54", "audit_id": "audit_055", "query_id": "q01576", "query": "Why did Deborah get the new plant on 30 August, 2023?", "query_type": "5", "auto_reason": "other", "first_rank": "8", "top_memory_id": "llm_01958", "top_memory_type": "event", "top_memory_text": "Deborah attended a community meetup last Friday (August 25, 2023) where they shared stories.", "gold_memory_ids": "llm_01949", "gold_memory_types": "event", "gold_memory_texts": "Jolene recently got a new plant as a reminder to nurture herself and embrace fresh starts.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "55", "audit_id": "audit_050", "query_id": "q00715", "query": "Who did Joanna plan to invite to her gaming party in June 2022?", "query_type": "5", "auto_reason": "other", "first_rank": "8", "top_memory_id": "llm_00801", "top_memory_type": "plan", "top_memory_text": "Joanna and Nate plan to see each other soon.", "gold_memory_ids": "llm_00744", "gold_memory_types": "plan", "gold_memory_texts": "Nate is organizing a gaming party two weekends later, inviting tournament friends and old teammates.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "56", "audit_id": "audit_029", "query_id": "q00340", "query": "What states has Maria vacationed at?", "query_type": "1", "auto_reason": "memory_type_mismatch", "first_rank": "2", "top_memory_id": "llm_00559", "top_memory_type": "hobby", "top_memory_text": "Maria has been taking regular 'me-time' walks at a nearby park.", "gold_memory_ids": "llm_00531|llm_00517", "gold_memory_types": "event", "gold_memory_texts": "Maria has a picture from a vacation in Florida with her family, feeling gratitude. || Maria went on a family road trip to Oregon when she was younger.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "57", "audit_id": "audit_004", "query_id": "q01760", "query": "What sports activity has Sam been doing to stay active while dealing with the knee injury?", "query_type": "5", "auto_reason": "activity_neighbor", "first_rank": "3", "top_memory_id": "llm_02164", "top_memory_type": "health", "top_memory_text": "Sam has been dealing with discomfort that limits his movement.", "gold_memory_ids": "llm_02094|llm_02095", "gold_memory_types": "health|plan", "gold_memory_texts": "Evan is planning to do physical therapy for his knee and hopes to get an appointment soon. || Evan is swimming to stay active while his knee heals.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "58", "audit_id": "audit_002", "query_id": "q01430", "query": "Which locations does Deborah practice her yoga at?", "query_type": "1", "auto_reason": "activity_neighbor", "first_rank": "12", "top_memory_id": "llm_01830", "top_memory_type": "preference", "top_memory_text": "Deborah likes candles and essential oils for her yoga practice.", "gold_memory_ids": "llm_01745|llm_01755|llm_01761|llm_01762|llm_01782|llm_01783", "gold_memory_types": "event|preference|relationship|work", "gold_memory_texts": "Deborah's mother passed away. || Deborah met her new neighbor Anna yesterday at yoga in the park. || Deborah teaches yoga and spends a lot of time doing so.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "59", "audit_id": "audit_018", "query_id": "q01055", "query": "When did Andrew make his dogs a fun indoor area?", "query_type": "2", "auto_reason": "gold_below_top20", "first_rank": "39", "top_memory_id": "llm_01251", "top_memory_type": "preference", "top_memory_text": "Andrew recommended a doggy daycare near him with a big indoor space for dogs.", "gold_memory_ids": "llm_01431|llm_01432|llm_01433", "gold_memory_types": "event|plan", "gold_memory_texts": "Andrew plans to take Scout, Toby, and Buddy to a nearby park for Scout's first adventure. || Andrew and his girlfriend are keeping Scout on a leash while he gets used to being outside. || Andrew and his girlfriend bought essentials for Scout including a bed, toys, and puppy pads.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "60", "audit_id": "audit_075", "query_id": "q00133", "query": "How long has Melanie been creating art?", "query_type": "4", "auto_reason": "temporal_neighbor", "first_rank": "11", "top_memory_id": "llm_00154", "top_memory_type": "hobby", "top_memory_text": "Melanie has been into art for seven years, focusing on painting and pottery.", "gold_memory_ids": "llm_00153", "gold_memory_types": "hobby", "gold_memory_texts": "Caroline has been creating art since she was 17.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "61", "audit_id": "audit_067", "query_id": "q00475", "query": "How long was Max a part of Maria's family?", "query_type": "5", "auto_reason": "relationship_neighbor", "first_rank": "2", "top_memory_id": "llm_00513", "top_memory_type": "event", "top_memory_text": "Maria's pet Max recently died.", "gold_memory_ids": "llm_00507", "gold_memory_types": "event", "gold_memory_texts": "John's family dog Max died recently after being part of the family for 10 years.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "62", "audit_id": "audit_065", "query_id": "q01789", "query": "Which types of cars does Dave like the most?", "query_type": "1", "auto_reason": "preference_neighbor", "first_rank": "5", "top_memory_id": "llm_02404", "top_memory_type": "hobby", "top_memory_text": "Dave has a garage with cars that he is proud of.", "gold_memory_ids": "llm_02271|llm_02272|llm_02273|llm_02253|llm_02267|llm_02274|llm_02275", "gold_memory_types": "event|goal|hobby|work", "gold_memory_texts": "Dave opened his own car maintenance shop. || Dave's dream was to open a car maintenance shop, and he achieved it. || Dave's next dream is to work on classic cars.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "63", "audit_id": "audit_068", "query_id": "q01349", "query": "Which of Deborah`s family and friends have passed away?", "query_type": "1", "auto_reason": "relationship_neighbor", "first_rank": "4", "top_memory_id": "llm_01988", "top_memory_type": "family", "top_memory_text": "Deborah's mom has passed away.", "gold_memory_ids": "llm_01729|llm_01739|llm_01740|llm_01779|llm_01780", "gold_memory_types": "emotion|event|family|preference", "gold_memory_texts": "Deborah's mother passed away a few years ago. || Deborah's father passed away two days before January 27, 2023. || Deborah is coping with her father's death by spending time with family and cherishing memories.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "64", "audit_id": "audit_070", "query_id": "q01182", "query": "What kind of games has James tried to develop?", "query_type": "1", "auto_reason": "semantic_neighbor", "first_rank": "17", "top_memory_id": "llm_01456", "top_memory_type": "hobby", "top_memory_text": "James has been exploring different styles of gaming recently.", "gold_memory_ids": "llm_01438|llm_01698", "gold_memory_types": "event|hobby", "gold_memory_texts": "James is currently enjoying playing The Witcher 3. || James released his first game for the gaming community recently.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "65", "audit_id": "audit_056", "query_id": "q01803", "query": "Who inspired Dave's passion for car engineering?", "query_type": "1", "auto_reason": "other", "first_rank": "19", "top_memory_id": "llm_02365", "top_memory_type": "event", "top_memory_text": "Dave attended a car workshop in San Francisco and was inspired by the passion and dedication of people in car restoration.", "gold_memory_ids": "llm_02348|llm_02349|llm_02472|llm_02473", "gold_memory_types": "event|hobby|work", "gold_memory_texts": "Dave grew up working on cars with his dad, and refurbishing cars is like therapy for him. || Dave has fond memories of working on cars with his dad as a kid, including one summer spent restoring an old car together. || Dave is an automotive engineer.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "66", "audit_id": "audit_013", "query_id": "q00502", "query": "What pets wouldn't cause any discomfort to Joanna?", "query_type": "3", "auto_reason": "gold_below_top20", "first_rank": "26", "top_memory_id": "llm_00719", "top_memory_type": "health", "top_memory_text": "Joanna has allergies that prevent her from getting pets.", "gold_memory_ids": "llm_00638", "gold_memory_types": "health", "gold_memory_texts": "Joanna is allergic to most reptiles and animals with fur, causing puffy and itchy face.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "67", "audit_id": "audit_028", "query_id": "q00314", "query": "Who gave Maria's family money when she was younger and her family was going through tough times?", "query_type": "1", "auto_reason": "memory_type_mismatch", "first_rank": "3", "top_memory_id": "llm_00517", "top_memory_type": "event", "top_memory_text": "Maria went on a family road trip to Oregon when she was younger.", "gold_memory_ids": "llm_00416|llm_00410", "gold_memory_types": "family|relationship", "gold_memory_texts": "Maria had financial problems in her youth and relied on help from her auntie. || Maria started volunteering to make a difference, inspired by her aunt who believed in volunteering and helped her family when struggling.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "68", "audit_id": "audit_008", "query_id": "q00583", "query": "What kind of job is Joanna beginning to preform the duties of because of her movie scripts?", "query_type": "3", "auto_reason": "career_education_neighbor", "first_rank": "3", "top_memory_id": "llm_00769", "top_memory_type": "goal", "top_memory_text": "Joanna recently started writing a book because her movie did well.", "gold_memory_ids": "llm_00889|llm_00890", "gold_memory_types": "goal|work", "gold_memory_texts": "Joanna is filming her own movie based on her road-trip script. || Joanna's movie is based on her road-trip script.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "69", "audit_id": "audit_033", "query_id": "q00609", "query": "What are the main ingredients of the ice cream recipe shared by Nate?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "10", "top_memory_id": "llm_00759", "top_memory_type": "plan", "top_memory_text": "Nate promised to give Joanna the vegan ice cream recipe tomorrow.", "gold_memory_ids": "llm_00688", "gold_memory_types": "hobby", "gold_memory_texts": "Nate makes dairy-free ice cream with coconut milk, vanilla extract, sugar, and a pinch of salt.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "70", "audit_id": "audit_041", "query_id": "q01233", "query": "What game was James playing in the online gaming tournament in April 2022?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "20", "top_memory_id": "llm_01583", "top_memory_type": "event", "top_memory_text": "James won an online gaming tournament last week.", "gold_memory_ids": "llm_01480", "gold_memory_types": "hobby", "gold_memory_texts": "James's favorite game is Apex Legends, which he plays with his team.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "71", "audit_id": "audit_079", "query_id": "q01663", "query": "When did Evan finish the painting that's hanging in the exhibit?", "query_type": "2", "auto_reason": "temporal_neighbor", "first_rank": "2", "top_memory_id": "llm_02083", "top_memory_type": "hobby", "top_memory_text": "Evan started painting years ago after a friend gave him a painting that inspired him.", "gold_memory_ids": "llm_02189|llm_02191", "gold_memory_types": "emotion|hobby", "gold_memory_texts": "Evan finished a contemporary figurative painting a few days ago. || Evan is proud of his painting.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "72", "audit_id": "audit_045", "query_id": "q01756", "query": "What food did Evan share a photo of on 19 August, 2023?", "query_type": "5", "auto_reason": "memory_type_mismatch", "first_rank": "3", "top_memory_id": "llm_02082", "top_memory_type": "hobby", "top_memory_text": "Evan started taking painting classes a few days before August 19, 2023.", "gold_memory_ids": "llm_02079", "gold_memory_types": "health", "gold_memory_texts": "Sam is on a diet and living healthier as of August 2023.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "73", "audit_id": "audit_057", "query_id": "q00982", "query": "What instrument is John learning to play in December 2023?", "query_type": "5", "auto_reason": "persona_confusion", "first_rank": "2", "top_memory_id": "llm_01465", "top_memory_type": "hobby", "top_memory_text": "James is learning an instrument and started a few days ago.", "gold_memory_ids": "llm_01098|llm_01100", "gold_memory_types": "hobby|preference", "gold_memory_texts": "Tim is learning to play the violin. || Tim is mostly into classical music but wants to try jazz and film scores on the violin.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "74", "audit_id": "audit_011", "query_id": "q00304", "query": "What plans does Gina have after receiving advice at the networking event?", "query_type": "5", "auto_reason": "gold_below_top20", "first_rank": "503", "top_memory_id": "llm_00355", "top_memory_type": "event", "top_memory_text": "Jon attended a networking event where he met investors and got good advice.", "gold_memory_ids": "llm_00356|llm_00357", "gold_memory_types": "plan", "gold_memory_texts": "Jon is sprucing up his business plan and tweaking his pitch to investors. || Jon is working on an online platform to showcase the dance studio's offerings.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "75", "audit_id": "audit_036", "query_id": "q00858", "query": "How long did John and his high school basketball teammates play together?", "query_type": "4", "auto_reason": "memory_type_mismatch", "first_rank": "2", "top_memory_id": "llm_00949", "top_memory_type": "education", "top_memory_text": "John played basketball through middle and high school and earned a college scholarship.", "gold_memory_ids": "llm_00975", "gold_memory_types": "event", "gold_memory_texts": "John played on a high school sports team with friends for four years.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "76", "audit_id": "audit_040", "query_id": "q01164", "query": "Does James live in Connecticut?", "query_type": "3", "auto_reason": "memory_type_mismatch", "first_rank": "10", "top_memory_id": "llm_01716", "top_memory_type": "relationship", "top_memory_text": "James and Samantha have decided to move in together.", "gold_memory_ids": "llm_01482|llm_01483", "gold_memory_types": "event|family", "gold_memory_texts": "James adopted a puppy from a shelter in Stamford last week and named it Ned. || James has a dog named Ned.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "77", "audit_id": "audit_021", "query_id": "q01547", "query": "What cool stuff did Deborah accomplish at the retreat on 9 February, 2023?", "query_type": "5", "auto_reason": "gold_below_top20", "first_rank": "391", "top_memory_id": "llm_01851", "top_memory_type": "plan", "top_memory_text": "Deborah is preparing for a yoga retreat with friends.", "gold_memory_ids": "llm_01772|llm_01773|llm_01774|llm_01775|llm_01776", "gold_memory_types": "goal|plan|work", "gold_memory_texts": "Jolene is working on an engineering project and came up with neat solutions. || Jolene is interested in green tech and wants to make a difference in disadvantaged areas. || Jolene has an idea for a volunteer program where engineers teach STEM to underprivileged kids.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "78", "audit_id": "audit_043", "query_id": "q01366", "query": "In what country did Jolene buy snake Seraphim?", "query_type": "3", "auto_reason": "memory_type_mismatch", "first_rank": "2", "top_memory_id": "llm_01800", "top_memory_type": "family", "top_memory_text": "Jolene has a pet snake named Seraphim.", "gold_memory_ids": "llm_01749", "gold_memory_types": "other", "gold_memory_texts": "Jolene has a second snake named Seraphim, which she bought a year ago in Paris.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "79", "audit_id": "audit_015", "query_id": "q00973", "query": "What type of meal does Tim often cook using a slow cooker?", "query_type": "5", "auto_reason": "gold_below_top20", "first_rank": "21", "top_memory_id": "llm_00969", "top_memory_type": "family", "top_memory_text": "Tim's family has a Thanksgiving tradition of preparing a feast, sharing what they're thankful for, and watching movies.", "gold_memory_ids": "llm_01046", "gold_memory_types": "preference", "gold_memory_texts": "John often makes honey garlic chicken with roasted vegetables.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}, {"review_order": "80", "audit_id": "audit_005", "query_id": "q01915", "query": "How does Calvin describe his music in relation to capturing feelings?", "query_type": "4", "auto_reason": "activity_neighbor", "first_rank": "4", "top_memory_id": "llm_02389", "top_memory_type": "preference", "top_memory_text": "Calvin values staying true to himself and being unique in his music.", "gold_memory_ids": "llm_02463", "gold_memory_types": "preference", "gold_memory_texts": "Calvin uses music as a form of therapy to express himself and work through emotions.", "human_manual_reason": "", "human_auto_reason_correct": "", "human_top_memory_relevant": "", "human_gold_memory_sufficient": "", "human_auditor_notes": ""}];
+    const outputFilename = "agent_memory_human_audit_full80_completed.csv";
+    const humanFields = ["human_manual_reason", "human_auto_reason_correct", "human_top_memory_relevant", "human_gold_memory_sufficient", "human_auditor_notes"];
+
+    function cell(value) {
+      return String(value ?? "");
+    }
+
+    function isComplete(row) {
+      return humanFields.every((field) => cell(row[field]).trim().length > 0);
+    }
+
+    function escapeHtml(value) {
+      return cell(value).replace(/[&<>"']/g, (ch) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[ch]));
+    }
+
+    function fieldId(rowIndex, field) {
+      return `row_${rowIndex}_${field}`;
+    }
+
+    function renderItems() {
+      const items = document.getElementById("items");
+      items.innerHTML = rows.map((row, idx) => `
+        <article class="item ${isComplete(row) ? "complete" : "incomplete"}" id="item_${idx}">
+          <div class="item-title">
+            <h2>#${escapeHtml(row.review_order)} · ${escapeHtml(row.audit_id)} · ${escapeHtml(row.query_id)}</h2>
+            <div>
+              <span class="badge">query type ${escapeHtml(row.query_type)}</span>
+              <span class="badge">first rank ${escapeHtml(row.first_rank)}</span>
+              <span class="badge">auto ${escapeHtml(row.auto_reason)}</span>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="box">
+              <div class="label">Query</div>
+              <div class="text">${escapeHtml(row.query)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Top Memory · ${escapeHtml(row.top_memory_id)} · ${escapeHtml(row.top_memory_type)}</div>
+              <div class="text">${escapeHtml(row.top_memory_text)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Gold Memory · ${escapeHtml(row.gold_memory_ids)} · ${escapeHtml(row.gold_memory_types)}</div>
+              <div class="text">${escapeHtml(row.gold_memory_texts)}</div>
+            </div>
+            <div class="box">
+              <div class="label">Human Labels</div>
+              <div class="form">
+                <label>Manual reason
+                  <select id="${fieldId(idx, "human_manual_reason")}" onchange="updateField(${idx}, 'human_manual_reason', this.value)">
+                    <option value=""></option>
+<option value="memory_type_mismatch">memory_type_mismatch</option>
+<option value="time_mismatch">time_mismatch</option>
+<option value="entity_mismatch">entity_mismatch</option>
+<option value="under_specific">under_specific</option>
+<option value="multi_evidence_missing">multi_evidence_missing</option>
+<option value="retrieval_noise">retrieval_noise</option>
+<option value="query_ambiguous">query_ambiguous</option>
+<option value="other">other</option>
+                  </select>
+                </label>
+                <label>Auto reason correct
+                  <select id="${fieldId(idx, "human_auto_reason_correct")}" onchange="updateField(${idx}, 'human_auto_reason_correct', this.value)">
+                    <option value=""></option>
+<option value="yes">yes</option>
+<option value="partial">partial</option>
+<option value="no">no</option>
+                  </select>
+                </label>
+                <label>Top memory relevant
+                  <select id="${fieldId(idx, "human_top_memory_relevant")}" onchange="updateField(${idx}, 'human_top_memory_relevant', this.value)">
+                    <option value=""></option>
+<option value="yes">yes</option>
+<option value="partial">partial</option>
+<option value="no">no</option>
+                  </select>
+                </label>
+                <label>Gold memory sufficient
+                  <select id="${fieldId(idx, "human_gold_memory_sufficient")}" onchange="updateField(${idx}, 'human_gold_memory_sufficient', this.value)">
+                    <option value=""></option>
+<option value="yes">yes</option>
+<option value="no">no</option>
+<option value="unclear">unclear</option>
+                  </select>
+                </label>
+                <label class="wide">Auditor notes
+                  <textarea id="${fieldId(idx, "human_auditor_notes")}" oninput="updateField(${idx}, 'human_auditor_notes', this.value)"></textarea>
+                </label>
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join("");
+      rows.forEach((row, idx) => {
+        humanFields.forEach((field) => {
+          const element = document.getElementById(fieldId(idx, field));
+          if (element) element.value = cell(row[field]);
+        });
+      });
+      updateProgress();
+    }
+
+    function updateField(index, field, value) {
+      rows[index][field] = value;
+      const item = document.getElementById(`item_${index}`);
+      item.classList.toggle("complete", isComplete(rows[index]));
+      item.classList.toggle("incomplete", !isComplete(rows[index]));
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const done = rows.filter(isComplete).length;
+      const total = rows.length;
+      document.getElementById("doneCount").textContent = done;
+      document.getElementById("missingCount").textContent = total - done;
+      document.getElementById("percentDone").textContent = total ? `${Math.round(done / total * 100)}%` : "0%";
+    }
+
+    function showIncomplete() {
+      const index = rows.findIndex((row) => !isComplete(row));
+      const target = document.getElementById(`item_${index < 0 ? 0 : index}`);
+      if (target) target.scrollIntoView({behavior: "smooth", block: "start"});
+    }
+
+    function csvEscape(value) {
+      const text = cell(value);
+      return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+    }
+
+    function downloadCsv() {
+      const headers = Object.keys(rows[0] || {});
+      const csv = [headers.join(","), ...rows.map((row) => headers.map((h) => csvEscape(row[h])).join(","))].join("\n");
+      const blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = outputFilename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    renderItems();
+  </script>
+</body>
+</html>

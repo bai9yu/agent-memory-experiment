@@ -20,7 +20,7 @@ LOCAL_PATH_PATTERNS = (
     re.compile(r"referenced-chatgpt-conversation-this-is-an"),
 )
 
-SCAN_SUFFIXES = {".md", ".csv", ".tex"}
+SCAN_SUFFIXES = {".md", ".csv", ".tex", ".html"}
 SCAN_ROOTS = ("outputs/", "README.md", "work/agent_memory_experiment/README.md")
 EXCLUDED_FILES = {
     # This file is produced at the end of refresh_paper_artifacts.py; command
