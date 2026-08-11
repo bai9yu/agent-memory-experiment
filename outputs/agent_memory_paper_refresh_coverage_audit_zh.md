@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 36
+- Required offline steps: 37
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -30,6 +30,7 @@
 | required_offline_step | embedding_baseline_comparison | True | BGE-M3 vs API embedding comparison status | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | api_embedding_postrun_gate | True | API embedding post-run completeness gate | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | external_embedding_blocker_audit | True | external embedding blocker audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | embedding_paper_claim_upgrade | True | embedding baseline paper-claim upgrade gate | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | submission_blocker_closure_plan | True | submission blocker closure path | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | submission_package_index | True | paper package index | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | paper_table_consistency | True | paper table consistency audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |

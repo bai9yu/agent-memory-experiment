@@ -323,6 +323,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes actionable blocker audit for external embedding baselines.",
         ),
         Step(
+            "embedding_paper_claim_upgrade",
+            py(
+                "validate_embedding_paper_claim_upgrade.py",
+                "--outputs-dir",
+                "outputs",
+                "--output-csv",
+                "outputs/agent_memory_embedding_paper_claim_upgrade.csv",
+                "--output-report",
+                "outputs/agent_memory_embedding_paper_claim_upgrade_zh.md",
+            ),
+            "Checks which paper-facing embedding-baseline claim tier is currently unlocked.",
+        ),
+        Step(
             "submission_blocker_closure_plan",
             py(
                 "generate_submission_blocker_closure_plan.py",

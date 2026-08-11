@@ -309,6 +309,8 @@ def main() -> None:
         ("Offline embedding sensitivity CSV", outputs / "agent_memory_offline_embedding_sensitivity.csv"),
         ("External embedding blocker audit", outputs / "agent_memory_external_embedding_blocker_audit_zh.md"),
         ("External embedding blocker audit CSV", outputs / "agent_memory_external_embedding_blocker_audit.csv"),
+        ("Embedding paper-claim upgrade gate", outputs / "agent_memory_embedding_paper_claim_upgrade_zh.md"),
+        ("Embedding paper-claim upgrade gate CSV", outputs / "agent_memory_embedding_paper_claim_upgrade.csv"),
         ("Human audit protocol", outputs / "agent_memory_human_audit_protocol_zh.md"),
         ("Human audit sample", outputs / "agent_memory_human_audit_sample_type_aware.csv"),
         ("Human audit summary", outputs / "agent_memory_human_audit_summary_zh.md"),
@@ -598,6 +600,11 @@ def main() -> None:
             "stage": "External embedding blocker audit",
             "command": "work/agent_memory_experiment/generate_external_embedding_blocker_audit.py",
             "notes": "Aggregates key, preflight, summary, comparison, and readiness blockers into an actionable audit.",
+        },
+        {
+            "stage": "Embedding paper-claim upgrade gate",
+            "command": "work/agent_memory_experiment/validate_embedding_paper_claim_upgrade.py",
+            "notes": "Maps external embedding evidence to protocol, preflight, result, comparison, and paper-ready claim tiers.",
         },
         {
             "stage": "Human audit sample",
