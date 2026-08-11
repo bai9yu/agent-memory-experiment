@@ -191,6 +191,8 @@ def main() -> None:
         ("Candidate reranker paired effect-size CSV", outputs / "agent_memory_candidate_reranker_paired_effect_size.csv"),
         ("Candidate reranker statistical power report", outputs / "agent_memory_candidate_reranker_statistical_power_zh.md"),
         ("Candidate reranker statistical power CSV", outputs / "agent_memory_candidate_reranker_statistical_power.csv"),
+        ("Paper case study pack", outputs / "agent_memory_paper_case_study_pack_zh.md"),
+        ("Paper case study pack CSV", outputs / "agent_memory_paper_case_study_pack.csv"),
         ("Candidate reranker seed stability report", outputs / "agent_memory_candidate_reranker_seed_stability_zh.md"),
         ("Candidate reranker seed stability summary", outputs / "agent_memory_candidate_reranker_seed_stability_summary.csv"),
         ("Candidate reranker seed stability deltas", outputs / "agent_memory_candidate_reranker_seed_stability.csv"),
@@ -437,6 +439,11 @@ def main() -> None:
             "stage": "Candidate reranker statistical power",
             "command": "work/agent_memory_experiment/generate_statistical_power_analysis.py",
             "notes": "Estimates paired bootstrap CI precision and sample-size sensitivity for main reranker metric deltas.",
+        },
+        {
+            "stage": "Paper case study pack",
+            "command": "work/agent_memory_experiment/generate_paper_case_study_pack.py",
+            "notes": "Builds compact qualitative examples for success, regression, and stable-correct reranker behavior.",
         },
         {
             "stage": "Candidate reranker seed stability",

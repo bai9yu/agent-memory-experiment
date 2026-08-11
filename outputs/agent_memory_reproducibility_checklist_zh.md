@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：138/138
+- Artifact 存在性：140/140
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `8b06b2b` |
+| git_commit | `c7d2d1a` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -45,6 +45,8 @@
 | Candidate reranker paired effect-size CSV | True | 6383 | `outputs/agent_memory_candidate_reranker_paired_effect_size.csv` |
 | Candidate reranker statistical power report | True | 3581 | `outputs/agent_memory_candidate_reranker_statistical_power_zh.md` |
 | Candidate reranker statistical power CSV | True | 4128 | `outputs/agent_memory_candidate_reranker_statistical_power.csv` |
+| Paper case study pack | True | 8632 | `outputs/agent_memory_paper_case_study_pack_zh.md` |
+| Paper case study pack CSV | True | 5466 | `outputs/agent_memory_paper_case_study_pack.csv` |
 | Candidate reranker seed stability report | True | 2058 | `outputs/agent_memory_candidate_reranker_seed_stability_zh.md` |
 | Candidate reranker seed stability summary | True | 682 | `outputs/agent_memory_candidate_reranker_seed_stability_summary.csv` |
 | Candidate reranker seed stability deltas | True | 612 | `outputs/agent_memory_candidate_reranker_seed_stability.csv` |
@@ -108,10 +110,10 @@
 | Submission readiness gate CSV | True | 1884 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
-| Artifact integrity manifest | True | 3939 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 23632 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
-| Submission gap analysis | True | 9881 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
-| Submission gap analysis CSV | True | 5713 | `outputs/agent_memory_submission_gap_analysis.csv` |
+| Artifact integrity manifest | True | 3843 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
+| Artifact integrity manifest CSV | True | 24447 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
+| Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -202,6 +204,7 @@
 | Candidate reranker feature ablation | `work/agent_memory_experiment/candidate_reranker_feature_ablation.py` | Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware. |
 | Candidate reranker paired effect size | `work/agent_memory_experiment/generate_paired_effect_size_analysis.py` | Reports improved/worsened/tied paired outcomes, query-type breakdowns, and paired Cohen's dz. |
 | Candidate reranker statistical power | `work/agent_memory_experiment/generate_statistical_power_analysis.py` | Estimates paired bootstrap CI precision and sample-size sensitivity for main reranker metric deltas. |
+| Paper case study pack | `work/agent_memory_experiment/generate_paper_case_study_pack.py` | Builds compact qualitative examples for success, regression, and stable-correct reranker behavior. |
 | Candidate reranker seed stability | `work/agent_memory_experiment/candidate_reranker_seed_stability.py` | Runs an extended 20-seed stability check for intrinsic-only and full candidate rerankers against type-aware. |
 | Candidate reranker train-fraction sensitivity | `work/agent_memory_experiment/candidate_reranker_train_fraction_sensitivity.py` | Checks whether intrinsic-only reranker gains hold across 0.5/0.6/0.7/0.8 train fractions. |
 | Candidate oracle gap analysis | `work/agent_memory_experiment/generate_oracle_gap_analysis.py` | Quantifies how much oracle headroom is closed by the main reranker and why Type3 remains unresolved. |

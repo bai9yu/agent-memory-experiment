@@ -631,6 +631,16 @@ python3 work/agent_memory_experiment/generate_statistical_power_analysis.py \
   --output-report outputs/agent_memory_candidate_reranker_statistical_power_zh.md
 ```
 
+Generate a compact paper-facing qualitative case study pack:
+
+```bash
+python3 work/agent_memory_experiment/generate_paper_case_study_pack.py \
+  --examples outputs/agent_memory_candidate_reranker_examples.csv \
+  --per-bucket 3 \
+  --output-csv outputs/agent_memory_paper_case_study_pack.csv \
+  --output-report outputs/agent_memory_paper_case_study_pack_zh.md
+```
+
 Generate candidate-oracle gap and remaining-headroom diagnostics:
 
 ```bash

@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 138/138
+- Artifacts covered: 140/140
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 6221371
+- Total bytes: 6235469
 
 ## 前 20 个 Artifact
 
@@ -33,7 +33,7 @@
 | Candidate reranker paired effect-size CSV | True | 6383 | 25 | 35a35c2968dc | ok | outputs/agent_memory_candidate_reranker_paired_effect_size.csv |
 | Candidate reranker statistical power report | True | 3581 | 75 | f5344c9ec805 | ok | outputs/agent_memory_candidate_reranker_statistical_power_zh.md |
 | Candidate reranker statistical power CSV | True | 4128 | 25 | 8d4738dae4df | ok | outputs/agent_memory_candidate_reranker_statistical_power.csv |
-| Candidate reranker seed stability report | True | 2058 | 38 | b8e8ecc22ba8 | ok | outputs/agent_memory_candidate_reranker_seed_stability_zh.md |
+| Paper case study pack | True | 8632 | 101 | f9c0247d28aa | ok | outputs/agent_memory_paper_case_study_pack_zh.md |
 
 ## 使用说明
 

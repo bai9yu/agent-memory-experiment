@@ -280,7 +280,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
                 f"R@5 delta {signed(intrinsic_loco_r5['delta_mean'])}, 95% CI [{f(intrinsic_loco_r5['delta_ci_low'], 4)}, {f(intrinsic_loco_r5['delta_ci_high'], 4)}]."
             ),
             "support_level": "strong_heldout_and_loco_statistical",
-            "primary_artifacts": "agent_memory_candidate_reranker_feature_ablation_summary.csv; agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_paired_effect_size_zh.md; agent_memory_candidate_reranker_statistical_power_zh.md; agent_memory_candidate_reranker_seed_stability_zh.md; agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md; agent_memory_candidate_oracle_gap_analysis_zh.md; agent_memory_candidate_reranker_intrinsic_loco_summary.csv; agent_memory_candidate_reranker_intrinsic_loco_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
+            "primary_artifacts": "agent_memory_candidate_reranker_feature_ablation_summary.csv; agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_paired_effect_size_zh.md; agent_memory_candidate_reranker_statistical_power_zh.md; agent_memory_paper_case_study_pack_zh.md; agent_memory_candidate_reranker_seed_stability_zh.md; agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md; agent_memory_candidate_oracle_gap_analysis_zh.md; agent_memory_candidate_reranker_intrinsic_loco_summary.csv; agent_memory_candidate_reranker_intrinsic_loco_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
             "paper_use": "应作为当前论文方法增量的核心结果；full reranker 保留为消融对照。",
             "remaining_gap": "Held-out 和 LOCO 已支持跨 LoCoMo conversation 泛化；若要宣称跨数据集泛化，仍需外部数据集验证。",
         },

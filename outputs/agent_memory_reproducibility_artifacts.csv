@@ -18,6 +18,8 @@ Candidate reranker paired effect-size report,outputs/agent_memory_candidate_rera
 Candidate reranker paired effect-size CSV,outputs/agent_memory_candidate_reranker_paired_effect_size.csv,True,6383
 Candidate reranker statistical power report,outputs/agent_memory_candidate_reranker_statistical_power_zh.md,True,3581
 Candidate reranker statistical power CSV,outputs/agent_memory_candidate_reranker_statistical_power.csv,True,4128
+Paper case study pack,outputs/agent_memory_paper_case_study_pack_zh.md,True,8632
+Paper case study pack CSV,outputs/agent_memory_paper_case_study_pack.csv,True,5466
 Candidate reranker seed stability report,outputs/agent_memory_candidate_reranker_seed_stability_zh.md,True,2058
 Candidate reranker seed stability summary,outputs/agent_memory_candidate_reranker_seed_stability_summary.csv,True,682
 Candidate reranker seed stability deltas,outputs/agent_memory_candidate_reranker_seed_stability.csv,True,612
@@ -81,10 +83,10 @@ Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,T
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1884
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
-Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3939
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,23632
-Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9881
-Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5713
+Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3843
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,24447
+Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
+Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
 Evidence freshness audit CSV,outputs/agent_memory_evidence_freshness_audit.csv,True,98
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
