@@ -216,6 +216,8 @@ def main() -> None:
         ("Human/LLM priority20 audit confirmation", outputs / "agent_memory_human_llm_audit_priority20_confirmation.csv"),
         ("Human/LLM priority20 audit agreement", outputs / "agent_memory_human_llm_audit_priority20_agreement_zh.md"),
         ("Human/LLM priority20 audit agreement CSV", outputs / "agent_memory_human_llm_audit_priority20_agreement.csv"),
+        ("Human audit readiness gate", outputs / "agent_memory_human_audit_readiness_gate_zh.md"),
+        ("Human audit readiness gate CSV", outputs / "agent_memory_human_audit_readiness_gate.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -313,6 +315,11 @@ def main() -> None:
             "stage": "Human/LLM priority20 audit",
             "command": "work/agent_memory_experiment/generate_priority_audit_subset.py",
             "notes": "Selects a 20-sample quick-review subset and reuses the agreement workflow.",
+        },
+        {
+            "stage": "Human audit readiness gate",
+            "command": "work/agent_memory_experiment/validate_human_audit_readiness.py",
+            "notes": "Checks whether priority20/full80 human confirmations can support paper claims.",
         },
         {
             "stage": "Evidence matrix",

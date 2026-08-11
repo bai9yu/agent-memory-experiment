@@ -47,6 +47,7 @@
 - `outputs/agent_memory_human_llm_audit_agreement_zh.md`
 - `outputs/agent_memory_human_llm_audit_priority20_guide_zh.md`
 - `outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md`
+- `outputs/agent_memory_human_audit_readiness_gate_zh.md`
 
 论文复现清单见：
 

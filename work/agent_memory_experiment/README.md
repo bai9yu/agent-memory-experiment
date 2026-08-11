@@ -954,6 +954,17 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
   --output-report outputs/agent_memory_manuscript_claim_check_zh.md
 ```
 
+Validate human-audit readiness for paper claims:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_readiness.py \
+  --full-confirmation outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --priority-confirmation outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-csv outputs/agent_memory_human_audit_readiness_gate.csv \
+  --output-report outputs/agent_memory_human_audit_readiness_gate_zh.md
+```
+
 Generate external embedding baseline status:
 
 ```bash

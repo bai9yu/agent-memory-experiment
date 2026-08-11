@@ -268,10 +268,11 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_human_llm_audit_agreement_zh.md`：Human/LLM 一致性报告；当前为 `pending_human_confirmation`，人工字段完成后会统计 exact agreement 和 Cohen's kappa。
 - `outputs/agent_memory_human_llm_audit_priority20_guide_zh.md`：20 条优先人工抽查指南；优先覆盖 LLM 判为 no/partial、gold 充分性存疑和高歧义错误类型。
 - `outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md`：priority20 快速抽查一致性报告；当前为 `pending_human_confirmation`，用于先低成本获得 quick-review 可靠性证据。
+- `outputs/agent_memory_human_audit_readiness_gate_zh.md`：Human audit readiness 门禁；当前 priority20 为 `0/20`、full80 为 `0/80`，用于防止论文把 LLM-assisted 预标注写成人工验证结论。
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `47/47`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `49/49`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
