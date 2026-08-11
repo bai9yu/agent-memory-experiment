@@ -1,0 +1,6 @@
+field,question,allowed,yes_rule,partial_rule,no_rule,paper_use
+human_auto_reason_correct,自动错误类型 auto_reason 是否准确解释了 Top-1/Top-K 失败原因？,yes | partial | no,auto_reason 与人工看到的主要失败原因一致，即使措辞不完全相同也可标 yes。,auto_reason 捕捉到部分原因，但遗漏了更关键的因素，或多个原因并存。,auto_reason 与样本证据明显不符，或真正原因属于另一类。,用于估计自动错误分析标签的可信度，不能替代人工错误类型分布。
+human_top_memory_relevant,Top memory 是否能够回答或部分回答 query？,yes | partial | no,Top memory 直接包含答案，或包含足以唯一推出答案的事实。,Top memory 与 query 主题、人物或时间相关，但缺少关键答案事实。,Top memory 与 query 无关、人物/时间错误，或会导致错误答案。,用于区分排序错误和 gold/evidence 设计问题。
+human_gold_memory_sufficient,Gold memory 是否足以支持 query 的答案判断？,yes | no | unclear,Gold memory 单独或作为 gold set 的一部分，能支持正确答案。,,Gold memory 与 query 不匹配，或缺少回答 query 所需的关键事实。,用于发现数据标签或 memory extraction 本身的问题。
+human_manual_reason,人工给出的主要错误类型或补充原因。,free text,优先使用短标签，例如 gold_below_top20、memory_type_mismatch、temporal_neighbor、entity_confusion、gold_insufficient、other。,,不要留空；不确定时写 unclear 并在 notes 解释。,用于最终人工错误分析表和 case study。
+human_auditor_notes,人工备注。,free text,记录让你做出判断的关键词、时间线、人物名或冲突证据。,,如果判断很直接，可以写 short note；不要写 API key、私人账号或无关信息。,用于仲裁和论文定性分析。

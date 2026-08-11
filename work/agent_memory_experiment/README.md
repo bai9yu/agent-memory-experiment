@@ -998,6 +998,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-report outputs/agent_memory_human_audit_full80_review_packet_zh.md
 ```
 
+Generate the human-audit annotation codebook before manual labeling:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_human_audit_annotation_codebook.py \
+  --project-root . \
+  --output-report outputs/agent_memory_human_audit_annotation_codebook_zh.md \
+  --output-schema outputs/agent_memory_human_audit_annotation_schema.csv
+```
+
 Fill only the `human_*` columns in the blind CSV, then merge labels back into
 the Human/LLM confirmation sheet:
 

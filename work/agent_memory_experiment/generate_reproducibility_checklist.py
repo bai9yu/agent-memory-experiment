@@ -278,6 +278,8 @@ def main() -> None:
         ("Human audit full80 dual agreement CSV", outputs / "agent_memory_human_audit_full80_dual_agreement.csv"),
         ("Human audit readiness gate", outputs / "agent_memory_human_audit_readiness_gate_zh.md"),
         ("Human audit readiness gate CSV", outputs / "agent_memory_human_audit_readiness_gate.csv"),
+        ("Human audit annotation codebook", outputs / "agent_memory_human_audit_annotation_codebook_zh.md"),
+        ("Human audit annotation schema", outputs / "agent_memory_human_audit_annotation_schema.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -442,6 +444,11 @@ def main() -> None:
             "stage": "Human audit review packet",
             "command": "work/agent_memory_experiment/generate_human_audit_review_packet.py",
             "notes": "Renders a readable Markdown review packet from the blinded priority20 sheet without exposing LLM-assisted labels.",
+        },
+        {
+            "stage": "Human audit annotation codebook",
+            "command": "work/agent_memory_experiment/generate_human_audit_annotation_codebook.py",
+            "notes": "Defines yes/partial/no label rules, manual reason labels, dual-annotation flow, and paper-claim boundaries.",
         },
         {
             "stage": "Dual human audit agreement",

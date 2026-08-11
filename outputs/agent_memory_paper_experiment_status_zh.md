@@ -266,7 +266,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_manuscript_claim_check_zh.md`：论文声明一致性检查；当前 8 项检查全部通过，用于防止正文把 pending baseline 或人工复核写成已完成结论。
 - `outputs/agent_memory_submission_readiness_gate_zh.md`：最终投稿门禁汇总；当前 required gates 为 `5/10`，blockers 为 `5`，说明复现、声明检查、公开发布卫生和 artifact 完整性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
 - `outputs/agent_memory_public_release_readiness_zh.md`：公开发布卫生检查；当前 blocker 为 `0`，未发现 tracked secret 或 `.env` 入库，剩余 minor 是正式开源前可补 LICENSE。
-- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `109/109` 个复现 artifact，缺失 `0`；其中 `107` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
+- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `111/111` 个复现 artifact，缺失 `0`；其中 `109` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前已登记默认 OpenAI `text-embedding-3-small` 和通用 OpenAI-compatible provider 两个入口，但尚未实际运行出指标。
@@ -290,10 +290,12 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_human_audit_full80_review_packet_zh.md`：full80 人工复核阅读包；覆盖完整 80 条盲审样本，可用于分配完整人工确认任务。
 - `outputs/agent_memory_human_audit_full80_dual_agreement_zh.md`：full80 双人独立标注一致性入口；当前 A/B 均完成 `0/80`，仲裁字段可用于形成论文最终人工错误分析标签。
 - `outputs/agent_memory_human_audit_readiness_gate_zh.md`：Human audit readiness 门禁；当前 priority20 为 `0/20`、full80 为 `0/80`，用于防止论文把 LLM-assisted 预标注写成人工验证结论。
+- `outputs/agent_memory_human_audit_annotation_codebook_zh.md`：人工复核标注准则；统一 priority20/full80 盲审表中 yes/partial/no、gold sufficiency、人工错误类型和双人标注流程的判定标准。
+- `outputs/agent_memory_human_audit_annotation_schema.csv`：人工复核字段 schema；记录每个 human_* 字段的问题、允许取值、判定规则和论文用途。
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `109/109`，metric gate 为 `9/9`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `111/111`，metric gate 为 `9/9`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
