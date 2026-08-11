@@ -607,6 +607,18 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candi
   --output-report outputs/agent_memory_candidate_reranker_feature_ablation_zh.md
 ```
 
+Generate paired outcome and effect-size diagnostics for the intrinsic reranker:
+
+```bash
+python3 work/agent_memory_experiment/generate_paired_effect_size_analysis.py \
+  --comparison outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv \
+  --baseline type_aware \
+  --candidate ablation_intrinsic_only \
+  --comparison-name intrinsic_only_vs_type_aware \
+  --output-csv outputs/agent_memory_candidate_reranker_paired_effect_size.csv \
+  --output-report outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md
+```
+
 Run extended seed-stability analysis for the intrinsic candidate reranker:
 
 ```bash

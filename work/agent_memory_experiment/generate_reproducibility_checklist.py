@@ -184,6 +184,8 @@ def main() -> None:
         ("Candidate reranker feature ablation split summary", outputs / "agent_memory_candidate_reranker_feature_ablation_split_summary.csv"),
         ("Candidate reranker feature ablation deltas", outputs / "agent_memory_candidate_reranker_feature_ablation_deltas.csv"),
         ("Candidate reranker feature ablation comparison", outputs / "agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv"),
+        ("Candidate reranker paired effect-size report", outputs / "agent_memory_candidate_reranker_paired_effect_size_zh.md"),
+        ("Candidate reranker paired effect-size CSV", outputs / "agent_memory_candidate_reranker_paired_effect_size.csv"),
         ("Candidate reranker seed stability report", outputs / "agent_memory_candidate_reranker_seed_stability_zh.md"),
         ("Candidate reranker seed stability summary", outputs / "agent_memory_candidate_reranker_seed_stability_summary.csv"),
         ("Candidate reranker seed stability deltas", outputs / "agent_memory_candidate_reranker_seed_stability.csv"),
@@ -313,6 +315,13 @@ def main() -> None:
         read_csv(outputs / "agent_memory_candidate_reranker_seed_stability.csv"),
         method="ablation_intrinsic_only",
     )
+    effect_size = metric_lookup(
+        read_csv(outputs / "agent_memory_candidate_reranker_paired_effect_size.csv"),
+        comparison="intrinsic_only_vs_type_aware",
+        group="all",
+        group_value="all",
+        metric="mrr",
+    )
     coverage = metric_lookup(
         read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv"),
         experiment="supervised_set_selector",
@@ -329,6 +338,8 @@ def main() -> None:
         metric_row("Intrinsic-only LOCO candidate reranker Recall@5", float(intrinsic_loco["recall@5_mean"]), 0.79),
         metric_row("Intrinsic-only seed-stability positive-seed rate", float(seed_stability["mrr_win_rate"]), 1.00),
         metric_row("Intrinsic-only seed-stability minimum MRR delta", float(seed_stability["mrr_delta_min"]), 0.04),
+        metric_row("Intrinsic-only paired effect-size MRR Cohen dz", float(effect_size["cohen_dz"]), 0.20),
+        metric_row("Intrinsic-only paired effect-size positive net rate", float(effect_size["net_positive_rate"]), 0.06),
         metric_row("Type3 supervised selector Coverage@5 delta is negative", -float(coverage["mean_delta"]), 0.05),
     ]
     writer_ready = False
@@ -362,6 +373,11 @@ def main() -> None:
             "stage": "Candidate reranker feature ablation",
             "command": "work/agent_memory_experiment/candidate_reranker_feature_ablation.py",
             "notes": "Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware.",
+        },
+        {
+            "stage": "Candidate reranker paired effect size",
+            "command": "work/agent_memory_experiment/generate_paired_effect_size_analysis.py",
+            "notes": "Reports improved/worsened/tied paired outcomes, query-type breakdowns, and paired Cohen's dz.",
         },
         {
             "stage": "Candidate reranker seed stability",

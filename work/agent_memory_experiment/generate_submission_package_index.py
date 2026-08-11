@@ -104,6 +104,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "next_action": "投稿正文可把该结果写入 robustness/stability 小节。",
         },
         {
+            "section": "Method Appendix",
+            "artifact": "outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md",
+            "role": "intrinsic candidate reranker 的 improved/worsened/tied、query type breakdown 和 paired Cohen's dz。",
+            "status": "ready",
+            "evidence": "paired outcome and effect-size diagnostics generated",
+            "next_action": "投稿正文可用该结果解释收益分布和 Type 3 边界。",
+        },
+        {
             "section": "Experiment Protocol",
             "artifact": "outputs/agent_memory_experiment_protocol_zh.md",
             "role": "数据切片、指标公式、显著性检验、主结果、负结果和写法边界。",

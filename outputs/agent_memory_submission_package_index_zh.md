@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Indexed artifacts: 15
+- Indexed artifacts: 16
 - Missing indexed artifacts: 0
 - Blocked/not-ready sections: 2
 
@@ -15,6 +15,7 @@
 | Main Tables | outputs/agent_memory_paper_tables.tex | True | ready | 可复制进论文的 LaTeX booktabs 表格。 | 投稿前根据目标模板微调 caption/label。 |
 | Method Appendix | outputs/agent_memory_intrinsic_reranker_method_appendix_zh.md | True | ready | intrinsic feature reranker 的候选池、特征、模型、验证协议和复现命令。 | 将核心公式与特征表压缩进正文方法小节。 |
 | Method Appendix | outputs/agent_memory_candidate_reranker_seed_stability_zh.md | True | ready | intrinsic candidate reranker 的 20-seed 随机划分稳定性证据。 | 投稿正文可把该结果写入 robustness/stability 小节。 |
+| Method Appendix | outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md | True | ready | intrinsic candidate reranker 的 improved/worsened/tied、query type breakdown 和 paired Cohen's dz。 | 投稿正文可用该结果解释收益分布和 Type 3 边界。 |
 | Experiment Protocol | outputs/agent_memory_experiment_protocol_zh.md | True | ready | 数据切片、指标公式、显著性检验、主结果、负结果和写法边界。 | 作为 supplementary material 或实验设置附录。 |
 | Evidence Matrix | outputs/agent_memory_paper_evidence_matrix_zh.md | True | ready | 论文主张、证据强度、剩余缺口和可写边界矩阵。 | 写作时逐条核对摘要/贡献是否过度宣称。 |
 | Threats to Validity | outputs/agent_memory_threats_to_validity_zh.md | True | ready_with_blockers_declared | 内部/外部/构念/统计/规模/复现有效性威胁与缓解措施。 | 外部 embedding 和人工复核完成后更新 blocker 行。 |
