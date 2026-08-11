@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 125/125
+- Artifacts covered: 129/129
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 6158371
+- Total bytes: 6179592
 
 ## 前 20 个 Artifact
 
@@ -32,8 +32,8 @@
 | Candidate reranker seed stability summary | True | 682 | 4 | a5a2589cb075 | ok | outputs/agent_memory_candidate_reranker_seed_stability_summary.csv |
 | Candidate reranker seed stability deltas | True | 612 | 3 | db25ff72961b | ok | outputs/agent_memory_candidate_reranker_seed_stability.csv |
 | Candidate reranker seed stability split summary | True | 6086 | 61 | 66789519edd1 | ok | outputs/agent_memory_candidate_reranker_seed_stability_split_summary.csv |
-| Bootstrap metric CI report | True | 6438 | 64 | e469f8dec879 | ok | outputs/agent_memory_bootstrap_metric_ci_zh.md |
-| Bootstrap metric CI CSV | True | 12250 | 33 | c35977989324 | ok | outputs/agent_memory_bootstrap_metric_ci.csv |
+| Candidate reranker train-fraction sensitivity report | True | 2558 | 46 | 36acb7a58ab7 | ok | outputs/agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md |
+| Candidate reranker train-fraction sensitivity summary | True | 2399 | 13 | 1a3f77dc6eb7 | ok | outputs/agent_memory_candidate_reranker_train_fraction_summary.csv |
 
 ## 使用说明
 

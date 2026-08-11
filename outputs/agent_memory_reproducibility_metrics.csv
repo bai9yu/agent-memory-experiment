@@ -9,6 +9,8 @@ Intrinsic-only LOCO candidate reranker MRR,0.6638026458848906,0.66,True
 Intrinsic-only LOCO candidate reranker Recall@5,0.7968899014127238,0.79,True
 Intrinsic-only seed-stability positive-seed rate,1.0,1.0,True
 Intrinsic-only seed-stability minimum MRR delta,0.041393908437331706,0.04,True
+Intrinsic-only train-fraction minimum win rate,1.0,1.0,True
+Intrinsic-only train-fraction minimum MRR delta,0.041393908437331706,0.04,True
 Intrinsic-only paired effect-size MRR Cohen dz,0.22337708453512511,0.2,True
 Intrinsic-only paired effect-size positive net rate,0.06521739130434782,0.06,True
 Type3 supervised selector Coverage@5 delta is negative,0.057205104263927796,0.05,True

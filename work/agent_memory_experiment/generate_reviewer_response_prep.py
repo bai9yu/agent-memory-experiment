@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import statistics
 from pathlib import Path
 from typing import Any
 
@@ -59,6 +60,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     reranker = read_csv(outputs / "agent_memory_candidate_reranker_locomo10_summary.csv")
     feature_ablation = read_csv(outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv")
     seed_stability = read_csv(outputs / "agent_memory_candidate_reranker_seed_stability.csv")
+    train_fraction_sensitivity = read_csv(outputs / "agent_memory_candidate_reranker_train_fraction_sensitivity.csv")
     effect_size = read_csv(outputs / "agent_memory_candidate_reranker_paired_effect_size.csv")
     bootstrap = read_csv(outputs / "agent_memory_bootstrap_metric_ci.csv")
     intrinsic_loco = read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv")
@@ -88,6 +90,13 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "mrr_win_rate": "NA",
         },
     )
+    intrinsic_fraction_rows = [
+        row for row in train_fraction_sensitivity
+        if row.get("method") == "ablation_intrinsic_only"
+    ]
+    intrinsic_fraction_min_win_rate = min(float(row["mrr_win_rate"]) for row in intrinsic_fraction_rows)
+    intrinsic_fraction_min_delta = min(float(row["mrr_delta_min"]) for row in intrinsic_fraction_rows)
+    intrinsic_fraction_mean_delta = statistics.mean(float(row["mrr_delta_mean"]) for row in intrinsic_fraction_rows)
     intrinsic_effect = lookup(
         effect_size,
         comparison="intrinsic_only_vs_type_aware",
@@ -164,12 +173,14 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
                 f"95% CI=[{f(intrinsic_ci.get('delta_ci_low'), 4)}, {f(intrinsic_ci.get('delta_ci_high'), 4)}]；"
                 f"20-seed stability: positive seeds={intrinsic_seed.get('mrr_positive_seeds')}/{intrinsic_seed.get('seeds')}, "
                 f"mean ΔMRR={f(intrinsic_seed.get('mrr_delta_mean'), 4)}, min ΔMRR={f(intrinsic_seed.get('mrr_delta_min'), 4)}；"
+                f"train-fraction sensitivity: min win rate={f(intrinsic_fraction_min_win_rate, 2)}, "
+                f"min ΔMRR={f(intrinsic_fraction_min_delta, 4)}, mean fraction ΔMRR={f(intrinsic_fraction_mean_delta, 4)}；"
                 f"paired outcome: improved/worsened/tied={intrinsic_effect.get('improved_pairs')}/{intrinsic_effect.get('worsened_pairs')}/{intrinsic_effect.get('tied_pairs')}, "
                 f"Cohen dz={f(intrinsic_effect.get('cohen_dz'), 4)}。"
             ),
-            "evidence_artifacts": "agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_paired_effect_size_zh.md; agent_memory_candidate_reranker_seed_stability_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
-            "remaining_gap": "仍可继续补 train/dev/test seed sweep 或更多外部数据集；但随机划分稳定性已具备 20-seed 证据。",
-            "planned_response": "强调候选级学习重排使用 held-out query split、intrinsic-only 消融和 20-seed stability，降低调参偶然性风险。",
+            "evidence_artifacts": "agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_paired_effect_size_zh.md; agent_memory_candidate_reranker_seed_stability_zh.md; agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
+            "remaining_gap": "仍可继续补更多外部数据集；但随机划分、训练比例和配对效应量证据已具备。",
+            "planned_response": "强调候选级学习重排使用 held-out query split、intrinsic-only 消融、20-seed stability、train-fraction sensitivity 和 paired effect-size，降低调参偶然性风险。",
         },
         {
             "reviewer_question": "该方法能否跨对话泛化？",

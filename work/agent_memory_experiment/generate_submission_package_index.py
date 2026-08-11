@@ -112,6 +112,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "next_action": "投稿正文可用该结果解释收益分布和 Type 3 边界。",
         },
         {
+            "section": "Method Appendix",
+            "artifact": "outputs/agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md",
+            "role": "intrinsic candidate reranker 在 0.5/0.6/0.7/0.8 train fraction 下的敏感性分析。",
+            "status": "ready",
+            "evidence": "intrinsic reranker win rate remains 1.0 across train fractions",
+            "next_action": "投稿正文可用该结果回应训练比例依赖风险。",
+        },
+        {
             "section": "Experiment Protocol",
             "artifact": "outputs/agent_memory_experiment_protocol_zh.md",
             "role": "数据切片、指标公式、显著性检验、主结果、负结果和写法边界。",

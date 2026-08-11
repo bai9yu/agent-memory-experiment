@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：125/125
-- 关键指标阈值：13/13
+- Artifact 存在性：129/129
+- 关键指标阈值：15/15
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `b74625f` |
+| git_commit | `39b10f1` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -44,6 +44,10 @@
 | Candidate reranker seed stability summary | True | 682 | `outputs/agent_memory_candidate_reranker_seed_stability_summary.csv` |
 | Candidate reranker seed stability deltas | True | 612 | `outputs/agent_memory_candidate_reranker_seed_stability.csv` |
 | Candidate reranker seed stability split summary | True | 6086 | `outputs/agent_memory_candidate_reranker_seed_stability_split_summary.csv` |
+| Candidate reranker train-fraction sensitivity report | True | 2558 | `outputs/agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md` |
+| Candidate reranker train-fraction sensitivity summary | True | 2399 | `outputs/agent_memory_candidate_reranker_train_fraction_summary.csv` |
+| Candidate reranker train-fraction sensitivity deltas | True | 1835 | `outputs/agent_memory_candidate_reranker_train_fraction_sensitivity.csv` |
+| Candidate reranker train-fraction sensitivity split summary | True | 12588 | `outputs/agent_memory_candidate_reranker_train_fraction_split_summary.csv` |
 | Bootstrap metric CI report | True | 6438 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
 | Bootstrap metric CI CSV | True | 12250 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
 | Validation-tuned router comparison | True | 850159 | `outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv` |
@@ -82,23 +86,23 @@
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
 | Paper tables Markdown | True | 3724 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 5197 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 7278 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper evidence matrix | True | 7414 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 7485 | `outputs/agent_memory_paper_draft_outline_zh.md` |
-| Paper manuscript draft | True | 12033 | `outputs/agent_memory_manuscript_draft_zh.md` |
+| Paper manuscript draft | True | 12317 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
 | Threats to validity appendix | True | 5872 | `outputs/agent_memory_threats_to_validity_zh.md` |
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
-| Reviewer response preparation matrix | True | 4161 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
-| Reviewer response preparation matrix CSV | True | 3848 | `outputs/agent_memory_reviewer_response_prep.csv` |
-| Submission package index | True | 4494 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 4654 | `outputs/agent_memory_submission_package_index.csv` |
+| Reviewer response preparation matrix | True | 4291 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
+| Reviewer response preparation matrix CSV | True | 4044 | `outputs/agent_memory_reviewer_response_prep.csv` |
+| Submission package index | True | 5034 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 5284 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission readiness gate | True | 2326 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
 | Submission readiness gate CSV | True | 1884 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
-| Artifact integrity manifest | True | 3857 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 21381 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest | True | 3872 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
+| Artifact integrity manifest CSV | True | 21760 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -148,7 +152,7 @@
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
 | Human audit annotation codebook | True | 6136 | `outputs/agent_memory_human_audit_annotation_codebook_zh.md` |
 | Human audit annotation schema | True | 1883 | `outputs/agent_memory_human_audit_annotation_schema.csv` |
-| Paper experiment status | True | 32640 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 33157 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -166,6 +170,8 @@
 | Intrinsic-only LOCO candidate reranker Recall@5 | 0.7969 | 0.7900 | True |
 | Intrinsic-only seed-stability positive-seed rate | 1.0000 | 1.0000 | True |
 | Intrinsic-only seed-stability minimum MRR delta | 0.0414 | 0.0400 | True |
+| Intrinsic-only train-fraction minimum win rate | 1.0000 | 1.0000 | True |
+| Intrinsic-only train-fraction minimum MRR delta | 0.0414 | 0.0400 | True |
 | Intrinsic-only paired effect-size MRR Cohen dz | 0.2234 | 0.2000 | True |
 | Intrinsic-only paired effect-size positive net rate | 0.0652 | 0.0600 | True |
 | Type3 supervised selector Coverage@5 delta is negative | 0.0572 | 0.0500 | True |
@@ -180,6 +186,7 @@
 | Candidate reranker feature ablation | `work/agent_memory_experiment/candidate_reranker_feature_ablation.py` | Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware. |
 | Candidate reranker paired effect size | `work/agent_memory_experiment/generate_paired_effect_size_analysis.py` | Reports improved/worsened/tied paired outcomes, query-type breakdowns, and paired Cohen's dz. |
 | Candidate reranker seed stability | `work/agent_memory_experiment/candidate_reranker_seed_stability.py` | Runs an extended 20-seed stability check for intrinsic-only and full candidate rerankers against type-aware. |
+| Candidate reranker train-fraction sensitivity | `work/agent_memory_experiment/candidate_reranker_train_fraction_sensitivity.py` | Checks whether intrinsic-only reranker gains hold across 0.5/0.6/0.7/0.8 train fractions. |
 | Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
 | Intrinsic candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_intrinsic_loco_experiment.py` | Reuses leave-one-conversation-out split with intrinsic-only candidate features. |
 | Intrinsic reranker method appendix | `work/agent_memory_experiment/generate_intrinsic_reranker_method_appendix.py` | Builds a paper appendix with feature definitions, model hyperparameters, validation protocol, and reproducible commands. |

@@ -190,6 +190,10 @@ def main() -> None:
         ("Candidate reranker seed stability summary", outputs / "agent_memory_candidate_reranker_seed_stability_summary.csv"),
         ("Candidate reranker seed stability deltas", outputs / "agent_memory_candidate_reranker_seed_stability.csv"),
         ("Candidate reranker seed stability split summary", outputs / "agent_memory_candidate_reranker_seed_stability_split_summary.csv"),
+        ("Candidate reranker train-fraction sensitivity report", outputs / "agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md"),
+        ("Candidate reranker train-fraction sensitivity summary", outputs / "agent_memory_candidate_reranker_train_fraction_summary.csv"),
+        ("Candidate reranker train-fraction sensitivity deltas", outputs / "agent_memory_candidate_reranker_train_fraction_sensitivity.csv"),
+        ("Candidate reranker train-fraction sensitivity split summary", outputs / "agent_memory_candidate_reranker_train_fraction_split_summary.csv"),
         ("Bootstrap metric CI report", outputs / "agent_memory_bootstrap_metric_ci_zh.md"),
         ("Bootstrap metric CI CSV", outputs / "agent_memory_bootstrap_metric_ci.csv"),
         ("Validation-tuned router comparison", outputs / "agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv"),
@@ -315,6 +319,10 @@ def main() -> None:
         read_csv(outputs / "agent_memory_candidate_reranker_seed_stability.csv"),
         method="ablation_intrinsic_only",
     )
+    train_fraction_rows = [
+        row for row in read_csv(outputs / "agent_memory_candidate_reranker_train_fraction_sensitivity.csv")
+        if row.get("method") == "ablation_intrinsic_only"
+    ]
     effect_size = metric_lookup(
         read_csv(outputs / "agent_memory_candidate_reranker_paired_effect_size.csv"),
         comparison="intrinsic_only_vs_type_aware",
@@ -338,6 +346,16 @@ def main() -> None:
         metric_row("Intrinsic-only LOCO candidate reranker Recall@5", float(intrinsic_loco["recall@5_mean"]), 0.79),
         metric_row("Intrinsic-only seed-stability positive-seed rate", float(seed_stability["mrr_win_rate"]), 1.00),
         metric_row("Intrinsic-only seed-stability minimum MRR delta", float(seed_stability["mrr_delta_min"]), 0.04),
+        metric_row(
+            "Intrinsic-only train-fraction minimum win rate",
+            min(float(row["mrr_win_rate"]) for row in train_fraction_rows),
+            1.00,
+        ),
+        metric_row(
+            "Intrinsic-only train-fraction minimum MRR delta",
+            min(float(row["mrr_delta_min"]) for row in train_fraction_rows),
+            0.04,
+        ),
         metric_row("Intrinsic-only paired effect-size MRR Cohen dz", float(effect_size["cohen_dz"]), 0.20),
         metric_row("Intrinsic-only paired effect-size positive net rate", float(effect_size["net_positive_rate"]), 0.06),
         metric_row("Type3 supervised selector Coverage@5 delta is negative", -float(coverage["mean_delta"]), 0.05),
@@ -383,6 +401,11 @@ def main() -> None:
             "stage": "Candidate reranker seed stability",
             "command": "work/agent_memory_experiment/candidate_reranker_seed_stability.py",
             "notes": "Runs an extended 20-seed stability check for intrinsic-only and full candidate rerankers against type-aware.",
+        },
+        {
+            "stage": "Candidate reranker train-fraction sensitivity",
+            "command": "work/agent_memory_experiment/candidate_reranker_train_fraction_sensitivity.py",
+            "notes": "Checks whether intrinsic-only reranker gains hold across 0.5/0.6/0.7/0.8 train fractions.",
         },
         {
             "stage": "Candidate reranker LOCO",
