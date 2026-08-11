@@ -142,6 +142,8 @@ paired significance test 显示 router 的 MRR delta 为 0.001994，但 95% CI �
 
 配对显著性检验显示 candidate reranker 相比 fixed `type_aware` 稳定提升：MRR delta `+0.0539`，95% CI `[0.0462, 0.0619]`，permutation p-value `0.0002`；Recall@5 delta `+0.0623`，95% CI `[0.0500, 0.0746]`，p-value `0.0002`。这是当前最适合作为论文方法增量的结果：固定公式和 query-level router 不够，而 candidate-level reranking 能从多检索器候选特征中学习更稳的排序。
 
+更严格的 leave-one-conversation-out 验证显示，candidate reranker 在 10 个 conversation split 上仍高于 fixed `type_aware`：按 split 平均 MRR `0.657` vs `0.608`，Recall@5 `0.782` vs `0.732`；按 query 加权的配对显著性检验中，MRR delta `+0.0504`，95% CI `[0.0411, 0.0601]`，permutation p-value `0.0002`，Recall@5 delta `+0.0522`，p-value `0.0002`。因此当前方法贡献不仅依赖随机 query split，也具备跨 LoCoMo conversation 的泛化证据。
+
 Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`、`semantic_score`、`time_aware_score`、`hybrid_score`、`type_aware_rr` 等特征，说明提升来自多检索器排序信号融合，而不是单一字段或 query type 记忆。
 
 按 query type 分析显示，candidate reranker 的收益并不均匀：
@@ -247,7 +249,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 当前已生成论文表格包：
 
 - `outputs/agent_memory_writer_stability_zh.md`：DeepSeek memory writer 重复抽取稳定性汇总；当前 3 个 manifest run 已全部 completed，状态为 `ready_for_variance`，可报告 MRR / Recall@5 / memory_tokens / API tokens 的均值和标准差。
-- `outputs/agent_memory_paper_tables_zh.md`：Markdown 主表、消融表、Type 3 失败分析表。
+- `outputs/agent_memory_paper_tables_zh.md`：Markdown 主表、消融表、candidate reranker LOCO 验证表、Type 3 失败分析表。
 - `outputs/agent_memory_paper_tables.tex`：可直接复制到论文的 LaTeX `booktabs` 表格。
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`：按“论文主张-证据-证据强度-剩余缺口”整理当前实验是否足以支撑投稿表述。
 - `outputs/agent_memory_paper_draft_outline_zh.md`：中文论文草稿骨架，汇总题目、摘要、贡献、公式、实验 RQ、边界和投稿前最小条件。
@@ -259,7 +261,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `25/25`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `29/29`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。

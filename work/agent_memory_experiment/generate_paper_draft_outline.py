@@ -34,6 +34,8 @@ def write_report(path: Path, outputs: Path) -> None:
     baseline = read_csv(outputs / "agent_memory_baseline_comparison_locomo10.csv")
     reranker = read_csv(outputs / "agent_memory_candidate_reranker_locomo10_summary.csv")
     reranker_sig = read_csv(outputs / "agent_memory_candidate_reranker_significance_results.csv")
+    reranker_loco = read_csv(outputs / "agent_memory_candidate_reranker_loco_summary.csv")
+    reranker_loco_sig = read_csv(outputs / "agent_memory_candidate_reranker_loco_significance_results.csv")
     type3_cov = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
     evidence = read_csv(outputs / "agent_memory_paper_evidence_matrix.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
@@ -46,6 +48,10 @@ def write_report(path: Path, outputs: Path) -> None:
     reranker_base = lookup(reranker, method="type_aware")
     reranker_mrr = lookup(reranker_sig, metric="mrr")
     reranker_r5 = lookup(reranker_sig, metric="recall@5")
+    reranker_loco_row = lookup(reranker_loco, method="candidate_reranker_loco")
+    reranker_loco_base = lookup(reranker_loco, method="type_aware")
+    reranker_loco_mrr = lookup(reranker_loco_sig, metric="mrr")
+    reranker_loco_r5 = lookup(reranker_loco_sig, metric="recall@5")
     type3_selector = lookup(type3_cov, experiment="supervised_set_selector", metric="coverage_ratio@5")
     writer_mrr = lookup(writer_aggregate, metric="mrr")
     writer_r5 = lookup(writer_aggregate, metric="recall@5")
@@ -76,6 +82,8 @@ def write_report(path: Path, outputs: Path) -> None:
             f"高于 LoCoMo observation memory 的 MRR {f(observation['mrr'])} 和 Recall@5 {f(observation['recall@5'])}。"
             f"进一步地，候选级学习重排在 held-out split 上将 MRR 从 {f(reranker_base['mrr_mean'])} 提升到 {f(reranker_row['mrr_mean'])}，"
             f"MRR delta 为 {signed(reranker_mrr['mean_delta'])}，permutation p={f(reranker_mrr['permutation_p_value'], 4)}。"
+            f"在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 {f(reranker_loco_row['mrr_mean'])}，"
+            f"高于 type-aware 的 {f(reranker_loco_base['mrr_mean'])}，加权 MRR delta 为 {signed(reranker_loco_mrr['mean_delta'])}。"
             f"DeepSeek memory writer 三次运行的 MRR 均值为 {f(writer_mrr['mean'])}，标准差为 {f(writer_mrr['stdev'])}，"
             f"Recall@5 均值为 {f(writer_r5['mean'])}，标准差为 {f(writer_r5['stdev'])}。"
             "同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。"
@@ -147,7 +155,8 @@ def write_report(path: Path, outputs: Path) -> None:
         "### RQ3: 学习式候选重排是否带来主要收益？",
         "",
         f"- 结果：candidate reranker MRR {f(reranker_row['mrr_mean'])} vs type-aware {f(reranker_base['mrr_mean'])}；MRR delta {signed(reranker_mrr['mean_delta'])}，Recall@5 delta {signed(reranker_r5['mean_delta'])}。",
-        "- 写法：这是当前论文最稳的算法贡献。",
+        f"- LOCO 验证：candidate reranker MRR {f(reranker_loco_row['mrr_mean'])} vs type-aware {f(reranker_loco_base['mrr_mean'])}；加权 MRR delta {signed(reranker_loco_mrr['mean_delta'])}，Recall@5 delta {signed(reranker_loco_r5['mean_delta'])}。",
+        "- 写法：这是当前论文最稳的算法贡献；随机 held-out 与 leave-one-conversation-out 均支持该结论。",
         "",
         "### RQ4: Type 3 多证据问题是否解决？",
         "",

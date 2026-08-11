@@ -60,6 +60,35 @@ recall@5 & +0.0623 & [0.0500, 0.0746] & 0.0002 \\
 
 \begin{table}[t]
 \centering
+\caption{Leave-one-conversation-out candidate-level reranking results.}
+\label{tab:candidate_reranker_loco}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Splits & R@1 & R@3 & R@5 & MRR \\
+\midrule
+type\_aware & 10 & 0.503 & 0.669 & 0.732 & 0.608 \\
+candidate\_reranker\_loco & 10 & 0.557 & 0.720 & 0.782 & 0.657 \\
+candidate\_oracle & 10 & 0.911 & 0.911 & 0.911 & 0.911 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Paired significance tests for leave-one-conversation-out candidate reranking.}
+\label{tab:candidate_reranker_loco_sig}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Delta & 95\% CI & p-value \\
+\midrule
+mrr & +0.0504 & [0.0411, 0.0601] & 0.0002 \\
+recall@5 & +0.0522 & [0.0375, 0.0675] & 0.0002 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
 \caption{Type-3 multi-evidence diagnostic results.}
 \label{tab:type3_boundary}
 \begin{tabular}{lrrrr}

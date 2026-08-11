@@ -116,6 +116,22 @@ def candidate_reranker_rows(summary_path: Path, significance_path: Path) -> tupl
     return metric_rows, sig_rows
 
 
+def candidate_loco_rows(summary_path: Path, significance_path: Path) -> tuple[list[list[str]], list[list[str]]]:
+    rows = read_csv(summary_path)
+    order = {"type_aware": 0, "candidate_reranker_loco": 1, "candidate_oracle": 2}
+    selected = sorted(rows, key=lambda row: order.get(row["method"], 99))
+    metric_rows = [
+        [row["method"], row["splits"], fmt(row["recall@1_mean"]), fmt(row["recall@3_mean"]), fmt(row["recall@5_mean"]), fmt(row["mrr_mean"])]
+        for row in selected
+    ]
+    sig_rows = [
+        [row["metric"], pct_delta(row["mean_delta"]), f"[{fmt(row['bootstrap_ci_low'], 4)}, {fmt(row['bootstrap_ci_high'], 4)}]", fmt(row["permutation_p_value"], 4)]
+        for row in read_csv(significance_path)
+        if row["metric"] in {"mrr", "recall@5"}
+    ]
+    return metric_rows, sig_rows
+
+
 def type3_rows(
     specific_path: Path,
     set_selector_path: Path,
@@ -201,6 +217,10 @@ def main() -> None:
         out / "agent_memory_candidate_reranker_locomo10_summary.csv",
         out / "agent_memory_candidate_reranker_significance_results.csv",
     )
+    reranker_loco_rows, reranker_loco_sig_rows = candidate_loco_rows(
+        out / "agent_memory_candidate_reranker_loco_summary.csv",
+        out / "agent_memory_candidate_reranker_loco_significance_results.csv",
+    )
     type3_metric_rows, type3_coverage_rows = type3_rows(
         out / "agent_memory_type3_specific_reranker_summary.csv",
         out / "agent_memory_type3_supervised_set_selector_summary.csv",
@@ -237,6 +257,20 @@ def main() -> None:
             reranker_sig_rows,
             "Paired significance tests for candidate-level reranking.",
             "tab:candidate_reranker_sig",
+        ),
+        (
+            "候选级重排 LOCO 验证",
+            ["Method", "Splits", "R@1", "R@3", "R@5", "MRR"],
+            reranker_loco_rows,
+            "Leave-one-conversation-out candidate-level reranking results.",
+            "tab:candidate_reranker_loco",
+        ),
+        (
+            "候选级重排 LOCO 显著性",
+            ["Metric", "Delta", "95% CI", "p-value"],
+            reranker_loco_sig_rows,
+            "Paired significance tests for leave-one-conversation-out candidate reranking.",
+            "tab:candidate_reranker_loco_sig",
         ),
         (
             "Type 3 方法边界",

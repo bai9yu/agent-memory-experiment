@@ -179,6 +179,10 @@ def main() -> None:
         ("Writer stability runs", outputs / "agent_memory_writer_stability_runs.csv"),
         ("Candidate reranker report", outputs / "agent_memory_candidate_reranker_locomo10_zh.md"),
         ("Candidate reranker significance", outputs / "agent_memory_candidate_reranker_significance_zh.md"),
+        ("Candidate reranker LOCO report", outputs / "agent_memory_candidate_reranker_loco_zh.md"),
+        ("Candidate reranker LOCO summary", outputs / "agent_memory_candidate_reranker_loco_summary.csv"),
+        ("Candidate reranker LOCO significance", outputs / "agent_memory_candidate_reranker_loco_significance_zh.md"),
+        ("Candidate reranker LOCO comparison", outputs / "agent_memory_candidate_reranker_loco_comparison_per_query.csv"),
         ("Type3 coverage significance", outputs / "agent_memory_type3_coverage_significance_zh.md"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
@@ -241,6 +245,11 @@ def main() -> None:
             "stage": "Candidate reranker",
             "command": "work/agent_memory_experiment/candidate_reranker_experiment.py",
             "notes": "Uses cached rankings.csv; held-out query split.",
+        },
+        {
+            "stage": "Candidate reranker LOCO",
+            "command": "work/agent_memory_experiment/candidate_reranker_loco_experiment.py",
+            "notes": "Uses cached rankings.csv; leave-one-conversation-out split.",
         },
         {
             "stage": "Type3 diagnostics",

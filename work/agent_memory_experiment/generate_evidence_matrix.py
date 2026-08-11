@@ -60,6 +60,8 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type_sig = read_csv(outputs / "agent_memory_type_aware_significance_results.csv")
     reranker = read_csv(outputs / "agent_memory_candidate_reranker_locomo10_summary.csv")
     reranker_sig = read_csv(outputs / "agent_memory_candidate_reranker_significance_results.csv")
+    reranker_loco = read_csv(outputs / "agent_memory_candidate_reranker_loco_summary.csv")
+    reranker_loco_sig = read_csv(outputs / "agent_memory_candidate_reranker_loco_significance_results.csv")
     query_type = read_csv(outputs / "agent_memory_query_type_locomo10_best_methods.csv")
     coverage = read_csv(outputs / "agent_memory_multi_evidence_coverage_summary.csv")
     type3_sig = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
@@ -85,6 +87,10 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     reranker_base = lookup(reranker, method="type_aware")
     reranker_sig_mrr = lookup(reranker_sig, metric="mrr")
     reranker_sig_r5 = lookup(reranker_sig, metric="recall@5")
+    reranker_loco_row = lookup(reranker_loco, method="candidate_reranker_loco")
+    reranker_loco_base = lookup(reranker_loco, method="type_aware")
+    reranker_loco_sig_mrr = lookup(reranker_loco_sig, metric="mrr")
+    reranker_loco_sig_r5 = lookup(reranker_loco_sig, metric="recall@5")
     type3_row = lookup(query_type, variant="llm_extracted_fact", query_type="3")
     type5_row = lookup(query_type, variant="llm_extracted_fact", query_type="5")
     cov_type3 = lookup(coverage, query_type="3", method="type_aware")
@@ -154,12 +160,15 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
                 f"Held-out type-aware MRR {f(reranker_base['mrr_mean'])}, R@5 {f(reranker_base['recall@5_mean'])}; "
                 f"candidate reranker MRR {f(reranker_row['mrr_mean'])}, R@5 {f(reranker_row['recall@5_mean'])}; "
                 f"MRR delta {signed(reranker_sig_mrr['mean_delta'])}, p={f(reranker_sig_mrr['permutation_p_value'], 4)}; "
-                f"R@5 delta {signed(reranker_sig_r5['mean_delta'])}, p={f(reranker_sig_r5['permutation_p_value'], 4)}."
+                f"R@5 delta {signed(reranker_sig_r5['mean_delta'])}, p={f(reranker_sig_r5['permutation_p_value'], 4)}. "
+                f"LOCO split: type-aware MRR {f(reranker_loco_base['mrr_mean'])}, candidate reranker MRR {f(reranker_loco_row['mrr_mean'])}; "
+                f"weighted MRR delta {signed(reranker_loco_sig_mrr['mean_delta'])}, p={f(reranker_loco_sig_mrr['permutation_p_value'], 4)}; "
+                f"weighted R@5 delta {signed(reranker_loco_sig_r5['mean_delta'])}, p={f(reranker_loco_sig_r5['permutation_p_value'], 4)}."
             ),
-            "support_level": "strong_heldout_statistical",
-            "primary_artifacts": "agent_memory_candidate_reranker_locomo10_summary.csv; agent_memory_candidate_reranker_significance_results.csv",
+            "support_level": "strong_heldout_and_loco_statistical",
+            "primary_artifacts": "agent_memory_candidate_reranker_locomo10_summary.csv; agent_memory_candidate_reranker_significance_results.csv; agent_memory_candidate_reranker_loco_summary.csv; agent_memory_candidate_reranker_loco_significance_results.csv",
             "paper_use": "应作为当前论文方法增量的核心结果。",
-            "remaining_gap": "需要加入外部数据集或更大的 LoCoMo split，才能宣称广泛泛化。",
+            "remaining_gap": "LOCO 已支持跨 LoCoMo conversation 泛化；若要宣称跨数据集泛化，仍需外部数据集验证。",
         },
         {
             "claim": "Type 3 多证据问题仍是当前方法边界。",
@@ -300,10 +309,9 @@ def write_report(path: Path, rows: list[dict[str, str]]) -> None:
         "## 投稿前最低补强建议",
         "",
         "1. 加入至少一个强 embedding/API baseline，避免结果只依赖 BGE-M3。",
-        "2. 对 candidate reranker 增加外部数据或更大 LoCoMo split 的验证。",
-        "3. 对错误分析做人工抽样复核，报告自动错误分类的可信度。",
-        "4. Type 3 暂按负结果和边界分析书写，不应宣称已经解决多证据检索。",
-        "5. 若目标期刊/会议要求更强泛化，应在额外数据集或更大真实 memory bank 上复验 writer stability。",
+        "2. 对错误分析做人工抽样复核，报告自动错误分类的可信度。",
+        "3. Type 3 暂按负结果和边界分析书写，不应宣称已经解决多证据检索。",
+        "4. 若目标期刊/会议要求更强泛化，应在额外数据集或更大真实 memory bank 上复验 writer stability 和 candidate reranker。",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

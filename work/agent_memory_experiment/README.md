@@ -568,6 +568,41 @@ python3 work/agent_memory_experiment/paired_significance_test.py \
   --output-report outputs/agent_memory_candidate_reranker_significance_zh.md
 ```
 
+Run leave-one-conversation-out candidate-level reranker analysis:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candidate_reranker_loco_experiment.py \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --locomo work/agent_memory_experiment/data/locomo10.json \
+  --rank-output-k 20 \
+  --output-split-summary outputs/agent_memory_candidate_reranker_loco_split_summary.csv \
+  --output-summary outputs/agent_memory_candidate_reranker_loco_summary.csv \
+  --output-deltas outputs/agent_memory_candidate_reranker_loco_deltas.csv \
+  --output-selected outputs/agent_memory_candidate_reranker_loco_selected.csv \
+  --output-comparison outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv \
+  --output-feature-importance outputs/agent_memory_candidate_reranker_loco_feature_importance.csv \
+  --output-ranked outputs/agent_memory_candidate_reranker_loco_ranked_top20.csv \
+  --output-report outputs/agent_memory_candidate_reranker_loco_zh.md
+```
+
+Run paired significance testing for the LOCO candidate reranker:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/paired_significance_test.py \
+  --per-query outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv \
+  --baseline type_aware \
+  --candidate candidate_reranker_loco \
+  --metrics mrr,recall@1,recall@3,recall@5 \
+  --iterations 5000 \
+  --seed 20260811 \
+  --output-csv outputs/agent_memory_candidate_reranker_loco_significance_results.csv \
+  --output-report outputs/agent_memory_candidate_reranker_loco_significance_zh.md
+```
+
 Run candidate reranker by-type and case analysis:
 
 ```bash

@@ -10,7 +10,7 @@
 
 ## 摘要草稿
 
-长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
+长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002。在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 0.657，高于 type-aware 的 0.608，加权 MRR delta 为 +0.0504。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
 
 ## 贡献点写法
 
@@ -73,7 +73,8 @@ time-aware / type-aware 重排：
 ### RQ3: 学习式候选重排是否带来主要收益？
 
 - 结果：candidate reranker MRR 0.661 vs type-aware 0.607；MRR delta +0.0539，Recall@5 delta +0.0623。
-- 写法：这是当前论文最稳的算法贡献。
+- LOCO 验证：candidate reranker MRR 0.657 vs type-aware 0.608；加权 MRR delta +0.0504，Recall@5 delta +0.0522。
+- 写法：这是当前论文最稳的算法贡献；随机 held-out 与 leave-one-conversation-out 均支持该结论。
 
 ### RQ4: Type 3 多证据问题是否解决？
 

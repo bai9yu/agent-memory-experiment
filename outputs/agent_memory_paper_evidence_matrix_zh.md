@@ -25,7 +25,7 @@
 | main_result | DeepSeek 抽取的事实级记忆在 LoCoMo10 上具备竞争力。 | DeepSeek fact + type-aware: MRR 0.609, R@5 0.733; LoCoMo observation + type-aware: MRR 0.583, R@5 0.703. | strong_cached | 可以作为记忆形态对比主结果，但需要说明当前仍是 LoCoMo10 切片。 | 仍需在 LoCoMo10 之外补外部数据或更大真实 memory bank，才能宣称广泛泛化。 |
 | main_result | 事实级记忆相比 LoCoMo observation memory 能减少存储 token。 | Fact memory tokens 31148 vs observation 40241; ratio 0.774, saving about 22.6%. | strong_cached | 可以支撑 memory compression / storage efficiency 动机。 | 需要把抽取 API 成本和检索阶段存储成本分开报告；方差可引用 writer stability report。 |
 | ablation_result | type-aware 重排相比 time-aware 重排有小幅但统计可靠的提升。 | MRR 0.605 -> 0.609, delta +0.0042, p=0.0072; R@5 delta +0.0065, p=0.0028. | statistically_supported_small_effect | 可以写成一个有用但幅度有限的打分组件。 | 不要夸大 Recall@1 / Recall@3，因为它们没有通过显著性检验。 |
-| main_method | 候选级学习重排是当前最强的方法贡献。 | Held-out type-aware MRR 0.607, R@5 0.733; candidate reranker MRR 0.661, R@5 0.796; MRR delta +0.0539, p=0.0002; R@5 delta +0.0623, p=0.0002. | strong_heldout_statistical | 应作为当前论文方法增量的核心结果。 | 需要加入外部数据集或更大的 LoCoMo split，才能宣称广泛泛化。 |
+| main_method | 候选级学习重排是当前最强的方法贡献。 | Held-out type-aware MRR 0.607, R@5 0.733; candidate reranker MRR 0.661, R@5 0.796; MRR delta +0.0539, p=0.0002; R@5 delta +0.0623, p=0.0002. LOCO split: type-aware MRR 0.608, candidate reranker MRR 0.657; weighted MRR delta +0.0504, p=0.0002; weighted R@5 delta +0.0522, p=0.0002. | strong_heldout_and_loco_statistical | 应作为当前论文方法增量的核心结果。 | LOCO 已支持跨 LoCoMo conversation 泛化；若要宣称跨数据集泛化，仍需外部数据集验证。 |
 | negative_result | Type 3 多证据问题仍是当前方法边界。 | Type 3 best method type_aware with MRR 0.429, R@5 0.547; mean gold evidence 2.651, multi-evidence share 67.5%; Type 5 multi-evidence share is only 35.4%. | strong_diagnostic | 可以作为 limitations 和下一步研究问题的主要依据。 | 需要更强的 listwise / setwise objective 或 LLM decomposition，不能宣称已解决 Type 3。 |
 | negative_result | 浅层 Type 3 修复方法无法解决多证据检索。 | Supervised set selector Coverage@5 delta -0.0572, p=0.0286; Type3-specific reranker and keyword decomposition also reduce Coverage@5. | statistically_supported_negative | 适合作为边界/负结果消融，而不是作为改进方法。 | 下一步应尝试 LLM 子问题生成或真正的 setwise objective。 |
 | efficiency_result | 向量候选预筛选可以在不损害质量的情况下提升检索速度。 | Sklearn exact NN top-200 + type-aware MRR 0.613, R@5 0.734; delta vs full type-aware MRR +0.0032. | strong_cached_efficiency | 可以支撑论文效率实验章节。 | 需要统一报告 wall-clock 设置，并在更大的真实 memory bank 上验证。 |
@@ -39,7 +39,6 @@
 ## 投稿前最低补强建议
 
 1. 加入至少一个强 embedding/API baseline，避免结果只依赖 BGE-M3。
-2. 对 candidate reranker 增加外部数据或更大 LoCoMo split 的验证。
-3. 对错误分析做人工抽样复核，报告自动错误分类的可信度。
-4. Type 3 暂按负结果和边界分析书写，不应宣称已经解决多证据检索。
-5. 若目标期刊/会议要求更强泛化，应在额外数据集或更大真实 memory bank 上复验 writer stability。
+2. 对错误分析做人工抽样复核，报告自动错误分类的可信度。
+3. Type 3 暂按负结果和边界分析书写，不应宣称已经解决多证据检索。
+4. 若目标期刊/会议要求更强泛化，应在额外数据集或更大真实 memory bank 上复验 writer stability 和 candidate reranker。

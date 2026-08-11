@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：25/25
+- Artifact 存在性：29/29
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `f655294` |
-| git_branch_status | `## main...origin/main [ahead 35]` |
+| git_commit | `dc90284` |
+| git_branch_status | `## main...origin/main [ahead 36]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -33,11 +33,15 @@
 | Writer stability runs | True | 924 | `outputs/agent_memory_writer_stability_runs.csv` |
 | Candidate reranker report | True | 2019 | `outputs/agent_memory_candidate_reranker_locomo10_zh.md` |
 | Candidate reranker significance | True | 607 | `outputs/agent_memory_candidate_reranker_significance_zh.md` |
+| Candidate reranker LOCO report | True | 3506 | `outputs/agent_memory_candidate_reranker_loco_zh.md` |
+| Candidate reranker LOCO summary | True | 684 | `outputs/agent_memory_candidate_reranker_loco_summary.csv` |
+| Candidate reranker LOCO significance | True | 627 | `outputs/agent_memory_candidate_reranker_loco_significance_zh.md` |
+| Candidate reranker LOCO comparison | True | 316655 | `outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv` |
 | Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
-| Paper tables Markdown | True | 2345 | `outputs/agent_memory_paper_tables_zh.md` |
-| Paper tables LaTeX | True | 3190 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 6276 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
-| Paper draft outline | True | 5966 | `outputs/agent_memory_paper_draft_outline_zh.md` |
+| Paper tables Markdown | True | 2832 | `outputs/agent_memory_paper_tables_zh.md` |
+| Paper tables LaTeX | True | 3994 | `outputs/agent_memory_paper_tables.tex` |
+| Paper evidence matrix | True | 6396 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper draft outline | True | 6309 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Embedding baseline status | True | 2017 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
@@ -48,7 +52,7 @@
 | Human audit sample | True | 28471 | `outputs/agent_memory_human_audit_sample_type_aware.csv` |
 | Human audit summary | True | 1394 | `outputs/agent_memory_human_audit_summary_zh.md` |
 | Human audit summary CSV | True | 777 | `outputs/agent_memory_human_audit_summary.csv` |
-| Paper experiment status | True | 20405 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 20934 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -69,6 +73,7 @@
 | Main LoCoMo retrieval | `work/agent_memory_experiment/README.md#recommended-locomo-run` | Requires local BGE-M3 cache; no online embedding API. |
 | Writer stability | `work/agent_memory_experiment/summarize_writer_stability.py` | Summarizes repeated DeepSeek memory-writer runs from a local manifest. |
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
+| Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
 | Embedding baseline status | `work/agent_memory_experiment/generate_embedding_baseline_status.py` | Tracks API embedding baseline readiness without reading or printing keys. |
 | API embedding run estimate | `work/agent_memory_experiment/estimate_api_embedding_run.py` | Estimates API embedding item count, approximate tokens, batches, and cache status without network. |

@@ -87,6 +87,8 @@ Text-intent router 可部署规则基线见 `outputs/agent_memory_text_intent_ro
 
 候选级学习重排实验见 `outputs/agent_memory_candidate_reranker_locomo10_zh.md`，显著性检验见 `outputs/agent_memory_candidate_reranker_significance_zh.md`。
 
+更严格的 leave-one-conversation-out 候选级重排验证见 `outputs/agent_memory_candidate_reranker_loco_zh.md`，显著性检验见 `outputs/agent_memory_candidate_reranker_loco_significance_zh.md`。
+
 候选级学习重排的按 query type 分析与失败案例见 `outputs/agent_memory_candidate_reranker_by_type_zh.md`。
 
 多证据覆盖分析见 `outputs/agent_memory_multi_evidence_coverage_zh.md`。
