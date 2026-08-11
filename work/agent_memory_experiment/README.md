@@ -931,6 +931,15 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-report outputs/agent_memory_experiment_protocol_zh.md
 ```
 
+Generate editable Chinese manuscript draft:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_paper_manuscript.py \
+  --project-root . \
+  --output-report outputs/agent_memory_manuscript_draft_zh.md
+```
+
 Generate external embedding baseline status:
 
 ```bash

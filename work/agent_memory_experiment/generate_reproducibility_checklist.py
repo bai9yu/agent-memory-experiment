@@ -188,6 +188,7 @@ def main() -> None:
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper evidence matrix", outputs / "agent_memory_paper_evidence_matrix_zh.md"),
         ("Paper draft outline", outputs / "agent_memory_paper_draft_outline_zh.md"),
+        ("Paper manuscript draft", outputs / "agent_memory_manuscript_draft_zh.md"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
@@ -320,6 +321,11 @@ def main() -> None:
             "stage": "Paper draft outline",
             "command": "work/agent_memory_experiment/generate_paper_draft_outline.py",
             "notes": "Builds a Chinese paper skeleton from current evidence, formulas, and result tables.",
+        },
+        {
+            "stage": "Paper manuscript draft",
+            "command": "work/agent_memory_experiment/generate_paper_manuscript.py",
+            "notes": "Generates an editable Chinese manuscript draft from cached experiment outputs.",
         },
         {
             "stage": "Submission gap analysis",

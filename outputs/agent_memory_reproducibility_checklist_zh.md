@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：44/44
+- Artifact 存在性：45/45
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `d88bd69` |
-| git_branch_status | `## main...origin/main [ahead 41]` |
+| git_commit | `aa1c126` |
+| git_branch_status | `## main...origin/main [ahead 42]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -42,9 +42,10 @@
 | Paper tables LaTeX | True | 3994 | `outputs/agent_memory_paper_tables.tex` |
 | Paper evidence matrix | True | 6590 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 6806 | `outputs/agent_memory_paper_draft_outline_zh.md` |
-| Submission gap analysis | True | 8239 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
-| Submission gap analysis CSV | True | 4479 | `outputs/agent_memory_submission_gap_analysis.csv` |
-| Experiment protocol | True | 4091 | `outputs/agent_memory_experiment_protocol_zh.md` |
+| Paper manuscript draft | True | 9661 | `outputs/agent_memory_manuscript_draft_zh.md` |
+| Submission gap analysis | True | 8590 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
+| Submission gap analysis CSV | True | 4651 | `outputs/agent_memory_submission_gap_analysis.csv` |
+| Experiment protocol | True | 4201 | `outputs/agent_memory_experiment_protocol_zh.md` |
 | Embedding baseline status | True | 2017 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
@@ -67,7 +68,7 @@
 | Human/LLM priority20 audit confirmation | True | 11290 | `outputs/agent_memory_human_llm_audit_priority20_confirmation.csv` |
 | Human/LLM priority20 audit agreement | True | 1804 | `outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md` |
 | Human/LLM priority20 audit agreement CSV | True | 980 | `outputs/agent_memory_human_llm_audit_priority20_agreement.csv` |
-| Paper experiment status | True | 22700 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 22972 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -100,6 +101,7 @@
 | Human/LLM priority20 audit | `work/agent_memory_experiment/generate_priority_audit_subset.py` | Selects a 20-sample quick-review subset and reuses the agreement workflow. |
 | Evidence matrix | `work/agent_memory_experiment/generate_evidence_matrix.py` | Summarizes paper claims, evidence strength, and remaining gaps. |
 | Paper draft outline | `work/agent_memory_experiment/generate_paper_draft_outline.py` | Builds a Chinese paper skeleton from current evidence, formulas, and result tables. |
+| Paper manuscript draft | `work/agent_memory_experiment/generate_paper_manuscript.py` | Generates an editable Chinese manuscript draft from cached experiment outputs. |
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |
 | Experiment protocol | `work/agent_memory_experiment/generate_experiment_protocol.py` | Builds a paper appendix-style protocol from cached metrics and artifacts. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |

@@ -194,7 +194,7 @@ def write_report(path: Path, outputs: Path) -> None:
         "",
         f"- Artifact gate: {artifact_pass}/{len(repro_artifacts)}",
         f"- Metric gate: {metric_pass}/{len(repro_metrics)}",
-        "- 关键入口：`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_paper_evidence_matrix_zh.md`、`outputs/agent_memory_paper_tables_zh.md`、`outputs/agent_memory_experiment_protocol_zh.md`。",
+        "- 关键入口：`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_paper_evidence_matrix_zh.md`、`outputs/agent_memory_paper_tables_zh.md`、`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_manuscript_draft_zh.md`。",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
