@@ -516,6 +516,8 @@ def rank_memories(
 
         if method == "vector":
             final = semantic
+        elif method == "keyword":
+            final = keyword
         elif method == "hybrid":
             final = 0.65 * semantic + 0.30 * keyword + 0.05 * entity
         elif method in {"time_aware", "type_aware"}:
@@ -621,6 +623,8 @@ def rank_all_methods(
 
             if method == "vector":
                 final = semantic
+            elif method == "keyword":
+                final = keyword
             elif method == "hybrid":
                 final = 0.65 * semantic + 0.30 * keyword + 0.05 * entity
             elif method in {"time_aware", "type_aware"}:
@@ -797,7 +801,7 @@ def run(args: argparse.Namespace) -> None:
     prepare_queries = getattr(semantic_scorer, "prepare_queries", None)
     if callable(prepare_queries):
         prepare_queries(queries)
-    methods = ("vector", "hybrid", "time_aware")
+    methods = ("vector", "keyword", "hybrid", "time_aware")
     if args.type_awareness_weight > 0:
         methods = methods + ("type_aware",)
 

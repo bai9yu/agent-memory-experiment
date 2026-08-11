@@ -457,6 +457,8 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memor
   --type-awareness-weight 0.08
 ```
 
+The same run now also writes a pure BM25 `keyword` method alongside `vector`, `hybrid`, `time_aware`, and `type_aware`.
+
 Run paired significance testing:
 
 ```bash

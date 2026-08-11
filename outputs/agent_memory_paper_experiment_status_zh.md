@@ -16,6 +16,20 @@
 | DeepSeek extracted fact + type-aware | 2517 | 31148 | 1838 | 0.503 | 0.670 | 0.733 | 0.609 |
 | LoCoMo observation | 2507 | 40241 | 1638 | 0.483 | 0.639 | 0.703 | 0.583 |
 
+## Baseline 对比
+
+DeepSeek extracted fact：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| keyword | 0.428 | 0.581 | 0.634 | 0.526 |
+| vector | 0.419 | 0.585 | 0.643 | 0.527 |
+| hybrid | 0.477 | 0.647 | 0.705 | 0.583 |
+| time_aware | 0.499 | 0.668 | 0.727 | 0.605 |
+| type_aware | 0.503 | 0.670 | 0.733 | 0.609 |
+
+结论：纯 keyword 与纯 vector 都明显弱于 hybrid / time-aware / type-aware，说明语义、关键词、时间、人物和类型信号都对最终检索有效。
+
 DeepSeek API 用量：
 
 - Prompt tokens：361103
@@ -53,7 +67,7 @@ Coverage：
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
-2. 更强 baseline：加入纯 BM25、OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
+2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 成本分析：报告 API 成本、memory token ratio、检索 latency、embedding cache 命中影响。
 4. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 5. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。

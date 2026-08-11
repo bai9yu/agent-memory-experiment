@@ -53,6 +53,8 @@ DeepSeek 抽取的 fact-level memory 已完成第 1 个完整 conversation 的�
 
 当前已加入 `type_aware` 重排消融；在 LoCoMo10 全量上，`w_type=0.04` 将 MRR 从 `0.605` 提升到 `0.609`，Recall@5 从 `0.727` 提升到 `0.733`。详细结果见 `outputs/agent_memory_type_aware_reranking_zh.md`。
 
+完整 baseline 对比见 `outputs/agent_memory_baseline_comparison_locomo10_zh.md`。
+
 LoCoMo10 全量 DeepSeek 抽取结果：
 
 | Memory Form | Memories | Memory Tokens | Answerable Queries | Recall@1 | Recall@5 | MRR |
