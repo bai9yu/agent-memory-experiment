@@ -7,4 +7,6 @@ Intrinsic-only candidate reranker MRR,0.6718996168287364,0.67,True
 Intrinsic-only candidate reranker Recall@5,0.8014492753623188,0.8,True
 Intrinsic-only LOCO candidate reranker MRR,0.6638026458848906,0.66,True
 Intrinsic-only LOCO candidate reranker Recall@5,0.7968899014127238,0.79,True
+Intrinsic-only seed-stability positive-seed rate,1.0,1.0,True
+Intrinsic-only seed-stability minimum MRR delta,0.041393908437331706,0.04,True
 Type3 supervised selector Coverage@5 delta is negative,0.057205104263927796,0.05,True

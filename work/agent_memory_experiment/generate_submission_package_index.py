@@ -96,6 +96,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "next_action": "将核心公式与特征表压缩进正文方法小节。",
         },
         {
+            "section": "Method Appendix",
+            "artifact": "outputs/agent_memory_candidate_reranker_seed_stability_zh.md",
+            "role": "intrinsic candidate reranker 的 20-seed 随机划分稳定性证据。",
+            "status": "ready",
+            "evidence": "intrinsic reranker improves over type-aware in 20/20 seeds",
+            "next_action": "投稿正文可把该结果写入 robustness/stability 小节。",
+        },
+        {
             "section": "Experiment Protocol",
             "artifact": "outputs/agent_memory_experiment_protocol_zh.md",
             "role": "数据切片、指标公式、显著性检验、主结果、负结果和写法边界。",

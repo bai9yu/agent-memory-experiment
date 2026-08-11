@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：119/119
-- 关键指标阈值：9/9
+- Artifact 存在性：123/123
+- 关键指标阈值：11/11
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `b4f62b1` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `cbd8346` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -38,6 +38,10 @@
 | Candidate reranker feature ablation split summary | True | 5458 | `outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv` |
 | Candidate reranker feature ablation deltas | True | 1407 | `outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv` |
 | Candidate reranker feature ablation comparison | True | 1724236 | `outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv` |
+| Candidate reranker seed stability report | True | 2058 | `outputs/agent_memory_candidate_reranker_seed_stability_zh.md` |
+| Candidate reranker seed stability summary | True | 682 | `outputs/agent_memory_candidate_reranker_seed_stability_summary.csv` |
+| Candidate reranker seed stability deltas | True | 612 | `outputs/agent_memory_candidate_reranker_seed_stability.csv` |
+| Candidate reranker seed stability split summary | True | 6086 | `outputs/agent_memory_candidate_reranker_seed_stability_split_summary.csv` |
 | Bootstrap metric CI report | True | 6438 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
 | Bootstrap metric CI CSV | True | 12250 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
 | Validation-tuned router comparison | True | 850159 | `outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv` |
@@ -76,17 +80,17 @@
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
 | Paper tables Markdown | True | 3724 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 5197 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 7048 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper evidence matrix | True | 7136 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 7485 | `outputs/agent_memory_paper_draft_outline_zh.md` |
-| Paper manuscript draft | True | 11560 | `outputs/agent_memory_manuscript_draft_zh.md` |
+| Paper manuscript draft | True | 11805 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
 | Threats to validity appendix | True | 5872 | `outputs/agent_memory_threats_to_validity_zh.md` |
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
-| Reviewer response preparation matrix | True | 3972 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
-| Reviewer response preparation matrix CSV | True | 3547 | `outputs/agent_memory_reviewer_response_prep.csv` |
-| Submission package index | True | 4255 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 4369 | `outputs/agent_memory_submission_package_index.csv` |
+| Reviewer response preparation matrix | True | 4088 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
+| Reviewer response preparation matrix CSV | True | 3717 | `outputs/agent_memory_reviewer_response_prep.csv` |
+| Submission package index | True | 4494 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 4654 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission readiness gate | True | 2324 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
 | Submission readiness gate CSV | True | 1882 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
@@ -142,7 +146,7 @@
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
 | Human audit annotation codebook | True | 6136 | `outputs/agent_memory_human_audit_annotation_codebook_zh.md` |
 | Human audit annotation schema | True | 1883 | `outputs/agent_memory_human_audit_annotation_schema.csv` |
-| Paper experiment status | True | 31412 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 32001 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -158,6 +162,8 @@
 | Intrinsic-only candidate reranker Recall@5 | 0.8014 | 0.8000 | True |
 | Intrinsic-only LOCO candidate reranker MRR | 0.6638 | 0.6600 | True |
 | Intrinsic-only LOCO candidate reranker Recall@5 | 0.7969 | 0.7900 | True |
+| Intrinsic-only seed-stability positive-seed rate | 1.0000 | 1.0000 | True |
+| Intrinsic-only seed-stability minimum MRR delta | 0.0414 | 0.0400 | True |
 | Type3 supervised selector Coverage@5 delta is negative | 0.0572 | 0.0500 | True |
 
 ## 复现命令入口
@@ -168,6 +174,7 @@
 | Writer stability | `work/agent_memory_experiment/summarize_writer_stability.py` | Summarizes repeated DeepSeek memory-writer runs from a local manifest. |
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
 | Candidate reranker feature ablation | `work/agent_memory_experiment/candidate_reranker_feature_ablation.py` | Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware. |
+| Candidate reranker seed stability | `work/agent_memory_experiment/candidate_reranker_seed_stability.py` | Runs an extended 20-seed stability check for intrinsic-only and full candidate rerankers against type-aware. |
 | Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
 | Intrinsic candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_intrinsic_loco_experiment.py` | Reuses leave-one-conversation-out split with intrinsic-only candidate features. |
 | Intrinsic reranker method appendix | `work/agent_memory_experiment/generate_intrinsic_reranker_method_appendix.py` | Builds a paper appendix with feature definitions, model hyperparameters, validation protocol, and reproducible commands. |

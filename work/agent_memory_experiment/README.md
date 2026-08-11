@@ -607,6 +607,19 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candi
   --output-report outputs/agent_memory_candidate_reranker_feature_ablation_zh.md
 ```
 
+Run extended seed-stability analysis for the intrinsic candidate reranker:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candidate_reranker_seed_stability.py \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --output-split-summary outputs/agent_memory_candidate_reranker_seed_stability_split_summary.csv \
+  --output-summary outputs/agent_memory_candidate_reranker_seed_stability_summary.csv \
+  --output-stability outputs/agent_memory_candidate_reranker_seed_stability.csv \
+  --output-report outputs/agent_memory_candidate_reranker_seed_stability_zh.md
+```
+
 Run leave-one-conversation-out candidate-level reranker analysis:
 
 ```bash

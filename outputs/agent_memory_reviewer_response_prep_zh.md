@@ -11,7 +11,7 @@
 | Reviewer Question | Risk | Current Evidence | Remaining Gap | Planned Response |
 | --- | --- | --- | --- | --- |
 | 为什么要用 LLM-written fact memory，而不是直接用 LoCoMo observation memory？ | medium | DeepSeek fact memory + type-aware MRR=0.609, Recall@5=0.733; observation + type-aware MRR=0.583, Recall@5=0.703。 | 还需要人工抽查 fact memory 是否忠实于原始对话，避免只用检索指标证明 memory writer 质量。 | 正文把该结论写成 representation-level retrieval gain，不宣称所有事实抽取均完全正确。 |
-| 方法增益是否只是调参或泄漏？ | medium | held-out candidate reranker MRR=0.661 vs type-aware 0.607; intrinsic-only MRR=0.672, delta=0.0652, 95% CI=[0.0545, 0.0763]。 | 投稿前仍建议补一个更明确的 train/dev/test seed sweep 或固定随机种子表。 | 强调候选级学习重排使用 held-out query split，并报告 intrinsic-only 消融减少 method-rank 特征依赖。 |
+| 方法增益是否只是调参或泄漏？ | medium | held-out candidate reranker MRR=0.661 vs type-aware 0.607; intrinsic-only MRR=0.672, delta=0.0652, 95% CI=[0.0545, 0.0763]；20-seed stability: positive seeds=20/20, mean ΔMRR=0.0602, min ΔMRR=0.0414。 | 仍可继续补 train/dev/test seed sweep 或更多外部数据集；但随机划分稳定性已具备 20-seed 证据。 | 强调候选级学习重排使用 held-out query split、intrinsic-only 消融和 20-seed stability，降低调参偶然性风险。 |
 | 该方法能否跨对话泛化？ | low | intrinsic LOCO MRR=0.664, Recall@5=0.797; MRR delta=0.0567, 95% CI=[0.0439, 0.0696]。 | LoCoMo10 仍是小规模 benchmark，外部数据集泛化尚未验证。 | 把 LOCO 作为跨 conversation 泛化证据，同时在 threats 中承认数据集数量限制。 |
 | 为什么没有直接接 OpenAI/Cohere/Jina 等外部 embedding baseline？ | blocker | 当前 completed external embedding baselines=0，submission gate 仍将其列为 blocker。 | 需要配置 OPENAI_API_KEY 或等价 OpenAI-compatible embedding provider key 并完成一次真实 API baseline。 | 在最终投稿前必须补齐；当前内部稿只能说明主结果基于本地 BGE-M3。 |
 | 错误分析是否有人类标注支撑？ | blocker | priority20 confirmed=0/20; full80 confirmed=0/80。 | 需要人工填写 priority20，最终投稿建议 full80 双人标注并报告一致性。 | 当前只能把 LLM-assisted audit 写成辅助诊断，不能当作人工可靠性结论。 |

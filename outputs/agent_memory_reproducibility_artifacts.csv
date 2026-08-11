@@ -11,6 +11,10 @@ Candidate reranker feature ablation summary,outputs/agent_memory_candidate_reran
 Candidate reranker feature ablation split summary,outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv,True,5458
 Candidate reranker feature ablation deltas,outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv,True,1407
 Candidate reranker feature ablation comparison,outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv,True,1724236
+Candidate reranker seed stability report,outputs/agent_memory_candidate_reranker_seed_stability_zh.md,True,2058
+Candidate reranker seed stability summary,outputs/agent_memory_candidate_reranker_seed_stability_summary.csv,True,682
+Candidate reranker seed stability deltas,outputs/agent_memory_candidate_reranker_seed_stability.csv,True,612
+Candidate reranker seed stability split summary,outputs/agent_memory_candidate_reranker_seed_stability_split_summary.csv,True,6086
 Bootstrap metric CI report,outputs/agent_memory_bootstrap_metric_ci_zh.md,True,6438
 Bootstrap metric CI CSV,outputs/agent_memory_bootstrap_metric_ci.csv,True,12250
 Validation-tuned router comparison,outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv,True,850159
@@ -49,17 +53,17 @@ Type3 supervised selector rwn002 comparison,outputs/agent_memory_type3_supervise
 Type3 supervised selector rwn002 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv,True,725694
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,3724
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,5197
-Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7048
+Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7136
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,7485
-Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,11560
+Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,11805
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
 Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True,5872
 Threats to validity CSV,outputs/agent_memory_threats_to_validity.csv,True,3236
-Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,3972
-Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,3547
-Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,4255
-Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,4369
+Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,4088
+Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,3717
+Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,4494
+Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,4654
 Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2324
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1882
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
@@ -115,6 +119,6 @@ Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
 Human audit annotation codebook,outputs/agent_memory_human_audit_annotation_codebook_zh.md,True,6136
 Human audit annotation schema,outputs/agent_memory_human_audit_annotation_schema.csv,True,1883
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,31412
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,32001
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

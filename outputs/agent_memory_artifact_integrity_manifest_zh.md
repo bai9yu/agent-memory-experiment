@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 119/119
+- Artifacts covered: 123/123
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 6137097
+- Total bytes: 6148267
 
 ## 前 20 个 Artifact
 
@@ -26,14 +26,14 @@
 | Candidate reranker feature ablation split summary | True | 5458 | 51 | 36853fd8c0fa | ok | outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv |
 | Candidate reranker feature ablation deltas | True | 1407 | 10 | 51b2e15e43b6 | ok | outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv |
 | Candidate reranker feature ablation comparison | True | 1724236 | 24841 | de37c8ae840f | ok | outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv |
+| Candidate reranker seed stability report | True | 2058 | 38 | b8e8ecc22ba8 | ok | outputs/agent_memory_candidate_reranker_seed_stability_zh.md |
+| Candidate reranker seed stability summary | True | 682 | 4 | a5a2589cb075 | ok | outputs/agent_memory_candidate_reranker_seed_stability_summary.csv |
+| Candidate reranker seed stability deltas | True | 612 | 3 | db25ff72961b | ok | outputs/agent_memory_candidate_reranker_seed_stability.csv |
+| Candidate reranker seed stability split summary | True | 6086 | 61 | 66789519edd1 | ok | outputs/agent_memory_candidate_reranker_seed_stability_split_summary.csv |
 | Bootstrap metric CI report | True | 6438 | 64 | e469f8dec879 | ok | outputs/agent_memory_bootstrap_metric_ci_zh.md |
 | Bootstrap metric CI CSV | True | 12250 | 33 | c35977989324 | ok | outputs/agent_memory_bootstrap_metric_ci.csv |
 | Validation-tuned router comparison | True | 850159 | 5521 | 9964bc0e5973 | ok | outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv |
 | Candidate reranker LOCO report | True | 3506 | 68 | 79e3f0650f02 | ok | outputs/agent_memory_candidate_reranker_loco_zh.md |
-| Candidate reranker LOCO summary | True | 684 | 4 | 282d33bb4303 | ok | outputs/agent_memory_candidate_reranker_loco_summary.csv |
-| Candidate reranker LOCO significance | True | 627 | 8 | 2de97cf4cd43 | ok | outputs/agent_memory_candidate_reranker_loco_significance_zh.md |
-| Candidate reranker LOCO comparison | True | 316655 | 3677 | aab9dacd7900 | ok | outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv |
-| Intrinsic candidate reranker LOCO report | True | 3683 | 70 | 839fb38db7e3 | ok | outputs/agent_memory_candidate_reranker_intrinsic_loco_zh.md |
 
 ## 使用说明
 

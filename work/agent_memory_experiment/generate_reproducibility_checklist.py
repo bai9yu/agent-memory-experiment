@@ -184,6 +184,10 @@ def main() -> None:
         ("Candidate reranker feature ablation split summary", outputs / "agent_memory_candidate_reranker_feature_ablation_split_summary.csv"),
         ("Candidate reranker feature ablation deltas", outputs / "agent_memory_candidate_reranker_feature_ablation_deltas.csv"),
         ("Candidate reranker feature ablation comparison", outputs / "agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv"),
+        ("Candidate reranker seed stability report", outputs / "agent_memory_candidate_reranker_seed_stability_zh.md"),
+        ("Candidate reranker seed stability summary", outputs / "agent_memory_candidate_reranker_seed_stability_summary.csv"),
+        ("Candidate reranker seed stability deltas", outputs / "agent_memory_candidate_reranker_seed_stability.csv"),
+        ("Candidate reranker seed stability split summary", outputs / "agent_memory_candidate_reranker_seed_stability_split_summary.csv"),
         ("Bootstrap metric CI report", outputs / "agent_memory_bootstrap_metric_ci_zh.md"),
         ("Bootstrap metric CI CSV", outputs / "agent_memory_bootstrap_metric_ci.csv"),
         ("Validation-tuned router comparison", outputs / "agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv"),
@@ -305,6 +309,10 @@ def main() -> None:
         read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv"),
         method="intrinsic_reranker_loco",
     )
+    seed_stability = metric_lookup(
+        read_csv(outputs / "agent_memory_candidate_reranker_seed_stability.csv"),
+        method="ablation_intrinsic_only",
+    )
     coverage = metric_lookup(
         read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv"),
         experiment="supervised_set_selector",
@@ -319,6 +327,8 @@ def main() -> None:
         metric_row("Intrinsic-only candidate reranker Recall@5", float(intrinsic_reranker["recall@5_mean"]), 0.80),
         metric_row("Intrinsic-only LOCO candidate reranker MRR", float(intrinsic_loco["mrr_mean"]), 0.66),
         metric_row("Intrinsic-only LOCO candidate reranker Recall@5", float(intrinsic_loco["recall@5_mean"]), 0.79),
+        metric_row("Intrinsic-only seed-stability positive-seed rate", float(seed_stability["mrr_win_rate"]), 1.00),
+        metric_row("Intrinsic-only seed-stability minimum MRR delta", float(seed_stability["mrr_delta_min"]), 0.04),
         metric_row("Type3 supervised selector Coverage@5 delta is negative", -float(coverage["mean_delta"]), 0.05),
     ]
     writer_ready = False
@@ -352,6 +362,11 @@ def main() -> None:
             "stage": "Candidate reranker feature ablation",
             "command": "work/agent_memory_experiment/candidate_reranker_feature_ablation.py",
             "notes": "Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware.",
+        },
+        {
+            "stage": "Candidate reranker seed stability",
+            "command": "work/agent_memory_experiment/candidate_reranker_seed_stability.py",
+            "notes": "Runs an extended 20-seed stability check for intrinsic-only and full candidate rerankers against type-aware.",
         },
         {
             "stage": "Candidate reranker LOCO",
