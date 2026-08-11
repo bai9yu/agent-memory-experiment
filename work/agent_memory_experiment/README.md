@@ -156,6 +156,22 @@ Chinese project notes:
 - `outputs/agent_memory_experiment_retro_zh.md`
 - `outputs/agent_memory_dataset_plan.md`
 
+Paper submission support artifacts:
+
+- `outputs/agent_memory_manuscript_draft_zh.md`
+- `outputs/agent_memory_threats_to_validity_zh.md`
+- `outputs/agent_memory_reviewer_response_prep_zh.md`
+- `outputs/agent_memory_submission_package_index_zh.md`
+- `outputs/agent_memory_submission_readiness_gate_zh.md`
+
+Generate the reviewer-question preparation matrix:
+
+```bash
+python3 work/agent_memory_experiment/generate_reviewer_response_prep.py \
+  --output-report outputs/agent_memory_reviewer_response_prep_zh.md \
+  --output-csv outputs/agent_memory_reviewer_response_prep.csv
+```
+
 To include a LoCoMo-like input file in the same pipeline:
 
 ```bash

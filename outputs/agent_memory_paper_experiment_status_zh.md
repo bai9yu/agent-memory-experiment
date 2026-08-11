@@ -8,6 +8,13 @@
 - 主要对照：LoCoMo 官方 `observation` memory。
 - 检索方法：`vector`、`hybrid`、`time_aware`、`type_aware`。
 - 中文报告：抽取、压缩、跨智能体复用、type-aware 消融、显著性检验和错误分析均已形成文档。
+- 论文提交支持：正文初稿、Threats to Validity、审稿问题准备矩阵、提交包索引、submission readiness gate 和 artifact integrity manifest 均已形成文档。
+
+## 当前投稿/答辩准备状态
+
+- 已补充 `outputs/agent_memory_reviewer_response_prep_zh.md`，按审稿问题整理了当前证据、风险等级、剩余缺口和安全写作边界。
+- 目前可以支撑的主张：在 LoCoMo10 answerable slice 上，本地 BGE-M3 embedding、DeepSeek fact-level memory 和 intrinsic candidate reranker 能稳定提升检索指标。
+- 目前必须保守处理的主张：外部商业 embedding baseline 尚未完成，人工复核标签尚未填写，Type 3 多证据问题仍是负结果和未来工作。
 
 ## LoCoMo10 全量主结果
 

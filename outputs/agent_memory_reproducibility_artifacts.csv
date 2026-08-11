@@ -56,14 +56,16 @@ Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,T
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
 Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True,5872
 Threats to validity CSV,outputs/agent_memory_threats_to_validity.csv,True,3236
-Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,4003
-Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,4064
+Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,3972
+Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,3547
+Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,4255
+Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,4369
 Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2324
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1882
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3826
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,19966
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,20625
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -113,6 +115,6 @@ Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
 Human audit annotation codebook,outputs/agent_memory_human_audit_annotation_codebook_zh.md,True,6136
 Human audit annotation schema,outputs/agent_memory_human_audit_annotation_schema.csv,True,1883
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,30674
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,31412
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

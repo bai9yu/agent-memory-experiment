@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Indexed artifacts: 13
+- Indexed artifacts: 14
 - Missing indexed artifacts: 0
 - Blocked/not-ready sections: 2
 
@@ -17,6 +17,7 @@
 | Experiment Protocol | outputs/agent_memory_experiment_protocol_zh.md | True | ready | 数据切片、指标公式、显著性检验、主结果、负结果和写法边界。 | 作为 supplementary material 或实验设置附录。 |
 | Evidence Matrix | outputs/agent_memory_paper_evidence_matrix_zh.md | True | ready | 论文主张、证据强度、剩余缺口和可写边界矩阵。 | 写作时逐条核对摘要/贡献是否过度宣称。 |
 | Threats to Validity | outputs/agent_memory_threats_to_validity_zh.md | True | ready_with_blockers_declared | 内部/外部/构念/统计/规模/复现有效性威胁与缓解措施。 | 外部 embedding 和人工复核完成后更新 blocker 行。 |
+| Reviewer Prep | outputs/agent_memory_reviewer_response_prep_zh.md | True | ready_with_blockers_declared | 审稿人可能追问的问题、当前证据、剩余缺口和安全写作边界。 | 每次补完 blocker 或修改主张后重新生成。 |
 | External Embedding | outputs/agent_memory_external_embedding_blocker_audit_zh.md | True | blocked | 外部 embedding baseline 的 key、preflight、summary 和 comparison blocker 审计。 | 配置 OPENAI_API_KEY 或 OpenAI-compatible provider key 后运行 API baseline。 |
 | Human Audit | outputs/agent_memory_human_audit_annotation_codebook_zh.md | True | ready_for_labeling | 人工复核 yes/partial/no、gold sufficiency、manual reason 和双人标注规则。 | 先填写 priority20 盲审 CSV，再扩展 full80。 |
 | Human Audit | outputs/agent_memory_human_audit_priority20_review_packet_zh.md | True | ready_for_labeling | 20 条优先人工复核阅读包。 | 人工填写 blind review CSV 的 human_* 字段。 |

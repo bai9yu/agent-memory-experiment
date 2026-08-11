@@ -120,6 +120,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "next_action": "外部 embedding 和人工复核完成后更新 blocker 行。",
         },
         {
+            "section": "Reviewer Prep",
+            "artifact": "outputs/agent_memory_reviewer_response_prep_zh.md",
+            "role": "审稿人可能追问的问题、当前证据、剩余缺口和安全写作边界。",
+            "status": "ready_with_blockers_declared",
+            "evidence": "external embedding and human audit blockers are explicitly listed",
+            "next_action": "每次补完 blocker 或修改主张后重新生成。",
+        },
+        {
             "section": "External Embedding",
             "artifact": "outputs/agent_memory_external_embedding_blocker_audit_zh.md",
             "role": "外部 embedding baseline 的 key、preflight、summary 和 comparison blocker 审计。",

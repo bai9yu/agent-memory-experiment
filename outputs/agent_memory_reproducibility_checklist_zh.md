@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：117/117
+- Artifact 存在性：119/119
 - 关键指标阈值：9/9
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `0a9f352` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `b4f62b1` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -83,14 +83,16 @@
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
 | Threats to validity appendix | True | 5872 | `outputs/agent_memory_threats_to_validity_zh.md` |
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
-| Submission package index | True | 4003 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 4064 | `outputs/agent_memory_submission_package_index.csv` |
+| Reviewer response preparation matrix | True | 3972 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
+| Reviewer response preparation matrix CSV | True | 3547 | `outputs/agent_memory_reviewer_response_prep.csv` |
+| Submission package index | True | 4255 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 4369 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission readiness gate | True | 2324 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
 | Submission readiness gate CSV | True | 1882 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3826 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 19966 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 20625 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -140,7 +142,7 @@
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
 | Human audit annotation codebook | True | 6136 | `outputs/agent_memory_human_audit_annotation_codebook_zh.md` |
 | Human audit annotation schema | True | 1883 | `outputs/agent_memory_human_audit_annotation_schema.csv` |
-| Paper experiment status | True | 30674 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 31412 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -195,6 +197,7 @@
 | Paper manuscript draft | `work/agent_memory_experiment/generate_paper_manuscript.py` | Generates an editable Chinese manuscript draft from cached experiment outputs. |
 | Paper manuscript claim check | `work/agent_memory_experiment/validate_manuscript_claims.py` | Checks that the draft does not overclaim pending embedding or human-audit results. |
 | Threats to validity appendix | `work/agent_memory_experiment/generate_threats_to_validity_appendix.py` | Builds a paper appendix of internal/external/construct/statistical validity threats and claim boundaries. |
+| Reviewer response preparation matrix | `work/agent_memory_experiment/generate_reviewer_response_prep.py` | Maps likely reviewer questions to current evidence, remaining gaps, and safe paper-writing boundaries. |
 | Submission package index | `work/agent_memory_experiment/generate_submission_package_index.py` | Indexes manuscript, tables, appendices, reproducibility artifacts, blockers, and final packaging actions. |
 | Submission readiness gate | `work/agent_memory_experiment/validate_submission_readiness.py` | Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission. |
 | Public release readiness gate | `work/agent_memory_experiment/validate_public_release_readiness.py` | Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links. |
