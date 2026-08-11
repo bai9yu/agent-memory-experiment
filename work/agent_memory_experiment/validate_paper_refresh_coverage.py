@@ -14,6 +14,8 @@ REQUIRED_STEPS = [
     ("human_audit_execution_plan", "human audit execution plan"),
     ("submission_blocker_closure_plan", "submission blocker closure path"),
     ("submission_package_index", "paper package index"),
+    ("untracked_artifact_audit", "untracked artifact hygiene audit"),
+    ("public_release_readiness", "public release readiness gate"),
     ("reproducibility_checklist", "artifact and metric gates"),
     ("artifact_integrity_manifest", "artifact integrity manifest"),
     ("evidence_matrix", "claim/evidence/gap matrix"),

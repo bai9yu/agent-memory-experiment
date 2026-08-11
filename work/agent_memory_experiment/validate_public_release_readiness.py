@@ -36,6 +36,13 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
+def read_csv(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    with path.open("r", encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
 def git_files(root: Path) -> list[str]:
     result = subprocess.run(["git", "ls-files"], cwd=root, check=True, capture_output=True, text=True)
     return [line for line in result.stdout.splitlines() if line.strip()]
@@ -92,8 +99,10 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
     gitignore = file_text(root / ".gitignore") or ""
     env_example = file_text(root / ".env.example") or ""
     readme = file_text(root / "README.md") or ""
+    untracked_audit = read_csv(root / "outputs" / "agent_memory_untracked_artifact_audit.csv")
     secret_hits = tracked_secret_hits(root, files)
     license_files = [name for name in files if Path(name).name.lower() in {"license", "license.md", "license.txt"}]
+    untracked_review = sum(1 for row in untracked_audit if row.get("recommendation") == "review_before_tracking")
 
     rows = [
         check_row(
@@ -135,6 +144,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "major",
             "README links submission readiness gate",
             "在 README 的论文报告列表中加入最终投稿门禁。",
+        ),
+        check_row(
+            "untracked_artifact_audit_present",
+            "paper_artifact",
+            bool(untracked_audit),
+            "major",
+            f"untracked audit rows={len(untracked_audit)}, review_before_tracking={untracked_review}",
+            "运行 audit_untracked_artifacts.py，并在公开发布前逐项确认 review_before_tracking 文件是否应纳入 Git。",
         ),
         check_row(
             "license_file_present",

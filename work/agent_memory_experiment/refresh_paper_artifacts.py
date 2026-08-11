@@ -81,6 +81,32 @@ def build_steps(include_environment: bool) -> list[Step]:
             ),
             "Refreshes the index of manuscript, tables, appendices, gates, and packaging actions.",
         ),
+        Step(
+            "untracked_artifact_audit",
+            py(
+                "audit_untracked_artifacts.py",
+                "--project-root",
+                ".",
+                "--output-csv",
+                "outputs/agent_memory_untracked_artifact_audit.csv",
+                "--output-report",
+                "outputs/agent_memory_untracked_artifact_audit_zh.md",
+            ),
+            "Classifies untracked local outputs before public artifact packaging.",
+        ),
+        Step(
+            "public_release_readiness",
+            py(
+                "validate_public_release_readiness.py",
+                "--project-root",
+                ".",
+                "--output-csv",
+                "outputs/agent_memory_public_release_readiness.csv",
+                "--output-report",
+                "outputs/agent_memory_public_release_readiness_zh.md",
+            ),
+            "Refreshes tracked-file release hygiene checks after untracked artifact audit.",
+        ),
     ]
     if include_environment:
         steps.extend([

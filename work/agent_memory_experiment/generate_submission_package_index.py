@@ -225,6 +225,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
         },
         {
             "section": "Reproducibility",
+            "artifact": "outputs/agent_memory_untracked_artifact_audit_zh.md",
+            "role": "未跟踪本地输出、临时数据和探索性结果的公开发布审计。",
+            "status": "ready_for_review",
+            "evidence": "untracked files are classified before public packaging",
+            "next_action": "公开发布前逐项决定 review_before_tracking 文件是否应转为正式 artifact。",
+        },
+        {
+            "section": "Reproducibility",
             "artifact": "outputs/agent_memory_paper_artifact_refresh_run_zh.md",
             "role": "离线论文 artifact 刷新流水线的逐步执行日志。",
             "status": "pass",

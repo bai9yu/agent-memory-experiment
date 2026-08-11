@@ -256,6 +256,8 @@ def main() -> None:
         ("Submission readiness gate CSV", outputs / "agent_memory_submission_readiness_gate.csv"),
         ("Public release readiness gate", outputs / "agent_memory_public_release_readiness_zh.md"),
         ("Public release readiness gate CSV", outputs / "agent_memory_public_release_readiness.csv"),
+        ("Untracked artifact audit", outputs / "agent_memory_untracked_artifact_audit_zh.md"),
+        ("Untracked artifact audit CSV", outputs / "agent_memory_untracked_artifact_audit.csv"),
         ("Artifact integrity manifest", outputs / "agent_memory_artifact_integrity_manifest_zh.md"),
         ("Artifact integrity manifest CSV", outputs / "agent_memory_artifact_integrity_manifest.csv"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
@@ -648,6 +650,11 @@ def main() -> None:
             "stage": "Public release readiness gate",
             "command": "work/agent_memory_experiment/validate_public_release_readiness.py",
             "notes": "Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links.",
+        },
+        {
+            "stage": "Untracked artifact audit",
+            "command": "work/agent_memory_experiment/audit_untracked_artifacts.py",
+            "notes": "Classifies untracked local outputs and temporary data before public artifact packaging.",
         },
         {
             "stage": "Artifact integrity manifest",
