@@ -1,17 +1,40 @@
 # Agent Memory Experiment
 
-本仓库用于验证智能体记忆模块的第一阶段方案，包括：
+本仓库实现了一套面向长对话与多智能体场景的 agent memory 实验框架，覆盖记忆构建、检索、重排、压缩和跨智能体复用。
+
+## 功能概览
 
 - LoCoMo 真实长对话数据接入
-- BGE-M3 本地 embedding 检索
+- 本地 BGE-M3 embedding 检索与 embedding cache
+- BM25 + semantic hybrid retrieval
 - adaptive time-aware reranking
-- persona gate 与 importance proxy
-- observation / session_summary 真实压缩对照
-- 跨智能体共享记忆的权限过滤实验
+- persona gate，用于减少人物主体混淆
+- importance proxy，用于提升身份、关系、长期目标、偏好等高价值记忆
+- LoCoMo `observation` / `session_summary` 真实压缩对照
+- 跨智能体共享记忆的权限过滤与风险对照实验
+- 中文实验报告、参数搜索记录和复盘文档
 
 主要代码在 `work/agent_memory_experiment/`。
 
-中文阶段文档和实验报告在 `outputs/`。
+中文文档和实验报告在 `outputs/`。
+
+## 当前推荐配置
+
+当前 LoCoMo 全量实验推荐：
+
+```text
+BGE-M3 + adaptive time-aware reranking + persona gate + importance proxy
+```
+
+关键结果：
+
+| Memory Form | Token Ratio | Recall@1 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| raw turn memory | 1.000 | 0.329 | 0.562 | 0.439 |
+| LoCoMo observation memory | 0.281 | 0.400 | 0.585 | 0.484 |
+| LoCoMo session summary memory | 0.201 | 0.520 | 0.773 | 0.636 |
+
+结论：事实级 observation memory 能显著降低 token 成本并减少闲聊噪声；session summary 更适合作为二级归档层。
 
 大文件没有纳入 Git：
 
