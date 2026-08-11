@@ -11,7 +11,7 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `2a143f1` |
+| git_commit | `72e9660` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -104,8 +104,8 @@
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
 | Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
 | Reviewer response preparation matrix CSV | True | 4249 | `outputs/agent_memory_reviewer_response_prep.csv` |
-| Submission package index | True | 5549 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 5949 | `outputs/agent_memory_submission_package_index.csv` |
+| Submission package index | True | 6583 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 7316 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission readiness gate | True | 2326 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
 | Submission readiness gate CSV | True | 1884 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
@@ -116,8 +116,8 @@
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3584 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 2795 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Paper artifact refresh run | True | 2180 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 6975 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper artifact refresh run | True | 2315 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 7445 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |

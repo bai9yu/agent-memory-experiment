@@ -6,7 +6,7 @@
 
 - Dry run: False
 - Include environment snapshot: False
-- Steps: 14
+- Steps: 15
 - Failures: 0
 
 ## Step Results
@@ -16,17 +16,18 @@
 | offline_embedding_sensitivity | pass | 0 | 0.023 | Refreshes offline hash/BM25 vs BGE-M3 encoder-sensitivity diagnostics. |
 | human_audit_execution_plan | pass | 0 | 0.021 | Refreshes the human-audit labeling execution plan from current gates. |
 | submission_blocker_closure_plan | pass | 0 | 0.021 | Refreshes the ordered closure path for final-submission blockers. |
-| reproducibility_checklist | pass | 0 | 0.044 | Refreshes artifact and metric gates. |
+| submission_package_index | pass | 0 | 0.022 | Refreshes the index of manuscript, tables, appendices, gates, and packaging actions. |
+| reproducibility_checklist | pass | 0 | 0.045 | Refreshes artifact and metric gates. |
 | artifact_integrity_manifest | pass | 0 | 0.039 | Refreshes artifact sha256/size/line-count manifest. |
-| evidence_matrix | pass | 0 | 0.029 | Refreshes paper claim/evidence/gap matrix. |
+| evidence_matrix | pass | 0 | 0.028 | Refreshes paper claim/evidence/gap matrix. |
 | submission_gap_analysis | pass | 0 | 0.023 | Refreshes reviewer-facing risk matrix. |
-| submission_readiness | pass | 0 | 0.022 | Refreshes final-submission gates. |
+| submission_readiness | pass | 0 | 0.023 | Refreshes final-submission gates. |
 | reviewer_response_prep | pass | 0 | 0.027 | Refreshes reviewer question/answer preparation matrix. |
 | paper_manuscript | pass | 0 | 0.028 | Refreshes Chinese manuscript draft from current evidence. |
 | manuscript_claim_check | pass | 0 | 0.023 | Checks that manuscript does not overclaim pending baselines/audits. |
 | evidence_freshness | pass | 0 | 0.024 | Checks stale artifact/metric/integrity gate counts. |
 | artifact_integrity_manifest_final | pass | 0 | 0.038 | Final manifest refresh after freshness audit changes. |
-| submission_readiness_final | pass | 0 | 0.023 | Final submission gate refresh after manifest changes. |
+| submission_readiness_final | pass | 0 | 0.024 | Final submission gate refresh after manifest changes. |
 
 ## 使用边界
 

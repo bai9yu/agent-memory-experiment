@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Indexed artifacts: 19
+- Indexed artifacts: 23
 - Missing indexed artifacts: 0
 - Blocked/not-ready sections: 2
 
@@ -23,11 +23,15 @@
 | Threats to Validity | outputs/agent_memory_threats_to_validity_zh.md | True | ready_with_blockers_declared | 内部/外部/构念/统计/规模/复现有效性威胁与缓解措施。 | 外部 embedding 和人工复核完成后更新 blocker 行。 |
 | Reviewer Prep | outputs/agent_memory_reviewer_response_prep_zh.md | True | ready_with_blockers_declared | 审稿人可能追问的问题、当前证据、剩余缺口和安全写作边界。 | 每次补完 blocker 或修改主张后重新生成。 |
 | External Embedding | outputs/agent_memory_external_embedding_blocker_audit_zh.md | True | blocked | 外部 embedding baseline 的 key、preflight、summary 和 comparison blocker 审计。 | 配置 OPENAI_API_KEY 或 OpenAI-compatible provider key 后运行 API baseline。 |
+| External Embedding | outputs/agent_memory_offline_embedding_sensitivity_zh.md | True | ready_diagnostic | BGE-M3、hash vector 和 BM25 keyword 的离线 encoder-sensitivity 下界诊断。 | 保留为下界诊断；投稿前仍需真实外部 API embedding baseline。 |
 | Human Audit | outputs/agent_memory_human_audit_annotation_codebook_zh.md | True | ready_for_labeling | 人工复核 yes/partial/no、gold sufficiency、manual reason 和双人标注规则。 | 先填写 priority20 盲审 CSV，再扩展 full80。 |
 | Human Audit | outputs/agent_memory_human_audit_execution_plan_zh.md | True | ready_for_labeling | 把 priority20、full80、双人独立标注、仲裁和论文刷新步骤拆成可执行 checklist。 | 按 execution plan 先完成 priority20 single blind labeling。 |
 | Human Audit | outputs/agent_memory_human_audit_priority20_review_packet_zh.md | True | ready_for_labeling | 20 条优先人工复核阅读包。 | 人工填写 blind review CSV 的 human_* 字段。 |
 | Reproducibility | outputs/agent_memory_reproducibility_checklist_zh.md | True | pass | artifact、指标阈值、数据规模、复现命令和环境入口清单。 | 新增任何 artifact 后重新生成。 |
 | Reproducibility | outputs/agent_memory_artifact_integrity_manifest_zh.md | True | pass | 复现 artifact sha256、大小和行数 manifest。 | 每次结果更新后重新生成。 |
+| Reproducibility | outputs/agent_memory_environment_freshness_audit_zh.md | True | pass | 环境快照的 generation-time Git 状态和 system CSV 新鲜度审计。 | 提交前后若刷新环境快照，应重新运行 freshness audit。 |
+| Reproducibility | outputs/agent_memory_paper_artifact_refresh_run_zh.md | True | pass | 离线论文 artifact 刷新流水线的逐步执行日志。 | 补完 API baseline 或人工标签后运行该流水线收口所有报告。 |
+| Submission Gate | outputs/agent_memory_submission_blocker_closure_plan_zh.md | True | ready_with_external_inputs | 外部 embedding、人审、reviewer risk 和最终一致性刷新的 blocker 关闭路线图。 | 按路线先解除 external embedding 和 human audit blockers。 |
 | Submission Gate | outputs/agent_memory_submission_readiness_gate_zh.md | True | not_ready | 最终投稿门禁，聚合复现、claim check、外部 baseline、人工复核和公开发布卫生。 | 解除 external_embedding_completed、priority20/full80_human_audit 和 reviewer_risk_blockers。 |
 
 ## 最小投稿前路径

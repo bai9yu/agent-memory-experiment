@@ -68,6 +68,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             ),
             "Refreshes the ordered closure path for final-submission blockers.",
         ),
+        Step(
+            "submission_package_index",
+            py(
+                "generate_submission_package_index.py",
+                "--project-root",
+                ".",
+                "--output-report",
+                "outputs/agent_memory_submission_package_index_zh.md",
+                "--output-csv",
+                "outputs/agent_memory_submission_package_index.csv",
+            ),
+            "Refreshes the index of manuscript, tables, appendices, gates, and packaging actions.",
+        ),
     ]
     if include_environment:
         steps.extend([
