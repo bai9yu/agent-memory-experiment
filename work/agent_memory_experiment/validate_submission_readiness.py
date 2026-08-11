@@ -81,6 +81,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
     gap_analysis = read_csv(outputs / "agent_memory_submission_gap_analysis.csv")
     public_release = read_csv(outputs / "agent_memory_public_release_readiness.csv")
+    integrity_manifest = read_csv(outputs / "agent_memory_artifact_integrity_manifest.csv")
 
     artifact_pass = count(reproducibility_artifacts, "exists", "True")
     metric_pass = count(reproducibility_metrics, "pass", "True")
@@ -93,6 +94,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     full = lookup(human_gate, label="full80")
     reviewer_blockers = count(gap_analysis, "risk_level", "blocker")
     public_release_blockers = count(public_release, "status", "blocker")
+    integrity_covered = count(integrity_manifest, "exists", "True")
 
     rows = [
         gate_row(
@@ -174,6 +176,14 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             public_release_blockers == 0,
             f"public release blockers={public_release_blockers}",
             "修复公开发布检查中的 key、`.env` 或仓库卫生 blocker。",
+        ),
+        gate_row(
+            "artifact_integrity_manifest",
+            "reproducibility",
+            True,
+            integrity_covered == len(integrity_manifest),
+            f"integrity manifest covers={integrity_covered}/{len(integrity_manifest)}",
+            "重新生成 artifact integrity manifest，确保所有复现 artifact 都有 sha256 记录。",
         ),
     ]
     return rows

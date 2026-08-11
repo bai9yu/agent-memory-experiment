@@ -195,6 +195,8 @@ def main() -> None:
         ("Submission readiness gate CSV", outputs / "agent_memory_submission_readiness_gate.csv"),
         ("Public release readiness gate", outputs / "agent_memory_public_release_readiness_zh.md"),
         ("Public release readiness gate CSV", outputs / "agent_memory_public_release_readiness.csv"),
+        ("Artifact integrity manifest", outputs / "agent_memory_artifact_integrity_manifest_zh.md"),
+        ("Artifact integrity manifest CSV", outputs / "agent_memory_artifact_integrity_manifest.csv"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
@@ -377,6 +379,11 @@ def main() -> None:
             "stage": "Public release readiness gate",
             "command": "work/agent_memory_experiment/validate_public_release_readiness.py",
             "notes": "Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links.",
+        },
+        {
+            "stage": "Artifact integrity manifest",
+            "command": "work/agent_memory_experiment/generate_artifact_integrity_manifest.py",
+            "notes": "Writes sha256, size, and line-count metadata for all reproducibility artifacts.",
         },
         {
             "stage": "Submission gap analysis",

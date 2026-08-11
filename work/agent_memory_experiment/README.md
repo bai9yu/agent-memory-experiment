@@ -1018,6 +1018,17 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
   --output-report outputs/agent_memory_public_release_readiness_zh.md
 ```
 
+Generate artifact integrity manifest for paper reproducibility files:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_artifact_integrity_manifest.py \
+  --project-root . \
+  --artifact-csv outputs/agent_memory_reproducibility_artifacts.csv \
+  --output-csv outputs/agent_memory_artifact_integrity_manifest.csv \
+  --output-report outputs/agent_memory_artifact_integrity_manifest_zh.md
+```
+
 Generate external embedding baseline status:
 
 ```bash
