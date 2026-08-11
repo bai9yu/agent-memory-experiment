@@ -745,6 +745,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/type3
   --output-report outputs/agent_memory_type3_coverage_significance_zh.md
 ```
 
+Generate paper-ready Markdown and LaTeX tables:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_paper_tables.py \
+  --outputs-dir outputs \
+  --output-markdown outputs/agent_memory_paper_tables_zh.md \
+  --output-latex outputs/agent_memory_paper_tables.tex
+```
+
 Run top-1 error analysis:
 
 ```bash

@@ -244,6 +244,11 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 ## 距离论文发表级仍缺的内容
 
+当前已生成论文表格包：
+
+- `outputs/agent_memory_paper_tables_zh.md`：Markdown 主表、消融表、Type 3 失败分析表。
+- `outputs/agent_memory_paper_tables.tex`：可直接复制到论文的 LaTeX `booktabs` 表格。
+
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。

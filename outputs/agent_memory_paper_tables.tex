@@ -1,0 +1,108 @@
+\begin{table}[t]
+\centering
+\caption{Main retrieval results on LoCoMo10 with LLM-extracted fact memories.}
+\label{tab:main_retrieval}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Queries & R@1 & R@3 & R@5 & MRR \\
+\midrule
+keyword & 1838 & 0.428 & 0.581 & 0.634 & 0.526 \\
+vector & 1838 & 0.419 & 0.585 & 0.643 & 0.527 \\
+hybrid & 1838 & 0.477 & 0.647 & 0.705 & 0.583 \\
+time\_aware & 1838 & 0.499 & 0.668 & 0.727 & 0.605 \\
+type\_aware & 1838 & 0.503 & 0.670 & 0.733 & 0.609 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Comparison between LLM-extracted fact memory and LoCoMo observation memory.}
+\label{tab:memory_forms}
+\begin{tabular}{lrrrrr}
+\toprule
+Memory & Queries & R@1 & R@3 & R@5 & MRR \\
+\midrule
+llm\_extracted\_fact & 1838 & 0.503 & 0.670 & 0.733 & 0.609 \\
+locomo\_observation & 1638 & 0.483 & 0.639 & 0.703 & 0.583 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Held-out candidate-level reranking results.}
+\label{tab:candidate_reranker}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Splits & R@1 & R@3 & R@5 & MRR \\
+\midrule
+type\_aware & 5 & 0.499 & 0.670 & 0.733 & 0.607 \\
+candidate\_reranker & 5 & 0.556 & 0.732 & 0.796 & 0.661 \\
+candidate\_oracle & 5 & 0.909 & 0.909 & 0.909 & 0.909 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Paired significance tests for candidate-level reranking.}
+\label{tab:candidate_reranker_sig}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Delta & 95\% CI & p-value \\
+\midrule
+mrr & +0.0539 & [0.0462, 0.0619] & 0.0002 \\
+recall@5 & +0.0623 & [0.0500, 0.0746] & 0.0002 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Type-3 multi-evidence diagnostic results.}
+\label{tab:type3_boundary}
+\begin{tabular}{lrrrr}
+\toprule
+Method & R@1 & R@3 & R@5 & MRR \\
+\midrule
+type\_aware & 0.344 & 0.507 & 0.546 & 0.434 \\
+type3\_specific\_reranker & 0.312 & 0.417 & 0.475 & 0.399 \\
+supervised\_set\_selector & 0.312 & 0.393 & 0.490 & 0.389 \\
+query\_decomposition & 0.128 & 0.221 & 0.279 & 0.214 \\
+type\_aware\_plus\_decomposition & 0.198 & 0.442 & 0.512 & 0.342 \\
+candidate\_oracle & 0.778 & 0.778 & 0.778 & 0.778 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Paired evidence-coverage significance tests for Type-3 diagnostics.}
+\label{tab:type3_coverage_sig}
+\begin{tabular}{lrrrrr}
+\toprule
+Experiment & Candidate & Base Cov@5 & Cand Cov@5 & Delta & p-value \\
+\midrule
+type3\_specific\_reranker & type3\_specific\_reranker & 0.377 & 0.331 & -0.0467 & 0.0474 \\
+supervised\_set\_selector & supervised\_set\_selector & 0.377 & 0.320 & -0.0572 & 0.0286 \\
+query\_decomposition\_fusion & type\_aware\_plus\_decomposition & 0.370 & 0.337 & -0.0325 & 0.0198 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Type-aware retrieval quality under vector candidate prefiltering.}
+\label{tab:prefilter}
+\begin{tabular}{lrrrr}
+\toprule
+Candidate K & R@1 & R@3 & R@5 & MRR \\
+\midrule
+50 & 0.482 & 0.639 & 0.695 & 0.579 \\
+100 & 0.498 & 0.667 & 0.724 & 0.600 \\
+200 & 0.509 & 0.682 & 0.734 & 0.613 \\
+500 & 0.507 & 0.675 & 0.737 & 0.612 \\
+\bottomrule
+\end{tabular}
+\end{table}
