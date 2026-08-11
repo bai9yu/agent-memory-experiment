@@ -21,6 +21,7 @@ The project also includes:
 
 - a permissive long-conversation converter for LoCoMo-like JSON/JSONL files
 - LoCoMo `observation` and `session_summary` compression builders
+- DeepSeek-based fact-level memory extraction from raw dialogue sessions
 - synthetic data generation for controlled retrieval, compression, and cross-agent tests
 - aggregation scripts for Chinese experiment reports
 
@@ -328,6 +329,49 @@ python3 work/agent_memory_experiment/compare_locomo_compression_variants.py \
   --session-summary work/agent_memory_experiment/results/locomo_compression_session_summary_bge_m3_importance_006/summary.csv \
   --output outputs/agent_memory_locomo_compression_real_zh.md \
   --csv-output outputs/agent_memory_locomo_compression_real_results.csv
+```
+
+## LLM Memory Extraction
+
+Create a local `.env` file in the repository root:
+
+```env
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
+```
+
+Run a small DeepSeek extraction job:
+
+```bash
+python3 work/agent_memory_experiment/llm_memory_extractor.py \
+  --input work/agent_memory_experiment/data/locomo10.json \
+  --output-dir work/agent_memory_experiment/data/llm_extracted_locomo_1s \
+  --max-records 1 \
+  --max-sessions 1 \
+  --temperature 0.1
+```
+
+Slice the result to the extracted LoCoMo session:
+
+```bash
+python3 work/agent_memory_experiment/filter_memory_eval_slice.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo_1s/memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo_1s/queries.jsonl \
+  --output-prefix work/agent_memory_experiment/data/llm_extracted_locomo_1s_d1 \
+  --sessions D1 \
+  --require-answer
+```
+
+Evaluate the extracted memory:
+
+```bash
+python3 work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo_1s_d1_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo_1s_d1_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/llm_extracted_locomo_1s_d1_hash \
+  --rank-output-k 7 \
+  --importance-weight 0.06
 ```
 
 ## Cross-Agent Memory Reuse Experiments

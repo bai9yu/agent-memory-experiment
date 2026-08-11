@@ -8,10 +8,14 @@ venv/
 env/
 work/agent_memory_experiment/.venv/
 
+# Local API keys and secrets
+.env
+.env.*
+!.env.example
+
 # Large or reproducible local artifacts
 work/agent_memory_experiment/cache/
 work/agent_memory_experiment/results/
 
 # Local scratch outputs
 *.log
-

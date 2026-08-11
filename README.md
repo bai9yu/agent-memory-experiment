@@ -11,6 +11,7 @@
 - persona gate，用于减少人物主体混淆
 - importance proxy，用于提升身份、关系、长期目标、偏好等高价值记忆
 - LoCoMo `observation` / `session_summary` 真实压缩对照
+- DeepSeek LLM fact-level memory extraction
 - 跨智能体共享记忆的权限过滤与风险对照实验
 - 中文实验报告、参数搜索记录和复盘文档
 
@@ -43,3 +44,15 @@ BGE-M3 + adaptive time-aware reranking + persona gate + importance proxy
 - `work/agent_memory_experiment/.venv/`：本地 Python 虚拟环境
 
 复现步骤见 `work/agent_memory_experiment/README.md`。
+
+## DeepSeek API 配置
+
+复制 `.env.example` 为 `.env`，并填入本地 API key：
+
+```env
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat
+```
+
+`.env` 已被 `.gitignore` 忽略，不会上传到 GitHub。

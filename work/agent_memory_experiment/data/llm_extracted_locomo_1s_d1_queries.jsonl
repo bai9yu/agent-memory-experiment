@@ -1,0 +1,5 @@
+{"id": "q00001", "query": "When did Caroline go to the LGBTQ support group?", "answer_memory_ids": ["llm_00001"], "query_date": "2023-05-08", "type": "2", "source_evidence_ids": ["D1:3"]}
+{"id": "q00003", "query": "What fields would Caroline be likely to pursue in her educaton?", "answer_memory_ids": ["llm_00004", "llm_00005"], "query_date": "2023-05-08", "type": "3", "source_evidence_ids": ["D1:9", "D1:11"]}
+{"id": "q00005", "query": "What is Caroline's identity?", "answer_memory_ids": ["llm_00002"], "query_date": "2023-05-08", "type": "1", "source_evidence_ids": ["D1:5"]}
+{"id": "q00014", "query": "What career path has Caroline decided to persue?", "answer_memory_ids": ["llm_00005"], "query_date": "2023-06-27", "type": "1", "source_evidence_ids": ["D4:13", "D1:11"]}
+{"id": "q00033", "query": "What LGBTQ+ events has Caroline participated in?", "answer_memory_ids": ["llm_00001"], "query_date": "2023-07-15", "type": "1", "source_evidence_ids": ["D5:1", "D8:17", "D3:1", "D1:3"]}
