@@ -61,7 +61,7 @@
 ### P4 候选级重排是否真的跨 conversation 泛化？
 
 - 风险等级：`major`
-- 当前证据：Held-out type-aware MRR 0.607, R@5 0.733; candidate reranker MRR 0.661, R@5 0.796; MRR delta +0.0539, p=0.0002; R@5 delta +0.0623, p=0.0002. LOCO split: type-aware MRR 0.608, candidate reranker MRR 0.657; weighted MRR delta +0.0504, p=0.0002; weighted R@5 delta +0.0522, p=0.0002.
+- 当前证据：Held-out type-aware MRR 0.607, R@5 0.733; full candidate reranker MRR 0.661, R@5 0.796; MRR delta +0.0539, p=0.0002; R@5 delta +0.0623, p=0.0002. Intrinsic-only reranker MRR 0.672, R@5 0.801; delta vs type-aware +0.0652, 95% CI [0.0545, 0.0763]; delta vs full +0.0113, 95% CI [0.0029, 0.0199]. 20-seed stability: positive seeds 20/20, mean MRR delta +0.0602, min MRR delta +0.0414. Train-fraction sensitivity: fractions 0.5/0.6/0.7/0.8, min win rate 1.00, min MRR delta +0.0414, mean fraction-level MRR delta +0.0608. Oracle-gap closure: held-out MRR 0.215, held-out R@5 0.387, LOCO MRR 0.184. Paired outcome: MRR improved/worsened/tied 771/591/1398, Cohen dz 0.2234; R@5 improved/worsened/tied 280/92/2388; Type 3 R@5 delta -0.0476; Type 3 Coverage@5 oracle-gap closure -0.2150. LOCO split: type-aware MRR 0.608, candidate reranker MRR 0.657; weighted MRR delta +0.0504, p=0.0002; weighted R@5 delta +0.0522, p=0.0002. Intrinsic LOCO MRR 0.664, R@5 0.797; MRR delta +0.0567, 95% CI [0.0439, 0.0696]; R@5 delta +0.0658, 95% CI [0.0490, 0.0827].
 - 重要性：学习式方法容易被质疑过拟合；LOCO 已缓解该风险，但仍应把 split 设置写清楚。
 - 当前可写：可以作为核心方法贡献，但需要避免跨数据集泛化措辞。
 - 最小动作：在方法和实验设置中突出 leave-one-conversation-out split，并保留 paired permutation test。
@@ -101,7 +101,7 @@
 ### P8 复现实验是否足够完整？
 
 - 风险等级：`moderate`
-- 当前证据：Reproducibility artifact gate 89/89 and metric gate 5/5. Current checklist artifacts=89, metrics=5.
+- 当前证据：当前复现清单 artifact gate 131/131，metric gate 17/17。
 - 重要性：复现清单完整能降低审稿人对工程实验的疑虑，但大模型输出和 embedding cache 不能全部进 Git。
 - 当前可写：可以写 artifact-checked reproducibility package。
 - 最小动作：在 appendix 写清楚数据准备、模型缓存、API key 不入库、重型结果由 CSV 缓存复现。

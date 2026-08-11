@@ -90,7 +90,6 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     type3 = find_contains(evidence, "claim", "Type 3 多证据问题")
     efficiency = lookup(evidence, status="efficiency_result")
     stability = lookup(evidence, status="stability_result")
-    reproducibility = lookup(evidence, status="reproducibility")
 
     rows = [
         {
@@ -182,7 +181,10 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "priority": 8,
             "risk_level": "moderate",
             "reviewer_question": "复现实验是否足够完整？",
-            "current_evidence": f"{reproducibility['evidence']} Current checklist artifacts={artifact_pass}, metrics={metric_pass}.",
+            "current_evidence": (
+                f"当前复现清单 artifact gate {artifact_pass}/{len(checklist_artifacts)}，"
+                f"metric gate {metric_pass}/{len(checklist_metrics)}。"
+            ),
             "why_it_matters": "复现清单完整能降低审稿人对工程实验的疑虑，但大模型输出和 embedding cache 不能全部进 Git。",
             "minimum_action": "在 appendix 写清楚数据准备、模型缓存、API key 不入库、重型结果由 CSV 缓存复现。",
             "paper_wording_now": "可以写 artifact-checked reproducibility package。",

@@ -70,16 +70,16 @@ Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True
 Threats to validity CSV,outputs/agent_memory_threats_to_validity.csv,True,3236
 Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,4396
 Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,4249
-Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,5034
-Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,5284
+Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,5277
+Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,5575
 Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2326
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1884
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3975
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,22593
-Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
-Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,22940
+Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9798
+Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5630
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
 Embedding baseline status,outputs/agent_memory_embedding_baseline_status_zh.md,True,3276
 Embedding baseline status CSV,outputs/agent_memory_embedding_baseline_status.csv,True,734

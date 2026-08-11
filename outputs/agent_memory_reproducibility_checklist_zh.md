@@ -11,8 +11,8 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `205799f` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `352ed39` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -97,16 +97,16 @@
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
 | Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
 | Reviewer response preparation matrix CSV | True | 4249 | `outputs/agent_memory_reviewer_response_prep.csv` |
-| Submission package index | True | 5034 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 5284 | `outputs/agent_memory_submission_package_index.csv` |
+| Submission package index | True | 5277 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 5575 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission readiness gate | True | 2326 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
 | Submission readiness gate CSV | True | 1884 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3975 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 22593 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
-| Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
-| Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
+| Artifact integrity manifest CSV | True | 22940 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Submission gap analysis | True | 9798 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
+| Submission gap analysis CSV | True | 5630 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
 | Embedding baseline status | True | 3276 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 734 | `outputs/agent_memory_embedding_baseline_status.csv` |
