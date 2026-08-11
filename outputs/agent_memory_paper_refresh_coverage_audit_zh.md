@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 23
+- Required offline steps: 24
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -16,6 +16,7 @@
 | required_offline_step | offline_embedding_sensitivity | True | encoder sensitivity diagnostic | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | human_audit_execution_plan | True | human audit execution plan | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | human_audit_sample_qc | True | human audit sample coverage and progress QC | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | human_audit_labeling_dashboard | True | human audit per-row labeling progress dashboard | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | embedding_baseline_status | True | external embedding status without network calls | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | embedding_provider_profiles | True | provider-specific external embedding command profiles | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | api_embedding_preflight | True | paid/API embedding preflight | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |

@@ -71,6 +71,21 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Checks priority20/full80 human-audit sample size, uniqueness, coverage, and labeling progress.",
         ),
         Step(
+            "human_audit_labeling_dashboard",
+            py(
+                "generate_human_audit_labeling_dashboard.py",
+                "--priority-csv",
+                "outputs/agent_memory_human_audit_priority20_blind_review.csv",
+                "--full-csv",
+                "outputs/agent_memory_human_audit_full80_blind_review.csv",
+                "--output-csv",
+                "outputs/agent_memory_human_audit_labeling_dashboard.csv",
+                "--output-report",
+                "outputs/agent_memory_human_audit_labeling_dashboard_zh.md",
+            ),
+            "Refreshes per-row human-audit labeling progress and next-item dashboard.",
+        ),
+        Step(
             "embedding_baseline_status",
             py(
                 "generate_embedding_baseline_status.py",

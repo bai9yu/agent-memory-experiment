@@ -209,6 +209,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
         },
         {
             "section": "Human Audit",
+            "artifact": "outputs/agent_memory_human_audit_labeling_dashboard_zh.md",
+            "role": "逐条列出 priority20/full80 盲审表的缺失 human_* 字段、下一批待标注样本和分布进度。",
+            "status": "ready_for_labeling",
+            "evidence": "per-row labeling progress is tracked separately from agreement metrics",
+            "next_action": "人工填写时按 dashboard 的 review_order 逐步完成 required human_* 字段。",
+        },
+        {
+            "section": "Human Audit",
             "artifact": "outputs/agent_memory_human_audit_priority20_review_packet_zh.md",
             "role": "20 条优先人工复核阅读包。",
             "status": "ready_for_labeling",

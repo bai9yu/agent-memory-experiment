@@ -325,6 +325,8 @@ def main() -> None:
         ("Human audit execution plan CSV", outputs / "agent_memory_human_audit_execution_plan.csv"),
         ("Human audit sample QC", outputs / "agent_memory_human_audit_sample_qc_zh.md"),
         ("Human audit sample QC CSV", outputs / "agent_memory_human_audit_sample_qc.csv"),
+        ("Human audit labeling dashboard", outputs / "agent_memory_human_audit_labeling_dashboard_zh.md"),
+        ("Human audit labeling dashboard CSV", outputs / "agent_memory_human_audit_labeling_dashboard.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -609,6 +611,11 @@ def main() -> None:
             "stage": "Human audit sample QC",
             "command": "work/agent_memory_experiment/validate_human_audit_sample_qc.py",
             "notes": "Checks sample count, duplicate audit IDs, query/error/rank coverage, and pending human-label progress.",
+        },
+        {
+            "stage": "Human audit labeling dashboard",
+            "command": "work/agent_memory_experiment/generate_human_audit_labeling_dashboard.py",
+            "notes": "Lists per-row missing human_* fields and the next priority/full80 items to label.",
         },
         {
             "stage": "Dual human audit agreement",
