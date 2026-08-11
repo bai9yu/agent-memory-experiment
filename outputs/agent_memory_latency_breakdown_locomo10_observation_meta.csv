@@ -1,0 +1,2 @@
+variant,num_memories,num_queries,num_methods,semantic_backend,total_seconds,milliseconds_per_query,milliseconds_per_query_method
+locomo_observation,2507,1638,5,sentence-transformer,33.512548792,20.459431496947495,4.091886299389499

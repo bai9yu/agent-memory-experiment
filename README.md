@@ -57,6 +57,8 @@ DeepSeek 抽取的 fact-level memory 已完成第 1 个完整 conversation 的�
 
 成本与延迟分析见 `outputs/agent_memory_cost_latency_locomo10_zh.md`。
 
+细粒度延迟分解见 `outputs/agent_memory_latency_breakdown_locomo10_zh.md`。
+
 LoCoMo10 全量 DeepSeek 抽取结果：
 
 | Memory Form | Memories | Memory Tokens | Answerable Queries | Recall@1 | Recall@5 | MRR |

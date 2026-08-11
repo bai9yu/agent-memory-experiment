@@ -499,6 +499,30 @@ python3 work/agent_memory_experiment/cost_latency_analysis.py \
   --output-report outputs/agent_memory_cost_latency_locomo10_zh.md
 ```
 
+Run fine-grained latency breakdown:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/latency_breakdown.py \
+  --variant llm_extracted_fact \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3,4 \
+  --importance-weight 0.06 \
+  --type-awareness-weight 0.04 \
+  --output-stages outputs/agent_memory_latency_breakdown_locomo10_llm_stages.csv \
+  --output-meta outputs/agent_memory_latency_breakdown_locomo10_llm_meta.csv \
+  --output-summary outputs/agent_memory_latency_breakdown_locomo10_llm_summary.csv \
+  --output-report outputs/agent_memory_latency_breakdown_locomo10_llm_zh.md
+```
+
 ## Cross-Agent Memory Reuse Experiments
 
 Run one cross-agent reuse experiment:

@@ -26,6 +26,15 @@ DeepSeek extracted fact 的 memory token 是 LoCoMo observation 的 `0.774`，�
 
 说明：runtime 是 `memory_eval.py` 的端到端离线评测时间，包含本地模型/缓存读取、编码、排序和写出结果，不等同于线上服务单 query latency。
 
+## Latency Breakdown
+
+| Variant | Main Bottleneck | Ranking Share | Scorer Init Seconds | Query Encoding Seconds |
+|---|---|---:|---:|---:|
+| llm_extracted_fact | ranking_and_metrics | 0.879 | 4.2435 | 0.0167 |
+| locomo_observation | ranking_and_metrics | 0.870 | 4.2494 | 0.0151 |
+
+细粒度结果见 `outputs/agent_memory_latency_breakdown_locomo10_zh.md`。当前瓶颈主要是 full-memory ranking，而不是 BGE-M3 query encoding。
+
 ## Accuracy-Cost Tradeoff
 
 | Variant | Method | Recall@1 | Recall@5 | MRR |
@@ -47,3 +56,4 @@ DeepSeek extracted fact 的 memory token 是 LoCoMo observation 的 `0.774`，�
 - type-aware 的准确率最高，但 runtime 与 time-aware 基本同阶，因为只增加轻量规则匹配。
 - keyword/vector 单独使用成本低但准确率明显弱于 hybrid/time-aware/type-aware。
 - 若面向在线系统，应进一步拆分 embedding 编码时间、候选召回时间和重排时间。
+- 细粒度 latency breakdown 显示，下一步效率优化应优先做候选预筛选或向量索引，减少全量 memory 排序成本。

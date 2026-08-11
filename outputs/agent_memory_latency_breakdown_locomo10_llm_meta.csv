@@ -1,0 +1,2 @@
+variant,num_memories,num_queries,num_methods,semantic_backend,total_seconds,milliseconds_per_query,milliseconds_per_query_method
+llm_extracted_fact,2517,1838,5,sentence-transformer,36.049109834,19.61322624265506,3.9226452485310124
