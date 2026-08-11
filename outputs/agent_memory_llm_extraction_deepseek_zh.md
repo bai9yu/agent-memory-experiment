@@ -91,11 +91,25 @@ LLM 抽取的 memory 格式如下：
 | LLM extracted fact | 187 | 2443 | 175 | 0.474 | 0.669 | 0.726 | 0.590 | 42014 |
 | LoCoMo observation | 184 | 3002 | 155 | 0.497 | 0.600 | 0.690 | 0.578 | 0 |
 
+### LoCoMo10 全量对比
+
+| Variant | Memories | Memory Tokens | Answerable Queries | Recall@1 | Recall@3 | Recall@5 | MRR | API Tokens |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| LLM extracted fact + type-aware | 2517 | 31148 | 1838 | 0.503 | 0.670 | 0.733 | 0.609 | 559574 |
+| LoCoMo observation | 2507 | 40241 | 1638 | 0.483 | 0.639 | 0.703 | 0.583 | 0 |
+
+Coverage：
+
+- LLM extracted fact query coverage：`0.925`
+- LLM extracted fact strict query coverage：`0.870`
+- LLM extracted fact evidence coverage：`0.896`
+
 ## 当前结论
 
 - DeepSeek 已经可以作为真实 `memory write` 模块接入，生成的 fact-level memory 能直接参与检索实验。
-- 在三 session 和完整 conversation 上，LLM 抽取记忆的 token 数少于 LoCoMo observation，同时 answerable query 覆盖不低于 observation。
-- 完整 conversation 上，LLM 的 Recall@3、Recall@5、MRR 略高于 observation，但 Recall@1 略低，说明候选召回已经有效，Top-1 排序仍需要优化。
+- 在三 session、完整 conversation 和 LoCoMo10 全量上，LLM 抽取记忆的 token 数少于 LoCoMo observation，同时 answerable query 覆盖不低于 observation。
+- LoCoMo10 全量上，LLM extracted fact + type-aware 的 Recall@1、Recall@3、Recall@5 和 MRR 均高于 LoCoMo observation。
+- 完整 conversation 上，LLM 的候选召回已经有效；全量结果进一步说明 Top-1 排序可以通过 type-aware reranking 小幅改善。
 - 主要错误集中在主体混淆、关系/身份查询、活动类查询和时间计划类查询。
 
 ## 后续改进方向
@@ -116,12 +130,23 @@ score_type = score_time + w_type * type_match(query, memory)
 
 | Type Weight | Method | Recall@1 | Recall@3 | Recall@5 | MRR |
 |---:|---|---:|---:|---:|---:|
-| 0.00 | time_aware | 0.509 | 0.680 | 0.743 | 0.620 |
-| 0.04 | type_aware | 0.514 | 0.680 | 0.737 | 0.624 |
-| 0.08 | type_aware | 0.514 | 0.691 | 0.737 | 0.626 |
-| 0.12 | type_aware | 0.509 | 0.697 | 0.749 | 0.625 |
+| Dataset | Type Weight | Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---|---:|---:|---:|---:|
+| 1 conversation | 0.00 | time_aware | 0.509 | 0.680 | 0.743 | 0.620 |
+| 1 conversation | 0.08 | type_aware | 0.514 | 0.691 | 0.737 | 0.626 |
+| LoCoMo10 | 0.00 | time_aware | 0.499 | 0.668 | 0.727 | 0.605 |
+| LoCoMo10 | 0.04 | type_aware | 0.503 | 0.670 | 0.733 | 0.609 |
 
-初步结论：`w_type=0.08` 的 MRR 最好，能修复部分身份、活动和计划类 Top-1 错误；但该信号仍需在 LoCoMo10 全量上验证稳定性。
+结论：在 1 conversation 上 `w_type=0.08` 最好，在 LoCoMo10 全量上 `w_type=0.04` 最好。type-aware 是有效但增益较小的重排信号，需要后续用重复抽取和显著性检验确认稳定性。
+
+LoCoMo10 全量显著性检验：
+
+| Metric | Delta | 95% Bootstrap CI | Permutation p-value |
+|---|---:|---:|---:|
+| MRR | 0.004213 | [0.001214, 0.007182] | 0.0072 |
+| Recall@1 | 0.003808 | [-0.001088, 0.009249] | 0.2066 |
+| Recall@3 | 0.002176 | [-0.002720, 0.007073] | 0.5103 |
+| Recall@5 | 0.006529 | [0.002720, 0.010881] | 0.0028 |
 
 ## 复现命令
 

@@ -127,6 +127,59 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
+def append_csv(path: Path, row: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    file_exists = path.exists() and path.stat().st_size > 0
+    with path.open("a", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=list(row.keys()))
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow(row)
+
+
+def load_existing_memories(output_dir: Path) -> list[dict[str, Any]]:
+    path = output_dir / "memories.jsonl"
+    if not path.exists():
+        return []
+    rows = []
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                rows.append(json.loads(line))
+    return rows
+
+
+def load_existing_csv(output_dir: Path, name: str) -> list[dict[str, Any]]:
+    path = output_dir / name
+    if not path.exists():
+        return []
+    with path.open("r", encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def completed_session_keys(usage_rows: list[dict[str, Any]]) -> set[tuple[int, str]]:
+    done = set()
+    for row in usage_rows:
+        try:
+            record_idx = int(row.get("record_idx", 0))
+        except (TypeError, ValueError):
+            continue
+        session = str(row.get("session", ""))
+        if record_idx and session:
+            done.add((record_idx, session))
+    return done
+
+
+def next_memory_counter(memory_rows: list[dict[str, Any]]) -> int:
+    max_id = 0
+    for row in memory_rows:
+        match = re.fullmatch(r"llm_(\d+)", str(row.get("id", "")))
+        if match:
+            max_id = max(max_id, int(match.group(1)))
+    return max_id + 1
+
+
 def normalize_text(value: Any) -> str:
     if value is None:
         return ""
@@ -417,6 +470,23 @@ def write_report(path: Path, memory_rows: list[dict[str, Any]], coverage: dict[s
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def rebuild_final_outputs(output_dir: Path, records: list[dict[str, Any]], memory_rows: list[dict[str, Any]], usage_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    add_adjacent_goal_links(memory_rows)
+    evidence_map: dict[tuple[int, str], list[str]] = {}
+    for memory in memory_rows:
+        record_idx = int(str(memory.get("session_id", "0_")).split("_", 1)[0])
+        for evidence_id in memory["source_evidence_ids"]:
+            evidence_map.setdefault((record_idx, evidence_id), []).append(memory["id"])
+
+    queries, coverage = remap_queries(records, evidence_map)
+    write_jsonl(output_dir / "memories.jsonl", memory_rows)
+    write_jsonl(output_dir / "queries.jsonl", queries)
+    write_csv(output_dir / "usage.csv", usage_rows)
+    write_csv(output_dir / "coverage.csv", [{"variant": "llm_extracted_fact", **coverage}])
+    write_report(output_dir / "extraction_report.md", memory_rows, coverage, usage_rows)
+    return coverage
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Extract LoCoMo fact-level memories with DeepSeek.")
     parser.add_argument("--input", type=Path, default=Path("work/agent_memory_experiment/data/locomo10.json"))
@@ -429,6 +499,7 @@ def main() -> None:
     parser.add_argument("--timeout", type=int, default=90)
     parser.add_argument("--sleep-seconds", type=float, default=0.0)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--resume", action="store_true", help="Skip sessions already present in usage.csv and refresh outputs after each new session.")
     args = parser.parse_args()
 
     load_dotenv(args.env_file)
@@ -440,34 +511,44 @@ def main() -> None:
 
     records = load_records(args.input)[:args.max_records]
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    memory_rows: list[dict[str, Any]] = []
-    prompt_rows: list[dict[str, Any]] = []
-    usage_rows: list[dict[str, Any]] = []
-    evidence_map: dict[tuple[int, str], list[str]] = {}
-    memory_counter = 1
+    memory_rows = load_existing_memories(args.output_dir) if args.resume and not args.dry_run else []
+    prompt_rows = load_existing_csv(args.output_dir, "prompts.csv") if args.resume else []
+    usage_rows = load_existing_csv(args.output_dir, "usage.csv") if args.resume and not args.dry_run else []
+    done_sessions = completed_session_keys(usage_rows)
+    memory_counter = next_memory_counter(memory_rows)
 
     for record_idx, record in enumerate(records, start=1):
         sample_id = str(record.get("sample_id", f"sample_{record_idx}"))
         for session_key in selected_session_keys(record, args.max_sessions, args.session_start):
             session_idx = session_number(session_key) or 0
+            session_label = f"D{session_idx}"
+            if args.resume and (record_idx, session_label) in done_sessions:
+                continue
             prompt = build_user_prompt(record, session_key)
-            prompt_rows.append({
+            prompt_row = {
                 "record_idx": record_idx,
                 "sample_id": sample_id,
-                "session": f"D{session_idx}",
+                "session": session_label,
                 "prompt": prompt,
-            })
+            }
+            prompt_rows.append(prompt_row)
+            if args.resume:
+                append_csv(args.output_dir / "prompts.csv", prompt_row)
             if args.dry_run:
                 continue
             data, usage = call_deepseek(prompt, model, base_url, api_key, args.temperature, args.timeout)
-            usage_rows.append({
+            usage_row = {
                 "record_idx": record_idx,
                 "sample_id": sample_id,
-                "session": f"D{session_idx}",
+                "session": session_label,
                 "prompt_tokens": usage.get("prompt_tokens", 0),
                 "completion_tokens": usage.get("completion_tokens", 0),
                 "total_tokens": usage.get("total_tokens", 0),
-            })
+            }
+            usage_rows.append(usage_row)
+            if args.resume:
+                append_csv(args.output_dir / "usage.csv", usage_row)
+                done_sessions.add((record_idx, session_label))
             iso_date = session_date(record, session_idx, len(memory_rows))
             for raw_memory in data.get("memories", []):
                 if not isinstance(raw_memory, dict):
@@ -478,30 +559,22 @@ def main() -> None:
                     continue
                 memory_rows.append(memory)
                 memory_counter += 1
+            if args.resume:
+                rebuild_final_outputs(args.output_dir, records, memory_rows, usage_rows)
             if args.sleep_seconds > 0:
                 time.sleep(args.sleep_seconds)
 
-    add_adjacent_goal_links(memory_rows)
-    for memory in memory_rows:
-        record_idx = int(str(memory.get("session_id", "0_")).split("_", 1)[0])
-        for evidence_id in memory["source_evidence_ids"]:
-            evidence_map.setdefault((record_idx, evidence_id), []).append(memory["id"])
-
-    write_csv(args.output_dir / "prompts.csv", prompt_rows)
+    if not args.resume:
+        write_csv(args.output_dir / "prompts.csv", prompt_rows)
     if args.dry_run:
         print(json.dumps({"dry_run": True, "prompts": len(prompt_rows), "output_dir": str(args.output_dir)}, indent=2))
         return
 
-    queries, coverage = remap_queries(records, evidence_map)
-    write_jsonl(args.output_dir / "memories.jsonl", memory_rows)
-    write_jsonl(args.output_dir / "queries.jsonl", queries)
-    write_csv(args.output_dir / "usage.csv", usage_rows)
-    write_csv(args.output_dir / "coverage.csv", [{"variant": "llm_extracted_fact", **coverage}])
-    write_report(args.output_dir / "extraction_report.md", memory_rows, coverage, usage_rows)
+    coverage = rebuild_final_outputs(args.output_dir, records, memory_rows, usage_rows)
     print(json.dumps({
         "output_dir": str(args.output_dir),
         "num_memories": len(memory_rows),
-        "num_queries": len(queries),
+        "num_queries": coverage["num_queries"],
         "query_coverage": coverage["query_coverage"],
         "evidence_coverage": coverage["evidence_coverage"],
         "model": model,

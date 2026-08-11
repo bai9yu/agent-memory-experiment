@@ -363,6 +363,19 @@ python3 work/agent_memory_experiment/llm_memory_extractor.py \
   --temperature 0.1
 ```
 
+Run LoCoMo10 with resumable extraction:
+
+```bash
+python3 work/agent_memory_experiment/llm_memory_extractor.py \
+  --input work/agent_memory_experiment/data/locomo10.json \
+  --output-dir work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3 \
+  --max-records 10 \
+  --max-sessions 30 \
+  --temperature 0.1 \
+  --sleep-seconds 0.2 \
+  --resume
+```
+
 Slice the result to the extracted LoCoMo session:
 
 ```bash
@@ -416,6 +429,13 @@ Current first-conversation DeepSeek result with local BGE-M3:
 | DeepSeek extracted fact | 187 | 2443 | 175 | 0.474 | 0.726 | 0.590 |
 | LoCoMo observation | 184 | 3002 | 155 | 0.497 | 0.690 | 0.578 |
 
+Current LoCoMo10 DeepSeek result with local BGE-M3 and type-aware reranking:
+
+| Variant | Memories | Memory Tokens | Answerable Queries | Recall@1 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|---:|---:|
+| DeepSeek extracted fact + type-aware | 2517 | 31148 | 1838 | 0.503 | 0.733 | 0.609 |
+| LoCoMo observation | 2507 | 40241 | 1638 | 0.483 | 0.703 | 0.583 |
+
 Run type-aware reranking on the same slice:
 
 ```bash
@@ -435,6 +455,17 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memor
   --persona-boost-query-types 1,2,3,4 \
   --importance-weight 0.06 \
   --type-awareness-weight 0.08
+```
+
+Run paired significance testing:
+
+```bash
+python3 work/agent_memory_experiment/paired_significance_test.py \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004/per_query_metrics.csv \
+  --baseline time_aware \
+  --candidate type_aware \
+  --output-csv outputs/agent_memory_type_aware_significance_results.csv \
+  --output-report outputs/agent_memory_type_aware_significance_zh.md
 ```
 
 ## Cross-Agent Memory Reuse Experiments

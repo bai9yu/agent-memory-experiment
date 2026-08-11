@@ -49,7 +49,14 @@ DeepSeek 抽取的 fact-level memory 已完成第 1 个完整 conversation 的�
 
 结论：DeepSeek 可以作为 memory write 模块接入；当前候选召回有效，但 Top-1 排序还需要继续优化。
 
-当前已加入 `type_aware` 重排消融；在第 1 个完整 conversation 上，`w_type=0.08` 将 MRR 从 `0.620` 提升到 `0.626`，Recall@3 从 `0.680` 提升到 `0.691`。详细结果见 `outputs/agent_memory_type_aware_reranking_zh.md`。
+当前已加入 `type_aware` 重排消融；在 LoCoMo10 全量上，`w_type=0.04` 将 MRR 从 `0.605` 提升到 `0.609`，Recall@5 从 `0.727` 提升到 `0.733`。详细结果见 `outputs/agent_memory_type_aware_reranking_zh.md`。
+
+LoCoMo10 全量 DeepSeek 抽取结果：
+
+| Memory Form | Memories | Memory Tokens | Answerable Queries | Recall@1 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|---:|---:|
+| DeepSeek extracted fact + type-aware | 2517 | 31148 | 1838 | 0.503 | 0.733 | 0.609 |
+| LoCoMo observation | 2507 | 40241 | 1638 | 0.483 | 0.703 | 0.583 |
 
 大文件没有纳入 Git：
 
