@@ -54,6 +54,8 @@ Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,7485
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,11027
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
+Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True,5872
+Threats to validity CSV,outputs/agent_memory_threats_to_validity.csv,True,3236
 Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2324
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1882
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
@@ -109,6 +111,6 @@ Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
 Human audit annotation codebook,outputs/agent_memory_human_audit_annotation_codebook_zh.md,True,6136
 Human audit annotation schema,outputs/agent_memory_human_audit_annotation_schema.csv,True,1883
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,29799
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,30235
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

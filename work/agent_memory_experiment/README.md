@@ -1060,6 +1060,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
   --output-report outputs/agent_memory_manuscript_claim_check_zh.md
 ```
 
+Generate threats-to-validity appendix:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_threats_to_validity_appendix.py \
+  --project-root . \
+  --output-report outputs/agent_memory_threats_to_validity_zh.md \
+  --output-csv outputs/agent_memory_threats_to_validity.csv
+```
+
 Validate human-audit readiness for paper claims:
 
 ```bash

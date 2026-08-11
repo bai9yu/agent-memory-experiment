@@ -227,6 +227,8 @@ def main() -> None:
         ("Paper manuscript draft", outputs / "agent_memory_manuscript_draft_zh.md"),
         ("Paper manuscript claim check", outputs / "agent_memory_manuscript_claim_check_zh.md"),
         ("Paper manuscript claim check CSV", outputs / "agent_memory_manuscript_claim_check.csv"),
+        ("Threats to validity appendix", outputs / "agent_memory_threats_to_validity_zh.md"),
+        ("Threats to validity CSV", outputs / "agent_memory_threats_to_validity.csv"),
         ("Submission readiness gate", outputs / "agent_memory_submission_readiness_gate_zh.md"),
         ("Submission readiness gate CSV", outputs / "agent_memory_submission_readiness_gate.csv"),
         ("Public release readiness gate", outputs / "agent_memory_public_release_readiness_zh.md"),
@@ -486,6 +488,11 @@ def main() -> None:
             "stage": "Paper manuscript claim check",
             "command": "work/agent_memory_experiment/validate_manuscript_claims.py",
             "notes": "Checks that the draft does not overclaim pending embedding or human-audit results.",
+        },
+        {
+            "stage": "Threats to validity appendix",
+            "command": "work/agent_memory_experiment/generate_threats_to_validity_appendix.py",
+            "notes": "Builds a paper appendix of internal/external/construct/statistical validity threats and claim boundaries.",
         },
         {
             "stage": "Submission readiness gate",

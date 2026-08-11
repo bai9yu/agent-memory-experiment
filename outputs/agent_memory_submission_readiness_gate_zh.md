@@ -13,7 +13,7 @@
 
 | Gate | Category | Required | Pass | Status | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| reproducibility_artifacts | reproducibility | True | True | pass | 113/113 artifacts exist |
+| reproducibility_artifacts | reproducibility | True | True | pass | 115/115 artifacts exist |
 | reproducibility_metrics | reproducibility | True | True | pass | 9/9 metric thresholds pass |
 | manuscript_claim_check | paper_writing | True | True | pass | 8/8 claim checks pass |
 | api_embedding_preflight | external_baseline | True | False | blocker | 4/5 required checks pass |
@@ -23,7 +23,7 @@
 | full80_human_audit | reliability | True | False | blocker | full80 confirmed=0/80, invalid=0 |
 | reviewer_risk_blockers | submission | True | False | blocker | blocker risks=2 |
 | public_release_hygiene | submission | True | True | pass | public release blockers=0 |
-| artifact_integrity_manifest | reproducibility | True | True | pass | integrity manifest covers=113/113, sha256_ok=111, self_skips=2 |
+| artifact_integrity_manifest | reproducibility | True | True | pass | integrity manifest covers=115/115, sha256_ok=113, self_skips=2 |
 
 ## 当前 Blocker
 
