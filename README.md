@@ -11,13 +11,16 @@
 - persona gate，用于减少人物主体混淆
 - importance proxy，用于提升身份、关系、长期目标、偏好等高价值记忆
 - LoCoMo `observation` / `session_summary` 真实压缩对照
-- DeepSeek LLM fact-level memory extraction
+- DeepSeek LLM fact-level memory extraction，并与 LoCoMo 官方 observation memory 对比
 - 跨智能体共享记忆的权限过滤与风险对照实验
 - 中文实验报告、参数搜索记录和复盘文档
 
 主要代码在 `work/agent_memory_experiment/`。
 
-中文文档和实验报告在 `outputs/`。
+中文文档和实验报告在 `outputs/`，其中 DeepSeek 记忆抽取报告见：
+
+- `outputs/agent_memory_llm_extraction_deepseek_zh.md`
+- `outputs/agent_memory_llm_extraction_1conversation_comparison_zh.md`
 
 ## 当前推荐配置
 
@@ -36,6 +39,15 @@ BGE-M3 + adaptive time-aware reranking + persona gate + importance proxy
 | LoCoMo session summary memory | 0.201 | 0.520 | 0.773 | 0.636 |
 
 结论：事实级 observation memory 能显著降低 token 成本并减少闲聊噪声；session summary 更适合作为二级归档层。
+
+DeepSeek 抽取的 fact-level memory 已完成第 1 个完整 conversation 的真实 API 接入实验：
+
+| Memory Form | Memories | Memory Tokens | Answerable Queries | Recall@1 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|---:|---:|
+| DeepSeek extracted fact | 187 | 2443 | 175 | 0.474 | 0.726 | 0.590 |
+| LoCoMo observation | 184 | 3002 | 155 | 0.497 | 0.690 | 0.578 |
+
+结论：DeepSeek 可以作为 memory write 模块接入；当前候选召回有效，但 Top-1 排序还需要继续优化。
 
 大文件没有纳入 Git：
 

@@ -352,6 +352,17 @@ python3 work/agent_memory_experiment/llm_memory_extractor.py \
   --temperature 0.1
 ```
 
+Run the first full LoCoMo conversation with DeepSeek extraction:
+
+```bash
+python3 work/agent_memory_experiment/llm_memory_extractor.py \
+  --input work/agent_memory_experiment/data/locomo10.json \
+  --output-dir work/agent_memory_experiment/data/llm_extracted_locomo_1c_all_v3 \
+  --max-records 1 \
+  --max-sessions 30 \
+  --temperature 0.1
+```
+
 Slice the result to the extracted LoCoMo session:
 
 ```bash
@@ -382,6 +393,28 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memor
   --persona-boost-query-types 1,2,3,4 \
   --importance-weight 0.06
 ```
+
+Create a comparison report against LoCoMo official observation memory:
+
+```bash
+python3 work/agent_memory_experiment/summarize_llm_extraction_comparison.py \
+  --llm-memories work/agent_memory_experiment/data/llm_extracted_locomo_1c_all_v3_d1_d30_memories.jsonl \
+  --llm-summary work/agent_memory_experiment/results/llm_extracted_locomo_1c_all_v3_d1_d30_bge_m3/summary.csv \
+  --llm-rankings work/agent_memory_experiment/results/llm_extracted_locomo_1c_all_v3_d1_d30_bge_m3/rankings.csv \
+  --llm-usage work/agent_memory_experiment/data/llm_extracted_locomo_1c_all_v3/usage.csv \
+  --observation-memories work/agent_memory_experiment/data/locomo_observation_record1_d1_d30_memories.jsonl \
+  --observation-summary work/agent_memory_experiment/results/locomo_observation_record1_d1_d30_bge_m3/summary.csv \
+  --observation-rankings work/agent_memory_experiment/results/locomo_observation_record1_d1_d30_bge_m3/rankings.csv \
+  --output outputs/agent_memory_llm_extraction_1conversation_comparison_zh.md \
+  --csv-output outputs/agent_memory_llm_extraction_1conversation_comparison.csv
+```
+
+Current first-conversation DeepSeek result with local BGE-M3:
+
+| Variant | Memories | Memory Tokens | Answerable Queries | Recall@1 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|---:|---:|
+| DeepSeek extracted fact | 187 | 2443 | 175 | 0.474 | 0.726 | 0.590 |
+| LoCoMo observation | 184 | 3002 | 155 | 0.497 | 0.690 | 0.578 |
 
 ## Cross-Agent Memory Reuse Experiments
 

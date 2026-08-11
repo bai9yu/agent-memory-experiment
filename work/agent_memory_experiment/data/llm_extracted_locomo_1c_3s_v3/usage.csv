@@ -1,0 +1,4 @@
+record_idx,sample_id,session,prompt_tokens,completion_tokens,total_tokens
+1,conv-26,D1,1067,757,1824
+1,conv-26,D2,1262,654,1916
+1,conv-26,D3,1683,796,2479

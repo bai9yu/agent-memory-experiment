@@ -1,0 +1,2 @@
+variant,num_queries,fully_mapped_queries,partially_mapped_queries,unmapped_queries,query_coverage,strict_query_coverage,total_evidence_ids,mapped_evidence_ids,evidence_coverage
+llm_extracted_fact,199,162,13,24,0.8793969849246231,0.8140703517587939,250,212,0.848
