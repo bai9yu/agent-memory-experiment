@@ -11,6 +11,7 @@
 - persona gate，用于减少人物主体混淆
 - importance proxy，用于提升身份、关系、长期目标、偏好等高价值记忆
 - candidate-level learned reranking，用于从多检索器候选并集中学习排序
+- Type 3 多证据覆盖、候选深度和专用重排诊断
 - LoCoMo `observation` / `session_summary` 真实压缩对照
 - DeepSeek LLM fact-level memory extraction，并与 LoCoMo 官方 observation memory 对比
 - 跨智能体共享记忆的权限过滤与风险对照实验
@@ -78,6 +79,8 @@ Top-20 集合级选择补充基线见 `outputs/agent_memory_set_selection_top20_
 
 候选深度分析见 `outputs/agent_memory_candidate_depth_analysis_zh.md`。
 
+Type 3 专用监督重排诊断见 `outputs/agent_memory_type3_specific_reranker_zh.md`。
+
 成本与延迟分析见 `outputs/agent_memory_cost_latency_locomo10_zh.md`。
 
 细粒度延迟分解见 `outputs/agent_memory_latency_breakdown_locomo10_zh.md`。
@@ -110,6 +113,8 @@ LoCoMo10 全量 DeepSeek 抽取结果：
 | candidate oracle | 0.909 | 0.909 | 0.909 | 0.909 |
 
 配对检验显示 candidate reranker 相比 fixed type-aware 的 MRR 提升为 `+0.0539`，95% CI `[0.0462, 0.0619]`，permutation p-value `0.0002`。
+
+Type 3 多证据问题的补充诊断显示，单独训练 Type3 专用候选重排器没有超过固定 `type_aware`：MRR `0.399` vs `0.434`，Coverage@5 `0.331` vs `0.377`。因此 Type 3 后续应转向 query decomposition 或监督式 set-level selection，而不是继续单点优化候选重排器。
 
 大文件没有纳入 Git：
 

@@ -402,6 +402,24 @@
 
 收益：进一步排除了“扩大候选池 + 简单 MMR”这个自然但不足的方案，明确需要带覆盖目标的学习方法。
 
+### 3.20 问题：Type 3 专用单候选重排没有解决多证据问题
+
+现象：进一步只用训练集中的 Type 3 候选训练专用 reranker，并在 held-out Type 3 query 上评估。结果 `type3_specific_reranker` 的 MRR 为 `0.399`，低于固定 `type_aware` 的 `0.434`；Coverage@5 为 `0.331`，也低于 `type_aware` 的 `0.377`。全局 candidate reranker 在 Type 3 上也没有超过 `type_aware`，MRR 为 `0.421`。
+
+原因判断：
+
+- Type 3 训练样本数量较少，单独训练容易过拟合。
+- 当前特征仍以“单条 memory 是否相关”为目标，不能显式建模多条 evidence 之间的互补关系。
+- Type 3 的 candidate oracle 仍明显更高，说明候选池内存在可用证据，但排序目标没有把整组证据提前。
+
+解决：
+
+- 新增 `type3_specific_reranker_experiment.py`，把 Type 3 专用重排作为独立负结果记录。
+- 同时输出排序指标和 evidence coverage 指标，避免只看 MRR。
+- 将下一步路线从“Type3 专用 reranker”调整为 query decomposition 或 supervised set-level selector。
+
+收益：排除了一个看似自然但效果不佳的改进方向，让论文后续贡献点更聚焦在多证据覆盖目标，而不是继续调单候选分类器。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -429,12 +447,13 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 5. KV cache 复用还没有真实实现，只在方法文档中给出下一步公式。
 6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，100k synthetic distractor 实验也只能说明趋势，ANN 优势仍需要真实更大 memory bank 才能充分证明。
 7. 简单 text-intent router 和浅层监督式 query-text router 都弱于 fixed `type_aware`；validation-tuned router 可接近 fixed `type_aware`，但仍没有稳定超过。candidate-level reranker 已取得显著提升，且 feature importance 与 query-type 分析显示它主要改善 Type 2/4/5，但 Type 3 仍是短板。
+8. Type 3 专用单候选重排已验证为负结果，说明 Type 3 需要 query decomposition 或 supervised set-level objective，而不是只换一个类型专用分类器。
 
 ## 6. 下一步行动清单
 
 1. 固化当前推荐配置：BGE-M3 + adaptive time-aware + persona gate + importance proxy。
 2. 固化两层记忆结构：fact/observation 作为在线检索层，session_summary 作为归档回溯层。
-3. 针对 Type 3 增加 query decomposition 或扩大候选召回后的 set-level learning，优化 Top-K evidence coverage ratio，而不仅是 Top-1 MRR。
+3. 针对 Type 3 增加 query decomposition 或扩大候选召回后的 supervised set-level learning，优化 Top-K evidence coverage ratio，而不仅是 Top-1 MRR。
 4. 增加 LLM memory extraction 重复实验：从原始对话抽取事实、时间、实体、重要性、权限，并报告 seed/temperature 方差。
 5. 增加 conflict resolver：同一主体同一属性按时间和置信度更新。
 6. 增加真实多 Agent trace：把 Agent A 的工具经验、错误修复、代码片段作为共享记忆。

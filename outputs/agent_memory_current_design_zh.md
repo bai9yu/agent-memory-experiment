@@ -24,22 +24,21 @@
 
 ## 2. 当前大模型用的是什么
 
-当前默认实验不调用任何大模型 API。
+当前项目已经接入过真实大模型 API，但大模型只用于 memory write / fact extraction，不作为默认检索模型。
 
 | 模块 | 当前默认实现 | 是否需要 API key | 目的 |
 |---|---|---:|---|
-| 语义相似度 | deterministic hashed-vector | 否 | 离线、可复现、零依赖基线 |
-| 可选 embedding | `BAAI/bge-small-en-v1.5` / `BAAI/bge-m3` | 否，但需安装依赖/下载模型 | 替换 hash 向量，得到更真实的语义检索 |
-| LLM 事实抽取 | 暂未接入，当前用规则压缩 | 否 | 第一阶段先验证压缩方向 |
-| Agent 推理生成 | 暂未接入 | 否 | 当前只评估记忆检索，不评估回答生成 |
+| 语义相似度 | `BAAI/bge-m3` 本地 embedding | 否，但需要本地模型缓存 | 当前 LoCoMo10 主实验的语义检索 |
+| 零依赖基线 | deterministic hashed-vector | 否 | 离线 sanity check 和无依赖基线 |
+| LLM 事实抽取 | DeepSeek 官方 API | 是 | 将长对话 turn/session 抽取为 fact-level memory |
+| Agent 推理生成 | 暂未作为主实验接入 | 暂不需要 | 当前先评估记忆写入、检索、重排，不评估最终回答生成 |
 
-因此，目前不需要你接入主流大模型 API。当前第二阶段路线改为：
+因此当前整体判断是：
 
-1. 本地 BGE embedding：先替换当前 hash 向量，验证检索质量。
-2. 小模型 LLM：用于 memory add 时的事实抽取、冲突判断、摘要压缩。
-3. 主推理模型：用于真实 Agent 根据检索记忆生成回答或执行计划。
-
-当前先不接 OpenAI embedding，也不接 Qwen embedding API；先把本地 `sentence-transformers + BGE-small/BGE-M3` 跑通。DeepSeek API 可以后续用于事实抽取、压缩和回答生成，但不是当前 embedding 层的依赖。
+1. Embedding 层优先用本地 BGE-M3，避免每次检索都产生 API 成本。
+2. DeepSeek API 已证明可以作为 memory writer，用于抽取结构化事实记忆。
+3. OpenAI / Qwen / 其他 embedding API 可以作为后续更强 embedding baseline，而不是当前唯一依赖。
+4. 真实 Agent 回答生成还不是本阶段主指标；后续若评估 end-to-end QA，再接入主推理模型。
 
 ## 3. 当前整体流程
 
@@ -569,6 +568,14 @@ paired significance test 显示 candidate reranker 相比 fixed `type_aware` 的
 然后在 \(\mathcal{C}_{deep}\) 上做集合级选择，而不是只重排 Top-10：
 
 补充实验显示，将同一启发式 set selector 用在 Top-20 候选池上，Type 3 Coverage@5 从 `0.372` 降到 `0.340`，Coverage@20 仍为 `0.597`。这说明“深候选池”提供了证据空间，但启发式多样性不能学习如何把证据提前；下一版需要 supervised set-level objective：
+
+进一步测试 Type 3 专用候选重排器：
+
+\[
+\hat p^{(3)}_{q,i}=f_{\theta_3}(\phi(q,m_i)),\quad q\in \mathcal{D}_{Type3}
+\]
+
+其中 \(f_{\theta_3}\) 只使用训练集中的 Type 3 候选学习。结果显示该方向没有改善：固定 `type_aware` 的 Type 3 MRR 为 `0.434`、Coverage@5 为 `0.377`，而 `type3_specific_reranker` 分别为 `0.399` 和 `0.331`。因此当前 Type 3 的瓶颈不是简单的类型专用单候选排序，而是多证据覆盖目标与 query 结构分解不足。
 
 \[
 \max_\theta

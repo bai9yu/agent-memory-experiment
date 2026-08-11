@@ -198,12 +198,25 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 结论：Top-20 候选池里确实有更多 evidence，但简单去重/类型多样性不会把它们提前到 Top-5；真正需要的是带监督信号的 set-level learning，或先做 query decomposition 再分别召回。
 
+进一步测试 Type 3 专用监督重排：使用同一 query-level held-out 划分，对比固定 `type_aware`、全局 candidate reranker、只用 Type 3 训练样本学习的专用 reranker，以及 candidate oracle。
+
+| Method | Type 3 MRR | Type 3 R@1 | Type 3 R@3 | Type 3 R@5 | Coverage@5 | Full@5 |
+|---|---:|---:|---:|---:|---:|---:|
+| type_aware | 0.434 | 0.344 | 0.507 | 0.546 | 0.377 | 0.230 |
+| global_candidate_reranker | 0.421 | 0.351 | 0.432 | 0.496 | 0.372 | 0.262 |
+| type3_specific_reranker | 0.399 | 0.312 | 0.417 | 0.475 | 0.331 | 0.206 |
+| candidate_oracle | 0.778 | 0.778 | 0.778 | 0.778 | 0.658 | 0.524 |
+
+结论：Type 3 专用单候选重排没有改善，反而低于固定 `type_aware`。这说明当前 Type 3 的瓶颈不是“把所有类型混在一起训练导致分布不匹配”，而是多证据问题本身需要集合级目标或 query decomposition。Candidate oracle 仍明显更高，证明候选池中存在可利用空间，但需要更适合多证据覆盖的模型。
+
+配对显著性检验显示 Type 3 专用重排相对 `type_aware` 的下降并非偶然：MRR delta `-0.0362`，95% CI `[-0.0705, -0.0002]`，p-value `0.0460`；Recall@5 delta `-0.0794`，95% CI `[-0.1429, -0.0238]`，p-value `0.0260`。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
-4. 学习式重排：candidate-level reranker 已有显著提升；下一步需要针对 Type 3 下降做多证据聚合、错误案例复核和更强 reranker 模型消融。
+4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排已验证为负结果，下一步需要做 query decomposition 或 supervised set-level selector。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 6. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 

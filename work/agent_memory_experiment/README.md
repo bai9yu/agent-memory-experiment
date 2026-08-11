@@ -641,6 +641,38 @@ python3 work/agent_memory_experiment/candidate_depth_analysis.py \
   --output-report outputs/agent_memory_candidate_depth_analysis_zh.md
 ```
 
+Run Type-3-specific supervised reranker diagnosis:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/type3_specific_reranker_experiment.py \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --output-split-summary outputs/agent_memory_type3_specific_reranker_split_summary.csv \
+  --output-summary outputs/agent_memory_type3_specific_reranker_summary.csv \
+  --output-per-query outputs/agent_memory_type3_specific_reranker_per_query.csv \
+  --output-comparison outputs/agent_memory_type3_specific_reranker_comparison_per_query.csv \
+  --output-coverage outputs/agent_memory_type3_specific_reranker_coverage.csv \
+  --output-coverage-summary outputs/agent_memory_type3_specific_reranker_coverage_summary.csv \
+  --output-feature-importance outputs/agent_memory_type3_specific_reranker_feature_importance.csv \
+  --output-ranked outputs/agent_memory_type3_specific_reranker_ranked_top20.csv \
+  --output-report outputs/agent_memory_type3_specific_reranker_zh.md
+```
+
+Run paired significance testing for the Type-3-specific reranker:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/paired_significance_test.py \
+  --per-query outputs/agent_memory_type3_specific_reranker_comparison_per_query.csv \
+  --baseline type_aware \
+  --candidate type3_specific_reranker \
+  --iterations 5000 \
+  --output-csv outputs/agent_memory_type3_specific_reranker_significance_results.csv \
+  --output-report outputs/agent_memory_type3_specific_reranker_significance_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash
