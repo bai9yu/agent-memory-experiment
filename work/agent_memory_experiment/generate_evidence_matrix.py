@@ -71,6 +71,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     audit_summary = read_csv(outputs / "agent_memory_human_audit_summary.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     embedding_estimate = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
+    embedding_comparison = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
 
     fact_type_aware = lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     observation_type_aware = lookup(baseline, variant="locomo_observation", method="type_aware")
@@ -100,6 +101,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     embedding_items = sum(int(row["items"]) for row in embedding_estimate)
     embedding_tokens = sum(int(row["approx_tokens"]) for row in embedding_estimate)
     embedding_batches = sum(0 if row["cache_exists"] == "True" else int(row["api_batches_if_uncached"]) for row in embedding_estimate)
+    embedding_comparison_done = all(row["status"] == "completed" for row in embedding_comparison)
 
     storage_ratio = float(fact_storage["memory_tokens"]) / float(observation_storage["memory_tokens"])
     sklearn_delta = float(sklearn_200["mrr"]) - float(fact_type_aware["mrr"])
@@ -226,9 +228,9 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
         {
             "claim": "外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。",
             "status": "baseline_protocol",
-            "evidence": f"已登记 {len(embedding_status)} 个外部 embedding baseline；completed={embedding_completed}, ready_or_completed={embedding_ready}；预计文本 {embedding_items} 条、约 {embedding_tokens} tokens、未缓存批次 {embedding_batches}。",
+            "evidence": f"已登记 {len(embedding_status)} 个外部 embedding baseline；completed={embedding_completed}, ready_or_completed={embedding_ready}；预计文本 {embedding_items} 条、约 {embedding_tokens} tokens、未缓存批次 {embedding_batches}；对比表完成={embedding_comparison_done}。",
             "support_level": "protocol_ready_pending_run",
-            "primary_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_api_embedding_run_estimate_zh.md; memory_eval.py",
+            "primary_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_api_embedding_run_estimate_zh.md; agent_memory_embedding_baseline_comparison_zh.md; memory_eval.py",
             "paper_use": "可以作为复现实验入口；在 summary.csv 生成前，不能写入主结果表。",
             "remaining_gap": "需要提供 API key 并实际运行 text-embedding-3-small 等外部 embedding 对照。",
         },

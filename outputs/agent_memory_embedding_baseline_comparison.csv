@@ -1,0 +1,5 @@
+metric,bge_m3,api_embedding,delta_api_minus_bge,status,api_label
+recall@1,0.5032644178454843,,,pending_api_result,OpenAI text-embedding-3-small
+recall@3,0.6702937976060935,,,pending_api_result,OpenAI text-embedding-3-small
+recall@5,0.7334058759521219,,,pending_api_result,OpenAI text-embedding-3-small
+mrr,0.6093848002850233,,,pending_api_result,OpenAI text-embedding-3-small

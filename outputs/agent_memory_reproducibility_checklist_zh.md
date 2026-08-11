@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：19/19
+- Artifact 存在性：21/21
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `80047e0` |
-| git_branch_status | `## main...origin/main [ahead 31]` |
+| git_commit | `9d11ef5` |
+| git_branch_status | `## main...origin/main [ahead 32]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -33,16 +33,18 @@
 | Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
 | Paper tables Markdown | True | 2345 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 3190 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 5826 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
-| Embedding baseline status | True | 1841 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
+| Paper evidence matrix | True | 5850 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Embedding baseline status | True | 2017 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
 | API embedding run estimate CSV | True | 502 | `outputs/agent_memory_api_embedding_run_estimate.csv` |
+| Embedding baseline comparison | True | 998 | `outputs/agent_memory_embedding_baseline_comparison_zh.md` |
+| Embedding baseline comparison CSV | True | 381 | `outputs/agent_memory_embedding_baseline_comparison.csv` |
 | Human audit protocol | True | 2479 | `outputs/agent_memory_human_audit_protocol_zh.md` |
 | Human audit sample | True | 28471 | `outputs/agent_memory_human_audit_sample_type_aware.csv` |
 | Human audit summary | True | 1394 | `outputs/agent_memory_human_audit_summary_zh.md` |
 | Human audit summary CSV | True | 777 | `outputs/agent_memory_human_audit_summary.csv` |
-| Paper experiment status | True | 19909 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 20099 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -65,6 +67,7 @@
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
 | Embedding baseline status | `work/agent_memory_experiment/generate_embedding_baseline_status.py` | Tracks API embedding baseline readiness without reading or printing keys. |
 | API embedding run estimate | `work/agent_memory_experiment/estimate_api_embedding_run.py` | Estimates API embedding item count, approximate tokens, batches, and cache status without network. |
+| Embedding baseline comparison | `work/agent_memory_experiment/compare_embedding_baselines.py` | Compares API embedding summary against BGE-M3 when the API run exists. |
 | Human audit sample | `work/agent_memory_experiment/generate_human_audit_sample.py` | Creates stratified manual-review sample for error-analysis reliability. |
 | Human audit summary | `work/agent_memory_experiment/summarize_human_audit.py` | Summarizes manual labels once the audit CSV is filled. |
 | Evidence matrix | `work/agent_memory_experiment/generate_evidence_matrix.py` | Summarizes paper claims, evidence strength, and remaining gaps. |

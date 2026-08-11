@@ -183,6 +183,8 @@ def main() -> None:
         ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
         ("API embedding run estimate", outputs / "agent_memory_api_embedding_run_estimate_zh.md"),
         ("API embedding run estimate CSV", outputs / "agent_memory_api_embedding_run_estimate.csv"),
+        ("Embedding baseline comparison", outputs / "agent_memory_embedding_baseline_comparison_zh.md"),
+        ("Embedding baseline comparison CSV", outputs / "agent_memory_embedding_baseline_comparison.csv"),
         ("Human audit protocol", outputs / "agent_memory_human_audit_protocol_zh.md"),
         ("Human audit sample", outputs / "agent_memory_human_audit_sample_type_aware.csv"),
         ("Human audit summary", outputs / "agent_memory_human_audit_summary_zh.md"),
@@ -234,6 +236,11 @@ def main() -> None:
             "stage": "API embedding run estimate",
             "command": "work/agent_memory_experiment/estimate_api_embedding_run.py",
             "notes": "Estimates API embedding item count, approximate tokens, batches, and cache status without network.",
+        },
+        {
+            "stage": "Embedding baseline comparison",
+            "command": "work/agent_memory_experiment/compare_embedding_baselines.py",
+            "notes": "Compares API embedding summary against BGE-M3 when the API run exists.",
         },
         {
             "stage": "Human audit sample",

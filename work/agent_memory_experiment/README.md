@@ -812,6 +812,19 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/estim
   --output-report outputs/agent_memory_api_embedding_run_estimate_zh.md
 ```
 
+Compare API embedding baseline with BGE-M3:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/compare_embedding_baselines.py \
+  --bge-summary work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/summary.csv \
+  --api-summary work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004/summary.csv \
+  --method type_aware \
+  --api-label "OpenAI text-embedding-3-small" \
+  --output-csv outputs/agent_memory_embedding_baseline_comparison.csv \
+  --output-report outputs/agent_memory_embedding_baseline_comparison_zh.md
+```
+
 Generate reproducibility checklist:
 
 ```bash
