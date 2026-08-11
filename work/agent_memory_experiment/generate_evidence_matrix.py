@@ -375,9 +375,9 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "status": "baseline_protocol",
             "evidence": f"已登记 {len(embedding_status)} 个外部 embedding baseline；completed={embedding_completed}, ready_or_completed={embedding_ready}；preflight required={preflight_required_pass}/{preflight_required_total}；预计文本 {embedding_items} 条、约 {embedding_tokens} tokens、未缓存批次 {embedding_batches}；对比表完成={embedding_comparison_done}。",
             "support_level": "protocol_ready_pending_run",
-            "primary_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_api_embedding_preflight_zh.md; agent_memory_api_embedding_run_estimate_zh.md; agent_memory_embedding_baseline_comparison_zh.md; memory_eval.py",
-            "paper_use": "可以作为复现实验入口；在 summary.csv 生成前，不能写入主结果表。",
-            "remaining_gap": "需要提供 OpenAI 或其他 OpenAI-compatible provider 的 embedding API key，并实际运行至少一个外部 embedding 对照。",
+            "primary_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_api_embedding_preflight_zh.md; agent_memory_api_embedding_run_estimate_zh.md; agent_memory_embedding_baseline_comparison_zh.md; agent_memory_offline_embedding_sensitivity_zh.md; memory_eval.py",
+            "paper_use": "可以作为复现实验入口；离线 hash/BM25 敏感性可写为下界诊断，但外部 API summary.csv 生成前不能写入外部 embedding 主结果表。",
+            "remaining_gap": "需要提供 OpenAI 或其他 OpenAI-compatible provider 的 embedding API key，并实际运行至少一个外部 embedding 对照；hash baseline 不能替代真实外部 embedding。",
         },
         {
             "claim": "完整项目距离最终投稿仍需要额外验证。",

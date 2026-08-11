@@ -68,7 +68,7 @@ Type3 supervised selector rwn002 comparison,outputs/agent_memory_type3_supervise
 Type3 supervised selector rwn002 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv,True,725694
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,3724
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,5197
-Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7731
+Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7856
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,7485
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,12592
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
@@ -84,7 +84,7 @@ Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3843
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,24447
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,24774
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
@@ -102,6 +102,8 @@ API embedding run estimate,outputs/agent_memory_api_embedding_run_estimate_zh.md
 API embedding run estimate CSV,outputs/agent_memory_api_embedding_run_estimate.csv,True,502
 Embedding baseline comparison,outputs/agent_memory_embedding_baseline_comparison_zh.md,True,998
 Embedding baseline comparison CSV,outputs/agent_memory_embedding_baseline_comparison.csv,True,381
+Offline embedding sensitivity,outputs/agent_memory_offline_embedding_sensitivity_zh.md,True,2669
+Offline embedding sensitivity CSV,outputs/agent_memory_offline_embedding_sensitivity.csv,True,1993
 External embedding blocker audit,outputs/agent_memory_external_embedding_blocker_audit_zh.md,True,2942
 External embedding blocker audit CSV,outputs/agent_memory_external_embedding_blocker_audit.csv,True,1140
 Human audit protocol,outputs/agent_memory_human_audit_protocol_zh.md,True,2479

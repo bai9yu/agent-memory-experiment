@@ -275,6 +275,8 @@ def main() -> None:
         ("API embedding run estimate CSV", outputs / "agent_memory_api_embedding_run_estimate.csv"),
         ("Embedding baseline comparison", outputs / "agent_memory_embedding_baseline_comparison_zh.md"),
         ("Embedding baseline comparison CSV", outputs / "agent_memory_embedding_baseline_comparison.csv"),
+        ("Offline embedding sensitivity", outputs / "agent_memory_offline_embedding_sensitivity_zh.md"),
+        ("Offline embedding sensitivity CSV", outputs / "agent_memory_offline_embedding_sensitivity.csv"),
         ("External embedding blocker audit", outputs / "agent_memory_external_embedding_blocker_audit_zh.md"),
         ("External embedding blocker audit CSV", outputs / "agent_memory_external_embedding_blocker_audit.csv"),
         ("Human audit protocol", outputs / "agent_memory_human_audit_protocol_zh.md"),
@@ -526,6 +528,11 @@ def main() -> None:
             "stage": "Embedding baseline comparison",
             "command": "work/agent_memory_experiment/compare_embedding_baselines.py",
             "notes": "Compares API embedding summary against BGE-M3 when the API run exists.",
+        },
+        {
+            "stage": "Offline embedding sensitivity",
+            "command": "work/agent_memory_experiment/generate_offline_embedding_sensitivity.py",
+            "notes": "Compares BGE-M3 against hash-vector and BM25 offline floors without network or paid API calls.",
         },
         {
             "stage": "External embedding blocker audit",

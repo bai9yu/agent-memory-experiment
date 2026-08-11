@@ -85,7 +85,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     )
     preflight_required_total = sum(1 for row in embedding_preflight if row.get("severity") == "required")
 
-    main_retrieval = find_contains(evidence, "claim", "事实级记忆在 LoCoMo10")
+    main_retrieval = lookup(evidence, status="main_result")
     main_method = lookup(evidence, status="main_method")
     type3 = find_contains(evidence, "claim", "Type 3 多证据问题")
     efficiency = lookup(evidence, status="efficiency_result")

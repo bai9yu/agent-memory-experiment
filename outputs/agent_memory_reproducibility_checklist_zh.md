@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：142/142
+- Artifact 存在性：144/144
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `1df9a64` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `ba55d3f` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -95,7 +95,7 @@
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
 | Paper tables Markdown | True | 3724 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 5197 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 7731 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper evidence matrix | True | 7856 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 7485 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Paper manuscript draft | True | 12592 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
@@ -111,7 +111,7 @@
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3843 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 24447 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 24774 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
@@ -129,6 +129,8 @@
 | API embedding run estimate CSV | True | 502 | `outputs/agent_memory_api_embedding_run_estimate.csv` |
 | Embedding baseline comparison | True | 998 | `outputs/agent_memory_embedding_baseline_comparison_zh.md` |
 | Embedding baseline comparison CSV | True | 381 | `outputs/agent_memory_embedding_baseline_comparison.csv` |
+| Offline embedding sensitivity | True | 2669 | `outputs/agent_memory_offline_embedding_sensitivity_zh.md` |
+| Offline embedding sensitivity CSV | True | 1993 | `outputs/agent_memory_offline_embedding_sensitivity.csv` |
 | External embedding blocker audit | True | 2942 | `outputs/agent_memory_external_embedding_blocker_audit_zh.md` |
 | External embedding blocker audit CSV | True | 1140 | `outputs/agent_memory_external_embedding_blocker_audit.csv` |
 | Human audit protocol | True | 2479 | `outputs/agent_memory_human_audit_protocol_zh.md` |
@@ -223,6 +225,7 @@
 | Mock API embedding smoke test | `work/agent_memory_experiment/mock_api_embedding_smoke_test.py` | Runs the API embedding backend against a localhost OpenAI-compatible mock and verifies cache hits. |
 | API embedding run estimate | `work/agent_memory_experiment/estimate_api_embedding_run.py` | Estimates API embedding item count, approximate tokens, batches, and cache status without network. |
 | Embedding baseline comparison | `work/agent_memory_experiment/compare_embedding_baselines.py` | Compares API embedding summary against BGE-M3 when the API run exists. |
+| Offline embedding sensitivity | `work/agent_memory_experiment/generate_offline_embedding_sensitivity.py` | Compares BGE-M3 against hash-vector and BM25 offline floors without network or paid API calls. |
 | External embedding blocker audit | `work/agent_memory_experiment/generate_external_embedding_blocker_audit.py` | Aggregates key, preflight, summary, comparison, and readiness blockers into an actionable audit. |
 | Human audit sample | `work/agent_memory_experiment/generate_human_audit_sample.py` | Creates stratified manual-review sample for error-analysis reliability. |
 | Human audit summary | `work/agent_memory_experiment/summarize_human_audit.py` | Summarizes manual labels once the audit CSV is filled. |

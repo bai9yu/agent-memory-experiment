@@ -1331,6 +1331,19 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/compa
   --output-report outputs/agent_memory_embedding_baseline_comparison_zh.md
 ```
 
+Generate an offline embedding sensitivity report against hash-vector and BM25
+floors. This does not replace the external API embedding baseline, but it is a
+fully reproducible encoder-sensitivity diagnostic:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_offline_embedding_sensitivity.py \
+  --bge-summary work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/summary.csv \
+  --hash-summary work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_hash_type_004_with_keyword/summary.csv \
+  --output-csv outputs/agent_memory_offline_embedding_sensitivity.csv \
+  --output-report outputs/agent_memory_offline_embedding_sensitivity_zh.md
+```
+
 Generate an actionable blocker audit for the external embedding baseline:
 
 ```bash
