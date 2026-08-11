@@ -470,6 +470,30 @@ python3 work/agent_memory_experiment/paired_significance_test.py \
   --output-report outputs/agent_memory_type_aware_significance_zh.md
 ```
 
+Run query-type analysis:
+
+```bash
+python3 work/agent_memory_experiment/query_type_analysis.py \
+  --llm-summary-by-type work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/summary_by_type.csv \
+  --observation-summary-by-type work/agent_memory_experiment/results/locomo_observation_all_answerable_bge_m3_type_008_with_keyword/summary_by_type.csv \
+  --output-combined-csv outputs/agent_memory_query_type_locomo10_combined.csv \
+  --output-delta-csv outputs/agent_memory_query_type_locomo10_type_aware_delta.csv \
+  --output-best-csv outputs/agent_memory_query_type_locomo10_best_methods.csv \
+  --output-report outputs/agent_memory_query_type_locomo10_zh.md
+```
+
+Run query-type router analysis:
+
+```bash
+python3 work/agent_memory_experiment/query_type_router_experiment.py \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --output-selected outputs/agent_memory_query_type_router_locomo10_selected.csv \
+  --output-comparison outputs/agent_memory_query_type_router_locomo10_comparison_per_query.csv \
+  --output-summary outputs/agent_memory_query_type_router_locomo10_summary.csv \
+  --output-by-type outputs/agent_memory_query_type_router_locomo10_by_type.csv \
+  --output-report outputs/agent_memory_query_type_router_locomo10_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash

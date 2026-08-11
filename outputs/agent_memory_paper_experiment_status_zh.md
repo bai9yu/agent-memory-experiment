@@ -80,13 +80,37 @@ Coverage：
 
 结论：MRR 和 Recall@5 的提升较小但通过 paired permutation test；Recall@1 / Recall@3 暂不能证明稳定提升。
 
+## Query-Type 细粒度分析
+
+LoCoMo10 answerable slice 按原始 query type 统计后，DeepSeek extracted fact memory 的最佳方法如下：
+
+| Query Type | Queries | Best Method | Recall@1 | Recall@5 | MRR |
+|---|---:|---|---:|---:|---:|
+| Type 1 | 278 | vector | 0.371 | 0.658 | 0.513 |
+| Type 2 | 310 | type_aware | 0.632 | 0.826 | 0.723 |
+| Type 3 | 86 | type_aware | 0.326 | 0.547 | 0.429 |
+| Type 4 | 752 | type_aware | 0.557 | 0.794 | 0.663 |
+| Type 5 | 412 | keyword | 0.442 | 0.633 | 0.537 |
+
+结论：Type 3 是当前明显短板；Type 5 上 keyword 反而最强，说明后续不能只继续增加语义/时间/type 权重，而应做 query-intent 自适应路由。
+
+基于该发现的离线 query-type router：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| fixed type_aware | 0.503 | 0.670 | 0.733 | 0.609 |
+| query_type_router | 0.505 | 0.674 | 0.731 | 0.611 |
+
+paired significance test 显示 router 的 MRR delta 为 0.001994，但 95% CI 为 [-0.006012, 0.009802]，p=0.6187，尚不能证明稳定提升。因此 router 当前作为下一步方法方向，而不是主结论。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
-4. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
-5. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
+4. Query-intent 自适应路由：按 query type 或 intent 在 vector/keyword/time-aware/type-aware 之间选择，尤其针对 Type 3 和 Type 5。
+5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
+6. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 
 ## 错误分析
 

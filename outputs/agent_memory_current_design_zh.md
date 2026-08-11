@@ -316,7 +316,61 @@ flowchart LR
 
 因为未授权但内容相同的私有副本可能抢占 Top-1。当前实验中的 `unfiltered_private_first` 已经验证了这个风险。
 
-## 7. 后续持续更新约定
+## 7. Query-Intent 自适应路由
+
+LoCoMo10 按 query type 分析显示，不同问题类型的最佳检索方法不同：
+
+- Type 1：`vector` 的 MRR 最高。
+- Type 2/3/4：`type_aware` 的 MRR 最高。
+- Type 5：`keyword` 的 MRR 最高。
+
+因此后续不应只依赖固定重排公式，而应加入 query-intent router：
+
+\[
+r(q)=\arg\max_{r\in\mathcal{R}} P(r\mid q)
+\]
+
+\[
+\mathcal{R}=\{
+\mathrm{keyword},
+\mathrm{vector},
+\mathrm{hybrid},
+\mathrm{time\_aware},
+\mathrm{type\_aware}
+\}
+\]
+
+最终检索可以写成：
+
+\[
+\operatorname{retrieve}(q)
+=
+\operatorname{TopK}_{m_i\in \mathcal{C}(q)}
+S_{r(q)}(q,m_i)
+\]
+
+在当前规则版中，可先用 LoCoMo query type 或 query intent pattern 近似：
+
+\[
+r(q)=
+\begin{cases}
+\mathrm{vector}, & \mathrm{type}(q)=1\\
+\mathrm{type\_aware}, & \mathrm{type}(q)\in\{2,3,4\}\\
+\mathrm{keyword}, & \mathrm{type}(q)=5\\
+\mathrm{time\_aware}, & \mathrm{otherwise}
+\end{cases}
+\]
+
+当前离线验证结果：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| fixed `type_aware` | 0.503 | 0.670 | 0.733 | 0.609 |
+| query-type router | 0.505 | 0.674 | 0.731 | 0.611 |
+
+paired significance test 显示该 router 的 MRR 提升尚不显著。因此下一步应从“使用数据集 type 标签的 oracle-light router”推进到“从 query 文本预测 intent 的可部署 router”，并重点避免 Type 5 上被语义相似但关键词不精确的记忆干扰。
+
+## 8. 后续持续更新约定
 
 这个文档建议每次代码升级后同步更新四处：
 

@@ -55,6 +55,10 @@ DeepSeek 抽取的 fact-level memory 已完成第 1 个完整 conversation 的�
 
 完整 baseline 对比见 `outputs/agent_memory_baseline_comparison_locomo10_zh.md`。
 
+LoCoMo10 按 query type 的细粒度分析见 `outputs/agent_memory_query_type_locomo10_zh.md`。
+
+Query-type router 离线验证见 `outputs/agent_memory_query_type_router_locomo10_zh.md`。
+
 成本与延迟分析见 `outputs/agent_memory_cost_latency_locomo10_zh.md`。
 
 细粒度延迟分解见 `outputs/agent_memory_latency_breakdown_locomo10_zh.md`。
