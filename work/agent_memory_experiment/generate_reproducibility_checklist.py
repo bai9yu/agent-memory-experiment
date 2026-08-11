@@ -226,6 +226,8 @@ def main() -> None:
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
         ("Embedding baseline status", outputs / "agent_memory_embedding_baseline_status_zh.md"),
         ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
+        ("Embedding provider profiles", outputs / "agent_memory_embedding_provider_profiles_zh.md"),
+        ("Embedding provider profiles CSV", outputs / "agent_memory_embedding_provider_profiles.csv"),
         ("API embedding preflight", outputs / "agent_memory_api_embedding_preflight_zh.md"),
         ("API embedding preflight CSV", outputs / "agent_memory_api_embedding_preflight.csv"),
         ("Mock API embedding smoke test", outputs / "agent_memory_mock_api_embedding_smoke_test_zh.md"),
@@ -335,6 +337,11 @@ def main() -> None:
             "stage": "Embedding baseline status",
             "command": "work/agent_memory_experiment/generate_embedding_baseline_status.py",
             "notes": "Tracks API embedding baseline readiness without reading or printing keys.",
+        },
+        {
+            "stage": "Embedding provider profiles",
+            "command": "work/agent_memory_experiment/generate_embedding_provider_profiles.py",
+            "notes": "Lists OpenAI and generic OpenAI-compatible provider commands for preflight, estimate, run, and compare.",
         },
         {
             "stage": "API embedding preflight",

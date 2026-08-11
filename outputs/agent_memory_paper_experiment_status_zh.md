@@ -260,10 +260,11 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_manuscript_claim_check_zh.md`：论文声明一致性检查；当前 8 项检查全部通过，用于防止正文把 pending baseline 或人工复核写成已完成结论。
 - `outputs/agent_memory_submission_readiness_gate_zh.md`：最终投稿门禁汇总；当前 required gates 为 `5/10`，blockers 为 `5`，说明复现、声明检查、公开发布卫生和 artifact 完整性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
 - `outputs/agent_memory_public_release_readiness_zh.md`：公开发布卫生检查；当前 blocker 为 `0`，未发现 tracked secret 或 `.env` 入库，剩余 minor 是正式开源前可补 LICENSE。
-- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `89/89` 个复现 artifact，缺失 `0`；其中 `87` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
+- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `91/91` 个复现 artifact，缺失 `0`；其中 `89` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前已登记默认 OpenAI `text-embedding-3-small` 和通用 OpenAI-compatible provider 两个入口，但尚未实际运行出指标。
+- `outputs/agent_memory_embedding_provider_profiles_zh.md`：外部 embedding provider profiles；集中列出 OpenAI 默认入口和通用 OpenAI-compatible provider 的 preflight、estimate、run、compare 命令，便于拿到任一可用 API key 后直接跑真实 embedding 对照。
 - `outputs/agent_memory_api_embedding_preflight_zh.md`：外部 embedding baseline 跑前门禁；当前 required checks 为 `4/5`，缺口是默认 `OPENAI_API_KEY` 未配置；若使用其他 provider，可配置 `EXTERNAL_EMBEDDING_API_KEY`、`EXTERNAL_EMBEDDING_MODEL`、`EXTERNAL_EMBEDDING_BASE_URL` 后按 README 替换 preflight 参数。
 - `outputs/agent_memory_mock_api_embedding_smoke_test_zh.md`：API embedding backend 离线 smoke test；使用 localhost mock server 验证 API 后端、summary 写入和 embedding cache，当前第一次 6 个请求、第二次 0 个请求，说明缓存命中。
 - `outputs/agent_memory_api_embedding_run_estimate_zh.md`：外部 embedding baseline 跑前规模预估；当前 LoCoMo10 预计 4355 条文本、约 71882 个近似 token、未缓存约 35 个 API 批次。
@@ -284,7 +285,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `89/89`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `91/91`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。

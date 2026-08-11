@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：89/89
+- Artifact 存在性：91/91
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `637b838` |
+| git_commit | `a1d40fd` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -80,6 +80,8 @@
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
 | Embedding baseline status | True | 3276 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 734 | `outputs/agent_memory_embedding_baseline_status.csv` |
+| Embedding provider profiles | True | 8856 | `outputs/agent_memory_embedding_provider_profiles_zh.md` |
+| Embedding provider profiles CSV | True | 904 | `outputs/agent_memory_embedding_provider_profiles.csv` |
 | API embedding preflight | True | 2189 | `outputs/agent_memory_api_embedding_preflight_zh.md` |
 | API embedding preflight CSV | True | 1109 | `outputs/agent_memory_api_embedding_preflight.csv` |
 | Mock API embedding smoke test | True | 977 | `outputs/agent_memory_mock_api_embedding_smoke_test_zh.md` |
@@ -112,7 +114,7 @@
 | Human audit full80 review packet | True | 62903 | `outputs/agent_memory_human_audit_full80_review_packet_zh.md` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 26612 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 26901 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -139,6 +141,7 @@
 | Type3 query decomposition fusion4 | `work/agent_memory_experiment/type3_query_decomposition_experiment.py` | Records the stronger keyword-facet decomposition fusion variant and its negative result. |
 | Type3 supervised set selector variants | `work/agent_memory_experiment/type3_supervised_set_selector_experiment.py` | Records rw=0 and rw=-0.02 greedy set-selector variants for Type3 negative-result analysis. |
 | Embedding baseline status | `work/agent_memory_experiment/generate_embedding_baseline_status.py` | Tracks API embedding baseline readiness without reading or printing keys. |
+| Embedding provider profiles | `work/agent_memory_experiment/generate_embedding_provider_profiles.py` | Lists OpenAI and generic OpenAI-compatible provider commands for preflight, estimate, run, and compare. |
 | API embedding preflight | `work/agent_memory_experiment/preflight_api_embedding_baseline.py` | Checks inputs, key availability, cache paths, and result summary before paid/API embedding runs. |
 | Mock API embedding smoke test | `work/agent_memory_experiment/mock_api_embedding_smoke_test.py` | Runs the API embedding backend against a localhost OpenAI-compatible mock and verifies cache hits. |
 | API embedding run estimate | `work/agent_memory_experiment/estimate_api_embedding_run.py` | Estimates API embedding item count, approximate tokens, batches, and cache status without network. |

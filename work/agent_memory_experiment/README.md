@@ -1061,6 +1061,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --env-file .env
 ```
 
+Generate provider-specific external embedding commands:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_embedding_provider_profiles.py \
+  --env-file .env \
+  --output-csv outputs/agent_memory_embedding_provider_profiles.csv \
+  --output-report outputs/agent_memory_embedding_provider_profiles_zh.md
+```
+
 Preflight the API embedding baseline before starting any paid/networked run:
 
 ```bash
