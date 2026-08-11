@@ -797,6 +797,21 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-csv outputs/agent_memory_embedding_baseline_status.csv
 ```
 
+Estimate API embedding baseline run scale:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/estimate_api_embedding_run.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --model text-embedding-3-small \
+  --base-url https://api.openai.com/v1 \
+  --batch-size 128 \
+  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
+  --output-csv outputs/agent_memory_api_embedding_run_estimate.csv \
+  --output-report outputs/agent_memory_api_embedding_run_estimate_zh.md
+```
+
 Generate reproducibility checklist:
 
 ```bash

@@ -181,6 +181,8 @@ def main() -> None:
         ("Paper evidence matrix", outputs / "agent_memory_paper_evidence_matrix_zh.md"),
         ("Embedding baseline status", outputs / "agent_memory_embedding_baseline_status_zh.md"),
         ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
+        ("API embedding run estimate", outputs / "agent_memory_api_embedding_run_estimate_zh.md"),
+        ("API embedding run estimate CSV", outputs / "agent_memory_api_embedding_run_estimate.csv"),
         ("Human audit protocol", outputs / "agent_memory_human_audit_protocol_zh.md"),
         ("Human audit sample", outputs / "agent_memory_human_audit_sample_type_aware.csv"),
         ("Human audit summary", outputs / "agent_memory_human_audit_summary_zh.md"),
@@ -227,6 +229,11 @@ def main() -> None:
             "stage": "Embedding baseline status",
             "command": "work/agent_memory_experiment/generate_embedding_baseline_status.py",
             "notes": "Tracks API embedding baseline readiness without reading or printing keys.",
+        },
+        {
+            "stage": "API embedding run estimate",
+            "command": "work/agent_memory_experiment/estimate_api_embedding_run.py",
+            "notes": "Estimates API embedding item count, approximate tokens, batches, and cache status without network.",
         },
         {
             "stage": "Human audit sample",

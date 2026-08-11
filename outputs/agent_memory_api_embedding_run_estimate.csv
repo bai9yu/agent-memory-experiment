@@ -1,0 +1,3 @@
+kind,items,total_chars,approx_tokens,batch_size,api_batches_if_uncached,cache_exists,cache_path,estimated_cost
+memories,2517,177913,45429,128,20,False,work/agent_memory_experiment/cache/embeddings/api/text-embedding-3-small/memories_c34fdc2deb14403f24e1c232339215988d75a771e362b02264503b2bf98501bf.npz,0.0
+queries,1838,103007,26453,128,15,False,work/agent_memory_experiment/cache/embeddings/api/text-embedding-3-small/queries_4fbbb2a49a5a46e96bbf61c51d82f0e68830c1a3e3f49c889c60c38b99d7792c.npz,0.0

@@ -6,6 +6,10 @@
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | OpenAI text-embedding-3-small | OpenAI-compatible embeddings API | text-embedding-3-small | OPENAI_API_KEY | False | pending_api_key | type_aware | OPENAI_API_KEY is not set; summary.csv not found |
 
+## 跑前规模预估
+
+- `outputs/agent_memory_api_embedding_run_estimate_zh.md` 记录当前 LoCoMo10 外部 embedding baseline 的文本数量、近似 token、批次数和缓存状态。
+
 ## 推荐运行命令
 
 ```bash
