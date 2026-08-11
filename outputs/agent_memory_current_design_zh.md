@@ -370,6 +370,21 @@ r(q)=
 
 paired significance test 显示该 router 的 MRR 提升尚不显著。因此下一步应从“使用数据集 type 标签的 oracle-light router”推进到“从 query 文本预测 intent 的可部署 router”，并重点避免 Type 5 上被语义相似但关键词不精确的记忆干扰。
 
+已验证的简单 text-intent rule router：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| fixed `type_aware` | 0.503 | 0.670 | 0.733 | 0.609 |
+| text-intent rule router | 0.489 | 0.661 | 0.715 | 0.595 |
+
+该规则版显著退化，说明 query intent router 不能只靠粗关键词规则。下一版应采用 validation-tuned classifier：
+
+\[
+r(q)=f_{\theta}(q)
+\]
+
+其中 \(f_{\theta}\) 可以是轻量文本分类器、LLM few-shot classifier，或人工规则 + validation search 的混合系统。
+
 ## 8. 后续持续更新约定
 
 这个文档建议每次代码升级后同步更新四处：

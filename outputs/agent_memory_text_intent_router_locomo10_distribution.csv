@@ -1,0 +1,6 @@
+selected_method,predicted_intent,num_queries,share
+keyword,keyword_heavy,181,0.0984766050054407
+type_aware,causal_type_aware,171,0.09303590859630033
+type_aware,default_type_aware,953,0.5184983677910773
+type_aware,temporal_type_aware,342,0.18607181719260066
+vector,identity_profile_vector,191,0.10391730141458107

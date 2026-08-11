@@ -243,6 +243,20 @@
 
 收益：形成了 ANN 速度-召回折中曲线，也明确了下一步应在真实更大 memory bank 或 HNSW/IVF-PQ 上继续验证。
 
+### 3.11 问题：简单文本规则无法可靠替代 query type router
+
+现象：oracle-light query-type router 使用 LoCoMo 标注 type 时，MRR 从 fixed `type_aware` 的 0.609 提升到 0.611，但提升不显著。进一步改成只看 query 文本的规则 router 后，MRR 降到 0.595，且显著低于 fixed `type_aware`。
+
+原因判断：query 文本中的关键词不足以稳定判断最佳检索方法。例如 “what kind/type/project/issue” 类问题有时需要 keyword，有时仍需要 type-aware 或语义匹配；简单规则会把大量 query 路由到不合适的方法。
+
+解决：
+
+- 保留 query-type router 作为 oracle-light 上界启发，不作为主结论。
+- 新增 text-intent router 作为可部署弱基线，并报告其显著退化结果。
+- 下一步应使用 validation-tuned classifier、LLM few-shot classifier，或更细粒度的 intent rules，并在验证集上调参。
+
+收益：避免把未验证的 router 写成贡献点，同时明确了后续方法改进方向。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -269,6 +283,7 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 4. 当前只评估检索，不评估最终回答生成质量。
 5. KV cache 复用还没有真实实现，只在方法文档中给出下一步公式。
 6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，100k synthetic distractor 实验也只能说明趋势，ANN 优势仍需要真实更大 memory bank 才能充分证明。
+7. 简单 text-intent router 显著弱于 fixed `type_aware`，说明路由方法需要验证集或模型化 intent classifier。
 
 ## 6. 下一步行动清单
 

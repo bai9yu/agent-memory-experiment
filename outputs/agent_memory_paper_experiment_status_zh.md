@@ -103,6 +103,15 @@ LoCoMo10 answerable slice 按原始 query type 统计后，DeepSeek extracted fa
 
 paired significance test 显示 router 的 MRR delta 为 0.001994，但 95% CI 为 [-0.006012, 0.009802]，p=0.6187，尚不能证明稳定提升。因此 router 当前作为下一步方法方向，而不是主结论。
 
+进一步测试可部署的 text-intent rule router，即只根据 query 文本规则选择 route，不使用 LoCoMo type 标注：
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+|---|---:|---:|---:|---:|
+| fixed type_aware | 0.503 | 0.670 | 0.733 | 0.609 |
+| text_intent_router | 0.489 | 0.661 | 0.715 | 0.595 |
+
+该规则 router 显著退化，MRR delta 为 -0.014602，95% CI 为 [-0.020611, -0.008713]，p=0.0002。结论：简单关键词规则不能替代 query type 标注，后续需要 validation-tuned intent classifier 或 LLM few-shot classifier。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
