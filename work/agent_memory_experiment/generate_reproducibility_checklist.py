@@ -316,6 +316,10 @@ def main() -> None:
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
+        ("Environment system snapshot", outputs / "agent_memory_environment_system.csv"),
+        ("Environment package snapshot", outputs / "agent_memory_environment_packages.csv"),
+        ("Environment freshness audit", outputs / "agent_memory_environment_freshness_audit_zh.md"),
+        ("Environment freshness audit CSV", outputs / "agent_memory_environment_freshness_audit.csv"),
     ]
     artifact_rows = [exists_row(label, path) for label, path in artifact_specs]
 
@@ -663,6 +667,11 @@ def main() -> None:
             "stage": "Environment snapshot",
             "command": "work/agent_memory_experiment/generate_environment_snapshot.py",
             "notes": "Records Python/package/cache/Git environment; does not read .env.",
+        },
+        {
+            "stage": "Environment freshness audit",
+            "command": "work/agent_memory_experiment/validate_environment_snapshot_freshness.py",
+            "notes": "Checks whether the environment snapshot system CSV is present and records generation-time Git freshness.",
         },
         {
             "stage": "Paper tables",

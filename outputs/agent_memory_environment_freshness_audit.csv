@@ -1,0 +1,5 @@
+check,pass,observed,expected,severity
+snapshot_system_csv_exists,True,outputs/agent_memory_environment_system.csv,existing environment system CSV,required
+git_commit_matches_generation_head,True,9b1903e,9b1903e,advisory_after_commit
+git_branch_status_matches_generation_status,True,## main...origin/main,## main...origin/main,advisory_after_commit
+commits_since_snapshot_generation,True,0,0 during generation; 1 is normal after committing the refreshed snapshot,advisory_after_commit

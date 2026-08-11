@@ -84,7 +84,7 @@ Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3843
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,24774
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,25752
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
@@ -142,4 +142,8 @@ Human audit execution plan,outputs/agent_memory_human_audit_execution_plan_zh.md
 Human audit execution plan CSV,outputs/agent_memory_human_audit_execution_plan.csv,True,2165
 Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,33847
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
-Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421
+Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1410
+Environment system snapshot,outputs/agent_memory_environment_system.csv,True,163
+Environment package snapshot,outputs/agent_memory_environment_packages.csv,True,188
+Environment freshness audit,outputs/agent_memory_environment_freshness_audit_zh.md,True,1337
+Environment freshness audit CSV,outputs/agent_memory_environment_freshness_audit.csv,True,489

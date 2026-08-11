@@ -1396,6 +1396,17 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-system outputs/agent_memory_environment_system.csv
 ```
 
+Validate environment snapshot freshness:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_environment_snapshot_freshness.py \
+  --project-root . \
+  --system-csv outputs/agent_memory_environment_system.csv \
+  --output-csv outputs/agent_memory_environment_freshness_audit.csv \
+  --output-report outputs/agent_memory_environment_freshness_audit_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash

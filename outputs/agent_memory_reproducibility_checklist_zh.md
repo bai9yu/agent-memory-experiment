@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：144/144
+- Artifact 存在性：148/148
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `ba55d3f` |
+| git_commit | `9b1903e` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -111,7 +111,7 @@
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3843 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 24774 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 25752 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
@@ -169,7 +169,11 @@
 | Human audit execution plan CSV | True | 2165 | `outputs/agent_memory_human_audit_execution_plan.csv` |
 | Paper experiment status | True | 33847 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
-| Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
+| Environment snapshot | True | 1410 | `outputs/agent_memory_environment_snapshot_zh.md` |
+| Environment system snapshot | True | 163 | `outputs/agent_memory_environment_system.csv` |
+| Environment package snapshot | True | 188 | `outputs/agent_memory_environment_packages.csv` |
+| Environment freshness audit | True | 1337 | `outputs/agent_memory_environment_freshness_audit_zh.md` |
+| Environment freshness audit CSV | True | 489 | `outputs/agent_memory_environment_freshness_audit.csv` |
 
 ## 核心指标检查
 
@@ -252,6 +256,7 @@
 | Evidence freshness audit | `work/agent_memory_experiment/validate_evidence_freshness.py` | Checks paper-facing reports for stale reproducibility artifact/metric/integrity gate counts after regeneration. |
 | Experiment protocol | `work/agent_memory_experiment/generate_experiment_protocol.py` | Builds a paper appendix-style protocol from cached metrics and artifacts. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |
+| Environment freshness audit | `work/agent_memory_experiment/validate_environment_snapshot_freshness.py` | Checks whether the environment snapshot system CSV is present and records generation-time Git freshness. |
 | Paper tables | `work/agent_memory_experiment/generate_paper_tables.py` | Generates Markdown and LaTeX tables from cached CSVs. |
 
 ## 仍需补强
