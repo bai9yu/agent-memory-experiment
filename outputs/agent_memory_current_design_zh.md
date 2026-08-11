@@ -577,6 +577,19 @@ paired significance test 显示 candidate reranker 相比 fixed `type_aware` 的
 
 其中 \(f_{\theta_3}\) 只使用训练集中的 Type 3 候选学习。结果显示该方向没有改善：固定 `type_aware` 的 Type 3 MRR 为 `0.434`、Coverage@5 为 `0.377`，而 `type3_specific_reranker` 分别为 `0.399` 和 `0.331`。因此当前 Type 3 的瓶颈不是简单的类型专用单候选排序，而是多证据覆盖目标与 query 结构分解不足。
 
+继续测试 greedy supervised set selector：
+
+\[
+S_t=\{m_1,\ldots,m_{t-1}\},\quad
+\hat g_{q,i,t}=f_\psi(\phi(q,m_i), \rho(m_i,S_t))
+\]
+
+\[
+m_t=\arg\max_{m_i\in \mathcal{C}_{deep}\setminus S_t}\hat g_{q,i,t}
+\]
+
+其中 \(\rho(m_i,S_t)\) 包含与已选集合的文本 Jaccard、是否已有相同 memory type、已选 type 覆盖数等上下文特征。结果仍为负：`supervised_set_selector` 的 Type 3 MRR 为 `0.389`、Coverage@5 为 `0.320`，均低于 fixed `type_aware`。这说明“候选级特征 + 贪心集合选择”还不足以表达 Type 3 所需的子问题结构；下一步更应显式做 query decomposition 或训练真正 listwise/setwise objective。
+
 \[
 \max_\theta
 \sum_q

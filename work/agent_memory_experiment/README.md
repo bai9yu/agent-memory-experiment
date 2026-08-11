@@ -673,6 +673,37 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/paire
   --output-report outputs/agent_memory_type3_specific_reranker_significance_zh.md
 ```
 
+Run Type-3 supervised greedy set selector diagnosis:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/type3_supervised_set_selector_experiment.py \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --output-split-summary outputs/agent_memory_type3_supervised_set_selector_split_summary.csv \
+  --output-summary outputs/agent_memory_type3_supervised_set_selector_summary.csv \
+  --output-per-query outputs/agent_memory_type3_supervised_set_selector_per_query.csv \
+  --output-comparison outputs/agent_memory_type3_supervised_set_selector_comparison_per_query.csv \
+  --output-coverage outputs/agent_memory_type3_supervised_set_selector_coverage.csv \
+  --output-coverage-summary outputs/agent_memory_type3_supervised_set_selector_coverage_summary.csv \
+  --output-ranked outputs/agent_memory_type3_supervised_set_selector_ranked_top20.csv \
+  --output-report outputs/agent_memory_type3_supervised_set_selector_zh.md
+```
+
+Run paired significance testing for the Type-3 supervised set selector:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/paired_significance_test.py \
+  --per-query outputs/agent_memory_type3_supervised_set_selector_comparison_per_query.csv \
+  --baseline type_aware \
+  --candidate supervised_set_selector \
+  --iterations 5000 \
+  --output-csv outputs/agent_memory_type3_supervised_set_selector_significance_results.csv \
+  --output-report outputs/agent_memory_type3_supervised_set_selector_significance_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash

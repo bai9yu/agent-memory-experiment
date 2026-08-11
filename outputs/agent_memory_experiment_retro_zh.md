@@ -420,6 +420,24 @@
 
 收益：排除了一个看似自然但效果不佳的改进方向，让论文后续贡献点更聚焦在多证据覆盖目标，而不是继续调单候选分类器。
 
+### 3.21 问题：监督式 greedy set selector 仍未解决 Type 3
+
+现象：进一步实现监督式 greedy set selector，在每一步选择候选时加入已选集合的文本冗余、memory type 覆盖等上下文特征。结果 `supervised_set_selector` 的 MRR 为 `0.389`，低于 `type_aware` 的 `0.434`；Coverage@5 为 `0.320`，低于 `type_aware` 的 `0.377`。参数检查中，`redundancy_weight=0.0` 比 `0.02` 和 `-0.02` 略好，但仍不能改善结论。
+
+原因判断：
+
+- 当前训练标签仍是单条候选是否为 evidence，没有真正学习“这一条是否补足当前已选集合缺失的子证据”。
+- Type 3 query 常隐含多个子问题，只有候选之间的 Jaccard/type 上下文不足以识别子问题结构。
+- 贪心策略容易早期选错，后续步骤无法恢复。
+
+解决：
+
+- 新增 `type3_supervised_set_selector_experiment.py`，把监督式集合贪心选择作为独立负结果记录。
+- 实现时发现逐条调用 `predict_proba` 很慢，改为每一步对剩余候选批量预测，运行时间回到可接受范围。
+- 将下一步进一步收敛为 query decomposition 或真正的 listwise/setwise objective，而不是继续堆简单候选上下文特征。
+
+收益：排除了“浅层监督 + 贪心集合选择”这个中间方案，避免后续在同一类弱特征上继续投入过多时间。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -448,12 +466,13 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，100k synthetic distractor 实验也只能说明趋势，ANN 优势仍需要真实更大 memory bank 才能充分证明。
 7. 简单 text-intent router 和浅层监督式 query-text router 都弱于 fixed `type_aware`；validation-tuned router 可接近 fixed `type_aware`，但仍没有稳定超过。candidate-level reranker 已取得显著提升，且 feature importance 与 query-type 分析显示它主要改善 Type 2/4/5，但 Type 3 仍是短板。
 8. Type 3 专用单候选重排已验证为负结果，说明 Type 3 需要 query decomposition 或 supervised set-level objective，而不是只换一个类型专用分类器。
+9. 监督式 greedy set selector 也没有改善 Type 3，说明下一步需要显式 query decomposition 或更强 listwise/setwise 学习目标。
 
 ## 6. 下一步行动清单
 
 1. 固化当前推荐配置：BGE-M3 + adaptive time-aware + persona gate + importance proxy。
 2. 固化两层记忆结构：fact/observation 作为在线检索层，session_summary 作为归档回溯层。
-3. 针对 Type 3 增加 query decomposition 或扩大候选召回后的 supervised set-level learning，优化 Top-K evidence coverage ratio，而不仅是 Top-1 MRR。
+3. 针对 Type 3 增加 query decomposition 或真正 listwise/setwise learning，优化 Top-K evidence coverage ratio，而不仅是 Top-1 MRR。
 4. 增加 LLM memory extraction 重复实验：从原始对话抽取事实、时间、实体、重要性、权限，并报告 seed/temperature 方差。
 5. 增加 conflict resolver：同一主体同一属性按时间和置信度更新。
 6. 增加真实多 Agent trace：把 Agent A 的工具经验、错误修复、代码片段作为共享记忆。

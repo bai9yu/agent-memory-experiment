@@ -211,12 +211,23 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 配对显著性检验显示 Type 3 专用重排相对 `type_aware` 的下降并非偶然：MRR delta `-0.0362`，95% CI `[-0.0705, -0.0002]`，p-value `0.0460`；Recall@5 delta `-0.0794`，95% CI `[-0.1429, -0.0238]`，p-value `0.0260`。
 
+继续测试 Type 3 监督式 greedy set selector：模型每一步选择候选时加入已选集合的文本冗余和 memory type 覆盖特征，直接面向多证据集合选择。但该方法仍未超过固定 `type_aware`：
+
+| Method | Type 3 MRR | Type 3 R@1 | Type 3 R@3 | Type 3 R@5 | Coverage@5 | Full@5 |
+|---|---:|---:|---:|---:|---:|---:|
+| type_aware | 0.434 | 0.344 | 0.507 | 0.546 | 0.377 | 0.230 |
+| type3_specific_reranker | 0.399 | 0.312 | 0.417 | 0.475 | 0.331 | 0.206 |
+| supervised_set_selector | 0.389 | 0.312 | 0.393 | 0.490 | 0.320 | 0.175 |
+| candidate_oracle | 0.778 | 0.778 | 0.778 | 0.778 | 0.658 | 0.524 |
+
+显著性检验显示 `supervised_set_selector` 相比 `type_aware` 的 MRR delta 为 `-0.0456`，95% CI `[-0.0893, -0.0017]`，p-value `0.0366`；Recall@5 delta 为 `-0.0635`，p-value `0.1410`。结论：仅靠候选上下文特征和贪心集合选择不足以解决 Type 3；下一步应显式做 query decomposition，或使用真正的 listwise/setwise objective。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
-4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排已验证为负结果，下一步需要做 query decomposition 或 supervised set-level selector。
+4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排和监督式 greedy set selector 均已验证为负结果，下一步需要做 query decomposition 或更强 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 6. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 
