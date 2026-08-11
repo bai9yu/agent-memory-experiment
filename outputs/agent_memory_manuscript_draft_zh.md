@@ -18,7 +18,7 @@
 2. 在 LoCoMo10 answerable slice 上验证 DeepSeek fact-level memory 相比 observation memory 具有更好的检索表现和更低 token 存储成本。
 3. 提出并验证 candidate-level learned reranking，在 held-out 和 LOCO split 下均显著优于 type-aware reranking。
 4. 系统报告 Type 3 multi-evidence retrieval 的负结果，明确当前方法边界。
-5. 提供论文级 artifact：复现清单、实验协议、审稿风险矩阵、LLM-assisted audit 和 priority20 人工确认包。
+5. 提供论文级 artifact：复现清单、实验协议、审稿风险矩阵、LLM-assisted audit、盲审人工复核表和 priority20 人工确认包。
 
 ## 2 任务定义
 
@@ -98,7 +98,7 @@ Type 3 supervised set selector 的 Coverage@5 delta 为 -0.0572，p=0.0286，说
 
 ## 6 错误分析与可靠性
 
-当前已有 80 条 LLM-assisted audit 初稿，并生成 priority20 快速人工确认包。priority20 包包含 20 条样本，当前人工确认 0 条。该流程适合先低成本报告 quick-review agreement；完整投稿前仍应扩展到 80 条，并报告 exact agreement 与 Cohen's kappa。
+当前已有 80 条 LLM-assisted audit 初稿，并生成 priority20 快速人工确认包和盲审人工复核表。priority20 包包含 20 条样本，当前人工确认 0 条。该流程适合先在不暴露 LLM 预标注的条件下完成 quick-review，再回填 confirmation 表并报告 exact agreement 与 Cohen's kappa；完整投稿前仍应扩展到 80 条。
 
 ## 7 限制
 
@@ -106,16 +106,16 @@ Type 3 supervised set selector 的 Coverage@5 delta 为 -0.0572，p=0.0286，说
 
 ## 8 结论
 
-本文给出一套面向长对话智能体记忆的可复现实验框架。结果显示，LLM-written fact memory 是紧凑且有效的记忆表示，candidate-level learned reranking 是当前最强的排序改进，而 Type 3 多证据检索仍是关键未解问题。后续最小补强是完成一个外部 embedding baseline，并填写 priority20/80 Human/LLM confirmation 表以形成可靠性证据。
+本文给出一套面向长对话智能体记忆的可复现实验框架。结果显示，LLM-written fact memory 是紧凑且有效的记忆表示，candidate-level learned reranking 是当前最强的排序改进，而 Type 3 多证据检索仍是关键未解问题。后续最小补强是完成一个外部 embedding baseline，并通过盲审表填写 priority20/80 Human/LLM confirmation 以形成可靠性证据。
 
 ## Appendix A 复现状态
 
-- Artifact gate：49/49
+- Artifact gate：53/53
 - Metric gate：5/5
 - 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_manuscript_claim_check_zh.md`、`outputs/agent_memory_human_audit_readiness_gate_zh.md`。
 
 ## Appendix B 投稿前 TODO
 
 - 运行外部 embedding baseline，生成 `agent_memory_embedding_baseline_comparison_zh.md` 的 completed 版本。
-- 填写 `agent_memory_human_llm_audit_priority20_confirmation.csv` 的 human_* 字段，并生成 quick-review agreement。
+- 填写 `agent_memory_human_audit_priority20_blind_review.csv` 的 human_* 字段，回填 confirmation 后生成 quick-review agreement。
 - 若目标为更高等级会议/期刊，继续扩展 LoCoMo slice 或加入第二数据集。

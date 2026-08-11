@@ -915,6 +915,39 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/confi
   --output-report outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md
 ```
 
+Export blinded human-review sheets that hide LLM-assisted labels:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind_human_audit_labels.py export \
+  --scope priority20 \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-blind-csv outputs/agent_memory_human_audit_priority20_blind_review.csv \
+  --output-report outputs/agent_memory_human_audit_priority20_blind_review_zh.md \
+  --seed 20260811
+
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind_human_audit_labels.py export \
+  --scope full80 \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --output-blind-csv outputs/agent_memory_human_audit_full80_blind_review.csv \
+  --output-report outputs/agent_memory_human_audit_full80_blind_review_zh.md \
+  --seed 20260811
+```
+
+Fill only the `human_*` columns in the blind CSV, then merge labels back into
+the Human/LLM confirmation sheet:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind_human_audit_labels.py merge \
+  --scope priority20 \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --blind-csv outputs/agent_memory_human_audit_priority20_blind_review.csv \
+  --output-confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-report outputs/agent_memory_human_audit_priority20_blind_review_zh.md
+```
+
 Generate submission gap and reviewer-risk analysis:
 
 ```bash

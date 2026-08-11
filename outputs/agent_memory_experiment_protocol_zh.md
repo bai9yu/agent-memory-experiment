@@ -51,11 +51,11 @@
 
 - DeepSeek memory writer 三次运行：MRR mean=0.613, stdev=0.004; Recall@5 mean=0.738, stdev=0.006。
 - Type 3 supervised set selector Coverage@5 delta=-0.0572, p=0.0286；该结果应写为负结果和边界分析。
-- Human/LLM 错误复核：已有 80 条确认表；另有 priority20 快速抽查包 20 条，当前人工确认 0 条；不能写作 human-verified error analysis。
+- Human/LLM 错误复核：已有 80 条确认表、priority20 快速抽查包 20 条和盲审人工复核表；当前人工确认 0 条；不能写作 human-verified error analysis。
 
 ## 7. 复现与审稿风险
 
-- 复现清单：artifact gate 49/49，metric gate 5/5。
+- 复现清单：artifact gate 53/53，metric gate 5/5。
 - 投稿风险矩阵：8 个风险，其中 blocker=2。
 - 两个 blocker：外部 embedding baseline 未实际完成；Human/LLM 人工确认未完成。
 
@@ -68,5 +68,5 @@
 ## 9. 最小投稿前检查
 
 - 完成至少一个外部 embedding baseline 并生成 delta。
-- 优先填写 Human/LLM priority20 confirmation CSV，先报告 quick-review exact agreement 和 Cohen's kappa；投稿前再扩展到完整 80 条。
+- 优先填写 priority20 blind review CSV 的 human_* 字段，回填 confirmation 后报告 quick-review exact agreement 和 Cohen's kappa；投稿前再扩展到完整 80 条。
 - 在论文实验设置中显式写出 LoCoMo10 slice、BGE-M3 cache、DeepSeek writer、LOCO split、paired significance test。

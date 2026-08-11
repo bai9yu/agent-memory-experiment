@@ -187,7 +187,7 @@ def write_report(path: Path, outputs: Path) -> None:
         f"投稿风险矩阵当前列出 {len(gap_rows)} 个审稿风险，其中 {blocker_count} 个 blocker。完整清单见 `outputs/agent_memory_submission_gap_analysis_zh.md`。",
         "",
         "1. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。",
-        "2. 在 Human/LLM 确认表中填写人工字段，确认或抽样复查 80 条 LLM-assisted 错误复核初稿，并报告 exact agreement 与 Cohen's kappa。",
+        "2. 优先在盲审人工复核表中填写 human_* 字段，回填 Human/LLM 确认表后报告 exact agreement 与 Cohen's kappa。",
         "3. 若不补外部数据集，需要在论文中明确本工作是 LoCoMo10 slice 的系统性实验，而非广泛泛化结论。",
         "",
         "## 复现状态",

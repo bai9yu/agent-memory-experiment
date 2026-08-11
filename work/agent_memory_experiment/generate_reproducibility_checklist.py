@@ -216,6 +216,10 @@ def main() -> None:
         ("Human/LLM priority20 audit confirmation", outputs / "agent_memory_human_llm_audit_priority20_confirmation.csv"),
         ("Human/LLM priority20 audit agreement", outputs / "agent_memory_human_llm_audit_priority20_agreement_zh.md"),
         ("Human/LLM priority20 audit agreement CSV", outputs / "agent_memory_human_llm_audit_priority20_agreement.csv"),
+        ("Human audit priority20 blind review", outputs / "agent_memory_human_audit_priority20_blind_review_zh.md"),
+        ("Human audit priority20 blind review CSV", outputs / "agent_memory_human_audit_priority20_blind_review.csv"),
+        ("Human audit full80 blind review", outputs / "agent_memory_human_audit_full80_blind_review_zh.md"),
+        ("Human audit full80 blind review CSV", outputs / "agent_memory_human_audit_full80_blind_review.csv"),
         ("Human audit readiness gate", outputs / "agent_memory_human_audit_readiness_gate_zh.md"),
         ("Human audit readiness gate CSV", outputs / "agent_memory_human_audit_readiness_gate.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
@@ -315,6 +319,11 @@ def main() -> None:
             "stage": "Human/LLM priority20 audit",
             "command": "work/agent_memory_experiment/generate_priority_audit_subset.py",
             "notes": "Selects a 20-sample quick-review subset and reuses the agreement workflow.",
+        },
+        {
+            "stage": "Blinded human audit sheets",
+            "command": "work/agent_memory_experiment/blind_human_audit_labels.py",
+            "notes": "Exports blind review sheets that hide LLM-assisted labels and can merge human labels back.",
         },
         {
             "stage": "Human audit readiness gate",

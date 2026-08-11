@@ -142,7 +142,7 @@ def write_report(path: Path, root: Path) -> None:
         "",
         f"- DeepSeek memory writer 三次运行：MRR mean={f(writer_mrr['mean'])}, stdev={f(writer_mrr['stdev'])}; Recall@5 mean={f(writer_r5['mean'])}, stdev={f(writer_r5['stdev'])}。",
         f"- Type 3 supervised set selector Coverage@5 delta={signed(type3_cov['mean_delta'])}, p={f(type3_cov['permutation_p_value'], 4)}；该结果应写为负结果和边界分析。",
-        f"- Human/LLM 错误复核：已有 80 条确认表；另有 priority20 快速抽查包 {priority_samples} 条，当前人工确认 {priority_confirmed} 条；不能写作 human-verified error analysis。",
+        f"- Human/LLM 错误复核：已有 80 条确认表、priority20 快速抽查包 {priority_samples} 条和盲审人工复核表；当前人工确认 {priority_confirmed} 条；不能写作 human-verified error analysis。",
         "",
         "## 7. 复现与审稿风险",
         "",
@@ -159,7 +159,7 @@ def write_report(path: Path, root: Path) -> None:
         "## 9. 最小投稿前检查",
         "",
         "- 完成至少一个外部 embedding baseline 并生成 delta。",
-        "- 优先填写 Human/LLM priority20 confirmation CSV，先报告 quick-review exact agreement 和 Cohen's kappa；投稿前再扩展到完整 80 条。",
+        "- 优先填写 priority20 blind review CSV 的 human_* 字段，回填 confirmation 后报告 quick-review exact agreement 和 Cohen's kappa；投稿前再扩展到完整 80 条。",
         "- 在论文实验设置中显式写出 LoCoMo10 slice、BGE-M3 cache、DeepSeek writer、LOCO split、paired significance test。",
     ]
     path.parent.mkdir(parents=True, exist_ok=True)

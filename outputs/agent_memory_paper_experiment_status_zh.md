@@ -268,6 +268,8 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_human_llm_audit_agreement_zh.md`：Human/LLM 一致性报告；当前为 `pending_human_confirmation`，人工字段完成后会统计 exact agreement 和 Cohen's kappa。
 - `outputs/agent_memory_human_llm_audit_priority20_guide_zh.md`：20 条优先人工抽查指南；优先覆盖 LLM 判为 no/partial、gold 充分性存疑和高歧义错误类型。
 - `outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md`：priority20 快速抽查一致性报告；当前为 `pending_human_confirmation`，用于先低成本获得 quick-review 可靠性证据。
+- `outputs/agent_memory_human_audit_priority20_blind_review_zh.md`：priority20 盲审人工复核表说明；隐藏 LLM-assisted 预标注，建议优先填写对应 CSV 的 `human_*` 字段。
+- `outputs/agent_memory_human_audit_full80_blind_review_zh.md`：full80 盲审人工复核表说明；用于完整人工复核，填写后可回填 Human/LLM 确认表并计算一致性。
 - `outputs/agent_memory_human_audit_readiness_gate_zh.md`：Human audit readiness 门禁；当前 priority20 为 `0/20`、full80 为 `0/80`，用于防止论文把 LLM-assisted 预标注写成人工验证结论。
 
 当前已生成论文复现清单：
@@ -280,7 +282,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 2. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
 4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
-6. 错误复核：已生成 80 条分层抽样复核表、DeepSeek LLM-assisted 预标注、Human/LLM 确认表和 priority20 快速抽查包；当前投稿风险矩阵将人工确认列为 blocker，建议先填写 priority20 的 `human_*` 字段，再扩展到完整 80 条。
+6. 错误复核：已生成 80 条分层抽样复核表、DeepSeek LLM-assisted 预标注、Human/LLM 确认表、priority20 快速抽查包和盲审人工复核表；当前投稿风险矩阵将人工确认列为 blocker，建议先填写 priority20 blind review 的 `human_*` 字段，再扩展到完整 80 条。
 
 ## 错误分析
 
