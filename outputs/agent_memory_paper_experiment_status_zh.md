@@ -244,6 +244,8 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 结论：三条 Type 3 尝试在 Coverage@5 上均下降，且均有统计证据；Coverage@20 没有可靠提升。因此当前 Type 3 失败并不是“多证据已经在深层候选中被方法稳定召回，只是没排到前面”，而是这些浅层方法没有形成有效的前排 evidence coverage 目标。
 
+已将 Type 3 query decomposition fusion4、supervised set selector `rw=0.0` 和 `rw=-0.02` 的报告、summary、split summary、coverage、per-query 和 ranked top20 文件纳入复现 artifact。它们共同支持一个更稳健的负结果结论：简单关键词拆解和浅层 greedy set selection 都不能替代真正的 listwise/setwise 多证据目标。
+
 ## 距离论文发表级仍缺的内容
 
 当前已生成论文表格包：
@@ -257,7 +259,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_manuscript_claim_check_zh.md`：论文声明一致性检查；当前 8 项检查全部通过，用于防止正文把 pending baseline 或人工复核写成已完成结论。
 - `outputs/agent_memory_submission_readiness_gate_zh.md`：最终投稿门禁汇总；当前 required gates 为 `5/10`，blockers 为 `5`，说明复现、声明检查、公开发布卫生和 artifact 完整性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
 - `outputs/agent_memory_public_release_readiness_zh.md`：公开发布卫生检查；当前 blocker 为 `0`，未发现 tracked secret 或 `.env` 入库，剩余 minor 是正式开源前可补 LICENSE。
-- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `63/63` 个复现 artifact，缺失 `0`，并为每个文件记录 size、line count 和 sha256。
+- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `84/84` 个复现 artifact，缺失 `0`，并为每个文件记录 size、line count 和 sha256。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前 OpenAI-compatible `text-embedding-3-small` baseline 已有 API/cache 入口，但尚未实际运行出指标。
@@ -279,7 +281,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `63/63`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `84/84`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。

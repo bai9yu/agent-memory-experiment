@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：63/63
+- Artifact 存在性：84/84
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `c0469e1` |
+| git_commit | `e39a918` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -38,6 +38,27 @@
 | Candidate reranker LOCO significance | True | 627 | `outputs/agent_memory_candidate_reranker_loco_significance_zh.md` |
 | Candidate reranker LOCO comparison | True | 316655 | `outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv` |
 | Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
+| Type3 query decomposition fusion4 report | True | 5473 | `outputs/agent_memory_type3_query_decomposition_fusion4_zh.md` |
+| Type3 query decomposition fusion4 summary | True | 1604 | `outputs/agent_memory_type3_query_decomposition_fusion4_summary.csv` |
+| Type3 query decomposition fusion4 per-query | True | 48687 | `outputs/agent_memory_type3_query_decomposition_fusion4_per_query.csv` |
+| Type3 query decomposition fusion4 facets | True | 43337 | `outputs/agent_memory_type3_query_decomposition_fusion4_facets.csv` |
+| Type3 query decomposition fusion4 ranked top20 | True | 529533 | `outputs/agent_memory_type3_query_decomposition_fusion4_ranked_top20.csv` |
+| Type3 supervised selector rw0 report | True | 1936 | `outputs/agent_memory_type3_supervised_set_selector_rw0_zh.md` |
+| Type3 supervised selector rw0 split summary | True | 2563 | `outputs/agent_memory_type3_supervised_set_selector_rw0_split_summary.csv` |
+| Type3 supervised selector rw0 summary | True | 1074 | `outputs/agent_memory_type3_supervised_set_selector_rw0_summary.csv` |
+| Type3 supervised selector rw0 coverage summary | True | 2033 | `outputs/agent_memory_type3_supervised_set_selector_rw0_coverage_summary.csv` |
+| Type3 supervised selector rw0 per-query | True | 39665 | `outputs/agent_memory_type3_supervised_set_selector_rw0_per_query.csv` |
+| Type3 supervised selector rw0 coverage | True | 66756 | `outputs/agent_memory_type3_supervised_set_selector_rw0_coverage.csv` |
+| Type3 supervised selector rw0 comparison | True | 41035 | `outputs/agent_memory_type3_supervised_set_selector_rw0_comparison_per_query.csv` |
+| Type3 supervised selector rw0 ranked top20 | True | 727551 | `outputs/agent_memory_type3_supervised_set_selector_rw0_ranked_top20.csv` |
+| Type3 supervised selector rwn002 report | True | 1938 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_zh.md` |
+| Type3 supervised selector rwn002 split summary | True | 2547 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_split_summary.csv` |
+| Type3 supervised selector rwn002 summary | True | 1073 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_summary.csv` |
+| Type3 supervised selector rwn002 coverage summary | True | 2031 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage_summary.csv` |
+| Type3 supervised selector rwn002 per-query | True | 39667 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_per_query.csv` |
+| Type3 supervised selector rwn002 coverage | True | 66755 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage.csv` |
+| Type3 supervised selector rwn002 comparison | True | 41037 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_comparison_per_query.csv` |
+| Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
 | Paper tables Markdown | True | 2832 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 3994 | `outputs/agent_memory_paper_tables.tex` |
 | Paper evidence matrix | True | 6662 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
@@ -45,12 +66,12 @@
 | Paper manuscript draft | True | 9893 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
-| Submission readiness gate | True | 2185 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
-| Submission readiness gate CSV | True | 1660 | `outputs/agent_memory_submission_readiness_gate.csv` |
+| Submission readiness gate | True | 2291 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
+| Submission readiness gate CSV | True | 1847 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
-| Artifact integrity manifest | True | 3189 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 9761 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest | True | 3505 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
+| Artifact integrity manifest CSV | True | 13759 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -86,7 +107,7 @@
 | Human audit full80 blind review CSV | True | 28745 | `outputs/agent_memory_human_audit_full80_blind_review.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 24843 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 25425 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -109,6 +130,8 @@
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
 | Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
+| Type3 query decomposition fusion4 | `work/agent_memory_experiment/type3_query_decomposition_experiment.py` | Records the stronger keyword-facet decomposition fusion variant and its negative result. |
+| Type3 supervised set selector variants | `work/agent_memory_experiment/type3_supervised_set_selector_experiment.py` | Records rw=0 and rw=-0.02 greedy set-selector variants for Type3 negative-result analysis. |
 | Embedding baseline status | `work/agent_memory_experiment/generate_embedding_baseline_status.py` | Tracks API embedding baseline readiness without reading or printing keys. |
 | API embedding preflight | `work/agent_memory_experiment/preflight_api_embedding_baseline.py` | Checks inputs, key availability, cache paths, and result summary before paid/API embedding runs. |
 | Mock API embedding smoke test | `work/agent_memory_experiment/mock_api_embedding_smoke_test.py` | Runs the API embedding backend against a localhost OpenAI-compatible mock and verifies cache hits. |

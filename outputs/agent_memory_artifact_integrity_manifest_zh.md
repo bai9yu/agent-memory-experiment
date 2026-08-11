@@ -5,9 +5,9 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 63/63
+- Artifacts covered: 84/84
 - Missing artifacts: 0
-- Total bytes: 631262
+- Total bytes: 3028230
 
 ## 前 20 个 Artifact
 
@@ -25,14 +25,14 @@
 | Candidate reranker LOCO significance | True | 627 | 8 | 2de97cf4cd43 | outputs/agent_memory_candidate_reranker_loco_significance_zh.md |
 | Candidate reranker LOCO comparison | True | 316655 | 3677 | aab9dacd7900 | outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv |
 | Type3 coverage significance | True | 2545 | 24 | c8fb7374a144 | outputs/agent_memory_type3_coverage_significance_zh.md |
-| Paper tables Markdown | True | 2832 | 78 | e4bcb650fa98 | outputs/agent_memory_paper_tables_zh.md |
-| Paper tables LaTeX | True | 3994 | 137 | cb2a2e13914d | outputs/agent_memory_paper_tables.tex |
-| Paper evidence matrix | True | 6662 | 44 | ec463cba4943 | outputs/agent_memory_paper_evidence_matrix_zh.md |
-| Paper draft outline | True | 6827 | 106 | d1377186270a | outputs/agent_memory_paper_draft_outline_zh.md |
-| Paper manuscript draft | True | 9893 | 121 | 121f04a66310 | outputs/agent_memory_manuscript_draft_zh.md |
-| Paper manuscript claim check | True | 1827 | 23 | 83404a0e0e2b | outputs/agent_memory_manuscript_claim_check_zh.md |
-| Paper manuscript claim check CSV | True | 1395 | 9 | b3f776f095fd | outputs/agent_memory_manuscript_claim_check.csv |
-| Submission readiness gate | True | 2291 | 38 | 863e2a0471a6 | outputs/agent_memory_submission_readiness_gate_zh.md |
+| Type3 query decomposition fusion4 report | True | 5473 | 41 | 1e3b009e3d0d | outputs/agent_memory_type3_query_decomposition_fusion4_zh.md |
+| Type3 query decomposition fusion4 summary | True | 1604 | 4 | 4f94bd0a0302 | outputs/agent_memory_type3_query_decomposition_fusion4_summary.csv |
+| Type3 query decomposition fusion4 per-query | True | 48687 | 259 | b0f7e329cf1a | outputs/agent_memory_type3_query_decomposition_fusion4_per_query.csv |
+| Type3 query decomposition fusion4 facets | True | 43337 | 87 | 6db83e2028a8 | outputs/agent_memory_type3_query_decomposition_fusion4_facets.csv |
+| Type3 query decomposition fusion4 ranked top20 | True | 529533 | 3441 | aa104641f5ce | outputs/agent_memory_type3_query_decomposition_fusion4_ranked_top20.csv |
+| Type3 supervised selector rw0 report | True | 1936 | 38 | 968e6a1f0a13 | outputs/agent_memory_type3_supervised_set_selector_rw0_zh.md |
+| Type3 supervised selector rw0 split summary | True | 2563 | 26 | dfcff8f9f42b | outputs/agent_memory_type3_supervised_set_selector_rw0_split_summary.csv |
+| Type3 supervised selector rw0 summary | True | 1074 | 6 | f51e26c630e1 | outputs/agent_memory_type3_supervised_set_selector_rw0_summary.csv |
 
 ## 使用说明
 

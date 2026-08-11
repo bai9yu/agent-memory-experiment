@@ -122,6 +122,10 @@ Type 3 监督式集合选择诊断见 `outputs/agent_memory_type3_supervised_set
 
 Type 3 query decomposition 弱基线见 `outputs/agent_memory_type3_query_decomposition_zh.md`。
 
+Type 3 query decomposition fusion4 补充负结果见 `outputs/agent_memory_type3_query_decomposition_fusion4_zh.md`。
+
+Type 3 supervised set selector 的 redundancy ablation 见 `outputs/agent_memory_type3_supervised_set_selector_rw0_zh.md` 和 `outputs/agent_memory_type3_supervised_set_selector_rwn002_zh.md`。
+
 Type 3 evidence coverage 显著性汇总见 `outputs/agent_memory_type3_coverage_significance_zh.md`。
 
 成本与延迟分析见 `outputs/agent_memory_cost_latency_locomo10_zh.md`。

@@ -11,6 +11,27 @@ Candidate reranker LOCO summary,outputs/agent_memory_candidate_reranker_loco_sum
 Candidate reranker LOCO significance,outputs/agent_memory_candidate_reranker_loco_significance_zh.md,True,627
 Candidate reranker LOCO comparison,outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv,True,316655
 Type3 coverage significance,outputs/agent_memory_type3_coverage_significance_zh.md,True,2545
+Type3 query decomposition fusion4 report,outputs/agent_memory_type3_query_decomposition_fusion4_zh.md,True,5473
+Type3 query decomposition fusion4 summary,outputs/agent_memory_type3_query_decomposition_fusion4_summary.csv,True,1604
+Type3 query decomposition fusion4 per-query,outputs/agent_memory_type3_query_decomposition_fusion4_per_query.csv,True,48687
+Type3 query decomposition fusion4 facets,outputs/agent_memory_type3_query_decomposition_fusion4_facets.csv,True,43337
+Type3 query decomposition fusion4 ranked top20,outputs/agent_memory_type3_query_decomposition_fusion4_ranked_top20.csv,True,529533
+Type3 supervised selector rw0 report,outputs/agent_memory_type3_supervised_set_selector_rw0_zh.md,True,1936
+Type3 supervised selector rw0 split summary,outputs/agent_memory_type3_supervised_set_selector_rw0_split_summary.csv,True,2563
+Type3 supervised selector rw0 summary,outputs/agent_memory_type3_supervised_set_selector_rw0_summary.csv,True,1074
+Type3 supervised selector rw0 coverage summary,outputs/agent_memory_type3_supervised_set_selector_rw0_coverage_summary.csv,True,2033
+Type3 supervised selector rw0 per-query,outputs/agent_memory_type3_supervised_set_selector_rw0_per_query.csv,True,39665
+Type3 supervised selector rw0 coverage,outputs/agent_memory_type3_supervised_set_selector_rw0_coverage.csv,True,66756
+Type3 supervised selector rw0 comparison,outputs/agent_memory_type3_supervised_set_selector_rw0_comparison_per_query.csv,True,41035
+Type3 supervised selector rw0 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rw0_ranked_top20.csv,True,727551
+Type3 supervised selector rwn002 report,outputs/agent_memory_type3_supervised_set_selector_rwn002_zh.md,True,1938
+Type3 supervised selector rwn002 split summary,outputs/agent_memory_type3_supervised_set_selector_rwn002_split_summary.csv,True,2547
+Type3 supervised selector rwn002 summary,outputs/agent_memory_type3_supervised_set_selector_rwn002_summary.csv,True,1073
+Type3 supervised selector rwn002 coverage summary,outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage_summary.csv,True,2031
+Type3 supervised selector rwn002 per-query,outputs/agent_memory_type3_supervised_set_selector_rwn002_per_query.csv,True,39667
+Type3 supervised selector rwn002 coverage,outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage.csv,True,66755
+Type3 supervised selector rwn002 comparison,outputs/agent_memory_type3_supervised_set_selector_rwn002_comparison_per_query.csv,True,41037
+Type3 supervised selector rwn002 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv,True,725694
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,2832
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,3994
 Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,6662
@@ -18,12 +39,12 @@ Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,6827
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,9893
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
-Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2185
-Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1660
+Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2291
+Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1847
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
-Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3189
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,9761
+Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3505
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,13759
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -59,6 +80,6 @@ Human audit full80 blind review,outputs/agent_memory_human_audit_full80_blind_re
 Human audit full80 blind review CSV,outputs/agent_memory_human_audit_full80_blind_review.csv,True,28745
 Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md,True,4943
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,24843
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,25425
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421
