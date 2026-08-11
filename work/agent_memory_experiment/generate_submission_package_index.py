@@ -201,6 +201,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
         },
         {
             "section": "Human Audit",
+            "artifact": "outputs/agent_memory_human_audit_sample_qc_zh.md",
+            "role": "检查 priority20/full80 人工复核样本数、去重、错误类型/query type/rank 区间覆盖和标注进度。",
+            "status": "ready_qc",
+            "evidence": "sample coverage QC is separated from human-label completion",
+            "next_action": "人工标注前后都重跑 QC，确保样本结构和 progress 记录一致。",
+        },
+        {
+            "section": "Human Audit",
             "artifact": "outputs/agent_memory_human_audit_priority20_review_packet_zh.md",
             "role": "20 条优先人工复核阅读包。",
             "status": "ready_for_labeling",

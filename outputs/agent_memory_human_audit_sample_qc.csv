@@ -1,0 +1,74 @@
+scope,group,value,count,total,share,status,evidence
+priority20,overview,sample_count,20,20,1.0,pass,expected=20
+priority20,overview,duplicate_audit_ids,0,20,0.0,pass,audit_id should be unique within scope
+priority20,overview,confirmed_samples,0,20,0.0,pending_human_labels,not required for sample QC; tracked for labeling progress
+priority20,overview,missing_required_human_fields,60,60,1.0,pending_human_labels,"human_auto_reason_correct,human_top_memory_relevant,human_gold_memory_sufficient"
+priority20,coverage,auto_reason_types,8,8,1.0,pass,sample should cover multiple automatic error categories
+priority20,coverage,query_types,5,5,1.0,pass,sample should cover multiple LoCoMo query types
+priority20,coverage,rank_buckets,4,4,1.0,pass,rank_11_20=6;rank_2_5=7;rank_6_10=4;rank_gt_20=3
+full80,overview,sample_count,80,80,1.0,pass,expected=80
+full80,overview,duplicate_audit_ids,0,80,0.0,pass,audit_id should be unique within scope
+full80,overview,confirmed_samples,0,80,0.0,pending_human_labels,not required for sample QC; tracked for labeling progress
+full80,overview,missing_required_human_fields,240,240,1.0,pending_human_labels,"human_auto_reason_correct,human_top_memory_relevant,human_gold_memory_sufficient"
+full80,coverage,auto_reason_types,11,11,1.0,pass,sample should cover multiple automatic error categories
+full80,coverage,query_types,5,5,1.0,pass,sample should cover multiple LoCoMo query types
+full80,coverage,rank_buckets,4,4,1.0,pass,rank_11_20=10;rank_2_5=41;rank_6_10=16;rank_gt_20=13
+priority20_vs_full80,overlap,priority_queries_in_full80,20,20,1.0,pass,priority20 is expected to be a focused subset or compatible slice of full80
+priority20,auto_reason_distribution,memory_type_mismatch,4,20,0.2,info,auto_reason_distribution=memory_type_mismatch
+priority20,auto_reason_distribution,other,4,20,0.2,info,auto_reason_distribution=other
+priority20,auto_reason_distribution,career_education_neighbor,3,20,0.15,info,auto_reason_distribution=career_education_neighbor
+priority20,auto_reason_distribution,gold_below_top20,3,20,0.15,info,auto_reason_distribution=gold_below_top20
+priority20,auto_reason_distribution,temporal_neighbor,3,20,0.15,info,auto_reason_distribution=temporal_neighbor
+priority20,auto_reason_distribution,activity_neighbor,1,20,0.05,info,auto_reason_distribution=activity_neighbor
+priority20,auto_reason_distribution,identity_neighbor,1,20,0.05,info,auto_reason_distribution=identity_neighbor
+priority20,auto_reason_distribution,relationship_neighbor,1,20,0.05,info,auto_reason_distribution=relationship_neighbor
+priority20,query_type_distribution,5,9,20,0.45,info,query_type_distribution=5
+priority20,query_type_distribution,4,4,20,0.2,info,query_type_distribution=4
+priority20,query_type_distribution,2,3,20,0.15,info,query_type_distribution=2
+priority20,query_type_distribution,1,2,20,0.1,info,query_type_distribution=1
+priority20,query_type_distribution,3,2,20,0.1,info,query_type_distribution=3
+priority20,first_rank_bucket_distribution,rank_2_5,7,20,0.35,info,first_rank_bucket_distribution=rank_2_5
+priority20,first_rank_bucket_distribution,rank_11_20,6,20,0.3,info,first_rank_bucket_distribution=rank_11_20
+priority20,first_rank_bucket_distribution,rank_6_10,4,20,0.2,info,first_rank_bucket_distribution=rank_6_10
+priority20,first_rank_bucket_distribution,rank_gt_20,3,20,0.15,info,first_rank_bucket_distribution=rank_gt_20
+priority20,top_memory_type_distribution,event,4,20,0.2,info,top_memory_type_distribution=event
+priority20,top_memory_type_distribution,hobby,4,20,0.2,info,top_memory_type_distribution=hobby
+priority20,top_memory_type_distribution,plan,3,20,0.15,info,top_memory_type_distribution=plan
+priority20,top_memory_type_distribution,preference,3,20,0.15,info,top_memory_type_distribution=preference
+priority20,top_memory_type_distribution,family,2,20,0.1,info,top_memory_type_distribution=family
+priority20,top_memory_type_distribution,emotion,1,20,0.05,info,top_memory_type_distribution=emotion
+priority20,top_memory_type_distribution,goal,1,20,0.05,info,top_memory_type_distribution=goal
+priority20,top_memory_type_distribution,relationship,1,20,0.05,info,top_memory_type_distribution=relationship
+priority20,top_memory_type_distribution,work,1,20,0.05,info,top_memory_type_distribution=work
+full80,auto_reason_distribution,memory_type_mismatch,23,80,0.2875,info,auto_reason_distribution=memory_type_mismatch
+full80,auto_reason_distribution,gold_below_top20,13,80,0.1625,info,auto_reason_distribution=gold_below_top20
+full80,auto_reason_distribution,other,8,80,0.1,info,auto_reason_distribution=other
+full80,auto_reason_distribution,temporal_neighbor,6,80,0.075,info,auto_reason_distribution=temporal_neighbor
+full80,auto_reason_distribution,activity_neighbor,5,80,0.0625,info,auto_reason_distribution=activity_neighbor
+full80,auto_reason_distribution,persona_confusion,5,80,0.0625,info,auto_reason_distribution=persona_confusion
+full80,auto_reason_distribution,semantic_neighbor,5,80,0.0625,info,auto_reason_distribution=semantic_neighbor
+full80,auto_reason_distribution,career_education_neighbor,4,80,0.05,info,auto_reason_distribution=career_education_neighbor
+full80,auto_reason_distribution,preference_neighbor,4,80,0.05,info,auto_reason_distribution=preference_neighbor
+full80,auto_reason_distribution,relationship_neighbor,4,80,0.05,info,auto_reason_distribution=relationship_neighbor
+full80,auto_reason_distribution,identity_neighbor,3,80,0.0375,info,auto_reason_distribution=identity_neighbor
+full80,query_type_distribution,4,23,80,0.2875,info,query_type_distribution=4
+full80,query_type_distribution,5,23,80,0.2875,info,query_type_distribution=5
+full80,query_type_distribution,1,18,80,0.225,info,query_type_distribution=1
+full80,query_type_distribution,2,10,80,0.125,info,query_type_distribution=2
+full80,query_type_distribution,3,6,80,0.075,info,query_type_distribution=3
+full80,first_rank_bucket_distribution,rank_2_5,41,80,0.5125,info,first_rank_bucket_distribution=rank_2_5
+full80,first_rank_bucket_distribution,rank_6_10,16,80,0.2,info,first_rank_bucket_distribution=rank_6_10
+full80,first_rank_bucket_distribution,rank_gt_20,13,80,0.1625,info,first_rank_bucket_distribution=rank_gt_20
+full80,first_rank_bucket_distribution,rank_11_20,10,80,0.125,info,first_rank_bucket_distribution=rank_11_20
+full80,top_memory_type_distribution,event,21,80,0.2625,info,top_memory_type_distribution=event
+full80,top_memory_type_distribution,hobby,12,80,0.15,info,top_memory_type_distribution=hobby
+full80,top_memory_type_distribution,preference,12,80,0.15,info,top_memory_type_distribution=preference
+full80,top_memory_type_distribution,plan,10,80,0.125,info,top_memory_type_distribution=plan
+full80,top_memory_type_distribution,family,7,80,0.0875,info,top_memory_type_distribution=family
+full80,top_memory_type_distribution,goal,3,80,0.0375,info,top_memory_type_distribution=goal
+full80,top_memory_type_distribution,health,3,80,0.0375,info,top_memory_type_distribution=health
+full80,top_memory_type_distribution,identity,3,80,0.0375,info,top_memory_type_distribution=identity
+full80,top_memory_type_distribution,work,3,80,0.0375,info,top_memory_type_distribution=work
+full80,top_memory_type_distribution,education,2,80,0.025,info,top_memory_type_distribution=education
+full80,top_memory_type_distribution,emotion,2,80,0.025,info,top_memory_type_distribution=emotion
+full80,top_memory_type_distribution,relationship,2,80,0.025,info,top_memory_type_distribution=relationship

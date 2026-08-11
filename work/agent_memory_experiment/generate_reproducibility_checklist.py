@@ -323,6 +323,8 @@ def main() -> None:
         ("Human audit annotation schema", outputs / "agent_memory_human_audit_annotation_schema.csv"),
         ("Human audit execution plan", outputs / "agent_memory_human_audit_execution_plan_zh.md"),
         ("Human audit execution plan CSV", outputs / "agent_memory_human_audit_execution_plan.csv"),
+        ("Human audit sample QC", outputs / "agent_memory_human_audit_sample_qc_zh.md"),
+        ("Human audit sample QC CSV", outputs / "agent_memory_human_audit_sample_qc.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -602,6 +604,11 @@ def main() -> None:
             "stage": "Human audit execution plan",
             "command": "work/agent_memory_experiment/generate_human_audit_execution_plan.py",
             "notes": "Turns the pending human-audit blocker into ordered labeling, dual-review, adjudication, and paper-refresh steps.",
+        },
+        {
+            "stage": "Human audit sample QC",
+            "command": "work/agent_memory_experiment/validate_human_audit_sample_qc.py",
+            "notes": "Checks sample count, duplicate audit IDs, query/error/rank coverage, and pending human-label progress.",
         },
         {
             "stage": "Dual human audit agreement",

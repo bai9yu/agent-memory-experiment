@@ -5,7 +5,7 @@
 ## 总览
 
 - Ready for final submission: False
-- Required gates passed: 5/10
+- Required gates passed: 6/11
 - Blockers: 5
 - Optional pending: 0
 
@@ -13,17 +13,18 @@
 
 | Gate | Category | Required | Pass | Status | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| reproducibility_artifacts | reproducibility | True | True | pass | 158/158 artifacts exist |
+| reproducibility_artifacts | reproducibility | True | True | pass | 160/160 artifacts exist |
 | reproducibility_metrics | reproducibility | True | True | pass | 22/22 metric thresholds pass |
 | manuscript_claim_check | paper_writing | True | True | pass | 8/8 claim checks pass |
 | api_embedding_preflight | external_baseline | True | False | blocker | 4/5 required checks pass |
 | mock_api_embedding_smoke_test | external_baseline | False | True | pass | second_run_requests=0, summary_exists=True |
 | external_embedding_completed | external_baseline | True | False | blocker | completed external embedding baselines=0, postrun_pass=0 |
+| human_audit_sample_qc | reliability | True | True | pass | sample QC rows=73, blocking failures=0 |
 | priority20_human_audit | reliability | True | False | blocker | priority20 confirmed=0/20, invalid=0 |
 | full80_human_audit | reliability | True | False | blocker | full80 confirmed=0/80, invalid=0 |
 | reviewer_risk_blockers | submission | True | False | blocker | blocker risks=2 |
 | public_release_hygiene | submission | True | True | pass | public release blockers=0 |
-| artifact_integrity_manifest | reproducibility | True | True | pass | integrity manifest covers=158/158, sha256_ok=156, self_skips=2 |
+| artifact_integrity_manifest | reproducibility | True | True | pass | integrity manifest covers=160/160, sha256_ok=158, self_skips=2 |
 
 ## 当前 Blocker
 

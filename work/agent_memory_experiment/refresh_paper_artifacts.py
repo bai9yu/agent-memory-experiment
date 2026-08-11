@@ -56,6 +56,21 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes the human-audit labeling execution plan from current gates.",
         ),
         Step(
+            "human_audit_sample_qc",
+            py(
+                "validate_human_audit_sample_qc.py",
+                "--priority-csv",
+                "outputs/agent_memory_human_audit_priority20_blind_review.csv",
+                "--full-csv",
+                "outputs/agent_memory_human_audit_full80_blind_review.csv",
+                "--output-csv",
+                "outputs/agent_memory_human_audit_sample_qc.csv",
+                "--output-report",
+                "outputs/agent_memory_human_audit_sample_qc_zh.md",
+            ),
+            "Checks priority20/full80 human-audit sample size, uniqueness, coverage, and labeling progress.",
+        ),
+        Step(
             "embedding_baseline_status",
             py(
                 "generate_embedding_baseline_status.py",

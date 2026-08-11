@@ -81,6 +81,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     embedding_preflight = read_csv(outputs / "agent_memory_api_embedding_preflight.csv")
     embedding_postrun = read_csv(outputs / "agent_memory_api_embedding_postrun_gate.csv")
     mock_smoke = read_csv(outputs / "agent_memory_mock_api_embedding_smoke_test.csv")
+    human_sample_qc = read_csv(outputs / "agent_memory_human_audit_sample_qc.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
     gap_analysis = read_csv(outputs / "agent_memory_submission_gap_analysis.csv")
     public_release = read_csv(outputs / "agent_memory_public_release_readiness.csv")
@@ -94,6 +95,8 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     preflight_required = [row for row in embedding_preflight if row.get("severity") == "required"]
     preflight_required_pass = count(preflight_required, "pass", "True")
     smoke_second = lookup(mock_smoke, run="2")
+    sample_qc_failures = count(human_sample_qc, "status", "fail")
+    sample_qc_rows = len(human_sample_qc)
     priority = lookup(human_gate, label="priority20")
     full = lookup(human_gate, label="full80")
     reviewer_blockers = count(gap_analysis, "risk_level", "blocker")
@@ -150,6 +153,14 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             embedding_completed >= 1 and postrun_completed >= 1,
             f"completed external embedding baselines={embedding_completed}, postrun_pass={postrun_completed}",
             "实际运行至少一个外部 embedding baseline，并生成与 BGE-M3 的 delta 表。",
+        ),
+        gate_row(
+            "human_audit_sample_qc",
+            "reliability",
+            True,
+            sample_qc_rows > 0 and sample_qc_failures == 0,
+            f"sample QC rows={sample_qc_rows}, blocking failures={sample_qc_failures}",
+            "修复 priority20/full80 样本数、重复 ID 或覆盖性 QC failure。",
         ),
         gate_row(
             "priority20_human_audit",
