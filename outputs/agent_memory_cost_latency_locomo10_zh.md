@@ -35,6 +35,18 @@ DeepSeek extracted fact 的 memory token 是 LoCoMo observation 的 `0.774`，�
 
 细粒度结果见 `outputs/agent_memory_latency_breakdown_locomo10_zh.md`。当前瓶颈主要是 full-memory ranking，而不是 BGE-M3 query encoding。
 
+## Candidate Prefiltering
+
+| Candidate Limit | Runtime Seconds | Speedup vs Full Ranking | Recall@1 | Recall@5 | MRR |
+|---:|---:|---:|---:|---:|---:|
+| full | 36.0491 | 1.00x | 0.503 | 0.733 | 0.609 |
+| 50 | 6.2673 | 5.75x | 0.482 | 0.694 | 0.579 |
+| 100 | 8.3394 | 4.32x | 0.497 | 0.724 | 0.600 |
+| 200 | 13.4028 | 2.69x | 0.509 | 0.733 | 0.613 |
+| 500 | 28.6656 | 1.26x | 0.507 | 0.736 | 0.611 |
+
+top-200 在当前离线实验中取得较好的效率-准确率折中：相比 full ranking 快约 2.69x，MRR 略高。后续如果接入向量索引，可把 semantic top-N 的全量打分进一步替换为近似检索。
+
 ## Accuracy-Cost Tradeoff
 
 | Variant | Method | Recall@1 | Recall@5 | MRR |
