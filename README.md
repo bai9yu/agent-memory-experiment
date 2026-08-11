@@ -61,6 +61,8 @@ DeepSeek 抽取的 fact-level memory 已完成第 1 个完整 conversation 的�
 
 候选预筛选实验见 `outputs/agent_memory_candidate_prefilter_locomo10_zh.md`。
 
+矩阵化 indexed 候选预筛选实验见 `outputs/agent_memory_indexed_prefilter_locomo10_zh.md`。
+
 LoCoMo10 全量 DeepSeek 抽取结果：
 
 | Memory Form | Memories | Memory Tokens | Answerable Queries | Recall@1 | Recall@5 | MRR |

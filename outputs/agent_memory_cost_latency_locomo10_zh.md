@@ -47,6 +47,19 @@ DeepSeek extracted fact 的 memory token 是 LoCoMo observation 的 `0.774`，�
 
 top-200 在当前离线实验中取得较好的效率-准确率折中：相比 full ranking 快约 2.69x，MRR 略高。后续如果接入向量索引，可把 semantic top-N 的全量打分进一步替换为近似检索。
 
+## Indexed Candidate Prefiltering
+
+进一步使用 batched dense similarity matrix 进行 exact top-N 候选召回：
+
+| Candidate Limit | End-to-End Seconds | Speedup vs Full Ranking | Recall@1 | Recall@5 | MRR |
+|---:|---:|---:|---:|---:|---:|
+| 50 | 4.0470 | 8.91x | 0.482 | 0.695 | 0.579 |
+| 100 | 7.2054 | 5.00x | 0.497 | 0.724 | 0.600 |
+| 200 | 11.3399 | 3.18x | 0.509 | 0.733 | 0.613 |
+| 500 | 24.4946 | 1.47x | 0.507 | 0.737 | 0.612 |
+
+batched top-N 的候选召回阶段耗时为 0.2920 秒，约 0.16 ms/query。top-200 仍是当前最佳效率-准确率折中点。
+
 ## Accuracy-Cost Tradeoff
 
 | Variant | Method | Recall@1 | Recall@5 | MRR |
@@ -69,3 +82,4 @@ top-200 在当前离线实验中取得较好的效率-准确率折中：相比 f
 - keyword/vector 单独使用成本低但准确率明显弱于 hybrid/time-aware/type-aware。
 - 若面向在线系统，应进一步拆分 embedding 编码时间、候选召回时间和重排时间。
 - 细粒度 latency breakdown 显示，下一步效率优化应优先做候选预筛选或向量索引，减少全量 memory 排序成本。
+- indexed candidate prefiltering 显示，top-200 可在 MRR 不降的情况下取得约 3.18x 端到端加速。
