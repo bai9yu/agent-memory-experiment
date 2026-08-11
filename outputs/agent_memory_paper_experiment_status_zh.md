@@ -36,6 +36,14 @@ DeepSeek API 用量：
 - Completion tokens：198471
 - Total tokens：559574
 
+成本与延迟：
+
+- DeepSeek extracted fact memory tokens：31148
+- LoCoMo observation memory tokens：40241
+- Memory storage token ratio：0.774，约节省 22.6%
+- LoCoMo10 LLM 评测 runtime：44.6335 秒，约 24.28 ms/query
+- LoCoMo10 observation 评测 runtime：40.8617 秒，约 24.95 ms/query
+
 Coverage：
 
 - Query coverage：0.925
@@ -68,7 +76,7 @@ Coverage：
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
-3. 成本分析：报告 API 成本、memory token ratio、检索 latency、embedding cache 命中影响。
+3. 细粒度延迟分析：拆分 embedding 编码时间、候选召回时间、重排时间和写盘时间。
 4. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 5. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 
@@ -88,4 +96,4 @@ LoCoMo10 `type_aware` Top-1 错误分析：
 
 ## 下一步建议
 
-优先做更强 baseline 和成本/延迟分析。它们不需要继续花 DeepSeek 抽取费用，却能把当前结果从“工程实验”推进到“论文实验”。
+优先做更强 embedding baseline 和细粒度 latency breakdown。它们不需要继续花 DeepSeek 抽取费用，却能把当前结果从“工程实验”推进到“论文实验”。

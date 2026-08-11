@@ -1,0 +1,3 @@
+variant,runtime_seconds,num_memories,num_queries,num_methods,milliseconds_per_query,milliseconds_per_query_method,candidate_pairs_per_method
+llm_extracted_fact,44.6335,2517,1838,5,24.28373231773667,4.856746463547334,4626246
+locomo_observation,40.8617,2507,1638,5,24.946092796092795,4.989218559218559,4106466

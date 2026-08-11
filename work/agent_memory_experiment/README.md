@@ -484,6 +484,21 @@ python3 work/agent_memory_experiment/error_analysis.py \
   --output-report outputs/agent_memory_error_analysis_locomo10_type_aware_zh.md
 ```
 
+Run cost and latency analysis:
+
+```bash
+python3 work/agent_memory_experiment/cost_latency_analysis.py \
+  --llm-memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --observation-memories work/agent_memory_experiment/data/locomo_observation_all_answerable_memories.jsonl \
+  --usage work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3/usage.csv \
+  --llm-report work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/report.md \
+  --observation-report work/agent_memory_experiment/results/locomo_observation_all_answerable_bge_m3_type_008_with_keyword/report.md \
+  --baseline-csv outputs/agent_memory_baseline_comparison_locomo10.csv \
+  --output-csv outputs/agent_memory_cost_storage_locomo10.csv \
+  --runtime-csv outputs/agent_memory_latency_locomo10.csv \
+  --output-report outputs/agent_memory_cost_latency_locomo10_zh.md
+```
+
 ## Cross-Agent Memory Reuse Experiments
 
 Run one cross-agent reuse experiment:
