@@ -217,6 +217,20 @@
 
 收益：LoCoMo 全量真实数据可以在本地完成评测，输出文件规模也可控。
 
+### 3.9 问题：FAISS 与本地 embedding 环境存在原生库线程冲突
+
+现象：安装 `faiss-cpu` 后，最小 FAISS import、Flat 和 IVF toy example 都正常，但在同一进程中加载 sentence-transformers/BGE-M3 后直接运行 FAISS-IVF，曾出现退出码 139 的段错误。
+
+原因判断：不是 Python 代码逻辑错误，而是 macOS/arm64 环境下 FAISS、BLAS/OpenMP、sentence-transformers 相关原生库的线程运行时冲突。
+
+解决：
+
+- 复现实验命令中固定单线程环境变量：`OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1`。
+- 保留 FAISS Flat 作为 exact index upper-bound，FAISS IVF 作为 ANN 速度-召回折中。
+- 在报告中显式记录该环境要求，避免后续复现时误判为算法失败。
+
+收益：FAISS Flat、IVF nprobe=8、IVF nprobe=32 均可稳定完成 LoCoMo10 实验，并形成向量索引效率对照表。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -242,6 +256,7 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 3. 当前没有 LLM-based memory write/update，无法处理复杂冲突。
 4. 当前只评估检索，不评估最终回答生成质量。
 5. KV cache 复用还没有真实实现，只在方法文档中给出下一步公式。
+6. FAISS IVF 在 LoCoMo10 当前规模下没有明显速度优势，ANN 优势需要更大 memory bank 才能充分体现。
 
 ## 6. 下一步行动清单
 

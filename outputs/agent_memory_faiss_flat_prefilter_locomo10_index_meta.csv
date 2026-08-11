@@ -1,0 +1,2 @@
+semantic_backend,embedding_model,index_type,nlist,nprobe,num_queries,num_memories,scorer_init_seconds,train_index_seconds,add_vectors_seconds,query_index_seconds
+sentence-transformer,BAAI/bge-m3,flat,64,8,1838,2517,4.221456167,0.0,0.0006085419999992681,0.1008488750000005

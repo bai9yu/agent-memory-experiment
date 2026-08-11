@@ -620,6 +620,35 @@ python3 work/agent_memory_experiment/lsh_prefilter_experiment.py \
   --output-report outputs/agent_memory_lsh_prefilter_locomo10_zh.md
 ```
 
+Run FAISS candidate prefiltering experiments:
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+HF_HOME=work/agent_memory_experiment/cache/huggingface \
+SENTENCE_TRANSFORMERS_HOME=work/agent_memory_experiment/cache/sentence_transformers \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/faiss_prefilter_experiment.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --candidate-limits 50,100,200,500 \
+  --semantic-backend sentence-transformer \
+  --embedding-model BAAI/bge-m3 \
+  --embedding-batch-size 16 \
+  --local-files-only \
+  --index-type ivf \
+  --nlist 64 \
+  --nprobe 32 \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3,4 \
+  --importance-weight 0.06 \
+  --type-awareness-weight 0.04 \
+  --full-baseline-seconds 36.049109834 \
+  --output-summary outputs/agent_memory_faiss_ivf32_prefilter_locomo10_summary.csv \
+  --output-meta outputs/agent_memory_faiss_ivf32_prefilter_locomo10_meta.csv \
+  --output-index-meta outputs/agent_memory_faiss_ivf32_prefilter_locomo10_index_meta.csv \
+  --output-report outputs/agent_memory_faiss_ivf32_prefilter_locomo10_zh.md
+```
+
 ## Cross-Agent Memory Reuse Experiments
 
 Run one cross-agent reuse experiment:

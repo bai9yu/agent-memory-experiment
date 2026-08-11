@@ -48,6 +48,7 @@ DeepSeek API 用量：
 - 候选预筛选：semantic top-200 + type-aware 取得 2.69x speedup，MRR 0.613，略高于 full ranking 的 0.609。
 - Indexed prefilter：batched top-200 + type-aware 取得 3.18x speedup，MRR 0.613。
 - Sklearn NearestNeighbors：BGE-M3 + exact NN top-200 + type-aware 取得 3.45x speedup，MRR 0.613，Recall@5 0.734；这是当前最适合作为论文效率章节的可复现向量索引基线。
+- FAISS：Flat top-200 取得 3.38x speedup，MRR 0.612，Recall@5 0.734；IVF nprobe=32 top-200 取得 3.31x speedup，MRR 0.605，candidate gold recall 0.966；IVF nprobe=8 更快近似但 MRR 降至 0.571。
 - LSH prefilter：hash embedding + random-hyperplane LSH top-200 + type-aware 取得 2.16x speedup，MRR 0.471；该弱基线说明近似索引本身不够，embedding 表达能力仍是召回质量关键。
 
 Coverage：
@@ -82,7 +83,7 @@ Coverage：
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
-3. 在线检索效率：已有 sklearn exact NN 向量索引基线；仍需加入 FAISS/HNSW 等 ANN 向量索引，并报告 ANN 召回率、构建时间和查询时间。
+3. 在线检索效率：已有 sklearn exact NN、FAISS Flat 和 FAISS IVF；仍需在更大 memory bank 上验证 ANN 优势，并可补 HNSW 对照。
 4. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 5. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 
