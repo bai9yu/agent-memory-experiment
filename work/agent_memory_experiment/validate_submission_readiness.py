@@ -77,6 +77,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     reproducibility_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     reproducibility_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
     claim_check = read_csv(outputs / "agent_memory_manuscript_claim_check.csv")
+    numeric_claim_check = read_csv(outputs / "agent_memory_manuscript_numeric_claim_check.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     embedding_preflight = read_csv(outputs / "agent_memory_api_embedding_preflight.csv")
     embedding_postrun = read_csv(outputs / "agent_memory_api_embedding_postrun_gate.csv")
@@ -90,6 +91,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     artifact_pass = count(reproducibility_artifacts, "exists", "True")
     metric_pass = count(reproducibility_metrics, "pass", "True")
     claim_pass = count(claim_check, "status", "pass")
+    numeric_claim_pass = count(numeric_claim_check, "status", "pass")
     embedding_completed = count(embedding_status, "status", "completed")
     postrun_completed = count(embedding_postrun, "postrun_pass", "True")
     preflight_required = [row for row in embedding_preflight if row.get("severity") == "required"]
@@ -129,6 +131,14 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             claim_pass == len(claim_check),
             f"{claim_pass}/{len(claim_check)} claim checks pass",
             "继续防止正文把 pending 实验写成已完成结论。",
+        ),
+        gate_row(
+            "manuscript_numeric_claim_check",
+            "paper_writing",
+            True,
+            numeric_claim_pass == len(numeric_claim_check) and len(numeric_claim_check) > 0,
+            f"{numeric_claim_pass}/{len(numeric_claim_check)} numeric claim checks pass",
+            "同步正文、论文表格和统计报告中的关键数值声明。",
         ),
         gate_row(
             "api_embedding_preflight",

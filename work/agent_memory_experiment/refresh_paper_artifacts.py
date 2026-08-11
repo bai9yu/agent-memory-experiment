@@ -538,6 +538,23 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Checks that manuscript does not overclaim pending baselines/audits.",
         ),
         Step(
+            "manuscript_numeric_claim_check",
+            py(
+                "validate_manuscript_numeric_claims.py",
+                "--project-root",
+                ".",
+                "--outputs-dir",
+                "outputs",
+                "--manuscript",
+                "outputs/agent_memory_manuscript_draft_zh.md",
+                "--output-csv",
+                "outputs/agent_memory_manuscript_numeric_claim_check.csv",
+                "--output-report",
+                "outputs/agent_memory_manuscript_numeric_claim_check_zh.md",
+            ),
+            "Checks that key numeric manuscript claims match current paper artifacts.",
+        ),
+        Step(
             "paper_scope_claim_audit",
             py(
                 "validate_paper_scope_claims.py",

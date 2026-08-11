@@ -81,6 +81,8 @@ Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,7485
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,12592
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
+Paper manuscript numeric claim check,outputs/agent_memory_manuscript_numeric_claim_check_zh.md,True,3116
+Paper manuscript numeric claim check CSV,outputs/agent_memory_manuscript_numeric_claim_check.csv,True,11685
 Paper scope claim audit,outputs/agent_memory_paper_scope_claim_audit_zh.md,True,11366
 Paper scope claim audit CSV,outputs/agent_memory_paper_scope_claim_audit.csv,True,10190
 Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True,5872
@@ -91,26 +93,26 @@ Submission package index,outputs/agent_memory_submission_package_index_zh.md,Tru
 Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,9694
 Submission entrypoint consistency audit,outputs/agent_memory_submission_entrypoint_consistency_zh.md,True,2106
 Submission entrypoint consistency audit CSV,outputs/agent_memory_submission_entrypoint_consistency.csv,True,1487
-Submission readiness gate,outputs/agent_memory_submission_readiness_zh.md,True,2444
-Submission readiness gate CSV,outputs/agent_memory_submission_readiness.csv,True,2067
+Submission readiness gate,outputs/agent_memory_submission_readiness_zh.md,True,2550
+Submission readiness gate CSV,outputs/agent_memory_submission_readiness.csv,True,2230
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1688
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1424
-Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4131
-Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3054
+Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4740
+Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3630
 Large intermediate provenance audit,outputs/agent_memory_large_intermediate_provenance_zh.md,True,2048
 Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_provenance.csv,True,2824
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734
 Artifact path portability audit CSV,outputs/agent_memory_artifact_path_portability.csv,True,214
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3795
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,33028
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,33385
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3600
 Submission blocker closure plan CSV,outputs/agent_memory_submission_blocker_closure_plan.csv,True,2813
-Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,5344
-Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,18592
-Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,7768
-Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,6726
+Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,5473
+Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,19293
+Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,7966
+Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,6916
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
 Evidence freshness audit CSV,outputs/agent_memory_evidence_freshness_audit.csv,True,98
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247

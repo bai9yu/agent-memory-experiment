@@ -20,7 +20,7 @@
 | work_readme_links_current_report | True | major | work/agent_memory_experiment/README.md | Update the experiment README submission command and artifact list. |
 | no_legacy_entrypoint_refs | True | major | no legacy references found | Replace legacy submission_readiness_gate references with submission_readiness references. |
 | report_csv_blocker_count_consistent | True | blocker | report_blockers=5, csv_blockers=5 | Regenerate submission readiness report and CSV together. |
-| report_required_gate_count_present | True | major | required_gates=6/11 | Ensure submission readiness report contains Required gates passed summary. |
+| report_required_gate_count_present | True | major | required_gates=7/12 | Ensure submission readiness report contains Required gates passed summary. |
 
 ## 论文使用边界
 
