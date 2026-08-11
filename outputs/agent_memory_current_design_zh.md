@@ -590,6 +590,31 @@ m_t=\arg\max_{m_i\in \mathcal{C}_{deep}\setminus S_t}\hat g_{q,i,t}
 
 其中 \(\rho(m_i,S_t)\) 包含与已选集合的文本 Jaccard、是否已有相同 memory type、已选 type 覆盖数等上下文特征。结果仍为负：`supervised_set_selector` 的 Type 3 MRR 为 `0.389`、Coverage@5 为 `0.320`，均低于 fixed `type_aware`。这说明“候选级特征 + 贪心集合选择”还不足以表达 Type 3 所需的子问题结构；下一步更应显式做 query decomposition 或训练真正 listwise/setwise objective。
 
+进一步测试关键词式 query decomposition：
+
+\[
+q \rightarrow \{z_1,z_2,\ldots,z_n\}
+\]
+
+\[
+\operatorname{rank}_{decomp}(q)
+=
+\operatorname{RRF}\left(
+\operatorname{BM25}(z_1),\ldots,\operatorname{BM25}(z_n)
+\right)
+\]
+
+并测试与 `type_aware` 的保守融合：
+
+\[
+S_{fusion}(q,m_i)
+=
+4.0\cdot \operatorname{RRF}_{type}(q,m_i)
++1.0\cdot \operatorname{RRF}_{decomp}(q,m_i)
+\]
+
+结果依然为负：纯 `query_decomposition` 的 Type 3 MRR 为 `0.214`，融合后为 `0.342`，仍低于 fixed `type_aware` 的 `0.429`；融合方法 Coverage@20 与 `type_aware` 持平，但 Coverage@5 和 MRR 下降。原因是弱关键词拆解会重复人物名并产生过泛 facet，导致 identity/profile 类泛化记忆抢占候选前排。因此下一步如果继续 decomposition，应使用 LLM 或更强规则生成语义子问题，而不是只做关键词窗口。
+
 \[
 \max_\theta
 \sum_q

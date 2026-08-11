@@ -1,0 +1,259 @@
+query_id,query_type,query,method,num_gold,is_multi_evidence,mrr,recall@1,recall@3,recall@5,first_rank,any_hit@1,full_coverage@1,coverage_ratio@1,any_hit@3,full_coverage@3,coverage_ratio@3,any_hit@5,full_coverage@5,coverage_ratio@5,any_hit@10,full_coverage@10,coverage_ratio@10,any_hit@20,full_coverage@20,coverage_ratio@20
+q00003,3,What fields would Caroline be likely to pursue in her educaton?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00003,3,What fields would Caroline be likely to pursue in her educaton?,query_decomposition,2,1,0.045454545454545456,0.0,0.0,0.0,22,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00003,3,What fields would Caroline be likely to pursue in her educaton?,type_aware_plus_decomposition,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0
+q00015,3,Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00015,3,Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?,query_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00015,3,Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?,type_aware_plus_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00023,3,Would Caroline likely have Dr. Seuss books on her bookshelf?,type_aware,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00023,3,Would Caroline likely have Dr. Seuss books on her bookshelf?,query_decomposition,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0
+q00023,3,Would Caroline likely have Dr. Seuss books on her bookshelf?,type_aware_plus_decomposition,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00028,3,Would Caroline pursue writing as a career option?,type_aware,2,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00028,3,Would Caroline pursue writing as a career option?,query_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00028,3,Would Caroline pursue writing as a career option?,type_aware_plus_decomposition,2,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00043,3,Would Melanie be more interested in going to a national park or a theme park?,type_aware,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00043,3,Would Melanie be more interested in going to a national park or a theme park?,query_decomposition,2,1,0.1,0.0,0.0,0.0,10,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5
+q00043,3,Would Melanie be more interested in going to a national park or a theme park?,type_aware_plus_decomposition,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00051,3,What would Caroline's political leaning likely be?,type_aware,2,1,0.03333333333333333,0.0,0.0,0.0,30,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00051,3,What would Caroline's political leaning likely be?,query_decomposition,2,1,0.014705882352941176,0.0,0.0,0.0,68,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00051,3,What would Caroline's political leaning likely be?,type_aware_plus_decomposition,2,1,0.014285714285714285,0.0,0.0,0.0,70,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00060,3,Would Caroline be considered religious?,type_aware,4,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.25,1.0,0.0,0.25,1.0,0.0,0.25,1.0,0.0,0.5,1.0,0.0,0.5
+q00060,3,Would Caroline be considered religious?,query_decomposition,4,1,0.14285714285714285,0.0,0.0,0.0,7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25,1.0,0.0,0.5
+q00060,3,Would Caroline be considered religious?,type_aware_plus_decomposition,4,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.25,1.0,0.0,0.25,1.0,0.0,0.5,1.0,0.0,0.5
+q00065,3,"Would Melanie likely enjoy the song ""The Four Seasons"" by Vivaldi?",type_aware,1,0,0.03571428571428571,0.0,0.0,0.0,28,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00065,3,"Would Melanie likely enjoy the song ""The Four Seasons"" by Vivaldi?",query_decomposition,1,0,0.00980392156862745,0.0,0.0,0.0,102,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00065,3,"Would Melanie likely enjoy the song ""The Four Seasons"" by Vivaldi?",type_aware_plus_decomposition,1,0,0.00980392156862745,0.0,0.0,0.0,102,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00070,3,What personality traits might Melanie say Caroline has?,type_aware,1,0,0.015151515151515152,0.0,0.0,0.0,66,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00070,3,What personality traits might Melanie say Caroline has?,query_decomposition,1,0,0.022222222222222223,0.0,0.0,0.0,45,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00070,3,What personality traits might Melanie say Caroline has?,type_aware_plus_decomposition,1,0,0.022222222222222223,0.0,0.0,0.0,45,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00078,3,Would Melanie go on another roadtrip soon?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00078,3,Would Melanie go on another roadtrip soon?,query_decomposition,2,1,0.02702702702702703,0.0,0.0,0.0,37,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00078,3,Would Melanie go on another roadtrip soon?,type_aware_plus_decomposition,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00082,3,Would Caroline want to move back to her home country soon?,type_aware,3,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q00082,3,Would Caroline want to move back to her home country soon?,query_decomposition,3,1,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333
+q00082,3,Would Caroline want to move back to her home country soon?,type_aware_plus_decomposition,3,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q00313,3,What might John's financial status be?,type_aware,1,0,0.02857142857142857,0.0,0.0,0.0,35,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00313,3,What might John's financial status be?,query_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00313,3,What might John's financial status be?,type_aware_plus_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00319,3,Would John be considered a patriotic person?,type_aware,2,1,0.013333333333333334,0.0,0.0,0.0,75,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00319,3,Would John be considered a patriotic person?,query_decomposition,2,1,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00319,3,Would John be considered a patriotic person?,type_aware_plus_decomposition,2,1,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00322,3,What might John's degree be in?,type_aware,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,1.0,1.0
+q00322,3,What might John's degree be in?,query_decomposition,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666
+q00322,3,What might John's degree be in?,type_aware_plus_decomposition,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,1.0,1.0,1.0,1.0,1.0
+q00350,3,Would John be open to moving to another country?,type_aware,4,1,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25
+q00350,3,Would John be open to moving to another country?,query_decomposition,4,1,0.1111111111111111,0.0,0.0,0.0,9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25,1.0,0.0,0.5
+q00350,3,Would John be open to moving to another country?,type_aware_plus_decomposition,4,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25,1.0,0.0,0.25,1.0,0.0,0.25
+q00355,3,What attributes describe John?,type_aware,5,1,0.07142857142857142,0.0,0.0,0.0,14,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2
+q00355,3,What attributes describe John?,query_decomposition,5,1,0.0136986301369863,0.0,0.0,0.0,73,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00355,3,What attributes describe John?,type_aware_plus_decomposition,5,1,0.058823529411764705,0.0,0.0,0.0,17,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2
+q00369,3,What job might Maria pursue in the future?,type_aware,7,1,0.05555555555555555,0.0,0.0,0.0,18,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.14285714285714285
+q00369,3,What job might Maria pursue in the future?,query_decomposition,7,1,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2857142857142857
+q00369,3,What job might Maria pursue in the future?,type_aware_plus_decomposition,7,1,0.08333333333333333,0.0,0.0,0.0,12,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.14285714285714285
+q00498,3,Is it likely that Nate has friends besides Joanna?,type_aware,1,0,0.0047169811320754715,0.0,0.0,0.0,212,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00498,3,Is it likely that Nate has friends besides Joanna?,query_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00498,3,Is it likely that Nate has friends besides Joanna?,type_aware_plus_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00502,3,What pets wouldn't cause any discomfort to Joanna?,type_aware,1,0,0.038461538461538464,0.0,0.0,0.0,26,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00502,3,What pets wouldn't cause any discomfort to Joanna?,query_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00502,3,What pets wouldn't cause any discomfort to Joanna?,type_aware_plus_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00510,3,What underlying condition might Joanna have based on her allergies?,type_aware,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q00510,3,What underlying condition might Joanna have based on her allergies?,query_decomposition,3,1,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333
+q00510,3,What underlying condition might Joanna have based on her allergies?,type_aware_plus_decomposition,3,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q00512,3,What nickname does Nate use for Joanna?,type_aware,1,0,0.012987012987012988,0.0,0.0,0.0,77,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00512,3,What nickname does Nate use for Joanna?,query_decomposition,1,0,0.02857142857142857,0.0,0.0,0.0,35,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00512,3,What nickname does Nate use for Joanna?,type_aware_plus_decomposition,1,0,0.027777777777777776,0.0,0.0,0.0,36,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00558,3,What Console does Nate own?,type_aware,1,0,0.018867924528301886,0.0,0.0,0.0,53,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00558,3,What Console does Nate own?,query_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00558,3,What Console does Nate own?,type_aware_plus_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00564,3,What alternative career might Nate consider after gaming?,type_aware,4,1,0.016129032258064516,0.0,0.0,0.0,62,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00564,3,What alternative career might Nate consider after gaming?,query_decomposition,4,1,0.08333333333333333,0.0,0.0,0.0,12,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25
+q00564,3,What alternative career might Nate consider after gaming?,type_aware_plus_decomposition,4,1,0.041666666666666664,0.0,0.0,0.0,24,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00566,3,How many hikes has Joanna been on?,type_aware,3,1,0.05555555555555555,0.0,0.0,0.0,18,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333
+q00566,3,How many hikes has Joanna been on?,query_decomposition,3,1,0.02127659574468085,0.0,0.0,0.0,47,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00566,3,How many hikes has Joanna been on?,type_aware_plus_decomposition,3,1,0.05,0.0,0.0,0.0,20,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333
+q00571,3,What state did Joanna visit in summer 2021?,type_aware,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00571,3,What state did Joanna visit in summer 2021?,query_decomposition,1,0,0.06666666666666667,0.0,0.0,0.0,15,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q00571,3,What state did Joanna visit in summer 2021?,type_aware_plus_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00582,3,Was the first half of September 2022 a good month career-wise for Nate and Joanna? Answer yes or no.,type_aware,4,1,0.00819672131147541,0.0,0.0,0.0,122,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00582,3,Was the first half of September 2022 a good month career-wise for Nate and Joanna? Answer yes or no.,query_decomposition,4,1,0.022222222222222223,0.0,0.0,0.0,45,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00582,3,Was the first half of September 2022 a good month career-wise for Nate and Joanna? Answer yes or no.,type_aware_plus_decomposition,4,1,0.02040816326530612,0.0,0.0,0.0,49,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00583,3,What kind of job is Joanna beginning to preform the duties of because of her movie scripts?,type_aware,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00583,3,What kind of job is Joanna beginning to preform the duties of because of her movie scripts?,query_decomposition,2,1,0.027777777777777776,0.0,0.0,0.0,36,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00583,3,What kind of job is Joanna beginning to preform the duties of because of her movie scripts?,type_aware_plus_decomposition,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00585,3,What state did Nate visit?,type_aware,2,1,0.02040816326530612,0.0,0.0,0.0,49,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00585,3,What state did Nate visit?,query_decomposition,2,1,0.018867924528301886,0.0,0.0,0.0,53,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00585,3,What state did Nate visit?,type_aware_plus_decomposition,2,1,0.018518518518518517,0.0,0.0,0.0,54,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00761,3,Would Tim enjoy reading books by C. S. Lewis or John Greene?,type_aware,3,1,0.008771929824561403,0.0,0.0,0.0,114,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00761,3,Would Tim enjoy reading books by C. S. Lewis or John Greene?,query_decomposition,3,1,0.00546448087431694,0.0,0.0,0.0,183,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00761,3,Would Tim enjoy reading books by C. S. Lewis or John Greene?,type_aware_plus_decomposition,3,1,0.00546448087431694,0.0,0.0,0.0,183,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00763,3,"Based on Tim's collections, what is a shop that he would enjoy visiting in New York city?",type_aware,1,0,0.016666666666666666,0.0,0.0,0.0,60,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00763,3,"Based on Tim's collections, what is a shop that he would enjoy visiting in New York city?",query_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00763,3,"Based on Tim's collections, what is a shop that he would enjoy visiting in New York city?",type_aware_plus_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00766,3,Which outdoor gear company likely signed up John for an endorsement deal?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0
+q00766,3,Which outdoor gear company likely signed up John for an endorsement deal?,query_decomposition,2,1,0.25,0.0,0.0,1.0,4,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q00766,3,Which outdoor gear company likely signed up John for an endorsement deal?,type_aware_plus_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0
+q00773,3,Who is Anthony?,type_aware,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00773,3,Who is Anthony?,query_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00773,3,Who is Anthony?,type_aware_plus_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00777,3,What is a prominent charity organization that John might want to work with and why?,type_aware,8,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.125,1.0,0.0,0.125,1.0,0.0,0.25,1.0,0.0,0.375
+q00777,3,What is a prominent charity organization that John might want to work with and why?,query_decomposition,8,1,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.125
+q00777,3,What is a prominent charity organization that John might want to work with and why?,type_aware_plus_decomposition,8,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.125,1.0,0.0,0.125,1.0,0.0,0.25,1.0,0.0,0.375
+q00785,3,Which popular time management technique does Tim use to prepare for exams?,type_aware,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00785,3,Which popular time management technique does Tim use to prepare for exams?,query_decomposition,2,1,0.07142857142857142,0.0,0.0,0.0,14,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5
+q00785,3,Which popular time management technique does Tim use to prepare for exams?,type_aware_plus_decomposition,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00786,3,Which popular music composer's tunes does Tim enjoy playing on the piano?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0
+q00786,3,Which popular music composer's tunes does Tim enjoy playing on the piano?,query_decomposition,2,1,0.02,0.0,0.0,0.0,50,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00786,3,Which popular music composer's tunes does Tim enjoy playing on the piano?,type_aware_plus_decomposition,2,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0
+q00790,3,Which US states might Tim be in during September 2023 based on his plans of visiting Universal Studios?,type_aware,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q00790,3,Which US states might Tim be in during September 2023 based on his plans of visiting Universal Studios?,query_decomposition,3,1,0.25,0.0,0.0,1.0,4,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q00790,3,Which US states might Tim be in during September 2023 based on his plans of visiting Universal Studios?,type_aware_plus_decomposition,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q00792,3,What could John do after his basketball career?,type_aware,5,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2
+q00792,3,What could John do after his basketball career?,query_decomposition,5,1,0.25,0.0,0.0,1.0,4,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2
+q00792,3,What could John do after his basketball career?,type_aware_plus_decomposition,5,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2
+q00809,3,What kind of yoga for building core strength might John benefit from?,type_aware,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00809,3,What kind of yoga for building core strength might John benefit from?,query_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00809,3,What kind of yoga for building core strength might John benefit from?,type_aware_plus_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00811,3,What other exercises can help John with his basketball performance?,type_aware,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666
+q00811,3,What other exercises can help John with his basketball performance?,query_decomposition,3,1,0.02631578947368421,0.0,0.0,0.0,38,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00811,3,What other exercises can help John with his basketball performance?,type_aware_plus_decomposition,3,1,0.25,0.0,0.0,1.0,4,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666
+q00824,3,What is a Star Wars book that Tim might enjoy?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00824,3,What is a Star Wars book that Tim might enjoy?,query_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00824,3,What is a Star Wars book that Tim might enjoy?,type_aware_plus_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q00825,3,What would be a good hobby related to his travel dreams for Tim to pick up?,type_aware,4,1,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25
+q00825,3,What would be a good hobby related to his travel dreams for Tim to pick up?,query_decomposition,4,1,0.02702702702702703,0.0,0.0,0.0,37,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q00825,3,What would be a good hobby related to his travel dreams for Tim to pick up?,type_aware_plus_decomposition,4,1,0.1,0.0,0.0,0.0,10,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25,1.0,0.0,0.25
+q00828,3,Which Star Wars-related locations would Tim enjoy during his visit to Ireland?,type_aware,5,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.2,1.0,0.0,0.6,1.0,0.0,0.8,1.0,1.0,1.0,1.0,1.0,1.0
+q00828,3,Which Star Wars-related locations would Tim enjoy during his visit to Ireland?,query_decomposition,5,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.4
+q00828,3,Which Star Wars-related locations would Tim enjoy during his visit to Ireland?,type_aware_plus_decomposition,5,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.2,1.0,0.0,0.4,1.0,0.0,0.6,1.0,1.0,1.0,1.0,1.0,1.0
+q01019,3,What is an indoor activity that Andrew would enjoy doing while make his dog happy?,type_aware,3,1,0.01639344262295082,0.0,0.0,0.0,61,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01019,3,What is an indoor activity that Andrew would enjoy doing while make his dog happy?,query_decomposition,3,1,0.08333333333333333,0.0,0.0,0.0,12,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.6666666666666666
+q01019,3,What is an indoor activity that Andrew would enjoy doing while make his dog happy?,type_aware_plus_decomposition,3,1,0.041666666666666664,0.0,0.0,0.0,24,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01020,3,Which meat does Audrey prefer eating more than others?,type_aware,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0
+q01020,3,Which meat does Audrey prefer eating more than others?,query_decomposition,2,1,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01020,3,Which meat does Audrey prefer eating more than others?,type_aware_plus_decomposition,2,1,0.06666666666666667,0.0,0.0,0.0,15,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q01033,3,What can Andrew potentially do to improve his stress and accomodate his living situation with his dogs?,type_aware,5,1,0.125,0.0,0.0,0.0,8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.4
+q01033,3,What can Andrew potentially do to improve his stress and accomodate his living situation with his dogs?,query_decomposition,5,1,0.037037037037037035,0.0,0.0,0.0,27,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01033,3,What can Andrew potentially do to improve his stress and accomodate his living situation with his dogs?,type_aware_plus_decomposition,5,1,0.08333333333333333,0.0,0.0,0.0,12,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.4
+q01043,3,Which US state do Audrey and Andrew potentially live in?,type_aware,1,0,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01043,3,Which US state do Audrey and Andrew potentially live in?,query_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01043,3,Which US state do Audrey and Andrew potentially live in?,type_aware_plus_decomposition,1,0,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01044,3,Which national park could Audrey and Andrew be referring to in their conversations?,type_aware,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q01044,3,Which national park could Audrey and Andrew be referring to in their conversations?,query_decomposition,3,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333
+q01044,3,Which national park could Audrey and Andrew be referring to in their conversations?,type_aware_plus_decomposition,3,1,0.25,0.0,0.0,1.0,4,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333,1.0,0.0,0.6666666666666666,1.0,0.0,0.6666666666666666
+q01052,3,What is something that Andrew could do to make birdwatching hobby to fit in his city schedule?,type_aware,3,1,0.018518518518518517,0.0,0.0,0.0,54,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01052,3,What is something that Andrew could do to make birdwatching hobby to fit in his city schedule?,query_decomposition,3,1,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333
+q01052,3,What is something that Andrew could do to make birdwatching hobby to fit in his city schedule?,type_aware_plus_decomposition,3,1,0.03333333333333333,0.0,0.0,0.0,30,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01053,3,What is a career that Andrew could potentially pursue with his love for animals and nature?,type_aware,5,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.8
+q01053,3,What is a career that Andrew could potentially pursue with his love for animals and nature?,query_decomposition,5,1,0.125,0.0,0.0,0.0,8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.4
+q01053,3,What is a career that Andrew could potentially pursue with his love for animals and nature?,type_aware_plus_decomposition,5,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.4,1.0,0.0,0.8
+q01158,3,What are John's suspected health problems?,type_aware,1,0,0.004,0.0,0.0,0.0,250,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01158,3,What are John's suspected health problems?,query_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01158,3,What are John's suspected health problems?,type_aware_plus_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01164,3,Does James live in Connecticut?,type_aware,2,1,0.1,0.0,0.0,0.0,10,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5
+q01164,3,Does James live in Connecticut?,query_decomposition,2,1,0.07692307692307693,0.0,0.0,0.0,13,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5
+q01164,3,Does James live in Connecticut?,type_aware_plus_decomposition,2,1,0.125,0.0,0.0,0.0,8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5
+q01165,3,In which state is the shelter from which James adopted the puppy?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0
+q01165,3,In which state is the shelter from which James adopted the puppy?,query_decomposition,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0
+q01165,3,In which state is the shelter from which James adopted the puppy?,type_aware_plus_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0
+q01170,3,Did James have a girlfriend during April 2022?,type_aware,1,0,0.16666666666666666,0.0,0.0,0.0,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01170,3,Did James have a girlfriend during April 2022?,query_decomposition,1,0,0.018518518518518517,0.0,0.0,0.0,54,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01170,3,Did James have a girlfriend during April 2022?,type_aware_plus_decomposition,1,0,0.14285714285714285,0.0,0.0,0.0,7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01175,3,What is the board game where you have to find the imposter that John mentions to James?,type_aware,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01175,3,What is the board game where you have to find the imposter that John mentions to James?,query_decomposition,1,0,0.008403361344537815,0.0,0.0,0.0,119,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01175,3,What is the board game where you have to find the imposter that John mentions to James?,type_aware_plus_decomposition,1,0,0.16666666666666666,0.0,0.0,0.0,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01177,3,Was James feeling lonely before meeting Samantha?,type_aware,1,0,0.030303030303030304,0.0,0.0,0.0,33,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01177,3,Was James feeling lonely before meeting Samantha?,query_decomposition,1,0,0.01282051282051282,0.0,0.0,0.0,78,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01177,3,Was James feeling lonely before meeting Samantha?,type_aware_plus_decomposition,1,0,0.012195121951219513,0.0,0.0,0.0,82,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01183,3,Are John and James fans of the same football team?,type_aware,3,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333
+q01183,3,Are John and James fans of the same football team?,query_decomposition,3,1,0.1111111111111111,0.0,0.0,0.0,9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333
+q01183,3,Are John and James fans of the same football team?,type_aware_plus_decomposition,3,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333,1.0,0.0,0.3333333333333333
+q01188,3,Which country did James book tickets for in July 2022?,type_aware,4,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.25,1.0,0.0,0.5,1.0,0.0,0.75,1.0,0.0,0.75,1.0,0.0,0.75
+q01188,3,Which country did James book tickets for in July 2022?,query_decomposition,4,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25,1.0,0.0,0.25,1.0,0.0,0.5
+q01188,3,Which country did James book tickets for in July 2022?,type_aware_plus_decomposition,4,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.25,1.0,0.0,0.5,1.0,0.0,0.75,1.0,0.0,0.75,1.0,0.0,0.75
+q01191,3,Did John and James study together?,type_aware,1,0,0.125,0.0,0.0,0.0,8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01191,3,Did John and James study together?,query_decomposition,1,0,0.034482758620689655,0.0,0.0,0.0,29,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01191,3,Did John and James study together?,type_aware_plus_decomposition,1,0,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q01193,3,What additional country did James visit during his trip to Canada?,type_aware,1,0,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01193,3,What additional country did James visit during his trip to Canada?,query_decomposition,1,0,0.0625,0.0,0.0,0.0,16,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q01193,3,What additional country did James visit during his trip to Canada?,type_aware_plus_decomposition,1,0,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01194,3,Who is Jill?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01194,3,Who is Jill?,query_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01194,3,Who is Jill?,type_aware_plus_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01202,3,Why didn't John want to go to Starbucks?,type_aware,1,0,0.002898550724637681,0.0,0.0,0.0,345,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01202,3,Why didn't John want to go to Starbucks?,query_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01202,3,Why didn't John want to go to Starbucks?,type_aware_plus_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01353,3,In what country did Jolene's mother buy her the pendant?,type_aware,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01353,3,In what country did Jolene's mother buy her the pendant?,query_decomposition,1,0,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01353,3,In what country did Jolene's mother buy her the pendant?,type_aware_plus_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01359,3,Is Deborah married?,type_aware,5,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.2,1.0,0.0,0.6,1.0,0.0,0.6,1.0,0.0,0.6,1.0,0.0,0.6
+q01359,3,Is Deborah married?,query_decomposition,5,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.4,1.0,0.0,0.4,1.0,0.0,0.4,1.0,0.0,0.6
+q01359,3,Is Deborah married?,type_aware_plus_decomposition,5,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.2,1.0,0.0,0.6,1.0,0.0,0.6,1.0,0.0,0.6,1.0,0.0,0.6
+q01366,3,In what country did Jolene buy snake Seraphim?,type_aware,1,0,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01366,3,In what country did Jolene buy snake Seraphim?,query_decomposition,1,0,0.041666666666666664,0.0,0.0,0.0,24,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01366,3,In what country did Jolene buy snake Seraphim?,type_aware_plus_decomposition,1,0,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01371,3,Why did Jolene sometimes put off doing yoga?,type_aware,2,1,0.010309278350515464,0.0,0.0,0.0,97,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01371,3,Why did Jolene sometimes put off doing yoga?,query_decomposition,2,1,0.008130081300813009,0.0,0.0,0.0,123,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01371,3,Why did Jolene sometimes put off doing yoga?,type_aware_plus_decomposition,2,1,0.008064516129032258,0.0,0.0,0.0,124,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01376,3,In what country was Jolene during summer 2022?,type_aware,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01376,3,In what country was Jolene during summer 2022?,query_decomposition,1,0,0.05263157894736842,0.0,0.0,0.0,19,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q01376,3,In what country was Jolene during summer 2022?,type_aware_plus_decomposition,1,0,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01384,3,How old is Jolene?,type_aware,17,1,0.1,0.0,0.0,0.0,10,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.058823529411764705,1.0,0.0,0.23529411764705882
+q01384,3,How old is Jolene?,query_decomposition,17,1,0.06666666666666667,0.0,0.0,0.0,15,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.11764705882352941
+q01384,3,How old is Jolene?,type_aware_plus_decomposition,17,1,0.1111111111111111,0.0,0.0,0.0,9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.058823529411764705,1.0,0.0,0.23529411764705882
+q01388,3,Does Deborah live close to the beach or the mountains?,type_aware,1,0,0.09090909090909091,0.0,0.0,0.0,11,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q01388,3,Does Deborah live close to the beach or the mountains?,query_decomposition,1,0,0.00684931506849315,0.0,0.0,0.0,146,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01388,3,Does Deborah live close to the beach or the mountains?,type_aware_plus_decomposition,1,0,0.0625,0.0,0.0,0.0,16,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q01396,3,Which US state did Jolene visit during her internship?,type_aware,1,0,0.08333333333333333,0.0,0.0,0.0,12,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q01396,3,Which US state did Jolene visit during her internship?,query_decomposition,1,0,0.020833333333333332,0.0,0.0,0.0,48,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01396,3,Which US state did Jolene visit during her internship?,type_aware_plus_decomposition,1,0,0.08333333333333333,0.0,0.0,0.0,12,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0
+q01418,3,Is the friend who wrote Deborah the motivational quote no longer alive?,type_aware,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01418,3,Is the friend who wrote Deborah the motivational quote no longer alive?,query_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01418,3,Is the friend who wrote Deborah the motivational quote no longer alive?,type_aware_plus_decomposition,1,0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01423,3,What card game is Deborah talking about?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01423,3,What card game is Deborah talking about?,query_decomposition,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01423,3,What card game is Deborah talking about?,type_aware_plus_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01592,3,Which country was Evan visiting in May 2023?,type_aware,1,0,0.014925373134328358,0.0,0.0,0.0,67,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01592,3,Which country was Evan visiting in May 2023?,query_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01592,3,Which country was Evan visiting in May 2023?,type_aware_plus_decomposition,1,0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01597,3,"Which type of vacation would Evan prefer with his family, walking tours in metropolitan cities or camping trip in the outdoors?",type_aware,5,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.4,1.0,0.0,0.4
+q01597,3,"Which type of vacation would Evan prefer with his family, walking tours in metropolitan cities or camping trip in the outdoors?",query_decomposition,5,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.2
+q01597,3,"Which type of vacation would Evan prefer with his family, walking tours in metropolitan cities or camping trip in the outdoors?",type_aware_plus_decomposition,5,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.2,1.0,0.0,0.4
+q01606,3,"Considering their conversations and personal growth, what advice might Evan and Sam give to someone facing a major life transition or challenge?",type_aware,9,1,0.25,0.0,0.0,1.0,4,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.1111111111111111,1.0,0.0,0.2222222222222222,1.0,0.0,0.3333333333333333
+q01606,3,"Considering their conversations and personal growth, what advice might Evan and Sam give to someone facing a major life transition or challenge?",query_decomposition,9,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.1111111111111111,1.0,0.0,0.1111111111111111,1.0,0.0,0.1111111111111111,1.0,0.0,0.2222222222222222,1.0,0.0,0.3333333333333333
+q01606,3,"Considering their conversations and personal growth, what advice might Evan and Sam give to someone facing a major life transition or challenge?",type_aware_plus_decomposition,9,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.1111111111111111,1.0,0.0,0.1111111111111111,1.0,0.0,0.2222222222222222,1.0,0.0,0.3333333333333333
+q01607,3,"In light of the health and dietary changes discussed, what would be an appropriate gift for both Evan and Sam to encourage their healthy lifestyles?",type_aware,17,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.058823529411764705,1.0,0.0,0.11764705882352941,1.0,0.0,0.17647058823529413
+q01607,3,"In light of the health and dietary changes discussed, what would be an appropriate gift for both Evan and Sam to encourage their healthy lifestyles?",query_decomposition,17,1,0.043478260869565216,0.0,0.0,0.0,23,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01607,3,"In light of the health and dietary changes discussed, what would be an appropriate gift for both Evan and Sam to encourage their healthy lifestyles?",type_aware_plus_decomposition,17,1,0.16666666666666666,0.0,0.0,0.0,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.058823529411764705,1.0,0.0,0.17647058823529413
+q01614,3,What electronic device could Evan gift Sam to help him keep up with his fitness goals?,type_aware,2,1,0.03125,0.0,0.0,0.0,32,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01614,3,What electronic device could Evan gift Sam to help him keep up with his fitness goals?,query_decomposition,2,1,0.038461538461538464,0.0,0.0,0.0,26,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01614,3,What electronic device could Evan gift Sam to help him keep up with his fitness goals?,type_aware_plus_decomposition,2,1,0.03225806451612903,0.0,0.0,0.0,31,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01630,3,How often does Sam get health checkups?,type_aware,4,1,0.2,0.0,0.0,1.0,5,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25,1.0,0.0,0.25,1.0,0.0,0.5
+q01630,3,How often does Sam get health checkups?,query_decomposition,4,1,0.038461538461538464,0.0,0.0,0.0,26,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01630,3,How often does Sam get health checkups?,type_aware_plus_decomposition,4,1,0.16666666666666666,0.0,0.0,0.0,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25,1.0,0.0,0.5
+q01638,3,"What challenges does Sam face in his quest for a healthier lifestyle, and how does he address them?",type_aware,6,1,0.05,0.0,0.0,0.0,20,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.16666666666666666
+q01638,3,"What challenges does Sam face in his quest for a healthier lifestyle, and how does he address them?",query_decomposition,6,1,0.016666666666666666,0.0,0.0,0.0,60,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01638,3,"What challenges does Sam face in his quest for a healthier lifestyle, and how does he address them?",type_aware_plus_decomposition,6,1,0.05,0.0,0.0,0.0,20,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.16666666666666666
+q01644,3,Which US state was Sam travelling in during October 2023?,type_aware,1,0,0.1,0.0,0.0,0.0,10,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01644,3,Which US state was Sam travelling in during October 2023?,query_decomposition,1,0,0.047619047619047616,0.0,0.0,0.0,21,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01644,3,Which US state was Sam travelling in during October 2023?,type_aware_plus_decomposition,1,0,0.1,0.0,0.0,0.0,10,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01652,3,Does Evan live close to a beach or mountains?,type_aware,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01652,3,Does Evan live close to a beach or mountains?,query_decomposition,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5
+q01652,3,Does Evan live close to a beach or mountains?,type_aware_plus_decomposition,2,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01658,3,Which major holiday season conincides with Evan's wedding?,type_aware,1,0,0.16666666666666666,0.0,0.0,0.0,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01658,3,Which major holiday season conincides with Evan's wedding?,query_decomposition,1,0,0.14285714285714285,0.0,0.0,0.0,7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01658,3,Which major holiday season conincides with Evan's wedding?,type_aware_plus_decomposition,1,0,0.16666666666666666,0.0,0.0,0.0,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01787,3,Which country do Calvin and Dave want to meet in?,type_aware,3,1,0.07142857142857142,0.0,0.0,0.0,14,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333
+q01787,3,Which country do Calvin and Dave want to meet in?,query_decomposition,3,1,0.041666666666666664,0.0,0.0,0.0,24,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+q01787,3,Which country do Calvin and Dave want to meet in?,type_aware_plus_decomposition,3,1,0.06666666666666667,0.0,0.0,0.0,15,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.3333333333333333
+q01790,3,Does Dave's shop employ a lot of people?,type_aware,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01790,3,Does Dave's shop employ a lot of people?,query_decomposition,2,1,0.5,0.0,1.0,1.0,2,0.0,0.0,0.0,1.0,0.0,0.5,1.0,0.0,0.5,1.0,0.0,0.5,1.0,1.0,1.0
+q01790,3,Does Dave's shop employ a lot of people?,type_aware_plus_decomposition,2,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01796,3,Would Calvin enjoy performing at the Hollywood Bowl?,type_aware,1,0,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01796,3,Would Calvin enjoy performing at the Hollywood Bowl?,query_decomposition,1,0,0.16666666666666666,0.0,0.0,0.0,6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01796,3,Would Calvin enjoy performing at the Hollywood Bowl?,type_aware_plus_decomposition,1,0,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+q01804,3,Does Calvin wish to become more popular?,type_aware,5,1,1.0,1.0,1.0,1.0,1,1.0,0.0,0.2,1.0,0.0,0.6,1.0,0.0,0.6,1.0,0.0,0.8,1.0,0.0,0.8
+q01804,3,Does Calvin wish to become more popular?,query_decomposition,5,1,0.05555555555555555,0.0,0.0,0.0,18,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.2
+q01804,3,Does Calvin wish to become more popular?,type_aware_plus_decomposition,5,1,0.3333333333333333,0.0,1.0,1.0,3,0.0,0.0,0.0,1.0,0.0,0.2,1.0,0.0,0.4,1.0,0.0,0.4,1.0,0.0,0.8
+q01820,3,Does Calvin love music tours?,type_aware,8,1,0.07692307692307693,0.0,0.0,0.0,13,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25
+q01820,3,Does Calvin love music tours?,query_decomposition,8,1,0.05,0.0,0.0,0.0,20,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.125
+q01820,3,Does Calvin love music tours?,type_aware_plus_decomposition,8,1,0.08333333333333333,0.0,0.0,0.0,12,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.25

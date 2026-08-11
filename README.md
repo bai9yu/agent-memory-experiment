@@ -83,6 +83,8 @@ Type 3 专用监督重排诊断见 `outputs/agent_memory_type3_specific_reranker
 
 Type 3 监督式集合选择诊断见 `outputs/agent_memory_type3_supervised_set_selector_zh.md`。
 
+Type 3 query decomposition 弱基线见 `outputs/agent_memory_type3_query_decomposition_zh.md`。
+
 成本与延迟分析见 `outputs/agent_memory_cost_latency_locomo10_zh.md`。
 
 细粒度延迟分解见 `outputs/agent_memory_latency_breakdown_locomo10_zh.md`。
@@ -119,6 +121,8 @@ LoCoMo10 全量 DeepSeek 抽取结果：
 Type 3 多证据问题的补充诊断显示，单独训练 Type3 专用候选重排器没有超过固定 `type_aware`：MRR `0.399` vs `0.434`，Coverage@5 `0.331` vs `0.377`。因此 Type 3 后续应转向 query decomposition 或监督式 set-level selection，而不是继续单点优化候选重排器。
 
 进一步的 greedy supervised set selector 仍未超过 `type_aware`：MRR `0.389` vs `0.434`，Coverage@5 `0.320` vs `0.377`。这说明仅靠候选上下文特征做集合贪心选择还不够，下一步应显式拆解 Type 3 query 或使用更强 listwise/setwise 目标。
+
+关键词式 query decomposition 弱基线也未超过 `type_aware`：纯拆解 MRR `0.214`，保守融合 MRR `0.342`，均低于 `type_aware` 的 `0.429`；融合后的 Coverage@20 与 `type_aware` 持平但 Top5/MRR 下降。后续如果继续做 decomposition，需要更强的 LLM/规则子问题生成，而不是简单关键词窗口。
 
 大文件没有纳入 Git：
 

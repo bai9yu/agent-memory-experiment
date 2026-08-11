@@ -222,12 +222,22 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 显著性检验显示 `supervised_set_selector` 相比 `type_aware` 的 MRR delta 为 `-0.0456`，95% CI `[-0.0893, -0.0017]`，p-value `0.0366`；Recall@5 delta 为 `-0.0635`，p-value `0.1410`。结论：仅靠候选上下文特征和贪心集合选择不足以解决 Type 3；下一步应显式做 query decomposition，或使用真正的 listwise/setwise objective。
 
+进一步测试关键词式 query decomposition 弱基线：从 Type 3 query 中抽取人物名、内容关键词和短窗口 facet query，分别做 BM25 召回，再与 `type_aware` 做保守 RRF 融合。结果仍低于固定 `type_aware`：
+
+| Method | Type 3 MRR | Type 3 R@1 | Type 3 R@3 | Type 3 R@5 | Coverage@5 | Coverage@20 |
+|---|---:|---:|---:|---:|---:|---:|
+| type_aware | 0.429 | 0.326 | 0.488 | 0.547 | 0.370 | 0.537 |
+| query_decomposition | 0.214 | 0.128 | 0.221 | 0.279 | 0.161 | 0.324 |
+| type_aware_plus_decomposition | 0.342 | 0.198 | 0.442 | 0.512 | 0.337 | 0.537 |
+
+融合方法的 Coverage@20 与 `type_aware` 持平，但 MRR 和 Top5 指标下降；显著性检验显示 MRR delta 为 `-0.0867`，95% CI `[-0.1376, -0.0442]`，p-value `0.0002`。结论：简单关键词窗口拆解噪声过大，容易把人物身份/泛化事实推到前面；如果继续做 query decomposition，需要使用更准确的 LLM 子问题生成或任务专用规则，而不是弱关键词拆解。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
 2. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
 3. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
-4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排和监督式 greedy set selector 均已验证为负结果，下一步需要做 query decomposition 或更强 listwise/setwise objective。
+4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
 6. 人工复核：对自动错误分类结果抽样检查，估计分类可靠性。
 

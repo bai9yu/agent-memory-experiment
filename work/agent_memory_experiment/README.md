@@ -704,6 +704,35 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/paire
   --output-report outputs/agent_memory_type3_supervised_set_selector_significance_zh.md
 ```
 
+Run Type-3 query decomposition weak baseline:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/type3_query_decomposition_experiment.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --output-per-query outputs/agent_memory_type3_query_decomposition_per_query.csv \
+  --output-summary outputs/agent_memory_type3_query_decomposition_summary.csv \
+  --output-ranked outputs/agent_memory_type3_query_decomposition_ranked_top20.csv \
+  --output-facets outputs/agent_memory_type3_query_decomposition_facets.csv \
+  --output-report outputs/agent_memory_type3_query_decomposition_zh.md
+```
+
+Run paired significance testing for Type-3 query decomposition fusion:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/paired_significance_test.py \
+  --per-query outputs/agent_memory_type3_query_decomposition_per_query.csv \
+  --baseline type_aware \
+  --candidate type_aware_plus_decomposition \
+  --iterations 5000 \
+  --output-csv outputs/agent_memory_type3_query_decomposition_significance_results.csv \
+  --output-report outputs/agent_memory_type3_query_decomposition_significance_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash
