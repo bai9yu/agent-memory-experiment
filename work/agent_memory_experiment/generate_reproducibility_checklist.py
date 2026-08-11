@@ -194,6 +194,8 @@ def main() -> None:
         ("Candidate reranker train-fraction sensitivity summary", outputs / "agent_memory_candidate_reranker_train_fraction_summary.csv"),
         ("Candidate reranker train-fraction sensitivity deltas", outputs / "agent_memory_candidate_reranker_train_fraction_sensitivity.csv"),
         ("Candidate reranker train-fraction sensitivity split summary", outputs / "agent_memory_candidate_reranker_train_fraction_split_summary.csv"),
+        ("Candidate oracle gap analysis report", outputs / "agent_memory_candidate_oracle_gap_analysis_zh.md"),
+        ("Candidate oracle gap analysis CSV", outputs / "agent_memory_candidate_oracle_gap_analysis.csv"),
         ("Bootstrap metric CI report", outputs / "agent_memory_bootstrap_metric_ci_zh.md"),
         ("Bootstrap metric CI CSV", outputs / "agent_memory_bootstrap_metric_ci.csv"),
         ("Validation-tuned router comparison", outputs / "agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv"),
@@ -330,6 +332,9 @@ def main() -> None:
         group_value="all",
         metric="mrr",
     )
+    oracle_gap_rows = read_csv(outputs / "agent_memory_candidate_oracle_gap_analysis.csv")
+    heldout_oracle_gap = metric_lookup(oracle_gap_rows, scenario="heldout_intrinsic", metric="mrr")
+    type3_oracle_gap = metric_lookup(oracle_gap_rows, scenario="type3_set_coverage", metric="coverage_ratio@5")
     coverage = metric_lookup(
         read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv"),
         experiment="supervised_set_selector",
@@ -358,6 +363,8 @@ def main() -> None:
         ),
         metric_row("Intrinsic-only paired effect-size MRR Cohen dz", float(effect_size["cohen_dz"]), 0.20),
         metric_row("Intrinsic-only paired effect-size positive net rate", float(effect_size["net_positive_rate"]), 0.06),
+        metric_row("Intrinsic-only held-out MRR oracle-gap closure", float(heldout_oracle_gap["closure_rate"]), 0.20),
+        metric_row("Type3 Coverage@5 oracle-gap closure is negative", -float(type3_oracle_gap["closure_rate"]), 0.10),
         metric_row("Type3 supervised selector Coverage@5 delta is negative", -float(coverage["mean_delta"]), 0.05),
     ]
     writer_ready = False
@@ -406,6 +413,11 @@ def main() -> None:
             "stage": "Candidate reranker train-fraction sensitivity",
             "command": "work/agent_memory_experiment/candidate_reranker_train_fraction_sensitivity.py",
             "notes": "Checks whether intrinsic-only reranker gains hold across 0.5/0.6/0.7/0.8 train fractions.",
+        },
+        {
+            "stage": "Candidate oracle gap analysis",
+            "command": "work/agent_memory_experiment/generate_oracle_gap_analysis.py",
+            "notes": "Quantifies how much oracle headroom is closed by the main reranker and why Type3 remains unresolved.",
         },
         {
             "stage": "Candidate reranker LOCO",

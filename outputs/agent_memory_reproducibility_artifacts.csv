@@ -21,6 +21,8 @@ Candidate reranker train-fraction sensitivity report,outputs/agent_memory_candid
 Candidate reranker train-fraction sensitivity summary,outputs/agent_memory_candidate_reranker_train_fraction_summary.csv,True,2399
 Candidate reranker train-fraction sensitivity deltas,outputs/agent_memory_candidate_reranker_train_fraction_sensitivity.csv,True,1835
 Candidate reranker train-fraction sensitivity split summary,outputs/agent_memory_candidate_reranker_train_fraction_split_summary.csv,True,12588
+Candidate oracle gap analysis report,outputs/agent_memory_candidate_oracle_gap_analysis_zh.md,True,2509
+Candidate oracle gap analysis CSV,outputs/agent_memory_candidate_oracle_gap_analysis.csv,True,3129
 Bootstrap metric CI report,outputs/agent_memory_bootstrap_metric_ci_zh.md,True,6438
 Bootstrap metric CI CSV,outputs/agent_memory_bootstrap_metric_ci.csv,True,12250
 Validation-tuned router comparison,outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv,True,850159
@@ -59,23 +61,23 @@ Type3 supervised selector rwn002 comparison,outputs/agent_memory_type3_supervise
 Type3 supervised selector rwn002 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv,True,725694
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,3724
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,5197
-Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7414
+Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,7536
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,7485
-Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,12317
+Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,12592
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
 Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True,5872
 Threats to validity CSV,outputs/agent_memory_threats_to_validity.csv,True,3236
-Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,4291
-Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,4044
+Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,4396
+Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,4249
 Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,5034
 Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,5284
 Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2326
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1884
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
-Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3872
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,21760
+Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3975
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,22593
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -125,6 +127,6 @@ Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
 Human audit annotation codebook,outputs/agent_memory_human_audit_annotation_codebook_zh.md,True,6136
 Human audit annotation schema,outputs/agent_memory_human_audit_annotation_schema.csv,True,1883
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,33157
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,33847
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

@@ -65,6 +65,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     seed_stability = read_csv(outputs / "agent_memory_candidate_reranker_seed_stability.csv")
     train_fraction_sensitivity = read_csv(outputs / "agent_memory_candidate_reranker_train_fraction_sensitivity.csv")
     effect_size = read_csv(outputs / "agent_memory_candidate_reranker_paired_effect_size.csv")
+    oracle_gap = read_csv(outputs / "agent_memory_candidate_oracle_gap_analysis.csv")
     bootstrap_ci = read_csv(outputs / "agent_memory_bootstrap_metric_ci.csv")
     reranker_loco = read_csv(outputs / "agent_memory_candidate_reranker_loco_summary.csv")
     intrinsic_loco = read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv")
@@ -128,6 +129,10 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
         group_value="3",
         metric="recall@5",
     )
+    heldout_oracle_mrr = lookup(oracle_gap, scenario="heldout_intrinsic", metric="mrr")
+    heldout_oracle_r5 = lookup(oracle_gap, scenario="heldout_intrinsic", metric="recall@5")
+    loco_oracle_mrr = lookup(oracle_gap, scenario="loco_intrinsic", metric="mrr")
+    type3_oracle_cov5 = lookup(oracle_gap, scenario="type3_set_coverage", metric="coverage_ratio@5")
     intrinsic_vs_type_mrr = lookup(
         bootstrap_ci,
         scenario="candidate_reranker_intrinsic_ablation_vs_type_aware",
@@ -243,9 +248,11 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
                 f"mean MRR delta {signed(intrinsic_seed['mrr_delta_mean'])}, min MRR delta {signed(intrinsic_seed['mrr_delta_min'])}. "
                 f"Train-fraction sensitivity: fractions 0.5/0.6/0.7/0.8, min win rate {f(intrinsic_fraction_min_win_rate, 2)}, "
                 f"min MRR delta {signed(intrinsic_fraction_min_delta)}, mean fraction-level MRR delta {signed(intrinsic_fraction_mean_delta)}. "
+                f"Oracle-gap closure: held-out MRR {f(heldout_oracle_mrr['closure_rate'], 3)}, held-out R@5 {f(heldout_oracle_r5['closure_rate'], 3)}, "
+                f"LOCO MRR {f(loco_oracle_mrr['closure_rate'], 3)}. "
                 f"Paired outcome: MRR improved/worsened/tied {intrinsic_effect_mrr['improved_pairs']}/{intrinsic_effect_mrr['worsened_pairs']}/{intrinsic_effect_mrr['tied_pairs']}, "
                 f"Cohen dz {f(intrinsic_effect_mrr['cohen_dz'], 4)}; R@5 improved/worsened/tied {intrinsic_effect_r5['improved_pairs']}/{intrinsic_effect_r5['worsened_pairs']}/{intrinsic_effect_r5['tied_pairs']}; "
-                f"Type 3 R@5 delta {signed(intrinsic_effect_type3_r5['mean_delta'])}. "
+                f"Type 3 R@5 delta {signed(intrinsic_effect_type3_r5['mean_delta'])}; Type 3 Coverage@5 oracle-gap closure {signed(type3_oracle_cov5['closure_rate'])}. "
                 f"LOCO split: type-aware MRR {f(reranker_loco_base['mrr_mean'])}, candidate reranker MRR {f(reranker_loco_row['mrr_mean'])}; "
                 f"weighted MRR delta {signed(reranker_loco_sig_mrr['mean_delta'])}, p={f(reranker_loco_sig_mrr['permutation_p_value'], 4)}; "
                 f"weighted R@5 delta {signed(reranker_loco_sig_r5['mean_delta'])}, p={f(reranker_loco_sig_r5['permutation_p_value'], 4)}. "
@@ -254,7 +261,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
                 f"R@5 delta {signed(intrinsic_loco_r5['delta_mean'])}, 95% CI [{f(intrinsic_loco_r5['delta_ci_low'], 4)}, {f(intrinsic_loco_r5['delta_ci_high'], 4)}]."
             ),
             "support_level": "strong_heldout_and_loco_statistical",
-            "primary_artifacts": "agent_memory_candidate_reranker_feature_ablation_summary.csv; agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_paired_effect_size_zh.md; agent_memory_candidate_reranker_seed_stability_zh.md; agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md; agent_memory_candidate_reranker_intrinsic_loco_summary.csv; agent_memory_candidate_reranker_intrinsic_loco_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
+            "primary_artifacts": "agent_memory_candidate_reranker_feature_ablation_summary.csv; agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_paired_effect_size_zh.md; agent_memory_candidate_reranker_seed_stability_zh.md; agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md; agent_memory_candidate_oracle_gap_analysis_zh.md; agent_memory_candidate_reranker_intrinsic_loco_summary.csv; agent_memory_candidate_reranker_intrinsic_loco_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
             "paper_use": "应作为当前论文方法增量的核心结果；full reranker 保留为消融对照。",
             "remaining_gap": "Held-out 和 LOCO 已支持跨 LoCoMo conversation 泛化；若要宣称跨数据集泛化，仍需外部数据集验证。",
         },

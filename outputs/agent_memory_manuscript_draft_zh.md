@@ -88,7 +88,7 @@ type-aware 相比 time-aware 的 MRR delta 为 +0.0042，p=0.0072；Recall@5 del
 
 ### 5.3 Intrinsic Candidate-Level Reranking 是主要收益来源
 
-在 held-out split 下，full candidate reranker 将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，p=0.0002；Recall@5 delta 为 +0.0623。进一步的 feature-group ablation 显示，intrinsic feature reranker 达到 MRR 0.672、Recall@5 0.801，相对 type-aware 的 MRR delta 为 +0.0652，95% CI=[0.0545, 0.0763]；相对 full reranker 的 MRR delta 为 +0.0113，95% CI=[0.0029, 0.0199]。paired outcome 分析显示，MRR improved/worsened/tied 为 771/591/1398，Cohen dz=0.2234；Recall@5 improved/worsened/tied 为 280/92/2388，但 Type 3 Recall@5 delta 为 -0.0476，说明收益并不覆盖多证据问题。扩展 20-seed stability 检查显示，intrinsic reranker 在 20/20 个随机划分上 MRR 均高于 type-aware，平均 ΔMRR=+0.0602，最小 ΔMRR=+0.0414。训练比例敏感性实验进一步显示，在 train fraction 0.5/0.6/0.7/0.8 下，intrinsic reranker 的最低 MRR win rate=1.00，最小 seed-level ΔMRR=+0.0414，平均 fraction-level ΔMRR=+0.0608。在 LOCO split 下，intrinsic feature reranker 的 MRR 为 0.664、Recall@5 为 0.797，相对 type-aware 的 MRR delta 为 +0.0567，95% CI=[0.0439, 0.0696]，Recall@5 delta 为 +0.0658，95% CI=[0.0490, 0.0827]。这支持将 intrinsic candidate-level learned reranking 作为本文最主要的方法贡献，同时把 method-level rank/score 特征视为可能带来噪声的消融发现。
+在 held-out split 下，full candidate reranker 将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，p=0.0002；Recall@5 delta 为 +0.0623。进一步的 feature-group ablation 显示，intrinsic feature reranker 达到 MRR 0.672、Recall@5 0.801，相对 type-aware 的 MRR delta 为 +0.0652，95% CI=[0.0545, 0.0763]；相对 full reranker 的 MRR delta 为 +0.0113，95% CI=[0.0029, 0.0199]。oracle-gap 分析显示，intrinsic reranker 在 held-out MRR 上关闭 candidate-oracle gap 的 0.215，Recall@5 closure 为 0.387；LOCO MRR closure 为 0.184，说明当前方法有效但仍未穷尽候选池上界。paired outcome 分析显示，MRR improved/worsened/tied 为 771/591/1398，Cohen dz=0.2234；Recall@5 improved/worsened/tied 为 280/92/2388，但 Type 3 Recall@5 delta 为 -0.0476，Type 3 set Coverage@5 oracle-gap closure 为 -0.2150，说明收益并不覆盖多证据问题。扩展 20-seed stability 检查显示，intrinsic reranker 在 20/20 个随机划分上 MRR 均高于 type-aware，平均 ΔMRR=+0.0602，最小 ΔMRR=+0.0414。训练比例敏感性实验进一步显示，在 train fraction 0.5/0.6/0.7/0.8 下，intrinsic reranker 的最低 MRR win rate=1.00，最小 seed-level ΔMRR=+0.0414，平均 fraction-level ΔMRR=+0.0608。在 LOCO split 下，intrinsic feature reranker 的 MRR 为 0.664、Recall@5 为 0.797，相对 type-aware 的 MRR delta 为 +0.0567，95% CI=[0.0439, 0.0696]，Recall@5 delta 为 +0.0658，95% CI=[0.0490, 0.0827]。这支持将 intrinsic candidate-level learned reranking 作为本文最主要的方法贡献，同时把 method-level rank/score 特征视为可能带来噪声的消融发现。
 
 ### 5.4 存储效率与 Writer 稳定性
 
@@ -112,8 +112,8 @@ Type 3 supervised set selector 的 Coverage@5 delta 为 -0.0572，p=0.0286，说
 
 ## Appendix A 复现状态
 
-- Artifact gate：125/125
-- Metric gate：13/13
+- Artifact gate：129/129
+- Metric gate：15/15
 - 关键文档：`outputs/agent_memory_experiment_protocol_zh.md`、`outputs/agent_memory_submission_gap_analysis_zh.md`、`outputs/agent_memory_reproducibility_checklist_zh.md`、`outputs/agent_memory_manuscript_claim_check_zh.md`、`outputs/agent_memory_threats_to_validity_zh.md`、`outputs/agent_memory_human_audit_readiness_gate_zh.md`。
 
 ## Appendix B 投稿前 TODO

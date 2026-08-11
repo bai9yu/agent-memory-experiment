@@ -62,6 +62,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     seed_stability = read_csv(outputs / "agent_memory_candidate_reranker_seed_stability.csv")
     train_fraction_sensitivity = read_csv(outputs / "agent_memory_candidate_reranker_train_fraction_sensitivity.csv")
     effect_size = read_csv(outputs / "agent_memory_candidate_reranker_paired_effect_size.csv")
+    oracle_gap = read_csv(outputs / "agent_memory_candidate_oracle_gap_analysis.csv")
     bootstrap = read_csv(outputs / "agent_memory_bootstrap_metric_ci.csv")
     intrinsic_loco = read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv")
     writer = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
@@ -109,6 +110,18 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "tied_pairs": "0",
             "cohen_dz": "NA",
         },
+    )
+    heldout_oracle_mrr = lookup(
+        oracle_gap,
+        scenario="heldout_intrinsic",
+        metric="mrr",
+        default={"closure_rate": "NA", "remaining_gap": "NA"},
+    )
+    type3_oracle_cov5 = lookup(
+        oracle_gap,
+        scenario="type3_set_coverage",
+        metric="coverage_ratio@5",
+        default={"closure_rate": "NA", "oracle": "NA"},
     )
     intrinsic_loco_row = lookup(intrinsic_loco, method="intrinsic_reranker_loco")
     intrinsic_ci = lookup(
@@ -175,10 +188,12 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
                 f"mean ΔMRR={f(intrinsic_seed.get('mrr_delta_mean'), 4)}, min ΔMRR={f(intrinsic_seed.get('mrr_delta_min'), 4)}；"
                 f"train-fraction sensitivity: min win rate={f(intrinsic_fraction_min_win_rate, 2)}, "
                 f"min ΔMRR={f(intrinsic_fraction_min_delta, 4)}, mean fraction ΔMRR={f(intrinsic_fraction_mean_delta, 4)}；"
+                f"oracle-gap: held-out MRR closure={f(heldout_oracle_mrr.get('closure_rate'), 3)}, "
+                f"remaining gap={f(heldout_oracle_mrr.get('remaining_gap'), 4)}；"
                 f"paired outcome: improved/worsened/tied={intrinsic_effect.get('improved_pairs')}/{intrinsic_effect.get('worsened_pairs')}/{intrinsic_effect.get('tied_pairs')}, "
                 f"Cohen dz={f(intrinsic_effect.get('cohen_dz'), 4)}。"
             ),
-            "evidence_artifacts": "agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_paired_effect_size_zh.md; agent_memory_candidate_reranker_seed_stability_zh.md; agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
+            "evidence_artifacts": "agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_paired_effect_size_zh.md; agent_memory_candidate_reranker_seed_stability_zh.md; agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md; agent_memory_candidate_oracle_gap_analysis_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
             "remaining_gap": "仍可继续补更多外部数据集；但随机划分、训练比例和配对效应量证据已具备。",
             "planned_response": "强调候选级学习重排使用 held-out query split、intrinsic-only 消融、20-seed stability、train-fraction sensitivity 和 paired effect-size，降低调参偶然性风险。",
         },
@@ -218,9 +233,10 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "risk_level": "medium",
             "current_answer": (
                 f"Type 3 supervised set selector Coverage@5 delta={f(type3_cov.get('mean_delta'), 4)}, "
-                f"95% CI=[{f(type3_cov.get('bootstrap_ci_low'), 4)}, {f(type3_cov.get('bootstrap_ci_high'), 4)}]，当前是负结果。"
+                f"95% CI=[{f(type3_cov.get('bootstrap_ci_low'), 4)}, {f(type3_cov.get('bootstrap_ci_high'), 4)}]；"
+                f"oracle Coverage@5={f(type3_oracle_cov5.get('oracle'))}, closure={f(type3_oracle_cov5.get('closure_rate'), 3)}，当前是负结果。"
             ),
-            "evidence_artifacts": "agent_memory_type3_coverage_significance_zh.md; agent_memory_paper_experiment_status_zh.md",
+            "evidence_artifacts": "agent_memory_type3_coverage_significance_zh.md; agent_memory_candidate_oracle_gap_analysis_zh.md; agent_memory_paper_experiment_status_zh.md",
             "remaining_gap": "需要 listwise/setwise objective 或 LLM query decomposition，当前方法没有解决 Type 3。",
             "planned_response": "把 Type 3 写成清晰边界和未来工作，不把它包装成主贡献。",
         },

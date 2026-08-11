@@ -619,6 +619,14 @@ python3 work/agent_memory_experiment/generate_paired_effect_size_analysis.py \
   --output-report outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md
 ```
 
+Generate candidate-oracle gap and remaining-headroom diagnostics:
+
+```bash
+python3 work/agent_memory_experiment/generate_oracle_gap_analysis.py \
+  --output-csv outputs/agent_memory_candidate_oracle_gap_analysis.csv \
+  --output-report outputs/agent_memory_candidate_oracle_gap_analysis_zh.md
+```
+
 Run extended seed-stability analysis for the intrinsic candidate reranker:
 
 ```bash

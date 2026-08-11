@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Indexed artifacts: 17
+- Indexed artifacts: 18
 - Missing indexed artifacts: 0
 - Blocked/not-ready sections: 2
 
@@ -17,6 +17,7 @@
 | Method Appendix | outputs/agent_memory_candidate_reranker_seed_stability_zh.md | True | ready | intrinsic candidate reranker 的 20-seed 随机划分稳定性证据。 | 投稿正文可把该结果写入 robustness/stability 小节。 |
 | Method Appendix | outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md | True | ready | intrinsic candidate reranker 的 improved/worsened/tied、query type breakdown 和 paired Cohen's dz。 | 投稿正文可用该结果解释收益分布和 Type 3 边界。 |
 | Method Appendix | outputs/agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md | True | ready | intrinsic candidate reranker 在 0.5/0.6/0.7/0.8 train fraction 下的敏感性分析。 | 投稿正文可用该结果回应训练比例依赖风险。 |
+| Method Appendix | outputs/agent_memory_candidate_oracle_gap_analysis_zh.md | True | ready | candidate oracle 上界、主方法 gap closure 和 Type 3 剩余瓶颈分析。 | 投稿正文可用该结果解释方法上界和未来工作。 |
 | Experiment Protocol | outputs/agent_memory_experiment_protocol_zh.md | True | ready | 数据切片、指标公式、显著性检验、主结果、负结果和写法边界。 | 作为 supplementary material 或实验设置附录。 |
 | Evidence Matrix | outputs/agent_memory_paper_evidence_matrix_zh.md | True | ready | 论文主张、证据强度、剩余缺口和可写边界矩阵。 | 写作时逐条核对摘要/贡献是否过度宣称。 |
 | Threats to Validity | outputs/agent_memory_threats_to_validity_zh.md | True | ready_with_blockers_declared | 内部/外部/构念/统计/规模/复现有效性威胁与缓解措施。 | 外部 embedding 和人工复核完成后更新 blocker 行。 |

@@ -157,6 +157,8 @@ paired outcome / effect-size 分析显示，`intrinsic_only` 相比 fixed `type_
 
 训练比例敏感性实验显示，在 train fraction `0.5/0.6/0.7/0.8` 下，`intrinsic_only` 相对 fixed `type_aware` 的 MRR win rate 均为 `1.00`，最小 seed-level ΔMRR 为 `+0.0414`，平均 fraction-level ΔMRR 为 `+0.0608`。这说明当前主方法不依赖固定的 70% train/test 划分。
 
+candidate-oracle gap 分析显示，`intrinsic_only` 在 held-out MRR 上关闭了 candidate oracle gap 的 `0.215`，在 Recall@5 上关闭 `0.387`；LOCO MRR closure 为 `0.184`。这说明主方法确实利用了候选池中的部分上界空间，但仍有明显剩余。Type 3 set selector 的 Coverage@5 oracle-gap closure 为 `-0.215`，说明当前 Type 3 失败不是因为候选池完全没有可用证据，而是缺少能把多条证据作为集合提前的目标。
+
 更严格的 leave-one-conversation-out 验证显示，intrinsic candidate reranker 在 10 个 conversation split 上仍高于 fixed `type_aware`：按 split 平均 MRR `0.664` vs `0.608`，Recall@5 `0.797` vs `0.732`；按 query bootstrap 的 MRR delta 为 `+0.0567`，95% CI `[0.0439, 0.0696]`，Recall@5 delta 为 `+0.0658`，95% CI `[0.0490, 0.0827]`。因此当前方法贡献不仅依赖随机 query split，也具备跨 LoCoMo conversation 的泛化证据。
 
 Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`、`semantic_score`、`time_aware_score`、`hybrid_score`、`type_aware_rr` 等特征，说明提升来自多检索器排序信号融合，而不是单一字段或 query type 记忆。
@@ -271,6 +273,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_bootstrap_metric_ci_zh.md`：per-query bootstrap 置信区间报告；当前主方法 held-out MRR delta 为 `0.0539`，95% CI `[0.0459, 0.0618]`，intrinsic LOCO MRR delta 为 `0.0567`，95% CI `[0.0439, 0.0696]`，intrinsic-only ablation 相比 type-aware 的 MRR delta 为 `0.0652`，95% CI `[0.0545, 0.0763]`，均不跨 0；validation-tuned router、text-intent router 和 Type 3 decomposition fusion4 则作为弱/负结果呈现。
 - `outputs/agent_memory_candidate_reranker_feature_ablation_zh.md`：candidate reranker 特征组消融报告；显示 `intrinsic_only` 高于 full reranker，支持将更简洁的 intrinsic feature reranker 作为论文主方法候选。
 - `outputs/agent_memory_candidate_reranker_paired_effect_size_zh.md`：paired outcome 与效应量分析；报告 improved/worsened/tied、paired Cohen's dz 和 query type breakdown，用于解释收益分布与 Type 3 边界。
+- `outputs/agent_memory_candidate_oracle_gap_analysis_zh.md`：candidate oracle gap 与剩余上界分析；量化主方法关闭了多少候选池上界，并解释 Type 3 仍需要 setwise/listwise 目标。
 - `outputs/agent_memory_candidate_reranker_seed_stability_zh.md`：20-seed 稳定性报告；显示 `intrinsic_only` 在所有随机划分 seed 上均高于 fixed `type_aware`，用于回应“是否只是偶然划分/调参”的审稿风险。
 - `outputs/agent_memory_candidate_reranker_train_fraction_sensitivity_zh.md`：训练比例敏感性报告；显示 `intrinsic_only` 在 0.5/0.6/0.7/0.8 train fraction 下均稳定优于 fixed `type_aware`。
 - `outputs/agent_memory_candidate_reranker_intrinsic_loco_zh.md`：intrinsic-only candidate reranker 的 leave-one-conversation-out 验证；10 个 conversation split 上 MRR `0.664`、Recall@5 `0.797`，补齐了 intrinsic 主方法的跨 conversation 泛化证据。

@@ -120,6 +120,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "next_action": "投稿正文可用该结果回应训练比例依赖风险。",
         },
         {
+            "section": "Method Appendix",
+            "artifact": "outputs/agent_memory_candidate_oracle_gap_analysis_zh.md",
+            "role": "candidate oracle 上界、主方法 gap closure 和 Type 3 剩余瓶颈分析。",
+            "status": "ready",
+            "evidence": "oracle gap closure and Type3 negative closure are quantified",
+            "next_action": "投稿正文可用该结果解释方法上界和未来工作。",
+        },
+        {
             "section": "Experiment Protocol",
             "artifact": "outputs/agent_memory_experiment_protocol_zh.md",
             "role": "数据切片、指标公式、显著性检验、主结果、负结果和写法边界。",
