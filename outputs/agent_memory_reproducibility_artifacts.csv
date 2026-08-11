@@ -102,15 +102,15 @@ Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734
 Artifact path portability audit CSV,outputs/agent_memory_artifact_path_portability.csv,True,214
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3795
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,32678
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,33028
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3600
 Submission blocker closure plan CSV,outputs/agent_memory_submission_blocker_closure_plan.csv,True,2813
-Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,5196
-Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,17923
-Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,7556
-Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,6522
+Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,5344
+Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,18592
+Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,7768
+Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,6726
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
 Evidence freshness audit CSV,outputs/agent_memory_evidence_freshness_audit.csv,True,98
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -124,6 +124,8 @@ Mock API embedding smoke test,outputs/agent_memory_mock_api_embedding_smoke_test
 Mock API embedding smoke test CSV,outputs/agent_memory_mock_api_embedding_smoke_test.csv,True,102
 API embedding run estimate,outputs/agent_memory_api_embedding_run_estimate_zh.md,True,1048
 API embedding run estimate CSV,outputs/agent_memory_api_embedding_run_estimate.csv,True,502
+API embedding execution runbook,outputs/agent_memory_api_embedding_execution_runbook_zh.md,True,4254
+API embedding execution runbook CSV,outputs/agent_memory_api_embedding_execution_runbook.csv,True,13688
 Embedding baseline comparison,outputs/agent_memory_embedding_baseline_comparison_zh.md,True,998
 Embedding baseline comparison CSV,outputs/agent_memory_embedding_baseline_comparison.csv,True,381
 API embedding post-run gate,outputs/agent_memory_api_embedding_postrun_gate_zh.md,True,1445

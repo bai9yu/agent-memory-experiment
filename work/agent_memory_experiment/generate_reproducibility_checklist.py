@@ -297,6 +297,8 @@ def main() -> None:
         ("Mock API embedding smoke test CSV", outputs / "agent_memory_mock_api_embedding_smoke_test.csv"),
         ("API embedding run estimate", outputs / "agent_memory_api_embedding_run_estimate_zh.md"),
         ("API embedding run estimate CSV", outputs / "agent_memory_api_embedding_run_estimate.csv"),
+        ("API embedding execution runbook", outputs / "agent_memory_api_embedding_execution_runbook_zh.md"),
+        ("API embedding execution runbook CSV", outputs / "agent_memory_api_embedding_execution_runbook.csv"),
         ("Embedding baseline comparison", outputs / "agent_memory_embedding_baseline_comparison_zh.md"),
         ("Embedding baseline comparison CSV", outputs / "agent_memory_embedding_baseline_comparison.csv"),
         ("API embedding post-run gate", outputs / "agent_memory_api_embedding_postrun_gate_zh.md"),
@@ -567,6 +569,11 @@ def main() -> None:
             "stage": "API embedding run estimate",
             "command": "work/agent_memory_experiment/estimate_api_embedding_run.py",
             "notes": "Estimates API embedding item count, approximate tokens, batches, and cache status without network.",
+        },
+        {
+            "stage": "API embedding execution runbook",
+            "command": "work/agent_memory_experiment/generate_api_embedding_execution_runbook.py",
+            "notes": "Fixes the preflight, estimate, paid run, comparison, postrun, and final-refresh sequence for external embedding baselines.",
         },
         {
             "stage": "Embedding baseline comparison",

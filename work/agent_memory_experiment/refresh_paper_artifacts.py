@@ -244,6 +244,25 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes API embedding item/token/batch estimate without network calls.",
         ),
         Step(
+            "api_embedding_execution_runbook",
+            py(
+                "generate_api_embedding_execution_runbook.py",
+                "--profile-csv",
+                "outputs/agent_memory_embedding_provider_profiles.csv",
+                "--preflight-csv",
+                "outputs/agent_memory_api_embedding_preflight.csv",
+                "--estimate-csv",
+                "outputs/agent_memory_api_embedding_run_estimate.csv",
+                "--postrun-csv",
+                "outputs/agent_memory_api_embedding_postrun_gate.csv",
+                "--output-csv",
+                "outputs/agent_memory_api_embedding_execution_runbook.csv",
+                "--output-report",
+                "outputs/agent_memory_api_embedding_execution_runbook_zh.md",
+            ),
+            "Generates the external API embedding baseline runbook without starting paid/network calls.",
+        ),
+        Step(
             "embedding_baseline_comparison",
             py(
                 "compare_embedding_baselines.py",

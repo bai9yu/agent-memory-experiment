@@ -11,6 +11,7 @@ required_offline_step,embedding_baseline_status,external embedding status withou
 required_offline_step,embedding_provider_profiles,provider-specific external embedding command profiles,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,api_embedding_preflight,paid/API embedding preflight,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,api_embedding_run_estimate,API embedding cost/cache estimate,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
+required_offline_step,api_embedding_execution_runbook,external API embedding execution and acceptance runbook,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,embedding_baseline_comparison,BGE-M3 vs API embedding comparison status,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,api_embedding_postrun_gate,API embedding post-run completeness gate,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,external_embedding_blocker_audit,external embedding blocker audit,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.

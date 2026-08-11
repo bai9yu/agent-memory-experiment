@@ -1,0 +1,121 @@
+provider_label,model,base_url,key_env,result_dir,step,phase,current_pass,evidence,acceptance,command
+OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,1_configure_key,manual,False,OPENAI_API_KEY available=False,Store the provider key in .env or shell; never commit the key.,Set the OPENAI_API_KEY environment variable in .env or shell.
+OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,2_preflight,offline_check,False,default preflight required=4/5; provider key available=False,All required preflight checks pass before any paid/network API call.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/preflight_api_embedding_baseline.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --result-dir work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004 \
+  --method type_aware \
+  --provider-label ""OpenAI text-embedding-3-small"" \
+  --model ""text-embedding-3-small"" \
+  --base-url ""https://api.openai.com/v1"" \
+  --dimensions 0 \
+  --batch-size 128 \
+  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
+  --api-key-env OPENAI_API_KEY \
+  --env-file .env \
+  --output-csv outputs/agent_memory_api_embedding_1_openai_text_embedding_3_small_preflight.csv \
+  --output-report outputs/agent_memory_api_embedding_1_openai_text_embedding_3_small_preflight_zh.md"
+OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,3_cost_and_cache_estimate,offline_check,True,"memories: items=2517, tokens=45429, batches=20, cache_exists=False; queries: items=1838, tokens=26453, batches=15, cache_exists=False","Review item count, approximate tokens, uncached batches, and expected cache reuse.","work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/estimate_api_embedding_run.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --model ""text-embedding-3-small"" \
+  --base-url ""https://api.openai.com/v1"" \
+  --dimensions 0 \
+  --batch-size 128 \
+  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
+  --output-csv outputs/agent_memory_api_embedding_1_openai_text_embedding_3_small_run_estimate.csv \
+  --output-report outputs/agent_memory_api_embedding_1_openai_text_embedding_3_small_run_estimate_zh.md"
+OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,4_real_api_run,network_paid_run,False,intentionally not run by offline refresh,Run only after preflight passes and expected cost/cache behavior is acceptable.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004 \
+  --semantic-backend api \
+  --api-embedding-model ""text-embedding-3-small"" \
+  --api-embedding-base-url ""https://api.openai.com/v1"" \
+  --api-key-env OPENAI_API_KEY \
+  --env-file .env \
+  --api-embedding-batch-size 128 \
+  --api-embedding-dimensions 0 \
+  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
+  --half-life-days 30 \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3 \
+  --importance-weight 0.06 \
+  --type-awareness-weight 0.04 \
+  --rank-output-k 20"
+OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,5_compare_with_bge_m3,offline_after_run,False,requires provider summary.csv from real API run,Generate numeric delta table versus BGE-M3 after summary.csv exists.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/compare_embedding_baselines.py \
+  --bge-summary work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/summary.csv \
+  --api-summary work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004/summary.csv \
+  --method type_aware \
+  --api-label ""OpenAI text-embedding-3-small"" \
+  --output-csv outputs/agent_memory_api_embedding_1_openai_text_embedding_3_small_comparison.csv \
+  --output-report outputs/agent_memory_api_embedding_1_openai_text_embedding_3_small_comparison_zh.md"
+OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,6_postrun_gate,offline_after_run,False,completed_for_paper=0,Post-run gate must report at least one provider completed_for_paper.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_postrun.py \
+  --profile-csv outputs/agent_memory_embedding_provider_profiles.csv \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_api_embedding_postrun_gate.csv \
+  --output-report outputs/agent_memory_api_embedding_postrun_gate_zh.md"
+OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,7_final_refresh,offline_after_run,False,run after external baseline and comparison are complete,"Refresh evidence matrix, manuscript, claim checks, reproducibility, freshness, and submission readiness.","work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py \
+  --project-root . \
+  --output-csv outputs/agent_memory_paper_artifact_refresh_run.csv \
+  --output-report outputs/agent_memory_paper_artifact_refresh_run_zh.md"
+Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,1_configure_key,manual,False,EXTERNAL_EMBEDDING_API_KEY available=False,Store the provider key in .env or shell; never commit the key.,Set the EXTERNAL_EMBEDDING_API_KEY environment variable in .env or shell.
+Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,2_preflight,offline_check,False,default preflight required=4/5; provider key available=False,All required preflight checks pass before any paid/network API call.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/preflight_api_embedding_baseline.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --result-dir work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004 \
+  --method type_aware \
+  --provider-label ""Generic OpenAI-compatible embedding"" \
+  --model ""provider_embedding_model"" \
+  --base-url ""https://provider.example/v1"" \
+  --dimensions 0 \
+  --batch-size 128 \
+  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
+  --api-key-env EXTERNAL_EMBEDDING_API_KEY \
+  --env-file .env \
+  --output-csv outputs/agent_memory_api_embedding_2_generic_openai_compatible_embedding_preflight.csv \
+  --output-report outputs/agent_memory_api_embedding_2_generic_openai_compatible_embedding_preflight_zh.md"
+Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,3_cost_and_cache_estimate,offline_check,True,"memories: items=2517, tokens=45429, batches=20, cache_exists=False; queries: items=1838, tokens=26453, batches=15, cache_exists=False","Review item count, approximate tokens, uncached batches, and expected cache reuse.","work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/estimate_api_embedding_run.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --model ""provider_embedding_model"" \
+  --base-url ""https://provider.example/v1"" \
+  --dimensions 0 \
+  --batch-size 128 \
+  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
+  --output-csv outputs/agent_memory_api_embedding_2_generic_openai_compatible_embedding_run_estimate.csv \
+  --output-report outputs/agent_memory_api_embedding_2_generic_openai_compatible_embedding_run_estimate_zh.md"
+Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,4_real_api_run,network_paid_run,False,intentionally not run by offline refresh,Run only after preflight passes and expected cost/cache behavior is acceptable.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memory_eval.py \
+  --memories work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --output-dir work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004 \
+  --semantic-backend api \
+  --api-embedding-model ""provider_embedding_model"" \
+  --api-embedding-base-url ""https://provider.example/v1"" \
+  --api-key-env EXTERNAL_EMBEDDING_API_KEY \
+  --env-file .env \
+  --api-embedding-batch-size 128 \
+  --api-embedding-dimensions 0 \
+  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
+  --half-life-days 30 \
+  --persona-boost-weight 0.04 \
+  --persona-boost-query-types 1,2,3 \
+  --importance-weight 0.06 \
+  --type-awareness-weight 0.04 \
+  --rank-output-k 20"
+Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,5_compare_with_bge_m3,offline_after_run,False,requires provider summary.csv from real API run,Generate numeric delta table versus BGE-M3 after summary.csv exists.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/compare_embedding_baselines.py \
+  --bge-summary work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/summary.csv \
+  --api-summary work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004/summary.csv \
+  --method type_aware \
+  --api-label ""Generic OpenAI-compatible embedding"" \
+  --output-csv outputs/agent_memory_api_embedding_2_generic_openai_compatible_embedding_comparison.csv \
+  --output-report outputs/agent_memory_api_embedding_2_generic_openai_compatible_embedding_comparison_zh.md"
+Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,6_postrun_gate,offline_after_run,False,completed_for_paper=0,Post-run gate must report at least one provider completed_for_paper.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_postrun.py \
+  --profile-csv outputs/agent_memory_embedding_provider_profiles.csv \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_api_embedding_postrun_gate.csv \
+  --output-report outputs/agent_memory_api_embedding_postrun_gate_zh.md"
+Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,7_final_refresh,offline_after_run,False,run after external baseline and comparison are complete,"Refresh evidence matrix, manuscript, claim checks, reproducibility, freshness, and submission readiness.","work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py \
+  --project-root . \
+  --output-csv outputs/agent_memory_paper_artifact_refresh_run.csv \
+  --output-report outputs/agent_memory_paper_artifact_refresh_run_zh.md"
