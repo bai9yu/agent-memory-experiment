@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 35
+- Required offline steps: 36
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -20,6 +20,7 @@
 | required_offline_step | human_audit_annotation_interface | True | offline human audit HTML annotation interface | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | human_audit_annotation_interface_validation | True | human audit annotation interface safety validation | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | human_audit_annotation_import_readiness | True | human audit annotation export import readiness check | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | human_audit_paper_claim_upgrade | True | human audit paper-claim upgrade gate | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | human_audit_blind_review_leakage | True | human audit blind review schema and leakage audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | embedding_baseline_status | True | external embedding status without network calls | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | embedding_provider_profiles | True | provider-specific external embedding command profiles | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |

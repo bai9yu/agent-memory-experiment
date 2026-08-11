@@ -342,6 +342,8 @@ def main() -> None:
         ("Human audit annotation interface validation CSV", outputs / "agent_memory_human_audit_annotation_interface_validation.csv"),
         ("Human audit annotation import readiness", outputs / "agent_memory_human_audit_annotation_import_readiness_zh.md"),
         ("Human audit annotation import readiness CSV", outputs / "agent_memory_human_audit_annotation_import_readiness.csv"),
+        ("Human audit paper-claim upgrade gate", outputs / "agent_memory_human_audit_paper_claim_upgrade_zh.md"),
+        ("Human audit paper-claim upgrade gate CSV", outputs / "agent_memory_human_audit_paper_claim_upgrade.csv"),
         ("Human audit full80 dual review CSV", outputs / "agent_memory_human_audit_full80_dual_review.csv"),
         ("Human audit full80 dual agreement", outputs / "agent_memory_human_audit_full80_dual_agreement_zh.md"),
         ("Human audit full80 dual agreement CSV", outputs / "agent_memory_human_audit_full80_dual_agreement.csv"),
@@ -666,6 +668,11 @@ def main() -> None:
             "stage": "Human audit annotation import readiness",
             "command": "work/agent_memory_experiment/validate_human_audit_annotation_import.py",
             "notes": "Checks exported annotation CSVs before merging human labels into confirmation and agreement reports.",
+        },
+        {
+            "stage": "Human audit paper-claim upgrade gate",
+            "command": "work/agent_memory_experiment/validate_human_audit_paper_claim_upgrade.py",
+            "notes": "Maps current human-audit evidence to protocol-only, quick-review, full-review, and human-verified paper claim tiers.",
         },
         {
             "stage": "Human audit blind review leakage audit",

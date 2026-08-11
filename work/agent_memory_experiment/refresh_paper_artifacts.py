@@ -147,6 +147,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Checks whether HTML-exported human labels are ready to merge into confirmation sheets.",
         ),
         Step(
+            "human_audit_paper_claim_upgrade",
+            py(
+                "validate_human_audit_paper_claim_upgrade.py",
+                "--outputs-dir",
+                "outputs",
+                "--output-csv",
+                "outputs/agent_memory_human_audit_paper_claim_upgrade.csv",
+                "--output-report",
+                "outputs/agent_memory_human_audit_paper_claim_upgrade_zh.md",
+            ),
+            "Checks which paper-facing human-audit claim tier is currently unlocked.",
+        ),
+        Step(
             "human_audit_blind_review_leakage",
             py(
                 "validate_human_audit_blind_review.py",
