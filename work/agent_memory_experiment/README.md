@@ -899,6 +899,15 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-report outputs/agent_memory_submission_gap_analysis_zh.md
 ```
 
+Generate paper-ready experiment protocol appendix:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_experiment_protocol.py \
+  --project-root . \
+  --output-report outputs/agent_memory_experiment_protocol_zh.md
+```
+
 Generate external embedding baseline status:
 
 ```bash

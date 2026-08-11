@@ -190,6 +190,7 @@ def main() -> None:
         ("Paper draft outline", outputs / "agent_memory_paper_draft_outline_zh.md"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
+        ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
         ("Embedding baseline status", outputs / "agent_memory_embedding_baseline_status_zh.md"),
         ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
         ("API embedding run estimate", outputs / "agent_memory_api_embedding_run_estimate_zh.md"),
@@ -314,6 +315,11 @@ def main() -> None:
             "stage": "Submission gap analysis",
             "command": "work/agent_memory_experiment/generate_submission_gap_analysis.py",
             "notes": "Ranks reviewer-facing risks and minimum actions before submission.",
+        },
+        {
+            "stage": "Experiment protocol",
+            "command": "work/agent_memory_experiment/generate_experiment_protocol.py",
+            "notes": "Builds a paper appendix-style protocol from cached metrics and artifacts.",
         },
         {
             "stage": "Environment snapshot",

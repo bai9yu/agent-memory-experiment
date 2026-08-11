@@ -15,8 +15,9 @@ Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,2832
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,3994
 Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,6590
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,6755
-Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,8194
-Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4434
+Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,8239
+Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4479
+Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4091
 Embedding baseline status,outputs/agent_memory_embedding_baseline_status_zh.md,True,2017
 Embedding baseline status CSV,outputs/agent_memory_embedding_baseline_status.csv,True,400
 API embedding run estimate,outputs/agent_memory_api_embedding_run_estimate_zh.md,True,1048
@@ -34,6 +35,6 @@ LLM-assisted audit usage,outputs/agent_memory_llm_audit_usage.csv,True,357
 Human/LLM audit confirmation,outputs/agent_memory_human_llm_audit_confirmation.csv,True,44890
 Human/LLM audit agreement,outputs/agent_memory_human_llm_audit_agreement_zh.md,True,1804
 Human/LLM audit agreement CSV,outputs/agent_memory_human_llm_audit_agreement.csv,True,980
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,22067
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,22271
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421
