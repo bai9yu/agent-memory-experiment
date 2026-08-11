@@ -253,6 +253,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_paper_tables.tex`：可直接复制到论文的 LaTeX `booktabs` 表格。
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`：按“论文主张-证据-证据强度-剩余缺口”整理当前实验是否足以支撑投稿表述。
 - `outputs/agent_memory_paper_draft_outline_zh.md`：中文论文草稿骨架，汇总题目、摘要、贡献、公式、实验 RQ、边界和投稿前最小条件。
+- `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前 OpenAI-compatible `text-embedding-3-small` baseline 已有 API/cache 入口，但尚未实际运行出指标。
 - `outputs/agent_memory_api_embedding_run_estimate_zh.md`：外部 embedding baseline 跑前规模预估；当前 LoCoMo10 预计 4355 条文本、约 71882 个近似 token、未缓存约 35 个 API 批次。
 - `outputs/agent_memory_embedding_baseline_comparison_zh.md`：外部 embedding baseline 与 BGE-M3 主结果的对比表；当前为 pending，API summary 生成后会自动计算 delta。
@@ -265,14 +266,15 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `36/36`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `38/38`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
+   - 当前投稿风险矩阵将该项列为 blocker；需要实际生成外部 embedding summary 后才能写入主结果。
 2. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
 4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
-6. 错误复核：已生成 80 条分层抽样复核表、DeepSeek LLM-assisted 预标注和 Human/LLM 确认表；下一步需要填写 `human_*` 字段并重新生成一致性统计。
+6. 错误复核：已生成 80 条分层抽样复核表、DeepSeek LLM-assisted 预标注和 Human/LLM 确认表；当前投稿风险矩阵将人工确认列为 blocker，下一步需要填写 `human_*` 字段并重新生成一致性统计。
 
 ## 错误分析
 

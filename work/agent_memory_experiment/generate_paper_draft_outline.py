@@ -63,6 +63,8 @@ def write_report(path: Path, outputs: Path) -> None:
     llm_audit_yes = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="yes")
     llm_audit_partial = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="partial")
     llm_audit_no = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="no")
+    gap_rows = read_csv(outputs / "agent_memory_submission_gap_analysis.csv")
+    blocker_count = sum(1 for row in gap_rows if row["risk_level"] == "blocker")
     open_gaps = [row for row in evidence if row["status"] in {"open_gap", "baseline_protocol", "stability_protocol", "reliability_protocol"}]
 
     lines = [
@@ -181,6 +183,8 @@ def write_report(path: Path, outputs: Path) -> None:
     lines.extend([
         "",
         "## 投稿前最小完成条件",
+        "",
+        f"投稿风险矩阵当前列出 {len(gap_rows)} 个审稿风险，其中 {blocker_count} 个 blocker。完整清单见 `outputs/agent_memory_submission_gap_analysis_zh.md`。",
         "",
         "1. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。",
         "2. 在 Human/LLM 确认表中填写人工字段，确认或抽样复查 80 条 LLM-assisted 错误复核初稿，并报告 exact agreement 与 Cohen's kappa。",

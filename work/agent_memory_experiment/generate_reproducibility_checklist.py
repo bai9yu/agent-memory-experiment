@@ -188,6 +188,8 @@ def main() -> None:
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper evidence matrix", outputs / "agent_memory_paper_evidence_matrix_zh.md"),
         ("Paper draft outline", outputs / "agent_memory_paper_draft_outline_zh.md"),
+        ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
+        ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
         ("Embedding baseline status", outputs / "agent_memory_embedding_baseline_status_zh.md"),
         ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
         ("API embedding run estimate", outputs / "agent_memory_api_embedding_run_estimate_zh.md"),
@@ -307,6 +309,11 @@ def main() -> None:
             "stage": "Paper draft outline",
             "command": "work/agent_memory_experiment/generate_paper_draft_outline.py",
             "notes": "Builds a Chinese paper skeleton from current evidence, formulas, and result tables.",
+        },
+        {
+            "stage": "Submission gap analysis",
+            "command": "work/agent_memory_experiment/generate_submission_gap_analysis.py",
+            "notes": "Ranks reviewer-facing risks and minimum actions before submission.",
         },
         {
             "stage": "Environment snapshot",

@@ -889,6 +889,16 @@ Fill `human_manual_reason`, `human_auto_reason_correct`, `human_top_memory_relev
 The agreement report will compute exact agreement and Cohen's kappa once the human
 fields are complete.
 
+Generate submission gap and reviewer-risk analysis:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_submission_gap_analysis.py \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_submission_gap_analysis.csv \
+  --output-report outputs/agent_memory_submission_gap_analysis_zh.md
+```
+
 Generate external embedding baseline status:
 
 ```bash
