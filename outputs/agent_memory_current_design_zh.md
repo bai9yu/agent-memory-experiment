@@ -539,6 +539,8 @@ paired significance test 显示 candidate reranker 相比 fixed `type_aware` 的
 
 因此下一版方法不应只继续调随机森林参数，而应专门为 Type 3 增加多证据聚合：
 
+多证据覆盖分析显示，Type 3 的平均 gold evidence 数为 `2.65`，多证据问题比例为 `0.675`；candidate reranker 的 Top-5 coverage ratio 为 `0.372`，略低于 fixed `type_aware` 的 `0.377`。因此 Type 3 的短板不是简单 Top-1 排序问题，而是候选集合需要覆盖多个事实。
+
 \[
 \operatorname{retrieve}_{multi}(q)
 =

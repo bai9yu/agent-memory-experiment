@@ -550,6 +550,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candi
   --output-selected outputs/agent_memory_candidate_reranker_locomo10_selected.csv \
   --output-comparison outputs/agent_memory_candidate_reranker_locomo10_comparison_per_query.csv \
   --output-feature-importance outputs/agent_memory_candidate_reranker_feature_importance.csv \
+  --output-ranked outputs/agent_memory_candidate_reranker_locomo10_ranked_top10.csv \
   --output-report outputs/agent_memory_candidate_reranker_locomo10_zh.md
 ```
 
@@ -577,6 +578,20 @@ python3 work/agent_memory_experiment/candidate_reranker_analysis.py \
   --output-by-type outputs/agent_memory_candidate_reranker_by_type.csv \
   --output-examples outputs/agent_memory_candidate_reranker_examples.csv \
   --output-report outputs/agent_memory_candidate_reranker_by_type_zh.md
+```
+
+Run multi-evidence Top-K coverage analysis:
+
+```bash
+python3 work/agent_memory_experiment/multi_evidence_coverage_analysis.py \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --candidate-ranked outputs/agent_memory_candidate_reranker_locomo10_ranked_top10.csv \
+  --output-per-query outputs/agent_memory_multi_evidence_coverage_per_query.csv \
+  --output-summary outputs/agent_memory_multi_evidence_coverage_summary.csv \
+  --output-delta outputs/agent_memory_multi_evidence_coverage_delta_by_type.csv \
+  --output-type3-examples outputs/agent_memory_multi_evidence_type3_examples.csv \
+  --output-report outputs/agent_memory_multi_evidence_coverage_zh.md
 ```
 
 Run top-1 error analysis:

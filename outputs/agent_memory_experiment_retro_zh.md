@@ -333,6 +333,23 @@
 
 收益：论文分析更诚实，也更像正式实验：既报告总体显著提升，也指出方法边界和下一步改进方向。
 
+### 3.16 问题：Type 3 的核心瓶颈是多证据覆盖，而不是单条候选排序
+
+现象：Top-K 多证据覆盖分析显示，Type 3 的平均 gold evidence 数为 `2.65`，多证据问题比例为 `0.675`。candidate reranker 在 Type 3 上 Top-5 coverage ratio 为 `0.372`，略低于 fixed `type_aware` 的 `0.377`；Top-10 coverage ratio 才基本持平。
+
+原因判断：
+
+- Type 3 往往需要多个事实共同支持答案，例如“是否可能”“会不会喜欢”“两个人是否有共同点”等。
+- 当前 candidate reranker 学的是单条 memory relevance，优化目标仍偏 Top-1。
+- 即使某条相关 memory 排名提高，也可能没有覆盖完整 evidence set。
+
+解决：
+
+- 新增 `multi_evidence_coverage_analysis.py`，显式评估 `any_hit@K`、`full_coverage@K` 和 `coverage_ratio@K`。
+- 将 Type 3 后续方向从“继续调单候选 reranker”调整为 set-level selection / query decomposition。
+
+收益：Type 3 的失败原因从泛泛的“推理问题难”变成可量化的“Top-K evidence set 覆盖不足”，更适合写入论文 error analysis。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -365,7 +382,7 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 
 1. 固化当前推荐配置：BGE-M3 + adaptive time-aware + persona gate + importance proxy。
 2. 固化两层记忆结构：fact/observation 作为在线检索层，session_summary 作为归档回溯层。
-3. 针对 Type 3 增加多证据聚合或 query decomposition，验证是否能修复当前下降。
+3. 针对 Type 3 增加 set-level selection 或 query decomposition，优化 Top-K evidence coverage ratio，而不仅是 Top-1 MRR。
 4. 增加 LLM memory extraction 重复实验：从原始对话抽取事实、时间、实体、重要性、权限，并报告 seed/temperature 方差。
 5. 增加 conflict resolver：同一主体同一属性按时间和置信度更新。
 6. 增加真实多 Agent trace：把 Agent A 的工具经验、错误修复、代码片段作为共享记忆。

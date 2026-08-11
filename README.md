@@ -70,6 +70,8 @@ Text-intent router 可部署规则基线见 `outputs/agent_memory_text_intent_ro
 
 候选级学习重排的按 query type 分析与失败案例见 `outputs/agent_memory_candidate_reranker_by_type_zh.md`。
 
+多证据覆盖分析见 `outputs/agent_memory_multi_evidence_coverage_zh.md`。
+
 成本与延迟分析见 `outputs/agent_memory_cost_latency_locomo10_zh.md`。
 
 细粒度延迟分解见 `outputs/agent_memory_latency_breakdown_locomo10_zh.md`。

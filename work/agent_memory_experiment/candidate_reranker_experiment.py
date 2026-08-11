@@ -199,7 +199,8 @@ def evaluate_split(
     baseline_rows: dict[str, dict[str, Any]],
     methods: list[str],
     train_fraction: float,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    rank_output_k: int,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     rng = random.Random(seed)
     shuffled = list(query_ids)
     rng.shuffle(shuffled)
@@ -217,6 +218,7 @@ def evaluate_split(
 
     selected_rows = []
     comparison_rows = []
+    ranked_rows = []
     for query_id in test_ids:
         ranked = sorted(candidates[query_id].values(), key=lambda row: row.get("learned_score", 0.0), reverse=True)
         scored = score_ranked_query(ranked)
@@ -260,6 +262,18 @@ def evaluate_split(
             "recall@5": selected_row["recall@5"],
             "first_rank": selected_row["first_rank"],
         })
+        for rank, row in enumerate(ranked[:rank_output_k], start=1):
+            ranked_rows.append({
+                "split_seed": seed,
+                "query_id": query_id,
+                "query_type": row["query_type"],
+                "rank": rank,
+                "memory_id": row["memory_id"],
+                "memory_type": row["memory_type"],
+                "memory_text": row["memory_text"],
+                "learned_score": row.get("learned_score", 0.0),
+                "is_relevant": row["is_relevant"],
+            })
 
     split_metric_rows = []
     baseline_split = [{**baseline_rows[query_id], "split_seed": seed} for query_id in test_ids]
@@ -267,7 +281,7 @@ def evaluate_split(
     split_metric_rows.append(aggregate(baseline_split, "type_aware", seed))
     split_metric_rows.append(aggregate(selected_rows, "candidate_reranker", seed))
     split_metric_rows.append(aggregate(oracle_split, "candidate_oracle", seed))
-    return split_metric_rows, selected_rows, comparison_rows, feature_rows
+    return split_metric_rows, selected_rows, comparison_rows, feature_rows, ranked_rows
 
 
 def summarize_feature_importance(rows: list[dict[str, Any]], top_n: int) -> list[dict[str, Any]]:
@@ -368,6 +382,8 @@ def main() -> None:
     parser.add_argument("--output-selected", type=Path, required=True)
     parser.add_argument("--output-comparison", type=Path, required=True)
     parser.add_argument("--output-feature-importance", type=Path, required=True)
+    parser.add_argument("--output-ranked", type=Path, required=True)
+    parser.add_argument("--rank-output-k", type=int, default=10)
     parser.add_argument("--feature-top-n", type=int, default=40)
     parser.add_argument("--output-report", type=Path, required=True)
     args = parser.parse_args()
@@ -384,19 +400,22 @@ def main() -> None:
     selected_rows = []
     comparison_rows = []
     feature_rows = []
+    ranked_rows = []
     for seed in seeds:
-        split_metric_rows, split_selected_rows, split_comparison_rows, split_feature_rows = evaluate_split(
+        split_metric_rows, split_selected_rows, split_comparison_rows, split_feature_rows, split_ranked_rows = evaluate_split(
             seed,
             query_ids,
             candidates,
             baseline_rows,
             methods,
             args.train_fraction,
+            args.rank_output_k,
         )
         split_rows.extend(split_metric_rows)
         selected_rows.extend(split_selected_rows)
         comparison_rows.extend(split_comparison_rows)
         feature_rows.extend(split_feature_rows)
+        ranked_rows.extend(split_ranked_rows)
 
     summary_rows = summarize_across_splits(split_rows)
     feature_summary_rows = summarize_feature_importance(feature_rows, args.feature_top_n)
@@ -405,6 +424,7 @@ def main() -> None:
     write_csv(args.output_selected, selected_rows)
     write_csv(args.output_comparison, comparison_rows)
     write_csv(args.output_feature_importance, feature_summary_rows)
+    write_csv(args.output_ranked, ranked_rows)
     write_report(args.output_report, summary_rows, dict(label_counts), feature_summary_rows)
 
 

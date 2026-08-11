@@ -156,6 +156,18 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 结论：candidate reranker 对 Type 5、Type 2、Type 4 收益最明显，说明它能纠正固定公式在关键词/事件/偏好类问题上的排序错误；但 Type 3 下降，说明推理型或跨事实问题仍需要单独处理，可能需要多证据聚合或 answer-aware reranking。
 
+进一步做 Top-K 多证据覆盖分析，比较 `type_aware` 与 candidate reranker 的候选集合是否覆盖答案 evidence set：
+
+| Query Type | Mean Gold | Multi-Evidence Share | Base Coverage@5 | Reranker Coverage@5 | Delta |
+|---|---:|---:|---:|---:|---:|
+| Type 1 | 4.06 | 0.930 | 0.309 | 0.352 | +0.0430 |
+| Type 2 | 1.56 | 0.399 | 0.707 | 0.781 | +0.0740 |
+| Type 3 | 2.65 | 0.675 | 0.377 | 0.372 | -0.0050 |
+| Type 4 | 1.44 | 0.340 | 0.688 | 0.744 | +0.0565 |
+| Type 5 | 1.50 | 0.354 | 0.552 | 0.652 | +0.1000 |
+
+该结果支持 Type 3 的错误诊断：Type 3 的平均 gold evidence 数为 `2.65`，多证据问题比例为 `0.675`，明显高于 Type 2/4/5；candidate reranker 虽然提升总体 Top-1，但没有改善 Type 3 的 Top-5 evidence coverage ratio。因此下一步应做 set-level selection，而不是只继续优化单候选排序。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。
