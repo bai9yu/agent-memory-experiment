@@ -8,7 +8,7 @@
 - Artifacts covered: 176/176
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 7032005
+- Total bytes: 7032000
 
 ## 前 20 个 Artifact
 

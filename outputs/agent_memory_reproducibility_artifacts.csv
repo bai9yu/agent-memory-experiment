@@ -85,14 +85,14 @@ Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True
 Threats to validity CSV,outputs/agent_memory_threats_to_validity.csv,True,3236
 Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,4396
 Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,4244
-Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,8546
-Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,9708
+Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,8532
+Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,9694
 Submission entrypoint consistency audit,outputs/agent_memory_submission_entrypoint_consistency_zh.md,True,2106
 Submission entrypoint consistency audit CSV,outputs/agent_memory_submission_entrypoint_consistency.csv,True,1487
 Submission readiness gate,outputs/agent_memory_submission_readiness_zh.md,True,2444
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness.csv,True,2067
-Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1564
-Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1209
+Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1583
+Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1213
 Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4131
 Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3054
 Large intermediate provenance audit,outputs/agent_memory_large_intermediate_provenance_zh.md,True,2048

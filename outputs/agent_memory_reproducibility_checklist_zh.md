@@ -11,7 +11,7 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `2d2a090` |
+| git_commit | `ac09046` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -112,14 +112,14 @@
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
 | Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
 | Reviewer response preparation matrix CSV | True | 4244 | `outputs/agent_memory_reviewer_response_prep.csv` |
-| Submission package index | True | 8546 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 9708 | `outputs/agent_memory_submission_package_index.csv` |
+| Submission package index | True | 8532 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 9694 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission entrypoint consistency audit | True | 2106 | `outputs/agent_memory_submission_entrypoint_consistency_zh.md` |
 | Submission entrypoint consistency audit CSV | True | 1487 | `outputs/agent_memory_submission_entrypoint_consistency.csv` |
 | Submission readiness gate | True | 2444 | `outputs/agent_memory_submission_readiness_zh.md` |
 | Submission readiness gate CSV | True | 2067 | `outputs/agent_memory_submission_readiness.csv` |
-| Public release readiness gate | True | 1564 | `outputs/agent_memory_public_release_readiness_zh.md` |
-| Public release readiness gate CSV | True | 1209 | `outputs/agent_memory_public_release_readiness.csv` |
+| Public release readiness gate | True | 1583 | `outputs/agent_memory_public_release_readiness_zh.md` |
+| Public release readiness gate CSV | True | 1213 | `outputs/agent_memory_public_release_readiness.csv` |
 | Untracked artifact audit | True | 4131 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
 | Untracked artifact audit CSV | True | 3054 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |

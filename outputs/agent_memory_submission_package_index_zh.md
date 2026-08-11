@@ -34,7 +34,7 @@
 | Reproducibility | outputs/agent_memory_reproducibility_checklist_zh.md | True | pass | artifact、指标阈值、数据规模、复现命令和环境入口清单。 | 新增任何 artifact 后重新生成。 |
 | Reproducibility | outputs/agent_memory_artifact_integrity_manifest_zh.md | True | pass | 复现 artifact sha256、大小和行数 manifest。 | 每次结果更新后重新生成。 |
 | Reproducibility | outputs/agent_memory_environment_freshness_audit_zh.md | True | pass | 环境快照的 generation-time Git 状态和 system CSV 新鲜度审计。 | 提交前后若刷新环境快照，应重新运行 freshness audit。 |
-| Reproducibility | outputs/agent_memory_untracked_artifact_audit_zh.md | True | ready_for_review | 未跟踪本地输出、临时数据和探索性结果的公开发布审计。 | 公开发布前逐项决定 review_before_tracking 文件是否应转为正式 artifact。 |
+| Reproducibility | outputs/agent_memory_untracked_artifact_audit_zh.md | True | classified | 未跟踪本地输出、临时数据和探索性结果的公开发布审计。 | 公开发布前确认 keep_untracked/local 项仍不属于论文正式 artifact。 |
 | Reproducibility | outputs/agent_memory_paper_artifact_refresh_run_zh.md | True | pass | 离线论文 artifact 刷新流水线的逐步执行日志。 | 补完 API baseline 或人工标签后运行该流水线收口所有报告。 |
 | Reproducibility | outputs/agent_memory_paper_refresh_coverage_audit_zh.md | True | pass | 检查离线刷新流水线是否覆盖关键论文报告步骤。 | 新增关键 paper artifact 后同步更新 coverage audit 的 required steps。 |
 | Submission Gate | outputs/agent_memory_submission_blocker_closure_plan_zh.md | True | ready_with_external_inputs | 外部 embedding、人审、reviewer risk 和最终一致性刷新的 blocker 关闭路线图。 | 按路线先解除 external embedding 和 human audit blockers。 |

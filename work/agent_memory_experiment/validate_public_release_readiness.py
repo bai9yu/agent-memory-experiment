@@ -103,6 +103,7 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
     secret_hits = tracked_secret_hits(root, files)
     license_files = [name for name in files if Path(name).name.lower() in {"license", "license.md", "license.txt"}]
     untracked_review = sum(1 for row in untracked_audit if row.get("recommendation") == "review_before_tracking")
+    untracked_keep_local = sum(1 for row in untracked_audit if row.get("recommendation") == "keep_untracked")
 
     rows = [
         check_row(
@@ -150,8 +151,8 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "paper_artifact",
             bool(untracked_audit),
             "major",
-            f"untracked audit rows={len(untracked_audit)}, review_before_tracking={untracked_review}",
-            "运行 audit_untracked_artifacts.py，并在公开发布前逐项确认 review_before_tracking 文件是否应纳入 Git。",
+            f"untracked audit rows={len(untracked_audit)}, review_before_tracking={untracked_review}, keep_untracked={untracked_keep_local}",
+            "运行 audit_untracked_artifacts.py，并确认 keep_untracked/local 项仍不属于论文正式 artifact。",
         ),
         check_row(
             "license_file_present",
