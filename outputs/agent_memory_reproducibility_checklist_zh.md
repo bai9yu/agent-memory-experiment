@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：148/148
+- Artifact 存在性：150/150
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `9b1903e` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `4eb2c7a` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -114,6 +114,8 @@
 | Artifact integrity manifest CSV | True | 25752 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
+| Submission blocker closure plan | True | 3584 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
+| Submission blocker closure plan CSV | True | 2795 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -253,6 +255,7 @@
 | Public release readiness gate | `work/agent_memory_experiment/validate_public_release_readiness.py` | Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links. |
 | Artifact integrity manifest | `work/agent_memory_experiment/generate_artifact_integrity_manifest.py` | Writes sha256, size, and line-count metadata for all reproducibility artifacts. |
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |
+| Submission blocker closure plan | `work/agent_memory_experiment/generate_submission_blocker_closure_plan.py` | Orders remaining external embedding, human audit, reviewer-risk, and final-refresh gates into a concrete closure path. |
 | Evidence freshness audit | `work/agent_memory_experiment/validate_evidence_freshness.py` | Checks paper-facing reports for stale reproducibility artifact/metric/integrity gate counts after regeneration. |
 | Experiment protocol | `work/agent_memory_experiment/generate_experiment_protocol.py` | Builds a paper appendix-style protocol from cached metrics and artifacts. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |

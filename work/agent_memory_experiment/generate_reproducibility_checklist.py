@@ -260,6 +260,8 @@ def main() -> None:
         ("Artifact integrity manifest CSV", outputs / "agent_memory_artifact_integrity_manifest.csv"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
+        ("Submission blocker closure plan", outputs / "agent_memory_submission_blocker_closure_plan_zh.md"),
+        ("Submission blocker closure plan CSV", outputs / "agent_memory_submission_blocker_closure_plan.csv"),
         ("Evidence freshness audit", outputs / "agent_memory_evidence_freshness_audit_zh.md"),
         ("Evidence freshness audit CSV", outputs / "agent_memory_evidence_freshness_audit.csv"),
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
@@ -652,6 +654,11 @@ def main() -> None:
             "stage": "Submission gap analysis",
             "command": "work/agent_memory_experiment/generate_submission_gap_analysis.py",
             "notes": "Ranks reviewer-facing risks and minimum actions before submission.",
+        },
+        {
+            "stage": "Submission blocker closure plan",
+            "command": "work/agent_memory_experiment/generate_submission_blocker_closure_plan.py",
+            "notes": "Orders remaining external embedding, human audit, reviewer-risk, and final-refresh gates into a concrete closure path.",
         },
         {
             "stage": "Evidence freshness audit",

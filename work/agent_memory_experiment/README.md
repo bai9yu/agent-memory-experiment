@@ -1127,6 +1127,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-report outputs/agent_memory_submission_gap_analysis_zh.md
 ```
 
+Generate a concrete closure plan for remaining final-submission blockers:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_submission_blocker_closure_plan.py \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_submission_blocker_closure_plan.csv \
+  --output-report outputs/agent_memory_submission_blocker_closure_plan_zh.md
+```
+
 Validate evidence freshness across paper-facing reports:
 
 ```bash
