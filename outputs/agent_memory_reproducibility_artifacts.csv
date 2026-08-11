@@ -23,6 +23,8 @@ Intrinsic candidate reranker LOCO summary,outputs/agent_memory_candidate_reranke
 Intrinsic candidate reranker LOCO split summary,outputs/agent_memory_candidate_reranker_intrinsic_loco_split_summary.csv,True,3266
 Intrinsic candidate reranker LOCO deltas,outputs/agent_memory_candidate_reranker_intrinsic_loco_deltas.csv,True,306
 Intrinsic candidate reranker LOCO comparison,outputs/agent_memory_candidate_reranker_intrinsic_loco_comparison_per_query.csv,True,316457
+Intrinsic reranker method appendix,outputs/agent_memory_intrinsic_reranker_method_appendix_zh.md,True,6999
+Intrinsic reranker feature groups,outputs/agent_memory_intrinsic_reranker_feature_groups.csv,True,924
 Type3 coverage significance,outputs/agent_memory_type3_coverage_significance_zh.md,True,2545
 Type3 query decomposition fusion4 report,outputs/agent_memory_type3_query_decomposition_fusion4_zh.md,True,5473
 Type3 query decomposition fusion4 summary,outputs/agent_memory_type3_query_decomposition_fusion4_summary.csv,True,1604
@@ -56,8 +58,8 @@ Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,T
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1882
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
-Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3807
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,17642
+Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3826
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,18968
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -103,6 +105,6 @@ Human audit full80 dual agreement,outputs/agent_memory_human_audit_full80_dual_a
 Human audit full80 dual agreement CSV,outputs/agent_memory_human_audit_full80_dual_agreement.csv,True,750
 Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md,True,4943
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,28211
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,28928
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

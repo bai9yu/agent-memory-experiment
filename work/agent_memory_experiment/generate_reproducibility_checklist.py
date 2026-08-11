@@ -196,6 +196,8 @@ def main() -> None:
         ("Intrinsic candidate reranker LOCO split summary", outputs / "agent_memory_candidate_reranker_intrinsic_loco_split_summary.csv"),
         ("Intrinsic candidate reranker LOCO deltas", outputs / "agent_memory_candidate_reranker_intrinsic_loco_deltas.csv"),
         ("Intrinsic candidate reranker LOCO comparison", outputs / "agent_memory_candidate_reranker_intrinsic_loco_comparison_per_query.csv"),
+        ("Intrinsic reranker method appendix", outputs / "agent_memory_intrinsic_reranker_method_appendix_zh.md"),
+        ("Intrinsic reranker feature groups", outputs / "agent_memory_intrinsic_reranker_feature_groups.csv"),
         ("Type3 coverage significance", outputs / "agent_memory_type3_coverage_significance_zh.md"),
         ("Type3 query decomposition fusion4 report", outputs / "agent_memory_type3_query_decomposition_fusion4_zh.md"),
         ("Type3 query decomposition fusion4 summary", outputs / "agent_memory_type3_query_decomposition_fusion4_summary.csv"),
@@ -350,6 +352,11 @@ def main() -> None:
             "stage": "Intrinsic candidate reranker LOCO",
             "command": "work/agent_memory_experiment/candidate_reranker_intrinsic_loco_experiment.py",
             "notes": "Reuses leave-one-conversation-out split with intrinsic-only candidate features.",
+        },
+        {
+            "stage": "Intrinsic reranker method appendix",
+            "command": "work/agent_memory_experiment/generate_intrinsic_reranker_method_appendix.py",
+            "notes": "Builds a paper appendix with feature definitions, model hyperparameters, validation protocol, and reproducible commands.",
         },
         {
             "stage": "Bootstrap metric CI",

@@ -1,0 +1,7 @@
+group,features,included_intrinsic,notes
+semantic_keyword,"semantic_score, keyword_score, entity_score, semantic_x_keyword",yes,候选自身与 query 的语义、关键词和实体匹配信号。
+temporal,"time_decay, recency_gate, recency_x_decay",yes,记忆时间与 query 时间需求之间的时效性特征。
+persona_type,"persona_score, persona_weight, memory_type_score, persona_x_type",yes,人物匹配、query intent 与 memory type 的匹配及其交互。
+categorical,"query_type one-hot, memory_type one-hot",yes,显式类型特征，帮助模型学习不同 query 和 memory type 的排序偏好。
+importance,importance_score,yes,记忆重要性 proxy；作为弱先验而不是主排序依据。
+method_level,"retriever_score, retriever_rank, retriever_present, reciprocal_rank",no,仅用于 full reranker ablation；intrinsic-only 主方法排除此组，以降低对固定检索器排名的依赖。

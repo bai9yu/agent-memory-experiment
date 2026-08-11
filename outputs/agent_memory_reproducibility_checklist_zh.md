@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：107/107
+- Artifact 存在性：109/109
 - 关键指标阈值：9/9
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `d5ed5df` |
-| git_branch_status | `## main...origin/main [ahead 4]` |
+| git_commit | `37dd9c2` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -50,6 +50,8 @@
 | Intrinsic candidate reranker LOCO split summary | True | 3266 | `outputs/agent_memory_candidate_reranker_intrinsic_loco_split_summary.csv` |
 | Intrinsic candidate reranker LOCO deltas | True | 306 | `outputs/agent_memory_candidate_reranker_intrinsic_loco_deltas.csv` |
 | Intrinsic candidate reranker LOCO comparison | True | 316457 | `outputs/agent_memory_candidate_reranker_intrinsic_loco_comparison_per_query.csv` |
+| Intrinsic reranker method appendix | True | 6999 | `outputs/agent_memory_intrinsic_reranker_method_appendix_zh.md` |
+| Intrinsic reranker feature groups | True | 924 | `outputs/agent_memory_intrinsic_reranker_feature_groups.csv` |
 | Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
 | Type3 query decomposition fusion4 report | True | 5473 | `outputs/agent_memory_type3_query_decomposition_fusion4_zh.md` |
 | Type3 query decomposition fusion4 summary | True | 1604 | `outputs/agent_memory_type3_query_decomposition_fusion4_summary.csv` |
@@ -83,8 +85,8 @@
 | Submission readiness gate CSV | True | 1882 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
-| Artifact integrity manifest | True | 3807 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 17642 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest | True | 3826 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
+| Artifact integrity manifest CSV | True | 18968 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -130,7 +132,7 @@
 | Human audit full80 dual agreement CSV | True | 750 | `outputs/agent_memory_human_audit_full80_dual_agreement.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 28211 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 28928 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -158,6 +160,7 @@
 | Candidate reranker feature ablation | `work/agent_memory_experiment/candidate_reranker_feature_ablation.py` | Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware. |
 | Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
 | Intrinsic candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_intrinsic_loco_experiment.py` | Reuses leave-one-conversation-out split with intrinsic-only candidate features. |
+| Intrinsic reranker method appendix | `work/agent_memory_experiment/generate_intrinsic_reranker_method_appendix.py` | Builds a paper appendix with feature definitions, model hyperparameters, validation protocol, and reproducible commands. |
 | Bootstrap metric CI | `work/agent_memory_experiment/bootstrap_metric_ci.py` | Computes query-level bootstrap confidence intervals for main, LOCO, router, and Type3 paired results. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
 | Type3 query decomposition fusion4 | `work/agent_memory_experiment/type3_query_decomposition_experiment.py` | Records the stronger keyword-facet decomposition fusion variant and its negative result. |

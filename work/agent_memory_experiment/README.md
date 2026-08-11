@@ -629,6 +629,15 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candi
   --output-report outputs/agent_memory_candidate_reranker_intrinsic_loco_zh.md
 ```
 
+Generate the paper appendix for the intrinsic feature reranker:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_intrinsic_reranker_method_appendix.py \
+  --output-report outputs/agent_memory_intrinsic_reranker_method_appendix_zh.md \
+  --output-features outputs/agent_memory_intrinsic_reranker_feature_groups.csv
+```
+
 Run paired significance testing for the LOCO candidate reranker:
 
 ```bash
