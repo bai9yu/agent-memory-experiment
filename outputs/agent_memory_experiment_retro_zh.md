@@ -385,6 +385,23 @@
 
 收益：Type 3 的后续路线从“尝试 query decomposition 或扩大召回”进一步收敛为“扩大候选深度后做集合级学习选择”。
 
+### 3.19 问题：Top-20 候选池上的启发式 set selector 仍不能提前 Type 3 证据
+
+现象：把 set-level selection 的输入从 Top-10 扩展到 Top-20 后，Type 3 candidate reranker 的 Coverage@20 为 `0.597`，Full@20 为 `0.444`；但启发式 `set_selector_type3` 的 Coverage@5 下降到 `0.340`，Full@5 下降到 `0.238`，Coverage@20 仍为 `0.597`。
+
+原因判断：
+
+- Top-20 里有更多相关 evidence，但它们没有被简单 Jaccard 去重和 memory type 多样性提前。
+- 多证据问题需要知道“哪些候选互补地覆盖不同 evidence”，而不是简单惩罚文本相似。
+- 启发式 set selector 没有训练目标，无法区分“重复但必要的相近事实”和“真正冗余的相似事实”。
+
+解决：
+
+- 将 Top-20 set selector 记录为负结果 baseline。
+- 下一步改为 supervised set-level learning 或 query decomposition。
+
+收益：进一步排除了“扩大候选池 + 简单 MMR”这个自然但不足的方案，明确需要带覆盖目标的学习方法。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性

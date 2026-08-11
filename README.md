@@ -74,6 +74,8 @@ Text-intent router 可部署规则基线见 `outputs/agent_memory_text_intent_ro
 
 集合级选择基线见 `outputs/agent_memory_set_selection_zh.md`。
 
+Top-20 集合级选择补充基线见 `outputs/agent_memory_set_selection_top20_zh.md`。
+
 候选深度分析见 `outputs/agent_memory_candidate_depth_analysis_zh.md`。
 
 成本与延迟分析见 `outputs/agent_memory_cost_latency_locomo10_zh.md`。

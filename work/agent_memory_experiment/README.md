@@ -607,6 +607,20 @@ python3 work/agent_memory_experiment/set_level_selection_experiment.py \
   --output-report outputs/agent_memory_set_selection_zh.md
 ```
 
+Run the same unsupervised set-level selection over Top-20 candidates:
+
+```bash
+python3 work/agent_memory_experiment/set_level_selection_experiment.py \
+  --candidate-ranked outputs/agent_memory_candidate_reranker_locomo10_ranked_top20.csv \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --ks 1,3,5,10,20 \
+  --output-per-query outputs/agent_memory_set_selection_top20_per_query.csv \
+  --output-ranked outputs/agent_memory_set_selection_top20_ranked.csv \
+  --output-overall outputs/agent_memory_set_selection_top20_overall.csv \
+  --output-by-type outputs/agent_memory_set_selection_top20_by_type.csv \
+  --output-report outputs/agent_memory_set_selection_top20_zh.md
+```
+
 Run candidate depth analysis after saving candidate reranker Top-20 rows:
 
 ```bash

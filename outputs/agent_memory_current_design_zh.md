@@ -568,6 +568,15 @@ paired significance test 显示 candidate reranker 相比 fixed `type_aware` 的
 
 然后在 \(\mathcal{C}_{deep}\) 上做集合级选择，而不是只重排 Top-10：
 
+补充实验显示，将同一启发式 set selector 用在 Top-20 候选池上，Type 3 Coverage@5 从 `0.372` 降到 `0.340`，Coverage@20 仍为 `0.597`。这说明“深候选池”提供了证据空间，但启发式多样性不能学习如何把证据提前；下一版需要 supervised set-level objective：
+
+\[
+\max_\theta
+\sum_q
+\operatorname{Coverage@K}
+(S_\theta(q,\mathcal{C}_{deep}))
+\]
+
 \[
 q \rightarrow \{q_1,q_2,\ldots,q_n\}
 \]

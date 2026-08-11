@@ -189,6 +189,15 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 结论：Type 3 并非完全缺少候选证据，而是相关 evidence 往往落在 Top-10 之后。下一步更合理的路线是“扩大候选召回到 Top-20/Top-50 + 学习式集合选择”，而不是只在 Top-10 内做启发式 MMR。
 
+将同一个无监督 set-level selection baseline 改用 Top-20 候选池后，Type 3 仍未改善：
+
+| Method | Type 3 MRR | Type 3 R@5 | Type 3 Coverage@5 | Type 3 Full@5 | Type 3 Coverage@20 | Type 3 Full@20 |
+|---|---:|---:|---:|---:|---:|---:|
+| candidate_reranker | 0.418 | 0.492 | 0.372 | 0.262 | 0.597 | 0.444 |
+| set_selector_type3 | 0.412 | 0.452 | 0.340 | 0.238 | 0.597 | 0.444 |
+
+结论：Top-20 候选池里确实有更多 evidence，但简单去重/类型多样性不会把它们提前到 Top-5；真正需要的是带监督信号的 set-level learning，或先做 query decomposition 再分别召回。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。

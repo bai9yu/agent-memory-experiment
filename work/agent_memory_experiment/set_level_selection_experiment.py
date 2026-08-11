@@ -206,44 +206,45 @@ def aggregate(rows: list[dict[str, Any]], group_keys: list[str], ks: list[int]) 
     return output
 
 
-def write_report(path: Path, overall: list[dict[str, Any]], by_type: list[dict[str, Any]], params: dict[str, float]) -> None:
+def write_report(path: Path, overall: list[dict[str, Any]], by_type: list[dict[str, Any]], params: dict[str, float], ks: list[int]) -> None:
+    max_k = max(ks)
     lines = [
         "# 集合级选择基线",
         "",
-        "本实验在 candidate reranker 的 Top-10 候选上做无监督 set-level selection：保留原 Top-1，然后用文本 Jaccard 去重和 memory type 多样性选择后续候选。",
-        f"固定参数：alpha={params['alpha']}, beta={params['beta']}, gamma={params['gamma']}。该方法不使用 gold evidence 调参。所有指标仅基于已缓存 Top-10 候选计算。",
+        f"本实验在 candidate reranker 的 Top-{max_k} 候选上做无监督 set-level selection：保留原 Top-1，然后用文本 Jaccard 去重和 memory type 多样性选择后续候选。",
+        f"固定参数：alpha={params['alpha']}, beta={params['beta']}, gamma={params['gamma']}。该方法不使用 gold evidence 调参。所有指标仅基于已缓存 Top-{max_k} 候选计算。",
         "",
         "## Overall",
         "",
-        "| Method | Rows | MRR | R@1 | R@5 | Coverage@5 | Full@5 | Coverage@10 | Full@10 |",
+        f"| Method | Rows | MRR | R@1 | R@5 | Coverage@5 | Full@5 | Coverage@{max_k} | Full@{max_k} |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in overall:
         lines.append(
             f"| {row['method']} | {row['num_rows']} | {metric(row['mrr'])} | {metric(row['recall@1'])} | "
             f"{metric(row['recall@5'])} | {metric(row['coverage_ratio@5'])} | {metric(row['full_coverage@5'])} | "
-            f"{metric(row['coverage_ratio@10'])} | {metric(row['full_coverage@10'])} |"
+            f"{metric(row[f'coverage_ratio@{max_k}'])} | {metric(row[f'full_coverage@{max_k}'])} |"
         )
     lines.extend([
         "",
         "## Type 3",
         "",
-        "| Method | Rows | MRR | R@5 | Coverage@5 | Full@5 | Coverage@10 | Full@10 |",
+        f"| Method | Rows | MRR | R@5 | Coverage@5 | Full@5 | Coverage@{max_k} | Full@{max_k} |",
         "|---|---:|---:|---:|---:|---:|---:|---:|",
     ])
     for row in [item for item in by_type if item["query_type"] == "3"]:
         lines.append(
             f"| {row['method']} | {row['num_rows']} | {metric(row['mrr'])} | {metric(row['recall@5'])} | "
             f"{metric(row['coverage_ratio@5'])} | {metric(row['full_coverage@5'])} | "
-            f"{metric(row['coverage_ratio@10'])} | {metric(row['full_coverage@10'])} |"
+            f"{metric(row[f'coverage_ratio@{max_k}'])} | {metric(row[f'full_coverage@{max_k}'])} |"
         )
     lines.extend([
         "",
         "## 解释",
         "",
-        "- `set_selector_type3` 没有提升 Type 3 coverage，说明仅在当前 Top-10 内做文本去重和 memory type 多样性不足以解决多证据覆盖。",
-        "- Top-10 coverage 不变表示候选集合本身没有扩大；Top-5 下降说明简单多样性可能把相关证据推到更后。",
-        "- 下一步应做 query decomposition、扩大候选召回，或训练真正的 set-level selector，而不是只在 Top-10 内做启发式重排。",
+        f"- `set_selector_type3` 没有提升 Type 3 coverage，说明仅在当前 Top-{max_k} 内做文本去重和 memory type 多样性不足以解决多证据覆盖。",
+        f"- Coverage@{max_k} 反映输入候选池的总体证据空间；Coverage@5 下降说明简单多样性可能把相关证据推到更后。",
+        f"- 下一步应做 query decomposition、扩大候选召回，或训练真正的 set-level selector，而不是只在 Top-{max_k} 内做启发式重排。",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -275,7 +276,7 @@ def main() -> None:
     write_csv(args.output_ranked, ranked)
     write_csv(args.output_overall, overall)
     write_csv(args.output_by_type, by_type)
-    write_report(args.output_report, overall, by_type, {"alpha": args.alpha, "beta": args.beta, "gamma": args.gamma})
+    write_report(args.output_report, overall, by_type, {"alpha": args.alpha, "beta": args.beta, "gamma": args.gamma}, ks)
     print(json.dumps({
         "num_rows": len(per_query),
         "output_report": str(args.output_report),
