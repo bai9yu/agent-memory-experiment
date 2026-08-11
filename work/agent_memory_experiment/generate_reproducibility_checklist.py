@@ -255,6 +255,8 @@ def main() -> None:
         ("Artifact integrity manifest CSV", outputs / "agent_memory_artifact_integrity_manifest.csv"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
+        ("Evidence freshness audit", outputs / "agent_memory_evidence_freshness_audit_zh.md"),
+        ("Evidence freshness audit CSV", outputs / "agent_memory_evidence_freshness_audit.csv"),
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
         ("Embedding baseline status", outputs / "agent_memory_embedding_baseline_status_zh.md"),
         ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
@@ -615,6 +617,11 @@ def main() -> None:
             "stage": "Submission gap analysis",
             "command": "work/agent_memory_experiment/generate_submission_gap_analysis.py",
             "notes": "Ranks reviewer-facing risks and minimum actions before submission.",
+        },
+        {
+            "stage": "Evidence freshness audit",
+            "command": "work/agent_memory_experiment/validate_evidence_freshness.py",
+            "notes": "Checks paper-facing reports for stale reproducibility artifact/metric/integrity gate counts after regeneration.",
         },
         {
             "stage": "Experiment protocol",

@@ -78,10 +78,12 @@ Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,T
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1884
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
-Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3975
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,22941
+Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3939
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,23632
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9881
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5713
+Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
+Evidence freshness audit CSV,outputs/agent_memory_evidence_freshness_audit.csv,True,98
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
 Embedding baseline status,outputs/agent_memory_embedding_baseline_status_zh.md,True,3276
 Embedding baseline status CSV,outputs/agent_memory_embedding_baseline_status.csv,True,734

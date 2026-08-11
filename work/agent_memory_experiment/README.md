@@ -1105,6 +1105,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-report outputs/agent_memory_submission_gap_analysis_zh.md
 ```
 
+Validate evidence freshness across paper-facing reports:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_evidence_freshness.py \
+  --outputs outputs \
+  --output-csv outputs/agent_memory_evidence_freshness_audit.csv \
+  --output-report outputs/agent_memory_evidence_freshness_audit_zh.md
+```
+
 Generate paper-ready experiment protocol appendix:
 
 ```bash

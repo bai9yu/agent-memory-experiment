@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：133/133
+- Artifact 存在性：135/135
 - 关键指标阈值：19/19
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `ad0a56b` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `6a73e8c` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -105,10 +105,12 @@
 | Submission readiness gate CSV | True | 1884 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
-| Artifact integrity manifest | True | 3975 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 22941 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest | True | 3939 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
+| Artifact integrity manifest CSV | True | 23632 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9881 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5713 | `outputs/agent_memory_submission_gap_analysis.csv` |
+| Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
+| Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
 | Embedding baseline status | True | 3276 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 734 | `outputs/agent_memory_embedding_baseline_status.csv` |
@@ -232,6 +234,7 @@
 | Public release readiness gate | `work/agent_memory_experiment/validate_public_release_readiness.py` | Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links. |
 | Artifact integrity manifest | `work/agent_memory_experiment/generate_artifact_integrity_manifest.py` | Writes sha256, size, and line-count metadata for all reproducibility artifacts. |
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |
+| Evidence freshness audit | `work/agent_memory_experiment/validate_evidence_freshness.py` | Checks paper-facing reports for stale reproducibility artifact/metric/integrity gate counts after regeneration. |
 | Experiment protocol | `work/agent_memory_experiment/generate_experiment_protocol.py` | Builds a paper appendix-style protocol from cached metrics and artifacts. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |
 | Paper tables | `work/agent_memory_experiment/generate_paper_tables.py` | Generates Markdown and LaTeX tables from cached CSVs. |
