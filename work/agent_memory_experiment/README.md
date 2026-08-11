@@ -766,6 +766,17 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-metrics outputs/agent_memory_reproducibility_metrics.csv
 ```
 
+Generate environment snapshot:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_environment_snapshot.py \
+  --project-root . \
+  --output-report outputs/agent_memory_environment_snapshot_zh.md \
+  --output-packages outputs/agent_memory_environment_packages.csv \
+  --output-system outputs/agent_memory_environment_system.csv
+```
+
 Run top-1 error analysis:
 
 ```bash

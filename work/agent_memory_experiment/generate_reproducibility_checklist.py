@@ -180,6 +180,7 @@ def main() -> None:
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
+        ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
     ]
     artifact_rows = [exists_row(label, path) for label, path in artifact_specs]
 
@@ -214,6 +215,11 @@ def main() -> None:
             "stage": "Type3 diagnostics",
             "command": "work/agent_memory_experiment/type3_coverage_significance_analysis.py",
             "notes": "Aggregates Type3 coverage significance tests.",
+        },
+        {
+            "stage": "Environment snapshot",
+            "command": "work/agent_memory_experiment/generate_environment_snapshot.py",
+            "notes": "Records Python/package/cache/Git environment; does not read .env.",
         },
         {
             "stage": "Paper tables",

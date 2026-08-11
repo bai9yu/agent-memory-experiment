@@ -6,5 +6,6 @@ Candidate reranker significance,outputs/agent_memory_candidate_reranker_signific
 Type3 coverage significance,outputs/agent_memory_type3_coverage_significance_zh.md,True,2545
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,2345
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,3190
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,18535
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,18952
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
+Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

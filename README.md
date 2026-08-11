@@ -34,6 +34,7 @@
 论文复现清单见：
 
 - `outputs/agent_memory_reproducibility_checklist_zh.md`
+- `outputs/agent_memory_environment_snapshot_zh.md`
 
 ## 当前推荐配置
 
