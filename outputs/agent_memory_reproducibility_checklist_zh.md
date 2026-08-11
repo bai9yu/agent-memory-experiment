@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：87/87
+- Artifact 存在性：88/88
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `ccf6f87` |
+| git_commit | `00ec18b` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -74,7 +74,7 @@
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3770 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 14865 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 15050 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -106,11 +106,12 @@
 | Human/LLM priority20 audit agreement CSV | True | 980 | `outputs/agent_memory_human_llm_audit_priority20_agreement.csv` |
 | Human audit priority20 blind review | True | 1220 | `outputs/agent_memory_human_audit_priority20_blind_review_zh.md` |
 | Human audit priority20 blind review CSV | True | 6882 | `outputs/agent_memory_human_audit_priority20_blind_review.csv` |
+| Human audit priority20 review packet | True | 15963 | `outputs/agent_memory_human_audit_priority20_review_packet_zh.md` |
 | Human audit full80 blind review | True | 1201 | `outputs/agent_memory_human_audit_full80_blind_review_zh.md` |
 | Human audit full80 blind review CSV | True | 28745 | `outputs/agent_memory_human_audit_full80_blind_review.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 25867 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 26204 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -147,6 +148,7 @@
 | Human/LLM audit confirmation | `work/agent_memory_experiment/confirm_llm_audit_labels.py` | Creates a human-confirmation sheet and summarizes agreement after manual labels are filled. |
 | Human/LLM priority20 audit | `work/agent_memory_experiment/generate_priority_audit_subset.py` | Selects a 20-sample quick-review subset and reuses the agreement workflow. |
 | Blinded human audit sheets | `work/agent_memory_experiment/blind_human_audit_labels.py` | Exports blind review sheets that hide LLM-assisted labels and can merge human labels back. |
+| Human audit review packet | `work/agent_memory_experiment/generate_human_audit_review_packet.py` | Renders a readable Markdown review packet from the blinded priority20 sheet without exposing LLM-assisted labels. |
 | Human audit readiness gate | `work/agent_memory_experiment/validate_human_audit_readiness.py` | Checks whether priority20/full80 human confirmations can support paper claims. |
 | Evidence matrix | `work/agent_memory_experiment/generate_evidence_matrix.py` | Summarizes paper claims, evidence strength, and remaining gaps. |
 | Paper draft outline | `work/agent_memory_experiment/generate_paper_draft_outline.py` | Builds a Chinese paper skeleton from current evidence, formulas, and result tables. |

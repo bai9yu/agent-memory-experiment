@@ -252,6 +252,7 @@ def main() -> None:
         ("Human/LLM priority20 audit agreement CSV", outputs / "agent_memory_human_llm_audit_priority20_agreement.csv"),
         ("Human audit priority20 blind review", outputs / "agent_memory_human_audit_priority20_blind_review_zh.md"),
         ("Human audit priority20 blind review CSV", outputs / "agent_memory_human_audit_priority20_blind_review.csv"),
+        ("Human audit priority20 review packet", outputs / "agent_memory_human_audit_priority20_review_packet_zh.md"),
         ("Human audit full80 blind review", outputs / "agent_memory_human_audit_full80_blind_review_zh.md"),
         ("Human audit full80 blind review CSV", outputs / "agent_memory_human_audit_full80_blind_review.csv"),
         ("Human audit readiness gate", outputs / "agent_memory_human_audit_readiness_gate_zh.md"),
@@ -383,6 +384,11 @@ def main() -> None:
             "stage": "Blinded human audit sheets",
             "command": "work/agent_memory_experiment/blind_human_audit_labels.py",
             "notes": "Exports blind review sheets that hide LLM-assisted labels and can merge human labels back.",
+        },
+        {
+            "stage": "Human audit review packet",
+            "command": "work/agent_memory_experiment/generate_human_audit_review_packet.py",
+            "notes": "Renders a readable Markdown review packet from the blinded priority20 sheet without exposing LLM-assisted labels.",
         },
         {
             "stage": "Human audit readiness gate",

@@ -260,7 +260,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_manuscript_claim_check_zh.md`：论文声明一致性检查；当前 8 项检查全部通过，用于防止正文把 pending baseline 或人工复核写成已完成结论。
 - `outputs/agent_memory_submission_readiness_gate_zh.md`：最终投稿门禁汇总；当前 required gates 为 `5/10`，blockers 为 `5`，说明复现、声明检查、公开发布卫生和 artifact 完整性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
 - `outputs/agent_memory_public_release_readiness_zh.md`：公开发布卫生检查；当前 blocker 为 `0`，未发现 tracked secret 或 `.env` 入库，剩余 minor 是正式开源前可补 LICENSE。
-- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `87/87` 个复现 artifact，缺失 `0`；其中 `85` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
+- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `88/88` 个复现 artifact，缺失 `0`；其中 `86` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前 OpenAI-compatible `text-embedding-3-small` baseline 已有 API/cache 入口，但尚未实际运行出指标。
@@ -277,12 +277,13 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_human_llm_audit_priority20_guide_zh.md`：20 条优先人工抽查指南；优先覆盖 LLM 判为 no/partial、gold 充分性存疑和高歧义错误类型。
 - `outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md`：priority20 快速抽查一致性报告；当前为 `pending_human_confirmation`，用于先低成本获得 quick-review 可靠性证据。
 - `outputs/agent_memory_human_audit_priority20_blind_review_zh.md`：priority20 盲审人工复核表说明；隐藏 LLM-assisted 预标注，建议优先填写对应 CSV 的 `human_*` 字段。
+- `outputs/agent_memory_human_audit_priority20_review_packet_zh.md`：priority20 人工复核阅读包；把盲审 CSV 渲染成逐样本 Markdown 卡片，只展示 query、auto reason、Top memory 和 gold memory，用于降低人工标注成本，但不替代人工填写。
 - `outputs/agent_memory_human_audit_full80_blind_review_zh.md`：full80 盲审人工复核表说明；用于完整人工复核，填写后可回填 Human/LLM 确认表并计算一致性。
 - `outputs/agent_memory_human_audit_readiness_gate_zh.md`：Human audit readiness 门禁；当前 priority20 为 `0/20`、full80 为 `0/80`，用于防止论文把 LLM-assisted 预标注写成人工验证结论。
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `87/87`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `88/88`，metric gate 为 `5/5`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
@@ -290,7 +291,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 2. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
 4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
-6. 错误复核：已生成 80 条分层抽样复核表、DeepSeek LLM-assisted 预标注、Human/LLM 确认表、priority20 快速抽查包和盲审人工复核表；当前投稿风险矩阵将人工确认列为 blocker，建议先填写 priority20 blind review 的 `human_*` 字段，再扩展到完整 80 条。
+6. 错误复核：已生成 80 条分层抽样复核表、DeepSeek LLM-assisted 预标注、Human/LLM 确认表、priority20 快速抽查包、盲审人工复核表和 priority20 阅读包；当前投稿风险矩阵将人工确认列为 blocker，建议先用阅读包审阅 20 条 priority20 样本并回填 blind review 的 `human_*` 字段，再扩展到完整 80 条。
 
 ## 错误分析
 
