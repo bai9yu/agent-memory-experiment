@@ -556,6 +556,17 @@ paired significance test 显示 candidate reranker 相比 fixed `type_aware` 的
 \mathbb{I}[\exists m_i\in S: m_i \sim e]
 \]
 
+当前已测试一个无监督启发式 set selector：保留 candidate reranker 的 Top-1，再用文本 Jaccard 去重和 memory type 多样性选择后续候选。结果 Type 3 Coverage@5 从 `0.372` 降到 `0.351`，Coverage@10 保持 `0.462` 不变。说明只在当前 Top-10 里做多样性重排不够，下一版应扩大候选池或显式拆解 query：
+
+\[
+q \rightarrow \{q_1,q_2,\ldots,q_n\}
+\]
+
+\[
+\operatorname{retrieve}_{multi}(q)=
+\bigcup_j \operatorname{TopK}(q_j)
+\]
+
 ## 9. 后续持续更新约定
 
 这个文档建议每次代码升级后同步更新四处：

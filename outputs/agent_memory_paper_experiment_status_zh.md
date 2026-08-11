@@ -168,6 +168,15 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 该结果支持 Type 3 的错误诊断：Type 3 的平均 gold evidence 数为 `2.65`，多证据问题比例为 `0.675`，明显高于 Type 2/4/5；candidate reranker 虽然提升总体 Top-1，但没有改善 Type 3 的 Top-5 evidence coverage ratio。因此下一步应做 set-level selection，而不是只继续优化单候选排序。
 
+进一步测试无监督 set-level selection baseline：在 candidate reranker 的 Top-10 内保留原 Top-1，再用文本 Jaccard 去重和 memory type 多样性选择后续候选。结果显示该启发式方法没有改善 Type 3：
+
+| Method | Type 3 MRR | Type 3 R@5 | Type 3 Coverage@5 | Type 3 Full@5 | Type 3 Coverage@10 |
+|---|---:|---:|---:|---:|---:|
+| candidate_reranker | 0.410 | 0.492 | 0.372 | 0.262 | 0.462 |
+| set_selector_type3 | 0.407 | 0.468 | 0.351 | 0.238 | 0.462 |
+
+结论：仅在当前 Top-10 里做启发式多样性重排会把部分相关证据推后，无法解决 Type 3。下一步应扩大候选召回、做 query decomposition，或训练真正的 set-level selector。
+
 ## 距离论文发表级仍缺的内容
 
 1. 重复抽取实验：至少对 LoCoMo10 做 3 次不同 seed / temperature 的 DeepSeek 抽取，报告均值和方差。

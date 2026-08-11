@@ -594,6 +594,19 @@ python3 work/agent_memory_experiment/multi_evidence_coverage_analysis.py \
   --output-report outputs/agent_memory_multi_evidence_coverage_zh.md
 ```
 
+Run unsupervised set-level selection over reranker Top-10 candidates:
+
+```bash
+python3 work/agent_memory_experiment/set_level_selection_experiment.py \
+  --candidate-ranked outputs/agent_memory_candidate_reranker_locomo10_ranked_top10.csv \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --output-per-query outputs/agent_memory_set_selection_per_query.csv \
+  --output-ranked outputs/agent_memory_set_selection_ranked.csv \
+  --output-overall outputs/agent_memory_set_selection_overall.csv \
+  --output-by-type outputs/agent_memory_set_selection_by_type.csv \
+  --output-report outputs/agent_memory_set_selection_zh.md
+```
+
 Run top-1 error analysis:
 
 ```bash

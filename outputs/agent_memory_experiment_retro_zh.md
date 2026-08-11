@@ -350,6 +350,24 @@
 
 收益：Type 3 的失败原因从泛泛的“推理问题难”变成可量化的“Top-K evidence set 覆盖不足”，更适合写入论文 error analysis。
 
+### 3.17 问题：简单 MMR 式 set-level selection 没有修复 Type 3
+
+现象：在 candidate reranker Top-10 内测试无监督 set selector：保留原 Top-1，再用文本 Jaccard 去重和 memory type 多样性选择后续候选。结果 Type 3 Coverage@5 从 `0.372` 降到 `0.351`，Full@5 从 `0.262` 降到 `0.238`；Coverage@10 保持 `0.462` 不变。
+
+原因判断：
+
+- 当前 Top-10 候选集合没有扩大，最多只能改变前 5 个候选的顺序。
+- 简单多样性会惩罚相似记忆，但 Type 3 的多个 evidence 有时本来就语义相近，去重反而把相关证据推后。
+- Top-10 coverage 不变说明候选池容量没有解决，Top-5 下降说明启发式排序目标不够准确。
+
+解决：
+
+- 将该方法记录为负结果 baseline。
+- 不继续调 MMR 参数作为主方向。
+- 下一步改做 query decomposition 或扩大候选召回后再做 set-level learning。
+
+收益：排除了一个看似自然但无效的简单方案，让后续实验方向更聚焦。
+
 ## 4. 当前实验结论
 
 ### 4.1 时效性
@@ -382,7 +400,7 @@ LoCoMo `locomo10.json` 已转换为 5882 条 memory 和 1986 个 query。hash ba
 
 1. 固化当前推荐配置：BGE-M3 + adaptive time-aware + persona gate + importance proxy。
 2. 固化两层记忆结构：fact/observation 作为在线检索层，session_summary 作为归档回溯层。
-3. 针对 Type 3 增加 set-level selection 或 query decomposition，优化 Top-K evidence coverage ratio，而不仅是 Top-1 MRR。
+3. 针对 Type 3 增加 query decomposition 或扩大候选召回后的 set-level learning，优化 Top-K evidence coverage ratio，而不仅是 Top-1 MRR。
 4. 增加 LLM memory extraction 重复实验：从原始对话抽取事实、时间、实体、重要性、权限，并报告 seed/temperature 方差。
 5. 增加 conflict resolver：同一主体同一属性按时间和置信度更新。
 6. 增加真实多 Agent trace：把 Agent A 的工具经验、错误修复、代码片段作为共享记忆。
