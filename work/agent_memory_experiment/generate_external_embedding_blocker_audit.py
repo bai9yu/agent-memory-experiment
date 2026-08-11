@@ -47,7 +47,10 @@ def build_action_rows(outputs: Path) -> list[dict[str, Any]]:
     preflight_rows = read_csv(outputs / "agent_memory_api_embedding_preflight.csv")
     estimate_rows = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
     comparison_rows = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
-    readiness_rows = read_csv(outputs / "agent_memory_submission_readiness_gate.csv")
+    readiness_rows = read_csv(outputs / "agent_memory_submission_readiness.csv")
+    if not readiness_rows:
+        readiness_rows = read_csv(outputs / "agent_memory_submission_readiness_gate.csv")
+    postrun_rows = read_csv(outputs / "agent_memory_api_embedding_postrun_gate.csv")
 
     openai_status = find_row(status_rows, "label", "OpenAI text-embedding-3-small")
     generic_status = find_row(status_rows, "label", "Generic OpenAI-compatible embedding")
@@ -77,6 +80,7 @@ def build_action_rows(outputs: Path) -> list[dict[str, Any]]:
             uncached_batches = estimate_rows[0].get("uncached_batches", "")
 
     comparison_ready = any(row.get("status") == "completed" for row in comparison_rows)
+    postrun_pass = any(row.get("postrun_pass") == "True" for row in postrun_rows)
 
     rows: list[dict[str, Any]] = [
         {
@@ -115,6 +119,13 @@ def build_action_rows(outputs: Path) -> list[dict[str, Any]]:
             "unblocks": "external_embedding_completed",
         },
         {
+            "item": "api_embedding_postrun_gate",
+            "status": "pass" if postrun_pass else "pending_summary",
+            "evidence": "post-run summary/files/comparison gate passed" if postrun_pass else "no provider has complete summary, result files, and comparison table",
+            "required_action": "Run validate_api_embedding_postrun.py after the API baseline and comparison finish.",
+            "unblocks": "paper-safe external embedding baseline",
+        },
+        {
             "item": "comparison_table_completed",
             "status": "pass" if comparison_ready else "pending_summary",
             "evidence": "completed API/BGE delta exists" if comparison_ready else "API summary not available; comparison remains pending",
@@ -142,7 +153,8 @@ def write_report(path: Path, rows: list[dict[str, Any]], outputs: Path) -> None:
         f"- Status source: `{outputs / 'agent_memory_embedding_baseline_status.csv'}`",
         f"- Preflight source: `{outputs / 'agent_memory_api_embedding_preflight.csv'}`",
         f"- Estimate source: `{outputs / 'agent_memory_api_embedding_run_estimate.csv'}`",
-        f"- Readiness source: `{outputs / 'agent_memory_submission_readiness_gate.csv'}`",
+        f"- Readiness source: `{outputs / 'agent_memory_submission_readiness.csv'}`",
+        f"- Post-run source: `{outputs / 'agent_memory_api_embedding_postrun_gate.csv'}`",
         "",
         markdown_table(["Item", "Status", "Evidence", "Required Action", "Unblocks"], table_rows),
         "",
@@ -169,7 +181,8 @@ def write_report(path: Path, rows: list[dict[str, Any]], outputs: Path) -> None:
         "3. `estimate_api_embedding_run.py`：确认文本数量、近似 token 和未缓存批次数。",
         "4. `memory_eval.py --semantic-backend api`：执行真实外部 embedding baseline。",
         "5. `compare_embedding_baselines.py`：生成相对 BGE-M3 的 delta 表。",
-        "6. `validate_submission_readiness.py`：确认 `api_embedding_preflight` 与 `external_embedding_completed` 门禁是否解除。",
+        "6. `validate_api_embedding_postrun.py`：确认 summary、rankings、per-query metrics、summary_by_type 和 comparison 都完整。",
+        "7. `validate_submission_readiness.py`：确认 `api_embedding_preflight` 与 `external_embedding_completed` 门禁是否解除。",
         "",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)

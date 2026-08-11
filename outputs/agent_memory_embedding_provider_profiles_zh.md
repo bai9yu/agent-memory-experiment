@@ -4,14 +4,14 @@
 
 ## Provider 概览
 
-| Label | Model | Base URL | Key Env | Key Available | Status | Result Dir |
-|---|---|---|---|---:|---|---|
-| OpenAI text-embedding-3-small | `text-embedding-3-small` | `https://api.openai.com/v1` | `OPENAI_API_KEY` | False | pending_api_key | `work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004` |
-| Generic OpenAI-compatible embedding | `provider_embedding_model` | `https://provider.example/v1` | `EXTERNAL_EMBEDDING_API_KEY` | False | pending_api_key | `work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004` |
+| Label | Model | Base URL | Dimensions | Key Env | Key Available | Status | Result Dir |
+|---|---|---|---:|---|---:|---|---|
+| OpenAI text-embedding-3-small | `text-embedding-3-small` | `https://api.openai.com/v1` | 0 | `OPENAI_API_KEY` | False | pending_api_key | `work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004` |
+| Generic OpenAI-compatible embedding | `provider_embedding_model` | `https://provider.example/v1` | 0 | `EXTERNAL_EMBEDDING_API_KEY` | False | pending_api_key | `work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004` |
 
 ## 使用顺序
 
-1. 在 `.env` 中配置其中一个 provider 的 key/model/base URL。
+1. 在 `.env` 中配置其中一个 provider 的 key/model/base URL；如 provider 支持指定维度，可配置 `OPENAI_EMBEDDING_DIMENSIONS` 或 `EXTERNAL_EMBEDDING_DIMENSIONS`。
 2. 先运行该 provider 的 preflight，确认 required checks 全部通过。
 3. 运行真实 API embedding baseline；首次运行会产生外部 API 调用和费用，之后应命中 embedding cache。
 4. 运行 compare 命令，生成相对 BGE-M3 的 delta 表，再重跑 evidence/readiness gate。
@@ -30,6 +30,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/prefl
   --provider-label "OpenAI text-embedding-3-small" \
   --model "text-embedding-3-small" \
   --base-url "https://api.openai.com/v1" \
+  --dimensions 0 \
   --batch-size 128 \
   --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
   --api-key-env OPENAI_API_KEY \
@@ -47,6 +48,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/estim
   --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
   --model "text-embedding-3-small" \
   --base-url "https://api.openai.com/v1" \
+  --dimensions 0 \
   --batch-size 128 \
   --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
   --output-csv outputs/agent_memory_api_embedding_1_openai_text-embedding-3-small_run_estimate.csv \
@@ -67,6 +69,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memor
   --api-key-env OPENAI_API_KEY \
   --env-file .env \
   --api-embedding-batch-size 128 \
+  --api-embedding-dimensions 0 \
   --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
   --half-life-days 30 \
   --persona-boost-weight 0.04 \
@@ -103,6 +106,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/prefl
   --provider-label "Generic OpenAI-compatible embedding" \
   --model "provider_embedding_model" \
   --base-url "https://provider.example/v1" \
+  --dimensions 0 \
   --batch-size 128 \
   --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
   --api-key-env EXTERNAL_EMBEDDING_API_KEY \
@@ -120,6 +124,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/estim
   --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
   --model "provider_embedding_model" \
   --base-url "https://provider.example/v1" \
+  --dimensions 0 \
   --batch-size 128 \
   --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
   --output-csv outputs/agent_memory_api_embedding_2_generic_openai-compatible_embedding_run_estimate.csv \
@@ -140,6 +145,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memor
   --api-key-env EXTERNAL_EMBEDDING_API_KEY \
   --env-file .env \
   --api-embedding-batch-size 128 \
+  --api-embedding-dimensions 0 \
   --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
   --half-life-days 30 \
   --persona-boost-weight 0.04 \

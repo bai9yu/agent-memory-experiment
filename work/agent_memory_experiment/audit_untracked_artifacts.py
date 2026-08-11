@@ -18,8 +18,11 @@ def run_git_status(root: Path) -> list[str]:
 def classify(path: str) -> tuple[str, str, str]:
     if path in {
         "work/agent_memory_experiment/audit_untracked_artifacts.py",
+        "work/agent_memory_experiment/validate_api_embedding_postrun.py",
         "outputs/agent_memory_untracked_artifact_audit.csv",
         "outputs/agent_memory_untracked_artifact_audit_zh.md",
+        "outputs/agent_memory_api_embedding_postrun_gate.csv",
+        "outputs/agent_memory_api_embedding_postrun_gate_zh.md",
     }:
         return ("release_audit_artifact", "track_as_paper_artifact", "New public-release audit support file; track with the paper artifact package.")
     if path.startswith("work/agent_memory_experiment/data/deepseek_smoke_test/"):

@@ -8,7 +8,8 @@
 - Status source: `outputs/agent_memory_embedding_baseline_status.csv`
 - Preflight source: `outputs/agent_memory_api_embedding_preflight.csv`
 - Estimate source: `outputs/agent_memory_api_embedding_run_estimate.csv`
-- Readiness source: `outputs/agent_memory_submission_readiness_gate.csv`
+- Readiness source: `outputs/agent_memory_submission_readiness.csv`
+- Post-run source: `outputs/agent_memory_api_embedding_postrun_gate.csv`
 
 | Item | Status | Evidence | Required Action | Unblocks |
 | --- | --- | --- | --- | --- |
@@ -16,7 +17,8 @@
 | generic_provider_key | alternative_missing | EXTERNAL_EMBEDDING_API_KEY is not set; summary.csv not found | Alternatively set EXTERNAL_EMBEDDING_API_KEY, EXTERNAL_EMBEDDING_MODEL, and EXTERNAL_EMBEDDING_BASE_URL. | api_embedding_preflight |
 | preflight_required_checks | blocker | 4/5 required checks pass | Run preflight_api_embedding_baseline.py after configuring an embedding provider key. | safe paid/API run |
 | run_scale_known | pass | items=4355, approx_tokens=71882, uncached_batches=35 | Rerun estimate_api_embedding_run.py if memories or queries change. | cost/risk planning |
-| external_summary_completed | blocker | completed external embedding baselines=0 | Run memory_eval.py with semantic-backend api and generate summary.csv. | external_embedding_completed |
+| external_summary_completed | blocker | completed external embedding baselines=0, postrun_pass=0 | Run memory_eval.py with semantic-backend api and generate summary.csv. | external_embedding_completed |
+| api_embedding_postrun_gate | pending_summary | no provider has complete summary, result files, and comparison table | Run validate_api_embedding_postrun.py after the API baseline and comparison finish. | paper-safe external embedding baseline |
 | comparison_table_completed | pending_summary | API summary not available; comparison remains pending | Run compare_embedding_baselines.py after API summary.csv exists. | paper embedding baseline table |
 
 ## 结论
@@ -32,4 +34,5 @@
 3. `estimate_api_embedding_run.py`：确认文本数量、近似 token 和未缓存批次数。
 4. `memory_eval.py --semantic-backend api`：执行真实外部 embedding baseline。
 5. `compare_embedding_baselines.py`：生成相对 BGE-M3 的 delta 表。
-6. `validate_submission_readiness.py`：确认 `api_embedding_preflight` 与 `external_embedding_completed` 门禁是否解除。
+6. `validate_api_embedding_postrun.py`：确认 summary、rankings、per-query metrics、summary_by_type 和 comparison 都完整。
+7. `validate_submission_readiness.py`：确认 `api_embedding_preflight` 与 `external_embedding_completed` 门禁是否解除。

@@ -169,6 +169,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
         },
         {
             "section": "External Embedding",
+            "artifact": "outputs/agent_memory_api_embedding_postrun_gate_zh.md",
+            "role": "外部 API embedding 跑后结果完整性验收，检查 summary、rankings、per-query metrics、summary_by_type 和 comparison。",
+            "status": "blocked_until_api_run",
+            "evidence": external_evidence,
+            "next_action": "API baseline 和 compare 完成后重跑该 gate，再刷新 submission readiness。",
+        },
+        {
+            "section": "External Embedding",
             "artifact": "outputs/agent_memory_offline_embedding_sensitivity_zh.md",
             "role": "BGE-M3、hash vector 和 BM25 keyword 的离线 encoder-sensitivity 下界诊断。",
             "status": "ready_diagnostic",

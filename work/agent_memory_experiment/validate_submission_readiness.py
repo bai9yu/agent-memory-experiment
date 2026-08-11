@@ -11,6 +11,8 @@ from typing import Any
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
     with path.open("r", encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))
 
@@ -77,6 +79,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     claim_check = read_csv(outputs / "agent_memory_manuscript_claim_check.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     embedding_preflight = read_csv(outputs / "agent_memory_api_embedding_preflight.csv")
+    embedding_postrun = read_csv(outputs / "agent_memory_api_embedding_postrun_gate.csv")
     mock_smoke = read_csv(outputs / "agent_memory_mock_api_embedding_smoke_test.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
     gap_analysis = read_csv(outputs / "agent_memory_submission_gap_analysis.csv")
@@ -87,6 +90,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     metric_pass = count(reproducibility_metrics, "pass", "True")
     claim_pass = count(claim_check, "status", "pass")
     embedding_completed = count(embedding_status, "status", "completed")
+    postrun_completed = count(embedding_postrun, "postrun_pass", "True")
     preflight_required = [row for row in embedding_preflight if row.get("severity") == "required"]
     preflight_required_pass = count(preflight_required, "pass", "True")
     smoke_second = lookup(mock_smoke, run="2")
@@ -143,8 +147,8 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "external_embedding_completed",
             "external_baseline",
             True,
-            embedding_completed >= 1,
-            f"completed external embedding baselines={embedding_completed}",
+            embedding_completed >= 1 and postrun_completed >= 1,
+            f"completed external embedding baselines={embedding_completed}, postrun_pass={postrun_completed}",
             "实际运行至少一个外部 embedding baseline，并生成与 BGE-M3 的 delta 表。",
         ),
         gate_row(

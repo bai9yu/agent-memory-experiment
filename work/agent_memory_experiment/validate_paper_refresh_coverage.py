@@ -12,6 +12,13 @@ from typing import Any
 REQUIRED_STEPS = [
     ("offline_embedding_sensitivity", "encoder sensitivity diagnostic"),
     ("human_audit_execution_plan", "human audit execution plan"),
+    ("embedding_baseline_status", "external embedding status without network calls"),
+    ("embedding_provider_profiles", "provider-specific external embedding command profiles"),
+    ("api_embedding_preflight", "paid/API embedding preflight"),
+    ("api_embedding_run_estimate", "API embedding cost/cache estimate"),
+    ("embedding_baseline_comparison", "BGE-M3 vs API embedding comparison status"),
+    ("api_embedding_postrun_gate", "API embedding post-run completeness gate"),
+    ("external_embedding_blocker_audit", "external embedding blocker audit"),
     ("submission_blocker_closure_plan", "submission blocker closure path"),
     ("submission_package_index", "paper package index"),
     ("untracked_artifact_audit", "untracked artifact hygiene audit"),

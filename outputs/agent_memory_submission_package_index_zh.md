@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Indexed artifacts: 25
+- Indexed artifacts: 26
 - Missing indexed artifacts: 0
 - Blocked/not-ready sections: 2
 
@@ -23,6 +23,7 @@
 | Threats to Validity | outputs/agent_memory_threats_to_validity_zh.md | True | ready_with_blockers_declared | 内部/外部/构念/统计/规模/复现有效性威胁与缓解措施。 | 外部 embedding 和人工复核完成后更新 blocker 行。 |
 | Reviewer Prep | outputs/agent_memory_reviewer_response_prep_zh.md | True | ready_with_blockers_declared | 审稿人可能追问的问题、当前证据、剩余缺口和安全写作边界。 | 每次补完 blocker 或修改主张后重新生成。 |
 | External Embedding | outputs/agent_memory_external_embedding_blocker_audit_zh.md | True | blocked | 外部 embedding baseline 的 key、preflight、summary 和 comparison blocker 审计。 | 配置 OPENAI_API_KEY 或 OpenAI-compatible provider key 后运行 API baseline。 |
+| External Embedding | outputs/agent_memory_api_embedding_postrun_gate_zh.md | True | blocked_until_api_run | 外部 API embedding 跑后结果完整性验收，检查 summary、rankings、per-query metrics、summary_by_type 和 comparison。 | API baseline 和 compare 完成后重跑该 gate，再刷新 submission readiness。 |
 | External Embedding | outputs/agent_memory_offline_embedding_sensitivity_zh.md | True | ready_diagnostic | BGE-M3、hash vector 和 BM25 keyword 的离线 encoder-sensitivity 下界诊断。 | 保留为下界诊断；投稿前仍需真实外部 API embedding baseline。 |
 | Human Audit | outputs/agent_memory_human_audit_annotation_codebook_zh.md | True | ready_for_labeling | 人工复核 yes/partial/no、gold sufficiency、manual reason 和双人标注规则。 | 先填写 priority20 盲审 CSV，再扩展 full80。 |
 | Human Audit | outputs/agent_memory_human_audit_execution_plan_zh.md | True | ready_for_labeling | 把 priority20、full80、双人独立标注、仲裁和论文刷新步骤拆成可执行 checklist。 | 按 execution plan 先完成 priority20 single blind labeling。 |

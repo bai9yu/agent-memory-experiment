@@ -24,6 +24,16 @@ def safe_name(value: str) -> str:
     return re.sub(r"[^a-zA-Z0-9_.-]+", "_", value.strip()) or "custom"
 
 
+def env_int(name: str, default: int = 0) -> int:
+    raw = os.environ.get(name, "").strip()
+    if not raw:
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        return default
+
+
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -47,12 +57,14 @@ def profile_row(
     key_env: str,
     result_dir: str,
     batch_size: int,
+    dimensions: int,
 ) -> dict[str, Any]:
     return {
         "label": label,
         "provider": provider,
         "model": model,
         "base_url": base_url.rstrip("/"),
+        "dimensions": dimensions,
         "key_env": key_env,
         "key_available": bool(os.environ.get(key_env, "")),
         "result_dir": result_dir,
@@ -66,6 +78,8 @@ def profile_row(
 def build_profiles(batch_size: int) -> list[dict[str, Any]]:
     custom_model = os.environ.get("EXTERNAL_EMBEDDING_MODEL", "provider_embedding_model")
     custom_base_url = os.environ.get("EXTERNAL_EMBEDDING_BASE_URL", "https://provider.example/v1")
+    openai_dimensions = env_int("OPENAI_EMBEDDING_DIMENSIONS", 0)
+    custom_dimensions = env_int("EXTERNAL_EMBEDDING_DIMENSIONS", 0)
     return [
         profile_row(
             "OpenAI text-embedding-3-small",
@@ -75,6 +89,7 @@ def build_profiles(batch_size: int) -> list[dict[str, Any]]:
             "OPENAI_API_KEY",
             "work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004",
             batch_size,
+            openai_dimensions,
         ),
         profile_row(
             "Generic OpenAI-compatible embedding",
@@ -84,6 +99,7 @@ def build_profiles(batch_size: int) -> list[dict[str, Any]]:
             "EXTERNAL_EMBEDDING_API_KEY",
             f"work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_{safe_name(custom_model)}_type_004",
             batch_size,
+            custom_dimensions,
         ),
     ]
 
@@ -103,6 +119,7 @@ def preflight_command(row: dict[str, Any], output_prefix: str) -> list[str]:
         f"  --provider-label \"{row['label']}\" \\",
         f"  --model \"{row['model']}\" \\",
         f"  --base-url \"{row['base_url']}\" \\",
+        f"  --dimensions {row['dimensions']} \\",
         f"  --batch-size {row['batch_size']} \\",
         f"  --embedding-cache-dir {CACHE_DIR} \\",
         f"  --api-key-env {row['key_env']} \\",
@@ -125,6 +142,7 @@ def run_command(row: dict[str, Any]) -> list[str]:
         f"  --api-key-env {row['key_env']} \\",
         "  --env-file .env \\",
         f"  --api-embedding-batch-size {row['batch_size']} \\",
+        f"  --api-embedding-dimensions {row['dimensions']} \\",
         f"  --embedding-cache-dir {CACHE_DIR} \\",
         "  --half-life-days 30 \\",
         "  --persona-boost-weight 0.04 \\",
@@ -143,6 +161,7 @@ def estimate_command(row: dict[str, Any], output_prefix: str) -> list[str]:
         f"  --queries {QUERIES} \\",
         f"  --model \"{row['model']}\" \\",
         f"  --base-url \"{row['base_url']}\" \\",
+        f"  --dimensions {row['dimensions']} \\",
         f"  --batch-size {row['batch_size']} \\",
         f"  --embedding-cache-dir {CACHE_DIR} \\",
         f"  --output-csv outputs/{output_prefix}_run_estimate.csv \\",
@@ -171,18 +190,18 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "",
         "## Provider 概览",
         "",
-        "| Label | Model | Base URL | Key Env | Key Available | Status | Result Dir |",
-        "|---|---|---|---|---:|---|---|",
+        "| Label | Model | Base URL | Dimensions | Key Env | Key Available | Status | Result Dir |",
+        "|---|---|---|---:|---|---:|---|---|",
     ]
     for row in rows:
         lines.append(
-            f"| {row['label']} | `{row['model']}` | `{row['base_url']}` | `{row['key_env']}` | {row['key_available']} | {row['status']} | `{row['result_dir']}` |"
+            f"| {row['label']} | `{row['model']}` | `{row['base_url']}` | {row['dimensions']} | `{row['key_env']}` | {row['key_available']} | {row['status']} | `{row['result_dir']}` |"
         )
     lines.extend([
         "",
         "## 使用顺序",
         "",
-        "1. 在 `.env` 中配置其中一个 provider 的 key/model/base URL。",
+        "1. 在 `.env` 中配置其中一个 provider 的 key/model/base URL；如 provider 支持指定维度，可配置 `OPENAI_EMBEDDING_DIMENSIONS` 或 `EXTERNAL_EMBEDDING_DIMENSIONS`。",
         "2. 先运行该 provider 的 preflight，确认 required checks 全部通过。",
         "3. 运行真实 API embedding baseline；首次运行会产生外部 API 调用和费用，之后应命中 embedding cache。",
         "4. 运行 compare 命令，生成相对 BGE-M3 的 delta 表，再重跑 evidence/readiness gate。",
