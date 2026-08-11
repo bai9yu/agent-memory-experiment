@@ -255,6 +255,7 @@ def main() -> None:
         ("Human audit priority20 review packet", outputs / "agent_memory_human_audit_priority20_review_packet_zh.md"),
         ("Human audit full80 blind review", outputs / "agent_memory_human_audit_full80_blind_review_zh.md"),
         ("Human audit full80 blind review CSV", outputs / "agent_memory_human_audit_full80_blind_review.csv"),
+        ("Human audit full80 review packet", outputs / "agent_memory_human_audit_full80_review_packet_zh.md"),
         ("Human audit readiness gate", outputs / "agent_memory_human_audit_readiness_gate_zh.md"),
         ("Human audit readiness gate CSV", outputs / "agent_memory_human_audit_readiness_gate.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),

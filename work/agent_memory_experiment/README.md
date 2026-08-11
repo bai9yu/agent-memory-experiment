@@ -936,7 +936,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind
   --seed 20260811
 ```
 
-Render a readable priority20 review packet from the blinded sheet:
+Render readable review packets from the blinded sheets:
 
 ```bash
 PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
@@ -944,6 +944,12 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --scope priority20 \
   --blind-csv outputs/agent_memory_human_audit_priority20_blind_review.csv \
   --output-report outputs/agent_memory_human_audit_priority20_review_packet_zh.md
+
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_human_audit_review_packet.py \
+  --scope full80 \
+  --blind-csv outputs/agent_memory_human_audit_full80_blind_review.csv \
+  --output-report outputs/agent_memory_human_audit_full80_review_packet_zh.md
 ```
 
 Fill only the `human_*` columns in the blind CSV, then merge labels back into
