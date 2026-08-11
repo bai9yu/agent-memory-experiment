@@ -998,6 +998,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
   --output-report outputs/agent_memory_human_audit_readiness_gate_zh.md
 ```
 
+Validate final submission readiness gates:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_submission_readiness.py \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_submission_readiness_gate.csv \
+  --output-report outputs/agent_memory_submission_readiness_gate_zh.md
+```
+
 Generate external embedding baseline status:
 
 ```bash

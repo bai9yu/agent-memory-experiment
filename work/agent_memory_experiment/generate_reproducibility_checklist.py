@@ -191,6 +191,8 @@ def main() -> None:
         ("Paper manuscript draft", outputs / "agent_memory_manuscript_draft_zh.md"),
         ("Paper manuscript claim check", outputs / "agent_memory_manuscript_claim_check_zh.md"),
         ("Paper manuscript claim check CSV", outputs / "agent_memory_manuscript_claim_check.csv"),
+        ("Submission readiness gate", outputs / "agent_memory_submission_readiness_gate_zh.md"),
+        ("Submission readiness gate CSV", outputs / "agent_memory_submission_readiness_gate.csv"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
@@ -363,6 +365,11 @@ def main() -> None:
             "stage": "Paper manuscript claim check",
             "command": "work/agent_memory_experiment/validate_manuscript_claims.py",
             "notes": "Checks that the draft does not overclaim pending embedding or human-audit results.",
+        },
+        {
+            "stage": "Submission readiness gate",
+            "command": "work/agent_memory_experiment/validate_submission_readiness.py",
+            "notes": "Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission.",
         },
         {
             "stage": "Submission gap analysis",

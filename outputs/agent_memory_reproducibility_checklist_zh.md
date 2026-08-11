@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：57/57
+- Artifact 存在性：59/59
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `44d873c` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `409d49c` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -45,6 +45,8 @@
 | Paper manuscript draft | True | 9893 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
+| Submission readiness gate | True | 2096 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
+| Submission readiness gate CSV | True | 1513 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -80,7 +82,7 @@
 | Human audit full80 blind review CSV | True | 28745 | `outputs/agent_memory_human_audit_full80_blind_review.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 24362 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 24618 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -119,6 +121,7 @@
 | Paper draft outline | `work/agent_memory_experiment/generate_paper_draft_outline.py` | Builds a Chinese paper skeleton from current evidence, formulas, and result tables. |
 | Paper manuscript draft | `work/agent_memory_experiment/generate_paper_manuscript.py` | Generates an editable Chinese manuscript draft from cached experiment outputs. |
 | Paper manuscript claim check | `work/agent_memory_experiment/validate_manuscript_claims.py` | Checks that the draft does not overclaim pending embedding or human-audit results. |
+| Submission readiness gate | `work/agent_memory_experiment/validate_submission_readiness.py` | Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission. |
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |
 | Experiment protocol | `work/agent_memory_experiment/generate_experiment_protocol.py` | Builds a paper appendix-style protocol from cached metrics and artifacts. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |
