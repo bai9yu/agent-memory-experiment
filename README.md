@@ -31,6 +31,7 @@
 - `outputs/agent_memory_paper_tables_zh.md`
 - `outputs/agent_memory_paper_tables.tex`
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`
+- `outputs/agent_memory_embedding_baseline_status_zh.md`
 - `outputs/agent_memory_human_audit_protocol_zh.md`
 - `outputs/agent_memory_human_audit_summary_zh.md`
 

@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：15/15
+- Artifact 存在性：17/17
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `08d2f50` |
-| git_branch_status | `## main...origin/main [ahead 29]` |
+| git_commit | `fe3202f` |
+| git_branch_status | `## main...origin/main [ahead 30]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -33,12 +33,14 @@
 | Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
 | Paper tables Markdown | True | 2345 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 3190 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 5308 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper evidence matrix | True | 5762 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Embedding baseline status | True | 1650 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
+| Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
 | Human audit protocol | True | 2479 | `outputs/agent_memory_human_audit_protocol_zh.md` |
 | Human audit sample | True | 28471 | `outputs/agent_memory_human_audit_sample_type_aware.csv` |
 | Human audit summary | True | 1394 | `outputs/agent_memory_human_audit_summary_zh.md` |
 | Human audit summary CSV | True | 777 | `outputs/agent_memory_human_audit_summary.csv` |
-| Paper experiment status | True | 19481 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 19700 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -59,6 +61,7 @@
 | Main LoCoMo retrieval | `work/agent_memory_experiment/README.md#recommended-locomo-run` | Requires local BGE-M3 cache; no online embedding API. |
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
+| Embedding baseline status | `work/agent_memory_experiment/generate_embedding_baseline_status.py` | Tracks API embedding baseline readiness without reading or printing keys. |
 | Human audit sample | `work/agent_memory_experiment/generate_human_audit_sample.py` | Creates stratified manual-review sample for error-analysis reliability. |
 | Human audit summary | `work/agent_memory_experiment/summarize_human_audit.py` | Summarizes manual labels once the audit CSV is filled. |
 | Evidence matrix | `work/agent_memory_experiment/generate_evidence_matrix.py` | Summarizes paper claims, evidence strength, and remaining gaps. |

@@ -788,6 +788,15 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/summa
   --output-report outputs/agent_memory_human_audit_summary_zh.md
 ```
 
+Generate external embedding baseline status:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_embedding_baseline_status.py \
+  --output-report outputs/agent_memory_embedding_baseline_status_zh.md \
+  --output-csv outputs/agent_memory_embedding_baseline_status.csv
+```
+
 Generate reproducibility checklist:
 
 ```bash

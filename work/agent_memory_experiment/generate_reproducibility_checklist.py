@@ -179,6 +179,8 @@ def main() -> None:
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper evidence matrix", outputs / "agent_memory_paper_evidence_matrix_zh.md"),
+        ("Embedding baseline status", outputs / "agent_memory_embedding_baseline_status_zh.md"),
+        ("Embedding baseline status CSV", outputs / "agent_memory_embedding_baseline_status.csv"),
         ("Human audit protocol", outputs / "agent_memory_human_audit_protocol_zh.md"),
         ("Human audit sample", outputs / "agent_memory_human_audit_sample_type_aware.csv"),
         ("Human audit summary", outputs / "agent_memory_human_audit_summary_zh.md"),
@@ -220,6 +222,11 @@ def main() -> None:
             "stage": "Type3 diagnostics",
             "command": "work/agent_memory_experiment/type3_coverage_significance_analysis.py",
             "notes": "Aggregates Type3 coverage significance tests.",
+        },
+        {
+            "stage": "Embedding baseline status",
+            "command": "work/agent_memory_experiment/generate_embedding_baseline_status.py",
+            "notes": "Tracks API embedding baseline readiness without reading or printing keys.",
         },
         {
             "stage": "Human audit sample",

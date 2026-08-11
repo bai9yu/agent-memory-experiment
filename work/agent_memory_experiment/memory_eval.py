@@ -12,10 +12,13 @@ import csv
 import hashlib
 import json
 import math
+import os
 import re
 import statistics
 import sys
 import time
+import urllib.error
+import urllib.request
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime
@@ -330,6 +333,138 @@ class SentenceTransformerSemanticScorer:
         }
 
 
+class APIEmbeddingSemanticScorer:
+    name = "api-embedding"
+
+    def __init__(
+        self,
+        memories: list[Memory],
+        model_name: str,
+        base_url: str,
+        api_key_env: str,
+        batch_size: int,
+        cache_dir: Path | None,
+        dimensions: int | None,
+        timeout: int,
+    ):
+        try:
+            import numpy as np
+        except ImportError as exc:
+            raise RuntimeError("numpy is required for API embedding backend.") from exc
+
+        api_key = os.environ.get(api_key_env, "")
+        if not api_key:
+            raise RuntimeError(
+                f"{api_key_env} is missing. Put it in the environment, then rerun with "
+                "`--semantic-backend api`."
+            )
+
+        self.np = np
+        self.model_name = model_name
+        self.base_url = base_url.rstrip("/")
+        self.api_key = api_key
+        self.api_key_env = api_key_env
+        self.batch_size = max(batch_size, 1)
+        self.cache_dir = cache_dir
+        self.dimensions = dimensions
+        self.timeout = timeout
+        self.memory_ids = [memory.id for memory in memories]
+        self.memory_vectors = self.encode_with_cache(
+            "memories",
+            [(memory.id, memory.text) for memory in memories],
+        )
+        self.query_vectors: dict[str, object] = {}
+
+    def cache_model_name(self) -> str:
+        dims = f":dim{self.dimensions}" if self.dimensions else ""
+        return f"{self.base_url}:{self.model_name}{dims}"
+
+    def cache_path(self, kind: str, items: list[tuple[str, str]]) -> Path | None:
+        if self.cache_dir is None:
+            return None
+        key = embedding_cache_key(kind, self.cache_model_name(), items)
+        return self.cache_dir / "api" / safe_cache_name(self.model_name) / f"{kind}_{key}.npz"
+
+    def request_embeddings(self, texts: list[str]) -> list[list[float]]:
+        payload = {
+            "model": self.model_name,
+            "input": texts,
+        }
+        if self.dimensions:
+            payload["dimensions"] = self.dimensions
+        request = urllib.request.Request(
+            f"{self.base_url}/embeddings",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                data = json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")[:500]
+            raise RuntimeError(f"Embedding API HTTP {exc.code}: {detail}") from exc
+        except urllib.error.URLError as exc:
+            raise RuntimeError(f"Embedding API request failed: {exc}") from exc
+
+        embeddings = [item["embedding"] for item in sorted(data["data"], key=lambda item: item["index"])]
+        if len(embeddings) != len(texts):
+            raise RuntimeError(f"Embedding API returned {len(embeddings)} vectors for {len(texts)} inputs.")
+        return embeddings
+
+    def encode_with_cache(self, kind: str, items: list[tuple[str, str]]):
+        cache_path = self.cache_path(kind, items)
+        if cache_path and cache_path.exists():
+            try:
+                data = self.np.load(cache_path, allow_pickle=False)
+                ids = [str(item) for item in data["ids"].tolist()]
+                vectors = data["vectors"].astype("float32")
+                if ids == [item_id for item_id, _ in items] and vectors.shape[0] == len(items):
+                    return vectors
+            except (OSError, ValueError, KeyError):
+                pass
+
+        vectors = []
+        texts = [text for _, text in items]
+        for start in range(0, len(texts), self.batch_size):
+            vectors.extend(self.request_embeddings(texts[start:start + self.batch_size]))
+        array = self.np.array(vectors, dtype="float32")
+        norms = self.np.linalg.norm(array, axis=1, keepdims=True)
+        array = array / self.np.maximum(norms, 1e-12)
+        if cache_path:
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            self.np.savez_compressed(
+                cache_path,
+                ids=self.np.array([item_id for item_id, _ in items]),
+                vectors=array,
+            )
+        return array
+
+    def prepare_queries(self, queries: list[Query]) -> None:
+        vectors = self.encode_with_cache(
+            "queries",
+            [(query.id, query.query) for query in queries],
+        )
+        self.query_vectors = {
+            query.id: vector
+            for query, vector in zip(queries, vectors)
+        }
+
+    def score(self, query: Query, memories: list[Memory]) -> dict[str, float]:
+        if query.id in self.query_vectors:
+            query_vector = self.query_vectors[query.id]
+        else:
+            query_vector = self.encode_with_cache("queries_single", [(query.id, query.query)])[0]
+        scores = (self.memory_vectors * query_vector).sum(axis=1)
+        return {
+            memory_id: float(score)
+            for memory_id, score in zip(self.memory_ids, scores)
+        }
+
+
 def build_semantic_scorer(args: argparse.Namespace, memories: list[Memory]) -> SemanticScorer:
     if args.semantic_backend == "hash":
         return HashSemanticScorer(memories)
@@ -341,6 +476,18 @@ def build_semantic_scorer(args: argparse.Namespace, memories: list[Memory]) -> S
             args.local_files_only,
             args.embedding_batch_size,
             cache_dir,
+        )
+    if args.semantic_backend == "api":
+        cache_dir = None if args.no_embedding_cache else args.embedding_cache_dir
+        return APIEmbeddingSemanticScorer(
+            memories,
+            args.api_embedding_model,
+            args.api_embedding_base_url,
+            args.api_key_env,
+            args.api_embedding_batch_size,
+            cache_dir,
+            args.api_embedding_dimensions,
+            args.api_embedding_timeout,
         )
     raise ValueError(f"Unknown semantic backend: {args.semantic_backend}")
 
@@ -858,11 +1005,17 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output-dir", type=Path, default=base / "results" / "sample_10")
     parser.add_argument("--half-life-days", type=float, default=45.0)
     parser.add_argument("--rank-output-k", type=int, default=100, help="Write only the top K ranked memories per query/method. Use 0 to skip rankings.csv.")
-    parser.add_argument("--semantic-backend", choices=["hash", "sentence-transformer"], default="hash")
+    parser.add_argument("--semantic-backend", choices=["hash", "sentence-transformer", "api"], default="hash")
     parser.add_argument("--embedding-model", default="sentence-transformers/all-MiniLM-L6-v2")
     parser.add_argument("--embedding-batch-size", type=int, default=32)
     parser.add_argument("--embedding-cache-dir", type=Path, default=base / "cache" / "embeddings")
     parser.add_argument("--no-embedding-cache", action="store_true")
+    parser.add_argument("--api-embedding-model", default="text-embedding-3-small")
+    parser.add_argument("--api-embedding-base-url", default="https://api.openai.com/v1")
+    parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    parser.add_argument("--api-embedding-batch-size", type=int, default=128)
+    parser.add_argument("--api-embedding-dimensions", type=int, default=0, help="Optional output dimension for supported embedding models. 0 keeps provider default.")
+    parser.add_argument("--api-embedding-timeout", type=int, default=60)
     parser.add_argument("--persona-boost-weight", type=float, default=0.0)
     parser.add_argument("--persona-boost-query-types", default="", help="Comma-separated query types that may receive persona boost. Empty means all types.")
     parser.add_argument("--importance-weight", type=float, default=0.0)

@@ -1,0 +1,2 @@
+label,provider,model,key_env,key_available,status,method,result_dir,summary_exists,evidence
+OpenAI text-embedding-3-small,OpenAI-compatible embeddings API,text-embedding-3-small,OPENAI_API_KEY,False,pending_api_key,type_aware,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,False,OPENAI_API_KEY is not set; summary.csv not found

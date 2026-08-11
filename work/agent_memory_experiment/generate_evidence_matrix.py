@@ -69,6 +69,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
     audit_sample = read_csv(outputs / "agent_memory_human_audit_sample_type_aware.csv")
     audit_summary = read_csv(outputs / "agent_memory_human_audit_summary.csv")
+    embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
 
     fact_type_aware = lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     observation_type_aware = lookup(baseline, variant="locomo_observation", method="type_aware")
@@ -93,6 +94,8 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     artifact_pass = sum(1 for row in repro_artifacts if row["exists"] == "True")
     metric_pass = sum(1 for row in repro_metrics if row["pass"] == "True")
     audit_labeled = sum(int(row["count"]) for row in audit_summary if row["group"] == "auto_reason")
+    embedding_completed = sum(1 for row in embedding_status if row["status"] == "completed")
+    embedding_ready = sum(1 for row in embedding_status if row["status"] in {"completed", "ready_to_run"})
 
     storage_ratio = float(fact_storage["memory_tokens"]) / float(observation_storage["memory_tokens"])
     sklearn_delta = float(sklearn_200["mrr"]) - float(fact_type_aware["mrr"])
@@ -217,9 +220,18 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "remaining_gap": "需要人工填写 manual_reason / auto_reason_correct，并统计一致性或准确率。",
         },
         {
+            "claim": "外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。",
+            "status": "baseline_protocol",
+            "evidence": f"已登记 {len(embedding_status)} 个外部 embedding baseline；completed={embedding_completed}, ready_or_completed={embedding_ready}。",
+            "support_level": "protocol_ready_pending_run",
+            "primary_artifacts": "agent_memory_embedding_baseline_status_zh.md; memory_eval.py",
+            "paper_use": "可以作为复现实验入口；在 summary.csv 生成前，不能写入主结果表。",
+            "remaining_gap": "需要提供 API key 并实际运行 text-embedding-3-small 等外部 embedding 对照。",
+        },
+        {
             "claim": "完整项目距离最终投稿仍需要额外验证。",
             "status": "open_gap",
-            "evidence": "剩余缺口包括多 seed DeepSeek 抽取、更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。",
+            "evidence": "剩余缺口包括多 seed DeepSeek 抽取、实际完成更强 embedding/API baseline、更大真实 memory bank 效率实验，以及人工错误复核标注结果。",
             "support_level": "gap_analysis",
             "primary_artifacts": "agent_memory_paper_experiment_status_zh.md; agent_memory_reproducibility_checklist_zh.md",
             "paper_use": "作为下一步 checklist，而不是论文主张。",
