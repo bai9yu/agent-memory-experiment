@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：115/115
+- Artifact 存在性：117/117
 - 关键指标阈值：9/9
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `74b975a` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `0a9f352` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -83,6 +83,8 @@
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
 | Threats to validity appendix | True | 5872 | `outputs/agent_memory_threats_to_validity_zh.md` |
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
+| Submission package index | True | 4003 | `outputs/agent_memory_submission_package_index_zh.md` |
+| Submission package index CSV | True | 4064 | `outputs/agent_memory_submission_package_index.csv` |
 | Submission readiness gate | True | 2324 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
 | Submission readiness gate CSV | True | 1882 | `outputs/agent_memory_submission_readiness_gate.csv` |
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
@@ -138,7 +140,7 @@
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
 | Human audit annotation codebook | True | 6136 | `outputs/agent_memory_human_audit_annotation_codebook_zh.md` |
 | Human audit annotation schema | True | 1883 | `outputs/agent_memory_human_audit_annotation_schema.csv` |
-| Paper experiment status | True | 30235 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 30674 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -193,6 +195,7 @@
 | Paper manuscript draft | `work/agent_memory_experiment/generate_paper_manuscript.py` | Generates an editable Chinese manuscript draft from cached experiment outputs. |
 | Paper manuscript claim check | `work/agent_memory_experiment/validate_manuscript_claims.py` | Checks that the draft does not overclaim pending embedding or human-audit results. |
 | Threats to validity appendix | `work/agent_memory_experiment/generate_threats_to_validity_appendix.py` | Builds a paper appendix of internal/external/construct/statistical validity threats and claim boundaries. |
+| Submission package index | `work/agent_memory_experiment/generate_submission_package_index.py` | Indexes manuscript, tables, appendices, reproducibility artifacts, blockers, and final packaging actions. |
 | Submission readiness gate | `work/agent_memory_experiment/validate_submission_readiness.py` | Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission. |
 | Public release readiness gate | `work/agent_memory_experiment/validate_public_release_readiness.py` | Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links. |
 | Artifact integrity manifest | `work/agent_memory_experiment/generate_artifact_integrity_manifest.py` | Writes sha256, size, and line-count metadata for all reproducibility artifacts. |

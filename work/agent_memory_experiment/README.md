@@ -1070,6 +1070,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-csv outputs/agent_memory_threats_to_validity.csv
 ```
 
+Generate submission package index:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_submission_package_index.py \
+  --project-root . \
+  --output-report outputs/agent_memory_submission_package_index_zh.md \
+  --output-csv outputs/agent_memory_submission_package_index.csv
+```
+
 Validate human-audit readiness for paper claims:
 
 ```bash
