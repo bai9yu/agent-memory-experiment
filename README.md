@@ -173,6 +173,11 @@ Coverage 显著性汇总进一步表明，Type3 专用重排、监督式集合�
 DEEPSEEK_API_KEY=your_deepseek_api_key_here
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_MODEL=deepseek-chat
+
+# 可选：只有运行 OpenAI embedding baseline 时需要。
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 `.env` 已被 `.gitignore` 忽略，不会上传到 GitHub。
+
+说明：DeepSeek key 用于 LLM memory writer 和 LLM-assisted audit；当前外部 embedding baseline 默认使用 OpenAI `text-embedding-3-small`，因此需要单独的 `OPENAI_API_KEY` 才能把该 baseline 从 pending 变为 completed。

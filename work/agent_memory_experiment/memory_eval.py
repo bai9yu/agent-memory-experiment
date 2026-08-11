@@ -131,6 +131,20 @@ def load_jsonl(path: Path) -> list[dict]:
     return rows
 
 
+def load_dotenv(path: Path) -> None:
+    if not path.exists():
+        return
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
 def load_memories(path: Path) -> list[Memory]:
     memories = []
     for row in load_jsonl(path):
@@ -936,6 +950,7 @@ def write_report(
 
 def run(args: argparse.Namespace) -> None:
     started = time.perf_counter()
+    load_dotenv(args.env_file)
     memories = load_memories(args.memories)
     queries = load_queries(args.queries)
     idf = build_idf(memories)
@@ -1013,6 +1028,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--api-embedding-model", default="text-embedding-3-small")
     parser.add_argument("--api-embedding-base-url", default="https://api.openai.com/v1")
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    parser.add_argument("--env-file", type=Path, default=Path(".env"), help="Optional local .env file for API keys. Values are never printed.")
     parser.add_argument("--api-embedding-batch-size", type=int, default=128)
     parser.add_argument("--api-embedding-dimensions", type=int, default=0, help="Optional output dimension for supported embedding models. 0 keeps provider default.")
     parser.add_argument("--api-embedding-timeout", type=int, default=60)

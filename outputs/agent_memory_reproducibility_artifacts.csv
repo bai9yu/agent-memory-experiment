@@ -21,7 +21,7 @@ Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,8590
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4651
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4201
-Embedding baseline status,outputs/agent_memory_embedding_baseline_status_zh.md,True,2017
+Embedding baseline status,outputs/agent_memory_embedding_baseline_status_zh.md,True,2542
 Embedding baseline status CSV,outputs/agent_memory_embedding_baseline_status.csv,True,400
 API embedding run estimate,outputs/agent_memory_api_embedding_run_estimate_zh.md,True,1048
 API embedding run estimate CSV,outputs/agent_memory_api_embedding_run_estimate.csv,True,502

@@ -16,6 +16,25 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def load_dotenv(path: Path) -> list[str]:
+    loaded_keys = []
+    if not path.exists():
+        return loaded_keys
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if not key:
+            continue
+        loaded_keys.append(key)
+        if key not in os.environ:
+            os.environ[key] = value
+    return loaded_keys
+
+
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -79,7 +98,7 @@ def markdown_table(headers: list[str], rows: list[list[str]]) -> str:
     return "\n".join(lines)
 
 
-def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
+def write_report(path: Path, rows: list[dict[str, Any]], env_file: Path, loaded_env_keys: list[str]) -> None:
     table_rows = [
         [
             row["label"],
@@ -97,6 +116,16 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "# 外部 Embedding Baseline 状态",
         "",
         "本文件记录外部 embedding baseline 的接入与运行状态。它只检查环境变量是否存在，不读取、不打印 API key。",
+        "",
+        "## 本地环境",
+        "",
+        f"- Env file: `{env_file}`",
+        f"- Env file exists: {env_file.exists()}",
+        f"- Loaded key names: {', '.join(loaded_env_keys) if loaded_env_keys else 'none'}",
+        f"- DeepSeek key available: {bool(os.environ.get('DEEPSEEK_API_KEY', ''))}",
+        f"- OpenAI embedding key available: {bool(os.environ.get('OPENAI_API_KEY', ''))}",
+        "",
+        "说明：当前项目把 `DEEPSEEK_API_KEY` 用于 LLM memory writer / LLM-assisted audit；默认外部 embedding baseline 使用 `OPENAI_API_KEY` + `text-embedding-3-small`。如果只配置 DeepSeek key，DeepSeek 相关 LLM 实验可以跑，但 OpenAI embedding baseline 仍会保持 pending。",
         "",
         markdown_table(["Label", "Provider", "Model", "Key Env", "Key Available", "Status", "Method", "Evidence"], table_rows),
         "",
@@ -117,6 +146,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "  --api-embedding-model text-embedding-3-small \\",
         "  --api-embedding-base-url https://api.openai.com/v1 \\",
         "  --api-key-env OPENAI_API_KEY \\",
+        "  --env-file .env \\",
         "  --api-embedding-batch-size 128 \\",
         "  --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \\",
         "  --half-life-days 30 \\",
@@ -142,12 +172,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate external embedding baseline status.")
     parser.add_argument("--output-report", type=Path, required=True)
     parser.add_argument("--output-csv", type=Path, required=True)
+    parser.add_argument("--env-file", type=Path, default=Path(".env"))
     parser.add_argument(
         "--openai-result-dir",
         type=Path,
         default=Path("work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004"),
     )
     args = parser.parse_args()
+    loaded_env_keys = load_dotenv(args.env_file)
 
     rows = [
         status_row(
@@ -160,7 +192,7 @@ def main() -> None:
         )
     ]
     write_csv(args.output_csv, rows)
-    write_report(args.output_report, rows)
+    write_report(args.output_report, rows, args.env_file, loaded_env_keys)
     print(json.dumps({
         "output_report": str(args.output_report),
         "baselines": len(rows),

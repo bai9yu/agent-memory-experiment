@@ -2,6 +2,16 @@
 
 本文件记录外部 embedding baseline 的接入与运行状态。它只检查环境变量是否存在，不读取、不打印 API key。
 
+## 本地环境
+
+- Env file: `.env`
+- Env file exists: True
+- Loaded key names: DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL
+- DeepSeek key available: True
+- OpenAI embedding key available: False
+
+说明：当前项目把 `DEEPSEEK_API_KEY` 用于 LLM memory writer / LLM-assisted audit；默认外部 embedding baseline 使用 `OPENAI_API_KEY` + `text-embedding-3-small`。如果只配置 DeepSeek key，DeepSeek 相关 LLM 实验可以跑，但 OpenAI embedding baseline 仍会保持 pending。
+
 | Label | Provider | Model | Key Env | Key Available | Status | Method | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | OpenAI text-embedding-3-small | OpenAI-compatible embeddings API | text-embedding-3-small | OPENAI_API_KEY | False | pending_api_key | type_aware | OPENAI_API_KEY is not set; summary.csv not found |
@@ -23,6 +33,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/memor
   --api-embedding-model text-embedding-3-small \
   --api-embedding-base-url https://api.openai.com/v1 \
   --api-key-env OPENAI_API_KEY \
+  --env-file .env \
   --api-embedding-batch-size 128 \
   --embedding-cache-dir work/agent_memory_experiment/cache/embeddings \
   --half-life-days 30 \

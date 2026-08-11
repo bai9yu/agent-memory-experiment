@@ -339,6 +339,9 @@ Create a local `.env` file in the repository root:
 DEEPSEEK_API_KEY=your_deepseek_api_key_here
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_MODEL=deepseek-chat
+
+# Optional: only needed for the OpenAI embedding baseline.
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 Run a small DeepSeek extraction job:
@@ -957,7 +960,8 @@ Generate external embedding baseline status:
 PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
 work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_embedding_baseline_status.py \
   --output-report outputs/agent_memory_embedding_baseline_status_zh.md \
-  --output-csv outputs/agent_memory_embedding_baseline_status.csv
+  --output-csv outputs/agent_memory_embedding_baseline_status.csv \
+  --env-file .env
 ```
 
 Estimate API embedding baseline run scale:

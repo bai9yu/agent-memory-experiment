@@ -11,8 +11,8 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `22450c2` |
-| git_branch_status | `## main...origin/main [ahead 43]` |
+| git_commit | `7baef20` |
+| git_branch_status | `## main...origin/main [ahead 44]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -48,7 +48,7 @@
 | Submission gap analysis | True | 8590 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4651 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4201 | `outputs/agent_memory_experiment_protocol_zh.md` |
-| Embedding baseline status | True | 2017 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
+| Embedding baseline status | True | 2542 | `outputs/agent_memory_embedding_baseline_status_zh.md` |
 | Embedding baseline status CSV | True | 400 | `outputs/agent_memory_embedding_baseline_status.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
 | API embedding run estimate CSV | True | 502 | `outputs/agent_memory_api_embedding_run_estimate.csv` |
