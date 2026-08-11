@@ -95,6 +95,8 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     reviewer_blockers = count(gap_analysis, "risk_level", "blocker")
     public_release_blockers = count(public_release, "status", "blocker")
     integrity_covered = count(integrity_manifest, "exists", "True")
+    integrity_ok = count(integrity_manifest, "checksum_status", "ok")
+    integrity_self_skips = count(integrity_manifest, "checksum_status", "self_referential_skip")
 
     rows = [
         gate_row(
@@ -181,8 +183,8 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "artifact_integrity_manifest",
             "reproducibility",
             True,
-            integrity_covered == len(integrity_manifest),
-            f"integrity manifest covers={integrity_covered}/{len(integrity_manifest)}",
+            integrity_covered == len(integrity_manifest) and integrity_ok + integrity_self_skips == len(integrity_manifest),
+            f"integrity manifest covers={integrity_covered}/{len(integrity_manifest)}, sha256_ok={integrity_ok}, self_skips={integrity_self_skips}",
             "重新生成 artifact integrity manifest，确保所有复现 artifact 都有 sha256 记录。",
         ),
     ]

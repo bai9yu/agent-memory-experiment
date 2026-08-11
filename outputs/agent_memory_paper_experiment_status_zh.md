@@ -259,7 +259,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_manuscript_claim_check_zh.md`：论文声明一致性检查；当前 8 项检查全部通过，用于防止正文把 pending baseline 或人工复核写成已完成结论。
 - `outputs/agent_memory_submission_readiness_gate_zh.md`：最终投稿门禁汇总；当前 required gates 为 `5/10`，blockers 为 `5`，说明复现、声明检查、公开发布卫生和 artifact 完整性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
 - `outputs/agent_memory_public_release_readiness_zh.md`：公开发布卫生检查；当前 blocker 为 `0`，未发现 tracked secret 或 `.env` 入库，剩余 minor 是正式开源前可补 LICENSE。
-- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `84/84` 个复现 artifact，缺失 `0`，并为每个文件记录 size、line count 和 sha256。
+- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `84/84` 个复现 artifact，缺失 `0`；其中 `82` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前 OpenAI-compatible `text-embedding-3-small` baseline 已有 API/cache 入口，但尚未实际运行出指标。

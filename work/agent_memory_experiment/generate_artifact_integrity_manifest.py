@@ -52,20 +52,26 @@ def markdown_table(headers: list[str], rows: list[list[str]]) -> str:
     return "\n".join(lines)
 
 
-def build_rows(project_root: Path, artifact_csv: Path) -> list[dict[str, Any]]:
+def normalized_rel(path: Path) -> str:
+    return path.as_posix()
+
+
+def build_rows(project_root: Path, artifact_csv: Path, self_referential_paths: set[str]) -> list[dict[str, Any]]:
     artifacts = read_csv(artifact_csv)
     rows = []
     for artifact in artifacts:
         rel_path = artifact["path"]
         path = project_root / rel_path
         exists = path.exists()
+        is_self_referential = normalized_rel(Path(rel_path)) in self_referential_paths
         rows.append({
             "label": artifact["label"],
             "path": rel_path,
             "exists": exists,
-            "size_bytes": path.stat().st_size if exists else 0,
-            "line_count": line_count(path) if exists else 0,
-            "sha256": sha256_file(path) if exists else "",
+            "size_bytes": 0 if exists and is_self_referential else (path.stat().st_size if exists else 0),
+            "line_count": 0 if exists and is_self_referential else (line_count(path) if exists else 0),
+            "sha256": "self_referential" if exists and is_self_referential else (sha256_file(path) if exists else ""),
+            "checksum_status": "self_referential_skip" if exists and is_self_referential else ("ok" if exists else "missing"),
         })
     return rows
 
@@ -73,6 +79,7 @@ def build_rows(project_root: Path, artifact_csv: Path) -> list[dict[str, Any]]:
 def write_report(path: Path, rows: list[dict[str, Any]], artifact_csv: Path) -> None:
     existing = [row for row in rows if row["exists"]]
     missing = [row for row in rows if not row["exists"]]
+    self_referential = [row for row in rows if row.get("checksum_status") == "self_referential_skip"]
     total_bytes = sum(int(row["size_bytes"]) for row in existing)
     table_rows = [
         [
@@ -81,6 +88,7 @@ def write_report(path: Path, rows: list[dict[str, Any]], artifact_csv: Path) -> 
             str(row["size_bytes"]),
             str(row["line_count"]),
             str(row["sha256"])[:12],
+            str(row["checksum_status"]),
             row["path"],
         ]
         for row in rows[:20]
@@ -95,15 +103,17 @@ def write_report(path: Path, rows: list[dict[str, Any]], artifact_csv: Path) -> 
         f"- Source artifact list: `{artifact_csv}`",
         f"- Artifacts covered: {len(existing)}/{len(rows)}",
         f"- Missing artifacts: {len(missing)}",
+        f"- Self-referential checksum skips: {len(self_referential)}",
         f"- Total bytes: {total_bytes}",
         "",
         "## 前 20 个 Artifact",
         "",
-        markdown_table(["Label", "Exists", "Bytes", "Lines", "SHA256 Prefix", "Path"], table_rows),
+        markdown_table(["Label", "Exists", "Bytes", "Lines", "SHA256 Prefix", "Checksum Status", "Path"], table_rows),
         "",
         "## 使用说明",
         "",
         "- 完整 sha256 位于 `outputs/agent_memory_artifact_integrity_manifest.csv`。",
+        "- manifest 自身的 CSV/报告属于自引用文件，`size_bytes`、`line_count` 记为 `0`，`sha256` 标记为 `self_referential`，不作为稳定校验哈希。",
         "- 若重新生成实验结果，预期相关 artifact 的 sha256 会变化；应同时更新复现清单、证据矩阵和论文声明检查。",
         "- 若没有重新运行实验而 sha256 变化，应检查是否存在非预期编辑或文件损坏。",
     ]
@@ -122,13 +132,18 @@ def main() -> None:
     parser.add_argument("--output-report", type=Path, required=True)
     args = parser.parse_args()
 
-    rows = build_rows(args.project_root, args.artifact_csv)
+    self_referential_paths = {
+        normalized_rel(args.output_csv),
+        normalized_rel(args.output_report),
+    }
+    rows = build_rows(args.project_root, args.artifact_csv, self_referential_paths)
     write_csv(args.output_csv, rows)
     write_report(args.output_report, rows, args.artifact_csv)
     print(json.dumps({
         "output_report": str(args.output_report),
         "artifacts": f"{sum(1 for row in rows if row['exists'])}/{len(rows)}",
         "missing": sum(1 for row in rows if not row["exists"]),
+        "self_referential_skips": sum(1 for row in rows if row["checksum_status"] == "self_referential_skip"),
     }, ensure_ascii=False, indent=2))
 
 

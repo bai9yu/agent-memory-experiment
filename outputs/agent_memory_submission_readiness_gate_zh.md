@@ -23,7 +23,7 @@
 | full80_human_audit | reliability | True | False | blocker | full80 confirmed=0/80, invalid=0 |
 | reviewer_risk_blockers | submission | True | False | blocker | blocker risks=2 |
 | public_release_hygiene | submission | True | True | pass | public release blockers=0 |
-| artifact_integrity_manifest | reproducibility | True | True | pass | integrity manifest covers=84/84 |
+| artifact_integrity_manifest | reproducibility | True | True | pass | integrity manifest covers=84/84, sha256_ok=82, self_skips=2 |
 
 ## 当前 Blocker
 
