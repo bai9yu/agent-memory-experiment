@@ -61,6 +61,7 @@ def write_report(path: Path, root: Path) -> None:
     feature_ablation = read_csv(outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv")
     bootstrap_ci = read_csv(outputs / "agent_memory_bootstrap_metric_ci.csv")
     loco = read_csv(outputs / "agent_memory_candidate_reranker_loco_summary.csv")
+    intrinsic_loco = read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv")
     loco_sig = read_csv(outputs / "agent_memory_candidate_reranker_loco_significance_results.csv")
     type3 = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
     writer = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
@@ -92,6 +93,9 @@ def write_report(path: Path, root: Path) -> None:
         scenario="candidate_reranker_intrinsic_ablation_vs_full",
         metric="mrr",
     )
+    intrinsic_loco_row = lookup(intrinsic_loco, method="intrinsic_reranker_loco")
+    intrinsic_loco_mrr = lookup(bootstrap_ci, scenario="candidate_reranker_intrinsic_loco", metric="mrr")
+    intrinsic_loco_r5 = lookup(bootstrap_ci, scenario="candidate_reranker_intrinsic_loco", metric="recall@5")
     loco_row = lookup(loco, method="candidate_reranker_loco")
     loco_base = lookup(loco, method="type_aware")
     loco_mrr = lookup(loco_sig, metric="mrr")
@@ -117,6 +121,7 @@ def write_report(path: Path, root: Path) -> None:
         ["type-aware", f(fact_type["mrr"]), f(fact_type["recall@5"])],
         ["candidate reranker", f(reranker_row["mrr_mean"]), f(reranker_row["recall@5_mean"])],
         ["intrinsic feature reranker", f(intrinsic_row["mrr_mean"]), f(intrinsic_row["recall@5_mean"])],
+        ["intrinsic feature reranker LOCO", f(intrinsic_loco_row["mrr_mean"]), f(intrinsic_loco_row["recall@5_mean"])],
         ["candidate reranker LOCO", f(loco_row["mrr_mean"]), f(loco_row["recall@5_mean"])],
     ]
     lines = [
@@ -134,7 +139,7 @@ def write_report(path: Path, root: Path) -> None:
             f"高于 LoCoMo observation memory + type-aware 的 MRR {f(obs_type['mrr'])}、Recall@5 {f(obs_type['recall@5'])}。"
             f"候选级学习重排进一步将 held-out MRR 从 {f(reranker_base['mrr_mean'])} 提升至 {f(reranker_row['mrr_mean'])}，"
             f"而 feature ablation 显示更简洁的 intrinsic feature reranker 可达到 MRR {f(intrinsic_row['mrr_mean'])}、Recall@5 {f(intrinsic_row['recall@5_mean'])}，"
-            f"并在 leave-one-conversation-out split 中保持 {signed(loco_mrr['mean_delta'])} 的 MRR 提升。"
+            f"并在 leave-one-conversation-out split 中达到 MRR {f(intrinsic_loco_row['mrr_mean'])}、Recall@5 {f(intrinsic_loco_row['recall@5_mean'])}。"
             f"同时，事实级记忆将 memory token 降至 observation memory 的 {pct(storage_ratio)}，DeepSeek memory writer 三次运行的 MRR 标准差为 {f(writer_mrr['stdev'])}。"
             "负结果表明，Type 3 多证据问题仍是主要边界，浅层单候选重排和简单 query decomposition 不能有效提高覆盖率。"
             "本文还给出复现清单、审稿风险矩阵和人工复核流程，用于后续补齐外部 embedding baseline 与人工一致性证据。"
@@ -198,7 +203,7 @@ def write_report(path: Path, root: Path) -> None:
         "",
         f"数据使用 LoCoMo10 answerable slice，包含 {memory_count} 条 fact memory 和 {query_count} 条可评估查询。主结果使用本地 BGE-M3 embedding cache。评估指标为 Recall@1/3/5、MRR，以及 Type 3 多证据问题的 Coverage@K。显著性检验采用 paired bootstrap 置信区间和 paired permutation test。",
         "",
-        "候选级重排使用两种划分：held-out query split 用于基础泛化检查；leave-one-conversation-out split 用于验证模型是否跨 conversation 泛化。所有可复现入口记录在 `outputs/agent_memory_reproducibility_checklist_zh.md`。",
+        "候选级重排使用两种划分：held-out query split 用于基础泛化检查；leave-one-conversation-out split 用于验证模型是否跨 conversation 泛化。intrinsic feature reranker 同时报告 held-out 与 LOCO 结果。所有可复现入口记录在 `outputs/agent_memory_reproducibility_checklist_zh.md`。",
         "",
         "## 5 结果",
         "",
@@ -214,7 +219,7 @@ def write_report(path: Path, root: Path) -> None:
         "",
         "### 5.3 Intrinsic Candidate-Level Reranking 是主要收益来源",
         "",
-        f"在 held-out split 下，full candidate reranker 将 MRR 从 {f(reranker_base['mrr_mean'])} 提升到 {f(reranker_row['mrr_mean'])}，MRR delta 为 {signed(reranker_mrr['mean_delta'])}，p={f(reranker_mrr['permutation_p_value'], 4)}；Recall@5 delta 为 {signed(reranker_r5['mean_delta'])}。进一步的 feature-group ablation 显示，intrinsic feature reranker 达到 MRR {f(intrinsic_row['mrr_mean'])}、Recall@5 {f(intrinsic_row['recall@5_mean'])}，相对 type-aware 的 MRR delta 为 {signed(intrinsic_vs_type_mrr['delta_mean'])}，95% CI=[{f(intrinsic_vs_type_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_type_mrr['delta_ci_high'], 4)}]；相对 full reranker 的 MRR delta 为 {signed(intrinsic_vs_full_mrr['delta_mean'])}，95% CI=[{f(intrinsic_vs_full_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_full_mrr['delta_ci_high'], 4)}]。在 LOCO split 下，candidate reranker 的 MRR 为 {f(loco_row['mrr_mean'])}，高于 type-aware 的 {f(loco_base['mrr_mean'])}，MRR delta 为 {signed(loco_mrr['mean_delta'])}，p={f(loco_mrr['permutation_p_value'], 4)}。这支持将 intrinsic candidate-level learned reranking 作为本文最主要的方法贡献，同时把 method-level rank/score 特征视为可能带来噪声的消融发现。",
+        f"在 held-out split 下，full candidate reranker 将 MRR 从 {f(reranker_base['mrr_mean'])} 提升到 {f(reranker_row['mrr_mean'])}，MRR delta 为 {signed(reranker_mrr['mean_delta'])}，p={f(reranker_mrr['permutation_p_value'], 4)}；Recall@5 delta 为 {signed(reranker_r5['mean_delta'])}。进一步的 feature-group ablation 显示，intrinsic feature reranker 达到 MRR {f(intrinsic_row['mrr_mean'])}、Recall@5 {f(intrinsic_row['recall@5_mean'])}，相对 type-aware 的 MRR delta 为 {signed(intrinsic_vs_type_mrr['delta_mean'])}，95% CI=[{f(intrinsic_vs_type_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_type_mrr['delta_ci_high'], 4)}]；相对 full reranker 的 MRR delta 为 {signed(intrinsic_vs_full_mrr['delta_mean'])}，95% CI=[{f(intrinsic_vs_full_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_full_mrr['delta_ci_high'], 4)}]。在 LOCO split 下，intrinsic feature reranker 的 MRR 为 {f(intrinsic_loco_row['mrr_mean'])}、Recall@5 为 {f(intrinsic_loco_row['recall@5_mean'])}，相对 type-aware 的 MRR delta 为 {signed(intrinsic_loco_mrr['delta_mean'])}，95% CI=[{f(intrinsic_loco_mrr['delta_ci_low'], 4)}, {f(intrinsic_loco_mrr['delta_ci_high'], 4)}]，Recall@5 delta 为 {signed(intrinsic_loco_r5['delta_mean'])}，95% CI=[{f(intrinsic_loco_r5['delta_ci_low'], 4)}, {f(intrinsic_loco_r5['delta_ci_high'], 4)}]。这支持将 intrinsic candidate-level learned reranking 作为本文最主要的方法贡献，同时把 method-level rank/score 特征视为可能带来噪声的消融发现。",
         "",
         "### 5.4 存储效率与 Writer 稳定性",
         "",

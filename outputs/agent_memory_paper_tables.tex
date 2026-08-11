@@ -89,6 +89,21 @@ recall@5 & +0.0522 & [0.0375, 0.0675] & 0.0002 \\
 
 \begin{table}[t]
 \centering
+\caption{Leave-one-conversation-out intrinsic candidate-level reranking results.}
+\label{tab:intrinsic_candidate_reranker_loco}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Splits & R@1 & R@3 & R@5 & MRR \\
+\midrule
+type\_aware & 10 & 0.503 & 0.669 & 0.732 & 0.608 \\
+intrinsic\_reranker\_loco & 10 & 0.559 & 0.742 & 0.797 & 0.664 \\
+candidate\_oracle & 10 & 0.911 & 0.911 & 0.911 & 0.911 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
 \caption{Feature-group ablations for candidate-level reranking.}
 \label{tab:candidate_reranker_feature_ablation}
 \begin{tabular}{lrrrrr}

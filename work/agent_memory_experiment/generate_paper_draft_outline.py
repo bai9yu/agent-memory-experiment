@@ -37,6 +37,7 @@ def write_report(path: Path, outputs: Path) -> None:
     feature_ablation = read_csv(outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv")
     bootstrap_ci = read_csv(outputs / "agent_memory_bootstrap_metric_ci.csv")
     reranker_loco = read_csv(outputs / "agent_memory_candidate_reranker_loco_summary.csv")
+    intrinsic_loco = read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv")
     reranker_loco_sig = read_csv(outputs / "agent_memory_candidate_reranker_loco_significance_results.csv")
     type3_cov = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
     evidence = read_csv(outputs / "agent_memory_paper_evidence_matrix.csv")
@@ -62,6 +63,9 @@ def write_report(path: Path, outputs: Path) -> None:
         scenario="candidate_reranker_intrinsic_ablation_vs_full",
         metric="mrr",
     )
+    intrinsic_loco_row = lookup(intrinsic_loco, method="intrinsic_reranker_loco")
+    intrinsic_loco_mrr = lookup(bootstrap_ci, scenario="candidate_reranker_intrinsic_loco", metric="mrr")
+    intrinsic_loco_r5 = lookup(bootstrap_ci, scenario="candidate_reranker_intrinsic_loco", metric="recall@5")
     reranker_loco_row = lookup(reranker_loco, method="candidate_reranker_loco")
     reranker_loco_base = lookup(reranker_loco, method="type_aware")
     reranker_loco_mrr = lookup(reranker_loco_sig, metric="mrr")
@@ -102,8 +106,8 @@ def write_report(path: Path, outputs: Path) -> None:
             f"进一步地，候选级学习重排在 held-out split 上将 MRR 从 {f(reranker_base['mrr_mean'])} 提升到 {f(reranker_row['mrr_mean'])}，"
             f"MRR delta 为 {signed(reranker_mrr['mean_delta'])}，permutation p={f(reranker_mrr['permutation_p_value'], 4)}；"
             f"feature ablation 中 intrinsic-only reranker 进一步达到 MRR {f(intrinsic_row['mrr_mean'])} 和 Recall@5 {f(intrinsic_row['recall@5_mean'])}。"
-            f"在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 {f(reranker_loco_row['mrr_mean'])}，"
-            f"高于 type-aware 的 {f(reranker_loco_base['mrr_mean'])}，加权 MRR delta 为 {signed(reranker_loco_mrr['mean_delta'])}。"
+            f"在更严格的 leave-one-conversation-out split 下，intrinsic-only reranker 的 MRR 为 {f(intrinsic_loco_row['mrr_mean'])}，"
+            f"高于 type-aware 的 {f(reranker_loco_base['mrr_mean'])}，MRR delta 为 {signed(intrinsic_loco_mrr['delta_mean'])}。"
             f"DeepSeek memory writer 三次运行的 MRR 均值为 {f(writer_mrr['mean'])}，标准差为 {f(writer_mrr['stdev'])}，"
             f"Recall@5 均值为 {f(writer_r5['mean'])}，标准差为 {f(writer_r5['stdev'])}。"
             f"错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 "
@@ -160,7 +164,7 @@ def write_report(path: Path, outputs: Path) -> None:
         "",
         "\\[\\hat{y}_{q,i}=f_{\\theta}(s_{sem},s_{bm25},d(q,m_i),p(q,m_i),T(q,m_i),type_i,I_i,\\phi(q,m_i))\\]",
         "",
-        "最终按 \\(\\hat{y}_{q,i}\\) 重新排序候选。当前 intrinsic-only 变体是 held-out split 上最强方法贡献；full reranker 和 LOCO reranker 作为消融与跨 conversation 泛化证据。",
+        "最终按 \\(\\hat{y}_{q,i}\\) 重新排序候选。当前 intrinsic-only 变体在 held-out 和 leave-one-conversation-out split 上均是最强候选级方法贡献；full reranker 保留为消融对照。",
         "",
         "## 实验章节结构",
         "",
@@ -178,8 +182,8 @@ def write_report(path: Path, outputs: Path) -> None:
         "",
         f"- 结果：full candidate reranker MRR {f(reranker_row['mrr_mean'])} vs type-aware {f(reranker_base['mrr_mean'])}；MRR delta {signed(reranker_mrr['mean_delta'])}，Recall@5 delta {signed(reranker_r5['mean_delta'])}。",
         f"- 特征组消融：intrinsic-only reranker MRR {f(intrinsic_row['mrr_mean'])}，Recall@5 {f(intrinsic_row['recall@5_mean'])}；相对 type-aware MRR delta {signed(intrinsic_vs_type_mrr['delta_mean'])}，95% CI [{f(intrinsic_vs_type_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_type_mrr['delta_ci_high'], 4)}]；相对 full reranker MRR delta {signed(intrinsic_vs_full_mrr['delta_mean'])}，95% CI [{f(intrinsic_vs_full_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_full_mrr['delta_ci_high'], 4)}]。",
-        f"- LOCO 验证：candidate reranker MRR {f(reranker_loco_row['mrr_mean'])} vs type-aware {f(reranker_loco_base['mrr_mean'])}；加权 MRR delta {signed(reranker_loco_mrr['mean_delta'])}，Recall@5 delta {signed(reranker_loco_r5['mean_delta'])}。",
-        "- 写法：intrinsic-only 是 held-out 最强版本；LOCO 已支持 candidate-level reranking 方向跨 conversation 泛化，但 intrinsic-only 版本可作为后续补充 LOCO 复验。",
+        f"- LOCO 验证：intrinsic-only reranker MRR {f(intrinsic_loco_row['mrr_mean'])} vs type-aware {f(reranker_loco_base['mrr_mean'])}；MRR delta {signed(intrinsic_loco_mrr['delta_mean'])}，95% CI [{f(intrinsic_loco_mrr['delta_ci_low'], 4)}, {f(intrinsic_loco_mrr['delta_ci_high'], 4)}]；Recall@5 delta {signed(intrinsic_loco_r5['delta_mean'])}，95% CI [{f(intrinsic_loco_r5['delta_ci_low'], 4)}, {f(intrinsic_loco_r5['delta_ci_high'], 4)}]。",
+        "- 写法：intrinsic-only 是 held-out 与 LOCO 都支持的当前主方法；full reranker 作为说明 method-level rank/score 特征可能带来噪声的消融对照。",
         "",
         "### RQ4: Type 3 多证据问题是否解决？",
         "",

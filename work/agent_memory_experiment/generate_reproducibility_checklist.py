@@ -191,6 +191,11 @@ def main() -> None:
         ("Candidate reranker LOCO summary", outputs / "agent_memory_candidate_reranker_loco_summary.csv"),
         ("Candidate reranker LOCO significance", outputs / "agent_memory_candidate_reranker_loco_significance_zh.md"),
         ("Candidate reranker LOCO comparison", outputs / "agent_memory_candidate_reranker_loco_comparison_per_query.csv"),
+        ("Intrinsic candidate reranker LOCO report", outputs / "agent_memory_candidate_reranker_intrinsic_loco_zh.md"),
+        ("Intrinsic candidate reranker LOCO summary", outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv"),
+        ("Intrinsic candidate reranker LOCO split summary", outputs / "agent_memory_candidate_reranker_intrinsic_loco_split_summary.csv"),
+        ("Intrinsic candidate reranker LOCO deltas", outputs / "agent_memory_candidate_reranker_intrinsic_loco_deltas.csv"),
+        ("Intrinsic candidate reranker LOCO comparison", outputs / "agent_memory_candidate_reranker_intrinsic_loco_comparison_per_query.csv"),
         ("Type3 coverage significance", outputs / "agent_memory_type3_coverage_significance_zh.md"),
         ("Type3 query decomposition fusion4 report", outputs / "agent_memory_type3_query_decomposition_fusion4_zh.md"),
         ("Type3 query decomposition fusion4 summary", outputs / "agent_memory_type3_query_decomposition_fusion4_summary.csv"),
@@ -284,6 +289,10 @@ def main() -> None:
         read_csv(outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv"),
         method="ablation_intrinsic_only",
     )
+    intrinsic_loco = metric_lookup(
+        read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv"),
+        method="intrinsic_reranker_loco",
+    )
     coverage = metric_lookup(
         read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv"),
         experiment="supervised_set_selector",
@@ -296,6 +305,8 @@ def main() -> None:
         metric_row("Candidate reranker Recall@5", float(reranker["recall@5_mean"]), 0.79),
         metric_row("Intrinsic-only candidate reranker MRR", float(intrinsic_reranker["mrr_mean"]), 0.67),
         metric_row("Intrinsic-only candidate reranker Recall@5", float(intrinsic_reranker["recall@5_mean"]), 0.80),
+        metric_row("Intrinsic-only LOCO candidate reranker MRR", float(intrinsic_loco["mrr_mean"]), 0.66),
+        metric_row("Intrinsic-only LOCO candidate reranker Recall@5", float(intrinsic_loco["recall@5_mean"]), 0.79),
         metric_row("Type3 supervised selector Coverage@5 delta is negative", -float(coverage["mean_delta"]), 0.05),
     ]
     writer_ready = False
@@ -334,6 +345,11 @@ def main() -> None:
             "stage": "Candidate reranker LOCO",
             "command": "work/agent_memory_experiment/candidate_reranker_loco_experiment.py",
             "notes": "Uses cached rankings.csv; leave-one-conversation-out split.",
+        },
+        {
+            "stage": "Intrinsic candidate reranker LOCO",
+            "command": "work/agent_memory_experiment/candidate_reranker_intrinsic_loco_experiment.py",
+            "notes": "Reuses leave-one-conversation-out split with intrinsic-only candidate features.",
         },
         {
             "stage": "Bootstrap metric CI",

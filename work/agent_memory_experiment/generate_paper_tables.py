@@ -132,6 +132,16 @@ def candidate_loco_rows(summary_path: Path, significance_path: Path) -> tuple[li
     return metric_rows, sig_rows
 
 
+def intrinsic_loco_rows(summary_path: Path) -> list[list[str]]:
+    rows = read_csv(summary_path)
+    order = {"type_aware": 0, "intrinsic_reranker_loco": 1, "candidate_oracle": 2}
+    selected = sorted(rows, key=lambda row: order.get(row["method"], 99))
+    return [
+        [row["method"], row["splits"], fmt(row["recall@1_mean"]), fmt(row["recall@3_mean"]), fmt(row["recall@5_mean"]), fmt(row["mrr_mean"])]
+        for row in selected
+    ]
+
+
 def candidate_feature_ablation_rows(path: Path) -> list[list[str]]:
     rows = read_csv(path)
     keep = {
@@ -254,6 +264,9 @@ def main() -> None:
         out / "agent_memory_candidate_reranker_loco_summary.csv",
         out / "agent_memory_candidate_reranker_loco_significance_results.csv",
     )
+    intrinsic_loco_metric_rows = intrinsic_loco_rows(
+        out / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv"
+    )
     feature_ablation_rows = candidate_feature_ablation_rows(
         out / "agent_memory_candidate_reranker_feature_ablation_deltas.csv"
     )
@@ -307,6 +320,13 @@ def main() -> None:
             reranker_loco_sig_rows,
             "Paired significance tests for leave-one-conversation-out candidate reranking.",
             "tab:candidate_reranker_loco_sig",
+        ),
+        (
+            "Intrinsic 候选级重排 LOCO 验证",
+            ["Method", "Splits", "R@1", "R@3", "R@5", "MRR"],
+            intrinsic_loco_metric_rows,
+            "Leave-one-conversation-out intrinsic candidate-level reranking results.",
+            "tab:intrinsic_candidate_reranker_loco",
         ),
         (
             "候选级重排特征组消融",

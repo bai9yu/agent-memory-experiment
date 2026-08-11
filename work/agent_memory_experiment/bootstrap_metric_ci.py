@@ -29,6 +29,13 @@ DEFAULT_SCENARIOS = [
         "description": "Leave-one-conversation-out split：检验 candidate reranker 是否能跨 conversation 泛化。",
     },
     {
+        "scenario": "candidate_reranker_intrinsic_loco",
+        "path": "outputs/agent_memory_candidate_reranker_intrinsic_loco_comparison_per_query.csv",
+        "baseline": "type_aware",
+        "candidate": "intrinsic_reranker_loco",
+        "description": "Leave-one-conversation-out split：检验 intrinsic-only candidate reranker 是否能跨 conversation 泛化。",
+    },
+    {
         "scenario": "candidate_reranker_intrinsic_ablation_vs_type_aware",
         "path": "outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv",
         "baseline": "type_aware",

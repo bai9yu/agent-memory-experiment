@@ -10,7 +10,7 @@
 
 ## 摘要草稿
 
-长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002；feature ablation 中 intrinsic-only reranker 进一步达到 MRR 0.672 和 Recall@5 0.801。在更严格的 leave-one-conversation-out split 下，candidate reranker 的 MRR 为 0.657，高于 type-aware 的 0.608，加权 MRR delta 为 +0.0504。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 28/29/23，并已生成 Human/LLM 确认表，可作为人工复核前的预标注材料。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
+长对话智能体需要在大量历史交互中高效检索与当前任务相关的事实记忆。本文构建了一个基于 LoCoMo 长对话数据的可复现实验框架，比较 DeepSeek 抽取的 fact-level memory、LoCoMo 官方 observation memory、本地 BGE-M3 embedding 检索、BM25 混合检索、时间感知重排、type-aware 重排以及候选级学习重排。在 LoCoMo10 answerable slice 上，DeepSeek fact memory + type-aware reranking 取得 MRR 0.609 和 Recall@5 0.733，高于 LoCoMo observation memory 的 MRR 0.583 和 Recall@5 0.703。进一步地，候选级学习重排在 held-out split 上将 MRR 从 0.607 提升到 0.661，MRR delta 为 +0.0539，permutation p=0.0002；feature ablation 中 intrinsic-only reranker 进一步达到 MRR 0.672 和 Recall@5 0.801。在更严格的 leave-one-conversation-out split 下，intrinsic-only reranker 的 MRR 为 0.664，高于 type-aware 的 0.608，MRR delta 为 +0.0567。DeepSeek memory writer 三次运行的 MRR 均值为 0.613，标准差为 0.004，Recall@5 均值为 0.738，标准差为 0.006。错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 28/29/23，并已生成 Human/LLM 确认表，可作为人工复核前的预标注材料。同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。
 
 ## 贡献点写法
 
@@ -56,7 +56,7 @@ time-aware / type-aware 重排：
 
 \[\hat{y}_{q,i}=f_{\theta}(s_{sem},s_{bm25},d(q,m_i),p(q,m_i),T(q,m_i),type_i,I_i,\phi(q,m_i))\]
 
-最终按 \(\hat{y}_{q,i}\) 重新排序候选。当前 intrinsic-only 变体是 held-out split 上最强方法贡献；full reranker 和 LOCO reranker 作为消融与跨 conversation 泛化证据。
+最终按 \(\hat{y}_{q,i}\) 重新排序候选。当前 intrinsic-only 变体在 held-out 和 leave-one-conversation-out split 上均是最强候选级方法贡献；full reranker 保留为消融对照。
 
 ## 实验章节结构
 
@@ -73,9 +73,9 @@ time-aware / type-aware 重排：
 ### RQ3: 学习式候选重排是否带来主要收益？
 
 - 结果：full candidate reranker MRR 0.661 vs type-aware 0.607；MRR delta +0.0539，Recall@5 delta +0.0623。
-- 特征组消融：intrinsic-only reranker MRR 0.672，Recall@5 0.801；相对 type-aware MRR delta +0.0652，95% CI [0.0543, 0.0759]；相对 full reranker MRR delta +0.0113，95% CI [0.0032, 0.0199]。
-- LOCO 验证：candidate reranker MRR 0.657 vs type-aware 0.608；加权 MRR delta +0.0504，Recall@5 delta +0.0522。
-- 写法：intrinsic-only 是 held-out 最强版本；LOCO 已支持 candidate-level reranking 方向跨 conversation 泛化，但 intrinsic-only 版本可作为后续补充 LOCO 复验。
+- 特征组消融：intrinsic-only reranker MRR 0.672，Recall@5 0.801；相对 type-aware MRR delta +0.0652，95% CI [0.0545, 0.0763]；相对 full reranker MRR delta +0.0113，95% CI [0.0029, 0.0199]。
+- LOCO 验证：intrinsic-only reranker MRR 0.664 vs type-aware 0.608；MRR delta +0.0567，95% CI [0.0439, 0.0696]；Recall@5 delta +0.0658，95% CI [0.0490, 0.0827]。
+- 写法：intrinsic-only 是 held-out 与 LOCO 都支持的当前主方法；full reranker 作为说明 method-level rank/score 特征可能带来噪声的消融对照。
 
 ### RQ4: Type 3 多证据问题是否解决？
 

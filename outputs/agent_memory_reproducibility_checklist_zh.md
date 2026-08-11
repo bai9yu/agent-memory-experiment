@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：102/102
-- 关键指标阈值：7/7
+- Artifact 存在性：107/107
+- 关键指标阈值：9/9
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `40fe30f` |
-| git_branch_status | `## main...origin/main [ahead 3]` |
+| git_commit | `d5ed5df` |
+| git_branch_status | `## main...origin/main [ahead 4]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -38,13 +38,18 @@
 | Candidate reranker feature ablation split summary | True | 5458 | `outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv` |
 | Candidate reranker feature ablation deltas | True | 1407 | `outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv` |
 | Candidate reranker feature ablation comparison | True | 1724236 | `outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv` |
-| Bootstrap metric CI report | True | 5760 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
-| Bootstrap metric CI CSV | True | 10679 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
+| Bootstrap metric CI report | True | 6438 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
+| Bootstrap metric CI CSV | True | 12250 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
 | Validation-tuned router comparison | True | 850159 | `outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv` |
 | Candidate reranker LOCO report | True | 3506 | `outputs/agent_memory_candidate_reranker_loco_zh.md` |
 | Candidate reranker LOCO summary | True | 684 | `outputs/agent_memory_candidate_reranker_loco_summary.csv` |
 | Candidate reranker LOCO significance | True | 627 | `outputs/agent_memory_candidate_reranker_loco_significance_zh.md` |
 | Candidate reranker LOCO comparison | True | 316655 | `outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv` |
+| Intrinsic candidate reranker LOCO report | True | 3683 | `outputs/agent_memory_candidate_reranker_intrinsic_loco_zh.md` |
+| Intrinsic candidate reranker LOCO summary | True | 685 | `outputs/agent_memory_candidate_reranker_intrinsic_loco_summary.csv` |
+| Intrinsic candidate reranker LOCO split summary | True | 3266 | `outputs/agent_memory_candidate_reranker_intrinsic_loco_split_summary.csv` |
+| Intrinsic candidate reranker LOCO deltas | True | 306 | `outputs/agent_memory_candidate_reranker_intrinsic_loco_deltas.csv` |
+| Intrinsic candidate reranker LOCO comparison | True | 316457 | `outputs/agent_memory_candidate_reranker_intrinsic_loco_comparison_per_query.csv` |
 | Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
 | Type3 query decomposition fusion4 report | True | 5473 | `outputs/agent_memory_type3_query_decomposition_fusion4_zh.md` |
 | Type3 query decomposition fusion4 summary | True | 1604 | `outputs/agent_memory_type3_query_decomposition_fusion4_summary.csv` |
@@ -67,11 +72,11 @@
 | Type3 supervised selector rwn002 coverage | True | 66755 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage.csv` |
 | Type3 supervised selector rwn002 comparison | True | 41037 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_comparison_per_query.csv` |
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
-| Paper tables Markdown | True | 3424 | `outputs/agent_memory_paper_tables_zh.md` |
-| Paper tables LaTeX | True | 4741 | `outputs/agent_memory_paper_tables.tex` |
-| Paper evidence matrix | True | 6959 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
-| Paper draft outline | True | 7449 | `outputs/agent_memory_paper_draft_outline_zh.md` |
-| Paper manuscript draft | True | 10813 | `outputs/agent_memory_manuscript_draft_zh.md` |
+| Paper tables Markdown | True | 3724 | `outputs/agent_memory_paper_tables_zh.md` |
+| Paper tables LaTeX | True | 5197 | `outputs/agent_memory_paper_tables.tex` |
+| Paper evidence matrix | True | 7048 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper draft outline | True | 7485 | `outputs/agent_memory_paper_draft_outline_zh.md` |
+| Paper manuscript draft | True | 11027 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
 | Submission readiness gate | True | 2324 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
@@ -79,7 +84,7 @@
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3807 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 17641 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 17642 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -139,6 +144,8 @@
 | Candidate reranker Recall@5 | 0.7957 | 0.7900 | True |
 | Intrinsic-only candidate reranker MRR | 0.6719 | 0.6700 | True |
 | Intrinsic-only candidate reranker Recall@5 | 0.8014 | 0.8000 | True |
+| Intrinsic-only LOCO candidate reranker MRR | 0.6638 | 0.6600 | True |
+| Intrinsic-only LOCO candidate reranker Recall@5 | 0.7969 | 0.7900 | True |
 | Type3 supervised selector Coverage@5 delta is negative | 0.0572 | 0.0500 | True |
 
 ## 复现命令入口
@@ -150,6 +157,7 @@
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
 | Candidate reranker feature ablation | `work/agent_memory_experiment/candidate_reranker_feature_ablation.py` | Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware. |
 | Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
+| Intrinsic candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_intrinsic_loco_experiment.py` | Reuses leave-one-conversation-out split with intrinsic-only candidate features. |
 | Bootstrap metric CI | `work/agent_memory_experiment/bootstrap_metric_ci.py` | Computes query-level bootstrap confidence intervals for main, LOCO, router, and Type3 paired results. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
 | Type3 query decomposition fusion4 | `work/agent_memory_experiment/type3_query_decomposition_experiment.py` | Records the stronger keyword-facet decomposition fusion variant and its negative result. |

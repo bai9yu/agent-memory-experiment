@@ -49,6 +49,14 @@
 | mrr | +0.0504 | [0.0411, 0.0601] | 0.0002 |
 | recall@5 | +0.0522 | [0.0375, 0.0675] | 0.0002 |
 
+## Intrinsic 候选级重排 LOCO 验证
+
+| Method | Splits | R@1 | R@3 | R@5 | MRR |
+| --- | --- | --- | --- | --- | --- |
+| type_aware | 10 | 0.503 | 0.669 | 0.732 | 0.608 |
+| intrinsic_reranker_loco | 10 | 0.559 | 0.742 | 0.797 | 0.664 |
+| candidate_oracle | 10 | 0.911 | 0.911 | 0.911 | 0.911 |
+
 ## 候选级重排特征组消融
 
 | Method | MRR | ΔMRR vs Type-Aware | ΔMRR vs Full | R@5 | ΔR@5 vs Type-Aware |

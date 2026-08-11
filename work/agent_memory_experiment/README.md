@@ -611,6 +611,24 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candi
   --output-report outputs/agent_memory_candidate_reranker_loco_zh.md
 ```
 
+Run intrinsic-only leave-one-conversation-out candidate reranker analysis:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/candidate_reranker_intrinsic_loco_experiment.py \
+  --rankings work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/rankings.csv \
+  --per-query work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_bge_m3_type_004_with_keyword/per_query_metrics.csv \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --locomo work/agent_memory_experiment/data/locomo10.json \
+  --output-split-summary outputs/agent_memory_candidate_reranker_intrinsic_loco_split_summary.csv \
+  --output-summary outputs/agent_memory_candidate_reranker_intrinsic_loco_summary.csv \
+  --output-deltas outputs/agent_memory_candidate_reranker_intrinsic_loco_deltas.csv \
+  --output-selected outputs/agent_memory_candidate_reranker_intrinsic_loco_selected.csv \
+  --output-comparison outputs/agent_memory_candidate_reranker_intrinsic_loco_comparison_per_query.csv \
+  --output-ranked outputs/agent_memory_candidate_reranker_intrinsic_loco_ranked_top20.csv \
+  --output-report outputs/agent_memory_candidate_reranker_intrinsic_loco_zh.md
+```
+
 Run paired significance testing for the LOCO candidate reranker:
 
 ```bash

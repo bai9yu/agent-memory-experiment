@@ -63,6 +63,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     feature_ablation = read_csv(outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv")
     bootstrap_ci = read_csv(outputs / "agent_memory_bootstrap_metric_ci.csv")
     reranker_loco = read_csv(outputs / "agent_memory_candidate_reranker_loco_summary.csv")
+    intrinsic_loco = read_csv(outputs / "agent_memory_candidate_reranker_intrinsic_loco_summary.csv")
     reranker_loco_sig = read_csv(outputs / "agent_memory_candidate_reranker_loco_significance_results.csv")
     query_type = read_csv(outputs / "agent_memory_query_type_locomo10_best_methods.csv")
     coverage = read_csv(outputs / "agent_memory_multi_evidence_coverage_summary.csv")
@@ -103,6 +104,17 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
         bootstrap_ci,
         scenario="candidate_reranker_intrinsic_ablation_vs_full",
         metric="mrr",
+    )
+    intrinsic_loco_row = lookup(intrinsic_loco, method="intrinsic_reranker_loco")
+    intrinsic_loco_mrr = lookup(
+        bootstrap_ci,
+        scenario="candidate_reranker_intrinsic_loco",
+        metric="mrr",
+    )
+    intrinsic_loco_r5 = lookup(
+        bootstrap_ci,
+        scenario="candidate_reranker_intrinsic_loco",
+        metric="recall@5",
     )
     reranker_loco_row = lookup(reranker_loco, method="candidate_reranker_loco")
     reranker_loco_base = lookup(reranker_loco, method="type_aware")
@@ -196,12 +208,15 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
                 f"delta vs full {signed(intrinsic_vs_full_mrr['delta_mean'])}, 95% CI [{f(intrinsic_vs_full_mrr['delta_ci_low'], 4)}, {f(intrinsic_vs_full_mrr['delta_ci_high'], 4)}]. "
                 f"LOCO split: type-aware MRR {f(reranker_loco_base['mrr_mean'])}, candidate reranker MRR {f(reranker_loco_row['mrr_mean'])}; "
                 f"weighted MRR delta {signed(reranker_loco_sig_mrr['mean_delta'])}, p={f(reranker_loco_sig_mrr['permutation_p_value'], 4)}; "
-                f"weighted R@5 delta {signed(reranker_loco_sig_r5['mean_delta'])}, p={f(reranker_loco_sig_r5['permutation_p_value'], 4)}."
+                f"weighted R@5 delta {signed(reranker_loco_sig_r5['mean_delta'])}, p={f(reranker_loco_sig_r5['permutation_p_value'], 4)}. "
+                f"Intrinsic LOCO MRR {f(intrinsic_loco_row['mrr_mean'])}, R@5 {f(intrinsic_loco_row['recall@5_mean'])}; "
+                f"MRR delta {signed(intrinsic_loco_mrr['delta_mean'])}, 95% CI [{f(intrinsic_loco_mrr['delta_ci_low'], 4)}, {f(intrinsic_loco_mrr['delta_ci_high'], 4)}]; "
+                f"R@5 delta {signed(intrinsic_loco_r5['delta_mean'])}, 95% CI [{f(intrinsic_loco_r5['delta_ci_low'], 4)}, {f(intrinsic_loco_r5['delta_ci_high'], 4)}]."
             ),
             "support_level": "strong_heldout_and_loco_statistical",
-            "primary_artifacts": "agent_memory_candidate_reranker_feature_ablation_summary.csv; agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_bootstrap_metric_ci_zh.md; agent_memory_candidate_reranker_loco_summary.csv; agent_memory_candidate_reranker_loco_significance_results.csv",
+            "primary_artifacts": "agent_memory_candidate_reranker_feature_ablation_summary.csv; agent_memory_candidate_reranker_feature_ablation_zh.md; agent_memory_candidate_reranker_intrinsic_loco_summary.csv; agent_memory_candidate_reranker_intrinsic_loco_zh.md; agent_memory_bootstrap_metric_ci_zh.md",
             "paper_use": "应作为当前论文方法增量的核心结果；full reranker 保留为消融对照。",
-            "remaining_gap": "LOCO 已支持跨 LoCoMo conversation 泛化，但 intrinsic-only 版本还可补 LOCO 复验；若要宣称跨数据集泛化，仍需外部数据集验证。",
+            "remaining_gap": "Held-out 和 LOCO 已支持跨 LoCoMo conversation 泛化；若要宣称跨数据集泛化，仍需外部数据集验证。",
         },
         {
             "claim": "Type 3 多证据问题仍是当前方法边界。",
