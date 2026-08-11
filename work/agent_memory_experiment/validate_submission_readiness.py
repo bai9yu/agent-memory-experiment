@@ -80,6 +80,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     mock_smoke = read_csv(outputs / "agent_memory_mock_api_embedding_smoke_test.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
     gap_analysis = read_csv(outputs / "agent_memory_submission_gap_analysis.csv")
+    public_release = read_csv(outputs / "agent_memory_public_release_readiness.csv")
 
     artifact_pass = count(reproducibility_artifacts, "exists", "True")
     metric_pass = count(reproducibility_metrics, "pass", "True")
@@ -91,6 +92,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     priority = lookup(human_gate, label="priority20")
     full = lookup(human_gate, label="full80")
     reviewer_blockers = count(gap_analysis, "risk_level", "blocker")
+    public_release_blockers = count(public_release, "status", "blocker")
 
     rows = [
         gate_row(
@@ -164,6 +166,14 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             reviewer_blockers == 0,
             f"blocker risks={reviewer_blockers}",
             "优先补齐外部 embedding baseline 和人工复核标签。",
+        ),
+        gate_row(
+            "public_release_hygiene",
+            "submission",
+            True,
+            public_release_blockers == 0,
+            f"public release blockers={public_release_blockers}",
+            "修复公开发布检查中的 key、`.env` 或仓库卫生 blocker。",
         ),
     ]
     return rows

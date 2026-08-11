@@ -193,6 +193,8 @@ def main() -> None:
         ("Paper manuscript claim check CSV", outputs / "agent_memory_manuscript_claim_check.csv"),
         ("Submission readiness gate", outputs / "agent_memory_submission_readiness_gate_zh.md"),
         ("Submission readiness gate CSV", outputs / "agent_memory_submission_readiness_gate.csv"),
+        ("Public release readiness gate", outputs / "agent_memory_public_release_readiness_zh.md"),
+        ("Public release readiness gate CSV", outputs / "agent_memory_public_release_readiness.csv"),
         ("Submission gap analysis", outputs / "agent_memory_submission_gap_analysis_zh.md"),
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
         ("Experiment protocol", outputs / "agent_memory_experiment_protocol_zh.md"),
@@ -370,6 +372,11 @@ def main() -> None:
             "stage": "Submission readiness gate",
             "command": "work/agent_memory_experiment/validate_submission_readiness.py",
             "notes": "Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission.",
+        },
+        {
+            "stage": "Public release readiness gate",
+            "command": "work/agent_memory_experiment/validate_public_release_readiness.py",
+            "notes": "Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links.",
         },
         {
             "stage": "Submission gap analysis",

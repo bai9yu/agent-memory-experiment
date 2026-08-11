@@ -5,7 +5,7 @@
 ## 总览
 
 - Ready for final submission: False
-- Required gates passed: 3/8
+- Required gates passed: 4/9
 - Blockers: 5
 - Optional pending: 0
 
@@ -13,7 +13,7 @@
 
 | Gate | Category | Required | Pass | Status | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| reproducibility_artifacts | reproducibility | True | True | pass | 59/59 artifacts exist |
+| reproducibility_artifacts | reproducibility | True | True | pass | 61/61 artifacts exist |
 | reproducibility_metrics | reproducibility | True | True | pass | 5/5 metric thresholds pass |
 | manuscript_claim_check | paper_writing | True | True | pass | 8/8 claim checks pass |
 | api_embedding_preflight | external_baseline | True | False | blocker | 4/5 required checks pass |
@@ -22,6 +22,7 @@
 | priority20_human_audit | reliability | True | False | blocker | priority20 confirmed=0/20, invalid=0 |
 | full80_human_audit | reliability | True | False | blocker | full80 confirmed=0/80, invalid=0 |
 | reviewer_risk_blockers | submission | True | False | blocker | blocker risks=2 |
+| public_release_hygiene | submission | True | True | pass | public release blockers=0 |
 
 ## 当前 Blocker
 

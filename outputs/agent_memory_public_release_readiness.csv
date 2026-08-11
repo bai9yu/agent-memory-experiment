@@ -1,0 +1,7 @@
+check,category,pass,severity,status,evidence,next_action
+tracked_secret_scan,security,True,blocker,pass,no tracked secret-like lines found,移除真实 API key 或 bearer token，轮换泄露 key，并重写 Git 历史后再公开。
+env_file_not_tracked,security,True,blocker,pass,.env tracked=False,确保 `.env` 不进入 Git；只提交 `.env.example`。
+gitignore_covers_env,security,True,major,pass,.gitignore contains `.env`,在 `.gitignore` 中加入 `.env`，避免后续误提交 key。
+env_example_uses_placeholders,reproducibility,True,major,pass,.env.example has provider placeholders,保留 DeepSeek/OpenAI key 的占位说明，不能写真实 key。
+readme_links_submission_gate,paper_artifact,True,major,pass,README links submission readiness gate,在 README 的论文报告列表中加入最终投稿门禁。
+license_file_present,open_source,False,minor,minor,license files=none,正式开源前补充 LICENSE；内部实验仓库可暂缓。

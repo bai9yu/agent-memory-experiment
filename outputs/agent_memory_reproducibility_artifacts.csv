@@ -18,8 +18,10 @@ Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,6827
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,9893
 Paper manuscript claim check,outputs/agent_memory_manuscript_claim_check_zh.md,True,1827
 Paper manuscript claim check CSV,outputs/agent_memory_manuscript_claim_check.csv,True,1395
-Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2096
-Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1513
+Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,True,2185
+Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1660
+Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
+Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247

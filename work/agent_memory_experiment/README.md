@@ -1008,6 +1008,16 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
   --output-report outputs/agent_memory_submission_readiness_gate_zh.md
 ```
 
+Validate public-release hygiene before sharing the repository or paper artifacts:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_public_release_readiness.py \
+  --project-root . \
+  --output-csv outputs/agent_memory_public_release_readiness.csv \
+  --output-report outputs/agent_memory_public_release_readiness_zh.md
+```
+
 Generate external embedding baseline status:
 
 ```bash

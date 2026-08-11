@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：59/59
+- Artifact 存在性：61/61
 - 关键指标阈值：5/5
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `409d49c` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `60941c3` |
+| git_branch_status | `## main...origin/main [ahead 2]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -45,8 +45,10 @@
 | Paper manuscript draft | True | 9893 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
-| Submission readiness gate | True | 2096 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
-| Submission readiness gate CSV | True | 1513 | `outputs/agent_memory_submission_readiness_gate.csv` |
+| Submission readiness gate | True | 2185 | `outputs/agent_memory_submission_readiness_gate_zh.md` |
+| Submission readiness gate CSV | True | 1660 | `outputs/agent_memory_submission_readiness_gate.csv` |
+| Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
+| Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -122,6 +124,7 @@
 | Paper manuscript draft | `work/agent_memory_experiment/generate_paper_manuscript.py` | Generates an editable Chinese manuscript draft from cached experiment outputs. |
 | Paper manuscript claim check | `work/agent_memory_experiment/validate_manuscript_claims.py` | Checks that the draft does not overclaim pending embedding or human-audit results. |
 | Submission readiness gate | `work/agent_memory_experiment/validate_submission_readiness.py` | Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission. |
+| Public release readiness gate | `work/agent_memory_experiment/validate_public_release_readiness.py` | Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links. |
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |
 | Experiment protocol | `work/agent_memory_experiment/generate_experiment_protocol.py` | Builds a paper appendix-style protocol from cached metrics and artifacts. |
 | Environment snapshot | `work/agent_memory_experiment/generate_environment_snapshot.py` | Records Python/package/cache/Git environment; does not read .env. |
