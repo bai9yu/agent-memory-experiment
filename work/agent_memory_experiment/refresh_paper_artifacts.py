@@ -519,6 +519,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Checks that manuscript does not overclaim pending baselines/audits.",
         ),
         Step(
+            "paper_scope_claim_audit",
+            py(
+                "validate_paper_scope_claims.py",
+                "--project-root",
+                ".",
+                "--output-csv",
+                "outputs/agent_memory_paper_scope_claim_audit.csv",
+                "--output-report",
+                "outputs/agent_memory_paper_scope_claim_audit_zh.md",
+            ),
+            "Audits paper-facing documents for scope and generalization overclaims.",
+        ),
+        Step(
             "evidence_freshness",
             py(
                 "validate_evidence_freshness.py",

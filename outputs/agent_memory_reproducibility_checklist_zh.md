@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：186/186
+- Artifact 存在性：188/188
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `0999595` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `b5e4334` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -108,6 +108,8 @@
 | Paper manuscript draft | True | 12592 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
 | Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
+| Paper scope claim audit | True | 11366 | `outputs/agent_memory_paper_scope_claim_audit_zh.md` |
+| Paper scope claim audit CSV | True | 10190 | `outputs/agent_memory_paper_scope_claim_audit.csv` |
 | Threats to validity appendix | True | 5872 | `outputs/agent_memory_threats_to_validity_zh.md` |
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
 | Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
@@ -127,15 +129,15 @@
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 32360 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 32678 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3600 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 2813 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Paper artifact refresh run | True | 5076 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 17559 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
-| Paper refresh coverage audit | True | 7358 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
-| Paper refresh coverage audit CSV | True | 6332 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
+| Paper artifact refresh run | True | 5196 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 17923 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper refresh coverage audit | True | 7556 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
+| Paper refresh coverage audit CSV | True | 6522 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -291,6 +293,7 @@
 | Paper draft outline | `work/agent_memory_experiment/generate_paper_draft_outline.py` | Builds a Chinese paper skeleton from current evidence, formulas, and result tables. |
 | Paper manuscript draft | `work/agent_memory_experiment/generate_paper_manuscript.py` | Generates an editable Chinese manuscript draft from cached experiment outputs. |
 | Paper manuscript claim check | `work/agent_memory_experiment/validate_manuscript_claims.py` | Checks that the draft does not overclaim pending embedding or human-audit results. |
+| Paper scope claim audit | `work/agent_memory_experiment/validate_paper_scope_claims.py` | Audits paper-facing documents for LoCoMo10 scope, external baseline, human-audit, production-scale, and agent-task overclaims. |
 | Threats to validity appendix | `work/agent_memory_experiment/generate_threats_to_validity_appendix.py` | Builds a paper appendix of internal/external/construct/statistical validity threats and claim boundaries. |
 | Reviewer response preparation matrix | `work/agent_memory_experiment/generate_reviewer_response_prep.py` | Maps likely reviewer questions to current evidence, remaining gaps, and safe paper-writing boundaries. |
 | Submission package index | `work/agent_memory_experiment/generate_submission_package_index.py` | Indexes manuscript, tables, appendices, reproducibility artifacts, blockers, and final packaging actions. |

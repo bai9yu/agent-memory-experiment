@@ -254,6 +254,8 @@ def main() -> None:
         ("Paper manuscript draft", outputs / "agent_memory_manuscript_draft_zh.md"),
         ("Paper manuscript claim check", outputs / "agent_memory_manuscript_claim_check_zh.md"),
         ("Paper manuscript claim check CSV", outputs / "agent_memory_manuscript_claim_check.csv"),
+        ("Paper scope claim audit", outputs / "agent_memory_paper_scope_claim_audit_zh.md"),
+        ("Paper scope claim audit CSV", outputs / "agent_memory_paper_scope_claim_audit.csv"),
         ("Threats to validity appendix", outputs / "agent_memory_threats_to_validity_zh.md"),
         ("Threats to validity CSV", outputs / "agent_memory_threats_to_validity.csv"),
         ("Reviewer response preparation matrix", outputs / "agent_memory_reviewer_response_prep_zh.md"),
@@ -690,6 +692,11 @@ def main() -> None:
             "stage": "Paper manuscript claim check",
             "command": "work/agent_memory_experiment/validate_manuscript_claims.py",
             "notes": "Checks that the draft does not overclaim pending embedding or human-audit results.",
+        },
+        {
+            "stage": "Paper scope claim audit",
+            "command": "work/agent_memory_experiment/validate_paper_scope_claims.py",
+            "notes": "Audits paper-facing documents for LoCoMo10 scope, external baseline, human-audit, production-scale, and agent-task overclaims.",
         },
         {
             "stage": "Threats to validity appendix",

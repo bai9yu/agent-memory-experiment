@@ -40,6 +40,7 @@ REQUIRED_STEPS = [
     ("reviewer_response_prep", "reviewer response prep"),
     ("paper_manuscript", "manuscript draft"),
     ("manuscript_claim_check", "manuscript claim check"),
+    ("paper_scope_claim_audit", "paper-facing scope and generalization claim audit"),
     ("evidence_freshness", "stale evidence audit"),
     ("submission_entrypoint_consistency", "submission readiness entrypoint consistency audit"),
 ]

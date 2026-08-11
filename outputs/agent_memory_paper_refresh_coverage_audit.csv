@@ -29,6 +29,7 @@ required_offline_step,submission_readiness,final submission gates,True,True,pass
 required_offline_step,reviewer_response_prep,reviewer response prep,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,paper_manuscript,manuscript draft,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,manuscript_claim_check,manuscript claim check,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
+required_offline_step,paper_scope_claim_audit,paper-facing scope and generalization claim audit,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,evidence_freshness,stale evidence audit,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,submission_entrypoint_consistency,submission readiness entrypoint consistency audit,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 excluded_by_design,external_api_embedding_run,requires paid/network API key,False,True,intentionally excluded from offline refresh pipeline,Run manually only after external input is available.

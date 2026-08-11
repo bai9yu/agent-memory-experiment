@@ -6,7 +6,7 @@
 
 - Dry run: False
 - Include environment snapshot: False
-- Steps: 35
+- Steps: 36
 - Failures: 0
 
 ## Step Results
@@ -15,11 +15,11 @@
 | --- | --- | --- | --- | --- |
 | offline_embedding_sensitivity | pass | 0 | 0.023 | Refreshes offline hash/BM25 vs BGE-M3 encoder-sensitivity diagnostics. |
 | human_audit_execution_plan | pass | 0 | 0.021 | Refreshes the human-audit labeling execution plan from current gates. |
-| human_audit_sample_qc | pass | 0 | 0.023 | Checks priority20/full80 human-audit sample size, uniqueness, coverage, and labeling progress. |
-| human_audit_labeling_dashboard | pass | 0 | 0.023 | Refreshes per-row human-audit labeling progress and next-item dashboard. |
+| human_audit_sample_qc | pass | 0 | 0.024 | Checks priority20/full80 human-audit sample size, uniqueness, coverage, and labeling progress. |
+| human_audit_labeling_dashboard | pass | 0 | 0.024 | Refreshes per-row human-audit labeling progress and next-item dashboard. |
 | human_audit_annotation_interface | pass | 0 | 0.024 | Generates offline HTML annotation interfaces for priority20/full80 blind-review sheets. |
-| human_audit_annotation_interface_validation | pass | 0 | 0.024 | Validates that generated annotation HTML matches blind CSVs and hides LLM-assisted labels. |
-| human_audit_annotation_import_readiness | pass | 0 | 0.023 | Checks whether HTML-exported human labels are ready to merge into confirmation sheets. |
+| human_audit_annotation_interface_validation | pass | 0 | 0.023 | Validates that generated annotation HTML matches blind CSVs and hides LLM-assisted labels. |
+| human_audit_annotation_import_readiness | pass | 0 | 0.024 | Checks whether HTML-exported human labels are ready to merge into confirmation sheets. |
 | human_audit_blind_review_leakage | pass | 0 | 0.022 | Checks that blinded human-audit review sheets do not expose LLM-assisted labels and follow the expected schema. |
 | embedding_baseline_status | pass | 0 | 0.022 | Refreshes external embedding key/result status without printing keys. |
 | embedding_provider_profiles | pass | 0 | 0.023 | Refreshes provider-specific preflight, estimate, run, and compare commands. |
@@ -31,23 +31,24 @@
 | submission_blocker_closure_plan | pass | 0 | 0.021 | Refreshes the ordered closure path for final-submission blockers. |
 | submission_package_index | pass | 0 | 0.022 | Refreshes the index of manuscript, tables, appendices, gates, and packaging actions. |
 | paper_table_consistency | pass | 0 | 0.051 | Checks that paper Markdown/LaTeX tables are byte-identical to regenerated CSV-derived outputs. |
-| untracked_artifact_audit | pass | 0 | 0.034 | Classifies untracked local outputs before public artifact packaging. |
-| large_intermediate_provenance | pass | 0 | 0.145 | Audits large local ranked/per-query intermediates against README commands and tracked downstream summaries. |
-| artifact_path_portability | pass | 0 | 0.180 | Checks tracked paper-facing reports for machine-local absolute paths before artifact sharing. |
-| public_release_readiness | pass | 0 | 0.432 | Refreshes tracked-file release hygiene checks after untracked artifact audit. |
+| untracked_artifact_audit | pass | 0 | 0.035 | Classifies untracked local outputs before public artifact packaging. |
+| large_intermediate_provenance | pass | 0 | 0.144 | Audits large local ranked/per-query intermediates against README commands and tracked downstream summaries. |
+| artifact_path_portability | pass | 0 | 0.183 | Checks tracked paper-facing reports for machine-local absolute paths before artifact sharing. |
+| public_release_readiness | pass | 0 | 0.434 | Refreshes tracked-file release hygiene checks after untracked artifact audit. |
 | reproducibility_checklist | pass | 0 | 0.045 | Refreshes artifact and metric gates. |
-| artifact_integrity_manifest | pass | 0 | 0.044 | Refreshes artifact sha256/size/line-count manifest. |
+| artifact_integrity_manifest | pass | 0 | 0.042 | Refreshes artifact sha256/size/line-count manifest. |
 | evidence_matrix | pass | 0 | 0.028 | Refreshes paper claim/evidence/gap matrix. |
 | submission_gap_analysis | pass | 0 | 0.023 | Refreshes reviewer-facing risk matrix. |
 | submission_readiness | pass | 0 | 0.023 | Refreshes final-submission gates. |
 | reviewer_response_prep | pass | 0 | 0.027 | Refreshes reviewer question/answer preparation matrix. |
 | paper_manuscript | pass | 0 | 0.028 | Refreshes Chinese manuscript draft from current evidence. |
 | manuscript_claim_check | pass | 0 | 0.023 | Checks that manuscript does not overclaim pending baselines/audits. |
+| paper_scope_claim_audit | pass | 0 | 0.025 | Audits paper-facing documents for scope and generalization overclaims. |
 | evidence_freshness | pass | 0 | 0.024 | Checks stale artifact/metric/integrity gate counts. |
-| submission_entrypoint_consistency | pass | 0 | 0.023 | Checks that README/package/reproducibility entrypoints point to the current submission readiness artifact. |
+| submission_entrypoint_consistency | pass | 0 | 0.024 | Checks that README/package/reproducibility entrypoints point to the current submission readiness artifact. |
 | paper_refresh_coverage | pass | 0 | 0.021 | Checks that the offline refresh run covers all required paper-facing reports. |
-| artifact_integrity_manifest_final | pass | 0 | 0.042 | Final manifest refresh after freshness audit changes. |
-| submission_readiness_final | pass | 0 | 0.024 | Final submission gate refresh after manifest changes. |
+| artifact_integrity_manifest_final | pass | 0 | 0.044 | Final manifest refresh after freshness audit changes. |
+| submission_readiness_final | pass | 0 | 0.027 | Final submission gate refresh after manifest changes. |
 
 ## 使用边界
 
