@@ -24,7 +24,14 @@ def fmt(value: str | float) -> str:
     return f"{float(value):.3f}"
 
 
-def write_report(result_dir: Path, output: Path, memories_path: Path, queries_path: Path) -> None:
+def display_path(path: Path, root: Path) -> str:
+    try:
+        return str(path.relative_to(root))
+    except ValueError:
+        return str(path)
+
+
+def write_report(result_dir: Path, output: Path, memories_path: Path, queries_path: Path, repo_root: Path) -> None:
     summary = read_csv(result_dir / "summary.csv")
     by_type = read_csv(result_dir / "summary_by_type.csv")
 
@@ -33,9 +40,9 @@ def write_report(result_dir: Path, output: Path, memories_path: Path, queries_pa
         "",
         "## 数据与转换",
         "",
-        f"- Memory 文件：`{memories_path}`",
-        f"- Query 文件：`{queries_path}`",
-        f"- 评测结果目录：`{result_dir}`",
+        f"- Memory 文件：`{display_path(memories_path, repo_root)}`",
+        f"- Query 文件：`{display_path(queries_path, repo_root)}`",
+        f"- 评测结果目录：`{display_path(result_dir, repo_root)}`",
         "",
         "LoCoMo 原始数据包含多 session 长对话、时间戳、QA 标注和 evidence。当前转换器把对话 turn 转为 memory，把 QA question 转为 query，并把 `D1:3` 这类 evidence id 映射到本地 `mxxxxx` memory id。",
         "",
@@ -153,7 +160,7 @@ def main() -> None:
     if args.local_files_only:
         eval_cmd.append("--local-files-only")
     run_cmd(eval_cmd, cwd=repo_root)
-    write_report(result_dir, repo_root / args.report_output, memories_path, queries_path)
+    write_report(result_dir, repo_root / args.report_output, memories_path, queries_path, repo_root)
 
 
 if __name__ == "__main__":

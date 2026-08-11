@@ -301,6 +301,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Audits large local ranked/per-query intermediates against README commands and tracked downstream summaries.",
         ),
         Step(
+            "artifact_path_portability",
+            py(
+                "validate_artifact_path_portability.py",
+                "--project-root",
+                ".",
+                "--output-csv",
+                "outputs/agent_memory_artifact_path_portability.csv",
+                "--output-report",
+                "outputs/agent_memory_artifact_path_portability_zh.md",
+            ),
+            "Checks tracked paper-facing reports for machine-local absolute paths before artifact sharing.",
+        ),
+        Step(
             "public_release_readiness",
             py(
                 "validate_public_release_readiness.py",
@@ -509,15 +522,25 @@ def build_steps(include_environment: bool) -> list[Step]:
     return steps
 
 
-def command_string(args: list[str]) -> str:
-    return " ".join(shlex.quote(arg) for arg in args)
+def portable_arg(arg: str, cwd: Path) -> str:
+    path = Path(arg)
+    if path.is_absolute():
+        try:
+            return str(path.relative_to(cwd.resolve()))
+        except ValueError:
+            return arg
+    return arg
+
+
+def command_string(args: list[str], cwd: Path) -> str:
+    return " ".join(shlex.quote(portable_arg(arg, cwd)) for arg in args)
 
 
 def run_step(step: Step, cwd: Path, dry_run: bool) -> dict[str, Any]:
     start = time.time()
     row: dict[str, Any] = {
         "step": step.name,
-        "command": command_string(step.args),
+        "command": command_string(step.args, cwd),
         "notes": step.notes,
         "status": "dry_run" if dry_run else "pending",
         "returncode": "",

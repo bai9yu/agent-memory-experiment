@@ -16,6 +16,7 @@ required_offline_step,submission_package_index,paper package index,True,True,pas
 required_offline_step,paper_table_consistency,paper table consistency audit,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,untracked_artifact_audit,untracked artifact hygiene audit,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,large_intermediate_provenance,large local intermediate provenance audit,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
+required_offline_step,artifact_path_portability,paper-facing artifact path portability audit,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,public_release_readiness,public release readiness gate,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,reproducibility_checklist,artifact and metric gates,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.
 required_offline_step,artifact_integrity_manifest,artifact integrity manifest,True,True,pass,Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change.

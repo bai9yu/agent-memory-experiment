@@ -2,9 +2,9 @@
 
 ## 数据与转换
 
-- Memory 文件：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/work/agent_memory_experiment/data/locomo_real_all_memories.jsonl`
-- Query 文件：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/work/agent_memory_experiment/data/locomo_real_all_queries.jsonl`
-- 评测结果目录：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/work/agent_memory_experiment/results/locomo_real_all`
+- Memory 文件：`work/agent_memory_experiment/data/locomo_real_all_memories.jsonl`
+- Query 文件：`work/agent_memory_experiment/data/locomo_real_all_queries.jsonl`
+- 评测结果目录：`work/agent_memory_experiment/results/locomo_real_all`
 
 LoCoMo 原始数据包含多 session 长对话、时间戳、QA 标注和 evidence。当前转换器把对话 turn 转为 memory，把 QA question 转为 query，并把 `D1:3` 这类 evidence id 映射到本地 `mxxxxx` memory id。
 
@@ -20,7 +20,7 @@ LoCoMo 原始数据包含多 session 长对话、时间戳、QA 标注和 eviden
 
 ### BGE-M3 本地 embedding：初始 time-aware
 
-结果目录：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/work/agent_memory_experiment/results/locomo_real_all_bge_m3`
+结果目录：`work/agent_memory_experiment/results/locomo_real_all_bge_m3`
 
 | Method | Recall@1 | Recall@3 | Recall@5 | MRR | Queries |
 |---|---:|---:|---:|---:|---:|
@@ -32,9 +32,9 @@ LoCoMo 原始数据包含多 session 长对话、时间戳、QA 标注和 eviden
 
 ### BGE-M3 本地 embedding：adaptive time-aware
 
-结果目录：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/work/agent_memory_experiment/results/locomo_real_all_bge_m3_adaptive_time`
+结果目录：`work/agent_memory_experiment/results/locomo_real_all_bge_m3_adaptive_time`
 
-参数来源：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/outputs/agent_memory_time_aware_tuning_zh.md`
+参数来源：`outputs/agent_memory_time_aware_tuning_zh.md`
 
 | Method | Recall@1 | Recall@3 | Recall@5 | MRR | Queries |
 |---|---:|---:|---:|---:|---:|
@@ -46,7 +46,7 @@ LoCoMo 原始数据包含多 session 长对话、时间戳、QA 标注和 eviden
 
 ### BGE-M3 本地 embedding：adaptive time-aware + persona gate
 
-结果目录：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/work/agent_memory_experiment/results/locomo_real_all_bge_m3_persona_004_types_1_4`
+结果目录：`work/agent_memory_experiment/results/locomo_real_all_bge_m3_persona_004_types_1_4`
 
 参数：`persona_boost_weight=0.04`，`persona_boost_query_types=1,2,3,4`
 
@@ -60,7 +60,7 @@ LoCoMo 原始数据包含多 session 长对话、时间戳、QA 标注和 eviden
 
 ### BGE-M3 本地 embedding：adaptive time-aware + persona gate + importance proxy
 
-结果目录：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/work/agent_memory_experiment/results/locomo_real_all_bge_m3_importance_006`
+结果目录：`work/agent_memory_experiment/results/locomo_real_all_bge_m3_importance_006`
 
 参数：`persona_boost_weight=0.04`，`persona_boost_query_types=1,2,3,4`，`importance_weight=0.06`
 
@@ -74,7 +74,7 @@ LoCoMo 原始数据包含多 session 长对话、时间戳、QA 标注和 eviden
 
 ## 真实压缩对照
 
-结果文档：`/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/outputs/agent_memory_locomo_compression_real_zh.md`
+结果文档：`outputs/agent_memory_locomo_compression_real_zh.md`
 
 | Variant | Memories | Token Ratio | Evidence Coverage | Recall@1 | Recall@3 | Recall@5 | MRR |
 |---|---:|---:|---:|---:|---:|---:|---:|

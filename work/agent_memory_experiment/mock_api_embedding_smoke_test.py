@@ -101,6 +101,13 @@ def markdown_table(headers: list[str], rows: list[list[str]]) -> str:
     return "\n".join(lines)
 
 
+def display_path(path: Path, root: Path) -> str:
+    try:
+        return str(path.relative_to(root))
+    except ValueError:
+        return str(path)
+
+
 def run_memory_eval(args: argparse.Namespace, base_url: str, cache_dir: Path) -> subprocess.CompletedProcess[str]:
     env = os.environ.copy()
     env["AGENT_MEMORY_MOCK_API_KEY"] = "mock_key_for_local_smoke_test"
@@ -141,7 +148,7 @@ def run_memory_eval(args: argparse.Namespace, base_url: str, cache_dir: Path) ->
     return subprocess.run(command, check=True, capture_output=True, text=True, env=env)
 
 
-def write_report(path: Path, rows: list[dict[str, Any]], summary_rows: list[dict[str, str]], output_dir: Path) -> None:
+def write_report(path: Path, rows: list[dict[str, Any]], summary_rows: list[dict[str, str]], output_dir: Path, repo_root: Path) -> None:
     type_aware = next((row for row in summary_rows if row.get("method") == "type_aware"), {})
     lines = [
         "# Mock API Embedding Smoke Test",
@@ -150,7 +157,7 @@ def write_report(path: Path, rows: list[dict[str, Any]], summary_rows: list[dict
         "",
         "## 结论",
         "",
-        f"- Output dir: `{output_dir}`",
+        f"- Output dir: `{display_path(output_dir, repo_root)}`",
         f"- First run API requests: {rows[0]['requests']}",
         f"- Second run API requests: {rows[1]['requests']}",
         f"- Cache hit verified: {rows[1]['requests'] == 0}",
@@ -237,7 +244,8 @@ def main() -> None:
         raise RuntimeError("second run did not hit the embedding cache.")
 
     write_csv(args.output_csv, rows)
-    write_report(args.output_report, rows, summary_rows, args.output_dir)
+    repo_root = Path(__file__).resolve().parents[2]
+    write_report(args.output_report, rows, summary_rows, args.output_dir, repo_root)
     print(json.dumps({
         "output_report": str(args.output_report),
         "first_run_requests": rows[0]["requests"],

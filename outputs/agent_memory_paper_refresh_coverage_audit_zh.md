@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 28
+- Required offline steps: 29
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -30,6 +30,7 @@
 | required_offline_step | paper_table_consistency | True | paper table consistency audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | untracked_artifact_audit | True | untracked artifact hygiene audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | large_intermediate_provenance | True | large local intermediate provenance audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | artifact_path_portability | True | paper-facing artifact path portability audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | public_release_readiness | True | public release readiness gate | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | reproducibility_checklist | True | artifact and metric gates | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | artifact_integrity_manifest | True | artifact integrity manifest | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |

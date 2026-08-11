@@ -100,10 +100,12 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
     env_example = file_text(root / ".env.example") or ""
     readme = file_text(root / "README.md") or ""
     untracked_audit = read_csv(root / "outputs" / "agent_memory_untracked_artifact_audit.csv")
+    path_portability = read_csv(root / "outputs" / "agent_memory_artifact_path_portability.csv")
     secret_hits = tracked_secret_hits(root, files)
     license_files = [name for name in files if Path(name).name.lower() in {"license", "license.md", "license.txt"}]
     untracked_review = sum(1 for row in untracked_audit if row.get("recommendation") == "review_before_tracking")
     untracked_keep_local = sum(1 for row in untracked_audit if row.get("recommendation") == "keep_untracked")
+    path_findings = sum(1 for row in path_portability if row.get("status") == "finding")
 
     rows = [
         check_row(
@@ -153,6 +155,14 @@ def build_rows(root: Path) -> list[dict[str, Any]]:
             "major",
             f"untracked audit rows={len(untracked_audit)}, review_before_tracking={untracked_review}, keep_untracked={untracked_keep_local}",
             "运行 audit_untracked_artifacts.py，并确认 keep_untracked/local 项仍不属于论文正式 artifact。",
+        ),
+        check_row(
+            "artifact_paths_portable",
+            "paper_artifact",
+            bool(path_portability) and path_findings == 0,
+            "major",
+            f"path portability rows={len(path_portability)}, findings={path_findings}",
+            "运行 validate_artifact_path_portability.py，并把公开报告中的本机绝对路径改为仓库相对路径。",
         ),
         check_row(
             "license_file_present",

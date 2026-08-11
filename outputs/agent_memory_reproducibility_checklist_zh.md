@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：176/176
+- Artifact 存在性：178/178
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `ac09046` |
+| git_commit | `b222737` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -118,22 +118,24 @@
 | Submission entrypoint consistency audit CSV | True | 1487 | `outputs/agent_memory_submission_entrypoint_consistency.csv` |
 | Submission readiness gate | True | 2444 | `outputs/agent_memory_submission_readiness_zh.md` |
 | Submission readiness gate CSV | True | 2067 | `outputs/agent_memory_submission_readiness.csv` |
-| Public release readiness gate | True | 1583 | `outputs/agent_memory_public_release_readiness_zh.md` |
-| Public release readiness gate CSV | True | 1213 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4131 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3054 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
+| Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
+| Untracked artifact audit | True | 4726 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 3616 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
+| Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
+| Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 30546 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 30879 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3600 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 2813 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Paper artifact refresh run | True | 4473 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 17339 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
-| Paper refresh coverage audit | True | 6524 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
-| Paper refresh coverage audit CSV | True | 5530 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
+| Paper artifact refresh run | True | 4618 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 15228 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper refresh coverage audit | True | 6719 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
+| Paper refresh coverage audit CSV | True | 5717 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -143,7 +145,7 @@
 | Embedding provider profiles CSV | True | 919 | `outputs/agent_memory_embedding_provider_profiles.csv` |
 | API embedding preflight | True | 2189 | `outputs/agent_memory_api_embedding_preflight_zh.md` |
 | API embedding preflight CSV | True | 1109 | `outputs/agent_memory_api_embedding_preflight.csv` |
-| Mock API embedding smoke test | True | 977 | `outputs/agent_memory_mock_api_embedding_smoke_test_zh.md` |
+| Mock API embedding smoke test | True | 896 | `outputs/agent_memory_mock_api_embedding_smoke_test_zh.md` |
 | Mock API embedding smoke test CSV | True | 102 | `outputs/agent_memory_mock_api_embedding_smoke_test.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
 | API embedding run estimate CSV | True | 502 | `outputs/agent_memory_api_embedding_run_estimate.csv` |
@@ -286,6 +288,7 @@
 | Public release readiness gate | `work/agent_memory_experiment/validate_public_release_readiness.py` | Scans tracked files for secret-like strings, .env hygiene, release metadata, and artifact links. |
 | Untracked artifact audit | `work/agent_memory_experiment/audit_untracked_artifacts.py` | Classifies untracked local outputs and temporary data before public artifact packaging. |
 | Large intermediate provenance audit | `work/agent_memory_experiment/validate_large_intermediate_provenance.py` | Explains large untracked ranked/per-query intermediates through README regeneration commands and tracked downstream summaries. |
+| Artifact path portability audit | `work/agent_memory_experiment/validate_artifact_path_portability.py` | Checks tracked paper-facing reports for machine-local absolute paths before public artifact sharing. |
 | Artifact integrity manifest | `work/agent_memory_experiment/generate_artifact_integrity_manifest.py` | Writes sha256, size, and line-count metadata for all reproducibility artifacts. |
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |
 | Submission blocker closure plan | `work/agent_memory_experiment/generate_submission_blocker_closure_plan.py` | Orders remaining external embedding, human audit, reviewer-risk, and final-refresh gates into a concrete closure path. |

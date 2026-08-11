@@ -1,0 +1,2 @@
+status,path,line,matched_patterns,evidence,action
+pass,,,,No machine-local absolute paths found in scanned tracked paper-facing artifacts.,Keep this audit in the refresh pipeline before sharing public artifacts.

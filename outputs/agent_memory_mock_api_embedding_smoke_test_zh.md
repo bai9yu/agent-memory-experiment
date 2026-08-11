@@ -4,7 +4,7 @@
 
 ## 结论
 
-- Output dir: `/Users/byx/Documents/Codex/2026-08-10/referenced-chatgpt-conversation-this-is-an/work/agent_memory_experiment/results/api_embedding_mock_smoke_test`
+- Output dir: `work/agent_memory_experiment/results/api_embedding_mock_smoke_test`
 - First run API requests: 6
 - Second run API requests: 0
 - Cache hit verified: True
