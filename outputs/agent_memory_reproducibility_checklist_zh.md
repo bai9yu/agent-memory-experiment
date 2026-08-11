@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：97/97
-- 关键指标阈值：5/5
+- Artifact 存在性：102/102
+- 关键指标阈值：7/7
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `f5a0070` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `6733731` |
+| git_branch_status | `## main...origin/main [ahead 2]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -33,8 +33,13 @@
 | Writer stability runs | True | 924 | `outputs/agent_memory_writer_stability_runs.csv` |
 | Candidate reranker report | True | 2019 | `outputs/agent_memory_candidate_reranker_locomo10_zh.md` |
 | Candidate reranker significance | True | 607 | `outputs/agent_memory_candidate_reranker_significance_zh.md` |
-| Bootstrap metric CI report | True | 4250 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
-| Bootstrap metric CI CSV | True | 7562 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
+| Candidate reranker feature ablation report | True | 3225 | `outputs/agent_memory_candidate_reranker_feature_ablation_zh.md` |
+| Candidate reranker feature ablation summary | True | 2034 | `outputs/agent_memory_candidate_reranker_feature_ablation_summary.csv` |
+| Candidate reranker feature ablation split summary | True | 5458 | `outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv` |
+| Candidate reranker feature ablation deltas | True | 1407 | `outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv` |
+| Candidate reranker feature ablation comparison | True | 1724236 | `outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv` |
+| Bootstrap metric CI report | True | 5760 | `outputs/agent_memory_bootstrap_metric_ci_zh.md` |
+| Bootstrap metric CI CSV | True | 10679 | `outputs/agent_memory_bootstrap_metric_ci.csv` |
 | Validation-tuned router comparison | True | 850159 | `outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv` |
 | Candidate reranker LOCO report | True | 3506 | `outputs/agent_memory_candidate_reranker_loco_zh.md` |
 | Candidate reranker LOCO summary | True | 684 | `outputs/agent_memory_candidate_reranker_loco_summary.csv` |
@@ -62,8 +67,8 @@
 | Type3 supervised selector rwn002 coverage | True | 66755 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage.csv` |
 | Type3 supervised selector rwn002 comparison | True | 41037 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_comparison_per_query.csv` |
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
-| Paper tables Markdown | True | 2832 | `outputs/agent_memory_paper_tables_zh.md` |
-| Paper tables LaTeX | True | 3994 | `outputs/agent_memory_paper_tables.tex` |
+| Paper tables Markdown | True | 3424 | `outputs/agent_memory_paper_tables_zh.md` |
+| Paper tables LaTeX | True | 4741 | `outputs/agent_memory_paper_tables.tex` |
 | Paper evidence matrix | True | 6707 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 6827 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Paper manuscript draft | True | 9893 | `outputs/agent_memory_manuscript_draft_zh.md` |
@@ -74,7 +79,7 @@
 | Public release readiness gate | True | 1436 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 968 | `outputs/agent_memory_public_release_readiness.csv` |
 | Artifact integrity manifest | True | 3770 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 15559 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 16640 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9070 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 4904 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -120,7 +125,7 @@
 | Human audit full80 dual agreement CSV | True | 750 | `outputs/agent_memory_human_audit_full80_dual_agreement.csv` |
 | Human audit readiness gate | True | 4943 | `outputs/agent_memory_human_audit_readiness_gate_zh.md` |
 | Human audit readiness gate CSV | True | 4116 | `outputs/agent_memory_human_audit_readiness_gate.csv` |
-| Paper experiment status | True | 27339 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Paper experiment status | True | 28206 | `outputs/agent_memory_paper_experiment_status_zh.md` |
 | Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
 | Environment snapshot | True | 1421 | `outputs/agent_memory_environment_snapshot_zh.md` |
 
@@ -132,6 +137,8 @@
 | LoCoMo10 type_aware Recall@5 | 0.7334 | 0.7300 | True |
 | Candidate reranker MRR | 0.6606 | 0.6500 | True |
 | Candidate reranker Recall@5 | 0.7957 | 0.7900 | True |
+| Intrinsic-only candidate reranker MRR | 0.6719 | 0.6700 | True |
+| Intrinsic-only candidate reranker Recall@5 | 0.8014 | 0.8000 | True |
 | Type3 supervised selector Coverage@5 delta is negative | 0.0572 | 0.0500 | True |
 
 ## 复现命令入口
@@ -141,6 +148,7 @@
 | Main LoCoMo retrieval | `work/agent_memory_experiment/README.md#recommended-locomo-run` | Requires local BGE-M3 cache; no online embedding API. |
 | Writer stability | `work/agent_memory_experiment/summarize_writer_stability.py` | Summarizes repeated DeepSeek memory-writer runs from a local manifest. |
 | Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
+| Candidate reranker feature ablation | `work/agent_memory_experiment/candidate_reranker_feature_ablation.py` | Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware. |
 | Candidate reranker LOCO | `work/agent_memory_experiment/candidate_reranker_loco_experiment.py` | Uses cached rankings.csv; leave-one-conversation-out split. |
 | Bootstrap metric CI | `work/agent_memory_experiment/bootstrap_metric_ci.py` | Computes query-level bootstrap confidence intervals for main, LOCO, router, and Type3 paired results. |
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |

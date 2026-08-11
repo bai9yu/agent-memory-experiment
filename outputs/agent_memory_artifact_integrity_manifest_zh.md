@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 97/97
+- Artifacts covered: 102/102
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 4015345
+- Total bytes: 5758553
 
 ## 前 20 个 Artifact
 
@@ -21,19 +21,19 @@
 | Writer stability runs | True | 924 | 4 | 13c91b80d653 | ok | outputs/agent_memory_writer_stability_runs.csv |
 | Candidate reranker report | True | 2019 | 53 | 47c06dda556d | ok | outputs/agent_memory_candidate_reranker_locomo10_zh.md |
 | Candidate reranker significance | True | 607 | 8 | 3d53a2fea54f | ok | outputs/agent_memory_candidate_reranker_significance_zh.md |
-| Bootstrap metric CI report | True | 4250 | 49 | 14c58e357bf4 | ok | outputs/agent_memory_bootstrap_metric_ci_zh.md |
-| Bootstrap metric CI CSV | True | 7562 | 21 | 8e7932fd965f | ok | outputs/agent_memory_bootstrap_metric_ci.csv |
+| Candidate reranker feature ablation report | True | 3225 | 52 | 26995f86ad2b | ok | outputs/agent_memory_candidate_reranker_feature_ablation_zh.md |
+| Candidate reranker feature ablation summary | True | 2034 | 11 | b9331061399f | ok | outputs/agent_memory_candidate_reranker_feature_ablation_summary.csv |
+| Candidate reranker feature ablation split summary | True | 5458 | 51 | 36853fd8c0fa | ok | outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv |
+| Candidate reranker feature ablation deltas | True | 1407 | 10 | 51b2e15e43b6 | ok | outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv |
+| Candidate reranker feature ablation comparison | True | 1724236 | 24841 | de37c8ae840f | ok | outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv |
+| Bootstrap metric CI report | True | 5760 | 59 | 814186c2558b | ok | outputs/agent_memory_bootstrap_metric_ci_zh.md |
+| Bootstrap metric CI CSV | True | 10679 | 29 | bdfec288cd33 | ok | outputs/agent_memory_bootstrap_metric_ci.csv |
 | Validation-tuned router comparison | True | 850159 | 5521 | 9964bc0e5973 | ok | outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv |
 | Candidate reranker LOCO report | True | 3506 | 68 | 79e3f0650f02 | ok | outputs/agent_memory_candidate_reranker_loco_zh.md |
 | Candidate reranker LOCO summary | True | 684 | 4 | 282d33bb4303 | ok | outputs/agent_memory_candidate_reranker_loco_summary.csv |
 | Candidate reranker LOCO significance | True | 627 | 8 | 2de97cf4cd43 | ok | outputs/agent_memory_candidate_reranker_loco_significance_zh.md |
 | Candidate reranker LOCO comparison | True | 316655 | 3677 | aab9dacd7900 | ok | outputs/agent_memory_candidate_reranker_loco_comparison_per_query.csv |
 | Type3 coverage significance | True | 2545 | 24 | c8fb7374a144 | ok | outputs/agent_memory_type3_coverage_significance_zh.md |
-| Type3 query decomposition fusion4 report | True | 5473 | 41 | 1e3b009e3d0d | ok | outputs/agent_memory_type3_query_decomposition_fusion4_zh.md |
-| Type3 query decomposition fusion4 summary | True | 1604 | 4 | 4f94bd0a0302 | ok | outputs/agent_memory_type3_query_decomposition_fusion4_summary.csv |
-| Type3 query decomposition fusion4 per-query | True | 48687 | 259 | b0f7e329cf1a | ok | outputs/agent_memory_type3_query_decomposition_fusion4_per_query.csv |
-| Type3 query decomposition fusion4 facets | True | 43337 | 87 | 6db83e2028a8 | ok | outputs/agent_memory_type3_query_decomposition_fusion4_facets.csv |
-| Type3 query decomposition fusion4 ranked top20 | True | 529533 | 3441 | aa104641f5ce | ok | outputs/agent_memory_type3_query_decomposition_fusion4_ranked_top20.csv |
 
 ## 使用说明
 

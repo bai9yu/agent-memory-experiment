@@ -132,6 +132,39 @@ def candidate_loco_rows(summary_path: Path, significance_path: Path) -> tuple[li
     return metric_rows, sig_rows
 
 
+def candidate_feature_ablation_rows(path: Path) -> list[list[str]]:
+    rows = read_csv(path)
+    keep = {
+        "ablation_intrinsic_only",
+        "ablation_full",
+        "ablation_no_time_features",
+        "ablation_retrieval_rank_only",
+        "type_aware",
+        "ablation_type_aware_score_only",
+    }
+    selected = [row for row in rows if row["method"] in keep]
+    order = {
+        "ablation_intrinsic_only": 0,
+        "ablation_full": 1,
+        "ablation_no_time_features": 2,
+        "ablation_retrieval_rank_only": 3,
+        "type_aware": 4,
+        "ablation_type_aware_score_only": 5,
+    }
+    selected.sort(key=lambda row: order[row["method"]])
+    return [
+        [
+            row["method"],
+            fmt(row["mrr_mean"]),
+            pct_delta(row["mrr_delta_vs_type_aware"]),
+            pct_delta(row["mrr_delta_vs_full_reranker"]),
+            fmt(row["recall@5_mean"]),
+            pct_delta(row["recall@5_delta_vs_type_aware"]),
+        ]
+        for row in selected
+    ]
+
+
 def type3_rows(
     specific_path: Path,
     set_selector_path: Path,
@@ -221,6 +254,9 @@ def main() -> None:
         out / "agent_memory_candidate_reranker_loco_summary.csv",
         out / "agent_memory_candidate_reranker_loco_significance_results.csv",
     )
+    feature_ablation_rows = candidate_feature_ablation_rows(
+        out / "agent_memory_candidate_reranker_feature_ablation_deltas.csv"
+    )
     type3_metric_rows, type3_coverage_rows = type3_rows(
         out / "agent_memory_type3_specific_reranker_summary.csv",
         out / "agent_memory_type3_supervised_set_selector_summary.csv",
@@ -271,6 +307,13 @@ def main() -> None:
             reranker_loco_sig_rows,
             "Paired significance tests for leave-one-conversation-out candidate reranking.",
             "tab:candidate_reranker_loco_sig",
+        ),
+        (
+            "候选级重排特征组消融",
+            ["Method", "MRR", "ΔMRR vs Type-Aware", "ΔMRR vs Full", "R@5", "ΔR@5 vs Type-Aware"],
+            feature_ablation_rows,
+            "Feature-group ablations for candidate-level reranking.",
+            "tab:candidate_reranker_feature_ablation",
         ),
         (
             "Type 3 方法边界",

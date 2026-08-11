@@ -6,8 +6,13 @@ Writer stability aggregate,outputs/agent_memory_writer_stability_aggregate.csv,T
 Writer stability runs,outputs/agent_memory_writer_stability_runs.csv,True,924
 Candidate reranker report,outputs/agent_memory_candidate_reranker_locomo10_zh.md,True,2019
 Candidate reranker significance,outputs/agent_memory_candidate_reranker_significance_zh.md,True,607
-Bootstrap metric CI report,outputs/agent_memory_bootstrap_metric_ci_zh.md,True,4250
-Bootstrap metric CI CSV,outputs/agent_memory_bootstrap_metric_ci.csv,True,7562
+Candidate reranker feature ablation report,outputs/agent_memory_candidate_reranker_feature_ablation_zh.md,True,3225
+Candidate reranker feature ablation summary,outputs/agent_memory_candidate_reranker_feature_ablation_summary.csv,True,2034
+Candidate reranker feature ablation split summary,outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv,True,5458
+Candidate reranker feature ablation deltas,outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv,True,1407
+Candidate reranker feature ablation comparison,outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv,True,1724236
+Bootstrap metric CI report,outputs/agent_memory_bootstrap_metric_ci_zh.md,True,5760
+Bootstrap metric CI CSV,outputs/agent_memory_bootstrap_metric_ci.csv,True,10679
 Validation-tuned router comparison,outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv,True,850159
 Candidate reranker LOCO report,outputs/agent_memory_candidate_reranker_loco_zh.md,True,3506
 Candidate reranker LOCO summary,outputs/agent_memory_candidate_reranker_loco_summary.csv,True,684
@@ -35,8 +40,8 @@ Type3 supervised selector rwn002 per-query,outputs/agent_memory_type3_supervised
 Type3 supervised selector rwn002 coverage,outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage.csv,True,66755
 Type3 supervised selector rwn002 comparison,outputs/agent_memory_type3_supervised_set_selector_rwn002_comparison_per_query.csv,True,41037
 Type3 supervised selector rwn002 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv,True,725694
-Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,2832
-Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,3994
+Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,3424
+Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,4741
 Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,6707
 Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,6827
 Paper manuscript draft,outputs/agent_memory_manuscript_draft_zh.md,True,9893
@@ -47,7 +52,7 @@ Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3770
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,15559
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,16640
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
@@ -93,6 +98,6 @@ Human audit full80 dual agreement,outputs/agent_memory_human_audit_full80_dual_a
 Human audit full80 dual agreement CSV,outputs/agent_memory_human_audit_full80_dual_agreement.csv,True,750
 Human audit readiness gate,outputs/agent_memory_human_audit_readiness_gate_zh.md,True,4943
 Human audit readiness gate CSV,outputs/agent_memory_human_audit_readiness_gate.csv,True,4116
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,27339
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,28206
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

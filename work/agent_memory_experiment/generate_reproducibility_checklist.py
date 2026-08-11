@@ -179,6 +179,11 @@ def main() -> None:
         ("Writer stability runs", outputs / "agent_memory_writer_stability_runs.csv"),
         ("Candidate reranker report", outputs / "agent_memory_candidate_reranker_locomo10_zh.md"),
         ("Candidate reranker significance", outputs / "agent_memory_candidate_reranker_significance_zh.md"),
+        ("Candidate reranker feature ablation report", outputs / "agent_memory_candidate_reranker_feature_ablation_zh.md"),
+        ("Candidate reranker feature ablation summary", outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv"),
+        ("Candidate reranker feature ablation split summary", outputs / "agent_memory_candidate_reranker_feature_ablation_split_summary.csv"),
+        ("Candidate reranker feature ablation deltas", outputs / "agent_memory_candidate_reranker_feature_ablation_deltas.csv"),
+        ("Candidate reranker feature ablation comparison", outputs / "agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv"),
         ("Bootstrap metric CI report", outputs / "agent_memory_bootstrap_metric_ci_zh.md"),
         ("Bootstrap metric CI CSV", outputs / "agent_memory_bootstrap_metric_ci.csv"),
         ("Validation-tuned router comparison", outputs / "agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv"),
@@ -275,6 +280,10 @@ def main() -> None:
     baseline = read_csv(outputs / "agent_memory_baseline_comparison_locomo10.csv")
     type_aware = metric_lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     reranker = metric_lookup(read_csv(outputs / "agent_memory_candidate_reranker_locomo10_summary.csv"), method="candidate_reranker")
+    intrinsic_reranker = metric_lookup(
+        read_csv(outputs / "agent_memory_candidate_reranker_feature_ablation_summary.csv"),
+        method="ablation_intrinsic_only",
+    )
     coverage = metric_lookup(
         read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv"),
         experiment="supervised_set_selector",
@@ -285,6 +294,8 @@ def main() -> None:
         metric_row("LoCoMo10 type_aware Recall@5", float(type_aware["recall@5"]), 0.73),
         metric_row("Candidate reranker MRR", float(reranker["mrr_mean"]), 0.65),
         metric_row("Candidate reranker Recall@5", float(reranker["recall@5_mean"]), 0.79),
+        metric_row("Intrinsic-only candidate reranker MRR", float(intrinsic_reranker["mrr_mean"]), 0.67),
+        metric_row("Intrinsic-only candidate reranker Recall@5", float(intrinsic_reranker["recall@5_mean"]), 0.80),
         metric_row("Type3 supervised selector Coverage@5 delta is negative", -float(coverage["mean_delta"]), 0.05),
     ]
     writer_ready = False
@@ -313,6 +324,11 @@ def main() -> None:
             "stage": "Candidate reranker",
             "command": "work/agent_memory_experiment/candidate_reranker_experiment.py",
             "notes": "Uses cached rankings.csv; held-out query split.",
+        },
+        {
+            "stage": "Candidate reranker feature ablation",
+            "command": "work/agent_memory_experiment/candidate_reranker_feature_ablation.py",
+            "notes": "Tests feature-group ablations and compares intrinsic-only reranker against full reranker and fixed type-aware.",
         },
         {
             "stage": "Candidate reranker LOCO",

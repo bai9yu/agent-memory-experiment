@@ -29,6 +29,20 @@ DEFAULT_SCENARIOS = [
         "description": "Leave-one-conversation-out split：检验 candidate reranker 是否能跨 conversation 泛化。",
     },
     {
+        "scenario": "candidate_reranker_intrinsic_ablation_vs_type_aware",
+        "path": "outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv",
+        "baseline": "type_aware",
+        "candidate": "ablation_intrinsic_only",
+        "description": "Candidate reranker 特征组消融：intrinsic-only 变体相对 fixed type-aware 的稳定性。",
+    },
+    {
+        "scenario": "candidate_reranker_intrinsic_ablation_vs_full",
+        "path": "outputs/agent_memory_candidate_reranker_feature_ablation_comparison_per_query.csv",
+        "baseline": "ablation_full",
+        "candidate": "ablation_intrinsic_only",
+        "description": "Candidate reranker 特征组消融：intrinsic-only 变体相对 full reranker 的稳定性。",
+    },
+    {
         "scenario": "validation_tuned_router",
         "path": "outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv",
         "baseline": "type_aware",

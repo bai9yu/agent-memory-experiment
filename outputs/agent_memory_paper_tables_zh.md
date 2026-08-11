@@ -49,6 +49,17 @@
 | mrr | +0.0504 | [0.0411, 0.0601] | 0.0002 |
 | recall@5 | +0.0522 | [0.0375, 0.0675] | 0.0002 |
 
+## 候选级重排特征组消融
+
+| Method | MRR | ΔMRR vs Type-Aware | ΔMRR vs Full | R@5 | ΔR@5 vs Type-Aware |
+| --- | --- | --- | --- | --- | --- |
+| ablation_intrinsic_only | 0.672 | +0.0652 | +0.0113 | 0.801 | +0.0681 |
+| ablation_full | 0.661 | +0.0539 | +0.0000 | 0.796 | +0.0623 |
+| ablation_no_time_features | 0.632 | +0.0251 | -0.0287 | 0.766 | +0.0322 |
+| ablation_retrieval_rank_only | 0.615 | +0.0080 | -0.0458 | 0.732 | -0.0018 |
+| type_aware | 0.607 | +0.0000 | -0.0539 | 0.733 | +0.0000 |
+| ablation_type_aware_score_only | 0.547 | -0.0600 | -0.1139 | 0.663 | -0.0707 |
+
 ## Type 3 方法边界
 
 | Method | R@1 | R@3 | R@5 | MRR |

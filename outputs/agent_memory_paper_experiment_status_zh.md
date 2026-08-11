@@ -142,6 +142,8 @@ paired significance test 显示 router 的 MRR delta 为 0.001994，但 95% CI �
 
 配对显著性检验显示 candidate reranker 相比 fixed `type_aware` 稳定提升：MRR delta `+0.0539`，95% CI `[0.0462, 0.0619]`，permutation p-value `0.0002`；Recall@5 delta `+0.0623`，95% CI `[0.0500, 0.0746]`，p-value `0.0002`。这是当前最适合作为论文方法增量的结果：固定公式和 query-level router 不够，而 candidate-level reranking 能从多检索器候选特征中学习更稳的排序。
 
+进一步做 feature-group ablation 后，`intrinsic_only` candidate reranker 取得当前 held-out 最好结果：MRR `0.672`、Recall@5 `0.801`。它相比 fixed `type_aware` 的 MRR delta 为 `+0.0652`，95% bootstrap CI `[0.0543, 0.0759]`；相比原 full reranker 的 MRR delta 为 `+0.0113`，95% CI `[0.0032, 0.0199]`。这说明原 full reranker 中 method-level rank/score 特征可能带来噪声，而 candidate 自身语义、时间、类型、persona 和交互特征更适合作为论文主方法的简化版本。
+
 更严格的 leave-one-conversation-out 验证显示，candidate reranker 在 10 个 conversation split 上仍高于 fixed `type_aware`：按 split 平均 MRR `0.657` vs `0.608`，Recall@5 `0.782` vs `0.732`；按 query 加权的配对显著性检验中，MRR delta `+0.0504`，95% CI `[0.0411, 0.0601]`，permutation p-value `0.0002`，Recall@5 delta `+0.0522`，p-value `0.0002`。因此当前方法贡献不仅依赖随机 query split，也具备跨 LoCoMo conversation 的泛化证据。
 
 Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`、`semantic_score`、`time_aware_score`、`hybrid_score`、`type_aware_rr` 等特征，说明提升来自多检索器排序信号融合，而不是单一字段或 query type 记忆。
@@ -253,14 +255,15 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_writer_stability_zh.md`：DeepSeek memory writer 重复抽取稳定性汇总；当前 3 个 manifest run 已全部 completed，状态为 `ready_for_variance`，可报告 MRR / Recall@5 / memory_tokens / API tokens 的均值和标准差。
 - `outputs/agent_memory_paper_tables_zh.md`：Markdown 主表、消融表、candidate reranker LOCO 验证表、Type 3 失败分析表。
 - `outputs/agent_memory_paper_tables.tex`：可直接复制到论文的 LaTeX `booktabs` 表格。
-- `outputs/agent_memory_bootstrap_metric_ci_zh.md`：per-query bootstrap 置信区间报告；当前主方法 held-out MRR delta 为 `0.0539`，95% CI `[0.0459, 0.0618]`，LOCO MRR delta 为 `0.0504`，95% CI `[0.0409, 0.0600]`，均不跨 0；validation-tuned router、text-intent router 和 Type 3 decomposition fusion4 则作为弱/负结果呈现。
+- `outputs/agent_memory_bootstrap_metric_ci_zh.md`：per-query bootstrap 置信区间报告；当前主方法 held-out MRR delta 为 `0.0539`，95% CI `[0.0459, 0.0618]`，LOCO MRR delta 为 `0.0504`，95% CI `[0.0409, 0.0600]`，intrinsic-only ablation 相比 type-aware 的 MRR delta 为 `0.0652`，95% CI `[0.0543, 0.0759]`，均不跨 0；validation-tuned router、text-intent router 和 Type 3 decomposition fusion4 则作为弱/负结果呈现。
+- `outputs/agent_memory_candidate_reranker_feature_ablation_zh.md`：candidate reranker 特征组消融报告；显示 `intrinsic_only` 高于 full reranker，支持将更简洁的 intrinsic feature reranker 作为论文主方法候选。
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`：按“论文主张-证据-证据强度-剩余缺口”整理当前实验是否足以支撑投稿表述。
 - `outputs/agent_memory_paper_draft_outline_zh.md`：中文论文草稿骨架，汇总题目、摘要、贡献、公式、实验 RQ、边界和投稿前最小条件。
 - `outputs/agent_memory_manuscript_draft_zh.md`：中文论文正文初稿；已包含摘要、引言、任务定义、方法、实验设置、结果、错误分析、限制和结论，但仍需补齐 embedding baseline 与人工一致性后才能作为最终投稿稿。
 - `outputs/agent_memory_manuscript_claim_check_zh.md`：论文声明一致性检查；当前 8 项检查全部通过，用于防止正文把 pending baseline 或人工复核写成已完成结论。
 - `outputs/agent_memory_submission_readiness_gate_zh.md`：最终投稿门禁汇总；当前 required gates 为 `5/10`，blockers 为 `5`，说明复现、声明检查、公开发布卫生和 artifact 完整性检查已通过，但外部 embedding baseline 和人工复核仍未达到最终投稿条件。
 - `outputs/agent_memory_public_release_readiness_zh.md`：公开发布卫生检查；当前 blocker 为 `0`，未发现 tracked secret 或 `.env` 入库，剩余 minor 是正式开源前可补 LICENSE。
-- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `97/97` 个复现 artifact，缺失 `0`；其中 `95` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
+- `outputs/agent_memory_artifact_integrity_manifest_zh.md`：artifact 完整性 manifest；当前覆盖 `102/102` 个复现 artifact，缺失 `0`；其中 `100` 个文件记录稳定 sha256，manifest 自身 CSV/报告 `2` 个自引用文件标记为 `self_referential_skip`。
 - `outputs/agent_memory_submission_gap_analysis_zh.md`：投稿前差距与审稿风险矩阵；当前列出 8 个风险，其中 2 个 blocker：外部 embedding baseline 与 Human/LLM 人工确认。
 - `outputs/agent_memory_experiment_protocol_zh.md`：论文实验协议与审稿复核清单；整理数据切片、指标公式、显著性检验、主结果、负结果、复现入口和写法边界。
 - `outputs/agent_memory_embedding_baseline_status_zh.md`：外部 embedding baseline 接入状态；当前已登记默认 OpenAI `text-embedding-3-small` 和通用 OpenAI-compatible provider 两个入口，但尚未实际运行出指标。
@@ -287,7 +290,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 
 当前已生成论文复现清单：
 
-- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `97/97`，metric gate 为 `5/5`。
+- `outputs/agent_memory_reproducibility_checklist_zh.md`：检查关键 artifact、核心指标阈值、数据规模和复现命令入口；当前 artifact gate 为 `102/102`，metric gate 为 `7/7`。
 - `outputs/agent_memory_environment_snapshot_zh.md`：记录 Python、关键依赖包、BGE-M3 本地缓存、Git 状态和系统环境；不读取 `.env`，不包含 API key。
 
 1. 更强 embedding baseline：加入 OpenAI embedding 或其他主流 embedding API、本地 BGE-small / BGE-M3 对比。
