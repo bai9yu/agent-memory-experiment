@@ -38,6 +38,8 @@
 - `outputs/agent_memory_embedding_baseline_comparison_zh.md`
 - `outputs/agent_memory_human_audit_protocol_zh.md`
 - `outputs/agent_memory_human_audit_summary_zh.md`
+- `outputs/agent_memory_llm_audit_report_zh.md`
+- `outputs/agent_memory_llm_audit_summary_zh.md`
 
 论文复现清单见：
 

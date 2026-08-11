@@ -258,6 +258,8 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_embedding_baseline_comparison_zh.md`：外部 embedding baseline 与 BGE-M3 主结果的对比表；当前为 pending，API summary 生成后会自动计算 delta。
 - `outputs/agent_memory_human_audit_protocol_zh.md`：自动错误分析的人工复核协议；已生成 80 条分层抽样待标注样本，但人工标注尚未完成。
 - `outputs/agent_memory_human_audit_summary_zh.md`：人工复核统计报告；当前为 `pending_labels`，用于标注完成后自动汇总可靠性。
+- `outputs/agent_memory_llm_audit_report_zh.md`：DeepSeek LLM-assisted 错误复核初稿；已为 80 条样本生成预标注，不替代人工复核。
+- `outputs/agent_memory_llm_audit_summary_zh.md`：LLM-assisted 预标注统计；auto_reason_correct yes/partial/no 为 `28/29/23`，可用于人工复核前的质量检查。
 
 当前已生成论文复现清单：
 
@@ -268,7 +270,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 2. 在线检索效率：已有 sklearn exact NN、FAISS Flat、FAISS IVF 和 100k synthetic distractor scale test；仍需在真实更大 memory bank 上验证 ANN 优势，并可补 HNSW/IVF-PQ 对照。
 4. 学习式重排：candidate-level reranker 已有显著提升；Type 3 专用单候选重排、监督式 greedy set selector 和关键词式 query decomposition 均已验证为负结果，下一步需要更强 LLM 子问题生成或真正 listwise/setwise objective。
 5. 跨智能体/KV cache 方向：需要把当前 synthetic cross-agent 实验替换为真实或半真实 multi-agent trace。
-6. 人工复核：已生成 80 条分层抽样复核表，下一步需要人工填写并统计自动错误分类可靠性。
+6. 错误复核：已生成 80 条分层抽样复核表，并完成 DeepSeek LLM-assisted 预标注；下一步需要人工确认或抽样复查，统计 human/LLM 一致性。
 
 ## 错误分析
 

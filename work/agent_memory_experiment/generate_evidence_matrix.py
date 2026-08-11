@@ -71,6 +71,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
     audit_sample = read_csv(outputs / "agent_memory_human_audit_sample_type_aware.csv")
     audit_summary = read_csv(outputs / "agent_memory_human_audit_summary.csv")
+    llm_audit_summary = read_csv(outputs / "agent_memory_llm_audit_summary.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     embedding_estimate = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
     embedding_comparison = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
@@ -103,6 +104,10 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     artifact_pass = sum(1 for row in repro_artifacts if row["exists"] == "True")
     metric_pass = sum(1 for row in repro_metrics if row["pass"] == "True")
     audit_labeled = sum(int(row["count"]) for row in audit_summary if row["group"] == "auto_reason")
+    llm_audit_labeled = sum(int(row["count"]) for row in llm_audit_summary if row["group"] == "auto_reason")
+    llm_audit_correct = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="yes")
+    llm_audit_partial = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="partial")
+    llm_audit_no = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="no")
     embedding_completed = sum(1 for row in embedding_status if row["status"] == "completed")
     embedding_ready = sum(1 for row in embedding_status if row["status"] in {"completed", "ready_to_run"})
     embedding_items = sum(int(row["items"]) for row in embedding_estimate)
@@ -229,13 +234,17 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "remaining_gap": "全新 clone 仍需要按文档准备模型/embedding cache，因为大缓存不进入 Git。",
         },
         {
-            "claim": "自动错误分析已经具备人工复核入口，但人工标注尚未完成。",
+            "claim": "自动错误分析已经具备人工复核入口，并已有 LLM-assisted 预标注。",
             "status": "reliability_protocol",
-            "evidence": f"已从 type-aware Top-1 错误中分层抽样 {len(audit_sample)} 条；当前已汇总人工标注 {audit_labeled} 条。",
-            "support_level": "protocol_ready_unlabeled",
-            "primary_artifacts": "agent_memory_human_audit_sample_type_aware.csv; agent_memory_human_audit_protocol_zh.md; agent_memory_human_audit_summary_zh.md",
-            "paper_use": "可以说明已有复核流程；在人工标注完成前，不能把自动错误分类当作已验证结论。",
-            "remaining_gap": "需要人工填写 manual_reason / auto_reason_correct，并统计一致性或准确率。",
+            "evidence": (
+                f"已从 type-aware Top-1 错误中分层抽样 {len(audit_sample)} 条；当前已汇总人工标注 {audit_labeled} 条；"
+                f"LLM-assisted 预标注 {llm_audit_labeled} 条，auto_reason_correct yes/partial/no="
+                f"{llm_audit_correct['count']}/{llm_audit_partial['count']}/{llm_audit_no['count']}。"
+            ),
+            "support_level": "llm_assisted_protocol_ready",
+            "primary_artifacts": "agent_memory_human_audit_sample_type_aware.csv; agent_memory_human_audit_protocol_zh.md; agent_memory_llm_audit_summary_zh.md; agent_memory_llm_audit_report_zh.md",
+            "paper_use": "可以说明已有 LLM-assisted 预复核流程；在人工确认前，不能把它写成人工验证结论。",
+            "remaining_gap": "需要人工确认或抽样复查 LLM-assisted labels，并统计一致性或准确率。",
         },
         {
             "claim": "DeepSeek memory writer 在 LoCoMo10 重复抽取中具有可报告的稳定性。",

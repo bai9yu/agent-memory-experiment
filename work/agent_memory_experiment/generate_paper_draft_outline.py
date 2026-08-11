@@ -41,6 +41,7 @@ def write_report(path: Path, outputs: Path) -> None:
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
     writer_aggregate = read_csv(outputs / "agent_memory_writer_stability_aggregate.csv")
+    llm_audit_summary = read_csv(outputs / "agent_memory_llm_audit_summary.csv")
 
     type_aware = lookup(baseline, variant="llm_extracted_fact", method="type_aware")
     observation = lookup(baseline, variant="locomo_observation", method="type_aware")
@@ -59,6 +60,9 @@ def write_report(path: Path, outputs: Path) -> None:
     metric_pass = sum(1 for row in repro_metrics if row["pass"] == "True")
     writer_completed = int(writer_mrr["completed_runs"])
     writer_ready = writer_completed >= 3
+    llm_audit_yes = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="yes")
+    llm_audit_partial = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="partial")
+    llm_audit_no = lookup(llm_audit_summary, group="field", label="auto_reason_correct", value="no")
     open_gaps = [row for row in evidence if row["status"] in {"open_gap", "baseline_protocol", "stability_protocol", "reliability_protocol"}]
 
     lines = [
@@ -86,6 +90,8 @@ def write_report(path: Path, outputs: Path) -> None:
             f"高于 type-aware 的 {f(reranker_loco_base['mrr_mean'])}，加权 MRR delta 为 {signed(reranker_loco_mrr['mean_delta'])}。"
             f"DeepSeek memory writer 三次运行的 MRR 均值为 {f(writer_mrr['mean'])}，标准差为 {f(writer_mrr['stdev'])}，"
             f"Recall@5 均值为 {f(writer_r5['mean'])}，标准差为 {f(writer_r5['stdev'])}。"
+            f"错误分析方面，80 条 LLM-assisted audit 初稿中 auto_reason_correct 的 yes/partial/no 为 "
+            f"{llm_audit_yes['count']}/{llm_audit_partial['count']}/{llm_audit_no['count']}，可作为人工复核前的预标注材料。"
             "同时，Type 3 多证据问题仍是主要边界，浅层 set selector 和关键词式 decomposition 未能改善 Coverage@5。"
             "本文给出主结果、负结果、稳定性、效率诊断和复现清单，并指出外部 embedding baseline 和人工错误复核仍需补齐后才能作为完整投稿版本。"
         ),
@@ -177,7 +183,7 @@ def write_report(path: Path, outputs: Path) -> None:
         "## 投稿前最小完成条件",
         "",
         "1. 至少完成一个外部 embedding baseline，并自动生成与 BGE-M3 的 delta 对比。",
-        "2. 完成 80 条人工错误复核，报告 auto_reason_correct 的 yes / partial / no 比例。",
+        "2. 人工确认或抽样复查 80 条 LLM-assisted 错误复核初稿，报告 human/LLM 一致性。",
         "3. 若不补外部数据集，需要在论文中明确本工作是 LoCoMo10 slice 的系统性实验，而非广泛泛化结论。",
         "",
         "## 复现状态",

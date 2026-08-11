@@ -845,6 +845,33 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/summa
   --output-report outputs/agent_memory_human_audit_summary_zh.md
 ```
 
+Generate LLM-assisted audit labels for human review:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/llm_audit_retrieval_errors.py \
+  --audit-csv outputs/agent_memory_human_audit_sample_type_aware.csv \
+  --output-csv outputs/agent_memory_llm_audit_sample_type_aware.csv \
+  --output-usage outputs/agent_memory_llm_audit_usage.csv \
+  --output-report outputs/agent_memory_llm_audit_report_zh.md \
+  --batch-size 5 \
+  --temperature 0.0 \
+  --timeout 120 \
+  --retries 5 \
+  --retry-sleep 3
+```
+
+Summarize LLM-assisted audit labels:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/summarize_human_audit.py \
+  --audit-csv outputs/agent_memory_llm_audit_sample_type_aware.csv \
+  --output-csv outputs/agent_memory_llm_audit_summary.csv \
+  --output-report outputs/agent_memory_llm_audit_summary_zh.md \
+  --audit-source llm_assisted
+```
+
 Generate external embedding baseline status:
 
 ```bash

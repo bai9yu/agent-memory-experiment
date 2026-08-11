@@ -28,8 +28,13 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
         return
+    fieldnames: list[str] = []
+    for row in rows:
+        for key in row:
+            if key not in fieldnames:
+                fieldnames.append(key)
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
 
@@ -117,13 +122,20 @@ def fmt(value: Any, digits: int = 3) -> str:
     return f"{float(value):.{digits}f}"
 
 
-def write_report(path: Path, rows: list[dict[str, str]], summary_rows: list[dict[str, Any]], validation_errors: list[str]) -> None:
+def write_report(path: Path, rows: list[dict[str, str]], summary_rows: list[dict[str, Any]], validation_errors: list[str], audit_source: str) -> None:
     labeled_rows = [row for row in rows if is_labeled(row)]
     fully_labeled = [
         row for row in rows
         if all(norm(row.get(field, "")) for field in LABEL_FIELDS)
     ]
-    status = "ready_for_paper" if len(fully_labeled) == len(rows) and not validation_errors else "pending_labels"
+    if audit_source == "human":
+        status = "ready_for_paper" if len(fully_labeled) == len(rows) and not validation_errors else "pending_labels"
+        title = "# 人工错误复核统计"
+        description = "本文件汇总人工复核表中的标注结果，用于判断自动错误分析是否足以写入论文。未完成标注时，本文件会明确显示 pending 状态。"
+    else:
+        status = "llm_assisted_ready_for_human_review" if len(fully_labeled) == len(rows) and not validation_errors else "pending_labels"
+        title = "# LLM-assisted 错误复核统计"
+        description = "本文件汇总 LLM-assisted 预标注结果，用于加速人工复核和检查自动错误分析。它不是人工标注结果，不能直接替代 human audit。"
 
     field_rows = [row for row in summary_rows if row["group"] == "field"]
     reason_rows = [row for row in summary_rows if row["group"] == "auto_reason"]
@@ -145,9 +157,9 @@ def write_report(path: Path, rows: list[dict[str, str]], summary_rows: list[dict
     ]
 
     lines = [
-        "# 人工错误复核统计",
+        title,
         "",
-        "本文件汇总人工复核表中的标注结果，用于判断自动错误分析是否足以写入论文。未完成标注时，本文件会明确显示 pending 状态。",
+        description,
         "",
         "## 总览",
         "",
@@ -168,10 +180,15 @@ def write_report(path: Path, rows: list[dict[str, str]], summary_rows: list[dict
         "## 论文使用判断",
         "",
     ]
-    if status == "ready_for_paper":
+    if audit_source == "human" and status == "ready_for_paper":
         lines.extend([
             "- 可以报告 `auto_reason_correct` 的 yes / partial / no 比例作为自动错误分类可靠性。",
             "- 可以报告 `gold_memory_sufficient`，说明失败是否来自检索器还是 gold evidence 不充分。",
+        ])
+    elif audit_source != "human" and status == "llm_assisted_ready_for_human_review":
+        lines.extend([
+            "- 可以作为人工复核前的预标注材料，帮助快速定位自动错误分类是否合理。",
+            "- 不应直接写成 human audit；论文中最多表述为 LLM-assisted audit draft，最终仍需人工确认。",
         ])
     else:
         lines.extend([
@@ -190,6 +207,7 @@ def main() -> None:
     parser.add_argument("--audit-csv", type=Path, required=True)
     parser.add_argument("--output-csv", type=Path, required=True)
     parser.add_argument("--output-report", type=Path, required=True)
+    parser.add_argument("--audit-source", choices=("human", "llm_assisted"), default="human")
     args = parser.parse_args()
 
     rows = read_csv(args.audit_csv)
@@ -200,7 +218,7 @@ def main() -> None:
         summary_rows.extend(summarize_field(labeled_rows, field))
     summary_rows.extend(summarize_by_reason(rows))
     write_csv(args.output_csv, summary_rows)
-    write_report(args.output_report, rows, summary_rows, validation_errors)
+    write_report(args.output_report, rows, summary_rows, validation_errors, args.audit_source)
     print(json.dumps({
         "audit_samples": len(rows),
         "labeled_samples": len(labeled_rows),

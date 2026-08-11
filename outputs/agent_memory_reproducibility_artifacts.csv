@@ -13,8 +13,8 @@ Candidate reranker LOCO comparison,outputs/agent_memory_candidate_reranker_loco_
 Type3 coverage significance,outputs/agent_memory_type3_coverage_significance_zh.md,True,2545
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,2832
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,3994
-Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,6396
-Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,6309
+Paper evidence matrix,outputs/agent_memory_paper_evidence_matrix_zh.md,True,6480
+Paper draft outline,outputs/agent_memory_paper_draft_outline_zh.md,True,6474
 Embedding baseline status,outputs/agent_memory_embedding_baseline_status_zh.md,True,2017
 Embedding baseline status CSV,outputs/agent_memory_embedding_baseline_status.csv,True,400
 API embedding run estimate,outputs/agent_memory_api_embedding_run_estimate_zh.md,True,1048
@@ -25,6 +25,10 @@ Human audit protocol,outputs/agent_memory_human_audit_protocol_zh.md,True,2479
 Human audit sample,outputs/agent_memory_human_audit_sample_type_aware.csv,True,28471
 Human audit summary,outputs/agent_memory_human_audit_summary_zh.md,True,1394
 Human audit summary CSV,outputs/agent_memory_human_audit_summary.csv,True,777
-Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,20934
+LLM-assisted audit report,outputs/agent_memory_llm_audit_report_zh.md,True,620
+LLM-assisted audit summary,outputs/agent_memory_llm_audit_summary_zh.md,True,1834
+LLM-assisted audit summary CSV,outputs/agent_memory_llm_audit_summary.csv,True,1241
+LLM-assisted audit usage,outputs/agent_memory_llm_audit_usage.csv,True,357
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,21318
 Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114
 Environment snapshot,outputs/agent_memory_environment_snapshot_zh.md,True,1421

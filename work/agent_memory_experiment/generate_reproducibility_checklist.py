@@ -198,6 +198,10 @@ def main() -> None:
         ("Human audit sample", outputs / "agent_memory_human_audit_sample_type_aware.csv"),
         ("Human audit summary", outputs / "agent_memory_human_audit_summary_zh.md"),
         ("Human audit summary CSV", outputs / "agent_memory_human_audit_summary.csv"),
+        ("LLM-assisted audit report", outputs / "agent_memory_llm_audit_report_zh.md"),
+        ("LLM-assisted audit summary", outputs / "agent_memory_llm_audit_summary_zh.md"),
+        ("LLM-assisted audit summary CSV", outputs / "agent_memory_llm_audit_summary.csv"),
+        ("LLM-assisted audit usage", outputs / "agent_memory_llm_audit_usage.csv"),
         ("Paper experiment status", outputs / "agent_memory_paper_experiment_status_zh.md"),
         ("Experiment retro", outputs / "agent_memory_experiment_retro_zh.md"),
         ("Environment snapshot", outputs / "agent_memory_environment_snapshot_zh.md"),
@@ -280,6 +284,11 @@ def main() -> None:
             "stage": "Human audit summary",
             "command": "work/agent_memory_experiment/summarize_human_audit.py",
             "notes": "Summarizes manual labels once the audit CSV is filled.",
+        },
+        {
+            "stage": "LLM-assisted audit",
+            "command": "work/agent_memory_experiment/llm_audit_retrieval_errors.py",
+            "notes": "Uses DeepSeek to draft audit labels for human review; does not replace human audit.",
         },
         {
             "stage": "Evidence matrix",
