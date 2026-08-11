@@ -1,0 +1,10 @@
+label,path,exists,size_bytes
+Main baseline CSV,outputs/agent_memory_baseline_comparison_locomo10.csv,True,1146
+LLM extraction report,outputs/agent_memory_llm_extraction_locomo10_comparison_zh.md,True,3431
+Candidate reranker report,outputs/agent_memory_candidate_reranker_locomo10_zh.md,True,2019
+Candidate reranker significance,outputs/agent_memory_candidate_reranker_significance_zh.md,True,607
+Type3 coverage significance,outputs/agent_memory_type3_coverage_significance_zh.md,True,2545
+Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,2345
+Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,3190
+Paper experiment status,outputs/agent_memory_paper_experiment_status_zh.md,True,18535
+Experiment retro,outputs/agent_memory_experiment_retro_zh.md,True,33114

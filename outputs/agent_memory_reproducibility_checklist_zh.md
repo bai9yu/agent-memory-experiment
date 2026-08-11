@@ -1,0 +1,63 @@
+# 论文实验复现清单
+
+本清单用于检查当前仓库是否具备复现实验和写论文的关键 artifact。它不重新运行重型实验，只核对数据、结果文件、核心指标和复现命令入口。
+
+## 总览
+
+- Artifact 存在性：9/9
+- 关键指标阈值：5/5
+
+## 环境快照
+
+| Key | Value |
+|---|---|
+| git_commit | `489ef9e` |
+| git_branch_status | `## main...origin/main [ahead 25]` |
+| python | `3.9.6` |
+
+## 数据文件
+
+| Label | Path | Count/Status |
+|---|---|---:|
+| LLM fact memories | `work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl` | 2517 |
+| Answerable queries | `work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl` | 1838 |
+
+## 关键 Artifact
+
+| Label | Exists | Size | Path |
+|---|---:|---:|---|
+| Main baseline CSV | True | 1146 | `outputs/agent_memory_baseline_comparison_locomo10.csv` |
+| LLM extraction report | True | 3431 | `outputs/agent_memory_llm_extraction_locomo10_comparison_zh.md` |
+| Candidate reranker report | True | 2019 | `outputs/agent_memory_candidate_reranker_locomo10_zh.md` |
+| Candidate reranker significance | True | 607 | `outputs/agent_memory_candidate_reranker_significance_zh.md` |
+| Type3 coverage significance | True | 2545 | `outputs/agent_memory_type3_coverage_significance_zh.md` |
+| Paper tables Markdown | True | 2345 | `outputs/agent_memory_paper_tables_zh.md` |
+| Paper tables LaTeX | True | 3190 | `outputs/agent_memory_paper_tables.tex` |
+| Paper experiment status | True | 18535 | `outputs/agent_memory_paper_experiment_status_zh.md` |
+| Experiment retro | True | 33114 | `outputs/agent_memory_experiment_retro_zh.md` |
+
+## 核心指标检查
+
+| Metric | Observed | Expected Min | Pass |
+|---|---:|---:|---:|
+| LoCoMo10 type_aware MRR | 0.6094 | 0.6000 | True |
+| LoCoMo10 type_aware Recall@5 | 0.7334 | 0.7300 | True |
+| Candidate reranker MRR | 0.6606 | 0.6500 | True |
+| Candidate reranker Recall@5 | 0.7957 | 0.7900 | True |
+| Type3 supervised selector Coverage@5 delta is negative | 0.0572 | 0.0500 | True |
+
+## 复现命令入口
+
+| Stage | Command / Document | Notes |
+|---|---|---|
+| Main LoCoMo retrieval | `work/agent_memory_experiment/README.md#recommended-locomo-run` | Requires local BGE-M3 cache; no online embedding API. |
+| Candidate reranker | `work/agent_memory_experiment/candidate_reranker_experiment.py` | Uses cached rankings.csv; held-out query split. |
+| Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
+| Paper tables | `work/agent_memory_experiment/generate_paper_tables.py` | Generates Markdown and LaTeX tables from cached CSVs. |
+
+## 仍需补强
+
+- DeepSeek 抽取重复实验仍需多 seed/temperature 版本，以报告 memory writer 方差。
+- 跨智能体/KV cache 仍需要真实或半真实 multi-agent trace。
+- Type 3 需要更强 LLM 子问题生成或 listwise/setwise objective；当前浅层方法均为负结果。
+- 如果投稿，需要把实验环境写成固定版本，包括 Python、sentence-transformers、FAISS/sklearn 版本和 BGE-M3 缓存来源。

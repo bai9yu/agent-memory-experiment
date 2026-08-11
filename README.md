@@ -31,6 +31,10 @@
 - `outputs/agent_memory_paper_tables_zh.md`
 - `outputs/agent_memory_paper_tables.tex`
 
+论文复现清单见：
+
+- `outputs/agent_memory_reproducibility_checklist_zh.md`
+
 ## 当前推荐配置
 
 当前 LoCoMo 全量实验推荐：

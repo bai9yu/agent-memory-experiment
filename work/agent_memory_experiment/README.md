@@ -755,6 +755,17 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/gener
   --output-latex outputs/agent_memory_paper_tables.tex
 ```
 
+Generate reproducibility checklist:
+
+```bash
+PYTHONPYCACHEPREFIX=/private/tmp/agent_memory_pycache \
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/generate_reproducibility_checklist.py \
+  --project-root . \
+  --output-report outputs/agent_memory_reproducibility_checklist_zh.md \
+  --output-artifacts outputs/agent_memory_reproducibility_artifacts.csv \
+  --output-metrics outputs/agent_memory_reproducibility_metrics.csv
+```
+
 Run top-1 error analysis:
 
 ```bash

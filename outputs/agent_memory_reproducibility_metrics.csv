@@ -1,0 +1,6 @@
+label,observed,expected_min,pass
+LoCoMo10 type_aware MRR,0.6093848002850233,0.6,True
+LoCoMo10 type_aware Recall@5,0.7334058759521219,0.73,True
+Candidate reranker MRR,0.6605859366363394,0.65,True
+Candidate reranker Recall@5,0.7956521739130434,0.79,True
+Type3 supervised selector Coverage@5 delta is negative,0.057205104263927796,0.05,True
