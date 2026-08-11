@@ -381,6 +381,21 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Builds a supplement packaging manifest with blocker and anonymization checks.",
         ),
         Step(
+            "anonymous_submission_readiness",
+            py(
+                "validate_anonymous_submission_readiness.py",
+                "--project-root",
+                ".",
+                "--manifest-csv",
+                "outputs/agent_memory_supplementary_package_manifest.csv",
+                "--output-csv",
+                "outputs/agent_memory_anonymous_submission_readiness.csv",
+                "--output-report",
+                "outputs/agent_memory_anonymous_submission_readiness_zh.md",
+            ),
+            "Checks anonymous-submission readiness for current supplement candidates.",
+        ),
+        Step(
             "paper_table_consistency",
             py(
                 "validate_paper_table_consistency.py",

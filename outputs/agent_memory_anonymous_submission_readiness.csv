@@ -1,0 +1,6 @@
+check,category,pass,status,evidence,action
+manifest_exists,input,True,pass,"manifest_rows=30, include_rows=12",先生成 supplementary package manifest。
+blocked_artifacts_excluded,claim_boundary,True,pass,blocked_artifacts_included=0,关闭外部 embedding / 人审 blocker 前，不要把 blocked artifact 放入 supplement。
+internal_gates_not_in_supplement,packaging_boundary,True,pass,internal_gate_artifacts_included=0,将 internal_review_gate 保留在仓库/rebuttal 材料中，不作为匿名 supplement 主包。
+included_files_exist,file_integrity,True,pass,missing=,修复 manifest 中指向的缺失 artifact。
+included_files_anonymous,anonymization,True,pass,no identity-like findings in included artifacts,匿名投稿前移除作者路径、仓库 URL、邮箱、API key 赋值和本地 Codex 路径。

@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：200/200
+- Artifact 存在性：202/202
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `9828731` |
-| git_branch_status | `## main...origin/main [ahead 2]` |
+| git_commit | `e4531a0` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -120,30 +120,32 @@
 | Submission package index CSV | True | 9694 | `outputs/agent_memory_submission_package_index.csv` |
 | Supplementary package manifest | True | 5054 | `outputs/agent_memory_supplementary_package_manifest_zh.md` |
 | Supplementary package manifest CSV | True | 8550 | `outputs/agent_memory_supplementary_package_manifest.csv` |
+| Anonymous submission readiness audit | True | 1759 | `outputs/agent_memory_anonymous_submission_readiness_zh.md` |
+| Anonymous submission readiness audit CSV | True | 829 | `outputs/agent_memory_anonymous_submission_readiness.csv` |
 | Submission entrypoint consistency audit | True | 2106 | `outputs/agent_memory_submission_entrypoint_consistency_zh.md` |
 | Submission entrypoint consistency audit CSV | True | 1487 | `outputs/agent_memory_submission_entrypoint_consistency.csv` |
 | Submission readiness gate | True | 2550 | `outputs/agent_memory_submission_readiness_zh.md` |
 | Submission readiness gate CSV | True | 2230 | `outputs/agent_memory_submission_readiness.csv` |
-| Final submission checklist | True | 3386 | `outputs/agent_memory_final_submission_checklist_zh.md` |
-| Final submission checklist CSV | True | 2778 | `outputs/agent_memory_final_submission_checklist.csv` |
+| Final submission checklist | True | 3408 | `outputs/agent_memory_final_submission_checklist_zh.md` |
+| Final submission checklist CSV | True | 2800 | `outputs/agent_memory_final_submission_checklist.csv` |
 | Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4732 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3622 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Untracked artifact audit | True | 4742 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 3632 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 34763 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 35117 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3600 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 2813 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Paper artifact refresh run | True | 5980 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 21112 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
-| Paper refresh coverage audit | True | 8761 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
-| Paper refresh coverage audit CSV | True | 7679 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
+| Paper artifact refresh run | True | 6109 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 21588 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper refresh coverage audit | True | 8961 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
+| Paper refresh coverage audit CSV | True | 7871 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -314,6 +316,7 @@
 | Reviewer response preparation matrix | `work/agent_memory_experiment/generate_reviewer_response_prep.py` | Maps likely reviewer questions to current evidence, remaining gaps, and safe paper-writing boundaries. |
 | Submission package index | `work/agent_memory_experiment/generate_submission_package_index.py` | Indexes manuscript, tables, appendices, reproducibility artifacts, blockers, and final packaging actions. |
 | Supplementary package manifest | `work/agent_memory_experiment/generate_supplementary_package_manifest.py` | Classifies package-index artifacts for supplement inclusion, internal review, blocker exclusion, and anonymization checks. |
+| Anonymous submission readiness audit | `work/agent_memory_experiment/validate_anonymous_submission_readiness.py` | Scans current supplement candidates for identity, path, repository URL, email, and API-key assignment risks. |
 | Submission entrypoint consistency audit | `work/agent_memory_experiment/validate_submission_entrypoint_consistency.py` | Checks that README, package index, and reproducibility entrypoints all point to the current submission readiness artifact. |
 | Submission readiness gate | `work/agent_memory_experiment/validate_submission_readiness.py` | Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission. |
 | Final submission checklist | `work/agent_memory_experiment/generate_final_submission_checklist.py` | Turns submission gates and claim-upgrade reports into an action-oriented final-submission checklist. |

@@ -93,30 +93,32 @@ Submission package index,outputs/agent_memory_submission_package_index_zh.md,Tru
 Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,9694
 Supplementary package manifest,outputs/agent_memory_supplementary_package_manifest_zh.md,True,5054
 Supplementary package manifest CSV,outputs/agent_memory_supplementary_package_manifest.csv,True,8550
+Anonymous submission readiness audit,outputs/agent_memory_anonymous_submission_readiness_zh.md,True,1759
+Anonymous submission readiness audit CSV,outputs/agent_memory_anonymous_submission_readiness.csv,True,829
 Submission entrypoint consistency audit,outputs/agent_memory_submission_entrypoint_consistency_zh.md,True,2106
 Submission entrypoint consistency audit CSV,outputs/agent_memory_submission_entrypoint_consistency.csv,True,1487
 Submission readiness gate,outputs/agent_memory_submission_readiness_zh.md,True,2550
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness.csv,True,2230
-Final submission checklist,outputs/agent_memory_final_submission_checklist_zh.md,True,3386
-Final submission checklist CSV,outputs/agent_memory_final_submission_checklist.csv,True,2778
+Final submission checklist,outputs/agent_memory_final_submission_checklist_zh.md,True,3408
+Final submission checklist CSV,outputs/agent_memory_final_submission_checklist.csv,True,2800
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1688
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1424
-Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4732
-Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3622
+Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4742
+Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3632
 Large intermediate provenance audit,outputs/agent_memory_large_intermediate_provenance_zh.md,True,2048
 Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_provenance.csv,True,2824
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734
 Artifact path portability audit CSV,outputs/agent_memory_artifact_path_portability.csv,True,214
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3795
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,34763
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,35117
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3600
 Submission blocker closure plan CSV,outputs/agent_memory_submission_blocker_closure_plan.csv,True,2813
-Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,5980
-Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,21112
-Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,8761
-Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,7679
+Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,6109
+Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,21588
+Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,8961
+Paper refresh coverage audit CSV,outputs/agent_memory_paper_refresh_coverage_audit.csv,True,7871
 Evidence freshness audit,outputs/agent_memory_evidence_freshness_audit_zh.md,True,808
 Evidence freshness audit CSV,outputs/agent_memory_evidence_freshness_audit.csv,True,98
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247

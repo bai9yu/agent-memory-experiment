@@ -36,6 +36,7 @@ def classify(path: str) -> tuple[str, str, str]:
         "work/agent_memory_experiment/validate_manuscript_numeric_claims.py",
         "work/agent_memory_experiment/generate_supplementary_package_manifest.py",
         "work/agent_memory_experiment/generate_final_submission_checklist.py",
+        "work/agent_memory_experiment/validate_anonymous_submission_readiness.py",
         "outputs/agent_memory_untracked_artifact_audit.csv",
         "outputs/agent_memory_untracked_artifact_audit_zh.md",
         "outputs/agent_memory_api_embedding_postrun_gate.csv",
@@ -76,6 +77,8 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_supplementary_package_manifest_zh.md",
         "outputs/agent_memory_final_submission_checklist.csv",
         "outputs/agent_memory_final_submission_checklist_zh.md",
+        "outputs/agent_memory_anonymous_submission_readiness.csv",
+        "outputs/agent_memory_anonymous_submission_readiness_zh.md",
     }:
         return ("release_audit_artifact", "track_as_paper_artifact", "New public-release audit support file; track with the paper artifact package.")
     if path.startswith("work/agent_memory_experiment/data/deepseek_smoke_test/"):

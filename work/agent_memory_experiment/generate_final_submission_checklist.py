@@ -78,6 +78,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     embedding_upgrade = read_csv(outputs / "agent_memory_embedding_paper_claim_upgrade.csv")
     human_upgrade = read_csv(outputs / "agent_memory_human_audit_paper_claim_upgrade.csv")
     supplement = read_csv(outputs / "agent_memory_supplementary_package_manifest.csv")
+    anonymous = read_csv(outputs / "agent_memory_anonymous_submission_readiness.csv")
     public_release = read_csv(outputs / "agent_memory_public_release_readiness.csv")
     freshness = read_csv(outputs / "agent_memory_evidence_freshness_audit.csv")
     scope = read_csv(outputs / "agent_memory_paper_scope_claim_audit.csv")
@@ -101,6 +102,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     supplement_missing = [row for row in supplement if row.get("exists") != "True"]
     supplement_blocked = [row for row in supplement if row.get("package_bucket") == "exclude_until_blocker_closed"]
     public_blockers = count(public_release, "status", "blocker")
+    anonymous_blockers = count(anonymous, "status", "blocker")
     scope_failures = count(scope, "status", "fail")
     numeric_failures = count(numeric, "status", "fail")
     stale_findings = count(freshness, "status", "fail")
@@ -181,8 +183,8 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "release",
             "Public release and anonymization hygiene",
             True,
-            as_bool(public_hygiene.get("pass")) and public_blockers == 0,
-            f"{public_hygiene.get('evidence', '')}; public_blockers={public_blockers}",
+            as_bool(public_hygiene.get("pass")) and public_blockers == 0 and anonymous_blockers == 0,
+            f"{public_hygiene.get('evidence', '')}; public_blockers={public_blockers}; anonymous_blockers={anonymous_blockers}",
             "正式匿名投稿前按会议要求移除作者、仓库 URL、账号身份信息；开源前补 LICENSE。",
             "可将仓库作为公开/内部复现 artifact 的基础版本。",
         ),

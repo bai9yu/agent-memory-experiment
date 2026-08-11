@@ -266,6 +266,8 @@ def main() -> None:
         ("Submission package index CSV", outputs / "agent_memory_submission_package_index.csv"),
         ("Supplementary package manifest", outputs / "agent_memory_supplementary_package_manifest_zh.md"),
         ("Supplementary package manifest CSV", outputs / "agent_memory_supplementary_package_manifest.csv"),
+        ("Anonymous submission readiness audit", outputs / "agent_memory_anonymous_submission_readiness_zh.md"),
+        ("Anonymous submission readiness audit CSV", outputs / "agent_memory_anonymous_submission_readiness.csv"),
         ("Submission entrypoint consistency audit", outputs / "agent_memory_submission_entrypoint_consistency_zh.md"),
         ("Submission entrypoint consistency audit CSV", outputs / "agent_memory_submission_entrypoint_consistency.csv"),
         ("Submission readiness gate", outputs / "agent_memory_submission_readiness_zh.md"),
@@ -749,6 +751,11 @@ def main() -> None:
             "stage": "Supplementary package manifest",
             "command": "work/agent_memory_experiment/generate_supplementary_package_manifest.py",
             "notes": "Classifies package-index artifacts for supplement inclusion, internal review, blocker exclusion, and anonymization checks.",
+        },
+        {
+            "stage": "Anonymous submission readiness audit",
+            "command": "work/agent_memory_experiment/validate_anonymous_submission_readiness.py",
+            "notes": "Scans current supplement candidates for identity, path, repository URL, email, and API-key assignment risks.",
         },
         {
             "stage": "Submission entrypoint consistency audit",
