@@ -87,15 +87,39 @@ def percentile(values: list[float], q: float) -> float:
     return values[lower] * (1.0 - weight) + values[upper] * weight
 
 
-def bootstrap_mean_ci(values: list[float], iterations: int, rng: random.Random) -> tuple[float, float]:
-    if not values:
-        return 0.0, 0.0
-    n = len(values)
-    boot_means = []
+def bootstrap_paired_mean_cis(
+    pairs: list[tuple[float, float]],
+    iterations: int,
+    rng: random.Random,
+) -> tuple[tuple[float, float], tuple[float, float], tuple[float, float]]:
+    if not pairs:
+        return (0.0, 0.0), (0.0, 0.0), (0.0, 0.0)
+    n = len(pairs)
+    baseline_means = []
+    candidate_means = []
+    delta_means = []
+    randrange = rng.randrange
+    inv_n = 1.0 / n
     for _ in range(iterations):
-        boot_means.append(statistics.mean(values[rng.randrange(n)] for _ in range(n)))
-    boot_means.sort()
-    return percentile(boot_means, 0.025), percentile(boot_means, 0.975)
+        baseline_sum = 0.0
+        candidate_sum = 0.0
+        for _ in range(n):
+            left, right = pairs[randrange(n)]
+            baseline_sum += left
+            candidate_sum += right
+        baseline_mean = baseline_sum * inv_n
+        candidate_mean = candidate_sum * inv_n
+        baseline_means.append(baseline_mean)
+        candidate_means.append(candidate_mean)
+        delta_means.append(candidate_mean - baseline_mean)
+    baseline_means.sort()
+    candidate_means.sort()
+    delta_means.sort()
+    return (
+        (percentile(baseline_means, 0.025), percentile(baseline_means, 0.975)),
+        (percentile(candidate_means, 0.025), percentile(candidate_means, 0.975)),
+        (percentile(delta_means, 0.025), percentile(delta_means, 0.975)),
+    )
 
 
 def normalize_query_id(row: dict[str, str]) -> str:
@@ -164,9 +188,11 @@ def summarize_scenario(
         baseline_values = [left for left, _ in metric_pairs]
         candidate_values = [right for _, right in metric_pairs]
         deltas = [right - left for left, right in metric_pairs]
-        baseline_low, baseline_high = bootstrap_mean_ci(baseline_values, iterations, rng)
-        candidate_low, candidate_high = bootstrap_mean_ci(candidate_values, iterations, rng)
-        delta_low, delta_high = bootstrap_mean_ci(deltas, iterations, rng)
+        (baseline_low, baseline_high), (candidate_low, candidate_high), (delta_low, delta_high) = bootstrap_paired_mean_cis(
+            metric_pairs,
+            iterations,
+            rng,
+        )
         output_rows.append({
             "scenario": scenario["scenario"],
             "description": scenario["description"],

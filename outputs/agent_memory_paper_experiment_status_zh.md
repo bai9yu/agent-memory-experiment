@@ -253,7 +253,7 @@ Feature importance 显示模型主要依赖 `type_aware_score`、`time_aware_rr`
 - `outputs/agent_memory_writer_stability_zh.md`：DeepSeek memory writer 重复抽取稳定性汇总；当前 3 个 manifest run 已全部 completed，状态为 `ready_for_variance`，可报告 MRR / Recall@5 / memory_tokens / API tokens 的均值和标准差。
 - `outputs/agent_memory_paper_tables_zh.md`：Markdown 主表、消融表、candidate reranker LOCO 验证表、Type 3 失败分析表。
 - `outputs/agent_memory_paper_tables.tex`：可直接复制到论文的 LaTeX `booktabs` 表格。
-- `outputs/agent_memory_bootstrap_metric_ci_zh.md`：per-query bootstrap 置信区间报告；当前主方法 held-out MRR delta 为 `0.0539`，95% CI `[0.0459, 0.0622]`，LOCO MRR delta 为 `0.0504`，95% CI `[0.0407, 0.0601]`，均不跨 0；validation-tuned router、text-intent router 和 Type 3 decomposition fusion4 则作为弱/负结果呈现。
+- `outputs/agent_memory_bootstrap_metric_ci_zh.md`：per-query bootstrap 置信区间报告；当前主方法 held-out MRR delta 为 `0.0539`，95% CI `[0.0459, 0.0618]`，LOCO MRR delta 为 `0.0504`，95% CI `[0.0409, 0.0600]`，均不跨 0；validation-tuned router、text-intent router 和 Type 3 decomposition fusion4 则作为弱/负结果呈现。
 - `outputs/agent_memory_paper_evidence_matrix_zh.md`：按“论文主张-证据-证据强度-剩余缺口”整理当前实验是否足以支撑投稿表述。
 - `outputs/agent_memory_paper_draft_outline_zh.md`：中文论文草稿骨架，汇总题目、摘要、贡献、公式、实验 RQ、边界和投稿前最小条件。
 - `outputs/agent_memory_manuscript_draft_zh.md`：中文论文正文初稿；已包含摘要、引言、任务定义、方法、实验设置、结果、错误分析、限制和结论，但仍需补齐 embedding baseline 与人工一致性后才能作为最终投稿稿。

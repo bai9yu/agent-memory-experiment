@@ -8,7 +8,7 @@
 - Artifacts covered: 87/87
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 3872972
+- Total bytes: 3873028
 
 ## 前 20 个 Artifact
 
@@ -21,8 +21,8 @@
 | Writer stability runs | True | 924 | 4 | 13c91b80d653 | ok | outputs/agent_memory_writer_stability_runs.csv |
 | Candidate reranker report | True | 2019 | 53 | 47c06dda556d | ok | outputs/agent_memory_candidate_reranker_locomo10_zh.md |
 | Candidate reranker significance | True | 607 | 8 | 3d53a2fea54f | ok | outputs/agent_memory_candidate_reranker_significance_zh.md |
-| Bootstrap metric CI report | True | 4250 | 49 | 32a551001a93 | ok | outputs/agent_memory_bootstrap_metric_ci_zh.md |
-| Bootstrap metric CI CSV | True | 7506 | 21 | a0c288e020b3 | ok | outputs/agent_memory_bootstrap_metric_ci.csv |
+| Bootstrap metric CI report | True | 4250 | 49 | 14c58e357bf4 | ok | outputs/agent_memory_bootstrap_metric_ci_zh.md |
+| Bootstrap metric CI CSV | True | 7562 | 21 | 8e7932fd965f | ok | outputs/agent_memory_bootstrap_metric_ci.csv |
 | Validation-tuned router comparison | True | 850159 | 5521 | 9964bc0e5973 | ok | outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv |
 | Candidate reranker LOCO report | True | 3506 | 68 | 79e3f0650f02 | ok | outputs/agent_memory_candidate_reranker_loco_zh.md |
 | Candidate reranker LOCO summary | True | 684 | 4 | 282d33bb4303 | ok | outputs/agent_memory_candidate_reranker_loco_summary.csv |

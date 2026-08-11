@@ -7,7 +7,7 @@ Writer stability runs,outputs/agent_memory_writer_stability_runs.csv,True,924
 Candidate reranker report,outputs/agent_memory_candidate_reranker_locomo10_zh.md,True,2019
 Candidate reranker significance,outputs/agent_memory_candidate_reranker_significance_zh.md,True,607
 Bootstrap metric CI report,outputs/agent_memory_bootstrap_metric_ci_zh.md,True,4250
-Bootstrap metric CI CSV,outputs/agent_memory_bootstrap_metric_ci.csv,True,7506
+Bootstrap metric CI CSV,outputs/agent_memory_bootstrap_metric_ci.csv,True,7562
 Validation-tuned router comparison,outputs/agent_memory_validation_tuned_router_locomo10_comparison_per_query.csv,True,850159
 Candidate reranker LOCO report,outputs/agent_memory_candidate_reranker_loco_zh.md,True,3506
 Candidate reranker LOCO summary,outputs/agent_memory_candidate_reranker_loco_summary.csv,True,684
@@ -46,8 +46,8 @@ Submission readiness gate,outputs/agent_memory_submission_readiness_gate_zh.md,T
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness_gate.csv,True,1877
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1436
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,968
-Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3750
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,14665
+Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3770
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,14865
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9070
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,4904
 Experiment protocol,outputs/agent_memory_experiment_protocol_zh.md,True,4247
