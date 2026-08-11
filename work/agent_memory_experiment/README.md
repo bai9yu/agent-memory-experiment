@@ -1,18 +1,28 @@
 # Agent Memory Experiment
 
-This folder contains a first-stage, fully offline experiment for validating agent memory retrieval ideas.
+This folder contains the core code for an agent memory experiment framework. It supports long-conversation memory conversion, semantic retrieval, time-aware reranking, persona-aware reranking, importance-aware reranking, memory compression analysis, and cross-agent memory reuse evaluation.
 
-## What It Tests
+## What It Implements
 
-The first run compares three memory retrieval baselines:
+The retrieval module compares and combines three scoring families:
 
-1. `vector`: deterministic hashed-vector similarity.
-2. `hybrid`: vector + BM25 keyword + entity overlap.
-3. `time_aware`: hybrid score with a recency-aware multiplier.
+1. `vector`: semantic similarity, using either deterministic hash vectors or local sentence-transformer embeddings.
+2. `hybrid`: semantic similarity + BM25 keyword matching + entity overlap.
+3. `time_aware`: hybrid retrieval with adaptive recency gating, persona-aware reranking, and importance-aware reranking.
 
-This is a lightweight stand-in for later experiments with `mem0`, `MemoryOS`, LoCoMo, and LongMemEval.
+The main LoCoMo configuration uses local `BAAI/bge-m3` embeddings with:
 
-The project also includes a permissive long-conversation converter for LoCoMo-like JSON/JSONL files.
+- BGE-M3 embedding cache
+- adaptive time-aware reranking
+- persona gate for speaker/person disambiguation
+- importance proxy for long-term preferences, relationships, identity, goals, plans, and emotional memories
+
+The project also includes:
+
+- a permissive long-conversation converter for LoCoMo-like JSON/JSONL files
+- LoCoMo `observation` and `session_summary` compression builders
+- synthetic data generation for controlled retrieval, compression, and cross-agent tests
+- aggregation scripts for Chinese experiment reports
 
 ## Run
 
@@ -30,13 +40,13 @@ Outputs are written to:
 
 ## One-Command Pipeline
 
-Run the retrieval-only offline pipeline:
+Run the retrieval pipeline:
 
 ```bash
 python3 work/agent_memory_experiment/run_experiments.py
 ```
 
-Run the full first-stage pipeline, including retrieval, compression, cross-agent reuse, aggregation, and the consolidated final report:
+Run the full pipeline, including retrieval, compression, cross-agent reuse, aggregation, and the consolidated report:
 
 ```bash
 python3 work/agent_memory_experiment/run_full_pipeline.py
@@ -60,7 +70,7 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/run_e
   --local-files-only
 ```
 
-The current project route does not use OpenAI embedding. Use BGE-small first for a fast local check, then switch to BGE-M3 after the pipeline is stable:
+The default route does not require an online embedding API. Use BGE-small for a fast local check, then switch to BGE-M3 for the main LoCoMo run:
 
 ```bash
 HF_HOME=work/agent_memory_experiment/cache/huggingface \
