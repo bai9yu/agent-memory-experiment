@@ -359,6 +359,8 @@ def main() -> None:
         ("Human audit readiness gate CSV", outputs / "agent_memory_human_audit_readiness_gate.csv"),
         ("Human audit annotation codebook", outputs / "agent_memory_human_audit_annotation_codebook_zh.md"),
         ("Human audit annotation schema", outputs / "agent_memory_human_audit_annotation_schema.csv"),
+        ("Human audit protocol compliance", outputs / "agent_memory_human_audit_protocol_compliance_zh.md"),
+        ("Human audit protocol compliance CSV", outputs / "agent_memory_human_audit_protocol_compliance.csv"),
         ("Human audit execution plan", outputs / "agent_memory_human_audit_execution_plan_zh.md"),
         ("Human audit execution plan CSV", outputs / "agent_memory_human_audit_execution_plan.csv"),
         ("Human audit sample QC", outputs / "agent_memory_human_audit_sample_qc_zh.md"),
@@ -651,6 +653,11 @@ def main() -> None:
             "stage": "Human audit annotation codebook",
             "command": "work/agent_memory_experiment/generate_human_audit_annotation_codebook.py",
             "notes": "Defines yes/partial/no label rules, manual reason labels, dual-annotation flow, and paper-claim boundaries.",
+        },
+        {
+            "stage": "Human audit protocol compliance",
+            "command": "work/agent_memory_experiment/validate_human_audit_protocol_compliance.py",
+            "notes": "Checks that samples, schemas, codebook, interfaces, import readiness, and claim gates form a protocol-ready human-labeling package.",
         },
         {
             "stage": "Human audit execution plan",

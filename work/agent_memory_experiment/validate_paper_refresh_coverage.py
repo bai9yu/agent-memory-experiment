@@ -12,6 +12,7 @@ from typing import Any
 REQUIRED_STEPS = [
     ("offline_embedding_sensitivity", "encoder sensitivity diagnostic"),
     ("human_audit_execution_plan", "human audit execution plan"),
+    ("human_audit_annotation_codebook", "human audit codebook with label rules and agreement formulas"),
     ("human_audit_sample_qc", "human audit sample coverage and progress QC"),
     ("human_audit_labeling_dashboard", "human audit per-row labeling progress dashboard"),
     ("human_audit_annotation_interface", "offline human audit HTML annotation interface"),
@@ -19,6 +20,7 @@ REQUIRED_STEPS = [
     ("human_audit_annotation_import_readiness", "human audit annotation export import readiness check"),
     ("human_audit_paper_claim_upgrade", "human audit paper-claim upgrade gate"),
     ("human_audit_blind_review_leakage", "human audit blind review schema and leakage audit"),
+    ("human_audit_protocol_compliance", "human audit protocol compliance and closure audit"),
     ("embedding_baseline_status", "external embedding status without network calls"),
     ("embedding_provider_profiles", "provider-specific external embedding command profiles"),
     ("api_embedding_preflight", "paid/API embedding preflight"),

@@ -29,7 +29,7 @@ forbidden_overclaim,external_embedding_completed,outputs/agent_memory_threats_to
 forbidden_overclaim,human_verified_error_analysis,outputs/agent_memory_threats_to_validity_zh.md,blocker,True,pass,no unqualified overclaim found,人工确认仍为 0，不能写 human-verified error analysis。
 forbidden_overclaim,production_scale_validation,outputs/agent_memory_threats_to_validity_zh.md,major,True,pass,no unqualified overclaim found,100k 扩展实验是 synthetic distractor diagnostic，不能写生产规模验证。
 forbidden_overclaim,end_to_end_agent_success,outputs/agent_memory_threats_to_validity_zh.md,major,True,pass,no unqualified overclaim found,当前评估是 memory retrieval，不等同端到端 agent task success。
-document_presence,document_exists,outputs/agent_memory_reproducibility_checklist_zh.md,info,True,pass,chars=40428,Document is available for scope-claim audit.
+document_presence,document_exists,outputs/agent_memory_reproducibility_checklist_zh.md,info,True,pass,chars=40913,Document is available for scope-claim audit.
 forbidden_overclaim,cross_dataset_generalization,outputs/agent_memory_reproducibility_checklist_zh.md,major,True,pass,no unqualified overclaim found,当前证据主要是 LoCoMo10 answerable slice 与 LOCO split，不能写成跨数据集泛化。
 forbidden_overclaim,external_embedding_completed,outputs/agent_memory_reproducibility_checklist_zh.md,blocker,True,pass,no unqualified overclaim found,外部 embedding baseline completed=0，不能写成已完成结果。
 forbidden_overclaim,human_verified_error_analysis,outputs/agent_memory_reproducibility_checklist_zh.md,blocker,True,pass,no unqualified overclaim found,人工确认仍为 0，不能写 human-verified error analysis。

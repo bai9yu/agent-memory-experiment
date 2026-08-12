@@ -114,7 +114,17 @@ full80 使用同一流程，替换为 full80 对应文件：`agent_memory_human_
 
 人工字段更新后，建议同步重跑 evidence matrix、submission gap、reproducibility checklist 和 artifact integrity manifest，使论文草稿、差距分析、投稿 gate 里的 blocker 数保持一致。
 
-## 7. 论文写法边界
+## 7. 一致性指标公式
+
+令第 `i` 个样本在某字段上的人工标签为 `h_i`，LLM-assisted 标签为 `l_i`，双人标注时 A/B 标注分别为 `a_i` 和 `b_i`：
+
+- Exact agreement: `A_exact = (1/N) * sum_i 1[h_i = l_i]`，双人标注时把 `h_i/l_i` 替换为 `a_i/b_i`。
+- Partial-credit agreement: 对 `yes/partial/no`，完全一致计 1，`yes` 与 `partial` 或 `partial` 与 `no` 计 0.5，`yes` 与 `no` 计 0。
+- Cohen's kappa: `kappa = (p_o - p_e) / (1 - p_e)`，其中 `p_o` 是观测一致率，`p_e` 是由两个标注者边际分布估计的随机一致率。
+
+报告时应同时说明样本范围：priority20 是快速抽查，full80 才能支撑完整错误分析；双人/仲裁完成后再把 adjudicated labels 作为最终人工分布。
+
+## 8. 论文写法边界
 
 - priority20 未完成前，只能写“已准备 quick-review protocol”，不能写人工抽查结果。
 - priority20 完成后，可以写小样本人工抽查和 Human/LLM agreement。

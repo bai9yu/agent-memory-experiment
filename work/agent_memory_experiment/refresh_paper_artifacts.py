@@ -56,6 +56,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes the human-audit labeling execution plan from current gates.",
         ),
         Step(
+            "human_audit_annotation_codebook",
+            py(
+                "generate_human_audit_annotation_codebook.py",
+                "--project-root",
+                ".",
+                "--output-report",
+                "outputs/agent_memory_human_audit_annotation_codebook_zh.md",
+                "--output-schema",
+                "outputs/agent_memory_human_audit_annotation_schema.csv",
+            ),
+            "Refreshes the human-audit annotation codebook, allowed labels, formulas, and recomputation commands.",
+        ),
+        Step(
             "human_audit_sample_qc",
             py(
                 "validate_human_audit_sample_qc.py",
@@ -173,6 +186,19 @@ def build_steps(include_environment: bool) -> list[Step]:
                 "outputs/agent_memory_human_audit_blind_review_leakage_zh.md",
             ),
             "Checks that blinded human-audit review sheets do not expose LLM-assisted labels and follow the expected schema.",
+        ),
+        Step(
+            "human_audit_protocol_compliance",
+            py(
+                "validate_human_audit_protocol_compliance.py",
+                "--outputs-dir",
+                "outputs",
+                "--output-csv",
+                "outputs/agent_memory_human_audit_protocol_compliance.csv",
+                "--output-report",
+                "outputs/agent_memory_human_audit_protocol_compliance_zh.md",
+            ),
+            "Checks that human-audit samples, schemas, codebook, interfaces, import checks, and claim gates form a protocol-ready package.",
         ),
         Step(
             "embedding_baseline_status",
