@@ -115,7 +115,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             True,
             as_bool(api_preflight.get("pass")),
             api_preflight.get("evidence", ""),
-            "配置 OPENAI_API_KEY 或 OpenAI-compatible provider key 后重跑 preflight。",
+            "按 `agent_memory_api_embedding_execution_runbook_zh.md` 的 1_configure_key 和 2_preflight 执行；key 只放 `.env` 或 shell。",
             "可把外部 embedding 从 pending protocol 升级为 safe-to-run baseline。",
         ),
         checklist_row(
@@ -125,7 +125,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             True,
             as_bool(external_completed.get("pass")) and as_bool(embedding_paper_ready.get("pass")),
             f"{external_completed.get('evidence', '')}; embedding_tier={embedding_paper_ready.get('status', 'missing')}",
-            "运行真实 API embedding baseline、comparison 和 postrun gate。",
+            "按 `agent_memory_api_embedding_execution_runbook_zh.md` 执行 4_real_api_run、5_compare_with_bge_m3、6_postrun_gate 和 strict paper acceptance。",
             "把外部 embedding baseline 加入主表或 robustness 对照，并刷新摘要/结论边界。",
         ),
         checklist_row(
@@ -135,7 +135,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             True,
             as_bool(priority_human.get("pass")),
             priority_human.get("evidence", ""),
-            "填写 priority20 blind review 的 human_* 字段并回填 agreement。",
+            "按 `agent_memory_human_audit_execution_plan_zh.md` 完成 Step 1 的 priority20 blind review、merge、agreement 和 readiness 命令。",
             "可报告 priority20 quick-review agreement，但仍需标注为小样本人工抽查。",
         ),
         checklist_row(
@@ -145,7 +145,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             True,
             as_bool(full_human.get("pass")) and as_bool(human_verified.get("pass")),
             f"{full_human.get('evidence', '')}; human_tier={human_verified.get('status', 'missing')}",
-            "完成 full80 single/dual/adjudication 标签并刷新 agreement/readiness。",
+            "按 `agent_memory_human_audit_execution_plan_zh.md` 完成 Step 3/4 的 full80 single/dual/adjudication、agreement 和 readiness。",
             "可把错误分析升级为 human-verified error analysis，并报告 exact agreement / kappa。",
         ),
         checklist_row(
@@ -195,7 +195,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             True,
             as_bool(reviewer_risk.get("pass")),
             reviewer_risk.get("evidence", ""),
-            "补完外部 embedding baseline 和人工审计后重跑 gap analysis/reviewer prep。",
+            "按 `agent_memory_submission_blocker_closure_plan_zh.md` 补完外部 embedding 和人审后，重跑 gap analysis/reviewer prep。",
             "可把稿件从 internal draft 升级为 final-submission candidate。",
         ),
     ]

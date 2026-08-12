@@ -101,8 +101,8 @@ Submission entrypoint consistency audit,outputs/agent_memory_submission_entrypoi
 Submission entrypoint consistency audit CSV,outputs/agent_memory_submission_entrypoint_consistency.csv,True,1487
 Submission readiness gate,outputs/agent_memory_submission_readiness_zh.md,True,2596
 Submission readiness gate CSV,outputs/agent_memory_submission_readiness.csv,True,2276
-Final submission checklist,outputs/agent_memory_final_submission_checklist_zh.md,True,3433
-Final submission checklist CSV,outputs/agent_memory_final_submission_checklist.csv,True,2825
+Final submission checklist,outputs/agent_memory_final_submission_checklist_zh.md,True,4035
+Final submission checklist CSV,outputs/agent_memory_final_submission_checklist.csv,True,3126
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1688
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1424
 Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4131
