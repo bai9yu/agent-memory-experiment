@@ -58,6 +58,10 @@ def postrun_completed(rows: list[dict[str, str]]) -> int:
     return sum(1 for row in rows if as_bool(row.get("postrun_pass")))
 
 
+def acceptance_completed(rows: list[dict[str, str]]) -> int:
+    return sum(1 for row in rows if as_bool(row.get("paper_acceptance_pass")))
+
+
 def comparison_completed(rows: list[dict[str, str]]) -> bool:
     return bool(rows) and all(row.get("status") == "completed" for row in rows)
 
@@ -102,12 +106,14 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     comparison = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
     postrun = read_csv(outputs / "agent_memory_api_embedding_postrun_gate.csv")
+    acceptance = read_csv(outputs / "agent_memory_api_embedding_paper_acceptance.csv")
     estimate = read_csv(outputs / "agent_memory_api_embedding_run_estimate.csv")
 
     required_pass, required_total = required_preflight_pass(preflight)
     ready = ready_status(status)
     completed = completed_status(status)
     postrun_pass = postrun_completed(postrun)
+    acceptance_pass = acceptance_completed(acceptance)
     comparison_ok = comparison_completed(comparison)
     estimated_items = sum(as_int(row.get("items")) for row in estimate)
     estimated_tokens = sum(as_int(row.get("approx_tokens")) for row in estimate)
@@ -116,7 +122,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     preflight_ok = required_total > 0 and required_pass == required_total
     run_ready = preflight_ok and ready >= 1
     result_completed = completed >= 1
-    paper_ready = postrun_pass >= 1 and comparison_ok
+    paper_ready = postrun_pass >= 1 and acceptance_pass >= 1 and comparison_ok
 
     return [
         gate_row(
@@ -166,9 +172,9 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
         ),
         gate_row(
             "paper_claim_ready",
-            "Post-run gate has at least one completed provider and comparison is complete.",
+            "Post-run gate and strict paper-acceptance gate have at least one completed provider, and comparison is complete.",
             paper_ready,
-            f"postrun_pass={postrun_pass}, comparison_completed={comparison_ok}",
+            f"postrun_pass={postrun_pass}, paper_acceptance_pass={acceptance_pass}, comparison_completed={comparison_ok}",
             "可以写：外部 embedding baseline 已完成，可作为论文 embedding 稳健性对照。",
             "不能写：跨所有 embedding provider 均稳健，除非新增多个 provider 并通过同一门禁。",
             "刷新 evidence matrix、manuscript、claim checks、reproducibility、freshness 和 submission readiness。",
@@ -219,7 +225,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "- 在 `preflight_ready` 之前，只能写外部 embedding baseline 的接入协议准备好。",
         "- 在 `api_result_completed` 之前，不能写任何外部 embedding 指标。",
         "- 在 `paper_claim_ready` 之前，不能把外部 embedding baseline 写入论文主结果或稳健性结论。",
-        "- 通过 `paper_claim_ready` 只说明至少一个外部 provider 完成；若要写跨 provider 稳健性，需要多个 provider 均完成并单独报告。",
+        "- 通过 `paper_claim_ready` 需要 postrun gate、strict paper-acceptance gate 和 comparison 同时通过；若要写跨 provider 稳健性，需要多个 provider 均完成并单独报告。",
     ]
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

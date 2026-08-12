@@ -10,6 +10,7 @@
 - Estimate source: `outputs/agent_memory_api_embedding_run_estimate.csv`
 - Readiness source: `outputs/agent_memory_submission_readiness.csv`
 - Post-run source: `outputs/agent_memory_api_embedding_postrun_gate.csv`
+- Paper acceptance source: `outputs/agent_memory_api_embedding_paper_acceptance.csv`
 
 | Item | Status | Evidence | Required Action | Unblocks |
 | --- | --- | --- | --- | --- |
@@ -19,6 +20,7 @@
 | run_scale_known | pass | items=4355, approx_tokens=71882, uncached_batches=35 | Rerun estimate_api_embedding_run.py if memories or queries change. | cost/risk planning |
 | external_summary_completed | blocker | completed external embedding baselines=0, postrun_pass=0 | Run memory_eval.py with semantic-backend api and generate summary.csv. | external_embedding_completed |
 | api_embedding_postrun_gate | pending_summary | no provider has complete summary, result files, and comparison table | Run validate_api_embedding_postrun.py after the API baseline and comparison finish. | paper-safe external embedding baseline |
+| api_embedding_paper_acceptance | pending_summary | no provider has complete query-scale, per-query, ranking, by-type, and comparison evidence | Run validate_api_embedding_paper_acceptance.py after the API baseline, comparison, and post-run gate finish. | paper-citable external embedding baseline |
 | comparison_table_completed | pending_summary | API summary not available; comparison remains pending | Run compare_embedding_baselines.py after API summary.csv exists. | paper embedding baseline table |
 
 ## 结论
@@ -35,4 +37,5 @@
 4. `memory_eval.py --semantic-backend api`：执行真实外部 embedding baseline。
 5. `compare_embedding_baselines.py`：生成相对 BGE-M3 的 delta 表。
 6. `validate_api_embedding_postrun.py`：确认 summary、rankings、per-query metrics、summary_by_type 和 comparison 都完整。
-7. `validate_submission_readiness.py`：确认 `api_embedding_preflight` 与 `external_embedding_completed` 门禁是否解除。
+7. `validate_api_embedding_paper_acceptance.py`：确认 query 数、per-query、Top-20 ranking、type coverage 和 comparison delta 均完整。
+8. `validate_submission_readiness.py`：确认 `api_embedding_preflight` 与 `external_embedding_completed` 门禁是否解除。

@@ -19,6 +19,7 @@ def classify(path: str) -> tuple[str, str, str]:
     if path in {
         "work/agent_memory_experiment/audit_untracked_artifacts.py",
         "work/agent_memory_experiment/validate_api_embedding_postrun.py",
+        "work/agent_memory_experiment/validate_api_embedding_paper_acceptance.py",
         "work/agent_memory_experiment/generate_api_embedding_execution_runbook.py",
         "work/agent_memory_experiment/validate_embedding_paper_claim_upgrade.py",
         "work/agent_memory_experiment/validate_human_audit_sample_qc.py",
@@ -42,6 +43,8 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_untracked_artifact_audit_zh.md",
         "outputs/agent_memory_api_embedding_postrun_gate.csv",
         "outputs/agent_memory_api_embedding_postrun_gate_zh.md",
+        "outputs/agent_memory_api_embedding_paper_acceptance.csv",
+        "outputs/agent_memory_api_embedding_paper_acceptance_zh.md",
         "outputs/agent_memory_api_embedding_execution_runbook.csv",
         "outputs/agent_memory_api_embedding_execution_runbook_zh.md",
         "outputs/agent_memory_embedding_paper_claim_upgrade.csv",

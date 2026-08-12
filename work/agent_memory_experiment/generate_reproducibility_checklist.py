@@ -311,6 +311,8 @@ def main() -> None:
         ("Embedding baseline comparison CSV", outputs / "agent_memory_embedding_baseline_comparison.csv"),
         ("API embedding post-run gate", outputs / "agent_memory_api_embedding_postrun_gate_zh.md"),
         ("API embedding post-run gate CSV", outputs / "agent_memory_api_embedding_postrun_gate.csv"),
+        ("API embedding paper acceptance gate", outputs / "agent_memory_api_embedding_paper_acceptance_zh.md"),
+        ("API embedding paper acceptance gate CSV", outputs / "agent_memory_api_embedding_paper_acceptance.csv"),
         ("Offline embedding sensitivity", outputs / "agent_memory_offline_embedding_sensitivity_zh.md"),
         ("Offline embedding sensitivity CSV", outputs / "agent_memory_offline_embedding_sensitivity.csv"),
         ("External embedding blocker audit", outputs / "agent_memory_external_embedding_blocker_audit_zh.md"),
@@ -598,6 +600,11 @@ def main() -> None:
             "stage": "API embedding post-run gate",
             "command": "work/agent_memory_experiment/validate_api_embedding_postrun.py",
             "notes": "Checks summary, result files, metrics, and BGE-M3 comparison before citing an API embedding baseline.",
+        },
+        {
+            "stage": "API embedding paper acceptance gate",
+            "command": "work/agent_memory_experiment/validate_api_embedding_paper_acceptance.py",
+            "notes": "Strictly checks query count, metric ranges, per-query rows, Top-20 ranking coverage, type coverage, and completed comparison deltas before paper citation.",
         },
         {
             "stage": "Offline embedding sensitivity",

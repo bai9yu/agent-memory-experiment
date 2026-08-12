@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：204/204
+- Artifact 存在性：206/206
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `6fc4d84` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `f6d2562` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -124,28 +124,28 @@
 | Anonymous submission readiness audit CSV | True | 829 | `outputs/agent_memory_anonymous_submission_readiness.csv` |
 | Submission entrypoint consistency audit | True | 2106 | `outputs/agent_memory_submission_entrypoint_consistency_zh.md` |
 | Submission entrypoint consistency audit CSV | True | 1487 | `outputs/agent_memory_submission_entrypoint_consistency.csv` |
-| Submission readiness gate | True | 2550 | `outputs/agent_memory_submission_readiness_zh.md` |
-| Submission readiness gate CSV | True | 2230 | `outputs/agent_memory_submission_readiness.csv` |
-| Final submission checklist | True | 3408 | `outputs/agent_memory_final_submission_checklist_zh.md` |
-| Final submission checklist CSV | True | 2800 | `outputs/agent_memory_final_submission_checklist.csv` |
+| Submission readiness gate | True | 2596 | `outputs/agent_memory_submission_readiness_zh.md` |
+| Submission readiness gate CSV | True | 2276 | `outputs/agent_memory_submission_readiness.csv` |
+| Final submission checklist | True | 3433 | `outputs/agent_memory_final_submission_checklist_zh.md` |
+| Final submission checklist CSV | True | 2825 | `outputs/agent_memory_final_submission_checklist.csv` |
 | Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4747 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3637 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Untracked artifact audit | True | 4744 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 3634 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 35465 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 35818 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3600 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 2813 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Paper artifact refresh run | True | 6450 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 22497 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
-| Paper refresh coverage audit | True | 9384 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
-| Paper refresh coverage audit CSV | True | 8278 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
+| Paper artifact refresh run | True | 6648 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 23163 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper refresh coverage audit | True | 9582 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
+| Paper refresh coverage audit CSV | True | 8468 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -159,18 +159,20 @@
 | Mock API embedding smoke test CSV | True | 102 | `outputs/agent_memory_mock_api_embedding_smoke_test.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
 | API embedding run estimate CSV | True | 502 | `outputs/agent_memory_api_embedding_run_estimate.csv` |
-| API embedding execution runbook | True | 4254 | `outputs/agent_memory_api_embedding_execution_runbook_zh.md` |
-| API embedding execution runbook CSV | True | 13688 | `outputs/agent_memory_api_embedding_execution_runbook.csv` |
+| API embedding execution runbook | True | 4388 | `outputs/agent_memory_api_embedding_execution_runbook_zh.md` |
+| API embedding execution runbook CSV | True | 13758 | `outputs/agent_memory_api_embedding_execution_runbook.csv` |
 | Embedding baseline comparison | True | 998 | `outputs/agent_memory_embedding_baseline_comparison_zh.md` |
 | Embedding baseline comparison CSV | True | 381 | `outputs/agent_memory_embedding_baseline_comparison.csv` |
 | API embedding post-run gate | True | 1445 | `outputs/agent_memory_api_embedding_postrun_gate_zh.md` |
 | API embedding post-run gate CSV | True | 898 | `outputs/agent_memory_api_embedding_postrun_gate.csv` |
+| API embedding paper acceptance gate | True | 1961 | `outputs/agent_memory_api_embedding_paper_acceptance_zh.md` |
+| API embedding paper acceptance gate CSV | True | 1269 | `outputs/agent_memory_api_embedding_paper_acceptance.csv` |
 | Offline embedding sensitivity | True | 2669 | `outputs/agent_memory_offline_embedding_sensitivity_zh.md` |
 | Offline embedding sensitivity CSV | True | 1993 | `outputs/agent_memory_offline_embedding_sensitivity.csv` |
-| External embedding blocker audit | True | 3406 | `outputs/agent_memory_external_embedding_blocker_audit_zh.md` |
-| External embedding blocker audit CSV | True | 1396 | `outputs/agent_memory_external_embedding_blocker_audit.csv` |
-| Embedding paper-claim upgrade gate | True | 2466 | `outputs/agent_memory_embedding_paper_claim_upgrade_zh.md` |
-| Embedding paper-claim upgrade gate CSV | True | 2514 | `outputs/agent_memory_embedding_paper_claim_upgrade.csv` |
+| External embedding blocker audit | True | 3938 | `outputs/agent_memory_external_embedding_blocker_audit_zh.md` |
+| External embedding blocker audit CSV | True | 1690 | `outputs/agent_memory_external_embedding_blocker_audit.csv` |
+| Embedding paper-claim upgrade gate | True | 2526 | `outputs/agent_memory_embedding_paper_claim_upgrade_zh.md` |
+| Embedding paper-claim upgrade gate CSV | True | 2576 | `outputs/agent_memory_embedding_paper_claim_upgrade.csv` |
 | Human audit protocol | True | 2479 | `outputs/agent_memory_human_audit_protocol_zh.md` |
 | Human audit sample | True | 28471 | `outputs/agent_memory_human_audit_sample_type_aware.csv` |
 | Human audit summary | True | 1394 | `outputs/agent_memory_human_audit_summary_zh.md` |
@@ -287,6 +289,7 @@
 | API embedding execution runbook | `work/agent_memory_experiment/generate_api_embedding_execution_runbook.py` | Fixes the preflight, estimate, paid run, comparison, postrun, and final-refresh sequence for external embedding baselines. |
 | Embedding baseline comparison | `work/agent_memory_experiment/compare_embedding_baselines.py` | Compares API embedding summary against BGE-M3 when the API run exists. |
 | API embedding post-run gate | `work/agent_memory_experiment/validate_api_embedding_postrun.py` | Checks summary, result files, metrics, and BGE-M3 comparison before citing an API embedding baseline. |
+| API embedding paper acceptance gate | `work/agent_memory_experiment/validate_api_embedding_paper_acceptance.py` | Strictly checks query count, metric ranges, per-query rows, Top-20 ranking coverage, type coverage, and completed comparison deltas before paper citation. |
 | Offline embedding sensitivity | `work/agent_memory_experiment/generate_offline_embedding_sensitivity.py` | Compares BGE-M3 against hash-vector and BM25 offline floors without network or paid API calls. |
 | External embedding blocker audit | `work/agent_memory_experiment/generate_external_embedding_blocker_audit.py` | Aggregates key, preflight, summary, comparison, and readiness blockers into an actionable audit. |
 | Embedding paper-claim upgrade gate | `work/agent_memory_experiment/validate_embedding_paper_claim_upgrade.py` | Maps external embedding evidence to protocol, preflight, result, comparison, and paper-ready claim tiers. |

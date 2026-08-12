@@ -336,6 +336,25 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Checks whether any API embedding run has complete paper-ready local outputs.",
         ),
         Step(
+            "api_embedding_paper_acceptance",
+            py(
+                "validate_api_embedding_paper_acceptance.py",
+                "--profile-csv",
+                "outputs/agent_memory_embedding_provider_profiles.csv",
+                "--queries",
+                "work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl",
+                "--outputs-dir",
+                "outputs",
+                "--rank-output-k",
+                "20",
+                "--output-csv",
+                "outputs/agent_memory_api_embedding_paper_acceptance.csv",
+                "--output-report",
+                "outputs/agent_memory_api_embedding_paper_acceptance_zh.md",
+            ),
+            "Strictly checks API embedding result scale, metrics, per-query rows, rankings, by-type coverage, and comparison deltas before paper citation.",
+        ),
+        Step(
             "external_embedding_blocker_audit",
             py(
                 "generate_external_embedding_blocker_audit.py",

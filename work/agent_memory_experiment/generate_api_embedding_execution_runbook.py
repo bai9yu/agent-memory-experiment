@@ -209,7 +209,7 @@ def build_rows(profile_csv: Path, preflight_csv: Path, estimate_csv: Path, postr
                 "offline_after_run",
                 postrun_completed > 0,
                 f"completed_for_paper={postrun_completed}",
-                "Post-run gate must report at least one provider completed_for_paper.",
+                "Post-run gate and paper acceptance gate must report at least one provider completed/accepted for paper.",
                 postrun_command(),
             ),
             (
@@ -295,12 +295,12 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "2. 完成 `1_configure_key`，确保 key 只在 `.env` 或 shell 中，不进入 Git。",
         "3. 运行 `2_preflight` 和 `3_cost_and_cache_estimate`。",
         "4. 只有 preflight 全部通过、费用/缓存可接受时，才运行 `4_real_api_run`。",
-        "5. 跑完后依次运行 compare、postrun gate 和 final refresh。",
+        "5. 跑完后依次运行 compare、postrun gate、paper acceptance gate 和 final refresh。",
         "",
         "## 论文使用边界",
         "",
         "- 可以写：外部 embedding baseline 的真实运行和验收路径已经固定，且离线刷新不会误触发付费 API。",
-        "- 不能写：runbook 生成完成就等于外部 embedding baseline 已完成；最终仍以 postrun gate completed_for_paper 为准。",
+        "- 不能写：runbook 生成完成就等于外部 embedding baseline 已完成；最终仍以 postrun gate completed_for_paper 和 paper acceptance accepted_for_paper 为准。",
     ]
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

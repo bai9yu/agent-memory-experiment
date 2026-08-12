@@ -49,6 +49,7 @@ def build_action_rows(outputs: Path) -> list[dict[str, Any]]:
     comparison_rows = read_csv(outputs / "agent_memory_embedding_baseline_comparison.csv")
     readiness_rows = read_csv(outputs / "agent_memory_submission_readiness.csv")
     postrun_rows = read_csv(outputs / "agent_memory_api_embedding_postrun_gate.csv")
+    acceptance_rows = read_csv(outputs / "agent_memory_api_embedding_paper_acceptance.csv")
 
     openai_status = find_row(status_rows, "label", "OpenAI text-embedding-3-small")
     generic_status = find_row(status_rows, "label", "Generic OpenAI-compatible embedding")
@@ -79,6 +80,7 @@ def build_action_rows(outputs: Path) -> list[dict[str, Any]]:
 
     comparison_ready = any(row.get("status") == "completed" for row in comparison_rows)
     postrun_pass = any(row.get("postrun_pass") == "True" for row in postrun_rows)
+    acceptance_pass = any(row.get("paper_acceptance_pass") == "True" for row in acceptance_rows)
 
     rows: list[dict[str, Any]] = [
         {
@@ -124,6 +126,13 @@ def build_action_rows(outputs: Path) -> list[dict[str, Any]]:
             "unblocks": "paper-safe external embedding baseline",
         },
         {
+            "item": "api_embedding_paper_acceptance",
+            "status": "pass" if acceptance_pass else "pending_summary",
+            "evidence": "strict paper acceptance passed" if acceptance_pass else "no provider has complete query-scale, per-query, ranking, by-type, and comparison evidence",
+            "required_action": "Run validate_api_embedding_paper_acceptance.py after the API baseline, comparison, and post-run gate finish.",
+            "unblocks": "paper-citable external embedding baseline",
+        },
+        {
             "item": "comparison_table_completed",
             "status": "pass" if comparison_ready else "pending_summary",
             "evidence": "completed API/BGE delta exists" if comparison_ready else "API summary not available; comparison remains pending",
@@ -153,6 +162,7 @@ def write_report(path: Path, rows: list[dict[str, Any]], outputs: Path) -> None:
         f"- Estimate source: `{outputs / 'agent_memory_api_embedding_run_estimate.csv'}`",
         f"- Readiness source: `{outputs / 'agent_memory_submission_readiness.csv'}`",
         f"- Post-run source: `{outputs / 'agent_memory_api_embedding_postrun_gate.csv'}`",
+        f"- Paper acceptance source: `{outputs / 'agent_memory_api_embedding_paper_acceptance.csv'}`",
         "",
         markdown_table(["Item", "Status", "Evidence", "Required Action", "Unblocks"], table_rows),
         "",
@@ -180,7 +190,8 @@ def write_report(path: Path, rows: list[dict[str, Any]], outputs: Path) -> None:
         "4. `memory_eval.py --semantic-backend api`：执行真实外部 embedding baseline。",
         "5. `compare_embedding_baselines.py`：生成相对 BGE-M3 的 delta 表。",
         "6. `validate_api_embedding_postrun.py`：确认 summary、rankings、per-query metrics、summary_by_type 和 comparison 都完整。",
-        "7. `validate_submission_readiness.py`：确认 `api_embedding_preflight` 与 `external_embedding_completed` 门禁是否解除。",
+        "7. `validate_api_embedding_paper_acceptance.py`：确认 query 数、per-query、Top-20 ranking、type coverage 和 comparison delta 均完整。",
+        "8. `validate_submission_readiness.py`：确认 `api_embedding_preflight` 与 `external_embedding_completed` 门禁是否解除。",
         "",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)

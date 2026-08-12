@@ -28,6 +28,7 @@ REQUIRED_STEPS = [
     ("api_embedding_execution_runbook", "external API embedding execution and acceptance runbook"),
     ("embedding_baseline_comparison", "BGE-M3 vs API embedding comparison status"),
     ("api_embedding_postrun_gate", "API embedding post-run completeness gate"),
+    ("api_embedding_paper_acceptance", "strict API embedding paper acceptance gate"),
     ("external_embedding_blocker_audit", "external embedding blocker audit"),
     ("embedding_paper_claim_upgrade", "embedding baseline paper-claim upgrade gate"),
     ("submission_blocker_closure_plan", "submission blocker closure path"),

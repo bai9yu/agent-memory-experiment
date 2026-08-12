@@ -81,6 +81,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     embedding_preflight = read_csv(outputs / "agent_memory_api_embedding_preflight.csv")
     embedding_postrun = read_csv(outputs / "agent_memory_api_embedding_postrun_gate.csv")
+    embedding_acceptance = read_csv(outputs / "agent_memory_api_embedding_paper_acceptance.csv")
     mock_smoke = read_csv(outputs / "agent_memory_mock_api_embedding_smoke_test.csv")
     human_sample_qc = read_csv(outputs / "agent_memory_human_audit_sample_qc.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
@@ -94,6 +95,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     numeric_claim_pass = count(numeric_claim_check, "status", "pass")
     embedding_completed = count(embedding_status, "status", "completed")
     postrun_completed = count(embedding_postrun, "postrun_pass", "True")
+    acceptance_completed = count(embedding_acceptance, "paper_acceptance_pass", "True")
     preflight_required = [row for row in embedding_preflight if row.get("severity") == "required"]
     preflight_required_pass = count(preflight_required, "pass", "True")
     smoke_second = lookup(mock_smoke, run="2")
@@ -160,9 +162,9 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "external_embedding_completed",
             "external_baseline",
             True,
-            embedding_completed >= 1 and postrun_completed >= 1,
-            f"completed external embedding baselines={embedding_completed}, postrun_pass={postrun_completed}",
-            "实际运行至少一个外部 embedding baseline，并生成与 BGE-M3 的 delta 表。",
+            embedding_completed >= 1 and postrun_completed >= 1 and acceptance_completed >= 1,
+            f"completed external embedding baselines={embedding_completed}, postrun_pass={postrun_completed}, paper_acceptance_pass={acceptance_completed}",
+            "实际运行至少一个外部 embedding baseline，并通过 strict paper acceptance 与 BGE-M3 delta 表。",
         ),
         gate_row(
             "human_audit_sample_qc",

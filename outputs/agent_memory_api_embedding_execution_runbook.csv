@@ -50,7 +50,7 @@ OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,O
   --api-label ""OpenAI text-embedding-3-small"" \
   --output-csv outputs/agent_memory_api_embedding_1_openai_text_embedding_3_small_comparison.csv \
   --output-report outputs/agent_memory_api_embedding_1_openai_text_embedding_3_small_comparison_zh.md"
-OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,6_postrun_gate,offline_after_run,False,completed_for_paper=0,Post-run gate must report at least one provider completed_for_paper.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_postrun.py \
+OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,6_postrun_gate,offline_after_run,False,completed_for_paper=0,Post-run gate and paper acceptance gate must report at least one provider completed/accepted for paper.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_postrun.py \
   --profile-csv outputs/agent_memory_embedding_provider_profiles.csv \
   --outputs-dir outputs \
   --output-csv outputs/agent_memory_api_embedding_postrun_gate.csv \
@@ -110,7 +110,7 @@ Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.ex
   --api-label ""Generic OpenAI-compatible embedding"" \
   --output-csv outputs/agent_memory_api_embedding_2_generic_openai_compatible_embedding_comparison.csv \
   --output-report outputs/agent_memory_api_embedding_2_generic_openai_compatible_embedding_comparison_zh.md"
-Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,6_postrun_gate,offline_after_run,False,completed_for_paper=0,Post-run gate must report at least one provider completed_for_paper.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_postrun.py \
+Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,6_postrun_gate,offline_after_run,False,completed_for_paper=0,Post-run gate and paper acceptance gate must report at least one provider completed/accepted for paper.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_postrun.py \
   --profile-csv outputs/agent_memory_embedding_provider_profiles.csv \
   --outputs-dir outputs \
   --output-csv outputs/agent_memory_api_embedding_postrun_gate.csv \
