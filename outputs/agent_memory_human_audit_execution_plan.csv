@@ -1,6 +1,50 @@
-step,stage,status,artifact_to_edit,required_action,current_evidence,pass_condition,paper_claim_enabled
-1,priority20 single blind labeling,pending,outputs/agent_memory_human_audit_priority20_blind_review.csv,"Fill human_manual_reason, human_auto_reason_correct, human_top_memory_relevant, human_gold_memory_sufficient, and human_auditor_notes for all 20 rows.",confirmed=0/20; missing_fields=60; invalid=0,20/20 samples have valid human_* labels after merge and agreement recomputation.,quick-review Human/LLM agreement can be reported.
-2,priority20 dual independent labeling,pending,outputs/agent_memory_human_audit_priority20_dual_review.csv,Annotator A and B independently fill their own columns; do not copy LLM-assisted labels or each other's labels.,both_labeled=0/20; adjudicated=0/20,Both annotators complete 20 rows; conflicts are adjudicated when needed.,"inter-annotator exact agreement, partial-credit agreement, and Cohen's kappa can be reported for priority20."
-3,full80 single blind labeling,pending,outputs/agent_memory_human_audit_full80_blind_review.csv,Complete the same human_* fields for all 80 rows after priority20 labels are stable.,confirmed=0/80; missing_fields=240; invalid=0,80/80 samples have valid human_* labels after merge and agreement recomputation.,full Human/LLM audit agreement can be reported.
-4,full80 dual independent labeling,pending,outputs/agent_memory_human_audit_full80_dual_review.csv,Annotator A and B fill full80 independently; adjudicator resolves disagreements.,both_labeled=0/80; adjudicated=0/80,Both annotators complete 80 rows and adjudication is complete.,human-verified error analysis can be written with stronger reliability evidence.
-5,paper refresh after human labels,waiting_on_labels,generated reports,"Regenerate agreement, human readiness, submission gap/readiness, evidence matrix, manuscript, claim check, reproducibility checklist, and manifest.",Current paper-facing reports correctly state human audit is pending.,No stale evidence findings; manuscript claim check has 0 failures; submission readiness human gates pass.,Upgrade wording from protocol-only to measured human-audit reliability.
+step,stage,status,artifact_to_edit,required_action,current_evidence,pass_condition,paper_claim_enabled,command
+1,priority20 single blind labeling,pending,outputs/agent_memory_human_audit_priority20_blind_review.csv,"Fill human_manual_reason, human_auto_reason_correct, human_top_memory_relevant, human_gold_memory_sufficient, and human_auditor_notes for all 20 rows.",confirmed=0/20; missing_fields=60; invalid=0,20/20 samples have valid human_* labels after merge and agreement recomputation.,quick-review Human/LLM agreement can be reported.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind_human_audit_labels.py merge \
+  --scope priority20 \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --blind-csv outputs/agent_memory_human_audit_priority20_blind_review.csv \
+  --output-confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-report outputs/agent_memory_human_audit_priority20_blind_review_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/confirm_llm_audit_labels.py \
+  --llm-audit-csv outputs/agent_memory_llm_audit_sample_type_aware.csv \
+  --audit-id-csv outputs/agent_memory_human_llm_audit_priority20_ids.csv \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-summary-csv outputs/agent_memory_human_llm_audit_priority20_agreement.csv \
+  --output-report outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_readiness.py \
+  --full-confirmation outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --priority-confirmation outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-csv outputs/agent_memory_human_audit_readiness_gate.csv \
+  --output-report outputs/agent_memory_human_audit_readiness_gate_zh.md"
+2,priority20 dual independent labeling,pending,outputs/agent_memory_human_audit_priority20_dual_review.csv,Annotator A and B independently fill their own columns; do not copy LLM-assisted labels or each other's labels.,both_labeled=0/20; adjudicated=0/20,Both annotators complete 20 rows; conflicts are adjudicated when needed.,"inter-annotator exact agreement, partial-credit agreement, and Cohen's kappa can be reported for priority20.","work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_protocol_compliance.py \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_human_audit_protocol_compliance.csv \
+  --output-report outputs/agent_memory_human_audit_protocol_compliance_zh.md"
+3,full80 single blind labeling,pending,outputs/agent_memory_human_audit_full80_blind_review.csv,Complete the same human_* fields for all 80 rows after priority20 labels are stable.,confirmed=0/80; missing_fields=240; invalid=0,80/80 samples have valid human_* labels after merge and agreement recomputation.,full Human/LLM audit agreement can be reported.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind_human_audit_labels.py merge \
+  --scope full80 \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --blind-csv outputs/agent_memory_human_audit_full80_blind_review.csv \
+  --output-confirmation-csv outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --output-report outputs/agent_memory_human_audit_full80_blind_review_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/confirm_llm_audit_labels.py \
+  --llm-audit-csv outputs/agent_memory_llm_audit_sample_type_aware.csv \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --output-summary-csv outputs/agent_memory_human_llm_audit_agreement.csv \
+  --output-report outputs/agent_memory_human_llm_audit_agreement_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_readiness.py \
+  --full-confirmation outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --priority-confirmation outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-csv outputs/agent_memory_human_audit_readiness_gate.csv \
+  --output-report outputs/agent_memory_human_audit_readiness_gate_zh.md"
+4,full80 dual independent labeling,pending,outputs/agent_memory_human_audit_full80_dual_review.csv,Annotator A and B fill full80 independently; adjudicator resolves disagreements.,both_labeled=0/80; adjudicated=0/80,Both annotators complete 80 rows and adjudication is complete.,human-verified error analysis can be written with stronger reliability evidence.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_protocol_compliance.py \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_human_audit_protocol_compliance.csv \
+  --output-report outputs/agent_memory_human_audit_protocol_compliance_zh.md"
+5,paper refresh after human labels,waiting_on_labels,generated reports,"Regenerate agreement, human readiness, submission gap/readiness, evidence matrix, manuscript, claim check, reproducibility checklist, and manifest.",Current paper-facing reports correctly state human audit is pending.,No stale evidence findings; manuscript claim check has 0 failures; submission readiness human gates pass.,Upgrade wording from protocol-only to measured human-audit reliability.,"work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py \
+  --project-root . \
+  --output-csv outputs/agent_memory_paper_artifact_refresh_run.csv \
+  --output-report outputs/agent_memory_paper_artifact_refresh_run_zh.md"

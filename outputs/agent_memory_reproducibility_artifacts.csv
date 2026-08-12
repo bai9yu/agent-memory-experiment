@@ -110,7 +110,7 @@ Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734
 Artifact path portability audit CSV,outputs/agent_memory_artifact_path_portability.csv,True,214
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3795
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,36176
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,36178
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,10998
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,6345
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3891
@@ -192,8 +192,8 @@ Human audit annotation codebook,outputs/agent_memory_human_audit_annotation_code
 Human audit annotation schema,outputs/agent_memory_human_audit_annotation_schema.csv,True,1883
 Human audit protocol compliance,outputs/agent_memory_human_audit_protocol_compliance_zh.md,True,6579
 Human audit protocol compliance CSV,outputs/agent_memory_human_audit_protocol_compliance.csv,True,5535
-Human audit execution plan,outputs/agent_memory_human_audit_execution_plan_zh.md,True,3788
-Human audit execution plan CSV,outputs/agent_memory_human_audit_execution_plan.csv,True,2165
+Human audit execution plan,outputs/agent_memory_human_audit_execution_plan_zh.md,True,7815
+Human audit execution plan CSV,outputs/agent_memory_human_audit_execution_plan.csv,True,5723
 Human audit sample QC,outputs/agent_memory_human_audit_sample_qc_zh.md,True,6936
 Human audit sample QC CSV,outputs/agent_memory_human_audit_sample_qc.csv,True,7512
 Human audit labeling dashboard,outputs/agent_memory_human_audit_labeling_dashboard_zh.md,True,6904

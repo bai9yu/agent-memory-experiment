@@ -11,8 +11,8 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `947a857` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `81d7182` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -137,7 +137,7 @@
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 36176 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 36178 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 10998 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 6345 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3891 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
@@ -219,8 +219,8 @@
 | Human audit annotation schema | True | 1883 | `outputs/agent_memory_human_audit_annotation_schema.csv` |
 | Human audit protocol compliance | True | 6579 | `outputs/agent_memory_human_audit_protocol_compliance_zh.md` |
 | Human audit protocol compliance CSV | True | 5535 | `outputs/agent_memory_human_audit_protocol_compliance.csv` |
-| Human audit execution plan | True | 3788 | `outputs/agent_memory_human_audit_execution_plan_zh.md` |
-| Human audit execution plan CSV | True | 2165 | `outputs/agent_memory_human_audit_execution_plan.csv` |
+| Human audit execution plan | True | 7815 | `outputs/agent_memory_human_audit_execution_plan_zh.md` |
+| Human audit execution plan CSV | True | 5723 | `outputs/agent_memory_human_audit_execution_plan.csv` |
 | Human audit sample QC | True | 6936 | `outputs/agent_memory_human_audit_sample_qc_zh.md` |
 | Human audit sample QC CSV | True | 7512 | `outputs/agent_memory_human_audit_sample_qc.csv` |
 | Human audit labeling dashboard | True | 6904 | `outputs/agent_memory_human_audit_labeling_dashboard_zh.md` |

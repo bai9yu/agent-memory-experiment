@@ -42,6 +42,84 @@
 3. priority20 通过后扩展到 full80；最终投稿建议至少完成 full80 single blind labeling。
 4. 每次人工字段更新后，重新运行 codebook 中的 merge/agreement/readiness 命令，并刷新 submission readiness。
 
+## 命令附录
+
+以下命令来自 execution plan CSV 的 `command` 字段。它们只用于回填、汇总和刷新已经由人工填写好的标签；不会自动生成或伪造人工标签。
+
+### Step 1 priority20 single blind labeling
+
+```bash
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind_human_audit_labels.py merge \
+  --scope priority20 \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --blind-csv outputs/agent_memory_human_audit_priority20_blind_review.csv \
+  --output-confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-report outputs/agent_memory_human_audit_priority20_blind_review_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/confirm_llm_audit_labels.py \
+  --llm-audit-csv outputs/agent_memory_llm_audit_sample_type_aware.csv \
+  --audit-id-csv outputs/agent_memory_human_llm_audit_priority20_ids.csv \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-summary-csv outputs/agent_memory_human_llm_audit_priority20_agreement.csv \
+  --output-report outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_readiness.py \
+  --full-confirmation outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --priority-confirmation outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-csv outputs/agent_memory_human_audit_readiness_gate.csv \
+  --output-report outputs/agent_memory_human_audit_readiness_gate_zh.md
+```
+
+### Step 2 priority20 dual independent labeling
+
+```bash
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_protocol_compliance.py \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_human_audit_protocol_compliance.csv \
+  --output-report outputs/agent_memory_human_audit_protocol_compliance_zh.md
+```
+
+### Step 3 full80 single blind labeling
+
+```bash
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind_human_audit_labels.py merge \
+  --scope full80 \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --blind-csv outputs/agent_memory_human_audit_full80_blind_review.csv \
+  --output-confirmation-csv outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --output-report outputs/agent_memory_human_audit_full80_blind_review_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/confirm_llm_audit_labels.py \
+  --llm-audit-csv outputs/agent_memory_llm_audit_sample_type_aware.csv \
+  --confirmation-csv outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --output-summary-csv outputs/agent_memory_human_llm_audit_agreement.csv \
+  --output-report outputs/agent_memory_human_llm_audit_agreement_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_readiness.py \
+  --full-confirmation outputs/agent_memory_human_llm_audit_confirmation.csv \
+  --priority-confirmation outputs/agent_memory_human_llm_audit_priority20_confirmation.csv \
+  --output-csv outputs/agent_memory_human_audit_readiness_gate.csv \
+  --output-report outputs/agent_memory_human_audit_readiness_gate_zh.md
+```
+
+### Step 4 full80 dual independent labeling
+
+```bash
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_protocol_compliance.py \
+  --outputs-dir outputs \
+  --output-csv outputs/agent_memory_human_audit_protocol_compliance.csv \
+  --output-report outputs/agent_memory_human_audit_protocol_compliance_zh.md
+```
+
+### Step 5 paper refresh after human labels
+
+```bash
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py \
+  --project-root . \
+  --output-csv outputs/agent_memory_paper_artifact_refresh_run.csv \
+  --output-report outputs/agent_memory_paper_artifact_refresh_run_zh.md
+```
+
 ## 论文写法门槛
 
 - 0/20：只能写“人工复核协议与盲审表已准备”。

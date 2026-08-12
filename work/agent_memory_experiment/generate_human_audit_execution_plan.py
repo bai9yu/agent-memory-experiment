@@ -41,6 +41,60 @@ def lookup(rows: list[dict[str, str]], **filters: str) -> dict[str, str]:
     return {}
 
 
+def line_join(parts: list[str]) -> str:
+    return " \\\n  ".join(parts)
+
+
+def merge_command(scope: str, confirmation_csv: str, blind_csv: str, output_report: str) -> str:
+    return line_join([
+        "work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/blind_human_audit_labels.py merge",
+        f"--scope {scope}",
+        f"--confirmation-csv {confirmation_csv}",
+        f"--blind-csv {blind_csv}",
+        f"--output-confirmation-csv {confirmation_csv}",
+        f"--output-report {output_report}",
+    ])
+
+
+def agreement_command(
+    audit_id_csv: str | None,
+    confirmation_csv: str,
+    output_summary: str,
+    output_report: str,
+) -> str:
+    parts = [
+        "work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/confirm_llm_audit_labels.py",
+        "--llm-audit-csv outputs/agent_memory_llm_audit_sample_type_aware.csv",
+    ]
+    if audit_id_csv:
+        parts.append(f"--audit-id-csv {audit_id_csv}")
+    parts.extend([
+        f"--confirmation-csv {confirmation_csv}",
+        f"--output-summary-csv {output_summary}",
+        f"--output-report {output_report}",
+    ])
+    return line_join(parts)
+
+
+def readiness_command() -> str:
+    return line_join([
+        "work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_readiness.py",
+        "--full-confirmation outputs/agent_memory_human_llm_audit_confirmation.csv",
+        "--priority-confirmation outputs/agent_memory_human_llm_audit_priority20_confirmation.csv",
+        "--output-csv outputs/agent_memory_human_audit_readiness_gate.csv",
+        "--output-report outputs/agent_memory_human_audit_readiness_gate_zh.md",
+    ])
+
+
+def final_refresh_command() -> str:
+    return line_join([
+        "work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py",
+        "--project-root .",
+        "--output-csv outputs/agent_memory_paper_artifact_refresh_run.csv",
+        "--output-report outputs/agent_memory_paper_artifact_refresh_run_zh.md",
+    ])
+
+
 def count_rows(path: Path) -> int:
     return len(read_csv(path))
 
@@ -67,6 +121,17 @@ def build_steps(outputs: Path) -> list[dict[str, Any]]:
             "current_evidence": f"confirmed={priority.get('confirmed_samples', '0')}/{priority.get('min_required', '20')}; missing_fields={priority.get('missing_human_fields', '')}; invalid={priority.get('invalid_labels', '')}",
             "pass_condition": "20/20 samples have valid human_* labels after merge and agreement recomputation.",
             "paper_claim_enabled": "quick-review Human/LLM agreement can be reported.",
+            "command": merge_command(
+                "priority20",
+                "outputs/agent_memory_human_llm_audit_priority20_confirmation.csv",
+                "outputs/agent_memory_human_audit_priority20_blind_review.csv",
+                "outputs/agent_memory_human_audit_priority20_blind_review_zh.md",
+            ) + "\n\n" + agreement_command(
+                "outputs/agent_memory_human_llm_audit_priority20_ids.csv",
+                "outputs/agent_memory_human_llm_audit_priority20_confirmation.csv",
+                "outputs/agent_memory_human_llm_audit_priority20_agreement.csv",
+                "outputs/agent_memory_human_llm_audit_priority20_agreement_zh.md",
+            ) + "\n\n" + readiness_command(),
         },
         {
             "step": "2",
@@ -77,6 +142,12 @@ def build_steps(outputs: Path) -> list[dict[str, Any]]:
             "current_evidence": f"both_labeled={priority_both.get('count', '0')}/20; adjudicated={priority_adj.get('count', '0')}/20",
             "pass_condition": "Both annotators complete 20 rows; conflicts are adjudicated when needed.",
             "paper_claim_enabled": "inter-annotator exact agreement, partial-credit agreement, and Cohen's kappa can be reported for priority20.",
+            "command": line_join([
+                "work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_protocol_compliance.py",
+                "--outputs-dir outputs",
+                "--output-csv outputs/agent_memory_human_audit_protocol_compliance.csv",
+                "--output-report outputs/agent_memory_human_audit_protocol_compliance_zh.md",
+            ]),
         },
         {
             "step": "3",
@@ -87,6 +158,17 @@ def build_steps(outputs: Path) -> list[dict[str, Any]]:
             "current_evidence": f"confirmed={full.get('confirmed_samples', '0')}/{full.get('min_required', '80')}; missing_fields={full.get('missing_human_fields', '')}; invalid={full.get('invalid_labels', '')}",
             "pass_condition": "80/80 samples have valid human_* labels after merge and agreement recomputation.",
             "paper_claim_enabled": "full Human/LLM audit agreement can be reported.",
+            "command": merge_command(
+                "full80",
+                "outputs/agent_memory_human_llm_audit_confirmation.csv",
+                "outputs/agent_memory_human_audit_full80_blind_review.csv",
+                "outputs/agent_memory_human_audit_full80_blind_review_zh.md",
+            ) + "\n\n" + agreement_command(
+                None,
+                "outputs/agent_memory_human_llm_audit_confirmation.csv",
+                "outputs/agent_memory_human_llm_audit_agreement.csv",
+                "outputs/agent_memory_human_llm_audit_agreement_zh.md",
+            ) + "\n\n" + readiness_command(),
         },
         {
             "step": "4",
@@ -97,6 +179,12 @@ def build_steps(outputs: Path) -> list[dict[str, Any]]:
             "current_evidence": f"both_labeled={full_both.get('count', '0')}/80; adjudicated={full_adj.get('count', '0')}/80",
             "pass_condition": "Both annotators complete 80 rows and adjudication is complete.",
             "paper_claim_enabled": "human-verified error analysis can be written with stronger reliability evidence.",
+            "command": line_join([
+                "work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_human_audit_protocol_compliance.py",
+                "--outputs-dir outputs",
+                "--output-csv outputs/agent_memory_human_audit_protocol_compliance.csv",
+                "--output-report outputs/agent_memory_human_audit_protocol_compliance_zh.md",
+            ]),
         },
         {
             "step": "5",
@@ -107,6 +195,7 @@ def build_steps(outputs: Path) -> list[dict[str, Any]]:
             "current_evidence": "Current paper-facing reports correctly state human audit is pending.",
             "pass_condition": "No stale evidence findings; manuscript claim check has 0 failures; submission readiness human gates pass.",
             "paper_claim_enabled": "Upgrade wording from protocol-only to measured human-audit reliability.",
+            "command": final_refresh_command(),
         },
     ]
 
@@ -167,13 +256,31 @@ def write_report(path: Path, outputs: Path, rows: list[dict[str, Any]]) -> None:
         "3. priority20 通过后扩展到 full80；最终投稿建议至少完成 full80 single blind labeling。",
         "4. 每次人工字段更新后，重新运行 codebook 中的 merge/agreement/readiness 命令，并刷新 submission readiness。",
         "",
+        "## 命令附录",
+        "",
+        "以下命令来自 execution plan CSV 的 `command` 字段。它们只用于回填、汇总和刷新已经由人工填写好的标签；不会自动生成或伪造人工标签。",
+        "",
+    ]
+    for row in rows:
+        command = row.get("command", "").strip()
+        if not command:
+            continue
+        lines.extend([
+            f"### Step {row['step']} {row['stage']}",
+            "",
+            "```bash",
+            command,
+            "```",
+            "",
+        ])
+    lines.extend([
         "## 论文写法门槛",
         "",
         "- 0/20：只能写“人工复核协议与盲审表已准备”。",
         "- 20/20：可以写“priority20 quick-review agreement”，但不能代表完整错误分析。",
         "- 80/80：可以写“full80 Human/LLM audit agreement”。",
         "- 80/80 + 双人/仲裁完成：可以更稳健地写“human-verified error analysis”。",
-    ]
+    ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
