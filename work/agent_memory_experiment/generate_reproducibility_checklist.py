@@ -266,6 +266,8 @@ def main() -> None:
         ("Submission package index CSV", outputs / "agent_memory_submission_package_index.csv"),
         ("Supplementary package manifest", outputs / "agent_memory_supplementary_package_manifest_zh.md"),
         ("Supplementary package manifest CSV", outputs / "agent_memory_supplementary_package_manifest.csv"),
+        ("Submission package consistency audit", outputs / "agent_memory_submission_package_consistency_zh.md"),
+        ("Submission package consistency audit CSV", outputs / "agent_memory_submission_package_consistency.csv"),
         ("Anonymous submission readiness audit", outputs / "agent_memory_anonymous_submission_readiness_zh.md"),
         ("Anonymous submission readiness audit CSV", outputs / "agent_memory_anonymous_submission_readiness.csv"),
         ("Submission entrypoint consistency audit", outputs / "agent_memory_submission_entrypoint_consistency_zh.md"),

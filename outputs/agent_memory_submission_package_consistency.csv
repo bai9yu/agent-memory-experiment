@@ -1,0 +1,10 @@
+check,pass,severity,status,evidence,action
+package_index_exists,True,blocker,pass,"path=outputs/agent_memory_submission_package_index.csv, rows=30",Regenerate the submission package index.
+indexed_artifacts_exist,True,blocker,pass,all indexed artifacts exist,Regenerate missing artifacts or remove stale rows from the package index.
+supplement_manifest_covers_index,True,blocker,pass,missing_from_supplement=[],Regenerate the supplementary package manifest from the current package index.
+supplement_manifest_has_no_extra_artifacts,True,major,pass,extra_in_supplement=[],Regenerate the supplementary package manifest so it mirrors the package index.
+indexed_artifacts_tracked_in_reproducibility,True,blocker,pass,missing_from_reproducibility=[],Add indexed artifacts to generate_reproducibility_checklist.py or remove stale package-index rows.
+indexed_artifacts_in_integrity_manifest,True,blocker,pass,missing_from_integrity=[],Regenerate reproducibility checklist and artifact integrity manifest after package-index changes.
+supplement_manifest_file_flags_match_disk,True,blocker,pass,supplement_missing_files=[],Regenerate missing files or update the package index before packaging.
+supplement_manifest_repro_flags_match_repro_list,True,major,pass,supplement_untracked=[],Ensure package artifacts are tracked in the reproducibility artifact list.
+supplement_manifest_anonymization_clean,True,blocker,pass,anonymization_findings=[],Resolve anonymization findings before treating current supplement candidates as anonymous-submission ready.

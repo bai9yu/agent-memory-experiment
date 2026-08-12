@@ -35,6 +35,7 @@ REQUIRED_STEPS = [
     ("submission_closure_consistency", "submission closure artifact consistency audit"),
     ("submission_package_index", "paper package index"),
     ("supplementary_package_manifest", "supplementary package manifest and anonymization audit"),
+    ("submission_package_consistency", "submission package index and manifest consistency audit"),
     ("anonymous_submission_readiness", "anonymous submission package readiness audit"),
     ("paper_table_consistency", "paper table consistency audit"),
     ("untracked_artifact_audit", "untracked artifact hygiene audit"),

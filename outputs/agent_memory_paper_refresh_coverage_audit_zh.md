@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 44
+- Required offline steps: 45
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -38,6 +38,7 @@
 | required_offline_step | submission_closure_consistency | True | submission closure artifact consistency audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | submission_package_index | True | paper package index | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | supplementary_package_manifest | True | supplementary package manifest and anonymization audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | submission_package_consistency | True | submission package index and manifest consistency audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | anonymous_submission_readiness | True | anonymous submission package readiness audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | paper_table_consistency | True | paper table consistency audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | untracked_artifact_audit | True | untracked artifact hygiene audit | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
