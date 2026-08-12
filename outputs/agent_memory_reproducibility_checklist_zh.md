@@ -11,7 +11,7 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `7e2f5ed` |
+| git_commit | `2f900a1` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -114,8 +114,8 @@
 | Paper scope claim audit CSV | True | 10190 | `outputs/agent_memory_paper_scope_claim_audit.csv` |
 | Threats to validity appendix | True | 5872 | `outputs/agent_memory_threats_to_validity_zh.md` |
 | Threats to validity CSV | True | 3236 | `outputs/agent_memory_threats_to_validity.csv` |
-| Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
-| Reviewer response preparation matrix CSV | True | 4244 | `outputs/agent_memory_reviewer_response_prep.csv` |
+| Reviewer response preparation matrix | True | 4885 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
+| Reviewer response preparation matrix CSV | True | 4844 | `outputs/agent_memory_reviewer_response_prep.csv` |
 | Submission package index | True | 8532 | `outputs/agent_memory_submission_package_index_zh.md` |
 | Submission package index CSV | True | 9837 | `outputs/agent_memory_submission_package_index.csv` |
 | Supplementary package manifest | True | 5054 | `outputs/agent_memory_supplementary_package_manifest_zh.md` |
@@ -137,9 +137,9 @@
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 36174 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
-| Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
-| Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
+| Artifact integrity manifest CSV | True | 36175 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Submission gap analysis | True | 10998 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
+| Submission gap analysis CSV | True | 6345 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3891 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 3255 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
 | Submission closure consistency audit | True | 2534 | `outputs/agent_memory_submission_closure_consistency_zh.md` |

@@ -87,8 +87,8 @@ Paper scope claim audit,outputs/agent_memory_paper_scope_claim_audit_zh.md,True,
 Paper scope claim audit CSV,outputs/agent_memory_paper_scope_claim_audit.csv,True,10190
 Threats to validity appendix,outputs/agent_memory_threats_to_validity_zh.md,True,5872
 Threats to validity CSV,outputs/agent_memory_threats_to_validity.csv,True,3236
-Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,4396
-Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,4244
+Reviewer response preparation matrix,outputs/agent_memory_reviewer_response_prep_zh.md,True,4885
+Reviewer response preparation matrix CSV,outputs/agent_memory_reviewer_response_prep.csv,True,4844
 Submission package index,outputs/agent_memory_submission_package_index_zh.md,True,8532
 Submission package index CSV,outputs/agent_memory_submission_package_index.csv,True,9837
 Supplementary package manifest,outputs/agent_memory_supplementary_package_manifest_zh.md,True,5054
@@ -110,9 +110,9 @@ Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734
 Artifact path portability audit CSV,outputs/agent_memory_artifact_path_portability.csv,True,214
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3795
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,36174
-Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,9993
-Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,5825
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,36175
+Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,10998
+Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,6345
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3891
 Submission blocker closure plan CSV,outputs/agent_memory_submission_blocker_closure_plan.csv,True,3255
 Submission closure consistency audit,outputs/agent_memory_submission_closure_consistency_zh.md,True,2534

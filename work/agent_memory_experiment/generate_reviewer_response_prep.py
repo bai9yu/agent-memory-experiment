@@ -70,7 +70,9 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     readiness = read_csv(outputs / "agent_memory_submission_readiness.csv")
     public_release = read_csv(outputs / "agent_memory_public_release_readiness.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
+    human_import = read_csv(outputs / "agent_memory_human_audit_annotation_import_readiness.csv")
     embedding = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
+    embedding_acceptance = read_csv(outputs / "agent_memory_api_embedding_paper_acceptance.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     repro_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
     integrity = read_csv(outputs / "agent_memory_artifact_integrity_manifest.csv")
@@ -153,8 +155,46 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
         label="full80",
         default={"confirmed_samples": "0", "min_required": "80", "invalid_labels": "NA"},
     )
+    import_priority20 = lookup(
+        human_import,
+        scope="priority20",
+        default={
+            "source_rows": "0",
+            "export_rows": "0",
+            "row_count_match": "False",
+            "audit_id_order_match": "False",
+            "immutable_context_mismatches": "NA",
+            "status": "missing",
+        },
+    )
+    import_full80 = lookup(
+        human_import,
+        scope="full80",
+        default={
+            "source_rows": "0",
+            "export_rows": "0",
+            "row_count_match": "False",
+            "audit_id_order_match": "False",
+            "immutable_context_mismatches": "NA",
+            "status": "missing",
+        },
+    )
 
     embedding_completed = sum(1 for row in embedding if row.get("status") == "completed")
+    embedding_acceptance_pass = sum(1 for row in embedding_acceptance if row.get("paper_acceptance_pass") == "True")
+    embedding_postrun_pass = sum(
+        1
+        for row in embedding_acceptance
+        if row.get("summary_num_queries") == row.get("expected_queries")
+        and row.get("summary_metrics_ok") == "True"
+        and row.get("per_query_target_rows") == row.get("expected_per_query_rows")
+        and row.get("ranking_target_rows") == row.get("expected_ranking_rows")
+        and row.get("comparison_completed") == "True"
+    )
+    embedding_expected_queries = next(
+        (row.get("expected_queries", "NA") for row in embedding_acceptance if row.get("expected_queries")),
+        "NA",
+    )
     public_blockers = sum(1 for row in public_release if row.get("status") == "blocker")
     readiness_blockers = [row for row in readiness if row.get("status") == "blocker"]
     artifact_pass = sum(1 for row in repro_artifacts if row.get("exists") == "True")
@@ -212,21 +252,28 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
         {
             "reviewer_question": "为什么没有直接接 OpenAI/Cohere/Jina 等外部 embedding baseline？",
             "risk_level": "blocker",
-            "current_answer": f"当前 completed external embedding baselines={embedding_completed}，submission gate 仍将其列为 blocker。",
-            "evidence_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_external_embedding_blocker_audit_zh.md",
-            "remaining_gap": "需要配置 OPENAI_API_KEY 或等价 OpenAI-compatible embedding provider key 并完成一次真实 API baseline。",
-            "planned_response": "在最终投稿前必须补齐；当前内部稿只能说明主结果基于本地 BGE-M3。",
+            "current_answer": (
+                f"当前 completed external embedding baselines={embedding_completed}; "
+                f"strict paper-acceptance pass={embedding_acceptance_pass}; "
+                f"postrun full-scale pass={embedding_postrun_pass}; "
+                f"target answerable queries={embedding_expected_queries}，submission gate 仍将其列为 blocker。"
+            ),
+            "evidence_artifacts": "agent_memory_embedding_baseline_status_zh.md; agent_memory_external_embedding_blocker_audit_zh.md; agent_memory_api_embedding_paper_acceptance_zh.md",
+            "remaining_gap": "需要配置 OPENAI_API_KEY 或等价 OpenAI-compatible embedding provider key，并在完整 answerable query scale 上生成 summary、summary_by_type、per-query metrics、Top-20 rankings 和与 BGE-M3 的 delta 对照。",
+            "planned_response": "在最终投稿前必须补齐 strict paper-acceptance gate；当前内部稿只能说明主结果基于本地 BGE-M3，不能暗示外部 API embedding 已验证。",
         },
         {
             "reviewer_question": "错误分析是否有人类标注支撑？",
             "risk_level": "blocker",
             "current_answer": (
                 f"priority20 confirmed={priority20.get('confirmed_samples')}/{priority20.get('min_required')}; "
-                f"full80 confirmed={full80.get('confirmed_samples')}/{full80.get('min_required')}。"
+                f"full80 confirmed={full80.get('confirmed_samples')}/{full80.get('min_required')}；"
+                f"blind import context mismatches priority20/full80="
+                f"{import_priority20.get('immutable_context_mismatches')}/{import_full80.get('immutable_context_mismatches')}。"
             ),
-            "evidence_artifacts": "agent_memory_human_audit_annotation_codebook_zh.md; agent_memory_human_audit_readiness_gate_zh.md",
-            "remaining_gap": "需要人工填写 priority20，最终投稿建议 full80 双人标注并报告一致性。",
-            "planned_response": "当前只能把 LLM-assisted audit 写成辅助诊断，不能当作人工可靠性结论。",
+            "evidence_artifacts": "agent_memory_human_audit_annotation_codebook_zh.md; agent_memory_human_audit_annotation_import_readiness_zh.md; agent_memory_human_audit_readiness_gate_zh.md",
+            "remaining_gap": "需要人工填写 priority20，最终投稿建议 full80 双人标注并报告一致性；导入时保留 audit_id 顺序和不可变上下文校验，避免标注文件错位或被修改后回填。",
+            "planned_response": "当前只能把 LLM-assisted audit 写成辅助诊断；可以说明已有盲审导入保护，但不能当作 human-verified error analysis。",
         },
         {
             "reviewer_question": "Type 3 多证据问题是否真的被解决？",

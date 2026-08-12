@@ -63,9 +63,11 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     evidence = read_csv(outputs / "agent_memory_paper_evidence_matrix.csv")
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
     embedding_preflight = read_csv(outputs / "agent_memory_api_embedding_preflight.csv")
+    embedding_acceptance = read_csv(outputs / "agent_memory_api_embedding_paper_acceptance.csv")
     agreement = read_csv(outputs / "agent_memory_human_llm_audit_agreement.csv")
     priority_agreement = read_csv(outputs / "agent_memory_human_llm_audit_priority20_agreement.csv")
     human_gate = read_csv(outputs / "agent_memory_human_audit_readiness_gate.csv")
+    human_import = read_csv(outputs / "agent_memory_human_audit_annotation_import_readiness.csv")
     checklist_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
     checklist_metrics = read_csv(outputs / "agent_memory_reproducibility_metrics.csv")
 
@@ -77,8 +79,24 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     priority_confirmed = int(lookup(priority_agreement, group="overview", label="confirmed_samples")["count"])
     human_gate_priority = lookup(human_gate, label="priority20")
     human_gate_full = lookup(human_gate, label="full80")
+    human_import_priority = lookup(human_import, scope="priority20")
+    human_import_full = lookup(human_import, scope="full80")
     embedding_completed = count(embedding_status, "status", "completed")
     embedding_ready = sum(1 for row in embedding_status if row.get("status") in {"ready_to_run", "completed"})
+    embedding_acceptance_pass = count(embedding_acceptance, "paper_acceptance_pass", "True")
+    embedding_postrun_pass = sum(
+        1
+        for row in embedding_acceptance
+        if row.get("summary_num_queries") == row.get("expected_queries")
+        and row.get("summary_metrics_ok") == "True"
+        and row.get("per_query_target_rows") == row.get("expected_per_query_rows")
+        and row.get("ranking_target_rows") == row.get("expected_ranking_rows")
+        and row.get("comparison_completed") == "True"
+    )
+    embedding_expected_queries = next(
+        (row.get("expected_queries", "NA") for row in embedding_acceptance if row.get("expected_queries")),
+        "NA",
+    )
     preflight_required_pass = sum(
         1 for row in embedding_preflight
         if row.get("severity") == "required" and row.get("pass") == "True"
@@ -98,12 +116,14 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "reviewer_question": "是否只在单一 embedding / 单一检索编码器上有效？",
             "current_evidence": (
                 f"外部 embedding baseline completed={embedding_completed}, ready_or_completed={embedding_ready}；"
-                f"API embedding preflight required={preflight_required_pass}/{preflight_required_total}。"
+                f"API embedding preflight required={preflight_required_pass}/{preflight_required_total}；"
+                f"strict paper-acceptance pass={embedding_acceptance_pass}, postrun full-scale pass={embedding_postrun_pass}, "
+                f"expected answerable queries={embedding_expected_queries}。"
             ),
             "why_it_matters": "没有强外部 embedding 对照时，审稿人可能认为提升来自 BGE-M3 或缓存设置，而不是记忆/重排方法本身。",
-            "minimum_action": "先让 API embedding preflight 的 required checks 全部通过，再运行至少一个主流 API embedding baseline，并自动生成与 BGE-M3 的 delta 表。",
+            "minimum_action": "先让 API embedding preflight 的 required checks 全部通过，再运行至少一个主流 API embedding baseline；结果必须通过 strict paper-acceptance gate，包括完整 query scale、summary_by_type、per-query metrics、Top-20 rankings 和与 BGE-M3 的 delta 表。",
             "paper_wording_now": "只能说 API baseline 接口已经准备好，不能把它写入主结果。",
-            "target_artifact": "agent_memory_api_embedding_preflight_zh.md; agent_memory_embedding_baseline_comparison_zh.md",
+            "target_artifact": "agent_memory_api_embedding_preflight_zh.md; agent_memory_api_embedding_paper_acceptance_zh.md; agent_memory_embedding_baseline_comparison_zh.md",
             "owner": "needs_api_key",
         },
         {
@@ -114,12 +134,17 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
                 f"Human/LLM 确认表 80 条，人工确认 {confirmed} 条，非法标签 {invalid_labels}；"
                 f"priority20 快速抽查包 {priority_samples} 条，agreement confirmed={priority_confirmed}；"
                 f"readiness gate priority20={human_gate_priority['confirmed_samples']}/{human_gate_priority['min_required']}, "
-                f"full80={human_gate_full['confirmed_samples']}/{human_gate_full['min_required']}。"
+                f"full80={human_gate_full['confirmed_samples']}/{human_gate_full['min_required']}；"
+                f"blind import row/order/context checks priority20="
+                f"{human_import_priority['row_count_match']}/{human_import_priority['audit_id_order_match']}/"
+                f"{human_import_priority['immutable_context_mismatches']} mismatches, full80="
+                f"{human_import_full['row_count_match']}/{human_import_full['audit_id_order_match']}/"
+                f"{human_import_full['immutable_context_mismatches']} mismatches。"
             ),
             "why_it_matters": "自动错误类型如果没有人工或一致性证据，只能作为诊断脚本输出，难以支撑论文中的错误分析结论。",
-            "minimum_action": "优先填写 priority20 confirmation CSV 的 human_* 字段，先报告 quick-review exact agreement 与 Cohen's kappa；投稿前再扩展到 80 条。",
-            "paper_wording_now": "可以写 LLM-assisted audit draft 和人工确认流程，不能写 human-verified error analysis。",
-            "target_artifact": "agent_memory_human_audit_readiness_gate_zh.md; agent_memory_human_llm_audit_priority20_agreement_zh.md; agent_memory_human_llm_audit_agreement_zh.md",
+            "minimum_action": "优先填写 priority20 blind review CSV 的 human_* 字段，通过不可变上下文导入校验后再回填 confirmation CSV，并报告 quick-review exact agreement 与 Cohen's kappa；投稿前再扩展到 80 条。",
+            "paper_wording_now": "可以写 LLM-assisted audit draft、人工确认流程和防错位导入保护，不能写 human-verified error analysis。",
+            "target_artifact": "agent_memory_human_audit_annotation_import_readiness_zh.md; agent_memory_human_audit_readiness_gate_zh.md; agent_memory_human_llm_audit_priority20_agreement_zh.md; agent_memory_human_llm_audit_agreement_zh.md",
             "owner": "needs_human_labels",
         },
         {
