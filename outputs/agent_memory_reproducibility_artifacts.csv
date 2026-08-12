@@ -134,8 +134,8 @@ Mock API embedding smoke test,outputs/agent_memory_mock_api_embedding_smoke_test
 Mock API embedding smoke test CSV,outputs/agent_memory_mock_api_embedding_smoke_test.csv,True,102
 API embedding run estimate,outputs/agent_memory_api_embedding_run_estimate_zh.md,True,1048
 API embedding run estimate CSV,outputs/agent_memory_api_embedding_run_estimate.csv,True,502
-API embedding execution runbook,outputs/agent_memory_api_embedding_execution_runbook_zh.md,True,4388
-API embedding execution runbook CSV,outputs/agent_memory_api_embedding_execution_runbook.csv,True,13758
+API embedding execution runbook,outputs/agent_memory_api_embedding_execution_runbook_zh.md,True,14438
+API embedding execution runbook CSV,outputs/agent_memory_api_embedding_execution_runbook.csv,True,14744
 Embedding baseline comparison,outputs/agent_memory_embedding_baseline_comparison_zh.md,True,998
 Embedding baseline comparison CSV,outputs/agent_memory_embedding_baseline_comparison.csv,True,381
 API embedding post-run gate,outputs/agent_memory_api_embedding_postrun_gate_zh.md,True,1445

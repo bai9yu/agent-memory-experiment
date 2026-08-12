@@ -11,8 +11,8 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `1dfb81e` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `947a857` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -161,8 +161,8 @@
 | Mock API embedding smoke test CSV | True | 102 | `outputs/agent_memory_mock_api_embedding_smoke_test.csv` |
 | API embedding run estimate | True | 1048 | `outputs/agent_memory_api_embedding_run_estimate_zh.md` |
 | API embedding run estimate CSV | True | 502 | `outputs/agent_memory_api_embedding_run_estimate.csv` |
-| API embedding execution runbook | True | 4388 | `outputs/agent_memory_api_embedding_execution_runbook_zh.md` |
-| API embedding execution runbook CSV | True | 13758 | `outputs/agent_memory_api_embedding_execution_runbook.csv` |
+| API embedding execution runbook | True | 14438 | `outputs/agent_memory_api_embedding_execution_runbook_zh.md` |
+| API embedding execution runbook CSV | True | 14744 | `outputs/agent_memory_api_embedding_execution_runbook.csv` |
 | Embedding baseline comparison | True | 998 | `outputs/agent_memory_embedding_baseline_comparison_zh.md` |
 | Embedding baseline comparison CSV | True | 381 | `outputs/agent_memory_embedding_baseline_comparison.csv` |
 | API embedding post-run gate | True | 1445 | `outputs/agent_memory_api_embedding_postrun_gate_zh.md` |

@@ -54,7 +54,15 @@ OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,O
   --profile-csv outputs/agent_memory_embedding_provider_profiles.csv \
   --outputs-dir outputs \
   --output-csv outputs/agent_memory_api_embedding_postrun_gate.csv \
-  --output-report outputs/agent_memory_api_embedding_postrun_gate_zh.md"
+  --output-report outputs/agent_memory_api_embedding_postrun_gate_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_paper_acceptance.py \
+  --profile-csv outputs/agent_memory_embedding_provider_profiles.csv \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --outputs-dir outputs \
+  --rank-output-k 20 \
+  --output-csv outputs/agent_memory_api_embedding_paper_acceptance.csv \
+  --output-report outputs/agent_memory_api_embedding_paper_acceptance_zh.md"
 OpenAI text-embedding-3-small,text-embedding-3-small,https://api.openai.com/v1,OPENAI_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_openai_text_embedding_3_small_type_004,7_final_refresh,offline_after_run,False,run after external baseline and comparison are complete,"Refresh evidence matrix, manuscript, claim checks, reproducibility, freshness, and submission readiness.","work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py \
   --project-root . \
   --output-csv outputs/agent_memory_paper_artifact_refresh_run.csv \
@@ -114,7 +122,15 @@ Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.ex
   --profile-csv outputs/agent_memory_embedding_provider_profiles.csv \
   --outputs-dir outputs \
   --output-csv outputs/agent_memory_api_embedding_postrun_gate.csv \
-  --output-report outputs/agent_memory_api_embedding_postrun_gate_zh.md"
+  --output-report outputs/agent_memory_api_embedding_postrun_gate_zh.md
+
+work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_paper_acceptance.py \
+  --profile-csv outputs/agent_memory_embedding_provider_profiles.csv \
+  --queries work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl \
+  --outputs-dir outputs \
+  --rank-output-k 20 \
+  --output-csv outputs/agent_memory_api_embedding_paper_acceptance.csv \
+  --output-report outputs/agent_memory_api_embedding_paper_acceptance_zh.md"
 Generic OpenAI-compatible embedding,provider_embedding_model,https://provider.example/v1,EXTERNAL_EMBEDDING_API_KEY,work/agent_memory_experiment/results/llm_extracted_locomo10_all_v3_answerable_provider_embedding_model_type_004,7_final_refresh,offline_after_run,False,run after external baseline and comparison are complete,"Refresh evidence matrix, manuscript, claim checks, reproducibility, freshness, and submission readiness.","work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py \
   --project-root . \
   --output-csv outputs/agent_memory_paper_artifact_refresh_run.csv \

@@ -126,6 +126,18 @@ def postrun_command() -> str:
     ])
 
 
+def paper_acceptance_command() -> str:
+    return line_join([
+        "work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/validate_api_embedding_paper_acceptance.py",
+        "--profile-csv outputs/agent_memory_embedding_provider_profiles.csv",
+        f"--queries {QUERIES}",
+        "--outputs-dir outputs",
+        "--rank-output-k 20",
+        "--output-csv outputs/agent_memory_api_embedding_paper_acceptance.csv",
+        "--output-report outputs/agent_memory_api_embedding_paper_acceptance_zh.md",
+    ])
+
+
 def refresh_command() -> str:
     return line_join([
         "work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/refresh_paper_artifacts.py",
@@ -210,7 +222,7 @@ def build_rows(profile_csv: Path, preflight_csv: Path, estimate_csv: Path, postr
                 postrun_completed > 0,
                 f"completed_for_paper={postrun_completed}",
                 "Post-run gate and paper acceptance gate must report at least one provider completed/accepted for paper.",
-                postrun_command(),
+                postrun_command() + "\n\n" + paper_acceptance_command(),
             ),
             (
                 "7_final_refresh",
@@ -297,11 +309,32 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "4. 只有 preflight 全部通过、费用/缓存可接受时，才运行 `4_real_api_run`。",
         "5. 跑完后依次运行 compare、postrun gate、paper acceptance gate 和 final refresh。",
         "",
+        "## 命令附录",
+        "",
+        "以下命令来自 runbook CSV 的 `command` 字段；复制前先确认 provider、模型、费用和缓存目录。`4_real_api_run` 是唯一会触发真实网络/付费 embedding 调用的步骤。",
+        "",
+    ]
+    for provider in providers:
+        provider_rows = [row for row in rows if row["provider_label"] == provider]
+        lines.extend([f"### {provider}", ""])
+        for row in provider_rows:
+            command = row.get("command", "").strip()
+            if not command:
+                continue
+            lines.extend([
+                f"#### {row['step']} ({row['phase']})",
+                "",
+                "```bash",
+                command,
+                "```",
+                "",
+            ])
+    lines.extend([
         "## 论文使用边界",
         "",
         "- 可以写：外部 embedding baseline 的真实运行和验收路径已经固定，且离线刷新不会误触发付费 API。",
         "- 不能写：runbook 生成完成就等于外部 embedding baseline 已完成；最终仍以 postrun gate completed_for_paper 和 paper acceptance accepted_for_paper 为准。",
-    ]
+    ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
