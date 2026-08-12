@@ -1,0 +1,12 @@
+item,value,unit,scope,paper_boundary
+memory_write_api_tokens,559574,tokens,269 DeepSeek memory-write sessions,one_time_generation_cost_not_online_retrieval_storage
+memory_write_prompt_tokens,361103,tokens,DeepSeek memory writer input,report_separately_from_stored_memory_tokens
+memory_write_completion_tokens,198471,tokens,DeepSeek memory writer output,report_separately_from_stored_memory_tokens
+fact_memory_storage_tokens,31148,tokens,"2517 fact memories, avg=12.38",reused_by_downstream_retrieval_runs
+observation_memory_storage_tokens,40241,tokens,"2507 LoCoMo observation memories, avg=16.05",comparison_storage_baseline
+fact_vs_observation_storage_ratio,0.774036,ratio,fact tokens / observation tokens,storage_efficiency_claim
+fact_vs_observation_storage_saving,0.225964,ratio,1 - storage ratio,storage_efficiency_claim
+write_tokens_per_fact_storage_token,17.965006,ratio,one-time API tokens / stored fact-memory tokens,do_not_describe_storage_saving_as_free_extraction
+storage_break_even_reuses,61.538986,retrieval_passes,one-time API tokens / per-pass storage-token saving,token_only_diagnostic_not_monetary_cost_model
+writer_stability_mrr,0.6126705729766935,mean,"completed_runs=3, stdev=0.0035468451339777636",supports_stability_but_not_human_faithfulness
+writer_stability_recall5,0.738371394146766,mean,"completed_runs=3, stdev=0.0058421793607673755",supports_stability_but_not_human_faithfulness

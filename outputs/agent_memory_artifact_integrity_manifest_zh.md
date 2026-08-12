@@ -5,10 +5,10 @@
 ## 总览
 
 - Source artifact list: `outputs/agent_memory_reproducibility_artifacts.csv`
-- Artifacts covered: 210/210
+- Artifacts covered: 212/212
 - Missing artifacts: 0
 - Self-referential checksum skips: 2
-- Total bytes: 7295923
+- Total bytes: 7303135
 
 ## 前 20 个 Artifact
 
@@ -22,6 +22,8 @@
 | Writer stability report | True | 1780 | 36 | 9ab6d5462083 | ok | outputs/agent_memory_writer_stability_zh.md |
 | Writer stability aggregate | True | 967 | 11 | a00fb4e1379c | ok | outputs/agent_memory_writer_stability_aggregate.csv |
 | Writer stability runs | True | 924 | 4 | 13c91b80d653 | ok | outputs/agent_memory_writer_stability_runs.csv |
+| Writer cost boundary report | True | 3073 | 40 | 0ad172e81f04 | ok | outputs/agent_memory_writer_cost_boundary_zh.md |
+| Writer cost boundary CSV | True | 1420 | 12 | 04bb5ef959f6 | ok | outputs/agent_memory_writer_cost_boundary.csv |
 | Time-aware error analysis report | True | 2493 | 51 | d582a9bfa7da | ok | outputs/agent_memory_error_analysis_locomo10_time_aware_zh.md |
 | Time-aware error analysis CSV | True | 308368 | 921 | 410ad453db48 | ok | outputs/agent_memory_error_analysis_locomo10_time_aware.csv |
 | Time-aware error analysis summary | True | 14604 | 184 | 9a92725ce374 | ok | outputs/agent_memory_error_analysis_locomo10_time_aware_summary.csv |
@@ -32,8 +34,6 @@
 | Candidate reranker significance | True | 607 | 8 | 3d53a2fea54f | ok | outputs/agent_memory_candidate_reranker_significance_zh.md |
 | Candidate reranker feature ablation report | True | 3225 | 52 | 26995f86ad2b | ok | outputs/agent_memory_candidate_reranker_feature_ablation_zh.md |
 | Candidate reranker feature ablation summary | True | 2034 | 11 | b9331061399f | ok | outputs/agent_memory_candidate_reranker_feature_ablation_summary.csv |
-| Candidate reranker feature ablation split summary | True | 5458 | 51 | 36853fd8c0fa | ok | outputs/agent_memory_candidate_reranker_feature_ablation_split_summary.csv |
-| Candidate reranker feature ablation deltas | True | 1407 | 10 | 51b2e15e43b6 | ok | outputs/agent_memory_candidate_reranker_feature_ablation_deltas.csv |
 
 ## 使用说明
 

@@ -58,6 +58,7 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
 def build_rows(outputs: Path) -> list[dict[str, str]]:
     baseline = read_csv(outputs / "agent_memory_baseline_comparison_locomo10.csv")
     storage = read_csv(outputs / "agent_memory_cost_storage_locomo10.csv")
+    writer_cost = read_csv(outputs / "agent_memory_writer_cost_boundary.csv")
     type_sig = read_csv(outputs / "agent_memory_type_aware_significance_results.csv")
     reranker = read_csv(outputs / "agent_memory_candidate_reranker_locomo10_summary.csv")
     reranker_sig = read_csv(outputs / "agent_memory_candidate_reranker_significance_results.csv")
@@ -95,6 +96,8 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     fact_slice = lookup(dataset_profile, label="llm_extracted_fact_answerable")
     fact_storage = lookup(storage, variant="llm_extracted_fact")
     observation_storage = lookup(storage, variant="locomo_observation")
+    writer_api_tokens = lookup(writer_cost, item="memory_write_api_tokens")
+    break_even_reuses = lookup(writer_cost, item="storage_break_even_reuses")
     time_aware = lookup(baseline, variant="llm_extracted_fact", method="time_aware")
     type_sig_mrr = lookup(type_sig, metric="mrr")
     type_sig_r5 = lookup(type_sig, metric="recall@5")
@@ -230,12 +233,14 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "status": "main_result",
             "evidence": (
                 f"Fact memory tokens {fact_storage['memory_tokens']} vs observation {observation_storage['memory_tokens']}; "
-                f"ratio {f(storage_ratio)}, saving about {pct(1.0 - storage_ratio)}."
+                f"ratio {f(storage_ratio)}, saving about {pct(1.0 - storage_ratio)}. "
+                f"One-time writer API tokens are reported separately: {writer_api_tokens['value']}; "
+                f"token-only storage break-even diagnostic is {f(break_even_reuses['value'])} retrieval passes."
             ),
             "support_level": "strong_cached",
-            "primary_artifacts": "agent_memory_baseline_comparison_locomo10.csv; agent_memory_cost_latency_locomo10_zh.md",
+            "primary_artifacts": "agent_memory_baseline_comparison_locomo10.csv; agent_memory_cost_latency_locomo10_zh.md; agent_memory_writer_cost_boundary_zh.md",
             "paper_use": "可以支撑 memory compression / storage efficiency 动机。",
-            "remaining_gap": "需要把抽取 API 成本和检索阶段存储成本分开报告；方差可引用 writer stability report。",
+            "remaining_gap": "若要报告货币成本，需要按目标 provider 的实时 input/output 单价换算；token-only break-even 不应写成费用或能耗结论。",
         },
         {
             "claim": "type-aware 重排相比 time-aware 重排有小幅但统计可靠的提升。",

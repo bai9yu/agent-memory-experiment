@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 45
+- Required offline steps: 46
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -28,6 +28,7 @@
 | required_offline_step | embedding_provider_profiles | True | provider-specific external embedding command profiles | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | api_embedding_preflight | True | paid/API embedding preflight | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | api_embedding_run_estimate | True | API embedding cost/cache estimate | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | writer_cost_boundary | True | one-time memory-write cost vs reusable storage-token boundary | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | api_embedding_execution_runbook | True | external API embedding execution and acceptance runbook | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | embedding_baseline_comparison | True | BGE-M3 vs API embedding comparison status | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | api_embedding_postrun_gate | True | API embedding post-run completeness gate | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |

@@ -25,6 +25,7 @@ REQUIRED_STEPS = [
     ("embedding_provider_profiles", "provider-specific external embedding command profiles"),
     ("api_embedding_preflight", "paid/API embedding preflight"),
     ("api_embedding_run_estimate", "API embedding cost/cache estimate"),
+    ("writer_cost_boundary", "one-time memory-write cost vs reusable storage-token boundary"),
     ("api_embedding_execution_runbook", "external API embedding execution and acceptance runbook"),
     ("embedding_baseline_comparison", "BGE-M3 vs API embedding comparison status"),
     ("api_embedding_postrun_gate", "API embedding post-run completeness gate"),

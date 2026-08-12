@@ -283,6 +283,25 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes API embedding item/token/batch estimate without network calls.",
         ),
         Step(
+            "writer_cost_boundary",
+            py(
+                "generate_writer_cost_boundary.py",
+                "--usage",
+                "work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3/usage.csv",
+                "--fact-memories",
+                "work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl",
+                "--observation-memories",
+                "work/agent_memory_experiment/data/locomo_observation_all_answerable_memories.jsonl",
+                "--writer-aggregate",
+                "outputs/agent_memory_writer_stability_aggregate.csv",
+                "--output-csv",
+                "outputs/agent_memory_writer_cost_boundary.csv",
+                "--output-report",
+                "outputs/agent_memory_writer_cost_boundary_zh.md",
+            ),
+            "Separates one-time LLM memory-write API tokens from reusable retrieval-time storage tokens.",
+        ),
+        Step(
             "api_embedding_execution_runbook",
             py(
                 "generate_api_embedding_execution_runbook.py",

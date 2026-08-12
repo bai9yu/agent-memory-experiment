@@ -180,6 +180,8 @@ def main() -> None:
         ("Writer stability report", outputs / "agent_memory_writer_stability_zh.md"),
         ("Writer stability aggregate", outputs / "agent_memory_writer_stability_aggregate.csv"),
         ("Writer stability runs", outputs / "agent_memory_writer_stability_runs.csv"),
+        ("Writer cost boundary report", outputs / "agent_memory_writer_cost_boundary_zh.md"),
+        ("Writer cost boundary CSV", outputs / "agent_memory_writer_cost_boundary.csv"),
         ("Time-aware error analysis report", outputs / "agent_memory_error_analysis_locomo10_time_aware_zh.md"),
         ("Time-aware error analysis CSV", outputs / "agent_memory_error_analysis_locomo10_time_aware.csv"),
         ("Time-aware error analysis summary", outputs / "agent_memory_error_analysis_locomo10_time_aware_summary.csv"),
@@ -489,6 +491,11 @@ def main() -> None:
             "stage": "Writer stability",
             "command": "work/agent_memory_experiment/summarize_writer_stability.py",
             "notes": "Summarizes repeated DeepSeek memory-writer runs from a local manifest.",
+        },
+        {
+            "stage": "Writer cost boundary",
+            "command": "work/agent_memory_experiment/generate_writer_cost_boundary.py",
+            "notes": "Separates one-time LLM memory-write tokens from reusable retrieval-time storage-token savings.",
         },
         {
             "stage": "Candidate reranker",
