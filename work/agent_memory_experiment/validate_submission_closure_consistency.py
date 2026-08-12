@@ -57,6 +57,27 @@ def text_contains(path: Path, token: str) -> bool:
     return path.exists() and token in path.read_text(encoding="utf-8")
 
 
+def checklist_runbook_refs_exist_and_are_executable(checklist: list[dict[str, str]], outputs: Path) -> tuple[bool, str]:
+    expected = {
+        "agent_memory_api_embedding_execution_runbook_zh.md": "## 命令附录",
+        "agent_memory_human_audit_execution_plan_zh.md": "## 命令附录",
+        "agent_memory_submission_blocker_closure_plan_zh.md": "## 关闭路线",
+    }
+    text = "\n".join(row.get("next_action", "") for row in checklist)
+    evidence: list[str] = []
+    ok = True
+    for filename, required_token in expected.items():
+        referenced = filename in text
+        path = outputs / filename
+        exists = path.exists()
+        token_present = text_contains(path, required_token)
+        evidence.append(
+            f"{filename}: referenced={referenced}, exists={exists}, token={required_token in path.read_text(encoding='utf-8') if exists else False}"
+        )
+        ok = ok and referenced and exists and token_present
+    return ok, "; ".join(evidence)
+
+
 def command_scripts(primary_command: str) -> list[str]:
     scripts: list[str] = []
     for part in primary_command.split(";"):
@@ -130,6 +151,7 @@ def build_rows(outputs: Path, project_root: Path) -> list[dict[str, Any]]:
     missing_scripts = missing_command_scripts(closure, project_root)
     blocker_gates = readiness_blocker_gates(readiness)
     uncovered_blockers = sorted(blocker_gates - covered_readiness_blockers(closure))
+    runbook_refs_ok, runbook_refs_evidence = checklist_runbook_refs_exist_and_are_executable(checklist, outputs)
 
     return [
         row(
@@ -174,6 +196,13 @@ def build_rows(outputs: Path, project_root: Path) -> list[dict[str, Any]]:
             "blocker",
             f"checklist_evidence={checklist_external.get('evidence', '')}",
             "Regenerate final submission checklist after strict API embedding acceptance changes.",
+        ),
+        row(
+            "final_checklist_runbook_refs_exist",
+            runbook_refs_ok,
+            "blocker",
+            runbook_refs_evidence,
+            "Update final checklist next actions to reference executable API, human-audit, and closure runbooks.",
         ),
         row(
             "submission_readiness_mentions_paper_acceptance",

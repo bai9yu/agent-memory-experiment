@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Checks: 9
+- Checks: 10
 - Blockers: 0
 - Major issues: 0
 - Closure artifacts consistent: True
@@ -19,6 +19,7 @@
 | closure_external_requires_paper_acceptance | True | pass | primary_command=memory_eval.py --semantic-backend api; compare_embedding_baselines.py; validate_api_embedding_postrun.py; validate_api_embedding_paper_acceptance.py; acceptance=summary/per-query/rankings/summary_by_type exist; compare_embedding_baselines.py reports numeric deltas; validate_api_embedding_postrun.py passes; validate_api_embedding_paper_acceptance.py reports paper_acceptance_pass=1. | Update external embedding closure step to require strict paper acceptance, not only summary/compare files. |
 | closure_diagram_mentions_acceptance | True | pass | diagram token present | Update the closure dependency diagram to include postrun and paper acceptance before reviewer-risk closure. |
 | final_checklist_mentions_paper_acceptance | True | pass | checklist_evidence=completed external embedding baselines=0, postrun_pass=0, paper_acceptance_pass=0; embedding_tier=pending | Regenerate final submission checklist after strict API embedding acceptance changes. |
+| final_checklist_runbook_refs_exist | True | pass | agent_memory_api_embedding_execution_runbook_zh.md: referenced=True, exists=True, token=True; agent_memory_human_audit_execution_plan_zh.md: referenced=True, exists=True, token=True; agent_memory_submission_blocker_closure_plan_zh.md: referenced=True, exists=True, token=True | Update final checklist next actions to reference executable API, human-audit, and closure runbooks. |
 | submission_readiness_mentions_paper_acceptance | True | pass | readiness_evidence=completed external embedding baselines=0, postrun_pass=0, paper_acceptance_pass=0 | Regenerate submission readiness after strict API embedding acceptance changes. |
 | acceptance_and_postrun_counts_aligned | True | pass | accepted=0, postrun_pass=0 | A provider should not be accepted for paper unless its postrun gate also passes. |
 | reviewer_blocker_counts_consistent | True | pass | reviewer_blockers=2, gap_blockers=2 | Regenerate reviewer response prep and submission gap analysis from the same blocker state. |

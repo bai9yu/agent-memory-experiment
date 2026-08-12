@@ -20,7 +20,7 @@ Human Audit,outputs/agent_memory_human_audit_execution_plan_zh.md,protocol_appen
 Human Audit,outputs/agent_memory_human_audit_sample_qc_zh.md,protocol_appendix_candidate,False,True,ready_qc,True,6936,,检查 priority20/full80 人工复核样本数、去重、错误类型/query type/rank 区间覆盖和标注进度。,人工标注前后都重跑 QC，确保样本结构和 progress 记录一致。
 Human Audit,outputs/agent_memory_human_audit_labeling_dashboard_zh.md,protocol_appendix_candidate,False,True,ready_for_labeling,True,6904,,逐条列出 priority20/full80 盲审表的缺失 human_* 字段、下一批待标注样本和分布进度。,人工填写时按 dashboard 的 review_order 逐步完成 required human_* 字段。
 Human Audit,outputs/agent_memory_human_audit_priority20_review_packet_zh.md,protocol_appendix_candidate,False,True,ready_for_labeling,True,15963,,20 条优先人工复核阅读包。,人工填写 blind review CSV 的 human_* 字段。
-Reproducibility,outputs/agent_memory_reproducibility_checklist_zh.md,internal_review_gate,False,True,pass,False,42784,,artifact、指标阈值、数据规模、复现命令和环境入口清单。,新增任何 artifact 后重新生成。
+Reproducibility,outputs/agent_memory_reproducibility_checklist_zh.md,internal_review_gate,False,True,pass,False,42794,,artifact、指标阈值、数据规模、复现命令和环境入口清单。,新增任何 artifact 后重新生成。
 Reproducibility,outputs/agent_memory_artifact_integrity_manifest_zh.md,internal_review_gate,False,True,pass,True,3795,,复现 artifact sha256、大小和行数 manifest。,每次结果更新后重新生成。
 Reproducibility,outputs/agent_memory_environment_freshness_audit_zh.md,internal_review_gate,False,True,pass,True,1337,,环境快照的 generation-time Git 状态和 system CSV 新鲜度审计。,提交前后若刷新环境快照，应重新运行 freshness audit。
 Reproducibility,outputs/agent_memory_untracked_artifact_audit_zh.md,internal_review_gate,False,True,classified,True,4131,,未跟踪本地输出、临时数据和探索性结果的公开发布审计。,公开发布前确认 keep_untracked/local 项仍不属于论文正式 artifact。
