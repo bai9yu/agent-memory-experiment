@@ -11,7 +11,7 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `2f900a1` |
+| git_commit | `1dfb81e` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -137,13 +137,13 @@
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 36175 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 36176 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 10998 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 6345 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3891 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 3255 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Submission closure consistency audit | True | 2534 | `outputs/agent_memory_submission_closure_consistency_zh.md` |
-| Submission closure consistency audit CSV | True | 1794 | `outputs/agent_memory_submission_closure_consistency.csv` |
+| Submission closure consistency audit | True | 3069 | `outputs/agent_memory_submission_closure_consistency_zh.md` |
+| Submission closure consistency audit CSV | True | 2327 | `outputs/agent_memory_submission_closure_consistency.csv` |
 | Paper artifact refresh run | True | 6828 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
 | Paper artifact refresh run CSV | True | 23626 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
 | Paper refresh coverage audit | True | 9783 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |

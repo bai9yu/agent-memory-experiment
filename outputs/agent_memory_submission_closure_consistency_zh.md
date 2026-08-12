@@ -4,7 +4,7 @@
 
 ## 总览
 
-- Checks: 7
+- Checks: 9
 - Blockers: 0
 - Major issues: 0
 - Closure artifacts consistent: True
@@ -14,6 +14,8 @@
 | Check | Pass | Status | Evidence | Action |
 | --- | --- | --- | --- | --- |
 | closure_plan_exists | True | pass | csv_exists=True, md_exists=True, rows=6 | Regenerate the submission blocker closure plan. |
+| closure_primary_commands_exist | True | pass | all closure primary command scripts exist | Update closure primary_command entries to reference existing scripts under work/agent_memory_experiment. |
+| closure_covers_readiness_blockers | True | pass | readiness_blockers=['api_embedding_preflight', 'external_embedding_completed', 'full80_human_audit', 'priority20_human_audit', 'reviewer_risk_blockers'], uncovered=[] | Add a closure-plan row for every required readiness blocker, or document its dependency on another closure row. |
 | closure_external_requires_paper_acceptance | True | pass | primary_command=memory_eval.py --semantic-backend api; compare_embedding_baselines.py; validate_api_embedding_postrun.py; validate_api_embedding_paper_acceptance.py; acceptance=summary/per-query/rankings/summary_by_type exist; compare_embedding_baselines.py reports numeric deltas; validate_api_embedding_postrun.py passes; validate_api_embedding_paper_acceptance.py reports paper_acceptance_pass=1. | Update external embedding closure step to require strict paper acceptance, not only summary/compare files. |
 | closure_diagram_mentions_acceptance | True | pass | diagram token present | Update the closure dependency diagram to include postrun and paper acceptance before reviewer-risk closure. |
 | final_checklist_mentions_paper_acceptance | True | pass | checklist_evidence=completed external embedding baselines=0, postrun_pass=0, paper_acceptance_pass=0; embedding_tier=pending | Regenerate final submission checklist after strict API embedding acceptance changes. |

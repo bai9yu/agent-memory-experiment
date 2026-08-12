@@ -57,7 +57,51 @@ def text_contains(path: Path, token: str) -> bool:
     return path.exists() and token in path.read_text(encoding="utf-8")
 
 
-def build_rows(outputs: Path) -> list[dict[str, Any]]:
+def command_scripts(primary_command: str) -> list[str]:
+    scripts: list[str] = []
+    for part in primary_command.split(";"):
+        token = part.strip().split(" ", 1)[0]
+        if token.endswith(".py"):
+            scripts.append(token)
+    return scripts
+
+
+def missing_command_scripts(closure: list[dict[str, str]], project_root: Path) -> list[str]:
+    missing: list[str] = []
+    script_root = project_root / "work" / "agent_memory_experiment"
+    for closure_row in closure:
+        for script in command_scripts(closure_row.get("primary_command", "")):
+            if not (script_root / script).exists():
+                missing.append(f"{closure_row.get('blocker_group', 'unknown')}:{script}")
+    return missing
+
+
+def readiness_blocker_gates(readiness: list[dict[str, str]]) -> set[str]:
+    return {
+        row.get("gate", "")
+        for row in readiness
+        if row.get("required_for_submission", row.get("required")) == "True"
+        and row.get("status") == "blocker"
+    }
+
+
+def closure_blocker_groups(closure: list[dict[str, str]]) -> set[str]:
+    return {row.get("blocker_group", "") for row in closure}
+
+
+def covered_readiness_blockers(closure: list[dict[str, str]]) -> set[str]:
+    groups = closure_blocker_groups(closure)
+    covered = set(groups)
+    if "external_embedding_preflight" in groups:
+        covered.add("api_embedding_preflight")
+    if "priority20_human_audit" in groups or "full80_human_audit" in groups:
+        covered.add("reviewer_risk_blockers")
+    if "external_embedding_completed" in groups:
+        covered.add("reviewer_risk_blockers")
+    return covered
+
+
+def build_rows(outputs: Path, project_root: Path) -> list[dict[str, Any]]:
     closure_csv = outputs / "agent_memory_submission_blocker_closure_plan.csv"
     closure_md = outputs / "agent_memory_submission_blocker_closure_plan_zh.md"
     checklist_csv = outputs / "agent_memory_final_submission_checklist.csv"
@@ -83,6 +127,9 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
     gap_blockers = sum(1 for r in gap if r.get("risk_level") == "blocker")
     accepted = sum(1 for r in acceptance if r.get("paper_acceptance_pass") == "True")
     postrun_pass = sum(1 for r in postrun if r.get("postrun_pass") == "True")
+    missing_scripts = missing_command_scripts(closure, project_root)
+    blocker_gates = readiness_blocker_gates(readiness)
+    uncovered_blockers = sorted(blocker_gates - covered_readiness_blockers(closure))
 
     return [
         row(
@@ -91,6 +138,20 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "blocker",
             f"csv_exists={closure_csv.exists()}, md_exists={closure_md.exists()}, rows={len(closure)}",
             "Regenerate the submission blocker closure plan.",
+        ),
+        row(
+            "closure_primary_commands_exist",
+            len(missing_scripts) == 0,
+            "blocker",
+            "all closure primary command scripts exist" if not missing_scripts else "; ".join(missing_scripts),
+            "Update closure primary_command entries to reference existing scripts under work/agent_memory_experiment.",
+        ),
+        row(
+            "closure_covers_readiness_blockers",
+            len(uncovered_blockers) == 0,
+            "blocker",
+            f"readiness_blockers={sorted(blocker_gates)}, uncovered={uncovered_blockers}",
+            "Add a closure-plan row for every required readiness blocker, or document its dependency on another closure row.",
         ),
         row(
             "closure_external_requires_paper_acceptance",
@@ -170,11 +231,12 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Validate submission closure artifact consistency.")
     parser.add_argument("--outputs-dir", type=Path, default=Path("outputs"))
+    parser.add_argument("--project-root", type=Path, default=Path("."))
     parser.add_argument("--output-csv", type=Path, default=Path("outputs/agent_memory_submission_closure_consistency.csv"))
     parser.add_argument("--output-report", type=Path, default=Path("outputs/agent_memory_submission_closure_consistency_zh.md"))
     args = parser.parse_args()
 
-    rows = build_rows(args.outputs_dir)
+    rows = build_rows(args.outputs_dir, args.project_root)
     write_csv(args.output_csv, rows)
     write_report(args.output_report, rows)
     print(json.dumps({

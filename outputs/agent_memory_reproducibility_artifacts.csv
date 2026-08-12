@@ -110,13 +110,13 @@ Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734
 Artifact path portability audit CSV,outputs/agent_memory_artifact_path_portability.csv,True,214
 Artifact integrity manifest,outputs/agent_memory_artifact_integrity_manifest_zh.md,True,3795
-Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,36175
+Artifact integrity manifest CSV,outputs/agent_memory_artifact_integrity_manifest.csv,True,36176
 Submission gap analysis,outputs/agent_memory_submission_gap_analysis_zh.md,True,10998
 Submission gap analysis CSV,outputs/agent_memory_submission_gap_analysis.csv,True,6345
 Submission blocker closure plan,outputs/agent_memory_submission_blocker_closure_plan_zh.md,True,3891
 Submission blocker closure plan CSV,outputs/agent_memory_submission_blocker_closure_plan.csv,True,3255
-Submission closure consistency audit,outputs/agent_memory_submission_closure_consistency_zh.md,True,2534
-Submission closure consistency audit CSV,outputs/agent_memory_submission_closure_consistency.csv,True,1794
+Submission closure consistency audit,outputs/agent_memory_submission_closure_consistency_zh.md,True,3069
+Submission closure consistency audit CSV,outputs/agent_memory_submission_closure_consistency.csv,True,2327
 Paper artifact refresh run,outputs/agent_memory_paper_artifact_refresh_run_zh.md,True,6828
 Paper artifact refresh run CSV,outputs/agent_memory_paper_artifact_refresh_run.csv,True,23626
 Paper refresh coverage audit,outputs/agent_memory_paper_refresh_coverage_audit_zh.md,True,9783
