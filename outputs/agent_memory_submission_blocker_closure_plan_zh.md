@@ -13,7 +13,7 @@
 | Order | Blocker Group | Current Gate | Minimum Action | Acceptance Criterion | Paper Upgrade |
 | --- | --- | --- | --- | --- | --- |
 | 1 | external_embedding_preflight | 4/5 required checks pass | Set OPENAI_API_KEY in .env or shell, then rerun preflight. | api_embedding_preflight pass=True; no key value is written to Git. | API baseline can move from pending protocol to safe-to-run experiment. |
-| 2 | external_embedding_completed | completed external embedding baselines=0, postrun_pass=0 | Run memory_eval.py with semantic-backend api and generate summary.csv. | external embedding summary.csv exists and compare_embedding_baselines.py reports numeric deltas vs BGE-M3. | External embedding baseline can be added to the embedding comparison table. |
+| 2 | external_embedding_completed | completed external embedding baselines=0, postrun_pass=0, paper_acceptance_pass=0 | Run memory_eval.py with semantic-backend api and generate summary.csv. Then run compare, postrun gate, and strict paper acceptance. | summary/per-query/rankings/summary_by_type exist; compare_embedding_baselines.py reports numeric deltas; validate_api_embedding_postrun.py passes; validate_api_embedding_paper_acceptance.py reports paper_acceptance_pass=1. | External embedding baseline can be added to the embedding comparison table only after strict paper acceptance passes. |
 | 3 | priority20_human_audit | priority20 confirmed=0/20, invalid=0 | Fill human_manual_reason, human_auto_reason_correct, human_top_memory_relevant, human_gold_memory_sufficient, and human_auditor_notes for all 20 rows. | 20/20 samples have valid human_* labels after merge and agreement recomputation. | quick-review Human/LLM agreement can be reported. |
 | 4 | full80_human_audit | full80 confirmed=0/80, invalid=0 | Complete the same human_* fields for all 80 rows after priority20 labels are stable. | 80/80 samples have valid human_* labels after merge and agreement recomputation. | full Human/LLM audit agreement can be reported. |
 | 5 | reviewer_risk_blockers | blocker risks=2 | Regenerate reviewer response prep and submission gap analysis after external embedding and human audit gates pass. | reviewer_risk_blockers pass=True and blocker risks=0. | The manuscript can move from internal draft to final-submission candidate. |
@@ -26,10 +26,11 @@ flowchart TD
   A["Embedding API key"] --> B["API preflight pass"]
   B --> C["External embedding summary.csv"]
   C --> D["Embedding comparison delta table"]
+  D --> D2["Postrun + paper acceptance pass"]
   E["priority20 human labels"] --> F["quick-review agreement"]
   F --> G["full80 human labels"]
   G --> H["full human audit agreement"]
-  D --> I["Reviewer blocker risks = 0"]
+  D2 --> I["Reviewer blocker risks = 0"]
   H --> I
   I --> J["Final consistency refresh"]
   J --> K["Submission readiness = True"]

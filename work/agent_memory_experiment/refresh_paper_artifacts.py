@@ -394,6 +394,19 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Refreshes the ordered closure path for final-submission blockers.",
         ),
         Step(
+            "submission_closure_consistency",
+            py(
+                "validate_submission_closure_consistency.py",
+                "--outputs-dir",
+                "outputs",
+                "--output-csv",
+                "outputs/agent_memory_submission_closure_consistency.csv",
+                "--output-report",
+                "outputs/agent_memory_submission_closure_consistency_zh.md",
+            ),
+            "Checks closure plan, final checklist, readiness, reviewer prep, and strict API acceptance for consistent blocker standards.",
+        ),
+        Step(
             "submission_package_index",
             py(
                 "generate_submission_package_index.py",

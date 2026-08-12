@@ -32,6 +32,7 @@ REQUIRED_STEPS = [
     ("external_embedding_blocker_audit", "external embedding blocker audit"),
     ("embedding_paper_claim_upgrade", "embedding baseline paper-claim upgrade gate"),
     ("submission_blocker_closure_plan", "submission blocker closure path"),
+    ("submission_closure_consistency", "submission closure artifact consistency audit"),
     ("submission_package_index", "paper package index"),
     ("supplementary_package_manifest", "supplementary package manifest and anonymization audit"),
     ("anonymous_submission_readiness", "anonymous submission package readiness audit"),

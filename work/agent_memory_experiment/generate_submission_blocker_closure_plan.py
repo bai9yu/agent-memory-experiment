@@ -18,8 +18,13 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames: list[str] = []
+    for row in rows:
+        for key in row:
+            if key not in fieldnames:
+                fieldnames.append(key)
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
 
@@ -54,6 +59,7 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
 
     external_key = by_key(external, "item", "default_openai_key")
     external_summary = by_key(external, "item", "external_summary_completed")
+    external_acceptance = by_key(external, "item", "api_embedding_paper_acceptance")
     priority_step = by_key(human, "stage", "priority20 single blind labeling")
     full_step = by_key(human, "stage", "full80 single blind labeling")
 
@@ -72,11 +78,12 @@ def build_rows(outputs: Path) -> list[dict[str, Any]]:
             "order": 2,
             "blocker_group": "external_embedding_completed",
             "current_gate": external_gate.get("evidence", ""),
-            "minimum_action": external_summary.get("required_action", "Run memory_eval.py with semantic-backend api."),
-            "acceptance_criterion": "external embedding summary.csv exists and compare_embedding_baselines.py reports numeric deltas vs BGE-M3.",
-            "primary_command": "memory_eval.py --semantic-backend api; compare_embedding_baselines.py",
-            "paper_upgrade": "External embedding baseline can be added to the embedding comparison table.",
+            "minimum_action": external_summary.get("required_action", "Run memory_eval.py with semantic-backend api.") + " Then run compare, postrun gate, and strict paper acceptance.",
+            "acceptance_criterion": "summary/per-query/rankings/summary_by_type exist; compare_embedding_baselines.py reports numeric deltas; validate_api_embedding_postrun.py passes; validate_api_embedding_paper_acceptance.py reports paper_acceptance_pass=1.",
+            "primary_command": "memory_eval.py --semantic-backend api; compare_embedding_baselines.py; validate_api_embedding_postrun.py; validate_api_embedding_paper_acceptance.py",
+            "paper_upgrade": "External embedding baseline can be added to the embedding comparison table only after strict paper acceptance passes.",
             "depends_on": "external_embedding_preflight",
+            "secondary_evidence": external_acceptance.get("evidence", ""),
         },
         {
             "order": 3,
@@ -158,10 +165,11 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "  A[\"Embedding API key\"] --> B[\"API preflight pass\"]",
         "  B --> C[\"External embedding summary.csv\"]",
         "  C --> D[\"Embedding comparison delta table\"]",
+        "  D --> D2[\"Postrun + paper acceptance pass\"]",
         "  E[\"priority20 human labels\"] --> F[\"quick-review agreement\"]",
         "  F --> G[\"full80 human labels\"]",
         "  G --> H[\"full human audit agreement\"]",
-        "  D --> I[\"Reviewer blocker risks = 0\"]",
+        "  D2 --> I[\"Reviewer blocker risks = 0\"]",
         "  H --> I",
         "  I --> J[\"Final consistency refresh\"]",
         "  J --> K[\"Submission readiness = True\"]",

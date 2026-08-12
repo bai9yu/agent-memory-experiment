@@ -4,14 +4,14 @@
 
 ## 总览
 
-- Artifact 存在性：206/206
+- Artifact 存在性：208/208
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `f6d2562` |
+| git_commit | `f5b780d` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -117,7 +117,7 @@
 | Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
 | Reviewer response preparation matrix CSV | True | 4244 | `outputs/agent_memory_reviewer_response_prep.csv` |
 | Submission package index | True | 8532 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 9694 | `outputs/agent_memory_submission_package_index.csv` |
+| Submission package index CSV | True | 9794 | `outputs/agent_memory_submission_package_index.csv` |
 | Supplementary package manifest | True | 5054 | `outputs/agent_memory_supplementary_package_manifest_zh.md` |
 | Supplementary package manifest CSV | True | 8550 | `outputs/agent_memory_supplementary_package_manifest.csv` |
 | Anonymous submission readiness audit | True | 1759 | `outputs/agent_memory_anonymous_submission_readiness_zh.md` |
@@ -130,22 +130,24 @@
 | Final submission checklist CSV | True | 2825 | `outputs/agent_memory_final_submission_checklist.csv` |
 | Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4744 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3634 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Untracked artifact audit | True | 4743 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 3633 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 35818 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 36173 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
-| Submission blocker closure plan | True | 3600 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
-| Submission blocker closure plan CSV | True | 2813 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
-| Paper artifact refresh run | True | 6648 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 23163 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
-| Paper refresh coverage audit | True | 9582 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
-| Paper refresh coverage audit CSV | True | 8468 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
+| Submission blocker closure plan | True | 3891 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
+| Submission blocker closure plan CSV | True | 3255 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
+| Submission closure consistency audit | True | 2534 | `outputs/agent_memory_submission_closure_consistency_zh.md` |
+| Submission closure consistency audit CSV | True | 1794 | `outputs/agent_memory_submission_closure_consistency.csv` |
+| Paper artifact refresh run | True | 6828 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 23626 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper refresh coverage audit | True | 9783 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
+| Paper refresh coverage audit CSV | True | 8661 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -169,8 +171,8 @@
 | API embedding paper acceptance gate CSV | True | 1269 | `outputs/agent_memory_api_embedding_paper_acceptance.csv` |
 | Offline embedding sensitivity | True | 2669 | `outputs/agent_memory_offline_embedding_sensitivity_zh.md` |
 | Offline embedding sensitivity CSV | True | 1993 | `outputs/agent_memory_offline_embedding_sensitivity.csv` |
-| External embedding blocker audit | True | 3938 | `outputs/agent_memory_external_embedding_blocker_audit_zh.md` |
-| External embedding blocker audit CSV | True | 1690 | `outputs/agent_memory_external_embedding_blocker_audit.csv` |
+| External embedding blocker audit | True | 3963 | `outputs/agent_memory_external_embedding_blocker_audit_zh.md` |
+| External embedding blocker audit CSV | True | 1715 | `outputs/agent_memory_external_embedding_blocker_audit.csv` |
 | Embedding paper-claim upgrade gate | True | 2526 | `outputs/agent_memory_embedding_paper_claim_upgrade_zh.md` |
 | Embedding paper-claim upgrade gate CSV | True | 2576 | `outputs/agent_memory_embedding_paper_claim_upgrade.csv` |
 | Human audit protocol | True | 2479 | `outputs/agent_memory_human_audit_protocol_zh.md` |
@@ -333,6 +335,7 @@
 | Artifact integrity manifest | `work/agent_memory_experiment/generate_artifact_integrity_manifest.py` | Writes sha256, size, and line-count metadata for all reproducibility artifacts. |
 | Submission gap analysis | `work/agent_memory_experiment/generate_submission_gap_analysis.py` | Ranks reviewer-facing risks and minimum actions before submission. |
 | Submission blocker closure plan | `work/agent_memory_experiment/generate_submission_blocker_closure_plan.py` | Orders remaining external embedding, human audit, reviewer-risk, and final-refresh gates into a concrete closure path. |
+| Submission closure consistency audit | `work/agent_memory_experiment/validate_submission_closure_consistency.py` | Checks closure plan, final checklist, submission readiness, reviewer prep, and API acceptance for consistent blocker standards. |
 | Paper artifact refresh run | `work/agent_memory_experiment/refresh_paper_artifacts.py` | Runs the offline cached paper-artifact refresh sequence and records step statuses. |
 | Paper refresh coverage audit | `work/agent_memory_experiment/validate_paper_refresh_coverage.py` | Checks that the offline paper refresh run contains all required report-refresh steps. |
 | Evidence freshness audit | `work/agent_memory_experiment/validate_evidence_freshness.py` | Checks paper-facing reports for stale reproducibility artifact/metric/integrity gate counts after regeneration. |

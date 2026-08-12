@@ -288,6 +288,8 @@ def main() -> None:
         ("Submission gap analysis CSV", outputs / "agent_memory_submission_gap_analysis.csv"),
         ("Submission blocker closure plan", outputs / "agent_memory_submission_blocker_closure_plan_zh.md"),
         ("Submission blocker closure plan CSV", outputs / "agent_memory_submission_blocker_closure_plan.csv"),
+        ("Submission closure consistency audit", outputs / "agent_memory_submission_closure_consistency_zh.md"),
+        ("Submission closure consistency audit CSV", outputs / "agent_memory_submission_closure_consistency.csv"),
         ("Paper artifact refresh run", outputs / "agent_memory_paper_artifact_refresh_run_zh.md"),
         ("Paper artifact refresh run CSV", outputs / "agent_memory_paper_artifact_refresh_run.csv"),
         ("Paper refresh coverage audit", outputs / "agent_memory_paper_refresh_coverage_audit_zh.md"),
@@ -820,6 +822,11 @@ def main() -> None:
             "stage": "Submission blocker closure plan",
             "command": "work/agent_memory_experiment/generate_submission_blocker_closure_plan.py",
             "notes": "Orders remaining external embedding, human audit, reviewer-risk, and final-refresh gates into a concrete closure path.",
+        },
+        {
+            "stage": "Submission closure consistency audit",
+            "command": "work/agent_memory_experiment/validate_submission_closure_consistency.py",
+            "notes": "Checks closure plan, final checklist, submission readiness, reviewer prep, and API acceptance for consistent blocker standards.",
         },
         {
             "stage": "Paper artifact refresh run",
