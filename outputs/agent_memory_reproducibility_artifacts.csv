@@ -179,8 +179,8 @@ Human audit annotation interface,outputs/agent_memory_human_audit_annotation_int
 Human audit annotation interface CSV,outputs/agent_memory_human_audit_annotation_interface.csv,True,319
 Human audit annotation interface validation,outputs/agent_memory_human_audit_annotation_interface_validation_zh.md,True,2856
 Human audit annotation interface validation CSV,outputs/agent_memory_human_audit_annotation_interface_validation.csv,True,2178
-Human audit annotation import readiness,outputs/agent_memory_human_audit_annotation_import_readiness_zh.md,True,2681
-Human audit annotation import readiness CSV,outputs/agent_memory_human_audit_annotation_import_readiness.csv,True,734
+Human audit annotation import readiness,outputs/agent_memory_human_audit_annotation_import_readiness_zh.md,True,2743
+Human audit annotation import readiness CSV,outputs/agent_memory_human_audit_annotation_import_readiness.csv,True,796
 Human audit paper-claim upgrade gate,outputs/agent_memory_human_audit_paper_claim_upgrade_zh.md,True,2510
 Human audit paper-claim upgrade gate CSV,outputs/agent_memory_human_audit_paper_claim_upgrade.csv,True,2624
 Human audit full80 dual review CSV,outputs/agent_memory_human_audit_full80_dual_review.csv,True,29853

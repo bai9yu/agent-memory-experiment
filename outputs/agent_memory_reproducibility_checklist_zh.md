@@ -11,7 +11,7 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `0ff7cbb` |
+| git_commit | `7e2f5ed` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -206,8 +206,8 @@
 | Human audit annotation interface CSV | True | 319 | `outputs/agent_memory_human_audit_annotation_interface.csv` |
 | Human audit annotation interface validation | True | 2856 | `outputs/agent_memory_human_audit_annotation_interface_validation_zh.md` |
 | Human audit annotation interface validation CSV | True | 2178 | `outputs/agent_memory_human_audit_annotation_interface_validation.csv` |
-| Human audit annotation import readiness | True | 2681 | `outputs/agent_memory_human_audit_annotation_import_readiness_zh.md` |
-| Human audit annotation import readiness CSV | True | 734 | `outputs/agent_memory_human_audit_annotation_import_readiness.csv` |
+| Human audit annotation import readiness | True | 2743 | `outputs/agent_memory_human_audit_annotation_import_readiness_zh.md` |
+| Human audit annotation import readiness CSV | True | 796 | `outputs/agent_memory_human_audit_annotation_import_readiness.csv` |
 | Human audit paper-claim upgrade gate | True | 2510 | `outputs/agent_memory_human_audit_paper_claim_upgrade_zh.md` |
 | Human audit paper-claim upgrade gate CSV | True | 2624 | `outputs/agent_memory_human_audit_paper_claim_upgrade.csv` |
 | Human audit full80 dual review CSV | True | 29853 | `outputs/agent_memory_human_audit_full80_dual_review.csv` |

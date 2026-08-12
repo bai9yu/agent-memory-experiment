@@ -46,6 +46,8 @@ BLIND_FIELDS = (
     *HUMAN_FIELDS,
 )
 
+IMMUTABLE_FIELDS = tuple(field for field in BLIND_FIELDS if field not in HUMAN_FIELDS and field != "review_order")
+
 ALLOWED = {
     "auto_reason_correct": ("yes", "partial", "no"),
     "top_memory_relevant": ("yes", "partial", "no"),
@@ -93,6 +95,23 @@ def validation_errors(rows: list[dict[str, str]]) -> list[str]:
     return errors
 
 
+def context_mismatches(source_rows: list[dict[str, str]], blind_rows: list[dict[str, str]]) -> list[str]:
+    blind_by_id = {row.get("audit_id", ""): row for row in blind_rows if row.get("audit_id")}
+    mismatches: list[str] = []
+    for source in source_rows:
+        audit_id = source.get("audit_id", "")
+        blind = blind_by_id.get(audit_id)
+        if not blind:
+            continue
+        changed = [
+            field for field in IMMUTABLE_FIELDS
+            if field in source and source.get(field, "") != blind.get(field, "")
+        ]
+        if changed:
+            mismatches.append(f"{audit_id}: {','.join(changed)}")
+    return mismatches
+
+
 def export_rows(rows: list[dict[str, str]], seed: int, keep_order: bool) -> list[dict[str, str]]:
     out = []
     for row in rows:
@@ -110,6 +129,9 @@ def merge_rows(source_rows: list[dict[str, str]], blind_rows: list[dict[str, str
     blind_by_id = {row["audit_id"]: row for row in blind_rows if row.get("audit_id")}
     merged = []
     missing = []
+    mismatches = context_mismatches(source_rows, blind_rows)
+    if mismatches:
+        raise RuntimeError(f"Blinded sheet changed immutable audit context fields: {mismatches[:10]}")
     for row in source_rows:
         audit_id = row.get("audit_id", "")
         new_row = dict(row)

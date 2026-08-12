@@ -24,6 +24,20 @@ HUMAN_FIELDS = (
     "human_auditor_notes",
 )
 
+IMMUTABLE_FIELDS = (
+    "query_id",
+    "query",
+    "query_type",
+    "auto_reason",
+    "first_rank",
+    "top_memory_id",
+    "top_memory_type",
+    "top_memory_text",
+    "gold_memory_ids",
+    "gold_memory_types",
+    "gold_memory_texts",
+)
+
 ALLOWED = {
     "auto_reason_correct": ("yes", "partial", "no"),
     "top_memory_relevant": ("yes", "partial", "no"),
@@ -86,6 +100,23 @@ def duplicate_values(values: list[str]) -> list[str]:
     return dupes
 
 
+def context_mismatches(source_rows: list[dict[str, str]], export_rows: list[dict[str, str]]) -> list[str]:
+    export_by_id = {row.get("audit_id", ""): row for row in export_rows if row.get("audit_id")}
+    mismatches: list[str] = []
+    for source in source_rows:
+        audit_id = source.get("audit_id", "")
+        export = export_by_id.get(audit_id)
+        if not export:
+            continue
+        changed = [
+            field for field in IMMUTABLE_FIELDS
+            if source.get(field, "") != export.get(field, "")
+        ]
+        if changed:
+            mismatches.append(f"{audit_id}: {','.join(changed)}")
+    return mismatches
+
+
 def check_scope(scope: str, source_csv: Path, export_csv: Path, confirmation_csv: Path) -> dict[str, Any]:
     source_rows = read_csv(source_csv)
     export_rows = read_csv(export_csv)
@@ -97,6 +128,7 @@ def check_scope(scope: str, source_csv: Path, export_csv: Path, confirmation_csv
     unexpected_ids = [audit_id for audit_id in export_ids if audit_id not in set(source_ids)]
     duplicates = duplicate_values([audit_id for audit_id in export_ids if audit_id])
     invalid = invalid_labels(export_rows)
+    context_changed = context_mismatches(source_rows, export_rows)
     complete_count = sum(1 for row in export_rows if is_complete(row))
     rows_match = source_ids == export_ids
     status = "ready_to_merge" if (
@@ -106,9 +138,10 @@ def check_scope(scope: str, source_csv: Path, export_csv: Path, confirmation_csv
         and not missing_human_cols
         and not duplicates
         and not invalid
+        and not context_changed
         and complete_count == len(export_rows)
     ) else "pending_or_invalid"
-    if export_rows and complete_count < len(export_rows) and not invalid:
+    if export_rows and complete_count < len(export_rows) and not invalid and not context_changed:
         status = "pending_human_labels"
     return {
         "scope": scope,
@@ -127,6 +160,8 @@ def check_scope(scope: str, source_csv: Path, export_csv: Path, confirmation_csv
         "complete_labels": complete_count,
         "invalid_labels": len(invalid),
         "invalid_examples": ";".join(invalid[:20]),
+        "immutable_context_mismatches": len(context_changed),
+        "immutable_context_examples": ";".join(context_changed[:20]),
         "status": status,
     }
 
@@ -151,6 +186,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
             str(row["audit_id_order_match"]),
             str(row["complete_labels"]),
             str(row["invalid_labels"]),
+            str(row["immutable_context_mismatches"]),
             row["status"],
         ]
         for row in rows
@@ -168,7 +204,7 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "",
         "## 检查明细",
         "",
-        markdown_table(["Scope", "Export Exists", "Rows", "Audit ID Order Match", "Complete Labels", "Invalid Labels", "Status"], table),
+        markdown_table(["Scope", "Export Exists", "Rows", "Audit ID Order Match", "Complete Labels", "Invalid Labels", "Context Mismatches", "Status"], table),
         "",
         "## 回填命令",
         "",
@@ -204,13 +240,13 @@ def write_report(path: Path, rows: list[dict[str, Any]]) -> None:
         "",
         "## 使用边界",
         "",
-        "- 可以写：人工标注结果回填前有 schema、audit_id 顺序、合法标签和完成度检查。",
+        "- 可以写：人工标注结果回填前有 schema、audit_id 顺序、不可变上下文字段、合法标签和完成度检查。",
         "- 不能写：import readiness 通过前或人工字段为空时，错误分析已经 human-verified。",
     ]
     for row in rows:
-        if row["invalid_examples"] or row["missing_audit_ids"] or row["unexpected_audit_ids"]:
+        if row["invalid_examples"] or row["missing_audit_ids"] or row["unexpected_audit_ids"] or row["immutable_context_examples"]:
             lines.extend(["", f"### {row['scope']} details", ""])
-            for key in ("missing_human_columns", "missing_audit_ids", "unexpected_audit_ids", "duplicate_audit_ids", "invalid_examples"):
+            for key in ("missing_human_columns", "missing_audit_ids", "unexpected_audit_ids", "duplicate_audit_ids", "invalid_examples", "immutable_context_examples"):
                 if row[key]:
                     lines.append(f"- {key}: `{row[key]}`")
     path.parent.mkdir(parents=True, exist_ok=True)

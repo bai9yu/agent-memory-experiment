@@ -10,10 +10,10 @@
 
 ## 检查明细
 
-| Scope | Export Exists | Rows | Audit ID Order Match | Complete Labels | Invalid Labels | Status |
-| --- | --- | --- | --- | --- | --- | --- |
-| priority20 | True | 20/20 | True | 0 | 0 | pending_human_labels |
-| full80 | True | 80/80 | True | 0 | 0 | pending_human_labels |
+| Scope | Export Exists | Rows | Audit ID Order Match | Complete Labels | Invalid Labels | Context Mismatches | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| priority20 | True | 20/20 | True | 0 | 0 | 0 | pending_human_labels |
+| full80 | True | 80/80 | True | 0 | 0 | 0 | pending_human_labels |
 
 ## 回填命令
 
@@ -49,5 +49,5 @@ work/agent_memory_experiment/.venv/bin/python work/agent_memory_experiment/valid
 
 ## 使用边界
 
-- 可以写：人工标注结果回填前有 schema、audit_id 顺序、合法标签和完成度检查。
+- 可以写：人工标注结果回填前有 schema、audit_id 顺序、不可变上下文字段、合法标签和完成度检查。
 - 不能写：import readiness 通过前或人工字段为空时，错误分析已经 human-verified。
