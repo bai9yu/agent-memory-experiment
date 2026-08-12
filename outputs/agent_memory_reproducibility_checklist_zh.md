@@ -11,7 +11,7 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `f5b780d` |
+| git_commit | `0ff7cbb` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -105,9 +105,9 @@
 | Paper table consistency audit CSV | True | 3737 | `outputs/agent_memory_paper_table_consistency.csv` |
 | Paper evidence matrix | True | 7856 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 7485 | `outputs/agent_memory_paper_draft_outline_zh.md` |
-| Paper manuscript draft | True | 12592 | `outputs/agent_memory_manuscript_draft_zh.md` |
-| Paper manuscript claim check | True | 1827 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
-| Paper manuscript claim check CSV | True | 1395 | `outputs/agent_memory_manuscript_claim_check.csv` |
+| Paper manuscript draft | True | 12830 | `outputs/agent_memory_manuscript_draft_zh.md` |
+| Paper manuscript claim check | True | 2065 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
+| Paper manuscript claim check CSV | True | 1622 | `outputs/agent_memory_manuscript_claim_check.csv` |
 | Paper manuscript numeric claim check | True | 3116 | `outputs/agent_memory_manuscript_numeric_claim_check_zh.md` |
 | Paper manuscript numeric claim check CSV | True | 11685 | `outputs/agent_memory_manuscript_numeric_claim_check.csv` |
 | Paper scope claim audit | True | 11366 | `outputs/agent_memory_paper_scope_claim_audit_zh.md` |
@@ -117,7 +117,7 @@
 | Reviewer response preparation matrix | True | 4396 | `outputs/agent_memory_reviewer_response_prep_zh.md` |
 | Reviewer response preparation matrix CSV | True | 4244 | `outputs/agent_memory_reviewer_response_prep.csv` |
 | Submission package index | True | 8532 | `outputs/agent_memory_submission_package_index_zh.md` |
-| Submission package index CSV | True | 9794 | `outputs/agent_memory_submission_package_index.csv` |
+| Submission package index CSV | True | 9837 | `outputs/agent_memory_submission_package_index.csv` |
 | Supplementary package manifest | True | 5054 | `outputs/agent_memory_supplementary_package_manifest_zh.md` |
 | Supplementary package manifest CSV | True | 8550 | `outputs/agent_memory_supplementary_package_manifest.csv` |
 | Anonymous submission readiness audit | True | 1759 | `outputs/agent_memory_anonymous_submission_readiness_zh.md` |
@@ -130,14 +130,14 @@
 | Final submission checklist CSV | True | 2825 | `outputs/agent_memory_final_submission_checklist.csv` |
 | Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4743 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3633 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Untracked artifact audit | True | 4131 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 3054 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3795 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 36173 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 36174 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 9993 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 5825 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3891 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |

@@ -5,7 +5,7 @@
 ## 总览
 
 - 状态：`pass`
-- 检查项：8
+- 检查项：9
 - 失败项：0
 - blocker 失败项：0
 
@@ -13,7 +13,8 @@
 
 | Rule | Severity | Status | Evidence | Guidance |
 | --- | --- | --- | --- | --- |
-| external_embedding_not_completed | blocker | pass | completed=0; no forbidden completion claim found | 保持外部 embedding baseline 为待补实验，直到 summary.csv 存在。 |
+| external_embedding_not_completed | blocker | pass | completed=0; no forbidden completion claim found | 保持外部 embedding baseline 为待补实验，直到 summary.csv、postrun gate 和 strict paper acceptance 均通过。 |
+| external_embedding_acceptance_caveat | minor | pass | paper_acceptance_pass=0; strict acceptance caveat present | 保持外部 embedding 的最终引用标准与 acceptance gate 一致。 |
 | human_audit_not_completed | blocker | pass | full_confirmed=0; no forbidden human-verified claim found | 可以写 LLM-assisted audit draft 或人工确认流程；完成后再升级声明。 |
 | priority20_not_completed | major | pass | priority_confirmed=0; no forbidden quick-review completion claim found | 可以写 priority20 确认包已准备好，但不能写已完成人工一致性。 |
 | cross_dataset_overclaim | major | pass | cross-dataset wording is absent or explicitly framed as a limitation | 跨数据集结论需要第二数据集或更大真实切片支撑。 |

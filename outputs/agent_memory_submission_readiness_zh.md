@@ -15,7 +15,7 @@
 | --- | --- | --- | --- | --- | --- |
 | reproducibility_artifacts | reproducibility | True | True | pass | 208/208 artifacts exist |
 | reproducibility_metrics | reproducibility | True | True | pass | 22/22 metric thresholds pass |
-| manuscript_claim_check | paper_writing | True | True | pass | 8/8 claim checks pass |
+| manuscript_claim_check | paper_writing | True | True | pass | 9/9 claim checks pass |
 | manuscript_numeric_claim_check | paper_writing | True | True | pass | 15/15 numeric claim checks pass |
 | api_embedding_preflight | external_baseline | True | False | blocker | 4/5 required checks pass |
 | mock_api_embedding_smoke_test | external_baseline | False | True | pass | second_run_requests=0, summary_exists=True |

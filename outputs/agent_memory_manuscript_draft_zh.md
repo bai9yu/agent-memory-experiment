@@ -104,11 +104,11 @@ Type 3 supervised set selector 的 Coverage@5 delta 为 -0.0572，p=0.0286，说
 
 ## 7 Threats to Validity 与限制
 
-本文当前有效性威胁附录覆盖 8 项风险，类别包括 construct_validity, external_validity, internal_validity, reliability, reproducibility, scalability_validity, statistical_conclusion_validity；其中仍有 2 项会阻止最终投稿。第一，外部 embedding baseline completed=0，因此目前不能把外部 API embedding 对照写入主结果。第二，Human/LLM 人工确认尚未完成，不能宣称 human-verified error analysis。第三，主结果仍限定在 LoCoMo10 answerable slice；LOCO split 支持跨 conversation 泛化，但不等同于跨数据集泛化。第四，MRR/Recall@K 只衡量 memory retrieval，不等价于端到端 agent task success。第五，100k 扩展性实验包含 synthetic distractor，只能作为效率诊断，不能直接代表真实生产规模。完整有效性威胁、缓解措施和论文声明边界见 `outputs/agent_memory_threats_to_validity_zh.md`。
+本文当前有效性威胁附录覆盖 8 项风险，类别包括 construct_validity, external_validity, internal_validity, reliability, reproducibility, scalability_validity, statistical_conclusion_validity；其中仍有 2 项会阻止最终投稿。第一，外部 embedding baseline completed=0，paper_acceptance_pass=0，因此目前不能把外部 API embedding 对照写入主结果。第二，Human/LLM 人工确认尚未完成，不能宣称 human-verified error analysis。第三，主结果仍限定在 LoCoMo10 answerable slice；LOCO split 支持跨 conversation 泛化，但不等同于跨数据集泛化。第四，MRR/Recall@K 只衡量 memory retrieval，不等价于端到端 agent task success。第五，100k 扩展性实验包含 synthetic distractor，只能作为效率诊断，不能直接代表真实生产规模。完整有效性威胁、缓解措施和论文声明边界见 `outputs/agent_memory_threats_to_validity_zh.md`。
 
 ## 8 结论
 
-本文给出一套面向长对话智能体记忆的可复现实验框架。结果显示，LLM-written fact memory 是紧凑且有效的记忆表示，intrinsic candidate-level learned reranking 是当前最强的排序改进，而 Type 3 多证据检索仍是关键未解问题。后续最小补强是完成一个外部 embedding baseline，并通过盲审表填写 priority20/80 Human/LLM confirmation 以形成可靠性证据。
+本文给出一套面向长对话智能体记忆的可复现实验框架。结果显示，LLM-written fact memory 是紧凑且有效的记忆表示，intrinsic candidate-level learned reranking 是当前最强的排序改进，而 Type 3 多证据检索仍是关键未解问题。后续最小补强是完成一个外部 embedding baseline，并通过 postrun gate、strict paper acceptance 与 BGE-M3 delta 表后再写入主结果；同时通过盲审表填写 priority20/80 Human/LLM confirmation 以形成可靠性证据。
 
 ## Appendix A 复现状态
 
@@ -118,6 +118,6 @@ Type 3 supervised set selector 的 Coverage@5 delta 为 -0.0572，p=0.0286，说
 
 ## Appendix B 投稿前 TODO
 
-- 运行外部 embedding baseline，生成 `agent_memory_embedding_baseline_comparison_zh.md` 的 completed 版本。
+- 运行外部 embedding baseline，生成 `agent_memory_embedding_baseline_comparison_zh.md` 的 completed 版本，并通过 `agent_memory_api_embedding_postrun_gate_zh.md` 与 `agent_memory_api_embedding_paper_acceptance_zh.md`。
 - 填写 `agent_memory_human_audit_priority20_blind_review.csv` 的 human_* 字段，回填 confirmation 后生成 quick-review agreement。
 - 若目标为更高等级会议/期刊，继续扩展 LoCoMo slice 或加入第二数据集。

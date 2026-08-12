@@ -1,7 +1,7 @@
 gate,category,required_for_submission,pass,status,evidence,next_action
 reproducibility_artifacts,reproducibility,True,True,pass,208/208 artifacts exist,保持复现清单随新增 artifact 更新。
 reproducibility_metrics,reproducibility,True,True,pass,22/22 metric thresholds pass,修复任何低于阈值的核心指标或调整论文主张。
-manuscript_claim_check,paper_writing,True,True,pass,8/8 claim checks pass,继续防止正文把 pending 实验写成已完成结论。
+manuscript_claim_check,paper_writing,True,True,pass,9/9 claim checks pass,继续防止正文把 pending 实验写成已完成结论。
 manuscript_numeric_claim_check,paper_writing,True,True,pass,15/15 numeric claim checks pass,同步正文、论文表格和统计报告中的关键数值声明。
 api_embedding_preflight,external_baseline,True,False,blocker,4/5 required checks pass,配置 OPENAI_API_KEY 或等价外部 embedding provider key 后重跑 preflight。
 mock_api_embedding_smoke_test,external_baseline,False,True,pass,"second_run_requests=0, summary_exists=True",保持该 smoke test 作为 API backend/cache 的离线回归测试。

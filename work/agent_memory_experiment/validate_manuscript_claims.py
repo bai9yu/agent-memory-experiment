@@ -55,10 +55,12 @@ def contains_forbidden_claim(text: str, patterns: list[str]) -> list[str]:
 
 def validate(manuscript: str, outputs: Path) -> list[dict[str, str]]:
     embedding_status = read_csv(outputs / "agent_memory_embedding_baseline_status.csv")
+    embedding_acceptance = read_csv(outputs / "agent_memory_api_embedding_paper_acceptance.csv")
     priority_agreement = read_csv(outputs / "agent_memory_human_llm_audit_priority20_agreement.csv")
     full_agreement = read_csv(outputs / "agent_memory_human_llm_audit_agreement.csv")
 
     embedding_completed = sum(1 for row in embedding_status if row.get("status") == "completed")
+    embedding_accepted = sum(1 for row in embedding_acceptance if row.get("paper_acceptance_pass") == "True")
     priority_confirmed = int(lookup(priority_agreement, group="overview", label="confirmed_samples")["count"])
     full_confirmed = int(lookup(full_agreement, group="overview", label="confirmed_samples")["count"])
 
@@ -83,7 +85,29 @@ def validate(manuscript: str, outputs: Path) -> list[dict[str, str]]:
             "severity": "blocker",
             "status": "pass",
             "evidence": f"completed={embedding_completed}; no forbidden completion claim found",
-            "guidance": "保持外部 embedding baseline 为待补实验，直到 summary.csv 存在。",
+            "guidance": "保持外部 embedding baseline 为待补实验，直到 summary.csv、postrun gate 和 strict paper acceptance 均通过。",
+        })
+
+    acceptance_boundary_present = (
+        "paper_acceptance_pass" in manuscript
+        or "strict paper acceptance" in manuscript
+        or "agent_memory_api_embedding_paper_acceptance_zh.md" in manuscript
+    )
+    if embedding_accepted == 0 and not acceptance_boundary_present:
+        checks.append({
+            "rule_id": "external_embedding_acceptance_caveat",
+            "severity": "minor",
+            "status": "fail",
+            "evidence": f"paper_acceptance_pass={embedding_accepted}; strict acceptance caveat missing",
+            "guidance": "正文/附录应明确外部 embedding 需要 postrun gate 和 strict paper acceptance，不能只写 summary/comparison。",
+        })
+    else:
+        checks.append({
+            "rule_id": "external_embedding_acceptance_caveat",
+            "severity": "minor",
+            "status": "pass",
+            "evidence": f"paper_acceptance_pass={embedding_accepted}; strict acceptance caveat present",
+            "guidance": "保持外部 embedding 的最终引用标准与 acceptance gate 一致。",
         })
 
     human_verified_hits = contains_forbidden_claim(manuscript, [
