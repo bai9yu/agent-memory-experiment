@@ -771,6 +771,11 @@ def main() -> None:
             "notes": "Classifies package-index artifacts for supplement inclusion, internal review, blocker exclusion, and anonymization checks.",
         },
         {
+            "stage": "Submission package consistency audit",
+            "command": "work/agent_memory_experiment/validate_submission_package_consistency.py",
+            "notes": "Checks that package-index artifacts are covered by the supplement manifest, reproducibility list, and integrity manifest.",
+        },
+        {
             "stage": "Anonymous submission readiness audit",
             "command": "work/agent_memory_experiment/validate_anonymous_submission_readiness.py",
             "notes": "Scans current supplement candidates for identity, path, repository URL, email, and API-key assignment risks.",

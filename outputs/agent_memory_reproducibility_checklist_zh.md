@@ -11,7 +11,7 @@
 
 | Key | Value |
 |---|---|
-| git_commit | `01bcd86` |
+| git_commit | `88e15bc` |
 | git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
@@ -132,8 +132,8 @@
 | Final submission checklist CSV | True | 2825 | `outputs/agent_memory_final_submission_checklist.csv` |
 | Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4743 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3633 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Untracked artifact audit | True | 4131 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 3054 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
@@ -326,6 +326,7 @@
 | Reviewer response preparation matrix | `work/agent_memory_experiment/generate_reviewer_response_prep.py` | Maps likely reviewer questions to current evidence, remaining gaps, and safe paper-writing boundaries. |
 | Submission package index | `work/agent_memory_experiment/generate_submission_package_index.py` | Indexes manuscript, tables, appendices, reproducibility artifacts, blockers, and final packaging actions. |
 | Supplementary package manifest | `work/agent_memory_experiment/generate_supplementary_package_manifest.py` | Classifies package-index artifacts for supplement inclusion, internal review, blocker exclusion, and anonymization checks. |
+| Submission package consistency audit | `work/agent_memory_experiment/validate_submission_package_consistency.py` | Checks that package-index artifacts are covered by the supplement manifest, reproducibility list, and integrity manifest. |
 | Anonymous submission readiness audit | `work/agent_memory_experiment/validate_anonymous_submission_readiness.py` | Scans current supplement candidates for identity, path, repository URL, email, and API-key assignment risks. |
 | Submission entrypoint consistency audit | `work/agent_memory_experiment/validate_submission_entrypoint_consistency.py` | Checks that README, package index, and reproducibility entrypoints all point to the current submission readiness artifact. |
 | Submission readiness gate | `work/agent_memory_experiment/validate_submission_readiness.py` | Aggregates reproducibility, baseline, human-audit, and reviewer-risk gates before final submission. |

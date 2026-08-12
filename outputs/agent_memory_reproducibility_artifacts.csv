@@ -105,8 +105,8 @@ Final submission checklist,outputs/agent_memory_final_submission_checklist_zh.md
 Final submission checklist CSV,outputs/agent_memory_final_submission_checklist.csv,True,2825
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1688
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1424
-Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4743
-Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3633
+Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4131
+Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3054
 Large intermediate provenance audit,outputs/agent_memory_large_intermediate_provenance_zh.md,True,2048
 Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_provenance.csv,True,2824
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734
