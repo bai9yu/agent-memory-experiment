@@ -257,6 +257,25 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Tests conservative Type3 intent-facet window reranking without changing Top-5 evidence membership.",
         ),
         Step(
+            "type3_rescue_space_analysis",
+            py(
+                "type3_rescue_space_analysis.py",
+                "--candidate-ranked",
+                "outputs/agent_memory_candidate_reranker_locomo10_ranked_top20.csv",
+                "--queries",
+                "work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl",
+                "--output-per-query",
+                "outputs/agent_memory_type3_rescue_space_per_query.csv",
+                "--output-summary",
+                "outputs/agent_memory_type3_rescue_space_summary.csv",
+                "--output-classes",
+                "outputs/agent_memory_type3_rescue_space_classes.csv",
+                "--output-report",
+                "outputs/agent_memory_type3_rescue_space_zh.md",
+            ),
+            "Classifies Type3 errors into Top-20 rerank-rescuable and candidate-recall-missing cases.",
+        ),
+        Step(
             "embedding_baseline_status",
             py(
                 "generate_embedding_baseline_status.py",

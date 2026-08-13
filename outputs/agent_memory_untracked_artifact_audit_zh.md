@@ -5,9 +5,9 @@
 ## 总览
 
 - Untracked entries: 22
-- Track as paper artifact: 5
+- Track as paper artifact: 4
 - Review before tracking: 0
-- Keep untracked/local: 17
+- Keep untracked/local: 18
 
 ## 明细
 
@@ -29,12 +29,12 @@
 | outputs/agent_memory_type3_coverage_aware_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 690164 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | outputs/agent_memory_type3_intent_fusion_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 159104 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | outputs/agent_memory_type3_intent_fusion_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 3176243 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_rescue_space_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 18613 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | work/agent_memory_experiment/data/deepseek_smoke_test/ | local_smoke_test_data | keep_untracked | 45402 | DeepSeek smoke-test cache/output should stay local unless explicitly anonymized and documented. |
-| outputs/agent_memory_type3_intent_fusion_deltas.csv | release_audit_artifact | track_as_paper_artifact | 1093 | New public-release audit support file; track with the paper artifact package. |
-| outputs/agent_memory_type3_intent_fusion_facets.csv | release_audit_artifact | track_as_paper_artifact | 41579 | New public-release audit support file; track with the paper artifact package. |
-| outputs/agent_memory_type3_intent_fusion_summary.csv | release_audit_artifact | track_as_paper_artifact | 2352 | New public-release audit support file; track with the paper artifact package. |
-| outputs/agent_memory_type3_intent_fusion_zh.md | release_audit_artifact | track_as_paper_artifact | 6275 | New public-release audit support file; track with the paper artifact package. |
-| work/agent_memory_experiment/type3_intent_fusion_reranker.py | release_audit_artifact | track_as_paper_artifact | 25399 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_rescue_space_classes.csv | release_audit_artifact | track_as_paper_artifact | 605 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_rescue_space_summary.csv | release_audit_artifact | track_as_paper_artifact | 556 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_rescue_space_zh.md | release_audit_artifact | track_as_paper_artifact | 2483 | New public-release audit support file; track with the paper artifact package. |
+| work/agent_memory_experiment/type3_rescue_space_analysis.py | release_audit_artifact | track_as_paper_artifact | 11028 | New public-release audit support file; track with the paper artifact package. |
 
 ## 使用边界
 

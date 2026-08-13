@@ -77,6 +77,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_sig = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
     type3_coverage_aware = read_csv(outputs / "agent_memory_type3_coverage_aware_deltas.csv")
     type3_intent_fusion = read_csv(outputs / "agent_memory_type3_intent_fusion_deltas.csv")
+    type3_rescue_space = read_csv(outputs / "agent_memory_type3_rescue_space_summary.csv")
     sklearn = read_csv(outputs / "agent_memory_sklearn_nn_prefilter_locomo10_summary.csv")
     faiss_scale = read_csv(outputs / "agent_memory_faiss_scale_100k_locomo10.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
@@ -185,6 +186,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_selector_sig = lookup(type3_sig, experiment="supervised_set_selector", metric="coverage_ratio@5")
     type3_coverage_aware_free = lookup(type3_coverage_aware, method="coverage_aware_free")
     type3_intent_top5 = lookup(type3_intent_fusion, method="intent_fusion_top5_window_keep_top1")
+    type3_rescue = lookup(type3_rescue_space, scope="all_type3_candidate_reranker_top20")
     sklearn_200 = lookup(sklearn, candidate_limit="200", method="type_aware")
     faiss_flat = lookup(faiss_scale, memory_bank_size="100000", index_type="flat", top_k="200")
     faiss_ivf4 = lookup(faiss_scale, memory_bank_size="100000", index_type="ivf", nprobe="4", top_k="200")
@@ -333,6 +335,20 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "primary_artifacts": "agent_memory_type3_intent_fusion_zh.md; agent_memory_type3_intent_fusion_summary.csv; agent_memory_type3_intent_fusion_deltas.csv",
             "paper_use": "可作为轻量优化尝试或消融边界：保守窗口重排不会破坏 Top-5 证据集合，但收益很小。",
             "remaining_gap": "需要学习式 set/listwise 目标来真正提升 Coverage@5 和 Full@5。",
+        },
+        {
+            "claim": "Type 3 错误同时包含重排可救回空间和候选召回缺失。",
+            "status": "diagnostic",
+            "evidence": (
+                f"Within candidate-reranker Top-20, {pct(type3_rescue['rerank_rescuable_share'])} of Type3 query-splits are rerank-rescuable; "
+                f"{pct(type3_rescue['candidate_missing_all_gold_share'])} miss all gold evidence. "
+                f"Oracle Top-5 coverage can rise from {f(type3_rescue['top5_coverage'])} to {f(type3_rescue['oracle_top5_coverage'])}, "
+                f"with Full@5 rising from {f(type3_rescue['top5_full'])} to {f(type3_rescue['oracle_top5_full'])}."
+            ),
+            "support_level": "strong_diagnostic",
+            "primary_artifacts": "agent_memory_type3_rescue_space_zh.md; agent_memory_type3_rescue_space_summary.csv; agent_memory_type3_rescue_space_classes.csv",
+            "paper_use": "用于解释为什么下一步需要双线优化：listwise/setwise 重排负责可救回样本，召回增强负责候选缺失样本。",
+            "remaining_gap": "该结果是 oracle 上限分析，不能作为实际方法指标；实际算法仍需在 held-out query 上验证。",
         },
         {
             "claim": "向量候选预筛选可以在不损害质量的情况下提升检索速度。",

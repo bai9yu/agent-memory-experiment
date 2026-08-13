@@ -254,6 +254,9 @@ def main() -> None:
         ("Type3 intent-facet fusion summary", outputs / "agent_memory_type3_intent_fusion_summary.csv"),
         ("Type3 intent-facet fusion deltas", outputs / "agent_memory_type3_intent_fusion_deltas.csv"),
         ("Type3 intent-facet fusion facets", outputs / "agent_memory_type3_intent_fusion_facets.csv"),
+        ("Type3 rescue-space report", outputs / "agent_memory_type3_rescue_space_zh.md"),
+        ("Type3 rescue-space summary", outputs / "agent_memory_type3_rescue_space_summary.csv"),
+        ("Type3 rescue-space classes", outputs / "agent_memory_type3_rescue_space_classes.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
@@ -588,6 +591,11 @@ def main() -> None:
             "stage": "Type3 intent-facet fusion reranker",
             "command": "work/agent_memory_experiment/type3_intent_fusion_reranker.py",
             "notes": "Tests conservative intent-facet Top-5 window reranking for Type3 queries without changing Top-5 evidence membership.",
+        },
+        {
+            "stage": "Type3 rescue-space analysis",
+            "command": "work/agent_memory_experiment/type3_rescue_space_analysis.py",
+            "notes": "Separates Type3 cases where better Top-20 reranking can help from cases that need stronger candidate recall.",
         },
         {
             "stage": "Embedding baseline status",
