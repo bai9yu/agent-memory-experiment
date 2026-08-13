@@ -83,6 +83,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_recall_expansion_deltas = read_csv(outputs / "agent_memory_type3_recall_expansion_deltas.csv")
     type3_expanded_selector = read_csv(outputs / "agent_memory_type3_expanded_pool_selector_deltas.csv")
     type3_learned_expanded_selector = read_csv(outputs / "agent_memory_type3_learned_expanded_selector_deltas.csv")
+    type3_cluster_coverage_selector = read_csv(outputs / "agent_memory_type3_cluster_coverage_selector_deltas.csv")
     sklearn = read_csv(outputs / "agent_memory_sklearn_nn_prefilter_locomo10_summary.csv")
     faiss_scale = read_csv(outputs / "agent_memory_faiss_scale_100k_locomo10.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
@@ -200,6 +201,8 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_expanded_oracle = lookup(type3_expanded_selector, method="expanded_pool_oracle_top5")
     type3_learned_expanded = lookup(type3_learned_expanded_selector, method="learned_expanded_selector")
     type3_learned_oracle = lookup(type3_learned_expanded_selector, method="expanded_pool_oracle_top5")
+    type3_cluster_coverage = lookup(type3_cluster_coverage_selector, method="cluster_coverage_selector")
+    type3_cluster_oracle = lookup(type3_cluster_coverage_selector, method="expanded_pool_oracle_top5")
     sklearn_200 = lookup(sklearn, candidate_limit="200", method="type_aware")
     faiss_flat = lookup(faiss_scale, memory_bank_size="100000", index_type="flat", top_k="200")
     faiss_ivf4 = lookup(faiss_scale, memory_bank_size="100000", index_type="ivf", nprobe="4", top_k="200")
@@ -425,6 +428,23 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "primary_artifacts": "agent_memory_type3_learned_expanded_selector_zh.md; agent_memory_type3_learned_expanded_selector_summary.csv; agent_memory_type3_learned_expanded_selector_deltas.csv; agent_memory_type3_learned_expanded_selector_weights.csv",
             "paper_use": "可以作为方法演进证据：候选扩展有效，但简单点式学习/均值差权重不足，需要更强的 listwise/setwise 训练目标或 LLM 子问题标签。",
             "remaining_gap": "下一步需要引入真正的集合级监督信号，评价是否能同时提升 MRR、Coverage@5 与 Full@5。",
+        },
+        {
+            "claim": "无监督簇多样性不能直接替代答案证据覆盖目标。",
+            "status": "negative_setwise_diagnostic",
+            "evidence": (
+                f"Cluster coverage selection changes Top-5 cluster count by "
+                f"{signed(type3_cluster_coverage['delta_top5_cluster_count'])}, but changes Coverage@5 by "
+                f"{signed(type3_cluster_coverage['delta_coverage_ratio@5'])} and Full@5 by "
+                f"{signed(type3_cluster_coverage['delta_full_coverage@5'])}. "
+                f"The oracle gap on the same pool remains Coverage@5 "
+                f"{signed(type3_cluster_oracle['delta_coverage_ratio@5'])} and Full@5 "
+                f"{signed(type3_cluster_oracle['delta_full_coverage@5'])}."
+            ),
+            "support_level": "negative_setwise_diagnostic_with_oracle_gap",
+            "primary_artifacts": "agent_memory_type3_cluster_coverage_selector_zh.md; agent_memory_type3_cluster_coverage_selector_summary.csv; agent_memory_type3_cluster_coverage_selector_deltas.csv",
+            "paper_use": "可作为消融结论：集合级目标是必要的，但简单无监督多样性与 gold evidence coverage 不对齐。",
+            "remaining_gap": "需要用监督式 listwise/setwise 目标、子问题覆盖标签，或 LLM 生成的 query decomposition 来对齐证据覆盖。",
         },
         {
             "claim": "向量候选预筛选可以在不损害质量的情况下提升检索速度。",

@@ -49,6 +49,7 @@ def classify(path: str) -> tuple[str, str, str]:
         "work/agent_memory_experiment/type3_recall_expansion_analysis.py",
         "work/agent_memory_experiment/type3_expanded_pool_selector.py",
         "work/agent_memory_experiment/type3_learned_expanded_selector.py",
+        "work/agent_memory_experiment/type3_cluster_coverage_selector.py",
         "outputs/agent_memory_untracked_artifact_audit.csv",
         "outputs/agent_memory_untracked_artifact_audit_zh.md",
         "outputs/agent_memory_api_embedding_postrun_gate.csv",
@@ -127,6 +128,9 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_type3_learned_expanded_selector_selected_params.csv",
         "outputs/agent_memory_type3_learned_expanded_selector_weights.csv",
         "outputs/agent_memory_type3_learned_expanded_selector_zh.md",
+        "outputs/agent_memory_type3_cluster_coverage_selector_summary.csv",
+        "outputs/agent_memory_type3_cluster_coverage_selector_deltas.csv",
+        "outputs/agent_memory_type3_cluster_coverage_selector_zh.md",
     }:
         return ("release_audit_artifact", "track_as_paper_artifact", "New public-release audit support file; track with the paper artifact package.")
     if path.startswith("work/agent_memory_experiment/data/deepseek_smoke_test/"):
@@ -157,6 +161,8 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_type3_expanded_pool_selector_ranked_top20.csv",
         "outputs/agent_memory_type3_learned_expanded_selector_per_query.csv",
         "outputs/agent_memory_type3_learned_expanded_selector_ranked_top20.csv",
+        "outputs/agent_memory_type3_cluster_coverage_selector_per_query.csv",
+        "outputs/agent_memory_type3_cluster_coverage_selector_ranked_top20.csv",
         "outputs/agent_memory_type3_learned_expanded_selector_balanced_per_query.csv",
         "outputs/agent_memory_type3_learned_expanded_selector_balanced_ranked_top20.csv",
         "outputs/agent_memory_type3_learned_expanded_selector_balanced_summary.csv",

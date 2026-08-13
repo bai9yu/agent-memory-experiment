@@ -1,0 +1,3 @@
+baseline,method,delta_mrr,delta_recall@5,delta_coverage_ratio@5,delta_full_coverage@5,delta_top5_cluster_count,delta_coverage_ratio@100,delta_full_coverage@100
+candidate20_then_expansion,cluster_coverage_selector,0.0013750961387986593,-0.007936507936507908,-0.028986409378566225,-0.05555555555555558,0.06349206349206327,0.0,0.0
+candidate20_then_expansion,expanded_pool_oracle_top5,0.4441298945338716,0.3730158730158731,0.34545336653179787,0.30158730158730157,0.05555555555555536,-0.002334267040149385,0.0

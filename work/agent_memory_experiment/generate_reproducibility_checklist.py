@@ -273,6 +273,9 @@ def main() -> None:
         ("Type3 learned expanded selector deltas", outputs / "agent_memory_type3_learned_expanded_selector_deltas.csv"),
         ("Type3 learned expanded selector selected params", outputs / "agent_memory_type3_learned_expanded_selector_selected_params.csv"),
         ("Type3 learned expanded selector weights", outputs / "agent_memory_type3_learned_expanded_selector_weights.csv"),
+        ("Type3 cluster coverage selector report", outputs / "agent_memory_type3_cluster_coverage_selector_zh.md"),
+        ("Type3 cluster coverage selector summary", outputs / "agent_memory_type3_cluster_coverage_selector_summary.csv"),
+        ("Type3 cluster coverage selector deltas", outputs / "agent_memory_type3_cluster_coverage_selector_deltas.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
@@ -632,6 +635,11 @@ def main() -> None:
             "stage": "Type3 learned expanded-pool selector",
             "command": "work/agent_memory_experiment/type3_learned_expanded_selector.py",
             "notes": "Tests a dependency-free learned selector on expanded Type3 pools with train/validation/test separation and records whether simple learned scoring can close the oracle gap.",
+        },
+        {
+            "stage": "Type3 cluster coverage selector",
+            "command": "work/agent_memory_experiment/type3_cluster_coverage_selector.py",
+            "notes": "Tests whether unsupervised cluster diversity in the expanded pool improves or harms Top-5 gold evidence coverage.",
         },
         {
             "stage": "Embedding baseline status",
