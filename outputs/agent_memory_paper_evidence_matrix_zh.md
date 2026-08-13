@@ -12,6 +12,7 @@
 | diagnostic_boundary | 1 |
 | efficiency_boundary | 1 |
 | efficiency_result | 1 |
+| heldout_negative_with_oracle_gap | 1 |
 | limited_positive | 1 |
 | main_method | 1 |
 | main_result | 2 |
@@ -37,9 +38,10 @@
 | negative_result | 单候选监督窗口重排不足以利用 Type 3 的 Top-20 可救回空间。 | Dependency-free supervised window reranking changes MRR by -0.0009; Recall@5, Coverage@5, and Full@5 change by +0.0000, +0.0000, and +0.0000. | heldout_negative | 可作为方法选择的负结果：仅学习单条候选相关性不能解决多证据集合覆盖。 | 需要直接优化集合覆盖的 listwise/setwise 目标，或引入 LLM 子问题生成提高候选召回。 |
 | positive_diagnostic | 多路离线召回扩展可以显著减少 Type 3 候选池缺证据问题。 | Merging candidate Top-20 with offline Top-50 and intent-facet Top-50 lowers Missing-All from 0.254 to 0.151 (-0.1032); Coverage@100 rises by +0.1069 and Full@100 rises by +0.1111. | strong_candidate_pool_diagnostic | 可作为下一版主方法的动机：先扩展候选池，再做 listwise/setwise 证据选择。 | 该实验只评价候选池覆盖，不评价最终排序；需要接后续重排器验证端到端 MRR/Coverage@5。 |
 | diagnostic_boundary | 扩展候选池的收益尚未被无监督 Top-5 选择器充分转化。 | Appending expansion after candidate Top-20 preserves Top-5 while improving Coverage@100 by +0.1232 and Full@100 by +0.1190. The unsupervised expanded-pool selector changes Coverage@5 by -0.0241, while oracle Top-5 on the expanded pool could improve Coverage@5 by +0.3455 and Full@5 by +0.3016. | strong_oracle_gap_diagnostic | 用于支撑下一版主方法：扩展召回池已经有证据，但必须设计学习式 listwise/setwise 选择器才能把收益前移到 Top-5。 | 当前 selector 是无监督启发式，不能作为最终改进；需要训练或 LLM 辅助标签来学习集合级选择。 |
+| heldout_negative_with_oracle_gap | 轻量学习式扩展池选择器仍不足以转化 Type 3 oracle 空间。 | With train/validation/test separation, the learned expanded selector changes MRR by -0.0001, Coverage@5 by +0.0000, and Full@5 by +0.0000. Oracle Top-5 on the same expanded pool could still improve Coverage@5 by +0.3455 and Full@5 by +0.3016. | heldout_negative_with_oracle_gap | 可以作为方法演进证据：候选扩展有效，但简单点式学习/均值差权重不足，需要更强的 listwise/setwise 训练目标或 LLM 子问题标签。 | 下一步需要引入真正的集合级监督信号，评价是否能同时提升 MRR、Coverage@5 与 Full@5。 |
 | efficiency_result | 向量候选预筛选可以在不损害质量的情况下提升检索速度。 | Sklearn exact NN top-200 + type-aware MRR 0.613, R@5 0.734; delta vs full type-aware MRR +0.0032. | strong_cached_efficiency | 可以支撑论文效率实验章节。 | 需要统一报告 wall-clock 设置，并在更大的真实 memory bank 上验证。 |
 | efficiency_boundary | 100k 记忆规模下 ANN 的速度-质量权衡并非天然占优。 | 100k Flat candidate gold recall 0.952, query 0.360s; IVF nprobe=4 recall 0.737, query 0.199s. | synthetic_scale_diagnostic | 可以作为扩展性诊断，但必须标注为 synthetic distractor stress test。 | 需要真实的大规模 conversation memory bank 才能形成更强系统结论。 |
-| reproducibility | 当前仓库已经具备可复现的缓存实验包。 | Reproducibility artifact gate 233/233 and metric gate 22/22. | artifact_checked | 可以用于论文 appendix 和内部复现实验。 | 全新 clone 仍需要按文档准备模型/embedding cache，因为大缓存不进入 Git。 |
+| reproducibility | 当前仓库已经具备可复现的缓存实验包。 | Reproducibility artifact gate 238/238 and metric gate 22/22. | artifact_checked | 可以用于论文 appendix 和内部复现实验。 | 全新 clone 仍需要按文档准备模型/embedding cache，因为大缓存不进入 Git。 |
 | reliability_protocol | 自动错误分析已经具备人工复核入口，并已有 LLM-assisted 预标注。 | 已从 type-aware Top-1 错误中分层抽样 80 条；当前已汇总人工标注 0 条；LLM-assisted 预标注 80 条，auto_reason_correct yes/partial/no=28/29/23；Human/LLM 确认表已生成，人工确认 0 条，非法标签 0；readiness gate: priority20 0/20, full80 0/80。 | llm_assisted_protocol_ready | 可以说明已有 LLM-assisted 预复核流程；在人工确认前，不能把它写成人工验证结论。 | 需要在 confirmation CSV 中填写 human_* 字段，并重新运行一致性脚本，得到 exact agreement 与 Cohen's kappa。 |
 | stability_result | DeepSeek memory writer 在 LoCoMo10 重复抽取中具有可报告的稳定性。 | 稳定性 manifest 登记 3 次抽取，目前 completed runs=3；已可报告均值和标准差。 | variance_ready | 可以作为 memory writer stability 小节；需要说明 temperature 设置和 LoCoMo10 slice 范围。 | 若投稿目标更高，需要在额外数据集或更大 LoCoMo slice 上复验。 |
 | baseline_protocol | 外部 embedding baseline 已经具备 API 接入与缓存框架，但尚未形成实验结果。 | 已登记 2 个外部 embedding baseline；completed=0, ready_or_completed=0；preflight required=4/5；预计文本 4355 条、约 71882 tokens、未缓存批次 35；对比表完成=False。 | protocol_ready_pending_run | 可以作为复现实验入口；离线 hash/BM25 敏感性可写为下界诊断，但外部 API summary.csv 生成前不能写入外部 embedding 主结果表。 | 需要提供 OpenAI 或其他 OpenAI-compatible provider 的 embedding API key，并实际运行至少一个外部 embedding 对照；hash baseline 不能替代真实外部 embedding。 |

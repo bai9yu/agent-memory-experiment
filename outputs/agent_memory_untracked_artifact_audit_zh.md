@@ -4,10 +4,10 @@
 
 ## 总览
 
-- Untracked entries: 27
-- Track as paper artifact: 4
+- Untracked entries: 45
+- Track as paper artifact: 6
 - Review before tracking: 0
-- Keep untracked/local: 23
+- Keep untracked/local: 39
 
 ## 明细
 
@@ -31,15 +31,33 @@
 | outputs/agent_memory_type3_expanded_pool_selector_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 6800615 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | outputs/agent_memory_type3_intent_fusion_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 159104 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | outputs/agent_memory_type3_intent_fusion_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 3176243 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_balanced_deltas.csv | large_type3_coverage_intermediate | keep_untracked | 445 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_balanced_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 78202 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_balanced_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 6431630 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_balanced_selected_params.csv | large_type3_coverage_intermediate | keep_untracked | 584 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_balanced_summary.csv | large_type3_coverage_intermediate | keep_untracked | 1474 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_balanced_weights.csv | large_type3_coverage_intermediate | keep_untracked | 2681 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_balanced_zh.md | large_type3_coverage_intermediate | keep_untracked | 2397 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_mrr_deltas.csv | large_type3_coverage_intermediate | keep_untracked | 445 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_mrr_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 78202 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_mrr_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 6431630 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_mrr_selected_params.csv | large_type3_coverage_intermediate | keep_untracked | 589 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_mrr_summary.csv | large_type3_coverage_intermediate | keep_untracked | 1474 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_mrr_weights.csv | large_type3_coverage_intermediate | keep_untracked | 2681 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_mrr_zh.md | large_type3_coverage_intermediate | keep_untracked | 2392 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 78221 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_learned_expanded_selector_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 6311754 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | outputs/agent_memory_type3_recall_expansion_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 356356 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | outputs/agent_memory_type3_rescue_space_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 18613 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | outputs/agent_memory_type3_supervised_window_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 31505 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | outputs/agent_memory_type3_supervised_window_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 814794 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | work/agent_memory_experiment/data/deepseek_smoke_test/ | local_smoke_test_data | keep_untracked | 45402 | DeepSeek smoke-test cache/output should stay local unless explicitly anonymized and documented. |
-| outputs/agent_memory_type3_expanded_pool_selector_deltas.csv | release_audit_artifact | track_as_paper_artifact | 996 | New public-release audit support file; track with the paper artifact package. |
-| outputs/agent_memory_type3_expanded_pool_selector_summary.csv | release_audit_artifact | track_as_paper_artifact | 1830 | New public-release audit support file; track with the paper artifact package. |
-| outputs/agent_memory_type3_expanded_pool_selector_zh.md | release_audit_artifact | track_as_paper_artifact | 2117 | New public-release audit support file; track with the paper artifact package. |
-| work/agent_memory_experiment/type3_expanded_pool_selector.py | release_audit_artifact | track_as_paper_artifact | 25748 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_learned_expanded_selector_deltas.csv | release_audit_artifact | track_as_paper_artifact | 391 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_learned_expanded_selector_selected_params.csv | release_audit_artifact | track_as_paper_artifact | 584 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_learned_expanded_selector_summary.csv | release_audit_artifact | track_as_paper_artifact | 1472 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_learned_expanded_selector_weights.csv | release_audit_artifact | track_as_paper_artifact | 2681 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_learned_expanded_selector_zh.md | release_audit_artifact | track_as_paper_artifact | 2396 | New public-release audit support file; track with the paper artifact package. |
+| work/agent_memory_experiment/type3_learned_expanded_selector.py | release_audit_artifact | track_as_paper_artifact | 22860 | New public-release audit support file; track with the paper artifact package. |
 
 ## 使用边界
 

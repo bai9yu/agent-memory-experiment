@@ -27,6 +27,7 @@ REQUIRED_STEPS = [
     ("type3_supervised_window_reranker", "Type3 supervised conservative window-reranking diagnostic"),
     ("type3_recall_expansion_analysis", "Type3 offline recall-expansion diagnostic"),
     ("type3_expanded_pool_selector", "Type3 expanded-pool Top-5 evidence selector diagnostic"),
+    ("type3_learned_expanded_selector", "Type3 learned expanded-pool selector diagnostic"),
     ("embedding_baseline_status", "external embedding status without network calls"),
     ("embedding_provider_profiles", "provider-specific external embedding command profiles"),
     ("api_embedding_preflight", "paid/API embedding preflight"),

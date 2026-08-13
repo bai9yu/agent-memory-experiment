@@ -268,6 +268,11 @@ def main() -> None:
         ("Type3 expanded-pool selector report", outputs / "agent_memory_type3_expanded_pool_selector_zh.md"),
         ("Type3 expanded-pool selector summary", outputs / "agent_memory_type3_expanded_pool_selector_summary.csv"),
         ("Type3 expanded-pool selector deltas", outputs / "agent_memory_type3_expanded_pool_selector_deltas.csv"),
+        ("Type3 learned expanded selector report", outputs / "agent_memory_type3_learned_expanded_selector_zh.md"),
+        ("Type3 learned expanded selector summary", outputs / "agent_memory_type3_learned_expanded_selector_summary.csv"),
+        ("Type3 learned expanded selector deltas", outputs / "agent_memory_type3_learned_expanded_selector_deltas.csv"),
+        ("Type3 learned expanded selector selected params", outputs / "agent_memory_type3_learned_expanded_selector_selected_params.csv"),
+        ("Type3 learned expanded selector weights", outputs / "agent_memory_type3_learned_expanded_selector_weights.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
@@ -622,6 +627,11 @@ def main() -> None:
             "stage": "Type3 expanded-pool selector",
             "command": "work/agent_memory_experiment/type3_expanded_pool_selector.py",
             "notes": "Tests whether the expanded Type3 candidate pool can be converted into Top-5 evidence selection gains and records the oracle gap.",
+        },
+        {
+            "stage": "Type3 learned expanded-pool selector",
+            "command": "work/agent_memory_experiment/type3_learned_expanded_selector.py",
+            "notes": "Tests a dependency-free learned selector on expanded Type3 pools with train/validation/test separation and records whether simple learned scoring can close the oracle gap.",
         },
         {
             "stage": "Embedding baseline status",
