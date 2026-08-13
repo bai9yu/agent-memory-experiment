@@ -4,10 +4,10 @@
 
 ## 总览
 
-- Untracked entries: 16
-- Track as paper artifact: 3
+- Untracked entries: 19
+- Track as paper artifact: 4
 - Review before tracking: 0
-- Keep untracked/local: 13
+- Keep untracked/local: 15
 
 ## 明细
 
@@ -25,10 +25,13 @@
 | outputs/agent_memory_candidate_reranker_locomo10_ranked_top20.csv | large_ranked_intermediate | keep_untracked | 6737780 | Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries. |
 | outputs/agent_memory_set_selection_ranked.csv | large_ranked_intermediate | keep_untracked | 6289166 | Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries. |
 | outputs/agent_memory_set_selection_top20_ranked.csv | large_ranked_intermediate | keep_untracked | 12717839 | Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries. |
+| outputs/agent_memory_type3_coverage_aware_per_query.csv | large_type3_coverage_intermediate | keep_untracked | 65616 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
+| outputs/agent_memory_type3_coverage_aware_ranked_top20.csv | large_type3_coverage_intermediate | keep_untracked | 690164 | Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence. |
 | work/agent_memory_experiment/data/deepseek_smoke_test/ | local_smoke_test_data | keep_untracked | 45402 | DeepSeek smoke-test cache/output should stay local unless explicitly anonymized and documented. |
-| outputs/agent_memory_writer_cost_boundary.csv | release_audit_artifact | track_as_paper_artifact | 1420 | New public-release audit support file; track with the paper artifact package. |
-| outputs/agent_memory_writer_cost_boundary_zh.md | release_audit_artifact | track_as_paper_artifact | 3073 | New public-release audit support file; track with the paper artifact package. |
-| work/agent_memory_experiment/generate_writer_cost_boundary.py | release_audit_artifact | track_as_paper_artifact | 9906 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_coverage_aware_deltas.csv | release_audit_artifact | track_as_paper_artifact | 409 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_coverage_aware_summary.csv | release_audit_artifact | track_as_paper_artifact | 1368 | New public-release audit support file; track with the paper artifact package. |
+| outputs/agent_memory_type3_coverage_aware_zh.md | release_audit_artifact | track_as_paper_artifact | 1764 | New public-release audit support file; track with the paper artifact package. |
+| work/agent_memory_experiment/type3_coverage_aware_reranker.py | release_audit_artifact | track_as_paper_artifact | 16530 | New public-release audit support file; track with the paper artifact package. |
 
 ## 使用边界
 

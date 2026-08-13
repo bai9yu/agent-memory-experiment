@@ -74,6 +74,9 @@ Type3 supervised selector rwn002 per-query,outputs/agent_memory_type3_supervised
 Type3 supervised selector rwn002 coverage,outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage.csv,True,66755
 Type3 supervised selector rwn002 comparison,outputs/agent_memory_type3_supervised_set_selector_rwn002_comparison_per_query.csv,True,41037
 Type3 supervised selector rwn002 ranked top20,outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv,True,725694
+Type3 coverage-aware reranker report,outputs/agent_memory_type3_coverage_aware_zh.md,True,1764
+Type3 coverage-aware reranker summary,outputs/agent_memory_type3_coverage_aware_summary.csv,True,1368
+Type3 coverage-aware reranker deltas,outputs/agent_memory_type3_coverage_aware_deltas.csv,True,409
 Paper tables Markdown,outputs/agent_memory_paper_tables_zh.md,True,3724
 Paper tables LaTeX,outputs/agent_memory_paper_tables.tex,True,5197
 Paper table consistency audit,outputs/agent_memory_paper_table_consistency_zh.md,True,3343
@@ -107,8 +110,8 @@ Final submission checklist,outputs/agent_memory_final_submission_checklist_zh.md
 Final submission checklist CSV,outputs/agent_memory_final_submission_checklist.csv,True,3126
 Public release readiness gate,outputs/agent_memory_public_release_readiness_zh.md,True,1688
 Public release readiness gate CSV,outputs/agent_memory_public_release_readiness.csv,True,1424
-Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,4713
-Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,3603
+Untracked artifact audit,outputs/agent_memory_untracked_artifact_audit_zh.md,True,5370
+Untracked artifact audit CSV,outputs/agent_memory_untracked_artifact_audit.csv,True,4227
 Large intermediate provenance audit,outputs/agent_memory_large_intermediate_provenance_zh.md,True,2048
 Large intermediate provenance audit CSV,outputs/agent_memory_large_intermediate_provenance.csv,True,2824
 Artifact path portability audit,outputs/agent_memory_artifact_path_portability_zh.md,True,734

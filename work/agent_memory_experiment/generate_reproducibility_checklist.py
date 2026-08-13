@@ -247,6 +247,9 @@ def main() -> None:
         ("Type3 supervised selector rwn002 coverage", outputs / "agent_memory_type3_supervised_set_selector_rwn002_coverage.csv"),
         ("Type3 supervised selector rwn002 comparison", outputs / "agent_memory_type3_supervised_set_selector_rwn002_comparison_per_query.csv"),
         ("Type3 supervised selector rwn002 ranked top20", outputs / "agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv"),
+        ("Type3 coverage-aware reranker report", outputs / "agent_memory_type3_coverage_aware_zh.md"),
+        ("Type3 coverage-aware reranker summary", outputs / "agent_memory_type3_coverage_aware_summary.csv"),
+        ("Type3 coverage-aware reranker deltas", outputs / "agent_memory_type3_coverage_aware_deltas.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
@@ -571,6 +574,11 @@ def main() -> None:
             "stage": "Type3 supervised set selector variants",
             "command": "work/agent_memory_experiment/type3_supervised_set_selector_experiment.py",
             "notes": "Records rw=0 and rw=-0.02 greedy set-selector variants for Type3 negative-result analysis.",
+        },
+        {
+            "stage": "Type3 coverage-aware reranker",
+            "command": "work/agent_memory_experiment/type3_coverage_aware_reranker.py",
+            "notes": "Tests unsupervised coverage-aware selection over cached Top-20 candidates without using gold evidence for scoring.",
         },
         {
             "stage": "Embedding baseline status",

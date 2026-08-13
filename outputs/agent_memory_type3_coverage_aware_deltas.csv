@@ -1,0 +1,3 @@
+baseline,method,delta_mrr,delta_recall@5,delta_coverage_ratio@5,delta_full_coverage@5,delta_coverage_ratio@20,delta_full_coverage@20
+candidate_reranker,coverage_aware_free,-0.0044494021384777205,-0.047619047619047616,-0.03963844797178129,-0.03968253968253971,0.0,0.0
+candidate_reranker,coverage_aware_keep_top1,-0.0044494021384777205,-0.047619047619047616,-0.03963844797178129,-0.03968253968253971,0.0,0.0

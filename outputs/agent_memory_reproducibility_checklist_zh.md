@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：212/212
+- Artifact 存在性：215/215
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `a6b0b1f` |
-| git_branch_status | `## main...origin/main [ahead 1]` |
+| git_commit | `f815438` |
+| git_branch_status | `## main...origin/main` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -101,6 +101,9 @@
 | Type3 supervised selector rwn002 coverage | True | 66755 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_coverage.csv` |
 | Type3 supervised selector rwn002 comparison | True | 41037 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_comparison_per_query.csv` |
 | Type3 supervised selector rwn002 ranked top20 | True | 725694 | `outputs/agent_memory_type3_supervised_set_selector_rwn002_ranked_top20.csv` |
+| Type3 coverage-aware reranker report | True | 1764 | `outputs/agent_memory_type3_coverage_aware_zh.md` |
+| Type3 coverage-aware reranker summary | True | 1368 | `outputs/agent_memory_type3_coverage_aware_summary.csv` |
+| Type3 coverage-aware reranker deltas | True | 409 | `outputs/agent_memory_type3_coverage_aware_deltas.csv` |
 | Paper tables Markdown | True | 3724 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 5197 | `outputs/agent_memory_paper_tables.tex` |
 | Paper table consistency audit | True | 3343 | `outputs/agent_memory_paper_table_consistency_zh.md` |
@@ -134,8 +137,8 @@
 | Final submission checklist CSV | True | 3126 | `outputs/agent_memory_final_submission_checklist.csv` |
 | Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 4713 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 3603 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Untracked artifact audit | True | 5370 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 4227 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
@@ -288,6 +291,7 @@
 | Type3 diagnostics | `work/agent_memory_experiment/type3_coverage_significance_analysis.py` | Aggregates Type3 coverage significance tests. |
 | Type3 query decomposition fusion4 | `work/agent_memory_experiment/type3_query_decomposition_experiment.py` | Records the stronger keyword-facet decomposition fusion variant and its negative result. |
 | Type3 supervised set selector variants | `work/agent_memory_experiment/type3_supervised_set_selector_experiment.py` | Records rw=0 and rw=-0.02 greedy set-selector variants for Type3 negative-result analysis. |
+| Type3 coverage-aware reranker | `work/agent_memory_experiment/type3_coverage_aware_reranker.py` | Tests unsupervised coverage-aware selection over cached Top-20 candidates without using gold evidence for scoring. |
 | Embedding baseline status | `work/agent_memory_experiment/generate_embedding_baseline_status.py` | Tracks API embedding baseline readiness without reading or printing keys. |
 | Embedding provider profiles | `work/agent_memory_experiment/generate_embedding_provider_profiles.py` | Lists OpenAI and generic OpenAI-compatible provider commands for preflight, estimate, run, and compare. |
 | API embedding preflight | `work/agent_memory_experiment/preflight_api_embedding_baseline.py` | Checks inputs, key availability, cache paths, and result summary before paid/API embedding runs. |

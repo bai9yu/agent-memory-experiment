@@ -75,6 +75,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     query_type = read_csv(outputs / "agent_memory_query_type_locomo10_best_methods.csv")
     coverage = read_csv(outputs / "agent_memory_multi_evidence_coverage_summary.csv")
     type3_sig = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
+    type3_coverage_aware = read_csv(outputs / "agent_memory_type3_coverage_aware_deltas.csv")
     sklearn = read_csv(outputs / "agent_memory_sklearn_nn_prefilter_locomo10_summary.csv")
     faiss_scale = read_csv(outputs / "agent_memory_faiss_scale_100k_locomo10.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
@@ -181,6 +182,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     cov_type3 = lookup(coverage, query_type="3", method="type_aware")
     cov_type5 = lookup(coverage, query_type="5", method="type_aware")
     type3_selector_sig = lookup(type3_sig, experiment="supervised_set_selector", metric="coverage_ratio@5")
+    type3_coverage_aware_free = lookup(type3_coverage_aware, method="coverage_aware_free")
     sklearn_200 = lookup(sklearn, candidate_limit="200", method="type_aware")
     faiss_flat = lookup(faiss_scale, memory_bank_size="100000", index_type="flat", top_k="200")
     faiss_ivf4 = lookup(faiss_scale, memory_bank_size="100000", index_type="ivf", nprobe="4", top_k="200")
@@ -307,12 +309,14 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "status": "negative_result",
             "evidence": (
                 f"Supervised set selector Coverage@5 delta {signed(type3_selector_sig['mean_delta'])}, "
-                f"p={f(type3_selector_sig['permutation_p_value'], 4)}; Type3-specific reranker and keyword decomposition also reduce Coverage@5."
+                f"p={f(type3_selector_sig['permutation_p_value'], 4)}; Type3-specific reranker and keyword decomposition also reduce Coverage@5. "
+                f"Top-20 coverage-aware unsupervised reranking also reduces Coverage@5 by {signed(type3_coverage_aware_free['delta_coverage_ratio@5'])} "
+                f"and Full@5 by {signed(type3_coverage_aware_free['delta_full_coverage@5'])}."
             ),
             "support_level": "statistically_supported_negative",
-            "primary_artifacts": "agent_memory_type3_coverage_significance_summary.csv; agent_memory_type3_coverage_significance_zh.md",
+            "primary_artifacts": "agent_memory_type3_coverage_significance_summary.csv; agent_memory_type3_coverage_significance_zh.md; agent_memory_type3_coverage_aware_zh.md",
             "paper_use": "适合作为边界/负结果消融，而不是作为改进方法。",
-            "remaining_gap": "下一步应尝试 LLM 子问题生成或真正的 setwise objective。",
+            "remaining_gap": "无监督 coverage/diversity 信号已不足；下一步应尝试 LLM 子问题生成或真正的 listwise/setwise objective。",
         },
         {
             "claim": "向量候选预筛选可以在不损害质量的情况下提升检索速度。",
