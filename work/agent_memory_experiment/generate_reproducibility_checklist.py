@@ -262,6 +262,9 @@ def main() -> None:
         ("Type3 supervised window deltas", outputs / "agent_memory_type3_supervised_window_deltas.csv"),
         ("Type3 supervised window selected params", outputs / "agent_memory_type3_supervised_window_selected_params.csv"),
         ("Type3 supervised window feature importance", outputs / "agent_memory_type3_supervised_window_feature_importance.csv"),
+        ("Type3 recall expansion report", outputs / "agent_memory_type3_recall_expansion_zh.md"),
+        ("Type3 recall expansion summary", outputs / "agent_memory_type3_recall_expansion_summary.csv"),
+        ("Type3 recall expansion deltas", outputs / "agent_memory_type3_recall_expansion_deltas.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
@@ -606,6 +609,11 @@ def main() -> None:
             "stage": "Type3 supervised window reranker",
             "command": "work/agent_memory_experiment/type3_supervised_window_reranker.py",
             "notes": "Tests dependency-free supervised Top-K window reranking and records its held-out negative result.",
+        },
+        {
+            "stage": "Type3 recall expansion analysis",
+            "command": "work/agent_memory_experiment/type3_recall_expansion_analysis.py",
+            "notes": "Tests whether merging candidate Top-20 with offline multi-signal and intent-facet retrieval reduces Type3 missing-gold cases.",
         },
         {
             "stage": "Embedding baseline status",

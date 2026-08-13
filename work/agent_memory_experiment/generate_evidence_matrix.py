@@ -79,6 +79,8 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_intent_fusion = read_csv(outputs / "agent_memory_type3_intent_fusion_deltas.csv")
     type3_rescue_space = read_csv(outputs / "agent_memory_type3_rescue_space_summary.csv")
     type3_supervised_window = read_csv(outputs / "agent_memory_type3_supervised_window_deltas.csv")
+    type3_recall_expansion = read_csv(outputs / "agent_memory_type3_recall_expansion_summary.csv")
+    type3_recall_expansion_deltas = read_csv(outputs / "agent_memory_type3_recall_expansion_deltas.csv")
     sklearn = read_csv(outputs / "agent_memory_sklearn_nn_prefilter_locomo10_summary.csv")
     faiss_scale = read_csv(outputs / "agent_memory_faiss_scale_100k_locomo10.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
@@ -189,6 +191,8 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_intent_top5 = lookup(type3_intent_fusion, method="intent_fusion_top5_window_keep_top1")
     type3_rescue = lookup(type3_rescue_space, scope="all_type3_candidate_reranker_top20")
     type3_window = lookup(type3_supervised_window, method="supervised_window_reranker")
+    type3_recall_best = lookup(type3_recall_expansion, method="candidate20_plus_offline50_facet50")
+    type3_recall_best_delta = lookup(type3_recall_expansion_deltas, method="candidate20_plus_offline50_facet50")
     sklearn_200 = lookup(sklearn, candidate_limit="200", method="type_aware")
     faiss_flat = lookup(faiss_scale, memory_bank_size="100000", index_type="flat", top_k="200")
     faiss_ivf4 = lookup(faiss_scale, memory_bank_size="100000", index_type="ivf", nprobe="4", top_k="200")
@@ -364,6 +368,22 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "primary_artifacts": "agent_memory_type3_supervised_window_zh.md; agent_memory_type3_supervised_window_summary.csv; agent_memory_type3_supervised_window_deltas.csv",
             "paper_use": "可作为方法选择的负结果：仅学习单条候选相关性不能解决多证据集合覆盖。",
             "remaining_gap": "需要直接优化集合覆盖的 listwise/setwise 目标，或引入 LLM 子问题生成提高候选召回。",
+        },
+        {
+            "claim": "多路离线召回扩展可以显著减少 Type 3 候选池缺证据问题。",
+            "status": "positive_diagnostic",
+            "evidence": (
+                f"Merging candidate Top-20 with offline Top-50 and intent-facet Top-50 lowers Missing-All from "
+                f"{f(lookup(type3_recall_expansion, method='candidate_top20')['missing_all_gold_share'])} to "
+                f"{f(type3_recall_best['missing_all_gold_share'])} "
+                f"({signed(type3_recall_best_delta['delta_missing_all_gold_share'])}); "
+                f"Coverage@100 rises by {signed(type3_recall_best_delta['delta_coverage_ratio@100'])} and "
+                f"Full@100 rises by {signed(type3_recall_best_delta['delta_full_coverage@100'])}."
+            ),
+            "support_level": "strong_candidate_pool_diagnostic",
+            "primary_artifacts": "agent_memory_type3_recall_expansion_zh.md; agent_memory_type3_recall_expansion_summary.csv; agent_memory_type3_recall_expansion_deltas.csv",
+            "paper_use": "可作为下一版主方法的动机：先扩展候选池，再做 listwise/setwise 证据选择。",
+            "remaining_gap": "该实验只评价候选池覆盖，不评价最终排序；需要接后续重排器验证端到端 MRR/Coverage@5。",
         },
         {
             "claim": "向量候选预筛选可以在不损害质量的情况下提升检索速度。",

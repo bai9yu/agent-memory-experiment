@@ -5,7 +5,7 @@
 ## 总览
 
 - Refresh CSV: `outputs/agent_memory_paper_artifact_refresh_run.csv`
-- Required offline steps: 50
+- Required offline steps: 51
 - Missing required steps: 0
 - Failing required steps: 0
 
@@ -28,6 +28,7 @@
 | required_offline_step | type3_intent_fusion_reranker | True | Type3 intent-facet conservative window-reranking diagnostic | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | type3_rescue_space_analysis | True | Type3 Top-20 rescue-space and recall-missing diagnostic | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | type3_supervised_window_reranker | True | Type3 supervised conservative window-reranking diagnostic | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
+| required_offline_step | type3_recall_expansion_analysis | True | Type3 offline recall-expansion diagnostic | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | embedding_baseline_status | True | external embedding status without network calls | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | embedding_provider_profiles | True | provider-specific external embedding command profiles | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |
 | required_offline_step | api_embedding_preflight | True | paid/API embedding preflight | pass | Keep in refresh_paper_artifacts.py and rerun after relevant artifacts change. |

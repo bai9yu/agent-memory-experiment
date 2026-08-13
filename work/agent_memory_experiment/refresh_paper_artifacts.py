@@ -303,6 +303,27 @@ def build_steps(include_environment: bool) -> list[Step]:
             "Tests dependency-free supervised Type3 window reranking with held-out query splits.",
         ),
         Step(
+            "type3_recall_expansion_analysis",
+            py(
+                "type3_recall_expansion_analysis.py",
+                "--candidate-ranked",
+                "outputs/agent_memory_candidate_reranker_locomo10_ranked_top20.csv",
+                "--queries",
+                "work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_queries.jsonl",
+                "--memories",
+                "work/agent_memory_experiment/data/llm_extracted_locomo10_all_v3_answerable_memories.jsonl",
+                "--output-per-query",
+                "outputs/agent_memory_type3_recall_expansion_per_query.csv",
+                "--output-summary",
+                "outputs/agent_memory_type3_recall_expansion_summary.csv",
+                "--output-deltas",
+                "outputs/agent_memory_type3_recall_expansion_deltas.csv",
+                "--output-report",
+                "outputs/agent_memory_type3_recall_expansion_zh.md",
+            ),
+            "Tests offline Type3 recall expansion by merging candidate Top-20 with multi-signal and intent-facet retrieval pools.",
+        ),
+        Step(
             "embedding_baseline_status",
             py(
                 "generate_embedding_baseline_status.py",
