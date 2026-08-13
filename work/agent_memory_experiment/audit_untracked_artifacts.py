@@ -47,6 +47,7 @@ def classify(path: str) -> tuple[str, str, str]:
         "work/agent_memory_experiment/type3_rescue_space_analysis.py",
         "work/agent_memory_experiment/type3_supervised_window_reranker.py",
         "work/agent_memory_experiment/type3_recall_expansion_analysis.py",
+        "work/agent_memory_experiment/type3_expanded_pool_selector.py",
         "outputs/agent_memory_untracked_artifact_audit.csv",
         "outputs/agent_memory_untracked_artifact_audit_zh.md",
         "outputs/agent_memory_api_embedding_postrun_gate.csv",
@@ -117,6 +118,9 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_type3_recall_expansion_summary.csv",
         "outputs/agent_memory_type3_recall_expansion_deltas.csv",
         "outputs/agent_memory_type3_recall_expansion_zh.md",
+        "outputs/agent_memory_type3_expanded_pool_selector_summary.csv",
+        "outputs/agent_memory_type3_expanded_pool_selector_deltas.csv",
+        "outputs/agent_memory_type3_expanded_pool_selector_zh.md",
     }:
         return ("release_audit_artifact", "track_as_paper_artifact", "New public-release audit support file; track with the paper artifact package.")
     if path.startswith("work/agent_memory_experiment/data/deepseek_smoke_test/"):
@@ -143,6 +147,8 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_type3_supervised_window_per_query.csv",
         "outputs/agent_memory_type3_supervised_window_ranked_top20.csv",
         "outputs/agent_memory_type3_recall_expansion_per_query.csv",
+        "outputs/agent_memory_type3_expanded_pool_selector_per_query.csv",
+        "outputs/agent_memory_type3_expanded_pool_selector_ranked_top20.csv",
     }:
         return ("large_type3_coverage_intermediate", "keep_untracked", "Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.")
     if path.startswith("outputs/agent_memory_candidate_reranker_") or path.startswith("outputs/agent_memory_set_selection"):

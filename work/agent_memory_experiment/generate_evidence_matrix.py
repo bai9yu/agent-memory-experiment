@@ -81,6 +81,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_supervised_window = read_csv(outputs / "agent_memory_type3_supervised_window_deltas.csv")
     type3_recall_expansion = read_csv(outputs / "agent_memory_type3_recall_expansion_summary.csv")
     type3_recall_expansion_deltas = read_csv(outputs / "agent_memory_type3_recall_expansion_deltas.csv")
+    type3_expanded_selector = read_csv(outputs / "agent_memory_type3_expanded_pool_selector_deltas.csv")
     sklearn = read_csv(outputs / "agent_memory_sklearn_nn_prefilter_locomo10_summary.csv")
     faiss_scale = read_csv(outputs / "agent_memory_faiss_scale_100k_locomo10.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
@@ -193,6 +194,9 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_window = lookup(type3_supervised_window, method="supervised_window_reranker")
     type3_recall_best = lookup(type3_recall_expansion, method="candidate20_plus_offline50_facet50")
     type3_recall_best_delta = lookup(type3_recall_expansion_deltas, method="candidate20_plus_offline50_facet50")
+    type3_expanded_append = lookup(type3_expanded_selector, method="candidate20_then_expansion")
+    type3_expanded_selector_row = lookup(type3_expanded_selector, method="expanded_pool_selector")
+    type3_expanded_oracle = lookup(type3_expanded_selector, method="expanded_pool_oracle_top5")
     sklearn_200 = lookup(sklearn, candidate_limit="200", method="type_aware")
     faiss_flat = lookup(faiss_scale, memory_bank_size="100000", index_type="flat", top_k="200")
     faiss_ivf4 = lookup(faiss_scale, memory_bank_size="100000", index_type="ivf", nprobe="4", top_k="200")
@@ -384,6 +388,23 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "primary_artifacts": "agent_memory_type3_recall_expansion_zh.md; agent_memory_type3_recall_expansion_summary.csv; agent_memory_type3_recall_expansion_deltas.csv",
             "paper_use": "可作为下一版主方法的动机：先扩展候选池，再做 listwise/setwise 证据选择。",
             "remaining_gap": "该实验只评价候选池覆盖，不评价最终排序；需要接后续重排器验证端到端 MRR/Coverage@5。",
+        },
+        {
+            "claim": "扩展候选池的收益尚未被无监督 Top-5 选择器充分转化。",
+            "status": "diagnostic_boundary",
+            "evidence": (
+                f"Appending expansion after candidate Top-20 preserves Top-5 while improving Coverage@100 by "
+                f"{signed(type3_expanded_append['delta_coverage_ratio@100'])} and Full@100 by "
+                f"{signed(type3_expanded_append['delta_full_coverage@100'])}. "
+                f"The unsupervised expanded-pool selector changes Coverage@5 by "
+                f"{signed(type3_expanded_selector_row['delta_coverage_ratio@5'])}, while oracle Top-5 on the expanded pool could improve "
+                f"Coverage@5 by {signed(type3_expanded_oracle['delta_coverage_ratio@5'])} and Full@5 by "
+                f"{signed(type3_expanded_oracle['delta_full_coverage@5'])}."
+            ),
+            "support_level": "strong_oracle_gap_diagnostic",
+            "primary_artifacts": "agent_memory_type3_expanded_pool_selector_zh.md; agent_memory_type3_expanded_pool_selector_summary.csv; agent_memory_type3_expanded_pool_selector_deltas.csv",
+            "paper_use": "用于支撑下一版主方法：扩展召回池已经有证据，但必须设计学习式 listwise/setwise 选择器才能把收益前移到 Top-5。",
+            "remaining_gap": "当前 selector 是无监督启发式，不能作为最终改进；需要训练或 LLM 辅助标签来学习集合级选择。",
         },
         {
             "claim": "向量候选预筛选可以在不损害质量的情况下提升检索速度。",

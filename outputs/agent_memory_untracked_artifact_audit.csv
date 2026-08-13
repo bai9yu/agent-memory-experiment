@@ -13,6 +13,8 @@ outputs/agent_memory_set_selection_ranked.csv,large_ranked_intermediate,keep_unt
 outputs/agent_memory_set_selection_top20_ranked.csv,large_ranked_intermediate,keep_untracked,12717839,Large ranked intermediate audited by agent_memory_large_intermediate_provenance; regenerate from README commands and rely on tracked downstream summaries.
 outputs/agent_memory_type3_coverage_aware_per_query.csv,large_type3_coverage_intermediate,keep_untracked,65616,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
 outputs/agent_memory_type3_coverage_aware_ranked_top20.csv,large_type3_coverage_intermediate,keep_untracked,690164,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
+outputs/agent_memory_type3_expanded_pool_selector_per_query.csv,large_type3_coverage_intermediate,keep_untracked,102961,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
+outputs/agent_memory_type3_expanded_pool_selector_ranked_top20.csv,large_type3_coverage_intermediate,keep_untracked,6800615,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
 outputs/agent_memory_type3_intent_fusion_per_query.csv,large_type3_coverage_intermediate,keep_untracked,159104,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
 outputs/agent_memory_type3_intent_fusion_ranked_top20.csv,large_type3_coverage_intermediate,keep_untracked,3176243,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
 outputs/agent_memory_type3_recall_expansion_per_query.csv,large_type3_coverage_intermediate,keep_untracked,356356,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
@@ -20,7 +22,7 @@ outputs/agent_memory_type3_rescue_space_per_query.csv,large_type3_coverage_inter
 outputs/agent_memory_type3_supervised_window_per_query.csv,large_type3_coverage_intermediate,keep_untracked,31505,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
 outputs/agent_memory_type3_supervised_window_ranked_top20.csv,large_type3_coverage_intermediate,keep_untracked,814794,Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.
 work/agent_memory_experiment/data/deepseek_smoke_test/,local_smoke_test_data,keep_untracked,45402,DeepSeek smoke-test cache/output should stay local unless explicitly anonymized and documented.
-outputs/agent_memory_type3_recall_expansion_deltas.csv,release_audit_artifact,track_as_paper_artifact,2769,New public-release audit support file; track with the paper artifact package.
-outputs/agent_memory_type3_recall_expansion_summary.csv,release_audit_artifact,track_as_paper_artifact,6085,New public-release audit support file; track with the paper artifact package.
-outputs/agent_memory_type3_recall_expansion_zh.md,release_audit_artifact,track_as_paper_artifact,2304,New public-release audit support file; track with the paper artifact package.
-work/agent_memory_experiment/type3_recall_expansion_analysis.py,release_audit_artifact,track_as_paper_artifact,17755,New public-release audit support file; track with the paper artifact package.
+outputs/agent_memory_type3_expanded_pool_selector_deltas.csv,release_audit_artifact,track_as_paper_artifact,996,New public-release audit support file; track with the paper artifact package.
+outputs/agent_memory_type3_expanded_pool_selector_summary.csv,release_audit_artifact,track_as_paper_artifact,1830,New public-release audit support file; track with the paper artifact package.
+outputs/agent_memory_type3_expanded_pool_selector_zh.md,release_audit_artifact,track_as_paper_artifact,2117,New public-release audit support file; track with the paper artifact package.
+work/agent_memory_experiment/type3_expanded_pool_selector.py,release_audit_artifact,track_as_paper_artifact,25748,New public-release audit support file; track with the paper artifact package.

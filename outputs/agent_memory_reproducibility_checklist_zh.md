@@ -4,15 +4,15 @@
 
 ## 总览
 
-- Artifact 存在性：230/230
+- Artifact 存在性：233/233
 - 关键指标阈值：22/22
 
 ## 环境快照
 
 | Key | Value |
 |---|---|
-| git_commit | `e845bf0` |
-| git_branch_status | `## main...origin/main` |
+| git_commit | `f76d8bf` |
+| git_branch_status | `## main...origin/main [ahead 1]` |
 | python | `3.9.6` |
 
 ## 数据文件
@@ -119,11 +119,14 @@
 | Type3 recall expansion report | True | 2304 | `outputs/agent_memory_type3_recall_expansion_zh.md` |
 | Type3 recall expansion summary | True | 6085 | `outputs/agent_memory_type3_recall_expansion_summary.csv` |
 | Type3 recall expansion deltas | True | 2769 | `outputs/agent_memory_type3_recall_expansion_deltas.csv` |
+| Type3 expanded-pool selector report | True | 2117 | `outputs/agent_memory_type3_expanded_pool_selector_zh.md` |
+| Type3 expanded-pool selector summary | True | 1830 | `outputs/agent_memory_type3_expanded_pool_selector_summary.csv` |
+| Type3 expanded-pool selector deltas | True | 996 | `outputs/agent_memory_type3_expanded_pool_selector_deltas.csv` |
 | Paper tables Markdown | True | 3724 | `outputs/agent_memory_paper_tables_zh.md` |
 | Paper tables LaTeX | True | 5197 | `outputs/agent_memory_paper_tables.tex` |
 | Paper table consistency audit | True | 3343 | `outputs/agent_memory_paper_table_consistency_zh.md` |
 | Paper table consistency audit CSV | True | 3737 | `outputs/agent_memory_paper_table_consistency.csv` |
-| Paper evidence matrix | True | 9803 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
+| Paper evidence matrix | True | 10374 | `outputs/agent_memory_paper_evidence_matrix_zh.md` |
 | Paper draft outline | True | 7485 | `outputs/agent_memory_paper_draft_outline_zh.md` |
 | Paper manuscript draft | True | 12830 | `outputs/agent_memory_manuscript_draft_zh.md` |
 | Paper manuscript claim check | True | 2065 | `outputs/agent_memory_manuscript_claim_check_zh.md` |
@@ -139,7 +142,7 @@
 | Submission package index | True | 8532 | `outputs/agent_memory_submission_package_index_zh.md` |
 | Submission package index CSV | True | 9837 | `outputs/agent_memory_submission_package_index.csv` |
 | Supplementary package manifest | True | 5054 | `outputs/agent_memory_supplementary_package_manifest_zh.md` |
-| Supplementary package manifest CSV | True | 8551 | `outputs/agent_memory_supplementary_package_manifest.csv` |
+| Supplementary package manifest CSV | True | 8552 | `outputs/agent_memory_supplementary_package_manifest.csv` |
 | Submission package consistency audit | True | 2352 | `outputs/agent_memory_submission_package_consistency_zh.md` |
 | Submission package consistency audit CSV | True | 1551 | `outputs/agent_memory_submission_package_consistency.csv` |
 | Anonymous submission readiness audit | True | 1759 | `outputs/agent_memory_anonymous_submission_readiness_zh.md` |
@@ -152,24 +155,24 @@
 | Final submission checklist CSV | True | 3126 | `outputs/agent_memory_final_submission_checklist.csv` |
 | Public release readiness gate | True | 1688 | `outputs/agent_memory_public_release_readiness_zh.md` |
 | Public release readiness gate CSV | True | 1424 | `outputs/agent_memory_public_release_readiness.csv` |
-| Untracked artifact audit | True | 6744 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
-| Untracked artifact audit CSV | True | 5535 | `outputs/agent_memory_untracked_artifact_audit.csv` |
+| Untracked artifact audit | True | 7230 | `outputs/agent_memory_untracked_artifact_audit_zh.md` |
+| Untracked artifact audit CSV | True | 5999 | `outputs/agent_memory_untracked_artifact_audit.csv` |
 | Large intermediate provenance audit | True | 2048 | `outputs/agent_memory_large_intermediate_provenance_zh.md` |
 | Large intermediate provenance audit CSV | True | 2824 | `outputs/agent_memory_large_intermediate_provenance.csv` |
 | Artifact path portability audit | True | 734 | `outputs/agent_memory_artifact_path_portability_zh.md` |
 | Artifact path portability audit CSV | True | 214 | `outputs/agent_memory_artifact_path_portability.csv` |
 | Artifact integrity manifest | True | 3706 | `outputs/agent_memory_artifact_integrity_manifest_zh.md` |
-| Artifact integrity manifest CSV | True | 39373 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
+| Artifact integrity manifest CSV | True | 39873 | `outputs/agent_memory_artifact_integrity_manifest.csv` |
 | Submission gap analysis | True | 10998 | `outputs/agent_memory_submission_gap_analysis_zh.md` |
 | Submission gap analysis CSV | True | 6345 | `outputs/agent_memory_submission_gap_analysis.csv` |
 | Submission blocker closure plan | True | 3891 | `outputs/agent_memory_submission_blocker_closure_plan_zh.md` |
 | Submission blocker closure plan CSV | True | 3255 | `outputs/agent_memory_submission_blocker_closure_plan.csv` |
 | Submission closure consistency audit | True | 3503 | `outputs/agent_memory_submission_closure_consistency_zh.md` |
 | Submission closure consistency audit CSV | True | 2761 | `outputs/agent_memory_submission_closure_consistency.csv` |
-| Paper artifact refresh run | True | 7699 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
-| Paper artifact refresh run CSV | True | 28939 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
-| Paper refresh coverage audit | True | 11049 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
-| Paper refresh coverage audit CSV | True | 9879 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
+| Paper artifact refresh run | True | 7873 | `outputs/agent_memory_paper_artifact_refresh_run_zh.md` |
+| Paper artifact refresh run CSV | True | 29793 | `outputs/agent_memory_paper_artifact_refresh_run.csv` |
+| Paper refresh coverage audit | True | 11247 | `outputs/agent_memory_paper_refresh_coverage_audit_zh.md` |
+| Paper refresh coverage audit CSV | True | 10069 | `outputs/agent_memory_paper_refresh_coverage_audit.csv` |
 | Evidence freshness audit | True | 808 | `outputs/agent_memory_evidence_freshness_audit_zh.md` |
 | Evidence freshness audit CSV | True | 98 | `outputs/agent_memory_evidence_freshness_audit.csv` |
 | Experiment protocol | True | 4247 | `outputs/agent_memory_experiment_protocol_zh.md` |
@@ -311,6 +314,7 @@
 | Type3 rescue-space analysis | `work/agent_memory_experiment/type3_rescue_space_analysis.py` | Separates Type3 cases where better Top-20 reranking can help from cases that need stronger candidate recall. |
 | Type3 supervised window reranker | `work/agent_memory_experiment/type3_supervised_window_reranker.py` | Tests dependency-free supervised Top-K window reranking and records its held-out negative result. |
 | Type3 recall expansion analysis | `work/agent_memory_experiment/type3_recall_expansion_analysis.py` | Tests whether merging candidate Top-20 with offline multi-signal and intent-facet retrieval reduces Type3 missing-gold cases. |
+| Type3 expanded-pool selector | `work/agent_memory_experiment/type3_expanded_pool_selector.py` | Tests whether the expanded Type3 candidate pool can be converted into Top-5 evidence selection gains and records the oracle gap. |
 | Embedding baseline status | `work/agent_memory_experiment/generate_embedding_baseline_status.py` | Tracks API embedding baseline readiness without reading or printing keys. |
 | Embedding provider profiles | `work/agent_memory_experiment/generate_embedding_provider_profiles.py` | Lists OpenAI and generic OpenAI-compatible provider commands for preflight, estimate, run, and compare. |
 | API embedding preflight | `work/agent_memory_experiment/preflight_api_embedding_baseline.py` | Checks inputs, key availability, cache paths, and result summary before paid/API embedding runs. |

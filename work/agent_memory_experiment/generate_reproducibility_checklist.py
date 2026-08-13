@@ -265,6 +265,9 @@ def main() -> None:
         ("Type3 recall expansion report", outputs / "agent_memory_type3_recall_expansion_zh.md"),
         ("Type3 recall expansion summary", outputs / "agent_memory_type3_recall_expansion_summary.csv"),
         ("Type3 recall expansion deltas", outputs / "agent_memory_type3_recall_expansion_deltas.csv"),
+        ("Type3 expanded-pool selector report", outputs / "agent_memory_type3_expanded_pool_selector_zh.md"),
+        ("Type3 expanded-pool selector summary", outputs / "agent_memory_type3_expanded_pool_selector_summary.csv"),
+        ("Type3 expanded-pool selector deltas", outputs / "agent_memory_type3_expanded_pool_selector_deltas.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
@@ -614,6 +617,11 @@ def main() -> None:
             "stage": "Type3 recall expansion analysis",
             "command": "work/agent_memory_experiment/type3_recall_expansion_analysis.py",
             "notes": "Tests whether merging candidate Top-20 with offline multi-signal and intent-facet retrieval reduces Type3 missing-gold cases.",
+        },
+        {
+            "stage": "Type3 expanded-pool selector",
+            "command": "work/agent_memory_experiment/type3_expanded_pool_selector.py",
+            "notes": "Tests whether the expanded Type3 candidate pool can be converted into Top-5 evidence selection gains and records the oracle gap.",
         },
         {
             "stage": "Embedding baseline status",
