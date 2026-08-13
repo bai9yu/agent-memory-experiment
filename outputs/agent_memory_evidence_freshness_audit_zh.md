@@ -4,10 +4,10 @@
 
 ## 当前权威门禁
 
-- Reproducibility artifact gate: 215/215
+- Reproducibility artifact gate: 219/219
 - Reproducibility metric gate: 22/22
-- Artifact integrity gate: 215/215
-- sha256 ok / self skips: 213 / 2
+- Artifact integrity gate: 219/219
+- sha256 ok / self skips: 217 / 2
 
 ## 结果
 

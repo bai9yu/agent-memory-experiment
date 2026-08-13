@@ -22,6 +22,7 @@ REQUIRED_STEPS = [
     ("human_audit_blind_review_leakage", "human audit blind review schema and leakage audit"),
     ("human_audit_protocol_compliance", "human audit protocol compliance and closure audit"),
     ("type3_coverage_aware_reranker", "Type3 coverage-aware reranking negative-result diagnostic"),
+    ("type3_intent_fusion_reranker", "Type3 intent-facet conservative window-reranking diagnostic"),
     ("embedding_baseline_status", "external embedding status without network calls"),
     ("embedding_provider_profiles", "provider-specific external embedding command profiles"),
     ("api_embedding_preflight", "paid/API embedding preflight"),

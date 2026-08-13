@@ -76,6 +76,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     coverage = read_csv(outputs / "agent_memory_multi_evidence_coverage_summary.csv")
     type3_sig = read_csv(outputs / "agent_memory_type3_coverage_significance_summary.csv")
     type3_coverage_aware = read_csv(outputs / "agent_memory_type3_coverage_aware_deltas.csv")
+    type3_intent_fusion = read_csv(outputs / "agent_memory_type3_intent_fusion_deltas.csv")
     sklearn = read_csv(outputs / "agent_memory_sklearn_nn_prefilter_locomo10_summary.csv")
     faiss_scale = read_csv(outputs / "agent_memory_faiss_scale_100k_locomo10.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
@@ -183,6 +184,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     cov_type5 = lookup(coverage, query_type="5", method="type_aware")
     type3_selector_sig = lookup(type3_sig, experiment="supervised_set_selector", metric="coverage_ratio@5")
     type3_coverage_aware_free = lookup(type3_coverage_aware, method="coverage_aware_free")
+    type3_intent_top5 = lookup(type3_intent_fusion, method="intent_fusion_top5_window_keep_top1")
     sklearn_200 = lookup(sklearn, candidate_limit="200", method="type_aware")
     faiss_flat = lookup(faiss_scale, memory_bank_size="100000", index_type="flat", top_k="200")
     faiss_ivf4 = lookup(faiss_scale, memory_bank_size="100000", index_type="ivf", nprobe="4", top_k="200")
@@ -317,6 +319,20 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "primary_artifacts": "agent_memory_type3_coverage_significance_summary.csv; agent_memory_type3_coverage_significance_zh.md; agent_memory_type3_coverage_aware_zh.md",
             "paper_use": "适合作为边界/负结果消融，而不是作为改进方法。",
             "remaining_gap": "无监督 coverage/diversity 信号已不足；下一步应尝试 LLM 子问题生成或真正的 listwise/setwise objective。",
+        },
+        {
+            "claim": "保守的 Type 3 意图窗口重排可以微调首个证据位置，但不足以解决多证据覆盖。",
+            "status": "limited_positive",
+            "evidence": (
+                f"Intent-facet Top-5 window reranking changes MRR by {signed(type3_intent_top5['delta_mrr'])} while keeping "
+                f"Recall@5, Coverage@5, Full@5, Coverage@20, and Full@20 unchanged "
+                f"({signed(type3_intent_top5['delta_recall@5'])}, {signed(type3_intent_top5['delta_coverage_ratio@5'])}, "
+                f"{signed(type3_intent_top5['delta_full_coverage@5'])})."
+            ),
+            "support_level": "small_clean_diagnostic",
+            "primary_artifacts": "agent_memory_type3_intent_fusion_zh.md; agent_memory_type3_intent_fusion_summary.csv; agent_memory_type3_intent_fusion_deltas.csv",
+            "paper_use": "可作为轻量优化尝试或消融边界：保守窗口重排不会破坏 Top-5 证据集合，但收益很小。",
+            "remaining_gap": "需要学习式 set/listwise 目标来真正提升 Coverage@5 和 Full@5。",
         },
         {
             "claim": "向量候选预筛选可以在不损害质量的情况下提升检索速度。",

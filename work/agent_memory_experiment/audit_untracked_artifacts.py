@@ -43,6 +43,7 @@ def classify(path: str) -> tuple[str, str, str]:
         "work/agent_memory_experiment/validate_anonymous_submission_readiness.py",
         "work/agent_memory_experiment/generate_writer_cost_boundary.py",
         "work/agent_memory_experiment/type3_coverage_aware_reranker.py",
+        "work/agent_memory_experiment/type3_intent_fusion_reranker.py",
         "outputs/agent_memory_untracked_artifact_audit.csv",
         "outputs/agent_memory_untracked_artifact_audit_zh.md",
         "outputs/agent_memory_api_embedding_postrun_gate.csv",
@@ -98,6 +99,10 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_type3_coverage_aware_deltas.csv",
         "outputs/agent_memory_type3_coverage_aware_summary.csv",
         "outputs/agent_memory_type3_coverage_aware_zh.md",
+        "outputs/agent_memory_type3_intent_fusion_deltas.csv",
+        "outputs/agent_memory_type3_intent_fusion_summary.csv",
+        "outputs/agent_memory_type3_intent_fusion_facets.csv",
+        "outputs/agent_memory_type3_intent_fusion_zh.md",
     }:
         return ("release_audit_artifact", "track_as_paper_artifact", "New public-release audit support file; track with the paper artifact package.")
     if path.startswith("work/agent_memory_experiment/data/deepseek_smoke_test/"):
@@ -118,6 +123,8 @@ def classify(path: str) -> tuple[str, str, str]:
     if path in {
         "outputs/agent_memory_type3_coverage_aware_per_query.csv",
         "outputs/agent_memory_type3_coverage_aware_ranked_top20.csv",
+        "outputs/agent_memory_type3_intent_fusion_per_query.csv",
+        "outputs/agent_memory_type3_intent_fusion_ranked_top20.csv",
     }:
         return ("large_type3_coverage_intermediate", "keep_untracked", "Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.")
     if path.startswith("outputs/agent_memory_candidate_reranker_") or path.startswith("outputs/agent_memory_set_selection"):

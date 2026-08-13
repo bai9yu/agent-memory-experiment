@@ -250,6 +250,10 @@ def main() -> None:
         ("Type3 coverage-aware reranker report", outputs / "agent_memory_type3_coverage_aware_zh.md"),
         ("Type3 coverage-aware reranker summary", outputs / "agent_memory_type3_coverage_aware_summary.csv"),
         ("Type3 coverage-aware reranker deltas", outputs / "agent_memory_type3_coverage_aware_deltas.csv"),
+        ("Type3 intent-facet fusion report", outputs / "agent_memory_type3_intent_fusion_zh.md"),
+        ("Type3 intent-facet fusion summary", outputs / "agent_memory_type3_intent_fusion_summary.csv"),
+        ("Type3 intent-facet fusion deltas", outputs / "agent_memory_type3_intent_fusion_deltas.csv"),
+        ("Type3 intent-facet fusion facets", outputs / "agent_memory_type3_intent_fusion_facets.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
@@ -579,6 +583,11 @@ def main() -> None:
             "stage": "Type3 coverage-aware reranker",
             "command": "work/agent_memory_experiment/type3_coverage_aware_reranker.py",
             "notes": "Tests unsupervised coverage-aware selection over cached Top-20 candidates without using gold evidence for scoring.",
+        },
+        {
+            "stage": "Type3 intent-facet fusion reranker",
+            "command": "work/agent_memory_experiment/type3_intent_fusion_reranker.py",
+            "notes": "Tests conservative intent-facet Top-5 window reranking for Type3 queries without changing Top-5 evidence membership.",
         },
         {
             "stage": "Embedding baseline status",
