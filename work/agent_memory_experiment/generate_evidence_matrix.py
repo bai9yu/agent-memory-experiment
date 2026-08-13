@@ -78,6 +78,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_coverage_aware = read_csv(outputs / "agent_memory_type3_coverage_aware_deltas.csv")
     type3_intent_fusion = read_csv(outputs / "agent_memory_type3_intent_fusion_deltas.csv")
     type3_rescue_space = read_csv(outputs / "agent_memory_type3_rescue_space_summary.csv")
+    type3_supervised_window = read_csv(outputs / "agent_memory_type3_supervised_window_deltas.csv")
     sklearn = read_csv(outputs / "agent_memory_sklearn_nn_prefilter_locomo10_summary.csv")
     faiss_scale = read_csv(outputs / "agent_memory_faiss_scale_100k_locomo10.csv")
     repro_artifacts = read_csv(outputs / "agent_memory_reproducibility_artifacts.csv")
@@ -187,6 +188,7 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
     type3_coverage_aware_free = lookup(type3_coverage_aware, method="coverage_aware_free")
     type3_intent_top5 = lookup(type3_intent_fusion, method="intent_fusion_top5_window_keep_top1")
     type3_rescue = lookup(type3_rescue_space, scope="all_type3_candidate_reranker_top20")
+    type3_window = lookup(type3_supervised_window, method="supervised_window_reranker")
     sklearn_200 = lookup(sklearn, candidate_limit="200", method="type_aware")
     faiss_flat = lookup(faiss_scale, memory_bank_size="100000", index_type="flat", top_k="200")
     faiss_ivf4 = lookup(faiss_scale, memory_bank_size="100000", index_type="ivf", nprobe="4", top_k="200")
@@ -349,6 +351,19 @@ def build_rows(outputs: Path) -> list[dict[str, str]]:
             "primary_artifacts": "agent_memory_type3_rescue_space_zh.md; agent_memory_type3_rescue_space_summary.csv; agent_memory_type3_rescue_space_classes.csv",
             "paper_use": "用于解释为什么下一步需要双线优化：listwise/setwise 重排负责可救回样本，召回增强负责候选缺失样本。",
             "remaining_gap": "该结果是 oracle 上限分析，不能作为实际方法指标；实际算法仍需在 held-out query 上验证。",
+        },
+        {
+            "claim": "单候选监督窗口重排不足以利用 Type 3 的 Top-20 可救回空间。",
+            "status": "negative_result",
+            "evidence": (
+                f"Dependency-free supervised window reranking changes MRR by {signed(type3_window['delta_mrr'])}; "
+                f"Recall@5, Coverage@5, and Full@5 change by {signed(type3_window['delta_recall@5'])}, "
+                f"{signed(type3_window['delta_coverage_ratio@5'])}, and {signed(type3_window['delta_full_coverage@5'])}."
+            ),
+            "support_level": "heldout_negative",
+            "primary_artifacts": "agent_memory_type3_supervised_window_zh.md; agent_memory_type3_supervised_window_summary.csv; agent_memory_type3_supervised_window_deltas.csv",
+            "paper_use": "可作为方法选择的负结果：仅学习单条候选相关性不能解决多证据集合覆盖。",
+            "remaining_gap": "需要直接优化集合覆盖的 listwise/setwise 目标，或引入 LLM 子问题生成提高候选召回。",
         },
         {
             "claim": "向量候选预筛选可以在不损害质量的情况下提升检索速度。",

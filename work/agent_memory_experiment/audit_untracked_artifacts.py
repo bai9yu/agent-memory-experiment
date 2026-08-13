@@ -45,6 +45,7 @@ def classify(path: str) -> tuple[str, str, str]:
         "work/agent_memory_experiment/type3_coverage_aware_reranker.py",
         "work/agent_memory_experiment/type3_intent_fusion_reranker.py",
         "work/agent_memory_experiment/type3_rescue_space_analysis.py",
+        "work/agent_memory_experiment/type3_supervised_window_reranker.py",
         "outputs/agent_memory_untracked_artifact_audit.csv",
         "outputs/agent_memory_untracked_artifact_audit_zh.md",
         "outputs/agent_memory_api_embedding_postrun_gate.csv",
@@ -107,6 +108,11 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_type3_rescue_space_summary.csv",
         "outputs/agent_memory_type3_rescue_space_classes.csv",
         "outputs/agent_memory_type3_rescue_space_zh.md",
+        "outputs/agent_memory_type3_supervised_window_summary.csv",
+        "outputs/agent_memory_type3_supervised_window_deltas.csv",
+        "outputs/agent_memory_type3_supervised_window_selected_params.csv",
+        "outputs/agent_memory_type3_supervised_window_feature_importance.csv",
+        "outputs/agent_memory_type3_supervised_window_zh.md",
     }:
         return ("release_audit_artifact", "track_as_paper_artifact", "New public-release audit support file; track with the paper artifact package.")
     if path.startswith("work/agent_memory_experiment/data/deepseek_smoke_test/"):
@@ -130,6 +136,8 @@ def classify(path: str) -> tuple[str, str, str]:
         "outputs/agent_memory_type3_intent_fusion_per_query.csv",
         "outputs/agent_memory_type3_intent_fusion_ranked_top20.csv",
         "outputs/agent_memory_type3_rescue_space_per_query.csv",
+        "outputs/agent_memory_type3_supervised_window_per_query.csv",
+        "outputs/agent_memory_type3_supervised_window_ranked_top20.csv",
     }:
         return ("large_type3_coverage_intermediate", "keep_untracked", "Detailed Type3 coverage-aware intermediate; tracked summary/delta/report carry paper-facing evidence.")
     if path.startswith("outputs/agent_memory_candidate_reranker_") or path.startswith("outputs/agent_memory_set_selection"):

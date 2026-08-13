@@ -257,6 +257,11 @@ def main() -> None:
         ("Type3 rescue-space report", outputs / "agent_memory_type3_rescue_space_zh.md"),
         ("Type3 rescue-space summary", outputs / "agent_memory_type3_rescue_space_summary.csv"),
         ("Type3 rescue-space classes", outputs / "agent_memory_type3_rescue_space_classes.csv"),
+        ("Type3 supervised window report", outputs / "agent_memory_type3_supervised_window_zh.md"),
+        ("Type3 supervised window summary", outputs / "agent_memory_type3_supervised_window_summary.csv"),
+        ("Type3 supervised window deltas", outputs / "agent_memory_type3_supervised_window_deltas.csv"),
+        ("Type3 supervised window selected params", outputs / "agent_memory_type3_supervised_window_selected_params.csv"),
+        ("Type3 supervised window feature importance", outputs / "agent_memory_type3_supervised_window_feature_importance.csv"),
         ("Paper tables Markdown", outputs / "agent_memory_paper_tables_zh.md"),
         ("Paper tables LaTeX", outputs / "agent_memory_paper_tables.tex"),
         ("Paper table consistency audit", outputs / "agent_memory_paper_table_consistency_zh.md"),
@@ -596,6 +601,11 @@ def main() -> None:
             "stage": "Type3 rescue-space analysis",
             "command": "work/agent_memory_experiment/type3_rescue_space_analysis.py",
             "notes": "Separates Type3 cases where better Top-20 reranking can help from cases that need stronger candidate recall.",
+        },
+        {
+            "stage": "Type3 supervised window reranker",
+            "command": "work/agent_memory_experiment/type3_supervised_window_reranker.py",
+            "notes": "Tests dependency-free supervised Top-K window reranking and records its held-out negative result.",
         },
         {
             "stage": "Embedding baseline status",

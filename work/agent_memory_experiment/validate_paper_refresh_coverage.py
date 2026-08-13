@@ -24,6 +24,7 @@ REQUIRED_STEPS = [
     ("type3_coverage_aware_reranker", "Type3 coverage-aware reranking negative-result diagnostic"),
     ("type3_intent_fusion_reranker", "Type3 intent-facet conservative window-reranking diagnostic"),
     ("type3_rescue_space_analysis", "Type3 Top-20 rescue-space and recall-missing diagnostic"),
+    ("type3_supervised_window_reranker", "Type3 supervised conservative window-reranking diagnostic"),
     ("embedding_baseline_status", "external embedding status without network calls"),
     ("embedding_provider_profiles", "provider-specific external embedding command profiles"),
     ("api_embedding_preflight", "paid/API embedding preflight"),

@@ -1,0 +1,2 @@
+baseline,method,delta_mrr,delta_recall@1,delta_recall@3,delta_recall@5,delta_coverage_ratio@5,delta_full_coverage@5,delta_coverage_ratio@20,delta_full_coverage@20
+candidate_reranker,supervised_window_reranker,-0.0009259259259258856,0.0,-0.015873015873015872,0.0,0.0,0.0,0.0,0.0
